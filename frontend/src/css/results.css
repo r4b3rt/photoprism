@@ -376,7 +376,6 @@ body.chrome .search-results .result {
 
 .cards-view .result .card-details .meta-details button i {
     position: absolute;
-    top: 0;
     margin-inline-start: -17px;
     font-family: Material Icons;
     font-size: inherit;
@@ -386,7 +385,7 @@ body.chrome .search-results .result {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     text-transform: none;
-    vertical-align: middle;
+    vertical-align: text-bottom;
     white-space: nowrap;
     text-align: start;
 }

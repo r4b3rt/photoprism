@@ -216,6 +216,13 @@
                   <translate>Add pictures from search results by selecting them.</translate>
                 </button>
 
+                <div v-if="album.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
+                  <translate>Contains one picture.</translate>
+                </div>
+                <div v-else-if="album.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
+                  <translate :translate-params="{ n: album.PhotoCount }">Contains %{n} pictures.</translate>
+                </div>
+
                 <div class="meta-details">
                   <button v-if="album.Type === 'folder'" :title="'/' + album.Path" class="meta-path" @click.exact="edit(album)">
                     <i class="mdi mdi-folder" />
@@ -224,14 +231,6 @@
                   <button v-if="album.Category !== ''" :title="album.Category" class="meta-category" @click.exact="edit(album)">
                     <i class="mdi mdi-tag" />
                     {{ album.Category }}
-                  </button>
-                  <button v-if="album.PhotoCount === 1" class="meta-count" @click.exact="edit(album)">
-                    <i class="mdi mdi-bookmark-box" />
-                    <translate>Contains one picture</translate>
-                  </button>
-                  <button v-else-if="album.PhotoCount > 0" class="meta-count" @click.exact="edit(album)">
-                    <i class="mdi mdi-bookmark-box" />
-                    <translate :translate-params="{ n: album.PhotoCount }">Contains %{n} pictures</translate>
                   </button>
                   <button v-if="album.getLocation() !== ''" class="meta-location text-truncate" @click.exact="edit(album)">
                     <i class="mdi mdi-map-marker" />

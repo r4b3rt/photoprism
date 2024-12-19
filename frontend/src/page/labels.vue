@@ -63,10 +63,9 @@
             <translate>In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.</translate>
           </p>
         </v-alert>
-        <v-row class="search-results label-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <v-col v-for="(label, index) in results" :key="label.UID" cols="6" sm="4" md="3" lg="2" xxl="1" class="d-flex">
-            <v-card tile :data-uid="label.UID" style="user-select: none" class="result card bg-card flex-grow-1" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
-              <div class="card-background card"></div>
+        <div class="v-row search-results label-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
+          <div v-for="(label, index) in results" ref="items" :key="label.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+            <div :data-uid="label.UID" style="user-select: none" class="result card bg-card" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
               <v-img
                 :src="label.thumbnailUrl('tile_500')"
                 :alt="label.Name"
@@ -90,30 +89,27 @@
                 </v-btn>
               </v-img>
 
-              <v-card-title class="pa-4 card-details" style="user-select: none" @click.stop.prevent="">
-                <p v-if="canManage" class="inline-edit" @click.stop.prevent="edit(label)">
+              <div class="card-details" @click.stop.prevent="">
+                <div v-if="canManage" class="meta-title inline-edit clickable" @click.stop.prevent="edit(label)">
                   {{ label.Name }}
-                </p>
-                <span v-else class="text-subtitle-2 ma-0">
-                  {{ label.Name }}
-                </span>
-              </v-card-title>
-
-              <v-card-text class="pb-2 pt-0 card-details" style="user-select: none" @click.stop.prevent="">
-                <div class="text-caption mb-2">
-                  <button v-if="label.PhotoCount === 1">
-                    <translate>Contains one picture.</translate>
-                  </button>
-                  <button v-else-if="label.PhotoCount > 0">
-                    <translate :translate-params="{ n: label.PhotoCount }">Contains %{n} pictures.</translate>
-                  </button>
                 </div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
+                <div v-else class="meta-title">
+                  {{ label.Name }}
+                </div>
+
+                <div v-if="label.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
+                  <translate>Contains one picture.</translate>
+                </div>
+                <div v-else-if="label.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
+                  <translate :translate-params="{ n: label.PhotoCount }">Contains %{n} pictures.</translate>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </v-container>
     </v-container>
+
     <p-label-edit-dialog :show="dialog.edit" :label="model" @close="dialog.edit = false"></p-label-edit-dialog>
   </div>
 </template>

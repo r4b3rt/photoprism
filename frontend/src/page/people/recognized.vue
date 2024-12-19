@@ -67,9 +67,9 @@
             <translate>Recognition starts after indexing has been completed.</translate>
           </p>
         </v-alert>
-        <v-row class="search-results subject-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <v-col v-for="(model, index) in results" :key="model.UID" cols="6" sm="4" md="3" lg="2" xxl="1" class="d-flex">
-            <v-card tile :data-uid="model.UID" style="user-select: none" class="result card bg-card flex-grow-1" :class="model.classes(selection.includes(model.UID))" :to="model.route(view)" @contextmenu.stop="onContextMenu($event, index)">
+        <div class="v-row search-results subject-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
+          <div v-for="(model, index) in results" :key="model.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+            <div :data-uid="model.UID" style="user-select: none" class="result card bg-card" :class="model.classes(selection.includes(model.UID))" @contextmenu.stop="onContextMenu($event, index)">
               <v-img
                 :src="model.thumbnailUrl('tile_320')"
                 :alt="model.Name"
@@ -109,41 +109,31 @@
                 </v-btn>
               </v-img>
 
-              <v-card-title class="pa-4 card-details" style="user-select: none" @click.stop.prevent="">
-                <div v-if="canManage" class="inline-edit" @click.stop.prevent="edit(model)">
-                  <span v-if="model.Name" class="text-body-2 ma-0">
-                    {{ model.Name }}
-                  </span>
-                  <span v-else>
-                    <v-icon>mdi-pencil</v-icon>
-                  </span>
-                </div>
-                <span v-else class="text-body-2 ma-0">
+              <div class="card-details" @click.stop.prevent="">
+                <div v-if="canManage" class="meta-title inline-edit clickable" @click.stop.prevent="edit(model)">
                   {{ model.Name }}
-                </span>
-              </v-card-title>
+                </div>
+                <div v-else class="meta-title">
+                  {{ model.Name }}
+                </div>
 
-              <v-card-text class="pb-2 pt-0 card-details" style="user-select: none" @click.stop.prevent="">
-                <div v-if="model.About" class="text-caption mb-2 text-truncate d-block" :title="$gettext('About')">
-                  <!-- TODO: change this filter -->
-                  <!-- {{ model.About | truncate(100) }} -->
+                <div v-if="model.About" class="meta-about text-truncate" :title="$gettext('About')">
                   {{ model.About }}
                 </div>
 
-                <div class="text-caption mb-2">
-                  <button v-if="model.PhotoCount === 1">
-                    <translate>Contains one picture.</translate>
-                  </button>
-                  <button v-else-if="model.PhotoCount > 0">
-                    <translate :translate-params="{ n: model.PhotoCount }">Contains %{n} pictures.</translate>
-                  </button>
+                <div v-if="model.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
+                  <translate>Contains one picture.</translate>
                 </div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
+                <div v-else-if="model.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
+                  <translate :translate-params="{ n: model.PhotoCount }">Contains %{n} pictures.</translate>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </v-container>
     </v-container>
+
     <p-people-edit-dialog :show="dialog.edit" :person="model" @close="dialog.edit = false" @confirm="onSave"></p-people-edit-dialog>
     <p-people-merge-dialog :show="merge.show" :subj1="merge.subj1" :subj2="merge.subj2" @close="onCancelMerge" @confirm="onMerge"></p-people-merge-dialog>
   </div>

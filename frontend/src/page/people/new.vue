@@ -21,7 +21,7 @@
     <v-container v-if="loading" fluid class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </v-container>
-    <v-container v-else fluid class="pa-0">
+    <v-container v-else fluid class="pa-2">
       <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
 
       <v-container grid-list-xs fluid class="pa-0">
@@ -34,11 +34,10 @@
             <translate>Recognition starts after indexing has been completed.</translate>
           </p>
         </v-alert>
-        <v-row class="search-results face-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
-          <v-col v-for="model in results" :key="model.ID" cols="12" sm="6" md="4" lg="3" xl="2" xxl="1" class="d-flex">
-            <v-card :data-id="model.ID" tile style="user-select: none" :class="model.classes()" class="result card bg-card flex-grow-1">
-              <div class="card-background card"></div>
-              <v-img :src="model.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card clickable" @click.stop.prevent="onView(model)">
+        <div class="v-row search-results face-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
+          <div v-for="model in results" :key="model.ID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
+            <div :data-id="model.ID" style="user-select: none" :class="model.classes()" class="result card bg-card">
+              <v-img :src="model.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card preview clickable" @click.stop.prevent="onView(model)">
                 <v-btn :ripple="false" class="input-hidden" icon variant="text" density="comfortable" position="absolute" @click.stop.prevent="toggleHidden(model)">
                   <v-icon color="white" class="select-on" :title="$gettext('Show')">mdi-eye-off</v-icon>
                   <v-icon color="white" class="select-off" :title="$gettext('Hide')">mdi-close</v-icon>
@@ -106,9 +105,9 @@
                   </v-col>
                 </v-row>
               </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
+            </div>
+          </div>
+        </div>
         <div class="text-center mt-4 mb-2">
           <v-btn color="secondary" rounded variant="flat" :to="{ name: 'all', query: { q: 'face:new' } }">
             <translate>Show all new faces</translate>
