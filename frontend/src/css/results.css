@@ -214,6 +214,11 @@ body.chrome .search-results .result {
     contain: layout paint style size;
 }
 
+.cards-view .result,
+.mosaic-view .result {
+    overflow: hidden !important;
+}
+
 .cards-view .result .preview,
 .list-view .result .preview,
 .mosaic-view .result.preview {
@@ -223,7 +228,7 @@ body.chrome .search-results .result {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 .cards-view .result .preview button,
