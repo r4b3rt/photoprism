@@ -77,7 +77,7 @@
           <div
             :key="photo.Hash"
             :title="photo.Title"
-            class="card clickable preview"
+            class="card preview clickable"
             @touchstart.passive="input.touchStart($event, index)"
             @touchend.stop.prevent="onClick($event, index)"
             @mousedown.stop.prevent="input.mouseDown($event, index)"
@@ -150,7 +150,7 @@
             </button>
           </div>
           <div class="card-details">
-            <button v-if="photo.Title" :title="photo.Title" class="action-title-edit meta-title" :data-uid="photo.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
+            <button v-if="photo.Title" :title="photo.Title" class="action-title-edit meta-title text-truncate" :data-uid="photo.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
               {{ photo.Title }}
             </button>
             <button v-if="photo.Description" :title="$gettext('Description')" class="meta-description" @click.exact="editPhoto(index)">

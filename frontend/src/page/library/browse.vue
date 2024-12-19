@@ -41,7 +41,7 @@
         </v-alert>
         <v-row class="search-results file-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <v-col v-for="(model, index) in results" :key="model.UID" cols="6" sm="4" md="3" lg="2" xxl="1" class="d-flex">
-            <v-card tile :data-uid="model.UID" class="result card flex-grow-1" :class="model.classes(selection.includes(model.UID))" @contextmenu.stop="onContextMenu($event, index)">
+            <v-card tile :data-uid="model.UID" class="result card bg-card flex-grow-1" :class="model.classes(selection.includes(model.UID))" @contextmenu.stop="onContextMenu($event, index)">
               <div class="card-background card"></div>
               <v-img
                 :src="model.thumbnailUrl('tile_500')"
@@ -49,7 +49,7 @@
                 :transition="false"
                 loading="lazy"
                 aspect-ratio="1"
-                class="card clickable"
+                class="card preview clickable"
                 @touchstart.passive="input.touchStart($event, index)"
                 @touchend.stop.prevent="onClick($event, index)"
                 @mousedown.stop.prevent="input.mouseDown($event, index)"

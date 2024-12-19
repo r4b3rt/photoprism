@@ -65,7 +65,7 @@
         </v-alert>
         <v-row class="search-results label-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <v-col v-for="(label, index) in results" :key="label.UID" cols="6" sm="4" md="3" lg="2" xxl="1" class="d-flex">
-            <v-card tile :data-uid="label.UID" style="user-select: none" class="result card flex-grow-1" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
+            <v-card tile :data-uid="label.UID" style="user-select: none" class="result card bg-card flex-grow-1" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
               <div class="card-background card"></div>
               <v-img
                 :src="label.thumbnailUrl('tile_500')"
@@ -73,7 +73,7 @@
                 :transition="false"
                 aspect-ratio="1"
                 style="user-select: none"
-                class="card clickable"
+                class="card preview clickable"
                 @touchstart.passive="input.touchStart($event, index)"
                 @touchend.stop.prevent="onClick($event, index)"
                 @mousedown.stop.prevent="input.mouseDown($event, index)"

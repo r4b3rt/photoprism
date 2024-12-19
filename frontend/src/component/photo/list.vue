@@ -48,7 +48,7 @@
                   <div
                     v-else
                     :key="photo.Hash"
-                    class="card clickable preview"
+                    class="card preview clickable"
                     @touchstart="onMouseDown($event, index)"
                     @touchend.stop.prevent="onClick($event, index)"
                     @mousedown="onMouseDown($event, index)"

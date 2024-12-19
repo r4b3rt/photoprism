@@ -1,11 +1,9 @@
 <template>
   <div class="p-page p-page-license">
-    <v-toolbar flat color="secondary" :density="$vuetify.display.smAndDown ? 'compact' : 'default'">
+    <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
       <v-toolbar-title>
         <translate>License</translate>
       </v-toolbar-title>
-
-      <v-spacer></v-spacer>
 
       <a target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.en.html">
         <img :src="$config.staticUri + '/img/agplv3-small.png'" alt="AGPLv3 Logo" />

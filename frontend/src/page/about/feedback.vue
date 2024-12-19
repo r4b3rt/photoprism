@@ -1,10 +1,10 @@
 <template>
   <div class="p-page p-page-support">
-    <v-toolbar flat color="secondary" :density="$vuetify.display.smAndDown ? 'compact' : 'default'">
+    <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
       <v-toolbar-title>
         <translate>Contact Us</translate>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+
       <v-btn icon>
         <v-icon size="26" color="surface-variant">mdi-message-text</v-icon>
       </v-btn>

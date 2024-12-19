@@ -7,7 +7,10 @@ body {
 
 html,
 body,
-body #app,
+body #app {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 .text-h1,
 .text-h2,
 .text-h3,
@@ -21,7 +24,7 @@ body #app,
 .text-caption,
 .text-button,
 .text-overline {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
 }
 
 html,
@@ -33,7 +36,8 @@ body #app,
 .text-body-2,
 .text-caption {
     /* Text rendering defaults. */
-    letter-spacing: normal;
+    letter-spacing: normal !important;
+    line-height: normal;
     text-justify: inter-word;
 
     /* Support for all WebKit browsers. */

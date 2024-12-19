@@ -144,9 +144,9 @@
           </p>
         </v-alert>
 
-        <v-row class="search-results album-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <v-col v-for="(album, index) in results" :key="album.UID" cols="6" sm="4" md="3" xl="2" xxl="1" class="d-flex">
-            <v-card tile :data-uid="album.UID" style="user-select: none" class="result card flex-grow-1" :class="album.classes(selection.includes(album.UID))" :to="album.route(view)" @contextmenu.stop="onContextMenu($event, index)">
+        <div class="v-row search-results album-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
+          <div v-for="(album, index) in results" ref="items" :key="album.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+            <div :data-uid="album.UID" style="user-select: none" class="result card bg-card" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">
               <div class="card-background card" style="user-select: none"></div>
               <v-img
                 :src="album.thumbnailUrl('tile_500')"
@@ -154,7 +154,7 @@
                 :transition="false"
                 aspect-ratio="1"
                 style="user-select: none"
-                class="card clickable"
+                class="card preview clickable"
                 @touchstart.passive="input.touchStart($event, index)"
                 @touchend.stop.prevent="onClick($event, index)"
                 @mousedown.stop.prevent="input.mouseDown($event, index)"
@@ -201,64 +201,47 @@
                 </v-btn>
               </v-img>
 
-              <v-card-title class="pl-4 pt-4 pr-4 pb-2 card-details" style="user-select: none">
-                <div>
-                  <h3 class="text-subtitle-2 mb-0">
-                    <button v-if="album.Type !== 'month'" class="action-title-edit text-truncate d-block" :data-uid="album.UID" @click.stop.prevent="edit(album)">
-                      <!-- TODO: change this filter -->
-                      <!-- {{ album.Title | truncate(80) }} -->
-                      {{ album.Title }}
-                    </button>
-                    <button v-else class="action-title-edit text-capitalize" :data-uid="album.UID" @click.stop.prevent="edit(album)">
-                      {{ album.getDateString() }}
-                    </button>
-                  </h3>
-                </div>
-              </v-card-title>
+              <div class="card-details">
+                <button v-if="album.Type === 'month'" :title="album.Title" class="action-title-edit meta-title text-capitalize" :data-uid="album.UID" @click.stop.prevent="edit(album)">
+                  {{ album.getDateString() }}
+                </button>
+                <button v-else-if="album.Title" :title="album.Title" class="action-title-edit meta-title" :data-uid="album.UID" @click.stop.prevent="edit(album)">
+                  {{ album.Title }}
+                </button>
 
-              <v-card-text class="pb-2 pt-0 card-details" style="user-select: none" @click.stop.prevent="">
-                <div v-if="album.Description" class="text-caption mb-2" :title="$gettext('Description')">
-                  <button @click.exact="edit(album)" class="text-truncate d-block">
-                    <!-- TODO: change this filter -->
-                    <!-- {{ album.Description | truncate(100) }} -->
-                    {{ album.Description }}
-                  </button>
-                </div>
+                <button v-if="album.Description" :title="$gettext('Description')" class="meta-description" @click.exact="edit(album)">
+                  {{ album.Description }}
+                </button>
+                <button v-else-if="album.Type === 'album' && !album.PhotoCount" class="meta-description" @click.stop.prevent="$router.push({ name: 'browse' })">
+                  <translate>Add pictures from search results by selecting them.</translate>
+                </button>
 
-                <div v-else-if="album.Type === 'album'" class="text-caption mb-2">
-                  <button v-if="album.PhotoCount === 1" @click.exact="edit(album)">
-                    <translate>Contains one picture.</translate>
+                <div class="meta-details">
+                  <button v-if="album.Type === 'folder'" :title="'/' + album.Path" class="meta-path" @click.exact="edit(album)">
+                    <i class="mdi mdi-folder" />
+                    /{{ album.Path }}
                   </button>
-                  <button v-else-if="album.PhotoCount > 0">
-                    <translate :translate-params="{ n: album.PhotoCount }">Contains %{n} pictures.</translate>
-                  </button>
-                  <button v-else @click.stop.prevent="$router.push({ name: 'browse' })">
-                    <translate>Add pictures from search results by selecting them.</translate>
-                  </button>
-                </div>
-                <div v-else-if="album.Type === 'folder'" class="text-caption mb-2">
-                  <button @click.exact="edit(album)" class="text-truncate d-block">
-                    <!-- TODO: change this filter -->
-<!-- /{{ album.Path | truncate(100) }} -->
-/{{ album.Path }}
-</button>
-                </div>
-                <div v-if="album.Category !== ''" class="text-caption mb-2 d-inline-block">
-                  <button @click.exact="edit(album)">
-                    <v-icon size="14">mdi-tag</v-icon>
+                  <button v-if="album.Category !== ''" :title="album.Category" class="meta-category" @click.exact="edit(album)">
+                    <i class="mdi mdi-tag" />
                     {{ album.Category }}
                   </button>
-                </div>
-                <div v-if="album.getLocation() !== ''" class="text-caption mb-2 d-inline-block">
-                  <button @click.exact="edit(album)">
-                    <v-icon size="14">mdi-map-marker</v-icon>
+                  <button v-if="album.PhotoCount === 1" class="meta-count" @click.exact="edit(album)">
+                    <i class="mdi mdi-bookmark-box" />
+                    <translate>Contains one picture</translate>
+                  </button>
+                  <button v-else-if="album.PhotoCount > 0" class="meta-count" @click.exact="edit(album)">
+                    <i class="mdi mdi-bookmark-box" />
+                    <translate :translate-params="{ n: album.PhotoCount }">Contains %{n} pictures</translate>
+                  </button>
+                  <button v-if="album.getLocation() !== ''" class="meta-location text-truncate" @click.exact="edit(album)">
+                    <i class="mdi mdi-map-marker" />
                     {{ album.getLocation() }}
                   </button>
                 </div>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
+              </div>
+            </div>
+          </div>
+        </div>
         <div v-if="canManage && staticFilter.type === 'album' && config.count.albums === 0" class="text-center my-2">
           <v-btn class="action-add" color="secondary" rounded @click.prevent="create">
             <translate>Add Album</translate>

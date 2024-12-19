@@ -1,11 +1,9 @@
 <template>
   <div class="p-page p-page-about">
-    <v-toolbar flat color="secondary" :density="$vuetify.display.smAndDown ? 'compact' : 'default'">
+    <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
       <v-toolbar-title>
         <span class="text-ltr">{{ $config.getAbout() }}{{ getMembership() }}</span>
       </v-toolbar-title>
-
-      <v-spacer></v-spacer>
 
       <v-btn icon href="https://www.photoprism.app/" target="_blank" class="action-info mx-2" :title="$gettext('Learn more')">
         <v-icon size="26" color="surface-variant">mdi-diamond-stone</v-icon>

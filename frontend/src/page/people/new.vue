@@ -36,7 +36,7 @@
         </v-alert>
         <v-row class="search-results face-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
           <v-col v-for="model in results" :key="model.ID" cols="12" sm="6" md="4" lg="3" xl="2" xxl="1" class="d-flex">
-            <v-card :data-id="model.ID" tile style="user-select: none" :class="model.classes()" class="result card flex-grow-1">
+            <v-card :data-id="model.ID" tile style="user-select: none" :class="model.classes()" class="result card bg-card flex-grow-1">
               <div class="card-background card"></div>
               <v-img :src="model.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card clickable" @click.stop.prevent="onView(model)">
                 <v-btn :ripple="false" class="input-hidden" icon variant="text" density="comfortable" position="absolute" @click.stop.prevent="toggleHidden(model)">

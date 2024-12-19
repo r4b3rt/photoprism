@@ -297,3 +297,17 @@ form>.v-card>.v-card-text.dense {
         max-width: 16.6666666667%;
     }
 }
+
+/* Toolbars */
+
+.v-toolbar .v-toolbar__content>.v-toolbar-title {
+    flex-grow: 1;
+}
+
+.v-toolbar.v-toolbar--density-compact .v-toolbar__content>.v-toolbar-title {
+    margin-inline-start: 12px;
+}
+
+.v-toolbar.v-toolbar--density-default .v-toolbar__content>.v-toolbar-title {
+    margin-inline-start: 12px;
+}

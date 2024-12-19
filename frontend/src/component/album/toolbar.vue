@@ -1,7 +1,7 @@
 <template>
   <v-form ref="form" validate-on="blur" autocomplete="off" class="p-photo-toolbar p-album-toolbar" accept-charset="UTF-8" @submit.prevent="updateQuery()">
     <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
-      <v-toolbar-title :title="album.Title">
+      <v-toolbar-title :title="album.Title" class="flex-grow-1">
         <span class="hidden-xs">
           <router-link :to="{ name: collectionRoute }">
             {{ T(collectionTitle) }}
@@ -11,9 +11,7 @@
         {{ album.Title }}
       </v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
-      <v-btn icon class="hidden-xs action-reload" :title="$gettext('Reload')" @click.stop="refresh()">
+       <v-btn icon class="hidden-xs action-reload" :title="$gettext('Reload')" @click.stop="refresh()">
         <v-icon>mdi-refresh</v-icon>
       </v-btn>
 
@@ -47,18 +45,9 @@
       </v-btn>
     </v-toolbar>
 
-    <template v-if="album.Description">
-      <v-card flat class="px-2 py-1 hidden-sm-and-down" color="secondary-light">
-        <v-card-text>
-          {{ album.Description }}
-        </v-card-text>
-      </v-card>
-      <v-card flat class="pa-0 hidden-md-and-up" color="secondary-light">
-        <v-card-text>
-          {{ album.Description }}
-        </v-card-text>
-      </v-card>
-    </template>
+    <div v-if="album.Description" class="toolbar-details-panel">
+      {{ album.Description }}
+    </div>
 
     <p-share-dialog :show="dialog.share" :model="album" @upload="webdavUpload" @close="dialog.share = false"></p-share-dialog>
     <p-share-upload-dialog :show="dialog.upload" :items="{ albums: album.getId() }" :model="album" @cancel="dialog.upload = false" @confirm="dialog.upload = false"></p-share-upload-dialog>
