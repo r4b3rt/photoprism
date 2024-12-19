@@ -50,7 +50,7 @@
           <v-icon>mdi-view-comfy</v-icon>
         </v-btn>
         <v-btn v-else icon class="action-view-cards" :title="$gettext('Toggle View')" @click.stop="setView('cards')">
-          <v-icon>mdi-view-column</v-icon>
+          <v-icon>mdi-view-grid</v-icon>
         </v-btn>
         <v-btn v-if="canDelete && context === 'archive' && config.count.archived > 0" icon class="hidden-sm-and-down action-delete-all" :title="$gettext('Delete All')" @click.stop="deleteAll()">
           <v-icon>mdi-delete-sweep</v-icon>
