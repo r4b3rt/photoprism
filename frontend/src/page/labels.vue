@@ -66,28 +66,26 @@
         <div class="v-row search-results label-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="(label, index) in results" ref="items" :key="label.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
             <div :data-uid="label.UID" style="user-select: none" class="result card bg-card" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
-              <v-img
-                :src="label.thumbnailUrl('tile_500')"
-                :alt="label.Name"
-                :transition="false"
-                aspect-ratio="1"
-                style="user-select: none"
+              <div
+                :key="label.UID"
+                :title="label.Name"
+                :style="`background-image: url(${label.thumbnailUrl('tile_500')})`"
                 class="card preview clickable"
                 @touchstart.passive="input.touchStart($event, index)"
                 @touchend.stop.prevent="onClick($event, index)"
                 @mousedown.stop.prevent="input.mouseDown($event, index)"
                 @click.stop.prevent="onClick($event, index)"
               >
-                <v-btn v-if="canSelect" :ripple="false" icon variant="text" position="absolute" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
-                  <v-icon color="white" class="select-on">mdi-check-circle</v-icon>
-                  <v-icon color="white" class="select-off">mdi-radiobox-blank</v-icon>
-                </v-btn>
-
-                <v-btn :ripple="false" icon variant="text" position="absolute" class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
-                  <v-icon icon="mdi-star" color="favorite" class="select-on"></v-icon>
-                  <v-icon icon="mdi-star-outline" color="white" class="select-off"></v-icon>
-                </v-btn>
-              </v-img>
+                <div class="preview__overlay"></div>
+                <button v-if="canSelect" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+                  <i class="mdi mdi-check-circle select-on" />
+                  <i class="mdi mdi-circle-outline select-off" />
+                </button>
+                <button class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+                  <i v-if="label.Favorite" class="mdi mdi-star text-favorite" />
+                  <i v-else class="mdi mdi-star-outline" />
+                </button>
+              </div>
 
               <div class="card-details" @click.stop.prevent="">
                 <div v-if="canManage" class="meta-title inline-edit clickable" @click.stop.prevent="edit(label)">

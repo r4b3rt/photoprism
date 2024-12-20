@@ -118,13 +118,7 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </v-container>
     <v-container v-else fluid class="pa-0">
-      <p-scroll
-          :hide-panel="hideExpansionPanel"
-          :load-more="loadMore"
-          :load-disabled="scrollDisabled"
-          :load-distance="scrollDistance"
-          :loading="loading">
-      </p-scroll>
+      <p-scroll :hide-panel="hideExpansionPanel" :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"> </p-scroll>
 
       <p-album-clipboard :refresh="refresh" :selection="selection" :share="share" :edit="edit" :clear-selection="clearSelection" :context="context"></p-album-clipboard>
 
@@ -147,58 +141,32 @@
         <div class="v-row search-results album-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="(album, index) in results" ref="items" :key="album.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
             <div :data-uid="album.UID" style="user-select: none" class="result card bg-card" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">
-              <v-img
-                :src="album.thumbnailUrl('tile_500')"
-                :alt="album.Title"
-                :transition="false"
-                aspect-ratio="1"
-                style="user-select: none"
+              <div
+                :key="album.UID"
+                :title="album.Title"
+                :style="`background-image: url(${album.thumbnailUrl('tile_500')})`"
                 class="card preview clickable"
                 @touchstart.passive="input.touchStart($event, index)"
                 @touchend.stop.prevent="onClick($event, index)"
                 @mousedown.stop.prevent="input.mouseDown($event, index)"
                 @click.stop.prevent="onClick($event, index)"
               >
-                <v-btn
-                  v-if="canShare && album.LinkCount > 0"
-                  :ripple="false"
-                  icon
-                  variant="text"
-                  position="absolute"
-                  class="action-share"
-                  @touchstart.stop.prevent="input.touchStart($event, index)"
-                  @touchend.stop.prevent="onShare($event, index)"
-                  @touchmove.stop.prevent
-                  @click.stop.prevent="onShare($event, index)"
-                >
-                  <v-icon color="white">mdi-share-variant</v-icon>
-                </v-btn>
-
-                <v-btn :ripple="false" icon variant="text" position="absolute" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
-                  <v-icon color="white" class="select-on">mdi-check-circle</v-icon>
-                  <v-icon color="white" class="select-off">mdi-radiobox-blank</v-icon>
-                </v-btn>
-
-                <v-btn :ripple="false" icon variant="text" position="absolute" class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
-                  <v-icon icon="mdi-star" color="favorite" class="select-on"></v-icon>
-                  <v-icon icon="mdi-star-outline" color="white" class="select-off"></v-icon>
-                </v-btn>
-
-                <v-btn
-                  v-if="canManage && experimental && featPrivate && album.Private"
-                  :ripple="false"
-                  icon
-                  variant="text"
-                  position="absolute"
-                  class="input-private"
-                  @touchstart.stop.prevent="input.touchStart($event, index)"
-                  @touchend.stop.prevent="onEdit($event, index)"
-                  @touchmove.stop.prevent
-                  @click.stop.prevent="onEdit($event, index)"
-                >
-                  <v-icon color="white" class="select-on">mdi-lock</v-icon>
-                </v-btn>
-              </v-img>
+                <div class="preview__overlay"></div>
+                <button v-if="canShare && album.LinkCount > 0" class="action-share" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onShare($event, index)" @touchmove.stop.prevent @click.stop.prevent="onShare($event, index)">
+                  <i class="mdi mdi-share-variant" />
+                </button>
+                <button class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+                  <i class="mdi mdi-check-circle select-on" />
+                  <i class="mdi mdi-circle-outline select-off" />
+                </button>
+                <button class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+                  <i v-if="album.Favorite" class="mdi mdi-star text-favorite select-on" />
+                  <i v-else class="mdi mdi-star-outline select-off" />
+                </button>
+                <button v-if="canManage && experimental && featPrivate && album.Private" class="input-private" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onEdit($event, index)" @touchmove.stop.prevent @click.stop.prevent="onEdit($event, index)">
+                  <i class="mdi mdi-lock" />
+                </button>
+              </div>
 
               <div class="card-details">
                 <button v-if="album.Type === 'month'" :title="album.Title" class="action-title-edit meta-title text-capitalize" :data-uid="album.UID" @click.stop.prevent="edit(album)">
