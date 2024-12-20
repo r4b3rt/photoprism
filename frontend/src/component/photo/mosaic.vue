@@ -30,11 +30,10 @@
           <div
             v-else
             :key="photo.Hash"
-            tile
             :data-id="photo.ID"
             :data-uid="photo.UID"
+            :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`"
             :class="photo.classes().join(' ') + ' card result clickable preview'"
-            :alt="photo.Title"
             :title="photo.Title"
             @contextmenu.stop="onContextMenu($event, index)"
             @touchstart.passive="input.touchStart($event, index)"
@@ -44,7 +43,7 @@
             @mouseover="playLive(photo)"
             @mouseleave="pauseLive(photo)"
           >
-            <div :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`" class="image" />
+            <div class="preview__overlay"></div>
             <div v-if="photo.Type === 'live' || photo.Type === 'animated'" class="live-player">
               <video :id="'live-player-' + photo.ID" :key="photo.ID" width="224" height="224" preload="none" loop muted playsinline>
                 <source :src="photo.videoUrl()" />

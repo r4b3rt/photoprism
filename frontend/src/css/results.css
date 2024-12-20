@@ -231,6 +231,27 @@ body.chrome .search-results .result {
     overflow: hidden !important;
 }
 
+.search-results .preview>.preview__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+    background-color: rgb(var(--v-theme-selected, #cccccc));
+    border-radius: inherit;
+    opacity: 0;
+}
+
+.list-view .result.is-selected .preview>.preview__overlay,
+.cards-view .result.is-selected .preview>.preview__overlay {
+    opacity: 0.2;
+}
+
+.mosaic-view .preview.is-selected>.preview__overlay {
+    opacity: 0.5;
+}
+
 .cards-view .result .preview button,
 .list-view .result .preview button,
 .mosaic-view .result.preview button {
@@ -302,14 +323,6 @@ body.chrome .search-results .result {
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
-}
-
-.cards-view .result.is-selected .preview .image {
-    opacity: 0.8;
-}
-
-.mosaic-view .result.is-selected.preview .image {
-    opacity: 0.5;
 }
 
 .cards-view .card .card-details {
@@ -401,10 +414,6 @@ body.chrome .search-results .result {
 
 .cards-view .result.placeholder .card-details i {
     width: 14px;
-}
-
-.list-view .result.is-selected .preview {
-    margin: 2px !important;
 }
 
 .cards-view>div {
@@ -603,9 +612,7 @@ body.chrome .search-results .result {
 }
 
 .cards-view .card.is-selected,
-.cards-view .card.is-selected .card-background,
-.mosaic-view .card.is-selected,
-.mosaic-view .card.is-selected .card-background {
+.cards-view .card.is-selected .card-background {
     color: rgb(var(--v-theme-on-selected, --v-theme-on-highlight)) !important;
     caret: rgb(var(--v-theme-on-selected, --v-theme-on-highlight)) !important;
     background: rgb(var(--v-theme-selected, --v-theme-highlight)) !important;

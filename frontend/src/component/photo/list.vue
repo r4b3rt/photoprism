@@ -49,13 +49,14 @@
                     v-else
                     :key="photo.Hash"
                     class="card preview clickable"
+                    :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`"
                     @touchstart="onMouseDown($event, index)"
                     @touchend.stop.prevent="onClick($event, index)"
                     @mousedown="onMouseDown($event, index)"
                     @contextmenu.stop="onContextMenu($event, index)"
                     @click.stop.prevent="onClick($event, index)"
                   >
-                    <div :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`" class="image" />
+                    <div class="preview__overlay"></div>
                     <button v-if="selectMode" class="input-select">
                       <i class="mdi mdi-check-circle select-on" />
                       <i class="mdi mdi-circle-outline select-off" />
