@@ -1,14 +1,14 @@
 <template>
   <div class="p-photos p-photo-cards">
-    <template v-if="photos.length === 0">
-      <v-alert color="surface-variant" :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'" class="no-results ma-2 opacity-70" variant="outlined">
-        <h3 v-if="filter.order === 'edited'" class="text-subtitle-2 ma-0 pa-0">
+    <div v-if="photos.length === 0" class="pa-3">
+      <v-alert color="primary" :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'" class="no-results opacity-60" variant="outlined">
+        <div v-if="filter.order === 'edited'" class="font-weight-bold">
           <translate>No recently edited pictures</translate>
-        </h3>
-        <h3 v-else class="text-subtitle-2 ma-0 pa-0">
+        </div>
+        <div v-else class="font-weight-bold">
           <translate>No pictures found</translate>
-        </h3>
-        <p class="mt-2 mb-0 pa-0">
+        </div>
+        <div class="mt-2 mb-0 pa-0">
           <translate>Try again using other filters or keywords.</translate>
           <template v-if="!isSharedView">
             <translate>In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.</translate>
@@ -16,9 +16,9 @@
               <translate>Non-photographic and low-quality images require a review before they appear in search results.</translate>
             </template>
           </template>
-        </p>
+        </div>
       </v-alert>
-    </template>
+    </div>
     <div class="v-row search-results photo-results cards-view" :class="{ 'select-results': selectMode }">
       <div v-for="(photo, index) in photos" ref="items" :key="photo.ID" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
         <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-uid="photo.UID" class="result card bg-card placeholder">

@@ -30,7 +30,7 @@
           }
         "
       ></v-text-field>
-      <v-spacer></v-spacer>
+
       <v-btn icon class="action-reload" :title="$gettext('Reload')" @click.stop="onReload()">
         <v-icon>mdi-refresh</v-icon>
       </v-btn>
@@ -41,52 +41,48 @@
         <v-icon>mdi-bug</v-icon>
       </v-btn>
     </v-toolbar>
-    <v-container v-if="loading" fluid class="pa-6">
+    <div v-if="loading" fluid class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
-    </v-container>
-    <v-container v-else-if="errors.length > 0" fluid class="pa-0">
+    </div>
+    <div v-else-if="errors.length > 0" fluid class="pa-0">
       <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
-      <v-list density="compact" lines="two" class="bg-transparent pa-1">
-        <v-list-item v-for="err in errors" :key="err.ID" class="rounded-4" @click="showDetails(err)">
-          <!--        TODO: fix it-->
-          <v-list-item :prepend-avatar="err.Level" :color="err.Level">
-            <!-- <v-icon :color="err.Level">{{ err.Level }}</v-icon> -->
-          </v-list-item>
 
-          <v-list-item-title>{{ err.Message }}</v-list-item-title>
-          <v-list-item-subtitle>{{ formatTime(err.Time) }}</v-list-item-subtitle>
+      <v-list lines="one" bg-color="table">
+        <v-list-item v-for="err in errors" :key="err.ID" :prepend-icon="err.Level === 'error' ? 'mdi-alert-circle-outline' : 'mdi-alert'" :title="err.Message" :subtitle="formatTime(err.Time)" @click="showDetails(err)">
+          <template #prepend>
+            <v-icon v-if="err.Level === 'error'" icon="mdi-alert-circle-outline" color="error"></v-icon>
+            <v-icon v-else-if="err.Level === 'warning'" icon="mdi-alert" color="warning"></v-icon>
+            <v-icon v-else icon="mdi-information-outline" color="info"></v-icon>
+          </template>
         </v-list-item>
       </v-list>
-    </v-container>
-    <div v-else class="pa-2">
-      <v-alert color="surface-variant" icon="mdi-check-circle-outline" class="no-results ma-2 opacity-70" variant="outlined">
-        <p class="mt-0 mb-0 pa-0">
-          <template v-if="filter.q !== ''">
-            <translate>No warnings or error containing this keyword. Note that search is case-sensitive.</translate>
-          </template>
-          <template>
-            <translate>Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues.</translate>
-          </template>
-        </p>
+    </div>
+    <div v-else class="pa-3">
+      <v-alert color="primary" icon="mdi-check-circle-outline" class="no-results opacity-60" variant="outlined">
+        <div v-if="filter.q">
+          <translate>No warnings or error containing this keyword. Note that search is case-sensitive.</translate>
+        </div>
+        <div v-else>
+          <translate>Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues.</translate>
+        </div>
       </v-alert>
     </div>
     <p-confirm-dialog :show="dialog.delete" icon="mdi-delete-outline" @cancel="dialog.delete = false" @confirm="onConfirmDelete"></p-confirm-dialog>
     <v-dialog v-model="details.show" max-width="500">
-      <v-card class="pa-2">
+      <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
+          <v-icon v-if="details.err.Level === 'error'" icon="mdi-alert-circle-outline" color="error"></v-icon>
+          <v-icon v-else-if="details.err.Level === 'warning'" icon="mdi-alert" color="warning"></v-icon>
+          <v-icon v-else icon="mdi-information-outline" color="info"></v-icon>
           <h6 class="text-h6 text-capitalize">{{ details.err.Level }}</h6>
         </v-card-title>
 
-        <v-card-text class="pa-2 text-subtitle-2">
-          {{ localTime(details.err.Time) }}
-        </v-card-text>
-
-        <v-card-text class="pa-2 text-body-2">
+        <v-card-text>
           {{ details.err.Message }}
         </v-card-text>
 
         <v-card-actions>
-          <v-btn color="secondary-light" variant="flat" class="action-close" @click="details.show = false">
+          <v-btn color="button" variant="flat" class="action-close" @click="details.show = false">
             <translate>Close</translate>
           </v-btn>
         </v-card-actions>

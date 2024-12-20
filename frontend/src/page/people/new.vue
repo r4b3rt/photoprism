@@ -24,16 +24,18 @@
     <div v-else>
       <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
 
-      <div>
-        <v-alert v-if="results.length === 0" color="surface-variant" icon="mdi-check-circle-outline" class="no-results ma-2 opacity-70" variant="outlined">
-          <h3 class="text-subtitle-2 ma-0 pa-0">
+      <div v-if="results.length === 0" class="pa-3">
+        <v-alert color="primary" icon="mdi-check-circle-outline" class="no-results opacity-60" variant="outlined">
+          <div class="font-weight-bold">
             <translate>No people found</translate>
-          </h3>
-          <p class="mt-2 mb-0 pa-0">
+          </div>
+          <div class="mt-2 mb-0 pa-0">
             <translate>You may rescan your library to find additional faces.</translate>
             <translate>Recognition starts after indexing has been completed.</translate>
-          </p>
+          </div>
         </v-alert>
+      </div>
+      <div v-else>
         <div class="v-row search-results face-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="model in results" :key="model.ID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
             <div :data-id="model.ID" style="user-select: none" :class="model.classes()" class="result card bg-card">

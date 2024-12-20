@@ -13,8 +13,6 @@
           </router-link>
         </v-toolbar-title>
 
-        <v-spacer></v-spacer>
-
         <v-btn icon :title="$gettext('Reload')" class="action-reload" @click.stop="refresh">
           <v-icon>mdi-refresh</v-icon>
         </v-btn>

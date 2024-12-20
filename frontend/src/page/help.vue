@@ -5,8 +5,6 @@
         <translate>Help</translate>
       </v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon href="https://docs.photoprism.app/getting-started/troubleshooting/" target="_blank" class="action-info mx-2" :title="$gettext('Learn more')">
         <v-icon icon="mdi-book-open-page-variant" size="26" color="surface-variant"></v-icon>
       </v-btn>

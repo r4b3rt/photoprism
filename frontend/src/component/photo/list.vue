@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div v-if="photos.length === 0" class="pa-2">
-      <v-alert color="surface-variant" :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'" class="no-results ma-2 opacity-70" variant="outlined">
-        <h3 v-if="filter.order === 'edited'" class="text-subtitle-2 ma-0 pa-0">
+    <div v-if="photos.length === 0" class="pa-3">
+      <v-alert color="primary" :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'" class="no-results opacity-60" variant="outlined">
+        <div v-if="filter.order === 'edited'" class="font-weight-bold">
           <translate>No recently edited pictures</translate>
-        </h3>
-        <h3 v-else class="text-subtitle-2 ma-0 pa-0">
+        </div>
+        <div v-else class="font-weight-bold">
           <translate>No pictures found</translate>
-        </h3>
-        <p class="mt-2 mb-0 pa-0">
+        </div>
+        <div class="mt-2 mb-0 pa-0">
           <translate>Try again using other filters or keywords.</translate>
           <template v-if="!isSharedView">
             <translate>In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.</translate>
-            <template v-if="config.settings.features.review">
+            <template v-if="$config.feature('review')">
               <translate>Non-photographic and low-quality images require a review before they appear in search results.</translate>
             </template>
           </template>
-        </p>
+        </div>
       </v-alert>
     </div>
     <div v-else class="search-results photo-results list-view">

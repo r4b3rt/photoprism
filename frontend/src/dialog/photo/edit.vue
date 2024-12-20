@@ -5,11 +5,12 @@
         <v-btn icon class="action-close" @click.stop="close">
           <v-icon>mdi-close</v-icon>
         </v-btn>
+
         <v-toolbar-title
           >{{ title }}
           <v-icon v-if="isPrivate" title="Private">mdi-lock</v-icon>
         </v-toolbar-title>
-        <v-spacer></v-spacer>
+
         <v-toolbar-items v-if="selection.length > 1">
           <v-btn icon :disabled="selected < 1" class="action-previous" @click.stop="prev">
             <v-icon v-if="!rtl">mdi-chevron-left</v-icon>

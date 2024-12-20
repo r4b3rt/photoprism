@@ -122,12 +122,12 @@
 
       <p-album-clipboard :refresh="refresh" :selection="selection" :share="share" :edit="edit" :clear-selection="clearSelection" :context="context"></p-album-clipboard>
 
-      <div>
-        <v-alert v-if="results.length === 0" color="surface-variant" icon="mdi-lightbulb-outline" class="no-results ma-2 opacity-70" variant="outlined">
-          <h3 class="text-subtitle-2 ma-0 pa-0">
+      <div v-if="results.length === 0" class="pa-3">
+        <v-alert color="primary" icon="mdi-lightbulb-outline" class="no-results opacity-60" variant="outlined">
+          <div class="font-weight-bold">
             <translate>No albums found</translate>
-          </h3>
-          <p class="mt-2 mb-0 pa-0">
+          </div>
+          <div class="mt-2 mb-0 pa-0">
             <translate>Try again using other filters or keywords.</translate>
             <template v-if="staticFilter.type === 'album'">
               <translate>After selecting pictures from search results, you can add them to an album using the context menu.</translate>
@@ -135,9 +135,10 @@
             <template v-else>
               <translate>Your library is continuously analyzed to automatically create albums of special moments, trips, and places.</translate>
             </template>
-          </p>
+          </div>
         </v-alert>
-
+      </div>
+      <div v-else>
         <div class="v-row search-results album-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="(album, index) in results" ref="items" :key="album.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
             <div :data-uid="album.UID" style="user-select: none" class="result card bg-card" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">

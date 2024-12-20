@@ -18,8 +18,6 @@
         </span>
       </v-toolbar-title>
 
-      <v-spacer></v-spacer>
-
       <v-btn icon href="https://link.photoprism.app/personal-editions" target="_blank" class="action-upgrade" :title="$gettext('Learn more')">
         <v-icon size="26" color="surface-variant">mdi-diamond-stone</v-icon>
       </v-btn>
