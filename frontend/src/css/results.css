@@ -181,7 +181,7 @@ body.chrome .search-results .result {
     background-color: #AA98A9 !important;
 }
 
-/* Pink */
+/* Cards, Mosaic and List View */
 
 .default-hidden {
     display: none;
@@ -201,8 +201,18 @@ body.chrome .search-results .result {
     box-shadow: none !important;
 }
 
+.cards-view>div {
+    margin: 0;
+    padding: 4px 2px;
+}
+
 .cards-view .result {
     margin: 2px !important;
+}
+
+.mosaic-view>div {
+    margin: 0;
+    padding: 2px;
 }
 
 .mosaic-view .result {
@@ -415,10 +425,6 @@ body.chrome .search-results .result {
 
 .cards-view .result.placeholder .card-details i {
     width: 14px;
-}
-
-.cards-view>div {
-    padding: 4px 2px;
 }
 
 .cards-view .input-select,
