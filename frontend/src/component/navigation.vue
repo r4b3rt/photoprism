@@ -215,19 +215,6 @@
               <span v-show="config.count.favorites > 0" class="nav-count-item">{{ config.count.favorites }}</span>
             </v-list-item>
 
-            <v-list-item v-if="isMini && $config.feature('moments')" :to="{ name: 'calendar' }" variant="text" class="nav-calendar" :ripple="false" @click.stop="">
-              <v-icon class="ma-auto">mdi-calendar-range</v-icon>
-            </v-list-item>
-            <v-list-item v-else-if="!isMini && $config.feature('moments')" :to="{ name: 'calendar' }" variant="text" class="nav-calendar" :ripple="false" @click.stop="">
-              <v-list-item-title class="nav-menu-item">
-                <v-icon>mdi-calendar-range</v-icon>
-                <p class="nav-item-title">
-                  <translate key="Calendar">Calendar</translate>
-                </p>
-              </v-list-item-title>
-              <span v-show="config.count.months > 0" class="nav-count-item">{{ config.count.months }}</span>
-            </v-list-item>
-
             <v-list-item v-if="isRestricted" v-show="$config.feature('places')" to="/states" variant="text" class="nav-states" :ripple="false" @click.stop="">
               <v-list-item-title class="nav-menu-item" @click.stop="">
                 <v-icon>mdi-near_me</v-icon>
@@ -267,12 +254,25 @@
               </div>
             </template>
 
+            <v-list-item v-if="isMini && $config.feature('moments')" :to="{ name: 'calendar' }" variant="text" class="nav-calendar" :ripple="false" @click.stop="">
+              <v-icon class="ma-auto">mdi-calendar</v-icon>
+            </v-list-item>
+            <v-list-item v-else-if="!isMini && $config.feature('moments')" :to="{ name: 'calendar' }" variant="text" class="nav-calendar" :ripple="false" @click.stop="">
+              <v-list-item-title class="nav-menu-item">
+                <v-icon>mdi-calendar</v-icon>
+                <p class="nav-item-title">
+                  <translate key="Calendar">Calendar</translate>
+                </p>
+              </v-list-item-title>
+              <span v-show="config.count.months > 0" class="nav-count-item">{{ config.count.months }}</span>
+            </v-list-item>
+
             <v-list-item v-if="isMini && $config.feature('moments')" :to="{ name: 'moments' }" variant="text" class="nav-moments" :ripple="false" @click.stop="">
-              <v-icon class="ma-auto">mdi-compass</v-icon>
+              <v-icon class="ma-auto">mdi-filmstrip-box</v-icon>
             </v-list-item>
             <v-list-item v-else-if="!isMini && $config.feature('moments')" :to="{ name: 'moments' }" variant="text" class="nav-moments" :ripple="false" @click.stop="">
               <v-list-item-title class="nav-menu-item">
-                <v-icon>mdi-compass</v-icon>
+                <v-icon>mdi-filmstrip-box</v-icon>
                 <p class="nav-item-title">
                   <translate key="Moments">Moments</translate>
                 </p>
