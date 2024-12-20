@@ -190,7 +190,7 @@ nav .v-list__item__title.title {
 .p-page .v-toolbar.page-toolbar .v-toolbar__content,
 .v-tabs .v-toolbar.page-toolbar .v-toolbar__content,
 .v-toolbar.page-toolbar .v-toolbar__content {
-    padding: 0 8px;
+    padding: 0 4px;
 }
 
 .p-page .v-toolbar.page-toolbar.v-toolbar--density-compact .v-toolbar__content {
