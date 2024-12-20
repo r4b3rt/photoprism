@@ -114,15 +114,15 @@
       </div>
     </v-form>
 
-    <v-container v-if="loading" fluid class="pa-6">
+    <div v-if="loading" class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
-    </v-container>
-    <v-container v-else fluid class="pa-0">
+    </div>
+    <div v-else>
       <p-scroll :hide-panel="hideExpansionPanel" :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"> </p-scroll>
 
       <p-album-clipboard :refresh="refresh" :selection="selection" :share="share" :edit="edit" :clear-selection="clearSelection" :context="context"></p-album-clipboard>
 
-      <v-container grid-list-xs fluid class="pa-2">
+      <div>
         <v-alert v-if="results.length === 0" color="surface-variant" icon="mdi-lightbulb-outline" class="no-results ma-2 opacity-70" variant="outlined">
           <h3 class="text-subtitle-2 ma-0 pa-0">
             <translate>No albums found</translate>
@@ -138,7 +138,7 @@
           </p>
         </v-alert>
 
-        <div class="v-row search-results album-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
+        <div class="v-row search-results album-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="(album, index) in results" ref="items" :key="album.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
             <div :data-uid="album.UID" style="user-select: none" class="result card bg-card" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">
               <div
@@ -213,8 +213,8 @@
             <translate>Add Album</translate>
           </v-btn>
         </div>
-      </v-container>
-    </v-container>
+      </div>
+    </div>
     <p-share-dialog :show="dialog.share" :model="model" @upload="webdavUpload" @close="dialog.share = false"></p-share-dialog>
     <p-share-upload-dialog :show="dialog.upload" :items="{ albums: selection }" :model="model" @cancel="dialog.upload = false" @confirm="dialog.upload = false"></p-share-upload-dialog>
     <p-album-edit-dialog :show="dialog.edit" :album="model" @close="dialog.edit = false"></p-album-edit-dialog>

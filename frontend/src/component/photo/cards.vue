@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-xs fluid class="pa-1 p-photos p-photo-cards">
+  <div class="p-photos p-photo-cards">
     <template v-if="photos.length === 0">
       <v-alert color="surface-variant" :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'" class="no-results ma-2 opacity-70" variant="outlined">
         <h3 v-if="filter.order === 'edited'" class="text-subtitle-2 ma-0 pa-0">
@@ -19,53 +19,53 @@
         </p>
       </v-alert>
     </template>
-    <div class="v-row search-results photo-results cards-view ma-0" :class="{ 'select-results': selectMode }">
+    <div class="v-row search-results photo-results cards-view" :class="{ 'select-results': selectMode }">
       <div v-for="(photo, index) in photos" ref="items" :key="photo.ID" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
         <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-uid="photo.UID" class="result card bg-card placeholder">
           <div :key="photo.Hash" class="card preview" />
           <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="card-review" />
           <div class="card-details">
-            <button v-if="photo.Title" :title="photo.Title" class="action-title-edit meta-title text-truncate" :data-uid="photo.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
+            <button v-if="photo.Title" class="action-title-edit meta-title text-truncate" :data-uid="photo.UID">
               {{ photo.Title }}
             </button>
-            <button v-if="photo.Description" :title="$gettext('Description')" class="meta-description" @click.exact="editPhoto(index)">
+            <button v-if="photo.Description" class="meta-description">
               {{ photo.Description }}
             </button>
             <div class="meta-details">
-              <button class="action-open-date meta-date" :data-uid="photo.UID" @click.exact="openDate(index)">
+              <button class="action-open-date meta-date" :data-uid="photo.UID">
                 <i :title="$gettext('Taken')" class="mdi mdi-calendar-range" />
                 {{ photo.getDateString(true) }}
               </button>
-              <button v-if="photo.Type === 'video'" :title="$gettext('Video')" @click.exact="editPhoto(index)">
+              <button v-if="photo.Type === 'video'">
                 <i class="mdi mdi-movie" />
                 {{ photo.getVideoInfo() }}
               </button>
-              <button v-else-if="photo.Type === 'live'" :title="$gettext('Live')" @click.exact="editPhoto(index)">
+              <button v-else-if="photo.Type === 'live'">
                 <i class="mdi mdi-play-circle" />
                 {{ photo.getVideoInfo() }}
               </button>
-              <button v-else-if="photo.Type === 'animated'" :title="$gettext('Animated') + ' GIF'" @click.exact="editPhoto(index)">
+              <button v-else-if="photo.Type === 'animated'">
                 <i class="mdi mdi-file-gif-box" />
                 {{ photo.getVideoInfo() }}
               </button>
-              <button v-else-if="photo.Type === 'vector'" :title="$gettext('Vector')" @click.exact="editPhoto(index)">
+              <button v-else-if="photo.Type === 'vector'">
                 <i class="mdi mdi-vector-polyline" />
                 {{ photo.getVectorInfo() }}
               </button>
-              <button v-else :title="$gettext('Camera')" class="meta-camera action-camera-edit" :data-uid="photo.UID" @click.exact="editPhoto(index)">
+              <button v-else class="meta-camera action-camera-edit" :data-uid="photo.UID">
                 <i class="mdi mdi-camera" />
                 {{ photo.getPhotoInfo() }}
               </button>
-              <button v-if="photo.LensID > 1 || photo.FocalLength" :title="$gettext('Lens')" class="meta-lens action-lens-edit" :data-uid="photo.UID" @click.exact="editPhoto(index)">
+              <button v-if="photo.LensID > 1 || photo.FocalLength" class="meta-lens action-lens-edit" :data-uid="photo.UID">
                 <i class="mdi mdi-camera-iris" />
                 {{ photo.getLensInfo() }}
               </button>
-              <button v-if="featDownload" :title="photo.getOriginalName()" class="meta-filename" @click.exact="downloadFile(index)">
-                <i class="mdi mdi-image" />
+              <button v-if="featDownload" class="meta-filename text-truncate">
+                <i class="mdi mdi-film" />
                 {{ photo.getOriginalName() }}
               </button>
               <template v-if="featPlaces && photo.Country !== 'zz'">
-                <button :title="$gettext('Location')" class="meta-location action-location" :data-uid="photo.UID" @click.exact="openLocation(index)">
+                <button class="meta-location action-location" :data-uid="photo.UID">
                   <i class="mdi mdi-map-marker" />
                   {{ photo.locationInfo() }}
                 </button>
@@ -186,8 +186,8 @@
                 <i class="mdi mdi-camera-iris" />
                 {{ photo.getLensInfo() }}
               </button>
-              <button v-if="featDownload" :title="photo.getOriginalName()" class="meta-filename" @click.exact="downloadFile(index)">
-                <i class="mdi mdi-image" />
+              <button v-if="featDownload" :title="photo.getOriginalName()" class="meta-filename text-truncate" @click.exact="downloadFile(index)">
+                <i class="mdi mdi-film" />
                 {{ photo.getOriginalName() }}
               </button>
               <template v-if="featPlaces && photo.Country !== 'zz'">
@@ -201,7 +201,7 @@
         </div>
       </div>
     </div>
-  </v-container>
+  </div>
 </template>
 <script>
 import download from "common/download";

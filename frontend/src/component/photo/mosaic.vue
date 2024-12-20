@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-xs fluid class="pa-1 p-photos p-photo-mosaic">
+  <div class="p-photos p-photo-mosaic">
     <div v-if="photos.length === 0" class="pa-0">
       <v-alert color="surface-variant" :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'" class="no-results ma-2 opacity-70" variant="outlined">
         <h3 v-if="filter.order === 'edited'" class="text-subtitle-2 ma-0 pa-0">
@@ -25,7 +25,7 @@
          The following div is the layout + size container. It makes the browser not
          re-layout all elements in the list when the children of one of them changes
         -->
-        <div class="image-container">
+        <div class="image-container bg-card">
           <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-uid="photo.UID" class="card result preview" />
           <div
             v-else
@@ -33,7 +33,7 @@
             :data-id="photo.ID"
             :data-uid="photo.UID"
             :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`"
-            :class="photo.classes().join(' ') + ' card result clickable preview'"
+            :class="photo.classes().join(' ') + ' card result preview clickable'"
             :title="photo.Title"
             @contextmenu.stop="onContextMenu($event, index)"
             @touchstart.passive="input.touchStart($event, index)"
@@ -97,7 +97,7 @@
         </div>
       </div>
     </div>
-  </v-container>
+  </div>
 </template>
 <script>
 import { Input, InputInvalid, ClickShort, ClickLong } from "common/input";

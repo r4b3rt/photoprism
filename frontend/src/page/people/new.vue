@@ -18,13 +18,13 @@
       </v-toolbar>
     </v-form>
 
-    <v-container v-if="loading" fluid class="pa-6">
+    <div v-if="loading" class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
-    </v-container>
-    <v-container v-else fluid class="pa-2">
+    </div>
+    <div v-else>
       <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
 
-      <v-container grid-list-xs fluid class="pa-0">
+      <div>
         <v-alert v-if="results.length === 0" color="surface-variant" icon="mdi-check-circle-outline" class="no-results ma-2 opacity-70" variant="outlined">
           <h3 class="text-subtitle-2 ma-0 pa-0">
             <translate>No people found</translate>
@@ -34,7 +34,7 @@
             <translate>Recognition starts after indexing has been completed.</translate>
           </p>
         </v-alert>
-        <div class="v-row search-results face-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
+        <div class="v-row search-results face-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="model in results" :key="model.ID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
             <div :data-id="model.ID" style="user-select: none" :class="model.classes()" class="result card bg-card">
               <v-img :src="model.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card preview clickable" @click.stop.prevent="onView(model)">
@@ -113,8 +113,8 @@
             <translate>Show all new faces</translate>
           </v-btn>
         </div>
-      </v-container>
-    </v-container>
+      </div>
+    </div>
   </div>
 </template>
 

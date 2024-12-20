@@ -45,15 +45,15 @@
       </v-toolbar>
     </v-form>
 
-    <v-container v-if="loading" fluid class="pa-6">
+    <div v-if="loading" class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
-    </v-container>
-    <v-container v-else fluid class="pa-0">
+    </div>
+    <div v-else>
       <p-label-clipboard v-if="canSelect" :refresh="refresh" :selection="selection" :clear-selection="clearSelection"></p-label-clipboard>
 
       <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
 
-      <v-container grid-list-xs fluid class="pa-2">
+      <div>
         <v-alert v-if="results.length === 0" color="surface-variant" icon="mdi-lightbulb-outline" class="no-results ma-2 opacity-70" variant="outlined">
           <h3 class="text-subtitle-2 ma-0 pa-0">
             <translate>No labels found</translate>
@@ -63,7 +63,7 @@
             <translate>In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.</translate>
           </p>
         </v-alert>
-        <div class="v-row search-results label-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
+        <div class="v-row search-results label-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="(label, index) in results" ref="items" :key="label.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
             <div :data-uid="label.UID" style="user-select: none" class="result card bg-card" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
               <div
@@ -105,8 +105,8 @@
             </div>
           </div>
         </div>
-      </v-container>
-    </v-container>
+      </div>
+    </div>
 
     <p-label-edit-dialog :show="dialog.edit" :label="model" @close="dialog.edit = false"></p-label-edit-dialog>
   </div>

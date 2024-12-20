@@ -48,15 +48,15 @@
       </v-toolbar>
     </v-form>
 
-    <v-container v-if="loading" fluid class="pa-6">
+    <div v-if="loading" class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
-    </v-container>
-    <v-container v-else fluid class="pa-0" style="min-height: 100vh">
+    </div>
+    <div v-else style="min-height: 100vh">
       <p-subject-clipboard :refresh="refresh" :selection="selection" :clear-selection="clearSelection"></p-subject-clipboard>
 
       <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
 
-      <v-container grid-list-xs fluid class="pa-2">
+      <div>
         <v-alert v-if="results.length === 0" icon="mdi-lightbulb-outline" class="no-results opacity-70" variant="outlined">
           <h3 class="text-subtitle-2 ma-0 pa-0">
             <translate>No people found</translate>
@@ -67,7 +67,7 @@
             <translate>Recognition starts after indexing has been completed.</translate>
           </p>
         </v-alert>
-        <div class="v-row search-results subject-results cards-view ma-0" :class="{ 'select-results': selection.length > 0 }">
+        <div class="v-row search-results subject-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="(model, index) in results" :key="model.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
             <div :data-uid="model.UID" style="user-select: none" class="result card bg-card" :class="model.classes(selection.includes(model.UID))" @contextmenu.stop="onContextMenu($event, index)">
               <v-img
@@ -131,8 +131,8 @@
             </div>
           </div>
         </div>
-      </v-container>
-    </v-container>
+      </div>
+    </div>
 
     <p-people-edit-dialog :show="dialog.edit" :person="model" @close="dialog.edit = false" @confirm="onSave"></p-people-edit-dialog>
     <p-people-merge-dialog :show="merge.show" :subj1="merge.subj1" :subj2="merge.subj2" @close="onCancelMerge" @confirm="onMerge"></p-people-merge-dialog>
