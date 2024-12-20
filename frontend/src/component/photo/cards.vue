@@ -22,17 +22,17 @@
     <div class="v-row search-results photo-results cards-view ma-0" :class="{ 'select-results': selectMode }">
       <div v-for="(photo, index) in photos" ref="items" :key="photo.ID" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
         <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-uid="photo.UID" class="result card bg-card placeholder">
-          <div class="card preview" />
+          <div :key="photo.Hash" class="card preview" />
           <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="card-review" />
           <div class="card-details">
-            <button v-if="photo.Title" :title="photo.Title" class="action-title-edit meta-title" :data-uid="photo.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
+            <button v-if="photo.Title" :title="photo.Title" class="action-title-edit meta-title text-truncate" :data-uid="photo.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
               {{ photo.Title }}
             </button>
             <button v-if="photo.Description" :title="$gettext('Description')" class="meta-description" @click.exact="editPhoto(index)">
               {{ photo.Description }}
             </button>
             <div class="meta-details">
-              <button class="action-open-date" :data-uid="photo.UID" @click.exact="openDate(index)">
+              <button class="action-open-date meta-date" :data-uid="photo.UID" @click.exact="openDate(index)">
                 <i :title="$gettext('Taken')" class="mdi mdi-calendar-range" />
                 {{ photo.getDateString(true) }}
               </button>

@@ -48,8 +48,8 @@
                   <div
                     v-else
                     :key="photo.Hash"
-                    class="card preview clickable"
                     :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`"
+                    class="card preview clickable"
                     @touchstart="onMouseDown($event, index)"
                     @touchend.stop.prevent="onClick($event, index)"
                     @mousedown="onMouseDown($event, index)"
