@@ -47,8 +47,8 @@
     <div v-else-if="errors.length > 0" fluid class="pa-0">
       <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
 
-      <v-list lines="one" bg-color="table">
-        <v-list-item v-for="err in errors" :key="err.ID" :prepend-icon="err.Level === 'error' ? 'mdi-alert-circle-outline' : 'mdi-alert'" :title="err.Message" :subtitle="formatTime(err.Time)" @click="showDetails(err)">
+      <v-list lines="one" bg-color="table" density="compact">
+        <v-list-item v-for="err in errors" :key="err.ID" :prepend-icon="err.Level === 'error' ? 'mdi-alert-circle-outline' : 'mdi-alert'" density="compact" :title="err.Message" :subtitle="formatTime(err.Time)" @click="showDetails(err)">
           <template #prepend>
             <v-icon v-if="err.Level === 'error'" icon="mdi-alert-circle-outline" color="error"></v-icon>
             <v-icon v-else-if="err.Level === 'warning'" icon="mdi-alert" color="warning"></v-icon>
