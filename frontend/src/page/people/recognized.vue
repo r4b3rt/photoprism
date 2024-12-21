@@ -70,14 +70,14 @@
       </div>
       <div v-else class="v-row search-results subject-results cards-view" :class="{ 'select-results': selection.length > 0 }">
         <div v-for="(m, index) in results" :key="m.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
-          <div :data-uid="m.UID" style="user-select: none" class="result card bg-card" :class="m.classes(selection.includes(m.UID))" @contextmenu.stop="onContextMenu($event, index)">
+          <div :data-uid="m.UID" style="user-select: none" class="result" :class="m.classes(selection.includes(m.UID))" @contextmenu.stop="onContextMenu($event, index)">
             <v-img
               :src="m.thumbnailUrl('tile_320')"
               :alt="m.Name"
               :transition="false"
               aspect-ratio="1"
               style="user-select: none"
-              class="card preview clickable"
+              class="preview"
               @touchstart.passive="input.touchStart($event, index)"
               @touchend.stop.prevent="onClick($event, index)"
               @mousedown.stop.prevent="input.mouseDown($event, index)"
@@ -110,7 +110,7 @@
               </v-btn>
             </v-img>
 
-            <div class="card-details" @click.stop.prevent="">
+            <div class="meta" @click.stop.prevent="">
               <div v-if="canManage" class="meta-title inline-edit clickable" @click.stop.prevent="edit(m)">
                 {{ m.Name }}
               </div>

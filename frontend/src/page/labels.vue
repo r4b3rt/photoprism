@@ -66,12 +66,12 @@
       </div>
       <div v-else class="v-row search-results label-results cards-view" :class="{ 'select-results': selection.length > 0 }">
         <div v-for="(label, index) in results" :key="label.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
-          <div :data-uid="label.UID" style="user-select: none" class="result card bg-card" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
+          <div :data-uid="label.UID" style="user-select: none" class="result" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
             <div
               :key="label.UID"
               :title="label.Name"
               :style="`background-image: url(${label.thumbnailUrl('tile_500')})`"
-              class="card preview clickable"
+              class="preview"
               @touchstart.passive="input.touchStart($event, index)"
               @touchend.stop.prevent="onClick($event, index)"
               @mousedown.stop.prevent="input.mouseDown($event, index)"
@@ -88,7 +88,7 @@
               </button>
             </div>
 
-            <div class="card-details" @click.stop.prevent="">
+            <div class="meta" @click.stop.prevent="">
               <div v-if="canManage" class="meta-title inline-edit clickable" @click.stop.prevent="edit(label)">
                 {{ label.Name }}
               </div>

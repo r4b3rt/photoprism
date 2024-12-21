@@ -42,11 +42,11 @@ test.meta("testID", "components-003").meta({ type: "short", mode: "public" })(
     await toolbar.setFilter("view", "Mosaic");
 
     await t
-      .expect(Selector("div.type-image.clickable").visible)
+      .expect(Selector("div.type-image.result").visible)
       .ok()
       .expect(Selector("div.p-photo-mosaic").visible)
       .ok()
-      .expect(Selector("div.is-photo div.card-details").exists)
+      .expect(Selector("div.is-photo div.meta").exists)
       .notOk()
       .expect(Selector("#photo-viewer").visible)
       .notOk();
@@ -70,9 +70,9 @@ test.meta("testID", "components-005").meta({ type: "short", mode: "public" })(
     await toolbar.search("photo:true");
 
     await t
-      .expect(Selector("div.type-image div.clickable").visible)
+      .expect(Selector("div.type-image div.result").visible)
       .ok()
-      .expect(Selector("div.is-photo div.card-details").visible)
+      .expect(Selector("div.is-photo div.meta").visible)
       .ok()
       .expect(Selector("#photo-viewer").visible)
       .notOk();

@@ -77,17 +77,17 @@ body.dark-theme.theme-mint,
     background: transparent;
 }
 
-#photoprism.theme-mint .cards-view .card.is-selected .card-details {
+#photoprism.theme-mint .cards-view .result.is-selected .meta {
     color: #fff;
     background-color: #333333;
 }
 
-#photoprism.theme-mint .cards-view .card.is-selected,
-#photoprism.theme-mint .cards-view .card.is-selected .card-background {
+#photoprism.theme-mint .cards-view .result.is-selected,
+#photoprism.theme-mint .cards-view .result.is-selected .card-background {
     background-color: #333333 !important;
 }
 
-#photoprism.theme-mint .cards-view .card.is-selected .card-details .v-icon {
+#photoprism.theme-mint .cards-view .result.is-selected .meta .v-icon {
     color: #fff;
 }
 

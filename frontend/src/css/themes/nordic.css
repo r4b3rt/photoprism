@@ -130,16 +130,16 @@ body.theme-nordic,
     background: transparent;
 }
 
-#photoprism.theme-nordic .cards-view .card.is-selected .card-details {
+#photoprism.theme-nordic .cards-view .result.is-selected .meta {
     color: #333333;
     background-color: #D8DEE9;
 }
 
-#photoprism.theme-nordic .cards-view .card.is-selected,
-#photoprism.theme-nordic .cards-view .card.is-selected .card-background {
+#photoprism.theme-nordic .cards-view .result.is-selected,
+#photoprism.theme-nordic .cards-view .result.is-selected .card-background {
     background-color: #D8DEE9 !important;
 }
 
-#photoprism.theme-nordic .cards-view .card.is-selected .card-details .v-icon {
+#photoprism.theme-nordic .cards-view .result.is-selected .meta .v-icon {
     color: #333333;
 }

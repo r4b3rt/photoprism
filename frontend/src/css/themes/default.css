@@ -1,10 +1,10 @@
 /* Component Color Defaults */
 /*
-.card {
+.result {
     background-color: #e0e0e0;
 }
 
-body.dark-theme .card {
+body.dark-theme .result {
     background-color: #1a1a1a;
 }
 
@@ -193,17 +193,17 @@ body.dark-theme.theme-default,
     background: transparent;
 }
 
-#photoprism.theme-default .cards-view .card.is-selected .card-details {
+#photoprism.theme-default .cards-view .result.is-selected .meta {
     color: #fff;
     background-color: #636869;
 }
 
-#photoprism.theme-default .cards-view .card.is-selected,
-#photoprism.theme-default .cards-view .card.is-selected .card-background {
+#photoprism.theme-default .cards-view .result.is-selected,
+#photoprism.theme-default .cards-view .result.is-selected .card-background {
     background-color: #636869 !important;
 }
 
-#photoprism.theme-default .cards-view .card.is-selected .card-details .v-icon {
+#photoprism.theme-default .cards-view .result.is-selected .meta .v-icon {
     color: #fff;
 }
 */

@@ -23,16 +23,16 @@ body.dark-theme.theme-lavender,
     background: #f6f7fa;
 }
 
-#photoprism.theme-lavender .cards-view .card.is-selected .card-details {
+#photoprism.theme-lavender .cards-view .result.is-selected .meta {
     color: #333;
     background-color: #CCCFE0;
 }
 
-#photoprism.theme-lavender .cards-view .card.is-selected,
-#photoprism.theme-lavender .cards-view .card.is-selected .card-background {
+#photoprism.theme-lavender .cards-view .result.is-selected,
+#photoprism.theme-lavender .cards-view .result.is-selected .card-background {
     background-color: #CCCFE0 !important;
 }
 
-#photoprism.theme-lavender .cards-view .card.is-selected .card-details .v-icon {
+#photoprism.theme-lavender .cards-view .result.is-selected .meta .v-icon {
     color: #333;
 }

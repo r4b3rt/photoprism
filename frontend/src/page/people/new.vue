@@ -38,15 +38,15 @@
       <div v-else>
         <div class="v-row search-results face-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="model in results" :key="model.ID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
-            <div :data-id="model.ID" style="user-select: none" :class="model.classes()" class="result card bg-card">
-              <v-img :src="model.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card preview clickable" @click.stop.prevent="onView(model)">
+            <div :data-id="model.ID" style="user-select: none" :class="model.classes()" class="result">
+              <v-img :src="model.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="preview" @click.stop.prevent="onView(model)">
                 <v-btn :ripple="false" class="input-hidden" icon variant="text" density="comfortable" position="absolute" @click.stop.prevent="toggleHidden(model)">
                   <v-icon color="white" class="select-on" :title="$gettext('Show')">mdi-eye-off</v-icon>
                   <v-icon color="white" class="select-off" :title="$gettext('Hide')">mdi-close</v-icon>
                 </v-btn>
               </v-img>
 
-              <v-card-actions class="card-details pa-0">
+              <v-card-actions class="meta pa-0">
                 <v-row v-if="model.SubjUID" align="center" class="ma-0">
                   <v-col cols="12" class="text-start pa-0">
                     <v-text-field

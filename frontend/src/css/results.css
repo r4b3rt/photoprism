@@ -227,18 +227,30 @@ body.chrome .search-results .result {
     padding: 1px;
 }
 
-.search-results .image-container {
+.mosaic-view .result-container {
     aspect-ratio: 1;
     contain: layout paint style size;
+    transition: none;
+}
+
+.search-results .result,
+.search-results .result-container{
+    transition: none;
+    overflow: hidden;
+}
+
+.search-results .result.preview,
+.search-results .result .preview {
+    cursor: pointer;
+}
+
+.list-view .result {
+    text-align: center;
 }
 
 .cards-view .result,
 .mosaic-view .result {
     overflow: hidden !important;
-}
-
-.cards-view .result .preview {
-    background-color: #72727216;
 }
 
 .cards-view .result .preview,
@@ -250,6 +262,7 @@ body.chrome .search-results .result {
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    transition: none !important;
     overflow: hidden !important;
     contain: layout paint style size;
 }
@@ -356,7 +369,7 @@ body.chrome .search-results .result {
     overflow: hidden;
 }
 
-.cards-view .card .card-details {
+.cards-view .result .meta {
     font-size: .825rem;
     line-height: normal;
     letter-spacing: normal;
@@ -371,15 +384,15 @@ body.chrome .search-results .result {
     border-bottom-right-radius: 6px;
 }
 
-.cards-view .result .card-details button,
-.cards-view .result .card-details .meta-details button {
+.cards-view .result .meta button,
+.cards-view .result .meta .meta-details button {
     display: block;
 }
 
-.cards-view .result .card-details,
-.cards-view .result .card-details button,
-.cards-view .result .card-details .meta-details,
-.cards-view .result .card-details .meta-details button {
+.cards-view .result .meta,
+.cards-view .result .meta button,
+.cards-view .result .meta .meta-details,
+.cards-view .result .meta .meta-details button {
     font-size: .75rem;
     line-height: normal;
     letter-spacing: normal;
@@ -391,7 +404,7 @@ body.chrome .search-results .result {
     hyphens: auto;
 }
 
-.cards-view .result .card-details .meta-details {
+.cards-view .result .meta .meta-details {
     display: flex;
     gap: 4px;
     margin: 0;
@@ -400,14 +413,14 @@ body.chrome .search-results .result {
     justify-content: flex-start;
 }
 
-.cards-view .result .card-details .meta-title {
+.cards-view .result .meta .meta-title {
     font-size: .875rem;
     font-weight: bold;
     line-height: normal;
     letter-spacing: normal;
 }
 
-.cards-view .result .card-details .meta-description {
+.cards-view .result .meta .meta-description {
     display: -webkit-box;
     -webkit-line-clamp: 4; /* number of lines to show */
     line-clamp: 4;
@@ -416,14 +429,14 @@ body.chrome .search-results .result {
     text-overflow: ellipsis;
 }
 
-.cards-view .result .card-details .meta-details button {
+.cards-view .result .meta .meta-details button {
     display: block;
     position: relative;
     margin: 0;
     padding: 0 0 0 17px;
 }
 
-.cards-view .result .card-details .meta-details button i {
+.cards-view .result .meta .meta-details button i {
     position: absolute;
     margin-inline-start: -17px;
     font-family: Material Icons;
@@ -439,11 +452,11 @@ body.chrome .search-results .result {
     text-align: start;
 }
 
-.is-rtl .cards-view .result .card-details .meta-details button {
+.is-rtl .cards-view .result .meta .meta-details button {
     padding: 0 17px 0 0;
 }
 
-.cards-view .result.placeholder .card-details i {
+.cards-view .result.placeholder .meta i {
     width: 14px;
 }
 
@@ -607,23 +620,14 @@ body.chrome .search-results .result {
     text-align: center;
 }
 
-.cards-view .v-card .card-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 0;
-}
-
-.cards-view .card .card-review {
+.cards-view .result .review {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     height: 34px;
 }
 
-.cards-view .card .card-review .v-btn {
+.cards-view .result .review .v-btn {
     font-size: .875rem;
     flex: 0 0 50%;
     height: 100%;
@@ -638,8 +642,14 @@ body.chrome .search-results .result {
     background: rgb(var(--v-theme-selected, --v-theme-highlight)) !important;
 }
 
-.cards-view .card.is-selected,
-.cards-view .card.is-selected .card-background {
+.cards-view .result {
+    color: rgb(var(--v-theme-on-card));
+    caret: rgb(var(--v-theme-on-card));
+    background: rgb(var(--v-theme-card));
+}
+
+.cards-view .result.is-selected,
+.cards-view .result.is-selected .card-background {
     color: rgb(var(--v-theme-on-selected, --v-theme-on-highlight)) !important;
     caret: rgb(var(--v-theme-on-selected, --v-theme-on-highlight)) !important;
     background: rgb(var(--v-theme-selected, --v-theme-highlight)) !important;
@@ -664,7 +674,7 @@ body.chrome .search-results .result {
 /* old browser support */
 @supports not (aspect-ratio: 1) {
     /* elements with aspect-ratio 1 and without margin */
-    .search-results .preview-container,
+    .search-results .result-container,
     .cards-view .result .preview,
     .list-view .result .preview,
     .list-view .result.preview,

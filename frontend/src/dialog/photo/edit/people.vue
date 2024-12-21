@@ -12,7 +12,7 @@
       </v-alert>
       <v-row v-else class="search-results face-results cards-view d-flex align-stretch ma-0">
         <v-col v-for="marker in markers" :key="marker.UID" cols="12" sm="6" md="3" xl="2" class="d-flex">
-          <v-card tile :data-id="marker.UID" style="user-select: none" :class="marker.classes()" class="result card bg-card flex-grow-1">
+          <v-card tile :data-id="marker.UID" style="user-select: none" :class="marker.classes()" class="result flex-grow-1">
             <div class="card-background card"></div>
             <v-img :src="marker.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card">
               <v-btn v-if="!marker.SubjUID && !marker.Invalid" :ripple="false" class="input-reject" icon variant="text" density="comfortable" position="absolute" :title="$gettext('Remove')" @click.stop.prevent="onReject(marker)">
@@ -20,7 +20,7 @@
               </v-btn>
             </v-img>
 
-            <v-card-actions class="card-details pa-0">
+            <v-card-actions class="meta pa-0">
               <v-row v-if="marker.Invalid" align="center">
                 <v-col cols="12" class="text-center pa-0">
                   <v-btn :disabled="busy" size="large" variant="flat" block :rounded="false" class="action-undo text-center" :title="$gettext('Undo')" @click.stop="onApprove(marker)">

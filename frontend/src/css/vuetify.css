@@ -40,6 +40,12 @@ body.dark-theme {
     padding: 0 8px;
 }
 
+.v-dialog .v-card,
+.v-dialog .v-card .v-responsive,
+.v-dialog .v-card .v-responsive img {
+    transition: none;
+}
+
 /* Dialogs */
 
 .v-overlay.v-dialog>.v-overlay__content>.v-card,

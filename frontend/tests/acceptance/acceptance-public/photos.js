@@ -30,7 +30,7 @@ test.meta("testID", "photos-001").meta({ mode: "public" })("Common: Scroll to to
     .notOk()
     .expect(getcurrentPosition())
     .eql(0)
-    .expect(Selector("div.type-image div.clickable").nth(0).visible)
+    .expect(Selector("div.type-image div.result").nth(0).visible)
     .ok();
 
   await scroll(0, 1400);

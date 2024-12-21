@@ -146,12 +146,12 @@
       </div>
       <div v-else class="v-row search-results album-results cards-view" :class="{ 'select-results': selection.length > 0 }">
         <div v-for="(album, index) in results" :key="album.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
-          <div :data-uid="album.UID" style="user-select: none" class="result card bg-card" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">
+          <div :data-uid="album.UID" style="user-select: none" class="result" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">
             <div
               :key="album.UID"
               :title="album.Title"
               :style="`background-image: url(${album.thumbnailUrl('tile_500')})`"
-              class="card preview clickable"
+              class="preview"
               @touchstart.passive="input.touchStart($event, index)"
               @touchend.stop.prevent="onClick($event, index)"
               @mousedown.stop.prevent="input.mouseDown($event, index)"
@@ -174,7 +174,7 @@
               </button>
             </div>
 
-            <div class="card-details">
+            <div class="meta">
               <button v-if="album.Type === 'month'" :title="album.Title" class="action-title-edit meta-title text-capitalize" :data-uid="album.UID" @click.stop.prevent="edit(album)">
                 {{ album.getDateString() }}
               </button>

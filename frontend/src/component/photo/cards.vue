@@ -21,10 +21,10 @@
     </div>
     <div v-else class="v-row search-results photo-results cards-view" :class="{ 'select-results': selectMode }">
       <div v-for="(photo, index) in photos" :key="photo.ID" ref="items" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
-        <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="result card bg-card placeholder">
-          <div class="card preview" />
-          <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="card-review" />
-          <div class="card-details">
+        <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="media result placeholder">
+          <div class="preview" />
+          <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="review" />
+          <div class="meta">
             <button v-if="photo.Title" class="action-title-edit meta-title text-truncate" :data-uid="photo.UID">
               {{ photo.Title }}
             </button>
@@ -73,11 +73,11 @@
             </div>
           </div>
         </div>
-        <div v-else :data-id="photo.ID" :data-uid="photo.UID" class="result card bg-card" :class="photo.classes()" @contextmenu.stop="onContextMenu($event, index)">
+        <div v-else :data-id="photo.ID" :data-uid="photo.UID" class="media result" :class="photo.classes()" @contextmenu.stop="onContextMenu($event, index)">
           <div
             :title="photo.Title"
             :style="`background-image: url(${photo.thumbnailUrl('tile_500')})`"
-            class="card preview clickable"
+            class="preview"
             @touchstart.passive="input.touchStart($event, index)"
             @touchend.stop.prevent="onClick($event, index)"
             @mousedown.stop.prevent="input.mouseDown($event, index)"
@@ -137,7 +137,7 @@
             </button>
           </div>
 
-          <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="card-review">
+          <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="review">
             <button type="button" class="v-btn v-btn--flat bg-button v-btn--variant-tonal action-archive text-center" :title="$gettext('Archive')" @click.stop="photo.archive()">
               <span class="v-btn__overlay"></span>
               <span class="v-btn__underlay"></span>
@@ -149,7 +149,7 @@
               <span class="v-btn__content" data-no-activator=""><i class="mdi-check mdi v-icon notranslate v-icon--size-default" aria-hidden="true"></i></span>
             </button>
           </div>
-          <div class="card-details">
+          <div class="meta">
             <button v-if="photo.Title" :title="photo.Title" class="action-title-edit meta-title text-truncate" :data-uid="photo.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
               {{ photo.Title }}
             </button>

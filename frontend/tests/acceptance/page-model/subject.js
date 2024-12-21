@@ -67,7 +67,7 @@ export default class Page {
   }
 
   async openFaceWithUid(uid) {
-    await t.click(Selector("div[data-id=" + uid + "] div.clickable"));
+    await t.click(Selector("div[data-id=" + uid + "] div.result"));
   }
 
   async checkSubjectVisibility(mode, uidOrName, visible) {

@@ -39,14 +39,14 @@
         </v-alert>
         <div class="v-row search-results file-results cards-view" :class="{ 'select-results': selection.length > 0 }">
           <div v-for="(model, index) in results" :key="model.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
-            <div :data-uid="model.UID" class="result card bg-card" :class="model.classes(selection.includes(model.UID))" @contextmenu.stop="onContextMenu($event, index)">
+            <div :data-uid="model.UID" class="result" :class="model.classes(selection.includes(model.UID))" @contextmenu.stop="onContextMenu($event, index)">
               <v-img
                 :src="model.thumbnailUrl('tile_500')"
                 :alt="model.Name"
                 :transition="false"
                 loading="lazy"
                 aspect-ratio="1"
-                class="card preview clickable"
+                class="preview"
                 @touchstart.passive="input.touchStart($event, index)"
                 @touchend.stop.prevent="onClick($event, index)"
                 @mousedown.stop.prevent="input.mouseDown($event, index)"
@@ -58,7 +58,7 @@
                 </v-btn>
               </v-img>
 
-              <div v-if="model.isFile()" class="card-details">
+              <div v-if="model.isFile()" class="meta">
                 <button :title="model.Name" class="meta-title" @click.exact="openFile(index)">
                   {{ model.baseName() }}
                 </button>
@@ -66,7 +66,7 @@
                   {{ model.getInfo() }}
                 </div>
               </div>
-              <div v-else class="card-details">
+              <div v-else class="meta">
                 <button :title="model.Title" class="meta-title" @click.exact="openFile(index)">
                   {{ model.baseName() }}
                 </button>
