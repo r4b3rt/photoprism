@@ -66,23 +66,23 @@
 
       <v-tabs-window v-model="active" class="overflow-y-auto" style="height: 100%">
         <v-tabs-window-item>
-          <p-tab-photo-details :key="uid" ref="details" :model="model" :uid="uid" @close="close" @prev="prev" @next="next"></p-tab-photo-details>
+          <p-tab-photo-details ref="details" :model="model" :uid="uid" @close="close" @prev="prev" @next="next"></p-tab-photo-details>
         </v-tabs-window-item>
 
         <v-tabs-window-item>
-          <p-tab-photo-labels :key="uid" :model="model" :uid="uid" @close="close"></p-tab-photo-labels>
+          <p-tab-photo-labels :model="model" :uid="uid" @close="close"></p-tab-photo-labels>
         </v-tabs-window-item>
 
         <v-tabs-window-item>
-          <p-tab-photo-people :key="uid" :model="model" :uid="uid" @close="close"></p-tab-photo-people>
+          <p-tab-photo-people :model="model" :uid="uid" @close="close"></p-tab-photo-people>
         </v-tabs-window-item>
 
         <v-tabs-window-item>
-          <p-tab-photo-files :key="uid" :model="model" :uid="uid" @close="close"></p-tab-photo-files>
+          <p-tab-photo-files :model="model" :uid="uid" @close="close"></p-tab-photo-files>
         </v-tabs-window-item>
 
         <v-tabs-window-item v-if="$config.feature('edit')">
-          <p-tab-photo-info :key="uid" :model="model" :uid="uid" @close="close"></p-tab-photo-info>
+          <p-tab-photo-info :model="model" :uid="uid" @close="close"></p-tab-photo-info>
         </v-tabs-window-item>
       </v-tabs-window>
     </v-card>

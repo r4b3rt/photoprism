@@ -140,7 +140,7 @@
       </div>
       <div v-else>
         <div class="v-row search-results album-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="(album, index) in results" ref="items" :key="album.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+          <div v-for="(album, index) in results" :key="album.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
             <div :data-uid="album.UID" style="user-select: none" class="result card bg-card" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">
               <div
                 :key="album.UID"

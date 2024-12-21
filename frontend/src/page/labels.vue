@@ -66,7 +66,7 @@
       </div>
       <div v-else>
         <div class="v-row search-results label-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="(label, index) in results" ref="items" :key="label.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+          <div v-for="(label, index) in results" :key="label.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
             <div :data-uid="label.UID" style="user-select: none" class="result card bg-card" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
               <div
                 :key="label.UID"

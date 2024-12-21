@@ -11,7 +11,7 @@
         </p>
       </v-alert>
       <v-row class="search-results face-results cards-view d-flex align-stretch ma-0">
-        <v-col v-for="(marker, index) in markers" :key="index" cols="12" sm="6" md="3" xl="2" class="d-flex">
+        <v-col v-for="marker in markers" :key="marker.UID" cols="12" sm="6" md="3" xl="2" class="d-flex">
           <v-card tile :data-id="marker.UID" style="user-select: none" :class="marker.classes()" class="result card bg-card flex-grow-1">
             <div class="card-background card"></div>
             <v-img :src="marker.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card">
@@ -93,7 +93,10 @@ export default {
       type: Object,
       default: () => {},
     },
-    uid: String,
+    uid: {
+      type: String,
+      default: "",
+    },
   },
   data() {
     return {

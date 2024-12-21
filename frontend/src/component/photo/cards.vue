@@ -20,9 +20,9 @@
       </v-alert>
     </div>
     <div class="v-row search-results photo-results cards-view" :class="{ 'select-results': selectMode }">
-      <div v-for="(photo, index) in photos" ref="items" :key="photo.ID" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
-        <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-uid="photo.UID" class="result card bg-card placeholder">
-          <div :key="photo.Hash" class="card preview" />
+      <div v-for="(photo, index) in photos" :key="photo.ID" ref="items" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
+        <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="result card bg-card placeholder">
+          <div class="card preview" />
           <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="card-review" />
           <div class="card-details">
             <button v-if="photo.Title" class="action-title-edit meta-title text-truncate" :data-uid="photo.UID">
@@ -75,7 +75,6 @@
         </div>
         <div v-else :data-id="photo.ID" :data-uid="photo.UID" class="result card bg-card" :class="photo.classes()" @contextmenu.stop="onContextMenu($event, index)">
           <div
-            :key="photo.Hash"
             :title="photo.Title"
             :style="`background-image: url(${photo.thumbnailUrl('tile_500')})`"
             class="card preview clickable"
@@ -88,7 +87,7 @@
           >
             <div class="preview__overlay"></div>
             <div v-if="photo.Type === 'live' || photo.Type === 'animated'" class="live-player">
-              <video :id="'live-player-' + photo.ID" :key="photo.ID" width="500" height="500" preload="none" loop muted playsinline>
+              <video :id="'live-player-' + photo.ID" width="500" height="500" preload="none" loop muted playsinline>
                 <source :src="photo.videoUrl()" />
               </video>
             </div>

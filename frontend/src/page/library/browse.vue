@@ -38,7 +38,7 @@
           </p>
         </v-alert>
         <div class="v-row search-results file-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="(model, index) in results" ref="items" :key="model.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+          <div v-for="(model, index) in results" :key="model.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
             <div :data-uid="model.UID" class="result card bg-card" :class="model.classes(selection.includes(model.UID))" @contextmenu.stop="onContextMenu($event, index)">
               <v-img
                 :src="model.thumbnailUrl('tile_500')"

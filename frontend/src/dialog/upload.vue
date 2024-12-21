@@ -39,7 +39,6 @@
                 </template>
                 <template #chip="data">
                   <v-chip
-                      :key="JSON.stringify(data.item)"
                       :model-value="data.selected"
                       :disabled="data.disabled"
                       class="bg-highlight rounded-xl text-truncate d-block"

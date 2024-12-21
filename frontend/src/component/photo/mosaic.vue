@@ -20,16 +20,15 @@
       </v-alert>
     </div>
     <div class="v-row search-results photo-results mosaic-view" :class="{ 'select-results': selectMode }">
-      <div v-for="(photo, index) in photos" ref="items" :key="photo.ID" class="v-col-4 v-col-sm-3 v-col-md-2 v-col-lg-1" :data-index="index">
+      <div v-for="(photo, index) in photos" :key="photo.ID" ref="items" class="v-col-4 v-col-sm-3 v-col-md-2 v-col-lg-1" :data-index="index">
         <!--
          The following div is the layout + size container. It makes the browser not
          re-layout all elements in the list when the children of one of them changes
         -->
         <div class="image-container bg-card">
-          <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-uid="photo.UID" class="card result preview" />
+          <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="card result preview" />
           <div
             v-else
-            :key="photo.Hash"
             :data-id="photo.ID"
             :data-uid="photo.UID"
             :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`"
@@ -45,7 +44,7 @@
           >
             <div class="preview__overlay"></div>
             <div v-if="photo.Type === 'live' || photo.Type === 'animated'" class="live-player">
-              <video :id="'live-player-' + photo.ID" :key="photo.ID" width="224" height="224" preload="none" loop muted playsinline>
+              <video :id="'live-player-' + photo.ID" width="224" height="224" preload="none" loop muted playsinline>
                 <source :src="photo.videoUrl()" />
               </video>
             </div>

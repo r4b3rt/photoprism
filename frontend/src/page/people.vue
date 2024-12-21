@@ -1,16 +1,16 @@
 <template>
   <div class="p-page p-page-people" :class="$config.aclClasses('people')">
     <v-tabs v-model="active" elevation="0" class="bg-transparent" grow bg-color="secondary" slider-color="surface-variant" :height="$vuetify.display.smAndDown ? 48 : 64">
-      <v-tab v-for="(item, index) in tabs" :id="'tab-' + item.name" :key="index" :class="item.class" ripple @click.stop.prevent="changePath(item.path)">
-        <v-icon v-if="$vuetify.display.smAndDown" :title="item.label">{{ item.icon }}</v-icon>
+      <v-tab v-for="t in tabs" :id="'tab-' + t.name" :key="t.name" :class="t.class" ripple @click.stop.prevent="changePath(t.path)">
+        <v-icon v-if="$vuetify.display.smAndDown" :title="t.label">{{ t.icon }}</v-icon>
         <template v-else>
-          <v-icon :size="18" start>{{ item.icon }}</v-icon>
-          {{ item.label }}
+          <v-icon :size="18" start>{{ t.icon }}</v-icon>
+          {{ t.label }}
           <v-badge
-              v-if="item.count"
+              v-if="t.count"
               color="surface-variant"
               inline
-              :content="item.count"
+              :content="t.count"
           >
           </v-badge>
         </template>
@@ -18,8 +18,8 @@
     </v-tabs>
 
     <v-tabs-window v-model="active">
-      <v-tabs-window-item v-for="(item, index) in tabs" :key="index">
-        <component :is="item.component" :static-filter="item.filter" :active="active === index" @updateFaceCount="onUpdateFaceCount"></component>
+      <v-tabs-window-item v-for="(t, index) in tabs" :key="t.name">
+        <component :is="t.component" :static-filter="t.filter" :active="active === index" @updateFaceCount="onUpdateFaceCount"></component>
       </v-tabs-window-item>
     </v-tabs-window>
   </div>

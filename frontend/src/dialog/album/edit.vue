@@ -16,7 +16,7 @@
               <v-text-field v-model="model.Location" hide-details :label="$gettext('Location')" :disabled="disabled" class="input-location"></v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-textarea :key="growDesc" v-model="model.Description" auto-grow hide-details autocomplete="off" :label="$gettext('Description')" :rows="1" :disabled="disabled" class="input-description"></v-textarea>
+              <v-textarea v-model="model.Description" auto-grow hide-details autocomplete="off" :label="$gettext('Description')" :rows="1" :disabled="disabled" class="input-description"></v-textarea>
             </v-col>
             <v-col cols="12">
               <!-- TODO: check property return-masked-value TEST -->

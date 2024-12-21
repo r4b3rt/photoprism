@@ -1,18 +1,18 @@
 <template>
   <div class="p-page p-page-settings" :class="$config.aclClasses('settings')">
     <v-tabs v-model="active" elevation="0" grow bg-color="secondary" slider-color="surface-variant" :height="$vuetify.display.smAndDown ? 48 : 64">
-      <v-tab v-for="(item, index) in tabs" :id="'tab-' + item.name" :key="index" :class="item.class" ripple @click="changePath(item.path)">
-        <v-icon v-if="$vuetify.display.smAndDown" :title="item.label">{{ item.icon }}</v-icon>
+      <v-tab v-for="t in tabs" :id="'tab-' + t.name" :key="t.name" :class="t.class" ripple @click="changePath(t.path)">
+        <v-icon v-if="$vuetify.display.smAndDown" :title="t.label">{{ t.icon }}</v-icon>
         <template v-else>
-          <v-icon :size="18" start>{{ item.icon }}</v-icon>
-          {{ item.label }}
+          <v-icon :size="18" start>{{ t.icon }}</v-icon>
+          {{ t.label }}
         </template>
       </v-tab>
     </v-tabs>
 
     <v-tabs-window v-model="active">
-      <v-tabs-window-item v-for="(item, index) in tabs" :key="index">
-        <component :is="item.component"></component>
+      <v-tabs-window-item v-for="(t, index) in tabs" :key="index">
+        <component :is="t.component"></component>
       </v-tabs-window-item>
     </v-tabs-window>
   </div>

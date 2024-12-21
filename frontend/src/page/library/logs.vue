@@ -5,7 +5,7 @@
         <p v-if="logs.length === 0" class="p-log-empty flex-grow-1">
           <translate>Nothing to see here yet.</translate>
         </p>
-        <p v-for="(log, index) in logs" :key="index.id" class="p-log-message text-selectable flex-grow-1" :class="'p-log-' + log.level">
+        <p v-for="log in logs" :key="log.id" class="p-log-message text-selectable flex-grow-1" :class="'p-log-' + log.level">
           {{ formatTime(log.time) }} {{ level(log) }} <span>{{ log.message }}</span>
         </p>
       </v-col>
@@ -23,7 +23,9 @@ export default {
       logs: this.$log.logs,
     };
   },
-  created() {},
+  created() {
+    console.log("LOGS", this.logs);
+  },
   methods: {
     level(log) {
       return log.level.substring(0, 4).toUpperCase();
