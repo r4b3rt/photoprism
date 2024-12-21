@@ -64,45 +64,43 @@
           </div>
         </v-alert>
       </div>
-      <div v-else>
-        <div class="v-row search-results label-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="(label, index) in results" :key="label.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
-            <div :data-uid="label.UID" style="user-select: none" class="result card bg-card" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
-              <div
-                :key="label.UID"
-                :title="label.Name"
-                :style="`background-image: url(${label.thumbnailUrl('tile_500')})`"
-                class="card preview clickable"
-                @touchstart.passive="input.touchStart($event, index)"
-                @touchend.stop.prevent="onClick($event, index)"
-                @mousedown.stop.prevent="input.mouseDown($event, index)"
-                @click.stop.prevent="onClick($event, index)"
-              >
-                <div class="preview__overlay"></div>
-                <button v-if="canSelect" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
-                  <i class="mdi mdi-check-circle select-on" />
-                  <i class="mdi mdi-circle-outline select-off" />
-                </button>
-                <button class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
-                  <i v-if="label.Favorite" class="mdi mdi-star text-favorite" />
-                  <i v-else class="mdi mdi-star-outline" />
-                </button>
+      <div v-else class="v-row search-results label-results cards-view" :class="{ 'select-results': selection.length > 0 }">
+        <div v-for="(label, index) in results" :key="label.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+          <div :data-uid="label.UID" style="user-select: none" class="result card bg-card" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
+            <div
+              :key="label.UID"
+              :title="label.Name"
+              :style="`background-image: url(${label.thumbnailUrl('tile_500')})`"
+              class="card preview clickable"
+              @touchstart.passive="input.touchStart($event, index)"
+              @touchend.stop.prevent="onClick($event, index)"
+              @mousedown.stop.prevent="input.mouseDown($event, index)"
+              @click.stop.prevent="onClick($event, index)"
+            >
+              <div class="preview__overlay"></div>
+              <button v-if="canSelect" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+                <i class="mdi mdi-check-circle select-on" />
+                <i class="mdi mdi-circle-outline select-off" />
+              </button>
+              <button class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+                <i v-if="label.Favorite" class="mdi mdi-star text-favorite" />
+                <i v-else class="mdi mdi-star-outline" />
+              </button>
+            </div>
+
+            <div class="card-details" @click.stop.prevent="">
+              <div v-if="canManage" class="meta-title inline-edit clickable" @click.stop.prevent="edit(label)">
+                {{ label.Name }}
+              </div>
+              <div v-else class="meta-title">
+                {{ label.Name }}
               </div>
 
-              <div class="card-details" @click.stop.prevent="">
-                <div v-if="canManage" class="meta-title inline-edit clickable" @click.stop.prevent="edit(label)">
-                  {{ label.Name }}
-                </div>
-                <div v-else class="meta-title">
-                  {{ label.Name }}
-                </div>
-
-                <div v-if="label.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
-                  <translate>Contains one picture.</translate>
-                </div>
-                <div v-else-if="label.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
-                  <translate :translate-params="{ n: label.PhotoCount }">Contains %{n} pictures.</translate>
-                </div>
+              <div v-if="label.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
+                <translate>Contains one picture.</translate>
+              </div>
+              <div v-else-if="label.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
+                <translate :translate-params="{ n: label.PhotoCount }">Contains %{n} pictures.</translate>
               </div>
             </div>
           </div>

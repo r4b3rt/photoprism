@@ -10,7 +10,7 @@
           <translate>Recognition starts after indexing has been completed.</translate>
         </p>
       </v-alert>
-      <v-row class="search-results face-results cards-view d-flex align-stretch ma-0">
+      <v-row v-else class="search-results face-results cards-view d-flex align-stretch ma-0">
         <v-col v-for="marker in markers" :key="marker.UID" cols="12" sm="6" md="3" xl="2" class="d-flex">
           <v-card tile :data-id="marker.UID" style="user-select: none" :class="marker.classes()" class="result card bg-card flex-grow-1">
             <div class="card-background card"></div>

@@ -19,7 +19,7 @@
         </div>
       </v-alert>
     </div>
-    <div class="v-row search-results photo-results mosaic-view" :class="{ 'select-results': selectMode }">
+    <div v-else class="v-row search-results photo-results mosaic-view" :class="{ 'select-results': selectMode }">
       <div v-for="(photo, index) in photos" :key="photo.ID" ref="items" class="v-col-4 v-col-sm-3 v-col-md-2 v-col-lg-1" :data-index="index">
         <!--
          The following div is the layout + size container. It makes the browser not

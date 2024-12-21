@@ -68,67 +68,65 @@
           </div>
         </v-alert>
       </div>
-      <div v-else>
-        <div class="v-row search-results subject-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="(model, index) in results" :key="model.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
-            <div :data-uid="model.UID" style="user-select: none" class="result card bg-card" :class="model.classes(selection.includes(model.UID))" @contextmenu.stop="onContextMenu($event, index)">
-              <v-img
-                :src="model.thumbnailUrl('tile_320')"
-                :alt="model.Name"
-                :transition="false"
-                aspect-ratio="1"
-                style="user-select: none"
-                class="card preview clickable"
-                @touchstart.passive="input.touchStart($event, index)"
-                @touchend.stop.prevent="onClick($event, index)"
-                @mousedown.stop.prevent="input.mouseDown($event, index)"
-                @click.stop.prevent="onClick($event, index)"
+      <div v-else class="v-row search-results subject-results cards-view" :class="{ 'select-results': selection.length > 0 }">
+        <div v-for="(m, index) in results" :key="m.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+          <div :data-uid="m.UID" style="user-select: none" class="result card bg-card" :class="m.classes(selection.includes(m.UID))" @contextmenu.stop="onContextMenu($event, index)">
+            <v-img
+              :src="m.thumbnailUrl('tile_320')"
+              :alt="m.Name"
+              :transition="false"
+              aspect-ratio="1"
+              style="user-select: none"
+              class="card preview clickable"
+              @touchstart.passive="input.touchStart($event, index)"
+              @touchend.stop.prevent="onClick($event, index)"
+              @mousedown.stop.prevent="input.mouseDown($event, index)"
+              @click.stop.prevent="onClick($event, index)"
+            >
+              <v-btn
+                v-if="canManage"
+                :ripple="false"
+                class="input-hidden"
+                icon
+                variant="text"
+                density="comfortable"
+                position="absolute"
+                @touchstart.stop.prevent="input.touchStart($event, index)"
+                @touchend.stop.prevent="onToggleHidden($event, index)"
+                @touchmove.stop.prevent
+                @click.stop.prevent="onToggleHidden($event, index)"
               >
-                <v-btn
-                  v-if="canManage"
-                  :ripple="false"
-                  class="input-hidden"
-                  icon
-                  variant="text"
-                  density="comfortable"
-                  position="absolute"
-                  @touchstart.stop.prevent="input.touchStart($event, index)"
-                  @touchend.stop.prevent="onToggleHidden($event, index)"
-                  @touchmove.stop.prevent
-                  @click.stop.prevent="onToggleHidden($event, index)"
-                >
-                  <v-icon color="white" class="select-on" :title="$gettext('Show')">mdi-eye-off</v-icon>
-                  <v-icon color="white" class="select-off" :title="$gettext('Hide')">mdi-close</v-icon>
-                </v-btn>
-                <v-btn :ripple="false" icon variant="text" position="absolute" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
-                  <v-icon color="white" class="select-on">mdi-check-circle</v-icon>
-                  <v-icon color="white" class="select-off">mdi-radiobox-blank</v-icon>
-                </v-btn>
+                <v-icon color="white" class="select-on" :title="$gettext('Show')">mdi-eye-off</v-icon>
+                <v-icon color="white" class="select-off" :title="$gettext('Hide')">mdi-close</v-icon>
+              </v-btn>
+              <v-btn :ripple="false" icon variant="text" position="absolute" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+                <v-icon color="white" class="select-on">mdi-check-circle</v-icon>
+                <v-icon color="white" class="select-off">mdi-radiobox-blank</v-icon>
+              </v-btn>
 
-                <v-btn :ripple="false" icon variant="text" position="absolute" class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
-                  <v-icon icon="mdi-star" color="favorite" class="select-on"></v-icon>
-                  <v-icon icon="mdi-star-outline" color="white" class="select-off"></v-icon>
-                </v-btn>
-              </v-img>
+              <v-btn :ripple="false" icon variant="text" position="absolute" class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+                <v-icon icon="mdi-star" color="favorite" class="select-on"></v-icon>
+                <v-icon icon="mdi-star-outline" color="white" class="select-off"></v-icon>
+              </v-btn>
+            </v-img>
 
-              <div class="card-details" @click.stop.prevent="">
-                <div v-if="canManage" class="meta-title inline-edit clickable" @click.stop.prevent="edit(model)">
-                  {{ model.Name }}
-                </div>
-                <div v-else class="meta-title">
-                  {{ model.Name }}
-                </div>
+            <div class="card-details" @click.stop.prevent="">
+              <div v-if="canManage" class="meta-title inline-edit clickable" @click.stop.prevent="edit(m)">
+                {{ m.Name }}
+              </div>
+              <div v-else class="meta-title">
+                {{ m.Name }}
+              </div>
 
-                <div v-if="model.About" class="meta-about text-truncate" :title="$gettext('About')">
-                  {{ model.About }}
-                </div>
+              <div v-if="m.About" class="meta-about text-truncate" :title="$gettext('About')">
+                {{ m.About }}
+              </div>
 
-                <div v-if="model.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
-                  <translate>Contains one picture.</translate>
-                </div>
-                <div v-else-if="model.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
-                  <translate :translate-params="{ n: model.PhotoCount }">Contains %{n} pictures.</translate>
-                </div>
+              <div v-if="m.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
+                <translate>Contains one picture.</translate>
+              </div>
+              <div v-else-if="m.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
+                <translate :translate-params="{ n: m.PhotoCount }">Contains %{n} pictures.</translate>
               </div>
             </div>
           </div>
@@ -266,7 +264,6 @@ export default {
           .finally(() => {
             this.busy = false;
           });
-
       } else if (existing.UID !== m.UID) {
         this.merge.subj1 = m;
         this.merge.subj2 = existing;

@@ -110,7 +110,7 @@
             </div>
           </div>
         </div>
-        <div class="text-center mt-4 mb-2">
+        <div class="d-flex justify-center mt-8 mb-4">
           <v-btn color="secondary" rounded variant="flat" :to="{ name: 'all', query: { q: 'face:new' } }">
             <translate>Show all new faces</translate>
           </v-btn>

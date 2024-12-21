@@ -137,82 +137,81 @@
             </template>
           </div>
         </v-alert>
+
+        <div v-if="canManage && staticFilter.type === 'album' && config.count.albums === 0" class="d-flex justify-center mt-8 mb-4">
+          <v-btn color="secondary" rounded variant="flat" class="action-add" @click.prevent="create">
+            <translate>Add Album</translate>
+          </v-btn>
+        </div>
       </div>
-      <div v-else>
-        <div class="v-row search-results album-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="(album, index) in results" :key="album.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
-            <div :data-uid="album.UID" style="user-select: none" class="result card bg-card" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">
-              <div
-                :key="album.UID"
-                :title="album.Title"
-                :style="`background-image: url(${album.thumbnailUrl('tile_500')})`"
-                class="card preview clickable"
-                @touchstart.passive="input.touchStart($event, index)"
-                @touchend.stop.prevent="onClick($event, index)"
-                @mousedown.stop.prevent="input.mouseDown($event, index)"
-                @click.stop.prevent="onClick($event, index)"
-              >
-                <div class="preview__overlay"></div>
-                <button v-if="canShare && album.LinkCount > 0" class="action-share" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onShare($event, index)" @touchmove.stop.prevent @click.stop.prevent="onShare($event, index)">
-                  <i class="mdi mdi-share-variant" />
-                </button>
-                <button class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
-                  <i class="mdi mdi-check-circle select-on" />
-                  <i class="mdi mdi-circle-outline select-off" />
-                </button>
-                <button class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
-                  <i v-if="album.Favorite" class="mdi mdi-star text-favorite select-on" />
-                  <i v-else class="mdi mdi-star-outline select-off" />
-                </button>
-                <button v-if="canManage && experimental && featPrivate && album.Private" class="input-private" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onEdit($event, index)" @touchmove.stop.prevent @click.stop.prevent="onEdit($event, index)">
-                  <i class="mdi mdi-lock" />
-                </button>
+      <div v-else class="v-row search-results album-results cards-view" :class="{ 'select-results': selection.length > 0 }">
+        <div v-for="(album, index) in results" :key="album.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+          <div :data-uid="album.UID" style="user-select: none" class="result card bg-card" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">
+            <div
+              :key="album.UID"
+              :title="album.Title"
+              :style="`background-image: url(${album.thumbnailUrl('tile_500')})`"
+              class="card preview clickable"
+              @touchstart.passive="input.touchStart($event, index)"
+              @touchend.stop.prevent="onClick($event, index)"
+              @mousedown.stop.prevent="input.mouseDown($event, index)"
+              @click.stop.prevent="onClick($event, index)"
+            >
+              <div class="preview__overlay"></div>
+              <button v-if="canShare && album.LinkCount > 0" class="action-share" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onShare($event, index)" @touchmove.stop.prevent @click.stop.prevent="onShare($event, index)">
+                <i class="mdi mdi-share-variant" />
+              </button>
+              <button class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+                <i class="mdi mdi-check-circle select-on" />
+                <i class="mdi mdi-circle-outline select-off" />
+              </button>
+              <button class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+                <i v-if="album.Favorite" class="mdi mdi-star text-favorite select-on" />
+                <i v-else class="mdi mdi-star-outline select-off" />
+              </button>
+              <button v-if="canManage && experimental && featPrivate && album.Private" class="input-private" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onEdit($event, index)" @touchmove.stop.prevent @click.stop.prevent="onEdit($event, index)">
+                <i class="mdi mdi-lock" />
+              </button>
+            </div>
+
+            <div class="card-details">
+              <button v-if="album.Type === 'month'" :title="album.Title" class="action-title-edit meta-title text-capitalize" :data-uid="album.UID" @click.stop.prevent="edit(album)">
+                {{ album.getDateString() }}
+              </button>
+              <button v-else-if="album.Title" :title="album.Title" class="action-title-edit meta-title" :data-uid="album.UID" @click.stop.prevent="edit(album)">
+                {{ album.Title }}
+              </button>
+
+              <button v-if="album.Description" :title="$gettext('Description')" class="meta-description" @click.exact="edit(album)">
+                {{ album.Description }}
+              </button>
+              <button v-else-if="album.Type === 'album' && !album.PhotoCount" class="meta-description" @click.stop.prevent="$router.push({ name: 'browse' })">
+                <translate>Add pictures from search results by selecting them.</translate>
+              </button>
+
+              <div v-if="album.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
+                <translate>Contains one picture.</translate>
+              </div>
+              <div v-else-if="album.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
+                <translate :translate-params="{ n: album.PhotoCount }">Contains %{n} pictures.</translate>
               </div>
 
-              <div class="card-details">
-                <button v-if="album.Type === 'month'" :title="album.Title" class="action-title-edit meta-title text-capitalize" :data-uid="album.UID" @click.stop.prevent="edit(album)">
-                  {{ album.getDateString() }}
+              <div class="meta-details">
+                <button v-if="album.Type === 'folder'" :title="'/' + album.Path" class="meta-path" @click.exact="edit(album)">
+                  <i class="mdi mdi-folder" />
+                  /{{ album.Path }}
                 </button>
-                <button v-else-if="album.Title" :title="album.Title" class="action-title-edit meta-title" :data-uid="album.UID" @click.stop.prevent="edit(album)">
-                  {{ album.Title }}
+                <button v-if="album.Category !== ''" :title="album.Category" class="meta-category" @click.exact="edit(album)">
+                  <i class="mdi mdi-tag" />
+                  {{ album.Category }}
                 </button>
-
-                <button v-if="album.Description" :title="$gettext('Description')" class="meta-description" @click.exact="edit(album)">
-                  {{ album.Description }}
+                <button v-if="album.getLocation() !== ''" class="meta-location text-truncate" @click.exact="edit(album)">
+                  <i class="mdi mdi-map-marker" />
+                  {{ album.getLocation() }}
                 </button>
-                <button v-else-if="album.Type === 'album' && !album.PhotoCount" class="meta-description" @click.stop.prevent="$router.push({ name: 'browse' })">
-                  <translate>Add pictures from search results by selecting them.</translate>
-                </button>
-
-                <div v-if="album.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
-                  <translate>Contains one picture.</translate>
-                </div>
-                <div v-else-if="album.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
-                  <translate :translate-params="{ n: album.PhotoCount }">Contains %{n} pictures.</translate>
-                </div>
-
-                <div class="meta-details">
-                  <button v-if="album.Type === 'folder'" :title="'/' + album.Path" class="meta-path" @click.exact="edit(album)">
-                    <i class="mdi mdi-folder" />
-                    /{{ album.Path }}
-                  </button>
-                  <button v-if="album.Category !== ''" :title="album.Category" class="meta-category" @click.exact="edit(album)">
-                    <i class="mdi mdi-tag" />
-                    {{ album.Category }}
-                  </button>
-                  <button v-if="album.getLocation() !== ''" class="meta-location text-truncate" @click.exact="edit(album)">
-                    <i class="mdi mdi-map-marker" />
-                    {{ album.getLocation() }}
-                  </button>
-                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div v-if="canManage && staticFilter.type === 'album' && config.count.albums === 0" class="text-center my-2">
-          <v-btn class="action-add" color="secondary" rounded @click.prevent="create">
-            <translate>Add Album</translate>
-          </v-btn>
         </div>
       </div>
     </div>
