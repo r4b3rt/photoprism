@@ -1,9 +1,16 @@
 <template>
-  <v-dialog :model-value="show" max-width="330">
+  <v-dialog :model-value="show" max-width="400">
     <v-card>
-      <v-card-title class="d-flex justify-start align-center flex-nowrap ga-3">
-        <h6 class="text-subtitle-1"><translate>PhotoPrism has been updated…</translate></h6>
+      <v-card-title class="d-flex justify-start align-center flex-nowrap ga-3 text-h6">
+        <v-icon icon="mdi-alert-decagram-outline" color="primary"></v-icon>
+        <h6 class="text-h6"><translate>Software Update</translate></h6>
       </v-card-title>
+      <v-card-text class="d-flex justify-start flex-column ga-3">
+        <div v-sanitize="getMessage()" class="text-body-2 data-message"></div>
+        <div dir="ltr" class="text-caption data-version">
+          {{ getVersion() }}
+        </div>
+      </v-card-text>
       <v-card-actions>
         <v-btn color="button" variant="flat" @click="close">
           <translate>Cancel</translate>
@@ -20,7 +27,10 @@
 export default {
   name: "PReloadDialog",
   props: {
-    show: Boolean,
+    show: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -38,6 +48,13 @@ export default {
     },
   },
   methods: {
+    getMessage() {
+      const message = this.$gettext("A new version is available for %{s}:", { s: `<b>${this.$config.getAbout()}</b>` }, true);
+      return this.$sanitize(message);
+    },
+    getVersion() {
+      return this.$config.getServerVersion();
+    },
     close() {
       this.$emit("close");
     },

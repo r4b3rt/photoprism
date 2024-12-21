@@ -56,9 +56,12 @@ export default class Config {
         console.warn("config: values missing");
       }
 
+      const now = new Date();
+
       this.debug = true;
       this.test = true;
       this.demo = false;
+      this.version = `${now.getUTCFullYear().toString().substr(-2)}${now.getMonth() + 1}${now.getDate()}-TEST`;
       this.theme = themes.Get("default");
       this.themeName = "";
       this.baseUri = "";
@@ -112,6 +115,7 @@ export default class Config {
     this.debug = !!values.debug;
     this.test = !!values.test;
     this.demo = !!values.demo;
+    this.version = values.version;
 
     this.updateTokens();
 
@@ -737,7 +741,11 @@ export default class Config {
   }
 
   getVersion() {
-    return this.get("version");
+    return this.version;
+  }
+
+  getServerVersion() {
+    return this.values?.version;
   }
 
   getSiteDescription() {

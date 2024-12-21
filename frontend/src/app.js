@@ -44,6 +44,8 @@ import Socket from "common/websocket";
 import Viewer from "common/viewer";
 import { createApp } from "vue";
 import { createVuetify } from "vuetify";
+import Vue3Sanitize from "vue-3-sanitize";
+import VueSanitize from "vue-sanitize-directive";
 import VueLuxon from "vue-luxon";
 import * as themes from "options/themes";
 // import VueFilters from "vue2-filters";
@@ -242,6 +244,10 @@ config.update().finally(() => {
 
   // Use Vue 3 Gettext.
   app.use(gettext);
+
+  // Use HTML sanitizer with v-sanitize directive.
+  app.use(Vue3Sanitize, { allowedTags: ["b", "strong", "span"], allowedAttributes: { b: ["dir"], strong: ["dir"], span: ["dir"] } });
+  app.use(VueSanitize);
 
   // TODO: check it
   // debugger;
