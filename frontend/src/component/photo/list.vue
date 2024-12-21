@@ -44,7 +44,7 @@
             <tbody>
               <tr v-for="(photo, index) in photos" :key="photo.ID" ref="items" :data-index="index">
                 <td :data-id="photo.ID" :data-uid="photo.UID" class="result text-center" :class="photo.classes()">
-                  <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" class="card preview"></div>
+                  <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" class="card preview"></div>
                   <div
                     v-else
                     :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`"
@@ -92,7 +92,7 @@
                 </td>
                 <td v-if="!isSharedView" class="text-center">
                   <div class="table-actions">
-                    <template v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex">
+                    <template v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex">
                       <!-- div v-if="hidePrivate" class="v-btn v-btn--icon v-btn--small" / -->
                       <div class="v-btn v-btn--icon v-btn--small" />
                     </template>
@@ -188,7 +188,7 @@ export default {
         timeStamp: -1,
       },
       firstVisibleElementIndex: 0,
-      lastVisibileElementIndex: 0,
+      lastVisibleElementIndex: 0,
       visibleElementIndices: new Set(),
     };
   },
@@ -241,7 +241,7 @@ export default {
       // we observe only every 5th item, so we increase the rendered
       // range here by 4 items in every directio just to be safe
       this.firstVisibleElementIndex = smallestIndex - 4;
-      this.lastVisibileElementIndex = largestIndex + 4;
+      this.lastVisibleElementIndex = largestIndex + 4;
     },
     downloadFile(index) {
       Notify.success(this.$gettext("Downloading…"));

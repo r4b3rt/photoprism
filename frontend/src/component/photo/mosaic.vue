@@ -26,7 +26,7 @@
          re-layout all elements in the list when the children of one of them changes
         -->
         <div class="image-container bg-card">
-          <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="card result preview" />
+          <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="card result preview" />
           <div
             v-else
             :data-id="photo.ID"
@@ -144,7 +144,7 @@ export default {
       hidePrivate: this.$config.getSettings().features.private,
       input: new Input(),
       firstVisibleElementIndex: 0,
-      lastVisibileElementIndex: 0,
+      lastVisibleElementIndex: 0,
       visibleElementIndices: new Set(),
     };
   },
@@ -197,7 +197,7 @@ export default {
       // we observe only every 5th item, so we increase the rendered
       // range here by 4 items in every directio just to be safe
       this.firstVisibleElementIndex = smallestIndex - 4;
-      this.lastVisibileElementIndex = largestIndex + 4;
+      this.lastVisibleElementIndex = largestIndex + 4;
     },
     livePlayer(photo) {
       return document.querySelector("#live-player-" + photo.ID);

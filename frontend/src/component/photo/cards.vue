@@ -21,7 +21,7 @@
     </div>
     <div v-else class="v-row search-results photo-results cards-view" :class="{ 'select-results': selectMode }">
       <div v-for="(photo, index) in photos" :key="photo.ID" ref="items" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
-        <div v-if="index < firstVisibleElementIndex || index > lastVisibileElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="result card bg-card placeholder">
+        <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="result card bg-card placeholder">
           <div class="card preview" />
           <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="card-review" />
           <div class="card-details">
@@ -267,7 +267,7 @@ export default {
       debug,
       input,
       firstVisibleElementIndex: 0,
-      lastVisibileElementIndex: 0,
+      lastVisibleElementIndex: 0,
       visibleElementIndices: new Set(),
     };
   },
@@ -318,7 +318,7 @@ export default {
       // we observe only every 5th item, so we increase the rendered
       // range here by 4 items in every direction just to be safe
       this.firstVisibleElementIndex = smallestIndex - 4;
-      this.lastVisibileElementIndex = largestIndex + 4;
+      this.lastVisibleElementIndex = largestIndex + 4;
     },
     livePlayer(photo) {
       return document.querySelector("#live-player-" + photo.ID);
