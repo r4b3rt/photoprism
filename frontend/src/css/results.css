@@ -81,9 +81,9 @@ body.chrome .search-results .result {
 }
 
 .live-player video {
+    position: absolute;
     width: auto;
     height: 100%;
-    position: absolute;
     overflow: hidden;
 }
 
@@ -256,28 +256,31 @@ body.chrome .search-results .result {
 
 .search-results .preview>.preview__overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    aspect-ratio: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     user-select: none;
     pointer-events: none;
     background-color: rgb(var(--v-theme-selected, #cccccc));
     border-radius: inherit;
+    visibility: hidden;
+}
+
+.search-results.list-view .preview>.preview__overlay,
+.search-results.cards-view .preview>.preview__overlay {
     contain: layout paint style size;
     opacity: 0.2;
-    display: none;
 }
 
+.search-results.mosaic-view .preview>.preview__overlay {
+    contain: layout paint style size;
+    opacity: 0.5;
+}
+
+.mosaic-view .preview.is-selected>.preview__overlay,
 .list-view .result.is-selected .preview>.preview__overlay,
 .cards-view .result.is-selected .preview>.preview__overlay {
-    display: block;
-}
-
-.mosaic-view .preview.is-selected>.preview__overlay {
-    display: block;
-    opacity: 0.5;
+    visibility: visible!important;
 }
 
 .cards-view .result .preview button,

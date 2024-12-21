@@ -46,7 +46,7 @@ export default {
       waitTime: 100, // ms
       panelHidden: false,
       showButton: false,
-      showButtonDistance: 80,
+      showButtonDistance: 100,
       maxScrollY: 0,
       onScrollOptions: { passive: true },
     };
@@ -59,26 +59,32 @@ export default {
   },
   methods: {
     onScroll() {
-      if (window.scrollY > this.maxScrollY) {
+      const scrollY = window.scrollY;
+
+      if (scrollY > this.maxScrollY) {
+        if (this.panelHidden && scrollY - this.maxScrollY < this.showButtonDistance) {
+          return;
+        }
+
         // Remember the maximum vertical scroll position.
-        this.maxScrollY = window.scrollY;
+        this.maxScrollY = scrollY;
 
         // Hide "Back to top" button if currently shown.
         this.resetButton();
 
         // Hide the expansion panel when scrolling more than specified in this.hidePanelDistance.
-        if (window.scrollY > this.hidePanelDistance) {
+        if (scrollY > this.hidePanelDistance) {
           this.onHidePanel();
         }
 
         // Trigger this.loadMore() callback if within load distance (infinite scrolling).
-        if (document.documentElement.scrollHeight - window.scrollY < this.loadDistance) {
+        if (document.documentElement.scrollHeight - scrollY < this.loadDistance) {
           this.onLoadMore();
         }
-      } else if (window.scrollY < this.resetDistance) {
+      } else if (scrollY < this.resetDistance) {
         // Hide "Back to top" button and reset maximum scroll position.
         this.reset();
-      } else if (this.maxScrollY - window.scrollY > this.showButtonDistance) {
+      } else if (this.maxScrollY - scrollY > this.showButtonDistance) {
         // Show "Back to top" button if it is not already shown.
         this.onShowButton();
       }
