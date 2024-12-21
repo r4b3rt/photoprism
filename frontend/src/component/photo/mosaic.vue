@@ -26,14 +26,15 @@
          re-layout all elements in the list when the children of one of them changes
         -->
         <div class="image-container bg-card">
-          <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="card result preview" />
+          <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="card bg-card result preview clickable" />
           <div
             v-else
             :data-id="photo.ID"
             :data-uid="photo.UID"
             :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`"
-            :class="photo.classes().join(' ') + ' card result preview clickable'"
+            :class="photo.classes()"
             :title="photo.Title"
+            class="card bg-card result preview clickable"
             @contextmenu.stop="onContextMenu($event, index)"
             @touchstart.passive="input.touchStart($event, index)"
             @touchend.stop.prevent="onClick($event, index)"
