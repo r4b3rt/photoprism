@@ -1,5 +1,5 @@
 import "../fixtures";
-import { Photo, FormatJpeg } from "model/photo";
+import { Photo, BatchSize, FormatJpeg } from "model/photo";
 
 let chai = require("chai/chai");
 let assert = chai.assert;
@@ -442,7 +442,7 @@ describe("model/photo", () => {
   });
 
   it("should return batch size", () => {
-    assert.equal(Photo.batchSize(), 90);
+    assert.equal(Photo.batchSize(), BatchSize);
   });
 
   it("should get model name", () => {
