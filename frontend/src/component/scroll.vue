@@ -123,7 +123,9 @@ export default {
       // unless this.loadDisabled or this.wait is set.
       if (!this.loadDisabled && !this.wait) {
         this.onWait();
-        this.loadMore();
+        this.$nextTick(() => {
+          this.loadMore();
+        });
       }
     },
     onWait() {
