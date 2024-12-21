@@ -30,7 +30,7 @@ import { config } from "app/session";
 import { $gettext } from "common/gettext";
 import * as src from "common/src";
 
-export let BatchSize = 48;
+export let BatchSize = 60;
 
 export class Marker extends RestModel {
   getDefaults() {

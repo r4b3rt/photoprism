@@ -30,7 +30,7 @@ import { DateTime } from "luxon";
 import { config } from "app/session";
 import { $gettext } from "common/gettext";
 
-export let BatchSize = 24;
+export let BatchSize = 60;
 
 export class Album extends RestModel {
   getDefaults() {
