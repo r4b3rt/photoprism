@@ -74,17 +74,17 @@ test.meta("testID", "sharing-001").meta({ mode: "auth" })("Common: Create, view,
   await t.expect(photoCountShared).eql(1);
 
   await t.click(Selector("div.v-toolbar-title a").withText("Albums"));
-  const AlbumCountAnonymous = await Selector("a.is-album").count;
+  const AlbumCountAnonymous = await Selector("div.result.is-album").count;
 
   await t.expect(AlbumCountAnonymous).eql(1);
 
   await menu.openPage("calendar");
-  const CalendarCountAnonymous = await Selector("a.is-album").count;
+  const CalendarCountAnonymous = await Selector("div.result.is-album").count;
 
   await t.expect(CalendarCountAnonymous).eql(0);
 
   await menu.openPage("folders");
-  const FolderCountAnonymous = await Selector("a.is-album").count;
+  const FolderCountAnonymous = await Selector("div.result.is-album").count;
 
   await t.expect(FolderCountAnonymous).eql(1);
 

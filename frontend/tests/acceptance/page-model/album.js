@@ -5,7 +5,7 @@ export default class Page {
 
   async getNthAlbumUid(type, nth) {
     if (type === "all") {
-      const NthAlbum = await Selector("a.is-album").nth(nth).getAttribute("data-uid");
+      const NthAlbum = await Selector("div.result.is-album").nth(nth).getAttribute("data-uid");
       return NthAlbum;
     } else {
       const NthAlbum = await Selector("a.type-" + type)
@@ -18,10 +18,10 @@ export default class Page {
   async getAlbumCount(type) {
     if (type === "all") {
       if (t.browser.platform === "mobile") {
-        const AlbumCount = await Selector("a.is-album", { timeout: 8000 }).count;
+        const AlbumCount = await Selector("div.result.is-album", { timeout: 8000 }).count;
         return AlbumCount;
       } else {
-        const AlbumCount = await Selector("a.is-album", { timeout: 5000 }).count;
+        const AlbumCount = await Selector("div.result.is-album", { timeout: 5000 }).count;
         return AlbumCount;
       }
     } else {
@@ -37,15 +37,15 @@ export default class Page {
 
   async selectAlbumFromUID(uid) {
     await t
-      .hover(Selector("a.is-album").withAttribute("data-uid", uid))
+      .hover(Selector("div.result.is-album").withAttribute("data-uid", uid))
       .click(Selector(`.uid-${uid} .input-select`));
   }
 
   async toggleSelectNthAlbum(nth, type) {
     if (type === "all") {
       await t
-        .hover(Selector("a.is-album", { timeout: 4000 }).nth(nth))
-        .click(Selector("a.is-album .input-select").nth(nth));
+        .hover(Selector("div.result.is-album", { timeout: 4000 }).nth(nth))
+        .click(Selector("div.result.is-album .input-select").nth(nth));
     } else {
       await t
         .hover(Selector("a.type-" + type, { timeout: 4000 }).nth(nth))
@@ -55,8 +55,8 @@ export default class Page {
 
   async openNthAlbum(nth, type) {
     if (!type || type === "all") {
-      if (await Selector("a.is-album").nth(nth).visible) {
-        await t.click(Selector("a.is-album").nth(nth));
+      if (await Selector("div.result.is-album").nth(nth).visible) {
+        await t.click(Selector("div.result.is-album").nth(nth));
       }
     } else {
       if (await Selector("a.type-" + type).nth(nth).visible) {
@@ -66,36 +66,36 @@ export default class Page {
   }
 
   async openAlbumWithUid(uid) {
-    await t.click(Selector("a.is-album").withAttribute("data-uid", uid));
+    await t.click(Selector("div.result.is-album").withAttribute("data-uid", uid));
   }
 
   async checkAlbumVisibility(uid, visible) {
     if (visible) {
-      await t.expect(Selector("a").withAttribute("data-uid", uid).visible).ok();
+      await t.expect(Selector("div").withAttribute("data-uid", uid).visible).ok();
     } else {
-      await t.expect(Selector("a").withAttribute("data-uid", uid).visible).notOk();
+      await t.expect(Selector("div").withAttribute("data-uid", uid).visible).notOk();
     }
   }
 
   async triggerHoverAction(mode, uidOrNth, action) {
     if (mode === "uid") {
       if (action === "share") {
-        await t.hover(Selector("a.uid-" + uidOrNth));
-        await t.click(Selector("a.uid-" + uidOrNth + " .action-" + action));
+        await t.hover(Selector("div.uid-" + uidOrNth));
+        await t.click(Selector("div.uid-" + uidOrNth + " .action-" + action));
       } else {
-        await t.hover(Selector("a.uid-" + uidOrNth));
-        await t.click(Selector("a.uid-" + uidOrNth + " .input-" + action));
+        await t.hover(Selector("div.uid-" + uidOrNth));
+        await t.click(Selector("div.uid-" + uidOrNth + " .input-" + action));
       }
     }
     if (mode === "nth") {
-      await t.hover(Selector("a.is-album").nth(uidOrNth));
+      await t.hover(Selector("div.result.is-album").nth(uidOrNth));
       await t.click(Selector(`.input-` + action));
     }
   }
 
   async checkHoverActionAvailability(mode, uidOrNth, action, visible) {
     if (mode === "uid") {
-      await t.hover(Selector("a.is-album").withAttribute("data-uid", uidOrNth));
+      await t.hover(Selector("div.result.is-album").withAttribute("data-uid", uidOrNth));
       if (visible) {
         await t.expect(Selector(`.uid-${uidOrNth} .input-` + action).visible).ok();
       } else {
@@ -103,7 +103,7 @@ export default class Page {
       }
     }
     if (mode === "nth") {
-      await t.hover(Selector("a.is-album").nth(uidOrNth));
+      await t.hover(Selector("div.result.is-album").nth(uidOrNth));
       if (action != "share") {
         if (visible) {
           await t.expect(Selector(`button.input-` + action).visible).ok();
@@ -130,11 +130,11 @@ export default class Page {
       }
     }
     if (mode === "nth") {
-      await t.hover(Selector("a.is-album").nth(uidOrNth));
+      await t.hover(Selector("div.result.is-album").nth(uidOrNth));
       if (set) {
         await t
           .expect(
-            Selector("a.is-album")
+            Selector("div.result.is-album")
               .nth(uidOrNth)
               .hasClass("is-" + action)
           )
@@ -142,7 +142,7 @@ export default class Page {
       } else {
         await t
           .expect(
-            Selector("a.is-album")
+            Selector("div.result.is-album")
               .nth(uidOrNth)
               .hasClass("is-" + action)
           )

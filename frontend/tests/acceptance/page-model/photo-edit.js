@@ -55,7 +55,7 @@ export default class Page {
     this.cameraValue = Selector(".input-camera .v-select__selection-text", { timeout: 15000 });
     this.lensValue = Selector(".input-lens .v-select__selection-text", { timeout: 15000 });
 
-    this.rejectName = Selector("div.input-name div.v-input__icon--clear", { timeout: 15000 });
+    this.rejectName = Selector("i.mdi-eject", { timeout: 15000 });
     this.removeMarker = Selector("button.input-reject", { timeout: 15000 });
     this.undoRemoveMarker = Selector("button.action-undo", { timeout: 15000 });
     this.inputName = Selector("div.input-name input", { timeout: 15000 });
