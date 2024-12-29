@@ -12,12 +12,12 @@ require (
 	github.com/dsoprea/go-tiff-image-structure/v2 v2.0.0-20221003165014-8ecc4f52edca
 	github.com/dustin/go-humanize v1.0.1
 	github.com/esimov/pigo v1.4.6
-	github.com/gin-contrib/gzip v1.0.1
+	github.com/gin-contrib/gzip v1.1.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/golang/geo v0.0.0-20230421003525-6adc56603217
-	github.com/google/open-location-code/go v0.0.0-20241213145606-bf601ad90a45
+	github.com/google/open-location-code/go v0.0.0-20241227091814-c92c6f33b71e
 	github.com/gorilla/websocket v1.5.3
-	github.com/gosimple/slug v1.14.0
+	github.com/gosimple/slug v1.15.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jinzhu/inflection v1.0.0
 	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
@@ -66,7 +66,7 @@ require (
 	golang.org/x/time v0.8.0
 )
 
-require github.com/go-ldap/ldap/v3 v3.4.9
+require github.com/go-ldap/ldap/v3 v3.4.10
 
 require (
 	github.com/prometheus/client_golang v1.20.5
@@ -113,7 +113,7 @@ require (
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-sql-driver/mysql v1.7.1 // indirect
-	github.com/goccy/go-json v0.10.3 // indirect
+	github.com/goccy/go-json v0.10.4 // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/gosimple/unidecode v1.0.1 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
@@ -147,13 +147,13 @@ require (
 	golang.org/x/oauth2 v0.24.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/tools v0.28.0 // indirect
-	google.golang.org/protobuf v1.35.2 // indirect
+	google.golang.org/protobuf v1.36.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
 require (
-	github.com/abema/go-mp4 v1.2.0
-	github.com/bytedance/sonic v1.12.4 // indirect
+	github.com/abema/go-mp4 v1.3.0
+	github.com/bytedance/sonic v1.12.6 // indirect
 	github.com/go-errors/errors v1.5.1 // indirect
 	github.com/go-playground/validator/v10 v10.23.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.3 // indirect
