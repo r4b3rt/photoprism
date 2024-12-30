@@ -328,6 +328,7 @@ body.chrome .search-results .result {
     padding: 0;
     top: 0;
     right: 0;
+    color: #f6f6f6;
     opacity: 0.89;
 }
 
