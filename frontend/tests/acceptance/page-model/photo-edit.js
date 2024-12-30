@@ -48,7 +48,7 @@ export default class Page {
     this.artist = Selector(".input-artist input", { timeout: 15000 });
     this.copyright = Selector(".input-copyright input", { timeout: 15000 });
     this.license = Selector(".input-license textarea", { timeout: 15000 });
-    this.description = Selector(".input-description textarea", { timeout: 15000 });
+    this.description = Selector(".input-caption textarea", { timeout: 15000 });
     this.notes = Selector(".input-notes textarea", { timeout: 15000 });
     this.camera = Selector(".input-camera input", { timeout: 15000 });
     this.lens = Selector(".input-lens input", { timeout: 15000 });
@@ -416,9 +416,9 @@ export default class Page {
       await t.typeText(Selector(".input-license textarea"), license, { replace: true });
     }
     if (description.empty || description === "") {
-      await t.click(Selector(".input-description textarea")).pressKey("ctrl+a delete");
+      await t.click(Selector(".input-caption textarea")).pressKey("ctrl+a delete");
     } else {
-      await t.typeText(Selector(".input-description textarea"), description, {
+      await t.typeText(Selector(".input-caption textarea"), description, {
         replace: true,
       });
     }

@@ -9,20 +9,6 @@
         </v-col>
         <v-col cols="12" sm="8" md="10" class="d-flex pa-0" align-self="stretch">
           <v-row dense>
-            <v-col cols="12" lg="6">
-              <v-text-field
-                v-model="model.Title"
-                :append-inner-icon="model.TitleSrc === 'manual' ? 'mdi-check' : ''"
-                :disabled="disabled"
-                :rules="[textRule]"
-                hide-details
-                :label="$pgettext('Photo', 'Title')"
-                placeholder=""
-                autocomplete="off"
-                class="input-title"
-              ></v-text-field>
-            </v-col>
-
             <v-col cols="4" lg="2" xl="1">
               <v-autocomplete
                 v-model="model.Day"
@@ -59,7 +45,7 @@
               >
               </v-autocomplete>
             </v-col>
-            <v-col cols="4" lg="2">
+            <v-col cols="4" lg="2" xl="1">
               <v-autocomplete
                 v-model="model.Year"
                 :append-inner-icon="model.TakenSrc === 'manual' ? 'mdi-check' : ''"
@@ -78,7 +64,7 @@
               </v-autocomplete>
             </v-col>
 
-            <v-col cols="6" lg="2">
+            <v-col cols="6" lg="2" xl="1">
               <!-- TODO: check property return-masked-value TEST -->
               <v-text-field
                 v-model="time"
@@ -95,11 +81,11 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="6" sm="6" lg="2" xl="3">
+            <v-col cols="6" sm="6" lg="4" xl="2">
               <v-autocomplete v-model="model.TimeZone" :disabled="disabled" :label="$gettext('Time Zone')" hide-details flat hide-no-data color="surface-variant" item-value="ID" item-title="Name" :items="options.TimeZones()" class="input-timezone" @update:model-value="updateTime"> </v-autocomplete>
             </v-col>
 
-            <v-col cols="12" sm="8" md="4" lg="2" xl="3">
+            <v-col cols="12" sm="8" md="4" xl="3">
               <v-autocomplete
                 v-model="model.Country"
                 :append-inner-icon="model.PlaceSrc === 'manual' ? 'mdi-check' : ''"
@@ -117,11 +103,11 @@
               </v-autocomplete>
             </v-col>
 
-            <v-col cols="4" md="2">
+            <v-col cols="4" md="2" xl="1">
               <v-text-field v-model="model.Altitude" :disabled="disabled" hide-details flat autocomplete="off" autocorrect="off" autocapitalize="none" :label="$gettext('Altitude (m)')" placeholder="" color="surface-variant" class="input-altitude"></v-text-field>
             </v-col>
 
-            <v-col cols="4" sm="6" md="3" lg="2">
+            <v-col cols="4" sm="6" md="3" xl="1">
               <v-text-field
                 v-model="model.Lat"
                 :append-inner-icon="model.PlaceSrc === 'manual' ? 'mdi-check' : ''"
@@ -137,7 +123,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="4" sm="6" md="3" lg="2">
+            <v-col cols="4" sm="6" md="3" xl="1">
               <v-text-field
                 v-model="model.Lng"
                 :append-inner-icon="model.PlaceSrc === 'manual' ? 'mdi-check' : ''"
@@ -203,51 +189,15 @@
               <v-text-field v-model="model.FocalLength" :disabled="disabled" hide-details autocomplete="off" :label="$gettext('Focal Length')" placeholder="" class="input-focal-length"></v-text-field>
             </v-col>
 
-            <v-col cols="12" md="6">
-              <v-text-field
-                v-model="model.Details.Artist"
-                :append-inner-icon="model.Details.ArtistSrc === 'manual' ? 'mdi-check' : ''"
-                :disabled="disabled"
-                :rules="[textRule]"
-                hide-details
-                autocomplete="off"
-                :label="$gettext('Artist')"
-                placeholder=""
-                class="input-artist"
-              ></v-text-field>
-            </v-col>
-
-            <v-col cols="6" md="3">
-              <v-text-field
-                v-model="model.Details.Copyright"
-                :append-inner-icon="model.Details.CopyrightSrc === 'manual' ? 'mdi-check' : ''"
-                :disabled="disabled"
-                :rules="[textRule]"
-                hide-details
-                autocomplete="off"
-                :label="$gettext('Copyright')"
-                placeholder=""
-                class="input-copyright"
-              ></v-text-field>
-            </v-col>
-
-            <v-col cols="6" md="3">
-              <v-textarea
-                v-model="model.Details.License"
-                :append-inner-icon="model.Details.LicenseSrc === 'manual' ? 'mdi-check' : ''"
-                :disabled="disabled"
-                :rules="[textRule]"
-                hide-details
-                autocomplete="off"
-                auto-grow
-                :label="$gettext('License')"
-                placeholder=""
-                :rows="1"
-                class="input-license"
-              ></v-textarea>
+            <v-col cols="12">
+              <v-text-field v-model="model.Title" :append-inner-icon="model.TitleSrc === 'manual' ? 'mdi-check' : ''" :disabled="disabled" :rules="[textRule]" hide-details :label="$pgettext('Photo', 'Title')" placeholder="" autocomplete="off" class="input-title"></v-text-field>
             </v-col>
 
             <v-col cols="12">
+              <v-textarea v-model="model.Description" :append-inner-icon="model.DescriptionSrc === 'manual' ? 'mdi-check' : ''" :disabled="disabled" hide-details autocomplete="off" auto-grow :label="$gettext('Caption')" placeholder="" :rows="1" class="input-caption"></v-textarea>
+            </v-col>
+
+            <v-col cols="12" md="6">
               <v-textarea
                 v-model="model.Details.Subject"
                 :append-inner-icon="model.Details.SubjectSrc === 'manual' ? 'mdi-check' : ''"
@@ -263,49 +213,36 @@
               ></v-textarea>
             </v-col>
 
-            <v-col cols="12">
+            <v-col cols="12" md="6">
+              <v-text-field v-model="model.Details.Copyright" :append-inner-icon="model.Details.CopyrightSrc === 'manual' ? 'mdi-check' : ''" :disabled="disabled" :rules="[textRule]" hide-details autocomplete="off" :label="$gettext('Copyright')" placeholder="" class="input-copyright"></v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="6">
+              <v-text-field v-model="model.Details.Artist" :append-inner-icon="model.Details.ArtistSrc === 'manual' ? 'mdi-check' : ''" :disabled="disabled" :rules="[textRule]" hide-details autocomplete="off" :label="$gettext('Artist')" placeholder="" class="input-artist"></v-text-field>
+            </v-col>
+
+            <v-col cols="12" md="6">
               <v-textarea
-                v-model="model.Description"
-                :append-inner-icon="model.DescriptionSrc === 'manual' ? 'mdi-check' : ''"
+                v-model="model.Details.License"
+                :append-inner-icon="model.Details.LicenseSrc === 'manual' ? 'mdi-check' : ''"
                 :disabled="disabled"
+                :rules="[textRule]"
                 hide-details
                 autocomplete="off"
                 auto-grow
-                :label="$gettext('Description')"
+                :label="$gettext('License')"
                 placeholder=""
                 :rows="1"
-                class="input-description"
+                class="input-license"
               ></v-textarea>
             </v-col>
 
             <v-col cols="12" md="8">
-              <v-textarea
-                v-model="model.Details.Keywords"
-                :append-inner-icon="model.Details.KeywordsSrc === 'manual' ? 'mdi-check' : ''"
-                :disabled="disabled"
-                hide-details
-                autocomplete="off"
-                auto-grow
-                :label="$gettext('Keywords')"
-                placeholder=""
-                :rows="1"
-                class="input-keywords"
-              ></v-textarea>
+              <v-textarea v-model="model.Details.Keywords" :append-inner-icon="model.Details.KeywordsSrc === 'manual' ? 'mdi-check' : ''" :disabled="disabled" hide-details autocomplete="off" auto-grow :label="$gettext('Keywords')" placeholder="" :rows="1" class="input-keywords"></v-textarea>
             </v-col>
 
             <v-col cols="12" md="4">
-              <v-textarea
-                v-model="model.Details.Notes"
-                :append-inner-icon="model.Details.NotesSrc === 'manual' ? 'mdi-check' : ''"
-                :disabled="disabled"
-                hide-details
-                autocomplete="off"
-                auto-grow
-                :label="$gettext('Notes')"
-                placeholder=""
-                :rows="1"
-                class="input-notes"
-              ></v-textarea>
+              <v-textarea v-model="model.Details.Notes" :append-inner-icon="model.Details.NotesSrc === 'manual' ? 'mdi-check' : ''" :disabled="disabled" hide-details autocomplete="off" auto-grow :label="$gettext('Notes')" placeholder="" :rows="1" class="input-notes"></v-textarea>
             </v-col>
 
             <v-col v-if="!disabled" cols="12">
