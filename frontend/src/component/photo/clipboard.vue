@@ -4,7 +4,7 @@
       <v-speed-dial
         id="t-clipboard"
         v-model="expanded"
-        :class="`p-clipboard ${!rtl ? '--ltr' : '--rtl'} p-photo-clipboard`"
+        :class="`p-clipboard p-photo-clipboard`"
         :end="!rtl"
         :start="rtl"
         :attach="true"
@@ -18,17 +18,17 @@
           </v-btn>
         </template>
 
-        <v-btn v-if="canShare && context !== 'archive' && context !== 'hidden' && context !== 'review'" key="share" :title="$gettext('Share')" icon="mdi-share" color="share" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-share" @click.stop="dialog.share = true"></v-btn>
-        <v-btn v-if="canManage && context === 'review'" key="check" :title="$gettext('Approve')" icon="mdi-check-bold" color="share" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-approve" @click.stop="batchApprove"></v-btn>
-        <v-btn v-if="canArchive && !album && context === 'archive' && context !== 'hidden'" key="restore" :title="$gettext('Restore')" icon="mdi-check-bold" color="share" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-restore" @click.stop="batchRestore"></v-btn>
-        <v-btn v-if="canEdit" key="pencil" :title="$gettext('Edit')" icon="mdi-pencil" color="edit" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-edit" @click.stop="edit"></v-btn>
-        <v-btn v-if="canTogglePrivate && context !== 'archive' && context !== 'hidden'" key="lock" :title="$gettext('Change private flag')" icon="mdi-lock" color="private" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-private" @click.stop="batchPrivate"></v-btn>
-        <v-btn v-if="canDownload && context !== 'archive'" key="download" :title="$gettext('Download')" icon="mdi-download" color="download" variant="elevated" density="comfortable" :disabled="busy" class="action-download" @click.stop="download()"></v-btn>
-        <v-btn v-if="canEditAlbum && context !== 'archive' && context !== 'hidden'" key="bookmark" :title="$gettext('Add to album')" icon="mdi-bookmark" color="album" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-album" @click.stop="dialog.album = true"></v-btn>
-        <v-btn v-if="canArchive && !isAlbum && context !== 'archive' && context !== 'hidden'" key="archive" :title="$gettext('Archive')" icon="mdi-archive" color="remove" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-archive" @click.stop="archivePhotos"></v-btn>
-        <v-btn v-if="canEditAlbum && isAlbum" key="eject" :title="$gettext('Remove from album')" icon="mdi-eject" color="remove" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-remove" @click.stop="removeFromAlbum"></v-btn>
-        <v-btn v-if="canDelete && !album && context === 'archive'" key="delete" :title="$gettext('Delete')" icon="mdi-delete" color="remove" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-delete" @click.stop="deletePhotos"></v-btn>
-        <v-btn key="close" icon="mdi-close" color="grey-darken-2" variant="elevated" density="comfortable" class="action-clear" @click.stop="clearClipboard()"></v-btn>
+        <v-btn v-if="canShare && context !== 'archive' && context !== 'hidden' && context !== 'review'" key="action-share" :title="$gettext('Share')" icon="mdi-share" color="share" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-share" @click.stop="dialog.share = true"></v-btn>
+        <v-btn v-if="canManage && context === 'review'" key="action-approve" :title="$gettext('Approve')" icon="mdi-check-bold" color="share" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-approve" @click.stop="batchApprove"></v-btn>
+        <v-btn v-if="canArchive && !album && context === 'archive' && context !== 'hidden'" key="action-restore" :title="$gettext('Restore')" icon="mdi-check-bold" color="share" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-restore" @click.stop="batchRestore"></v-btn>
+        <v-btn v-if="canEdit" :title="$gettext('Edit')" key="action-edit" icon="mdi-pencil" color="edit" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-edit" @click.stop="edit"></v-btn>
+        <v-btn v-if="canTogglePrivate && context !== 'archive' && context !== 'hidden'" key="action-private" :title="$gettext('Change private flag')" icon="mdi-lock" color="private" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-private" @click.stop="batchPrivate"></v-btn>
+        <v-btn v-if="canDownload && context !== 'archive'" key="action-download" :title="$gettext('Download')" icon="mdi-download" color="download" variant="elevated" density="comfortable" :disabled="busy" class="action-download" @click.stop="download()"></v-btn>
+        <v-btn v-if="canEditAlbum && context !== 'archive' && context !== 'hidden'" key="action-album" :title="$gettext('Add to album')" icon="mdi-bookmark" color="album" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-album" @click.stop="dialog.album = true"></v-btn>
+        <v-btn v-if="canArchive && !isAlbum && context !== 'archive' && context !== 'hidden'" key="action-archive" :title="$gettext('Archive')" icon="mdi-archive" color="remove" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-archive" @click.stop="archivePhotos"></v-btn>
+        <v-btn v-if="canEditAlbum && isAlbum" key="action-remove" :title="$gettext('Remove from album')" icon="mdi-eject" color="remove" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-remove" @click.stop="removeFromAlbum"></v-btn>
+        <v-btn v-if="canDelete && !album && context === 'archive'" key="action-delete" :title="$gettext('Delete')" icon="mdi-delete" color="remove" variant="elevated" density="comfortable" :disabled="selection.length === 0 || busy" class="action-delete" @click.stop="deletePhotos"></v-btn>
+        <v-btn key="action-close" icon="mdi-close" color="grey-darken-2" variant="elevated" density="comfortable" class="action-clear" @click.stop="clearClipboard()"></v-btn>
       </v-speed-dial>
     </div>
     <p-photo-archive-dialog :show="dialog.archive" @cancel="dialog.archive = false" @confirm="batchArchive"></p-photo-archive-dialog>

@@ -4,7 +4,7 @@
       <v-speed-dial
           id="t-clipboard"
           v-model="expanded"
-          :class="`p-clipboard ${!rtl ? '--ltr' : '--rtl'} p-album-clipboard`"
+          :class="`p-clipboard p-album-clipboard`"
           :end="!rtl"
           :start="rtl"
           :attach="true"
@@ -13,17 +13,17 @@
           offset="12"
       >
         <template #activator="{ props }">
-          <v-btn v-bind="props" icon size="52" color="highlight" variant="elevated" density="comfortable" class="action-menu ma-5">
+          <v-btn v-bind="props" icon size="52" color="highlight" variant="elevated" density="comfortable" class="action-menu opacity-95 ma-5">
             <span class="count-clipboard">{{ selection.length }}</span>
           </v-btn>
         </template>
 
-        <v-btn v-if="canShare" key="share" :title="$gettext('Share')" icon="mdi-share-variant" color="share" density="comfortable" :disabled="selection.length !== 1" class="action-share" @click.stop="shareDialog()"></v-btn>
-        <v-btn v-if="canManage" key="pencil" :title="$gettext('Edit')" icon="mdi-pencil" color="edit" density="comfortable" :disabled="selection.length !== 1" class="action-edit" @click.stop="editDialog()"></v-btn>
-        <v-btn key="download" :title="$gettext('Download')" icon="mdi-download" color="download" density="comfortable" class="action-download" :disabled="!canDownload || selection.length !== 1" @click.stop="download()"></v-btn>
-        <v-btn v-if="canManage" key="bookmark" :title="$gettext('Add to album')" icon="mdi-bookmark" color="album" density="comfortable" :disabled="selection.length === 0" class="action-clone" @click.stop="dialog.album = true"></v-btn>
-        <v-btn v-if="canDelete && deletable.includes(context)" key="delete" :title="$gettext('Delete')" icon="mdi-delete" color="remove" density="comfortable" :disabled="selection.length === 0" class="action-delete" @click.stop="dialog.delete = true"></v-btn>
-        <v-btn key="close" icon="mdi-close" color="grey-darken-2" density="comfortable" class="action-clear" @click.stop="clearClipboard()"></v-btn>
+        <v-btn v-if="canShare" key="action-share" :title="$gettext('Share')" icon="mdi-share-variant" color="share" density="comfortable" :disabled="selection.length !== 1" class="action-share" @click.stop="shareDialog()"></v-btn>
+        <v-btn v-if="canManage" key="action-edit" :title="$gettext('Edit')" icon="mdi-pencil" color="edit" density="comfortable" :disabled="selection.length !== 1" class="action-edit" @click.stop="editDialog()"></v-btn>
+        <v-btn key="action-download" :title="$gettext('Download')" icon="mdi-download" color="download" density="comfortable" class="action-download" :disabled="!canDownload || selection.length !== 1" @click.stop="download()"></v-btn>
+        <v-btn v-if="canManage" key="action-album" :title="$gettext('Add to album')" icon="mdi-bookmark" color="album" density="comfortable" :disabled="selection.length === 0" class="action-clone" @click.stop="dialog.album = true"></v-btn>
+        <v-btn v-if="canDelete && deletable.includes(context)" key="action-delete" :title="$gettext('Delete')" icon="mdi-delete" color="remove" density="comfortable" :disabled="selection.length === 0" class="action-delete" @click.stop="dialog.delete = true"></v-btn>
+        <v-btn key="action-close" icon="mdi-close" color="grey-darken-2" density="comfortable" class="action-clear" @click.stop="clearClipboard()"></v-btn>
       </v-speed-dial>
     </div>
     <p-photo-album-dialog :show="dialog.album" @cancel="dialog.album = false" @confirm="cloneAlbums"></p-photo-album-dialog>

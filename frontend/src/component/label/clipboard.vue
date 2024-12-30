@@ -4,7 +4,7 @@
       <v-speed-dial
         id="t-clipboard"
         v-model="expanded"
-        :class="`p-clipboard ${!rtl ? '--ltr' : '--rtl'} p-label-clipboard`"
+        :class="`p-clipboard p-label-clipboard`"
         :end="!rtl"
         :start="rtl"
         :attach="true"
@@ -13,15 +13,15 @@
         offset="12"
       >
         <template #activator="{ props }">
-          <v-btn v-bind="props" icon size="52" color="highlight" variant="elevated" density="comfortable" class="action-menu ma-5">
+          <v-btn v-bind="props" icon size="52" color="highlight" variant="elevated" density="comfortable" class="action-menu opacity-95 ma-5">
             <span class="count-clipboard">{{ selection.length }}</span>
           </v-btn>
         </template>
 
         <!-- v-btn key="download" :title="$gettext('Download')" icon="mdi-download" color="download" density="comfortable class="action-download" :disabled="selection.length !== 1" @click.stop="download()"></v-btn -->
-        <v-btn key="bookmark" :title="$gettext('Add to album')" icon="mdi-bookmark" color="album" density="comfortable" :disabled="!canAddAlbums || selection.length === 0" class="action-album" @click.stop="dialog.album = true"></v-btn>
-        <v-btn key="delete" :title="$gettext('Delete')" icon="mdi-delete" color="remove" density="comfortable" :disabled="!canManage || selection.length === 0" class="action-delete" @click.stop="dialog.delete = true"></v-btn>
-        <v-btn key="close" icon="mdi-close" color="grey-darken-2" density="comfortable"  class="action-clear" @click.stop="clearClipboard()"></v-btn>
+        <v-btn key="action-album" :title="$gettext('Add to album')" icon="mdi-bookmark" color="album" density="comfortable" :disabled="!canAddAlbums || selection.length === 0" class="action-album" @click.stop="dialog.album = true"></v-btn>
+        <v-btn key="action-delete" :title="$gettext('Delete')" icon="mdi-delete" color="remove" density="comfortable" :disabled="!canManage || selection.length === 0" class="action-delete" @click.stop="dialog.delete = true"></v-btn>
+        <v-btn key="action-close" icon="mdi-close" color="grey-darken-2" density="comfortable" class="action-clear" @click.stop="clearClipboard()"></v-btn>
       </v-speed-dial>
     </div>
     <p-photo-album-dialog :show="dialog.album" @cancel="dialog.album = false" @confirm="addToAlbum"></p-photo-album-dialog>
