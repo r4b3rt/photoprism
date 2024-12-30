@@ -347,12 +347,12 @@ body.chrome .search-results .result {
 }
 
 .cards-view .preview .preview-details>div.info-text {
-    margin: 8px 6px;
+    margin: 7px 8px;
     font-size: 17px;
 }
 
 .mosaic-view .preview .preview-details>div.info-text {
-    margin: 6px;
+    margin: 5px 6px;
     font-size: 15px;
 }
 
