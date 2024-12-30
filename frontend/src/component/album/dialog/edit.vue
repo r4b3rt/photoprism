@@ -35,7 +35,7 @@
             </v-col>
           </v-row>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="action-buttons">
           <v-btn variant="flat" color="button" class="action-cancel" @click.stop="close">
             <translate>Cancel</translate>
           </v-btn>

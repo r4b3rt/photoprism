@@ -37,7 +37,7 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="secondary-light" class="action-back" @click.stop="onBack">
               <translate>Back</translate>
             </v-btn>
@@ -70,7 +70,7 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-close" @click.stop="close">
               <translate>Close</translate>
             </v-btn>
@@ -100,7 +100,7 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-cancel" @click.stop="onCancel">
               <translate>Cancel</translate>
             </v-btn>
@@ -127,13 +127,13 @@
                 >
                   <template #item="props">
                     <tr :data-name="props.item.ClientName">
-                      <td class="text-selectable text-start">
+                      <td class="text-selectable text-break text-start">
                         {{ props.item.ClientName }}
                       </td>
-                      <td class="text-start hidden-xs" nowrap>
+                      <td class="text-start text-break hidden-xs" nowrap>
                         {{ scopeInfo(props.item.AuthScope) }}
                       </td>
-                      <td class="text-start" nowrap>
+                      <td class="text-start text-break" nowrap>
                         {{ formatDateTime(props.item.LastActive) }}
                       </td>
                       <td class="text-start hidden-sm-and-down" nowrap>
@@ -150,7 +150,7 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-close" @click.stop="close">
               <translate>Close</translate>
             </v-btn>
@@ -213,7 +213,9 @@ export default {
         { title: this.$gettext("Name"), key: "ID", sortable: false, align: "left" },
         {
           title: this.$gettext("Scope"),
-          class: "hidden-xs",
+          headerProps: {
+            class: "hidden-xs",
+          },
           key: "AuthScope",
           sortable: false,
           align: "left",
@@ -226,10 +228,13 @@ export default {
         },
         {
           title: this.$gettext("Expires"),
-          class: "hidden-sm-and-down",
+          headerProps: {
+            class: "hidden-sm-and-down",
+          },
           key: "Expires",
           sortable: false,
           align: "left",
+          mobile: false,
         },
         { title: "", key: "", sortable: false, align: "right" },
       ],

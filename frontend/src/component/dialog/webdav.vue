@@ -34,7 +34,7 @@
         </v-alert>
       </v-card-text>
 
-      <v-card-actions>
+      <v-card-actions class="action-buttons">
         <v-btn variant="flat" color="button" class="action-close" @click.stop="close">
           <translate>Close</translate>
         </v-btn>

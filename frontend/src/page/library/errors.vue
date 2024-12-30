@@ -77,8 +77,12 @@
           <h6 class="text-h6 text-capitalize">{{ details.err.Level }}</h6>
         </v-card-title>
 
-        <v-card-text>
+        <v-card-text class="text-body-2 text-break">
           {{ details.err.Message }}
+        </v-card-text>
+
+        <v-card-text class="text-caption mt-2">
+          {{ formatTime(details.err.Time) }}
         </v-card-text>
 
         <v-card-actions>

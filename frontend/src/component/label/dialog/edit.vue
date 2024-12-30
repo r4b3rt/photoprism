@@ -6,20 +6,19 @@
           <v-icon size="28" color="primary">mdi-label</v-icon>
           <h6 class="text-h6"><translate :translate-params="{ name: model.modelName() }">Edit %{name}</translate></h6>
         </v-card-title>
-
         <v-card-text class="dense">
-            <v-row dense>
-              <v-col cols="12">
-                <v-text-field v-model="model.Name" hide-details autofocus :rules="[titleRule]" :label="$gettext('Name')" :disabled="disabled" class="input-title" @keyup.enter="confirm"></v-text-field>
-              </v-col>
-              <v-col sm="4">
-                <!-- TODO: check property flat TEST -->
+          <v-row dense>
+            <v-col cols="12">
+              <v-text-field v-model="model.Name" hide-details autofocus :rules="[titleRule]" :label="$gettext('Name')" :disabled="disabled" class="input-title" @keyup.enter="confirm"></v-text-field>
+            </v-col>
+            <v-col sm="4">
+              <!-- TODO: check property flat TEST -->
 <!--                TODO: fix Favorite saving-->
-                <v-checkbox v-model="model.Favorite" :disabled="disabled" :label="$gettext('Favorite')" hide-details> </v-checkbox>
-              </v-col>
-            </v-row>
+              <v-checkbox v-model="model.Favorite" :disabled="disabled" :label="$gettext('Favorite')" hide-details> </v-checkbox>
+            </v-col>
+          </v-row>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="action-buttons">
           <v-btn variant="flat" color="button" class="action-cancel" @click.stop="close">
             <translate>Cancel</translate>
           </v-btn>

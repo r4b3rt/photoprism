@@ -6,7 +6,6 @@
           <v-icon size="28" color="primary">mdi-account</v-icon>
           <h6 class="text-h6"><translate :translate-params="{ name: model.modelName() }">Edit %{name}</translate></h6>
         </v-card-title>
-
         <v-card-text class="dense">
           <v-row dense>
             <v-col cols="12">
@@ -20,7 +19,7 @@
             </v-col>
           </v-row>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="action-buttons">
           <v-btn variant="flat" color="button" class="action-cancel" @click.stop="close">
             <translate>Cancel</translate>
           </v-btn>

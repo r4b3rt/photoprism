@@ -5,13 +5,13 @@
         <v-icon size="54" color="primary">mdi-package-down</v-icon>
         <p class="text-subtitle-1"><translate>Are you sure you want to archive the selection?</translate></p>
       </v-card-title>
-      <v-card-actions>
+      <v-card-actions class="action-buttons">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-            <translate>No</translate>
-          </v-btn>
-          <v-btn color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
-            <translate>Yes</translate>
-          </v-btn>
+          <translate>No</translate>
+        </v-btn>
+        <v-btn color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
+          <translate>Yes</translate>
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

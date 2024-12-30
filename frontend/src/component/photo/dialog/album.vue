@@ -24,7 +24,7 @@
           >
           </v-combobox>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="action-buttons">
           <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
             <translate>Cancel</translate>
           </v-btn>

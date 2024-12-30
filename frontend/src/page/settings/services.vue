@@ -1,20 +1,10 @@
 <template>
   <div class="p-tab p-settings-services">
-    <v-data-table
-        v-model="selected"
-        :headers="listColumns"
-        :items="results"
-        tile
-        hover
-        hide-default-footer
-        item-key="ID" :no-data-text="$gettext('No services configured.')"
-        :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
-        class="elevation-0 account-results list-view"
-    >
+    <v-data-table v-model="selected" :headers="listColumns" :items="results" tile hover hide-default-footer item-key="ID" :no-data-text="$gettext('No services configured.')" :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="elevation-0 account-results list-view">
       <template #item="props">
         <tr :data-name="props.item.AccName">
           <td class="p-account">
-            <button class="surface-variant--text" @click.stop.prevent="edit(props.item)">
+            <button class="text-primary text-break" @click.stop.prevent="edit(props.item)">
               {{ props.item.AccName }}
             </button>
           </td>
@@ -25,7 +15,7 @@
           </td>
           <td class="text-center">
             <v-btn icon density="comfortable" variant="plain" :ripple="false" class="action-toggle-sync" @click.stop.prevent="editSync(props.item)">
-              <v-icon v-if="props.item.AccErrors" color="surface-variant" :title="props.item.AccError">mdi-alert</v-icon>
+              <v-icon v-if="props.item.AccErrors" color="surface-variant" :title="props.item.AccError">mdi-alert </v-icon>
               <v-icon v-else-if="props.item.AccSync" color="surface-variant">mdi-sync</v-icon>
               <v-icon v-else color="surface-variant">mdi-sync-off</v-icon>
             </v-btn>
@@ -100,12 +90,22 @@ export default {
         { title: this.$gettext("Sync"), key: "AccSync", sortable: false, align: "center" },
         {
           title: this.$gettext("Last Sync"),
+          headerProps: {
+            class: "hidden-sm-and-down",
+          },
           key: "SyncDate",
           sortable: false,
-          class: "hidden-sm-and-down",
           align: "left",
         },
-        { title: "", key: "", sortable: false, class: "hidden-xs", align: "right" },
+        {
+          title: "",
+          headerProps: {
+            class: "hidden-xs",
+          },
+          key: "",
+          sortable: false,
+          align: "right",
+        },
       ],
       rtl: this.$rtl,
     };

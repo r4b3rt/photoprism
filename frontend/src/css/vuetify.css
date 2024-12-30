@@ -32,7 +32,13 @@ body.dark-theme {
     padding: 12px 20px;
 }
 
-.v-card-actions {
+.v-card-title>.switch {
+    min-width: 50px;
+    text-align: end;
+}
+
+.v-card-actions,
+.v-card-actions.action-buttons {
     padding: 8px 12px;
 }
 
@@ -137,6 +143,11 @@ body.dark-theme {
 }
 
 /* Form Inputs */
+
+.v-input--density-compact {
+    --v-input-control-height: 32x;
+    --v-input-padding-top: 8px;
+}
 
 .v-selection-control--density-compact .v-label {
     margin-inline-start: .5em;

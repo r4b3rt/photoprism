@@ -159,7 +159,11 @@ export const defaults = {
     flat: true,
     density: "compact",
     baseColor: "surface",
-    hideDetails: true,
+    color: "surface-variant",
+    hideDetails: "auto",
+    minWidth: 32,
+    variant: "flat",
+    falseValue: false,
     ripple: false,
   },
   VRating: {

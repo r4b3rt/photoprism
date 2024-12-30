@@ -1,6 +1,6 @@
 <template>
   <div class="p-tab p-tab-photo-files">
-    <v-expansion-panels v-model="state" class="pa-0 elevation-0" variant="accordion" multiple >
+    <v-expansion-panels v-model="state" class="pa-0 elevation-0" variant="accordion" multiple>
       <template v-for="file in model.fileModels()">
         <v-expansion-panel v-if="!file.Missing" class="pa-0 elevation-0" style="margin-top: 1px">
           <v-expansion-panel-title>
@@ -18,12 +18,7 @@
                   <v-row class="d-flex align-stretch" align="center" justify="center">
                     <v-col cols="12" class="pa-0 flex-grow-1">
                       <div class="v-table__overflow">
-                        <v-table
-                            tile
-                            hover
-                            :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
-                            class="photo-files d-flex bg-transparent"
-                        >
+                        <v-table tile hover :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="photo-files d-flex bg-transparent">
                           <tbody>
                             <tr v-if="file.FileType === 'jpg' || file.FileType === 'png'">
                               <td>
@@ -37,26 +32,28 @@
                               <td>
                                 <translate>Actions</translate>
                               </td>
-                              <td class="d-flex justify-start align-center ga-2">
-                                <v-btn v-if="features.download" density="comfortable" variant="flat" color="highlight" class="btn-action action-download" :disabled="busy" @click.stop.prevent="downloadFile(file)">
-                                  <translate>Download</translate>
-                                </v-btn>
-                                <v-btn v-if="features.edit && (file.FileType === 'jpg' || file.FileType === 'png') && !file.Error && !file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-primary" :disabled="busy" @click.stop.prevent="primaryFile(file)">
-                                  <translate>Primary</translate>
-                                </v-btn>
-                                <v-btn v-if="features.edit && !file.Sidecar && !file.Error && !file.Primary && file.Root === '/'" density="comfortable" variant="flat" color="highlight" class="btn-action action-unstack" :disabled="busy" @click.stop.prevent="unstackFile(file)">
-                                  <translate>Unstack</translate>
-                                </v-btn>
-                                <v-btn v-if="features.delete && !file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-delete" :disabled="busy" @click.stop.prevent="showDeleteDialog(file)">
-                                  <translate>Delete</translate>
-                                </v-btn>
-                                <v-btn v-if="experimental && canAccessPrivate && file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-open-folder" :href="folderUrl(file)" target="_blank">
-                                  <translate>File Browser</translate>
-                                </v-btn>
+                              <td>
+                                <div class="action-buttons justify-start">
+                                  <v-btn v-if="features.download" density="comfortable" variant="flat" color="highlight" class="btn-action action-download" :disabled="busy" @click.stop.prevent="downloadFile(file)">
+                                    <translate>Download</translate>
+                                  </v-btn>
+                                  <v-btn v-if="features.edit && (file.FileType === 'jpg' || file.FileType === 'png') && !file.Error && !file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-primary" :disabled="busy" @click.stop.prevent="primaryFile(file)">
+                                    <translate>Primary</translate>
+                                  </v-btn>
+                                  <v-btn v-if="features.edit && !file.Sidecar && !file.Error && !file.Primary && file.Root === '/'" density="comfortable" variant="flat" color="highlight" class="btn-action action-unstack" :disabled="busy" @click.stop.prevent="unstackFile(file)">
+                                    <translate>Unstack</translate>
+                                  </v-btn>
+                                  <v-btn v-if="features.delete && !file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-delete" :disabled="busy" @click.stop.prevent="showDeleteDialog(file)">
+                                    <translate>Delete</translate>
+                                  </v-btn>
+                                  <v-btn v-if="experimental && canAccessPrivate && file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-open-folder" :href="folderUrl(file)" target="_blank">
+                                    <translate>File Browser</translate>
+                                  </v-btn>
+                                </div>
                               </td>
                             </tr>
                             <tr>
-                              <td title="Unique ID"> UID </td>
+                              <td title="Unique ID">UID</td>
                               <td>
                                 <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.UID)">{{ file.UID }}</span>
                               </td>
@@ -73,16 +70,14 @@
                               <td title="SHA-1">
                                 <translate>Hash</translate>
                               </td>
-                              <td
-                                ><span class="clickable" @click.stop.prevent="copyText(file.Hash)">{{ file.Hash }}</span></td
+                              <td><span class="clickable text-break" @click.stop.prevent="copyText(file.Hash)">{{ file.Hash }}</span></td
                               >
                             </tr>
                             <tr v-if="file.Name">
                               <td>
                                 <translate>Filename</translate>
                               </td>
-                              <td
-                                ><span class="clickable" @click.stop.prevent="copyText(file.Name)">{{ file.Name }}</span></td
+                              <td class="text-break"><span class="clickable" @click.stop.prevent="copyText(file.Name)">{{ file.Name }}</span></td
                               >
                             </tr>
                             <tr v-if="file.Root">
@@ -95,9 +90,7 @@
                               <td>
                                 <translate>Original Name</translate>
                               </td>
-                              <td
-                                ><span class="clickable" @click.stop.prevent="copyText(file.OriginalName)">{{ file.OriginalName }}</span></td
-                              >
+                              <td class="text-break"><span class="clickable" @click.stop.prevent="copyText(file.OriginalName)">{{ file.OriginalName }}</span></td>
                             </tr>
                             <tr>
                               <td>
@@ -109,13 +102,13 @@
                               <td>
                                 <translate>Software</translate>
                               </td>
-                              <td>{{ file.Software }}</td>
+                              <td class="text-break">{{ file.Software }}</td>
                             </tr>
                             <tr v-if="file.FileType">
                               <td>
                                 <translate>Type</translate>
                               </td>
-                              <td>{{ file.typeInfo() }}</td>
+                              <td class="text-break">{{ file.typeInfo() }}</td>
                             </tr>
                             <tr v-if="file.isAnimated()">
                               <td>
@@ -225,7 +218,7 @@
                               <td>
                                 <translate>Color Profile</translate>
                               </td>
-                              <td>{{ file.ColorProfile }}</td>
+                              <td class="text-break">{{ file.ColorProfile }}</td>
                             </tr>
                             <tr v-if="file.MainColor">
                               <td>
@@ -253,8 +246,7 @@
                               <td>
                                 <translate>Added</translate>
                               </td>
-                              <td
-                                >{{ formatTime(file.CreatedAt) }}
+                              <td class="text-break">{{ formatTime(file.CreatedAt) }}
                                 <translate>in</translate>
                                 <!--                              TODO: change filter-->
                                 <!--                              {{ Math.round(file.CreatedIn / 1000000) | number("0,0") }} ms-->
@@ -265,8 +257,7 @@
                               <td>
                                 <translate>Updated</translate>
                               </td>
-                              <td
-                                >{{ formatTime(file.UpdatedAt) }}
+                              <td class="text-break">{{ formatTime(file.UpdatedAt) }}
                                 <translate>in</translate>
                                 <!--                              TODO: change filter-->
                                 <!--                              {{ Math.round(file.UpdatedIn / 1000000) | number("0,0") }} ms-->
@@ -334,11 +325,20 @@ export default {
         { title: this.$gettext("Name"), key: "Name", sortable: false, align: "left" },
         {
           title: this.$gettext("Dimensions"),
+          headerProps: {
+            class: "hidden-sm-and-down",
+          },
           key: "",
           sortable: false,
-          class: "hidden-sm-and-down",
         },
-        { title: this.$gettext("Size"), key: "Size", sortable: false, class: "hidden-xs" },
+        {
+          title: this.$gettext("Size"),
+          headerProps: {
+            class: "hidden-xs",
+          },
+          key: "Size",
+          sortable: false,
+        },
         { title: this.$gettext("Type"), key: "", sortable: false, align: "left" },
         { title: this.$gettext("Status"), key: "", sortable: false, align: "left" },
       ],

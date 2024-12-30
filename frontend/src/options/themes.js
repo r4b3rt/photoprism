@@ -579,7 +579,7 @@ let themes = {
 /* Automatically Generated Theme Color variations */
 
 export const variations = {
-  colors: ["primary", "highlight", "secondary", "surface", "navigation"],
+  colors: ["primary", "highlight", "secondary", "surface", "surface-variant", "navigation"],
   lighten: 2,
   darken: 1,
 };

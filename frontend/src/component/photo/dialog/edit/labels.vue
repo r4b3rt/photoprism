@@ -74,7 +74,6 @@
 </template>
 
 <script>
-import Label from "model/label";
 import Thumb from "model/thumb";
 
 export default {

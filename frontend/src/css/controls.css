@@ -26,9 +26,23 @@
     margin-bottom: 20px;
 }
 
-.action-controls .v-btn .v-btn__content,
+.action-buttons .v-btn .v-btn__content,
 .action-controls .v-btn .v-btn__content {
     min-width: 68px;
+}
+
+table td>.action-buttons {
+    margin: 8px 0;
+    padding: 0;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 599px) {
+    .action-buttons>.v-btn,
+    .action-buttons>button {
+        flex-grow: 1;
+    }
 }
 
 .auth-login .action-buttons {

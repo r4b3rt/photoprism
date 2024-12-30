@@ -40,7 +40,7 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-close" @click.stop="close">
               <translate>Close</translate>
             </v-btn>
@@ -79,7 +79,7 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-cancel" @click.stop="close">
               <translate>Cancel</translate>
             </v-btn>
@@ -116,7 +116,7 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-cancel" @click.stop="close">
               <translate>Cancel</translate>
             </v-btn>
@@ -163,7 +163,7 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="highlight" class="action-deactivate" :disabled="setupDisabled()" @click.stop="onDeactivate">
               <translate>Deactivate</translate>
             </v-btn>
@@ -181,7 +181,7 @@
               </v-col>
             </v-row>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-close" @click.stop="close">
               <translate>Close</translate>
             </v-btn>

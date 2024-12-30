@@ -5,7 +5,7 @@
         <v-icon size="54" color="primary">mdi-account-multiple</v-icon>
         <p class="text-subtitle-1">{{ prompt }}</p>
       </v-card-title>
-      <v-card-actions class="dialog-merge">
+      <v-card-actions class="dialog-merge action-buttons">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
           <translate>No</translate>
         </v-btn>

@@ -5,7 +5,7 @@
         <v-icon size="54" color="primary">mdi-delete-outline</v-icon>
         <p class="text-subtitle-1"><translate>Are you sure you want to delete these labels?</translate></p>
       </v-card-title>
-      <v-card-actions>
+      <v-card-actions class="action-buttons">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
           <translate>Cancel</translate>
         </v-btn>
