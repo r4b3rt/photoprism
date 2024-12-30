@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" max-width="400">
+  <v-dialog :model-value="show" max-width="380">
     <v-card>
       <v-card-title class="d-flex justify-start align-center flex-nowrap ga-3 text-h6">
         <v-icon icon="mdi-alert-decagram-outline" color="primary"></v-icon>
@@ -13,7 +13,7 @@
       </v-card-text>
       <v-card-actions>
         <v-btn color="button" variant="flat" @click="close">
-          <translate>Cancel</translate>
+          <translate>Close</translate>
         </v-btn>
         <v-btn color="highlight" class="action-update-reload" variant="flat" @click="reload">
           <translate>Reload</translate>
