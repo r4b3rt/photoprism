@@ -286,9 +286,23 @@ body.dark-theme {
     color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
 }
 
-.v-table .v-select.v-input .v-field .v-field__input {
+.v-table .v-input.v-select .v-field .v-field__input,
+.v-table .v-input.v-text-field .v-field .v-field__input {
     padding-left: 0;
     padding-right: 0;
+}
+
+.v-table .v-input.v-select .v-field--appended {
+    padding-inline-end: 8px;
+}
+
+.v-table .v-input.v-select .v-input__append>i,
+.v-table .v-input.v-select .v-input__append>.v-icon {
+    font-size: 1.25em;
+}
+
+.v-table .v-input.v-select .v-input__append {
+    margin-inline-start: 0;
 }
 
 .v-table,

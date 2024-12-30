@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon icon="mdi-delete-outline" size="54" color="primary"></v-icon>
-        <p class="text-subtitle-1"><translate key="Are you sure you want to delete these albums?">Are you sure you want to delete these albums?</translate></p>
+        <p class="text-subtitle-1"><translate>Are you sure you want to delete these albums?</translate></p>
       </v-card-title>
       <v-card-actions class="action-buttons">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">

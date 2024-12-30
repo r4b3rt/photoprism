@@ -2,12 +2,7 @@
   <div class="p-tab p-tab-photo-advanced">
     <v-form ref="form" validate-on="blur" accept-charset="UTF-8" @submit.prevent>
       <div class="v-table__overflow">
-        <v-table
-            tile
-            hover
-            :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
-            class="bg-transparent"
-        >
+        <v-table tile hover :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="bg-transparent">
           <tbody>
             <tr>
               <td>UID</td>
@@ -24,10 +19,24 @@
             <tr>
               <td :title="model.TypeSrc">
                 <translate>Type</translate>
-                <v-icon v-if="model.TypeSrc === 'manual'" class="src">mdi-check</v-icon>
               </td>
               <td>
-                <v-select v-model="model.Type" :list-props="{ density: 'compact' }" max-width="160" variant="solo" bg-color="transparent" density="compact" autocomplete="off" hide-details :items="options.PhotoTypes()" item-title="text" item-value="value" class="input-type" @update:model-value="save"></v-select>
+                <v-select
+                  v-model="model.Type"
+                  :append-icon="model.TypeSrc === 'manual' ? 'mdi-check' : ''"
+                  :list-props="{ density: 'compact' }"
+                  max-width="160"
+                  variant="solo"
+                  bg-color="transparent"
+                  density="compact"
+                  autocomplete="off"
+                  hide-details
+                  :items="options.PhotoTypes()"
+                  item-title="text"
+                  item-value="value"
+                  class="input-type"
+                  @update:model-value="save"
+                ></v-select>
               </td>
             </tr>
             <tr v-if="model.Path">
@@ -51,27 +60,34 @@
                 <translate>Original Name</translate>
               </td>
               <td>
-                <v-text-field v-model="model.OriginalName" flat variant="solo" density="compact" hide-details autocomplete="off" autocorrect="off" autocapitalize="none" color="surface-variant" @change="save"></v-text-field>
+                <v-text-field v-model="model.OriginalName" flat variant="solo" bg-color="transparent" density="compact" hide-details autocomplete="off" autocorrect="off" autocapitalize="none" @change="save"></v-text-field>
               </td>
             </tr>
             <tr>
               <td :title="sourceName(model.TitleSrc)">
                 <translate>Title</translate>
-                <v-icon v-if="model.TitleSrc === 'manual'" class="src">mdi-check</v-icon>
               </td>
               <td :title="sourceName(model.TitleSrc)">
-                <span class="clickable" @click.stop.prevent="copyText(model.Title)">{{ model.Title }}</span>
-                <v-icon v-if="model.TitleSrc === 'name'" class="src">mdi-file</v-icon>
+                <div class="text-flex">
+                  <span class="clickable" @click.stop.prevent="copyText(model.Title)">{{ model.Title }}</span>
+                  <v-icon v-if="model.TitleSrc === 'name'" icon="mdi-file" class="src"></v-icon>
+                  <v-icon v-else-if="model.TitleSrc === 'manual'" icon="mdi-check" class="src"></v-icon>
+                </div>
               </td>
             </tr>
             <tr>
               <td :title="sourceName(model.TakenSrc)">
                 <translate>Taken</translate>
-                <v-icon v-if="model.TakenSrc === 'manual'" class="src">mdi-check</v-icon>
               </td>
               <td :title="sourceName(model.TakenSrc)">
-                {{ model.getDateString() }}
-                <v-icon v-if="model.TakenSrc === 'name' || model.TakenSrc === 'estimate'" class="src">mdi-chart-timeline-variant-shimmer</v-icon>
+                <div class="text-flex">
+                  <div>{{ model.getDateString() }}</div>
+                  <v-icon v-if="model.TakenSrc === ''" icon="mdi-file-clock-outline" class="src"></v-icon>
+                  <!-- v-icon v-else-if="model.TakenSrc === 'meta'" icon="mdi-camera" class="src"></v-icon -->
+                  <v-icon v-else-if="model.TakenSrc === 'name'" icon="mdi-file-tree-outline" class="src"></v-icon>
+                  <v-icon v-else-if="model.TakenSrc === 'estimate'" icon="mdi-file-question" class="src"></v-icon>
+                  <v-icon v-else-if="model.TakenSrc === 'manual'" icon="mdi-check" class="src"></v-icon>
+                </div>
               </td>
             </tr>
             <tr v-if="albums.length > 0">
@@ -151,11 +167,14 @@
             <tr>
               <td :title="sourceName(model.PlaceSrc)">
                 <translate>Place</translate>
-                <v-icon v-if="model.PlaceSrc === 'manual'" class="src">mdi-check</v-icon>
               </td>
               <td :title="sourceName(model.PlaceSrc)">
-                {{ model.locationInfo() }}
-                <v-icon v-if="model.PlaceSrc === 'estimate'" class="src">mdi-chart-timeline-variant-shimmer</v-icon>
+                <div class="text-flex">
+                  <div>{{ model.locationInfo() }}</div>
+                  <v-icon v-if="model.PlaceSrc === 'estimate'" icon="mdi-map-clock-outline" class="src"></v-icon>
+                  <!-- v-icon v-else-if="model.PlaceSrc === 'meta'" icon="mdi-camera" class="src"></v-icon -->
+                  <v-icon v-else-if="model.PlaceSrc === 'manual'" icon="mdi-check" class="src"></v-icon>
+                </div>
               </td>
             </tr>
             <tr v-if="model.Lat">

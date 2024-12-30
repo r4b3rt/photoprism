@@ -222,6 +222,9 @@ export default {
         },
         {
           title: this.$gettext("Last Used"),
+          headerProps: {
+            class: "text-no-wrap",
+          },
           key: "LastActive",
           sortable: false,
           align: "left",

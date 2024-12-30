@@ -53,6 +53,38 @@ body #app,
     font-feature-settings: 'kern', 'liga';
 }
 
+.text-body-3,
+.text-subtitle-3 {
+    font-size: .8125rem;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.text-body-3 {
+    font-weight: 400;
+}
+
+.text-subtitle-3 {
+    font-weight: 500;
+}
+
+.text-flex {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.text-flex>* {
+    display: inline-flex;
+}
+
+.text-flex>i,
+.text-flex>.v-icon {
+    font-size: 1.25em;
+}
+
 .text-ltr {
     direction: ltr !important;
 }
