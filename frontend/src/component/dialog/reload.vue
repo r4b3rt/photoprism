@@ -6,7 +6,7 @@
         <h6 class="text-h6"><translate>Software Update</translate></h6>
       </v-card-title>
       <v-card-text class="d-flex justify-start flex-column ga-3">
-        <div v-sanitize="getMessage()" class="text-body-2 data-message"></div>
+        <div class="text-body-2 data-message">{{ getMessage() }}</div>
         <div dir="ltr" class="text-caption data-version">
           {{ getVersion() }}
         </div>
@@ -49,8 +49,7 @@ export default {
   },
   methods: {
     getMessage() {
-      const message = this.$gettext("A new version of %{s} is available:", { s: `<b>${this.$config.getAbout()}</b>` }, true);
-      return this.$sanitize(message);
+      return this.$gettext("A new version of %{s} is available:", { s: this.$config.getAbout() });
     },
     getVersion() {
       return this.$config.getServerVersion();
