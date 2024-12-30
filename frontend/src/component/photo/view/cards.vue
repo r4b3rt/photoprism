@@ -93,17 +93,7 @@
             </div>
 
             <button
-              v-if="m.Type === 'video'"
-              class="input-video"
-              @touchstart.stop.prevent="input.touchStart($event, index)"
-              @touchend.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
-              @touchmove.stop.prevent
-              @click.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
-            >
-              {{ m.getShortInfo() }}
-            </button>
-            <button
-              v-else-if="m.Type !== 'image' || m.isStack()"
+              v-if="m.Type !== 'image' || m.isStack()"
               class="input-open"
               @touchstart.stop.prevent="input.touchStart($event, index)"
               @touchend.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
@@ -122,9 +112,10 @@
               <i class="mdi mdi-magnify-plus-outline" />
             </button>
 
-            <button v-if="!isSharedView && featPrivate && m.Private" class="input-private">
-              <i class="mdi mdi-lock" />
-            </button>
+            <div class="preview-details">
+              <div v-if="m.Type === 'video'" class="info-text">{{ m.getDurationInfo() }}</div>
+              <div v-if="!isSharedView && featPrivate && m.Private" class="info-icon"><i class="mdi mdi-lock" /></div>
+            </div>
 
             <!--
               We'd usually use v-if here to only render the button if needed.

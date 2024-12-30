@@ -944,25 +944,19 @@ export class Photo extends RestModel {
   });
 
   // Example: 1:03:46
-  getShortInfo = () => {
+  getDurationInfo = () => {
     let file = this.videoFile() || this.mainFile();
-    return this.generateShortInfo(file);
+    return this.generateDurationInfo(file);
   };
 
-  generateShortInfo = memoizeOne((file) => {
+  generateDurationInfo = memoizeOne((file) => {
     if (!file) {
       return "";
-    }
-
-    if (file.Duration && file.Duration > 0) {
+    } else if (file.Duration && file.Duration > 0) {
       return Util.duration(file.Duration);
-    } else if (file.FileType) {
-      return Util.formatCodec(file.FileType);
-    } else if (file.Codec) {
-      return Util.formatCodec(file.Codec);
     }
 
-    return "0:00";
+    return "";
   });
 
   // Example: Apple iPhone 12 Pro Max, DNG, 4032 × 3024, 32.9 MB
