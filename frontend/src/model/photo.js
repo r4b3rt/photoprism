@@ -926,12 +926,14 @@ export class Photo extends RestModel {
 
     const info = [];
 
-    if (file.Duration > 0) {
+    /* if (file.Duration > 0) {
       info.push(Util.duration(file.Duration));
-    }
+    } */
 
     if (file.Codec) {
       info.push(Util.formatCodec(file.Codec));
+    } else if (file.FileType) {
+      info.push(Util.formatCodec(file.FileType));
     }
 
     this.addSizeInfo(file, info);
