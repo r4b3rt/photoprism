@@ -8,9 +8,9 @@
       <v-card-text>
         <v-expansion-panels variant="accordion" density="compact" rounded="6" class="elevation-0">
           <v-expansion-panel v-for="(link, index) in links" :key="link.UID" color="secondary" class="pa-0 elevation-0">
-            <v-expansion-panel-title>
-              <button class="text-start action-url ml-0 mt-0 mb-0 pa-0" style="user-select: none" @click.stop="copyUrl(link)">
-                <v-icon size="16" class="pr-1">mdi-link</v-icon>
+            <v-expansion-panel-title class="d-flex justify-start align-center ga-3 text-body-2 px-4">
+              <v-icon icon="mdi-link"></v-icon>
+              <button class="text-start action-url d-inline-flex" style="user-select: none" @click.stop="copyUrl(link)">
                 /s/<strong v-if="link.Token" style="font-weight: 500"> {{ link.getToken() }} </strong><span v-else>…</span>
               </button>
             </v-expansion-panel-title>

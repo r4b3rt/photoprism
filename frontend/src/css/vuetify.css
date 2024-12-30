@@ -116,7 +116,7 @@ body.dark-theme {
 .v-expansion-panels .v-expansion-panel .v-card>.v-card-text.grid,
 .v-expansion-panels .v-expansion-panel .v-card>.v-card-text.dense {
     margin: 0;
-    padding: 12px;
+    padding: 8px;
 }
 
 .v-expansion-panels .v-expansion-panel .v-card>.v-card-actions {
