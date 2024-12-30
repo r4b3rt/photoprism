@@ -216,7 +216,7 @@
 
             <v-list-item v-if="isRestricted" v-show="$config.feature('places')" to="/states" variant="text" class="nav-states" :ripple="false" @click.stop="">
               <v-list-item-title class="nav-menu-item" @click.stop="">
-                <v-icon>mdi-near_me</v-icon>
+                <v-icon>mdi-near-me</v-icon>
                 <translate key="States">States</translate>
               </v-list-item-title>
               <span v-show="config.count.states > 0" class="nav-count-item">{{ config.count.states }}</span>
