@@ -1,6 +1,7 @@
 import { config } from "app/session";
 import { T } from "common/gettext";
 
+// Returns the id and messages of the current locale.
 export const Locale = () => {
   const locale = config.getLanguageLocale();
   const isRTL = config.isRtl();
@@ -13,6 +14,7 @@ export const Locale = () => {
   };
 };
 
+// Returns the Vuetify UI messages translated with Gettext.
 export const Messages = ($gettext) => {
   return {
     badge: $gettext("Badge"),
