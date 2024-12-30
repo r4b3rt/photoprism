@@ -143,7 +143,7 @@ export default {
   },
   methods: {
     hideExpansionPanel() {
-      return this.$refs?.toolbar.hideExpansionPanel();
+      return this.$refs?.toolbar?.hideExpansionPanel();
     },
     getViewType() {
       let queryParam = this.$route.query["view"] ? this.$route.query["view"] : "";

@@ -206,7 +206,7 @@ export default {
   },
   methods: {
     hideExpansionPanel() {
-      return this.$refs?.toolbar.hideExpansionPanel();
+      return this.$refs?.toolbar?.hideExpansionPanel();
     },
     searchCount() {
       const offset = parseInt(window.localStorage.getItem("photos_offset"));
