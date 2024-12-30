@@ -467,13 +467,15 @@ body.chrome .search-results .result {
     letter-spacing: normal;
 }
 
+.cards-view .result .meta .meta-caption,
 .cards-view .result .meta .meta-description {
     display: -webkit-box;
-    -webkit-line-clamp: 4; /* number of lines to show */
-    line-clamp: 4;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: pre-wrap;
 }
 
 .cards-view .result .meta .meta-details button {
