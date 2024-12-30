@@ -301,7 +301,7 @@
 </template>
 
 <script>
-import PAccountPasswordDialog from "dialog/account/password.vue";
+import PAccountPasswordDialog from "component/account/password.vue";
 import countries from "options/countries.json";
 import Notify from "common/notify";
 import User from "model/user";

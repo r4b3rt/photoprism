@@ -30,9 +30,7 @@ import Api from "common/api";
 import Notify from "common/notify";
 import Scrollbar from "common/scrollbar";
 import { PhotoClipboard } from "common/clipboard";
-import { installComponents } from "component/components";
-import { installDialogs } from "dialog/dialogs";
-import customIcons from "component/icons";
+import * as components from "components";
 import Event from "pubsub-js";
 import Log from "common/log";
 import PhotoPrism from "app.vue";
@@ -110,125 +108,13 @@ config.update().finally(() => {
 
   // Create Vuetify 3 instance.
   const vuetify = createVuetify({
-    defaults: {
-      VBtn: {
-        flat: true,
-        variant: "flat",
-        ripple: true,
-      },
-      VSwitch: {
-        flat: true,
-        density: "compact",
-        baseColor: "surface",
-        hideDetails: true,
-        ripple: false,
-      },
-      VRating: {
-        density: "compact",
-        color: "on-surface",
-        activeColor: "surface-variant",
-        ripple: false,
-      },
-      VCheckbox: {
-        density: "compact",
-        color: "surface-variant",
-        hideDetails: "auto",
-        ripple: false,
-      },
-      VTextField: {
-        flat: true,
-        variant: "solo-filled",
-        color: "surface-variant",
-        hideDetails: "auto",
-      },
-      VTextarea: {
-        flat: true,
-        variant: "solo-filled",
-        color: "surface-variant",
-        hideDetails: "auto",
-      },
-      VOtpInput: {
-        variant: "outlined",
-        baseColor: "on-surface-variant",
-        autofocus: true,
-      },
-      VAutocomplete: {
-        flat: true,
-        variant: "solo-filled",
-        color: "surface-variant",
-        itemTitle: "text",
-        itemValue: "value",
-        hideDetails: "auto",
-        hideNoData: true,
-      },
-      VCombobox: {
-        flat: true,
-        variant: "solo-filled",
-        color: "surface-variant",
-        itemTitle: "text",
-        itemValue: "value",
-        hideDetails: "auto",
-      },
-      VSelect: {
-        flat: true,
-        variant: "solo-filled",
-        color: "surface-variant",
-        itemTitle: "text",
-        itemValue: "value",
-        hideDetails: "auto",
-      },
-      VCard: {
-        density: "compact",
-        color: "background",
-        flat: true,
-        ripple: false,
-      },
-      VTab: {
-        color: "on-surface",
-        baseColor: "on-surface-variant",
-        ripple: false,
-      },
-      VTabs: {
-        grow: true,
-        elevation: 0,
-        color: "on-surface",
-        bgColor: "secondary",
-        baseColor: "secondary",
-        sliderColor: "surface-variant",
-      },
-      VTable: {
-        density: "comfortable",
-      },
-      VListItem: {
-        ripple: false,
-      },
-      VDataTable: {
-        color: "background",
-      },
-      VExpansionPanel: {
-        tile: true,
-        ripple: false,
-      },
-      VExpansionPanels: {
-        flat: true,
-        tile: true,
-        static: true,
-        variant: "accordion",
-        bgColor: "secondary-light",
-        ripple: false,
-      },
-      VProgressLinear: {
-        height: 10,
-        rounded: true,
-        color: "surface-variant",
-      },
-    },
+    defaults: components.defaults,
     icons: {
       defaultSet: "mdi",
       aliases,
       sets: {
         mdi,
-        ...customIcons,
+        ...components.icons,
       },
     },
     theme: {
@@ -239,7 +125,7 @@ config.update().finally(() => {
     locale: Locale(),
   });
 
-  // Use Vuetify.
+  // Use Vuetify 3.
   app.use(vuetify);
 
   // Use Vue 3 Gettext.
@@ -253,16 +139,9 @@ config.update().finally(() => {
   // debugger;
   // app.use(VueLuxon);
   app.config.globalProperties.$luxon = VueLuxon;
-  // app.config.globalProperties.$fullscreen = InfiniteLoading;
-  // app.use(VueFullscreen);
-  // app.use(VueFilters);
-  // app.use(Components);
-  installComponents(app);
-  // app.use(Dialogs);
-  installDialogs(app);
+  components.install(app);
 
-  // make scroll-pos-restore compatible with bfcache
-  // this is required to make scroll-pos-restore work on iOS in PWA-mode
+  // Make scroll-pos-restore compatible with bfcache (required to work in PWA mode on iOS).
   window.addEventListener("pagehide", (event) => {
     if (event.persisted) {
       localStorage.setItem("lastScrollPosBeforePageHide", JSON.stringify({ x: window.scrollX, y: window.scrollY }));
@@ -273,15 +152,15 @@ config.update().finally(() => {
       const lastSavedScrollPos = localStorage.getItem("lastScrollPosBeforePageHide");
       if (lastSavedScrollPos !== undefined && lastSavedScrollPos !== null && lastSavedScrollPos !== "") {
         window.positionToRestore = JSON.parse(localStorage.getItem("lastScrollPosBeforePageHide"));
-        // wait for other things that set the scroll-pos anywhere in the app to fire
+        // Wait for other things that set the scroll-pos anywhere in the app to fire.
         setTimeout(() => {
           if (window.positionToRestore !== undefined) {
             window.scrollTo(window.positionToRestore.x, window.positionToRestore.y);
           }
         }, 50);
 
-        // let's give the scrollBehaviour-function some time to use the restored
-        // position instead of resetting the scroll-pos to 0,0
+        // Let's give the scrollBehaviour-function some time to use the
+        // restored position instead of resetting the scroll-pos to 0,0.
         setTimeout(() => {
           window.positionToRestore = undefined;
         }, 250);

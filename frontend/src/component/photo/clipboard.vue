@@ -34,7 +34,7 @@
     <p-photo-archive-dialog :show="dialog.archive" @cancel="dialog.archive = false" @confirm="batchArchive"></p-photo-archive-dialog>
     <p-photo-delete-dialog :show="dialog.delete" @cancel="dialog.delete = false" @confirm="batchDelete"></p-photo-delete-dialog>
     <p-photo-album-dialog :show="dialog.album" @cancel="dialog.album = false" @confirm="addToAlbum"></p-photo-album-dialog>
-    <p-share-upload-dialog :show="dialog.share" :items="{ photos: selection }" :model="album" @cancel="dialog.share = false" @confirm="onShared"></p-share-upload-dialog>
+    <p-service-upload-dialog :show="dialog.share" :items="{ photos: selection }" :model="album" @cancel="dialog.share = false" @confirm="onShared"></p-service-upload-dialog>
   </div>
 </template>
 <script>

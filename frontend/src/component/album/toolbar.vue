@@ -50,7 +50,7 @@
     </div>
 
     <p-share-dialog :show="dialog.share" :model="album" @upload="webdavUpload" @close="dialog.share = false"></p-share-dialog>
-    <p-share-upload-dialog :show="dialog.upload" :items="{ albums: album.getId() }" :model="album" @cancel="dialog.upload = false" @confirm="dialog.upload = false"></p-share-upload-dialog>
+    <p-service-upload-dialog :show="dialog.upload" :items="{ albums: album.getId() }" :model="album" @cancel="dialog.upload = false" @confirm="dialog.upload = false"></p-service-upload-dialog>
     <p-album-edit-dialog :show="dialog.edit" :album="album" @close="dialog.edit = false"></p-album-edit-dialog>
   </v-form>
 </template>

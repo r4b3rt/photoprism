@@ -1,11 +1,11 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="400" class="p-share-upload-dialog" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="400" class="p-service-upload-dialog" @keydown.esc="cancel">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
-            <h6 class="text-h6"><translate>WebDAV Upload</translate></h6>
-            <v-btn icon variant="text" color="primary" @click.stop="setup">
-              <v-icon>mdi-cloud</v-icon>
-            </v-btn>
+        <h6 class="text-h6"><translate>WebDAV Upload</translate></h6>
+        <v-btn icon variant="text" color="primary" @click.stop="setup">
+          <v-icon>mdi-cloud</v-icon>
+        </v-btn>
       </v-card-title>
       <v-card-text class="dense">
         <v-row dense>
@@ -50,7 +50,7 @@ import Service from "model/service";
 import Selection from "common/selection";
 
 export default {
-  name: "PShareUploadDialog",
+  name: "PServiceUploadDialog",
   props: {
     show: Boolean,
     items: {

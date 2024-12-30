@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     getMessage() {
-      const message = this.$gettext("A new version is available for %{s}:", { s: `<b>${this.$config.getAbout()}</b>` }, true);
+      const message = this.$gettext("A new version of %{s} is available:", { s: `<b>${this.$config.getAbout()}</b>` }, true);
       return this.$sanitize(message);
     },
     getVersion() {
