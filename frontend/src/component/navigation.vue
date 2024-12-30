@@ -14,9 +14,6 @@
       </template>
       <template v-else-if="!auth">
         <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" color="navigation" class="nav-small">
-          <v-avatar class="bg-transparent nav-logo" tile :size="28">
-            <img :src="appIcon" :alt="appName" />
-          </v-avatar>
           <v-btn icon variant="text" class="bg-transparent nav-logo">
             <img :src="appIcon" :alt="appName" />
           </v-btn>
@@ -32,17 +29,19 @@
             <v-list class="navigation-home elevation-0" bg-color="navigation-home" width="100%" density="compact">
               <v-list-item class="px-3" :elevation="0" :ripple="false" @click.stop.prevent="goHome">
                 <template #prepend>
-                  <div class="v-avatar bg-transparent nav-logo clickable" @click.stop.prevent="goHome">
-                    <img :src="appIcon" :alt="appName" :class="{ 'animate-hue': indexing }" />
+                  <div class="v-avatar bg-transparent nav-logo">
+                    <a :href="siteUrl" @click.stop.prevent="goHome">
+                      <img :src="appIcon" :alt="appName" :class="{ 'animate-hue': indexing }" />
+                    </a>
                   </div>
                 </template>
                 <template #append>
-                  <v-btn icon variant="text" :elevation="0" class="nav-minimize hidden-sm-and-down" :ripple="false" :title="$gettext('Minimize')" @click.stop="toggleIsMini()">
+                  <v-btn icon variant="text" :elevation="0" class="nav-minimize hidden-sm-and-down" :ripple="false" :title="$gettext('Minimize')" @click.stop.prevent="toggleIsMini()">
                     <v-icon :icon="rtl ? 'mdi-chevron-right' : 'mdi-chevron-left'"></v-icon>
                   </v-btn>
                 </template>
                 <v-list-item-title class="nav-toolbar-title">
-                  {{ appName }}
+                  <a :href="siteUrl">{{ appName }}</a>
                 </v-list-item-title>
               </v-list-item>
             </v-list>
@@ -558,6 +557,7 @@
 <script>
 import Event from "pubsub-js";
 import Album from "model/album";
+import {config} from "../app/session";
 
 export default {
   name: "PNavigation",
@@ -589,6 +589,7 @@ export default {
       appName: this.$config.getName(),
       appAbout: this.$config.getAbout(),
       appIcon: this.$config.getIcon(),
+      siteUrl: this.$config.values.siteUrl,
       disconnected: this.$config.disconnected,
       indexing: false,
       drawer: null,
