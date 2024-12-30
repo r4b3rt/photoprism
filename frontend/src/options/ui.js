@@ -37,7 +37,7 @@ export const colorsDark = {
 };
 
 export const variablesDark = {
-  "btn-height": "32px",
+  "btn-height": "33px",
   "table-row-height": "44px",
   "table-header-height": "44px",
   "border-color": "#FFFFFF",
