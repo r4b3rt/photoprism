@@ -2,12 +2,11 @@
   <div class="p-page p-page-album-photos">
     <p-album-toolbar ref="toolbar" :filter="filter" :album="model" :settings="settings" :refresh="refresh" :update-filter="updateFilter" :update-query="updateQuery"></p-album-toolbar>
 
-    <v-container v-if="loading" fluid class="pa-6">
+    <div v-if="loading" class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
-    </v-container>
-    <v-container v-else fluid class="pa-0">
+    </div>
+    <div v-else>
       <p-scroll
-        :hide-panel="hideExpansionPanel"
         :load-more="loadMore"
         :load-disabled="scrollDisabled"
         :load-distance="scrollDistance"
@@ -19,7 +18,7 @@
       <p-photo-mosaic v-if="settings.view === 'mosaic'" context="album" :photos="results" :select-mode="selectMode" :filter="filter" :album="model" :edit-photo="editPhoto" :open-photo="openPhoto" :is-shared-view="isShared"></p-photo-mosaic>
       <p-photo-list v-else-if="settings.view === 'list'" context="album" :photos="results" :select-mode="selectMode" :filter="filter" :album="model" :open-photo="openPhoto" :edit-photo="editPhoto" :open-date="openDate" :open-location="openLocation" :is-shared-view="isShared"></p-photo-list>
       <p-photo-cards v-else context="album" :photos="results" :select-mode="selectMode" :filter="filter" :album="model" :open-photo="openPhoto" :edit-photo="editPhoto" :open-date="openDate" :open-location="openLocation" :is-shared-view="isShared"></p-photo-cards>
-    </v-container>
+    </div>
   </div>
 </template>
 

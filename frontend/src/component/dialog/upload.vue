@@ -6,7 +6,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-toolbar-title>
-          <translate key="Upload">Upload</translate>
+          <translate>Upload</translate>
         </v-toolbar-title>
       </v-toolbar>
       <v-container grid-list-xs ext-xs-left fluid>
@@ -51,11 +51,11 @@
                   </v-chip>
                 </template>
               </v-combobox>
-              <span v-else-if="failed"><translate key="Upload failed">Upload failed</translate></span>
+              <span v-else-if="failed"><translate>Upload failed</translate></span>
               <span v-else-if="total > 0 && completedTotal < 100">
                 <translate :translate-params="{ n: current, t: total }">Uploading %{n} of %{t}…</translate>
               </span>
-              <span v-else-if="indexing"><translate key="Upload complete">Upload complete. Indexing…</translate></span>
+              <span v-else-if="indexing"><translate>Upload complete. Indexing…</translate></span>
               <span v-else-if="completedTotal === 100"><translate key="Done">Done.</translate></span>
             </p>
 
@@ -79,7 +79,7 @@
             </p>
 
             <v-btn :disabled="busy" color="highlight" class="text-white ml-0 mt-2 action-upload" variant="flat" @click.stop="onUploadDialog()">
-              <translate key="Upload">Upload</translate>
+              <translate>Upload</translate>
               <v-icon icon="mdi-download" end></v-icon>
             </v-btn>
           </v-container>

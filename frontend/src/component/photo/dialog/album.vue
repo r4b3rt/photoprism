@@ -4,7 +4,7 @@
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon icon="mdi-image-album" size="28" color="primary"></v-icon>
-          <h6 class="text-h6"><translate key="Add to album">Add to album</translate></h6>
+          <h6 class="text-h6"><translate>Add to album</translate></h6>
         </v-card-title>
         <v-card-text>
           <v-combobox

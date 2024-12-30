@@ -59,7 +59,7 @@
               <v-list-item to="/browse" variant="text" class="nav-browse activator" :ripple="false" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
-                    <translate key="Search">Search</translate>
+                    <translate>Search</translate>
                   </p>
                   <span v-if="config.count.all > 0" :class="`nav-count-group ${rtl ? '--rtl' : ''}`">{{ config.count.all }}</span>
                 </v-list-item-title>
@@ -117,7 +117,7 @@
 
                 <v-list-item v-if="canAccessPrivate" v-show="$config.feature('private')" to="/private" variant="text" class="nav-private" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate key="Private">Private</translate>
+                    <translate>Private</translate>
                   </v-list-item-title>
                   <span v-show="config.count.private > 0" class="nav-count-item">{{ config.count.private }}</span>
                 </v-list-item>
@@ -138,7 +138,7 @@
               <v-list-item to="/albums" variant="text" class="nav-albums activator" :ripple="false" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
-                    <translate key="Albums">Albums</translate>
+                    <translate>Albums</translate>
                   </p>
                   <span v-if="config.count.albums > 0" :class="`nav-count-group ${rtl ? '--rtl' : ''}`">{{ config.count.albums }}</span>
                 </v-list-item-title>
@@ -153,7 +153,7 @@
 
                 <v-list-item to="/unsorted" variant="text" class="nav-unsorted" :ripple="false">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate key="Unsorted">Unsorted</translate>
+                    <translate>Unsorted</translate>
                   </v-list-item-title>
                 </v-list-item>
               </v-list-group>
@@ -166,7 +166,7 @@
               <v-list-item to="/videos" variant="text" class="nav-video activator" :ripple="false" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
-                    <translate key="Videos">Videos</translate>
+                    <translate>Videos</translate>
                   </p>
                   <span v-show="config.count.videos > 0" :class="`nav-count-group ${rtl ? '--rtl' : ''}`">{{ config.count.videos }}</span>
                 </v-list-item-title>
@@ -195,7 +195,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-account</v-icon>
                 <p class="nav-item-title">
-                  <translate key="People">People</translate>
+                  <translate>People</translate>
                 </p>
               </v-list-item-title>
               <span v-show="config.count.people > 0" class="nav-count-item">{{ config.count.people }}</span>
@@ -208,7 +208,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-star</v-icon>
                 <p class="nav-item-title">
-                  <translate key="Favorites">Favorites</translate>
+                  <translate>Favorites</translate>
                 </p>
               </v-list-item-title>
               <span v-show="config.count.favorites > 0" class="nav-count-item">{{ config.count.favorites }}</span>
@@ -217,7 +217,7 @@
             <v-list-item v-if="isRestricted" v-show="$config.feature('places')" to="/states" variant="text" class="nav-states" :ripple="false" @click.stop="">
               <v-list-item-title class="nav-menu-item" @click.stop="">
                 <v-icon>mdi-near-me</v-icon>
-                <translate key="States">States</translate>
+                <translate>States</translate>
               </v-list-item-title>
               <span v-show="config.count.states > 0" class="nav-count-item">{{ config.count.states }}</span>
             </v-list-item>
@@ -230,7 +230,7 @@
                 <v-list-item to="/places" variant="text" class="nav-places activator" :ripple="false" @click.stop="">
                   <v-list-item-title class="nav-menu-item">
                     <p class="nav-item-title">
-                      <translate key="Places">Places</translate>
+                      <translate>Places</translate>
                     </p>
                     <span v-show="config.count.places > 0" :class="`nav-count-group ${rtl ? '--rtl' : ''}`">{{ config.count.places }}</span>
                   </v-list-item-title>
@@ -245,7 +245,7 @@
 
                   <v-list-item to="/states" variant="text" class="nav-states" @click.stop="">
                     <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                      <translate key="States">States</translate>
+                      <translate>States</translate>
                     </v-list-item-title>
                     <span v-show="config.count.states > 0" class="nav-count-item">{{ config.count.states }}</span>
                   </v-list-item>
@@ -260,7 +260,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-calendar</v-icon>
                 <p class="nav-item-title">
-                  <translate key="Calendar">Calendar</translate>
+                  <translate>Calendar</translate>
                 </p>
               </v-list-item-title>
               <span v-show="config.count.months > 0" class="nav-count-item">{{ config.count.months }}</span>
@@ -273,7 +273,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-filmstrip-box</v-icon>
                 <p class="nav-item-title">
-                  <translate key="Moments">Moments</translate>
+                  <translate>Moments</translate>
                 </p>
               </v-list-item-title>
               <span v-show="config.count.moments > 0" class="nav-count-item">{{ config.count.moments }}</span>
@@ -286,7 +286,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-label</v-icon>
                 <p class="nav-item-title">
-                  <translate key="Labels">Labels</translate>
+                  <translate>Labels</translate>
                 </p>
               </v-list-item-title>
               <span v-show="config.count.labels > 0" class="nav-count-item">{{ config.count.labels }}</span>
@@ -299,7 +299,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-folder</v-icon>
                 <p class="nav-item-title">
-                  <translate key="Folders">Folders</translate>
+                  <translate>Folders</translate>
                 </p>
               </v-list-item-title>
               <span v-show="config.count.folders > 0" class="nav-count-item">{{ config.count.folders }}</span>
@@ -312,7 +312,7 @@
               <v-list-item :to="{ name: 'library_index' }" variant="text" class="nav-library activator" :ripple="false" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
-                    <translate key="Library">Library</translate>
+                    <translate>Library</translate>
                   </p>
                 </v-list-item-title>
               </v-list-item>
@@ -326,21 +326,21 @@
 
                 <v-list-item v-show="$config.feature('files')" to="/index/files" variant="text" class="nav-originals" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate key="Originals">Originals</translate>
+                    <translate>Originals</translate>
                   </v-list-item-title>
                   <span v-show="config.count.files > 0 && canAccessPrivate" class="nav-count-item">{{ config.count.files }}</span>
                 </v-list-item>
 
                 <v-list-item :to="{ name: 'hidden' }" variant="text" class="nav-hidden" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate key="Hidden">Hidden</translate>
+                    <translate>Hidden</translate>
                   </v-list-item-title>
                   <span v-show="config.count.hidden > 0" class="nav-count-item">{{ config.count.hidden }}</span>
                 </v-list-item>
 
                 <v-list-item :to="{ name: 'errors' }" variant="text" class="nav-errors" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate key="Errors">Errors</translate>
+                    <translate>Errors</translate>
                   </v-list-item-title>
                 </v-list-item>
               </v-list-group>
@@ -354,7 +354,7 @@
                 <v-list-item :to="{ name: 'settings' }" variant="text" class="nav-settings activator" :ripple="false" @click.stop="">
                   <v-list-item-title class="nav-menu-item">
                     <p class="nav-item-title">
-                      <translate key="Settings">Settings</translate>
+                      <translate>Settings</translate>
                     </p>
                   </v-list-item-title>
                 </v-list-item>
@@ -380,13 +380,13 @@
 
                   <v-list-item :to="{ name: 'license' }" :exact="true" variant="text" class="nav-license" :ripple="false" @click.stop="">
                     <v-list-item-title :class="`menu-item ${rtl ? '--rtl' : ''}`">
-                      <translate key="License">License</translate>
+                      <translate>License</translate>
                     </v-list-item-title>
                   </v-list-item>
 
-                  <v-list-item v-show="featUpgrade" :to="{ name: 'upgrade' }" variant="text" class="nav-upgrade" :exact="true" :ripple="false" @click.stop="">
+                  <v-list-item v-if="featUpgrade && !featMembership" :to="{ name: 'upgrade' }" variant="text" class="nav-upgrade" :exact="true" :ripple="false" @click.stop="">
                     <v-list-item-title :class="`menu-item ${rtl ? '--rtl' : ''}`">
-                      <translate key="Upgrade">Upgrade</translate>
+                      <translate>Upgrade</translate>
                     </v-list-item-title>
                   </v-list-item>
 
@@ -402,7 +402,7 @@
             <v-list-item v-show="!auth" :to="{ name: 'login' }" variant="text" class="nav-login" @click.stop="">
               <v-list-item-title>
                 <v-icon>mdi-lock</v-icon>
-                <translate key="Login">Login</translate>
+                <translate>Login</translate>
               </v-list-item-title>
             </v-list-item>
 
@@ -414,13 +414,13 @@
               <v-list-item-title v-if="isPro" class="nav-menu-item">
                 <v-icon>mdi-check-circle</v-icon>
                 <p class="nav-item-title">
-                  <translate key="Upgrade">Upgrade</translate>
+                  <translate>Upgrade</translate>
                 </p>
               </v-list-item-title>
               <v-list-item-title v-else class="nav-menu-item">
                 <v-icon>mdi-diamond</v-icon>
                 <p class="nav-item-title">
-                  <translate key="Support Our Mission">Support Our Mission</translate>
+                  <translate>Support Our Mission</translate>
                 </p>
               </v-list-item-title>
             </v-list-item>
@@ -432,7 +432,7 @@
               <v-icon color="warning" size="25">mdi-wifi-off</v-icon>
             </div>
             <div v-if="!isMini" class="text-start mt-1 text-body-2">
-              <translate key="No server connection">No server connection</translate>
+              <translate>No server connection</translate>
             </div>
           </div>
           <div v-show="auth && !isPublic && !disconnected" class="nav-info user-info">

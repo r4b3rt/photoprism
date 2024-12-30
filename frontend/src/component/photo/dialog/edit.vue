@@ -28,7 +28,7 @@
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Details')">mdi-pencil</v-icon>
           <template v-else>
             <v-icon :size="18" start>mdi-pencil</v-icon>
-            <translate key="Details">Details</translate>
+            <translate>Details</translate>
           </template>
         </v-tab>
 
@@ -36,7 +36,7 @@
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Labels')">mdi-label</v-icon>
           <template v-else>
             <v-icon :size="18" start>mdi-label</v-icon>
-            <translate key="Labels">Labels</translate>
+            <translate>Labels</translate>
             <v-badge v-if="model.Labels.length" color="surface-variant" inline :content="model.Labels.length"></v-badge>
           </template>
         </v-tab>
@@ -45,7 +45,7 @@
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('People')">mdi-account-multiple</v-icon>
           <template v-else>
             <v-icon :size="18" start>mdi-account-multiple</v-icon>
-            <translate key="People">People</translate>
+            <translate>People</translate>
             <v-badge v-if="model.Faces" color="surface-variant" inline :content="model.Faces"></v-badge>
           </template>
         </v-tab>
@@ -54,7 +54,7 @@
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Files')">mdi-film</v-icon>
           <template v-else>
             <v-icon :size="18" start>mdi-film</v-icon>
-            <translate key="Files">Files</translate>
+            <translate>Files</translate>
             <v-badge v-if="model.Files.length" color="surface-variant" inline :content="model.Files.length"></v-badge>
           </template>
         </v-tab>

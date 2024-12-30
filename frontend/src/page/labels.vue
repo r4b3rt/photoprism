@@ -68,7 +68,6 @@
         <div v-for="(label, index) in results" :key="label.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
           <div :data-uid="label.UID" style="user-select: none" class="result" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
             <div
-              :key="label.UID"
               :title="label.Name"
               :style="`background-image: url(${label.thumbnailUrl('tile_500')})`"
               class="preview"

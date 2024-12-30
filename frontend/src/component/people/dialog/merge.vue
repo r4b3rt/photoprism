@@ -7,10 +7,10 @@
       </v-card-title>
       <v-card-actions class="dialog-merge">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-          <translate key="No">No</translate>
+          <translate>No</translate>
         </v-btn>
         <v-btn color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
-          <translate key="Yes">Yes</translate>
+          <translate>Yes</translate>
         </v-btn>
       </v-card-actions>
     </v-card>

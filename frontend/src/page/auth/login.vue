@@ -17,7 +17,6 @@
                       <v-text-field
                         v-if="useRecoveryCode"
                         id="one-time-code"
-                        key="auth-input-code"
                         ref="code"
                         v-model="code"
                         :disabled="loading"
@@ -58,7 +57,6 @@
                     <v-col cols="12" class="pb-1">
                       <v-text-field
                         id="auth-username"
-                        key="auth-input-username"
                         v-model="username"
                         :disabled="loading || enterCode"
                         name="username"
@@ -79,7 +77,6 @@
                     <v-col cols="12" class="pb-1">
                       <v-text-field
                         id="auth-password"
-                        key="auth-input-password"
                         v-model="password"
                         :disabled="loading"
                         name="password"

@@ -8,10 +8,10 @@
       </v-card-title>
       <v-card-actions>
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-          <translate key="Cancel">Cancel</translate>
+          <translate>Cancel</translate>
         </v-btn>
         <v-btn v-if="action === ''" color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
-          <translate key="Delete">Delete</translate>
+          <translate>Delete</translate>
         </v-btn>
         <v-btn v-else color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
           {{ action }}
