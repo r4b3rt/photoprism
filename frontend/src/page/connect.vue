@@ -22,87 +22,86 @@
         <v-icon size="26" color="surface-variant">mdi-diamond-stone</v-icon>
       </v-btn>
     </v-toolbar>
-    <v-form ref="form" v-model="valid" autocomplete="off" class="px-6 pt-6 pb-0" validate-on="blur" @submit.prevent>
-      <v-row v-if="busy">
-        <v-col cols="12" class="d-flex text-sm-center pa-2">
+    <div class="pa-6">
+      <v-form ref="form" v-model="valid" autocomplete="off" validate-on="blur" @submit.prevent>
+        <div v-if="busy">
           <v-progress-linear :indeterminate="true"></v-progress-linear>
-        </v-col>
-      </v-row>
-      <v-row v-else-if="error">
-        <v-col cols="12" class="text-sm-left pa-2">
-          <v-alert color="error" icon="mdi-shield-alert" class="mt-6" variant="outlined">
-            {{ error }}
+        </div>
+        <div v-else-if="error">
+          <v-alert color="primary" icon="mdi-connection" variant="outlined">
+            {{ error ? error + "." : $gettext("Failed to connect account.") }}
           </v-alert>
-        </v-col>
-        <v-col cols="12" class="pa-2">
-          <v-btn color="highlight lighten-2" :block="$vuetify.display.xs" class="ml-0" variant="outlined" :disabled="busy" @click.stop="reset">
-            <translate>Cancel</translate>
-          </v-btn>
-          <v-btn color="highlight" :block="$vuetify.display.xs" class="text-white ml-0" href="https://www.photoprism.app/contact" target="_blank" variant="flat">
-            <translate>Contact Us</translate>
-          </v-btn>
-        </v-col>
-      </v-row>
-      <v-row v-else-if="success">
-        <v-col cols="12" class="pa-2 d-flex">
-          <p class="text-body-1 text-start flex-grow-1">
+          <div class="action-buttons">
+            <v-btn color="primary" :block="$vuetify.display.xs" variant="outlined" :disabled="busy" @click.stop="reset">
+              <translate>Cancel</translate>
+            </v-btn>
+            <v-btn color="highlight" :block="$vuetify.display.xs" href="https://www.photoprism.app/contact" target="_blank" variant="flat" class="action-contact">
+              <translate>Contact Us</translate>
+            </v-btn>
+          </div>
+        </div>
+        <div v-else-if="success">
+          <v-alert color="primary" icon="mdi-check-decagram" variant="outlined">
             <translate>Your account has been successfully connected.</translate>
             <span v-if="$config.values.restart">
               <translate>Please restart your instance for the changes to take effect.</translate>
             </span>
-          </p>
-        </v-col>
-        <v-col cols="12" class="d-flex grow pa-2">
-          <v-btn href="https://my.photoprism.app/dashboard" target="_blank" color="highlight lighten-2 flex-grow-1" :block="$vuetify.display.xs" class="ml-0" variant="outlined" :disabled="busy">
-            <translate>Manage Account</translate>
-          </v-btn>
-          <v-btn v-if="$config.values.restart && !$config.values.disable.restart" color="highlight" :block="$vuetify.display.xs" class="text-white ml-0" variant="flat" :disabled="busy" @click.stop.p.prevent="onRestart">
-            <translate>Restart</translate>
-            <v-icon end>mdi-restart</v-icon>
-          </v-btn>
-          <v-btn v-if="$config.getTier() < 4" href="https://my.photoprism.app/dashboard/membership" target="_blank" color="highlight" :block="$vuetify.display.xs" class="text-white ml-0" variant="flat" :disabled="busy">
-            <translate>Upgrade Now</translate>
-            <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'" start></v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-      <v-row v-else>
-        <v-col v-if="$config.getTier() < 4" cols="12" class="d-flex align-center justify-center px-2 pt-1 pb-6 text-body-1 text-selectable">
-          <translate>Become a member today, support our mission and enjoy our member benefits!</translate>
-          <translate>Your continued support helps us provide regular updates and remain independent, so we can fulfill our mission and protect your privacy.</translate>
-        </v-col>
-        <v-col cols="12" class="grow align-center justify-center px-2 py-1">
-          <v-alert color="surface-variant" variant="outlined">
-            <p class="text-body-1 text-selectable">
+          </v-alert>
+
+          <div class="action-buttons">
+            <v-btn href="https://my.photoprism.app/dashboard" target="_blank" color="primary" :block="$vuetify.display.xs" variant="outlined" class="action-manage" :disabled="busy">
+              <translate>Manage Account</translate>
+            </v-btn>
+            <v-btn v-if="$config.values.restart && !$config.values.disable.restart" color="highlight" :block="$vuetify.display.xs" variant="flat" :disabled="busy" class="px-5 action-restart" @click.stop.p.prevent="onRestart">
+              <translate>Restart</translate>
+              <v-icon end>mdi-restart</v-icon>
+            </v-btn>
+            <v-btn v-if="$config.getTier() < 4" href="https://my.photoprism.app/dashboard/membership" target="_blank" color="highlight" :block="$vuetify.display.xs" variant="flat" class="px-5 action-upgrade" :disabled="busy">
+              <translate>Upgrade Now</translate>
+              <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'" size="20" end></v-icon>
+            </v-btn>
+          </div>
+        </div>
+        <div v-else>
+          <div v-if="$config.getTier() < 4" class="pb-6 text-subtitle-2 text-break text-selectable">
+            <translate>Become a member today, support our mission and enjoy our member benefits!</translate>
+            <translate>Your continued support helps us provide regular updates and remain independent, so we can fulfill our mission and protect your privacy.</translate>
+          </div>
+
+          <v-alert color="primary" variant="outlined">
+            <p class="text-body-2 text-break text-selectable">
               <strong><translate>To upgrade, you can either enter an activation code or click "Register" to sign up on our website:</translate></strong>
             </p>
+
             <!-- TODO: check property return-masked-value TEST -->
             <v-text-field v-model="form.token" single-line hide-details return-masked-value :mask="tokenMask" autocomplete="off" :placeholder="$gettext('Activation Code')"></v-text-field>
-            <div class="action-buttons text-start mt-6">
-              <v-btn v-if="$config.getTier() >= 4" href="https://my.photoprism.app/dashboard" target="_blank" color="surface-variant" :block="$vuetify.display.xs" class="ml-0" variant="outlined" :disabled="busy">
+
+            <div class="action-buttons">
+              <v-btn v-if="$config.getTier() >= 4" href="https://my.photoprism.app/dashboard" target="_blank" color="primary" :block="$vuetify.display.xs" variant="outlined" class="action-manage" :disabled="busy">
                 <translate>Manage Account</translate>
               </v-btn>
-              <v-btn v-else color="surface-variant" :block="$vuetify.display.xs" class="ml-0" variant="outlined" :disabled="busy" @click.stop="compare">
+              <v-btn v-else color="primary" :block="$vuetify.display.xs" variant="outlined" :disabled="busy" class="action-compare" @click.stop="compare">
                 <translate>Compare Editions</translate>
               </v-btn>
 
-              <v-btn v-if="!form.token.length" color="highlight" class="text-white ml-0 action-proceed" :block="$vuetify.display.xs" variant="flat" :disabled="busy" @click.stop="connect">
+              <v-btn v-if="!form.token.length" color="highlight" :block="$vuetify.display.xs" variant="flat" :disabled="busy" class="px-5 action-proceed" @click.stop="connect">
                 <translate>Register</translate>
-                <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'" start></v-icon>
+                <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'" size="20" end></v-icon>
               </v-btn>
-              <v-btn v-else color="highlight" :block="$vuetify.display.xs" class="text-white ml-0 action-activate" variant="flat" :disabled="busy || form.token.length !== tokenMask.length" @click.stop="activate">
+              <v-btn v-else color="highlight" :block="$vuetify.display.xs" variant="flat" :disabled="busy || form.token.length !== tokenMask.length" class="px-5 action-activate" @click.stop="activate">
                 <translate>Activate</translate>
-                <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'" start></v-icon>
+                <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'" end></v-icon>
               </v-btn>
             </div>
           </v-alert>
-        </v-col>
-        <v-col cols="12" class="px-2 pt-6 pb-0 text-body-2 text-selectable">
-          <translate>You are welcome to contact us at membership@photoprism.app for questions regarding your membership.</translate>
-          <translate>By using the software and services we provide, you agree to our terms of service, privacy policy, and code of conduct.</translate>
-        </v-col>
-      </v-row>
-    </v-form>
+
+          <div class="pt-6 text-caption text-break text-selectable">
+            <translate>You are welcome to contact us at membership@photoprism.app for questions regarding your membership.</translate>
+            <translate>By using the software and services we provide, you agree to our terms of service, privacy policy, and code of conduct.</translate>
+          </div>
+        </div>
+      </v-form>
+    </div>
     <p-about-footer></p-about-footer>
   </div>
 </template>
