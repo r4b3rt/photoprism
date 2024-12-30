@@ -69,8 +69,13 @@ export default class Util {
     let min = Math.floor(u / Minute) % 60;
     let sec = Math.ceil(u / Second) % 60;
 
-    result.push(h.toString().padStart(2, "0"));
-    result.push(min.toString().padStart(2, "0"));
+    if (h && h > 0) {
+      result.push(h.toString());
+      result.push(min.toString().padStart(2, "0"));
+    } else {
+      result.push(min.toString());
+    }
+
     result.push(sec.toString().padStart(2, "0"));
 
     // return `${h}h${min}m${sec}s`

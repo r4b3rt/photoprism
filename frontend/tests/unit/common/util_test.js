@@ -23,11 +23,11 @@ describe("common/util", () => {
   });
   it("should return duration 6s", () => {
     const duration = Util.duration(6000000000);
-    assert.equal(duration, "00:00:06");
+    assert.equal(duration, "0:06");
   });
   it("should return duration 10min", () => {
     const duration = Util.duration(600000000000);
-    assert.equal(duration, "00:10:00");
+    assert.equal(duration, "10:00");
   });
   it("should convert -1 to roman", () => {
     const roman = Util.arabicToRoman(-1);
