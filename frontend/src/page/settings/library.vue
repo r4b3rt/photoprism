@@ -10,14 +10,14 @@
           <v-row align="start" dense>
             <v-col cols="12" sm="4">
               <v-checkbox
-                v-model="settings.features.estimates"
+                v-model="settings.features.review"
                 :disabled="busy"
-                class="ma-0 pa-0 input-estimates"
+                class="ma-0 pa-0 input-review"
                 density="compact"
                 color="surface-variant"
-                :label="$gettext('Estimates')"
-                :hint="$gettext('Estimate the approximate location of pictures without coordinates.')"
-                prepend-icon="mdi-chart-timeline-variant-shimmer"
+                :label="$gettext('Quality Filter')"
+                :hint="$gettext('Require non-photographic and low-quality images to be reviewed before they appear in search results.')"
+                prepend-icon="mdi-eye"
                 persistent-hint
                 @update:model-value="onChange"
               >
@@ -26,14 +26,14 @@
 
             <v-col cols="12" sm="4">
               <v-checkbox
-                v-model="settings.features.review"
+                v-model="settings.features.estimates"
                 :disabled="busy"
-                class="ma-0 pa-0 input-review"
+                class="ma-0 pa-0 input-estimates"
                 density="compact"
                 color="surface-variant"
-                :label="$gettext('Quality Filter')"
-                :hint="$gettext('Non-photographic and low-quality images require a review before they appear in search results.')"
-                prepend-icon="mdi-eye"
+                :label="$gettext('Estimate Locations')"
+                :hint="$gettext('Estimate the approximate location of pictures without GPS coordinates.')"
+                prepend-icon="mdi-map-clock-outline"
                 persistent-hint
                 @update:model-value="onChange"
               >
@@ -47,9 +47,9 @@
                 class="ma-0 pa-0 input-convert"
                 density="compact"
                 color="surface-variant"
-                :label="$gettext('Preview Images')"
-                :hint="$gettext('Automatically generate thumbnails for files that cannot otherwise be indexed or viewed.')"
-                prepend-icon="mdi-image"
+                :label="$gettext('Generate Previews')"
+                :hint="$gettext('Extract still images and generate thumbnails while indexing.')"
+                prepend-icon="mdi-image-size-select-large"
                 persistent-hint
                 @update:model-value="onChange"
               >
