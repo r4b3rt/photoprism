@@ -20,99 +20,109 @@
       </v-alert>
     </div>
     <div v-else class="v-row search-results photo-results cards-view" :class="{ 'select-results': selectMode }">
-      <div v-for="(photo, index) in photos" :key="photo.ID" ref="items" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
-        <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="media result placeholder">
+      <div v-for="(m, index) in photos" :key="m.ID" ref="items" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
+        <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="m.ID" :data-uid="m.UID" class="media result placeholder">
           <div class="preview" />
-          <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="review" />
+          <div v-if="!isSharedView && m.Quality < 3 && context === 'review'" class="review" />
           <div class="meta">
-            <button v-if="photo.Title" class="action-title-edit meta-title text-truncate" :data-uid="photo.UID">
-              {{ photo.Title }}
+            <button v-if="m.Title" class="action-title-edit meta-title text-truncate" :data-uid="m.UID">
+              {{ m.Title }}
             </button>
-            <button v-if="photo.Description" class="meta-description">
-              {{ photo.Description }}
+            <button v-if="m.Description" class="meta-description">
+              {{ m.Description }}
             </button>
             <div class="meta-details">
-              <button class="action-open-date meta-date" :data-uid="photo.UID">
+              <button class="action-open-date meta-date" :data-uid="m.UID">
                 <i :title="$gettext('Taken')" class="mdi mdi-calendar-range" />
-                {{ photo.getDateString(true) }}
+                {{ m.getDateString(true) }}
               </button>
-              <button v-if="photo.Type === 'video'">
+              <button v-if="m.Type === 'video'">
                 <i class="mdi mdi-movie" />
-                {{ photo.getVideoInfo() }}
+                {{ m.getVideoInfo() }}
               </button>
-              <button v-else-if="photo.Type === 'live'">
+              <button v-else-if="m.Type === 'live'">
                 <i class="mdi mdi-play-circle" />
-                {{ photo.getVideoInfo() }}
+                {{ m.getVideoInfo() }}
               </button>
-              <button v-else-if="photo.Type === 'animated'">
+              <button v-else-if="m.Type === 'animated'">
                 <i class="mdi mdi-file-gif-box" />
-                {{ photo.getVideoInfo() }}
+                {{ m.getVideoInfo() }}
               </button>
-              <button v-else-if="photo.Type === 'vector'">
+              <button v-else-if="m.Type === 'vector'">
                 <i class="mdi mdi-vector-polyline" />
-                {{ photo.getVectorInfo() }}
+                {{ m.getVectorInfo() }}
               </button>
-              <button v-else class="meta-camera action-camera-edit" :data-uid="photo.UID">
+              <button v-else class="meta-camera action-camera-edit" :data-uid="m.UID">
                 <i class="mdi mdi-camera" />
-                {{ photo.getPhotoInfo() }}
+                {{ m.getPhotoInfo() }}
               </button>
-              <button v-if="photo.LensID > 1 || photo.FocalLength" class="meta-lens action-lens-edit" :data-uid="photo.UID">
+              <button v-if="m.LensID > 1 || m.FocalLength" class="meta-lens action-lens-edit" :data-uid="m.UID">
                 <i class="mdi mdi-camera-iris" />
-                {{ photo.getLensInfo() }}
+                {{ m.getLensInfo() }}
               </button>
               <button v-if="featDownload" class="meta-filename text-truncate">
                 <i class="mdi mdi-film" />
-                {{ photo.getOriginalName() }}
+                {{ m.getOriginalName() }}
               </button>
-              <template v-if="featPlaces && photo.Country !== 'zz'">
-                <button class="meta-location action-location" :data-uid="photo.UID">
+              <template v-if="featPlaces && m.Country !== 'zz'">
+                <button class="meta-location action-location" :data-uid="m.UID">
                   <i class="mdi mdi-map-marker" />
-                  {{ photo.locationInfo() }}
+                  {{ m.locationInfo() }}
                 </button>
               </template>
             </div>
           </div>
         </div>
-        <div v-else :data-id="photo.ID" :data-uid="photo.UID" class="media result" :class="photo.classes()" @contextmenu.stop="onContextMenu($event, index)">
+        <div v-else :data-id="m.ID" :data-uid="m.UID" class="media result" :class="m.classes()" @contextmenu.stop="onContextMenu($event, index)">
           <div
-            :title="photo.Title"
-            :style="`background-image: url(${photo.thumbnailUrl('tile_500')})`"
+            :title="m.Title"
+            :style="`background-image: url(${m.thumbnailUrl('tile_500')})`"
             class="preview"
             @touchstart.passive="input.touchStart($event, index)"
             @touchend.stop.prevent="onClick($event, index)"
             @mousedown.stop.prevent="input.mouseDown($event, index)"
             @click.stop.prevent="onClick($event, index)"
-            @mouseover="playLive(photo)"
-            @mouseleave="pauseLive(photo)"
+            @mouseover="playLive(m)"
+            @mouseleave="pauseLive(m)"
           >
             <div class="preview__overlay"></div>
-            <div v-if="photo.Type === 'live' || photo.Type === 'animated'" class="live-player">
-              <video :id="'live-player-' + photo.ID" width="500" height="500" preload="none" loop muted playsinline>
-                <source :src="photo.videoUrl()" />
+            <div v-if="m.Type === 'live' || m.Type === 'animated'" class="live-player">
+              <video :id="'live-player-' + m.ID" width="500" height="500" preload="none" loop muted playsinline>
+                <source :src="m.videoUrl()" />
               </video>
             </div>
 
             <button
-              v-if="photo.Type !== 'image' || photo.isStack()"
+              v-if="m.Type === 'video'"
+              class="input-video"
+              @touchstart.stop.prevent="input.touchStart($event, index)"
+              @touchend.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
+              @touchmove.stop.prevent
+              @click.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
+            >
+              {{ m.getShortInfo() }}
+            </button>
+            <button
+              v-else-if="m.Type !== 'image' || m.isStack()"
               class="input-open"
               @touchstart.stop.prevent="input.touchStart($event, index)"
-              @touchend.stop.prevent="onOpen($event, index, !isSharedView, photo.Type === 'live')"
+              @touchend.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
               @touchmove.stop.prevent
-              @click.stop.prevent="onOpen($event, index, !isSharedView, photo.Type === 'live')"
+              @click.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
             >
-              <i v-if="photo.Type === 'raw'" class="action-raw mdi mdi-raw" :title="$gettext('RAW')" />
-              <i v-if="photo.Type === 'live'" class="action-live" :title="$gettext('Live')"><icon-live-photo /></i>
-              <i v-if="photo.Type === 'video'" class="mdi mdi-play" :title="$gettext('Video')" />
-              <i v-if="photo.Type === 'animated'" class="mdi mdi-file-gif-box" :title="$gettext('Animated')" />
-              <i v-if="photo.Type === 'vector'" class="action-vector mdi mdi-vector-polyline" :title="$gettext('Vector')"></i>
-              <i v-if="photo.Type === 'image'" class="mdi mdi-camera-burst" :title="$gettext('Stack')" />
+              <i v-if="m.Type === 'raw'" class="action-raw mdi mdi-raw" :title="$gettext('RAW')" />
+              <i v-if="m.Type === 'live'" class="action-live" :title="$gettext('Live')"><icon-live-photo /></i>
+              <i v-if="m.Type === 'video'" class="mdi mdi-play" :title="$gettext('Video')" />
+              <i v-if="m.Type === 'animated'" class="mdi mdi-file-gif-box" :title="$gettext('Animated')" />
+              <i v-if="m.Type === 'vector'" class="action-vector mdi mdi-vector-polyline" :title="$gettext('Vector')"></i>
+              <i v-if="m.Type === 'image'" class="mdi mdi-camera-burst" :title="$gettext('Stack')" />
             </button>
 
-            <button v-if="photo.Type === 'image' && selectMode" class="input-view" :title="$gettext('View')" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onOpen($event, index)" @touchmove.stop.prevent @click.stop.prevent="onOpen($event, index)">
+            <button v-if="m.Type === 'image' && selectMode" class="input-view" :title="$gettext('View')" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onOpen($event, index)" @touchmove.stop.prevent @click.stop.prevent="onOpen($event, index)">
               <i class="mdi mdi-magnify-plus-outline" />
             </button>
 
-            <button v-if="!isSharedView && featPrivate && photo.Private" class="input-private">
+            <button v-if="!isSharedView && featPrivate && m.Private" class="input-private">
               <i class="mdi mdi-lock" />
             </button>
 
@@ -132,67 +142,67 @@
             </button>
 
             <button v-if="!isSharedView" class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
-              <i v-if="photo.Favorite" class="mdi mdi-star text-favorite" />
+              <i v-if="m.Favorite" class="mdi mdi-star text-favorite" />
               <i v-else class="mdi mdi-star-outline" />
             </button>
           </div>
 
-          <div v-if="!isSharedView && photo.Quality < 3 && context === 'review'" class="review">
-            <button type="button" class="v-btn v-btn--flat bg-button v-btn--variant-tonal action-archive text-center" :title="$gettext('Archive')" @click.stop="photo.archive()">
+          <div v-if="!isSharedView && m.Quality < 3 && context === 'review'" class="review">
+            <button type="button" class="v-btn v-btn--flat bg-button v-btn--variant-tonal action-archive text-center" :title="$gettext('Archive')" @click.stop="m.archive()">
               <span class="v-btn__overlay"></span>
               <span class="v-btn__underlay"></span>
               <span class="v-btn__content" data-no-activator=""><i class="mdi-close mdi v-icon notranslate v-theme--default v-icon--size-default" aria-hidden="true"></i></span>
             </button>
-            <button type="button" class="v-btn v-btn--flat bg-button v-btn--variant-tonal action-approve text-center" :title="$gettext('Approve')" @click.stop="photo.approve()">
+            <button type="button" class="v-btn v-btn--flat bg-button v-btn--variant-tonal action-approve text-center" :title="$gettext('Approve')" @click.stop="m.approve()">
               <span class="v-btn__overlay"></span>
               <span class="v-btn__underlay"></span>
               <span class="v-btn__content" data-no-activator=""><i class="mdi-check mdi v-icon notranslate v-icon--size-default" aria-hidden="true"></i></span>
             </button>
           </div>
           <div class="meta">
-            <button v-if="photo.Title" :title="photo.Title" class="action-title-edit meta-title text-truncate" :data-uid="photo.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
-              {{ photo.Title }}
+            <button v-if="m.Title" :title="m.Title" class="action-title-edit meta-title text-truncate" :data-uid="m.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
+              {{ m.Title }}
             </button>
-            <button v-if="photo.Description" :title="$gettext('Description')" class="meta-description" @click.exact="editPhoto(index)">
-              {{ photo.Description }}
+            <button v-if="m.Description" :title="$gettext('Description')" class="meta-description" @click.exact="editPhoto(index)">
+              {{ m.Description }}
             </button>
             <div class="meta-details">
-              <button class="action-open-date meta-date" :data-uid="photo.UID" @click.exact="openDate(index)">
+              <button class="action-open-date meta-date" :data-uid="m.UID" @click.exact="openDate(index)">
                 <i :title="$gettext('Taken')" class="mdi mdi-calendar-range" />
-                {{ photo.getDateString(true) }}
+                {{ m.getDateString(true) }}
               </button>
-              <button v-if="photo.Type === 'video'" :title="$gettext('Video')" @click.exact="editPhoto(index)">
+              <button v-if="m.Type === 'video'" :title="$gettext('Video')" @click.exact="editPhoto(index)">
                 <i class="mdi mdi-movie" />
-                {{ photo.getVideoInfo() }}
+                {{ m.getVideoInfo() }}
               </button>
-              <button v-else-if="photo.Type === 'live'" :title="$gettext('Live')" @click.exact="editPhoto(index)">
+              <button v-else-if="m.Type === 'live'" :title="$gettext('Live')" @click.exact="editPhoto(index)">
                 <i class="mdi mdi-play-circle" />
-                {{ photo.getVideoInfo() }}
+                {{ m.getVideoInfo() }}
               </button>
-              <button v-else-if="photo.Type === 'animated'" :title="$gettext('Animated') + ' GIF'" @click.exact="editPhoto(index)">
+              <button v-else-if="m.Type === 'animated'" :title="$gettext('Animated') + ' GIF'" @click.exact="editPhoto(index)">
                 <i class="mdi mdi-file-gif-box" />
-                {{ photo.getVideoInfo() }}
+                {{ m.getVideoInfo() }}
               </button>
-              <button v-else-if="photo.Type === 'vector'" :title="$gettext('Vector')" @click.exact="editPhoto(index)">
+              <button v-else-if="m.Type === 'vector'" :title="$gettext('Vector')" @click.exact="editPhoto(index)">
                 <i class="mdi mdi-vector-polyline" />
-                {{ photo.getVectorInfo() }}
+                {{ m.getVectorInfo() }}
               </button>
-              <button v-else :title="$gettext('Camera')" class="meta-camera action-camera-edit" :data-uid="photo.UID" @click.exact="editPhoto(index)">
+              <button v-else :title="$gettext('Camera')" class="meta-camera action-camera-edit" :data-uid="m.UID" @click.exact="editPhoto(index)">
                 <i class="mdi mdi-camera" />
-                {{ photo.getPhotoInfo() }}
+                {{ m.getPhotoInfo() }}
               </button>
-              <button v-if="photo.LensID > 1 || photo.FocalLength" :title="$gettext('Lens')" class="meta-lens action-lens-edit" :data-uid="photo.UID" @click.exact="editPhoto(index)">
+              <button v-if="m.LensID > 1 || m.FocalLength" :title="$gettext('Lens')" class="meta-lens action-lens-edit" :data-uid="m.UID" @click.exact="editPhoto(index)">
                 <i class="mdi mdi-camera-iris" />
-                {{ photo.getLensInfo() }}
+                {{ m.getLensInfo() }}
               </button>
-              <button v-if="featDownload" :title="photo.getOriginalName()" class="meta-filename text-truncate" @click.exact="downloadFile(index)">
+              <button v-if="featDownload" :title="m.getOriginalName()" class="meta-filename text-truncate" @click.exact="downloadFile(index)">
                 <i class="mdi mdi-film" />
-                {{ photo.getOriginalName() }}
+                {{ m.getOriginalName() }}
               </button>
-              <template v-if="featPlaces && photo.Country !== 'zz'">
-                <button :title="$gettext('Location')" class="meta-location action-location" :data-uid="photo.UID" @click.exact="openLocation(index)">
+              <template v-if="featPlaces && m.Country !== 'zz'">
+                <button :title="$gettext('Location')" class="meta-location action-location" :data-uid="m.UID" @click.exact="openLocation(index)">
                   <i class="mdi mdi-map-marker" />
-                  {{ photo.locationInfo() }}
+                  {{ m.locationInfo() }}
                 </button>
               </template>
             </div>

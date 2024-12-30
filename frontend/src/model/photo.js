@@ -913,7 +913,7 @@ export class Photo extends RestModel {
     return info.join(", ");
   });
 
-  // Example: 00:00:03, HEVC, 1440 × 1920, 4.2 MB
+  // Example: 1:03:46, HEVC, 1440 × 1920, 4.2 MB
   getVideoInfo = () => {
     let file = this.videoFile() || this.mainFile();
     return this.generateVideoInfo(file);
@@ -941,6 +941,28 @@ export class Photo extends RestModel {
     }
 
     return info.join(", ");
+  });
+
+  // Example: 1:03:46
+  getShortInfo = () => {
+    let file = this.videoFile() || this.mainFile();
+    return this.generateShortInfo(file);
+  };
+
+  generateShortInfo = memoizeOne((file) => {
+    if (!file) {
+      return "";
+    }
+
+    if (file.Duration && file.Duration > 0) {
+      return Util.duration(file.Duration);
+    } else if (file.FileType) {
+      return Util.formatCodec(file.FileType);
+    } else if (file.Codec) {
+      return Util.formatCodec(file.Codec);
+    }
+
+    return "0:00";
   });
 
   // Example: Apple iPhone 12 Pro Max, DNG, 4032 × 3024, 32.9 MB

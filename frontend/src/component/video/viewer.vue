@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="video-viewer" role="dialog" @click.stop.prevent="onClose" @keydown.esc.stop.prevent="onClose">
+  <div v-if="show" class="video-viewer p-video-viewer" role="dialog" @click.stop.prevent="onClose" @keydown.esc.stop.prevent="onClose">
     <p-video-player v-show="show" ref="player" :source="source" :poster="poster" :height="height" :width="width" :autoplay="true" :loop="loop" @close="onClose"></p-video-player>
   </div>
 </template>

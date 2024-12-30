@@ -27,7 +27,6 @@ import PNotify from "component/notify.vue";
 import PScroll from "component/scroll.vue";
 import PNavigation from "component/navigation.vue";
 import PLoadingBar from "component/loading-bar.vue";
-import PPhotoViewer from "component/photo-viewer.vue";
 import PVideoPlayer from "component/video/player.vue";
 import PVideoViewer from "component/video/viewer.vue";
 
@@ -62,12 +61,13 @@ import IconPrism from "component/icon/prism.vue";
 import PPeopleMergeDialog from "component/people/dialog/merge.vue";
 import PPeopleEditDialog from "component/people/dialog/edit.vue";
 
-import PPhotoToolbar from "component/photo/toolbar.vue";
-import PPhotoCards from "component/photo/cards.vue";
-import PPhotoMosaic from "component/photo/mosaic.vue";
-import PPhotoList from "component/photo/list.vue";
-import PPhotoPreview from "component/photo/preview.vue";
+import PPhotoCards from "component/photo/view/cards.vue";
+import PPhotoMosaic from "component/photo/view/mosaic.vue";
+import PPhotoList from "component/photo/view/list.vue";
 import PPhotoClipboard from "component/photo/clipboard.vue";
+import PPhotoToolbar from "component/photo/toolbar.vue";
+import PPhotoPreview from "component/photo/preview.vue";
+import PPhotoViewer from "component/photo/viewer.vue";
 import PPhotoArchiveDialog from "component/photo/dialog/archive.vue";
 import PPhotoAlbumDialog from "component/photo/dialog/album.vue";
 import PPhotoEditDialog from "component/photo/dialog/edit.vue";
@@ -128,13 +128,13 @@ export function install(app) {
   app.component("PPeopleMergeDialog", PPeopleMergeDialog);
   app.component("PPeopleEditDialog", PPeopleEditDialog);
 
-  app.component("PPhotoViewer", PPhotoViewer);
-  app.component("PPhotoToolbar", PPhotoToolbar);
   app.component("PPhotoCards", PPhotoCards);
   app.component("PPhotoMosaic", PPhotoMosaic);
   app.component("PPhotoList", PPhotoList);
-  app.component("PPhotoPreview", PPhotoPreview);
   app.component("PPhotoClipboard", PPhotoClipboard);
+  app.component("PPhotoToolbar", PPhotoToolbar);
+  app.component("PPhotoPreview", PPhotoPreview);
+  app.component("PPhotoViewer", PPhotoViewer);
   app.component("PPhotoArchiveDialog", PPhotoArchiveDialog);
   app.component("PPhotoAlbumDialog", PPhotoAlbumDialog);
   app.component("PPhotoEditDialog", PPhotoEditDialog);

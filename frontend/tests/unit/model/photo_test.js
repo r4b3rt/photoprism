@@ -1101,6 +1101,7 @@ describe("model/photo", () => {
     };
     const photo4 = new Photo(values4);
     assert.equal(photo4.getVideoInfo(), "6µs, AVC, 300 × 500, 10.0 KB");
+    assert.equal(photo4.getShortInfo(), "6µs");
   });
 
   it("should return photo info", () => {

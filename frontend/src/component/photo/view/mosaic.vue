@@ -20,58 +20,68 @@
       </v-alert>
     </div>
     <div v-else class="v-row search-results photo-results mosaic-view" :class="{ 'select-results': selectMode }">
-      <div v-for="(photo, index) in photos" :key="photo.ID" ref="items" class="v-col-4 v-col-sm-3 v-col-md-2 v-col-lg-1" :data-index="index">
+      <div v-for="(m, index) in photos" :key="m.ID" ref="items" class="v-col-4 v-col-sm-3 v-col-md-2 v-col-lg-1" :data-index="index">
         <!--
          The following div is the layout + size container. It makes the browser not
          re-layout all elements in the list when the children of one of them changes
         -->
         <div class="result-container">
-          <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="photo.ID" :data-uid="photo.UID" class="media result preview placeholder" />
+          <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="m.ID" :data-uid="m.UID" class="media result preview placeholder" />
           <div
             v-else
-            :data-id="photo.ID"
-            :data-uid="photo.UID"
-            :title="photo.Title"
-            :style="`background-image: url(${photo.thumbnailUrl('tile_224')})`"
-            :class="photo.classes()"
+            :data-id="m.ID"
+            :data-uid="m.UID"
+            :title="m.Title"
+            :style="`background-image: url(${m.thumbnailUrl('tile_224')})`"
+            :class="m.classes()"
             class="media result preview"
             @contextmenu.stop="onContextMenu($event, index)"
             @touchstart.passive="input.touchStart($event, index)"
             @touchend.stop.prevent="onClick($event, index)"
             @mousedown.stop.prevent="input.mouseDown($event, index)"
             @click.stop.prevent="onClick($event, index)"
-            @mouseover="playLive(photo)"
-            @mouseleave="pauseLive(photo)"
+            @mouseover="playLive(m)"
+            @mouseleave="pauseLive(m)"
           >
             <div class="preview__overlay"></div>
-            <div v-if="photo.Type === 'live' || photo.Type === 'animated'" class="live-player">
-              <video :id="'live-player-' + photo.ID" width="224" height="224" preload="none" loop muted playsinline>
-                <source :src="photo.videoUrl()" />
+            <div v-if="m.Type === 'live' || m.Type === 'animated'" class="live-player">
+              <video :id="'live-player-' + m.ID" width="224" height="224" preload="none" loop muted playsinline>
+                <source :src="m.videoUrl()" />
               </video>
             </div>
 
             <button
-              v-if="photo.Type !== 'image' || photo.isStack()"
+              v-if="m.Type === 'video'"
+              class="input-video"
+              @touchstart.stop.prevent="input.touchStart($event, index)"
+              @touchend.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
+              @touchmove.stop.prevent
+              @click.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
+            >
+              {{ m.getShortInfo() }}
+            </button>
+            <button
+              v-else-if="m.Type !== 'image' || m.isStack()"
               class="input-open"
               @touchstart.stop.prevent="input.touchStart($event, index)"
-              @touchend.stop.prevent="onOpen($event, index, !isSharedView, photo.Type === 'live')"
+              @touchend.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
               @touchmove.stop.prevent
-              @click.stop.prevent="onOpen($event, index, !isSharedView, photo.Type === 'live')"
+              @click.stop.prevent="onOpen($event, index, !isSharedView, m.Type === 'live')"
             >
-              <i v-if="photo.Type === 'raw'" class="action-raw mdi mdi-raw" :title="$gettext('RAW')"></i>
-              <i v-if="photo.Type === 'live'" class="action-live" :title="$gettext('Live')"><icon-live-photo /></i>
-              <i v-if="photo.Type === 'video'" class="mdi mdi-play" :title="$gettext('Video')" />
-              <i v-if="photo.Type === 'animated'" class="mdi mdi-file-gif-box" :title="$gettext('Animated')" />
-              <i v-if="photo.Type === 'vector'" class="action-vector mdi mdi-vector-polyline" :title="$gettext('Vector')" />
-              <i v-if="photo.Type === 'image'" class="mdi mdi-camera-burst" :title="$gettext('Stack')" />
+              <i v-if="m.Type === 'raw'" class="action-raw mdi mdi-raw" :title="$gettext('RAW')"></i>
+              <i v-if="m.Type === 'live'" class="action-live" :title="$gettext('Live')"><icon-live-photo /></i>
+              <i v-if="m.Type === 'video'" class="mdi mdi-play" :title="$gettext('Video')" />
+              <i v-if="m.Type === 'animated'" class="mdi mdi-file-gif-box" :title="$gettext('Animated')" />
+              <i v-if="m.Type === 'vector'" class="action-vector mdi mdi-vector-polyline" :title="$gettext('Vector')" />
+              <i v-if="m.Type === 'image'" class="mdi mdi-camera-burst" :title="$gettext('Stack')" />
             </button>
 
-            <button v-if="photo.Type === 'image' && selectMode" class="input-view" :title="$gettext('View')" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onOpen($event, index)" @touchmove.stop.prevent @click.stop.prevent="onOpen($event, index)">
-              <i color="white" class="mdi mdi-magnify-plus-outline" />
+            <button v-if="m.Type === 'image' && selectMode" class="input-view" :title="$gettext('View')" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onOpen($event, index)" @touchmove.stop.prevent @click.stop.prevent="onOpen($event, index)">
+              <i class="mdi mdi-magnify-plus-outline" />
             </button>
 
-            <button v-if="!isSharedView && hidePrivate && photo.Private" class="input-private">
-              <i color="white" class="mdi mdi-lock" />
+            <button v-if="!isSharedView && hidePrivate && m.Private" class="input-private">
+              <i class="mdi mdi-lock" />
             </button>
 
             <!--
@@ -85,12 +95,12 @@
               use css to show it when it is being hovered.
             -->
             <button class="input-select" @mousedown.stop.prevent="input.mouseDown($event, index)" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
-              <i color="white" class="mdi mdi-check-circle select-on" />
-              <i color="white" class="mdi mdi-circle-outline select-off" />
+              <i class="mdi mdi-check-circle select-on" />
+              <i class="mdi mdi-circle-outline select-off" />
             </button>
 
             <button v-if="!isSharedView" class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
-              <i v-if="photo.Favorite" class="mdi mdi-star text-favorite" />
+              <i v-if="m.Favorite" class="mdi mdi-star text-favorite" />
               <i v-else class="mdi mdi-star-outline" />
             </button>
           </div>
