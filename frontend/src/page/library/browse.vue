@@ -4,12 +4,12 @@
       <v-toolbar flat color="secondary" :density="$vuetify.display.smAndDown ? 'compact' : 'default'">
         <v-toolbar-title>
           <router-link to="/index/files">
-            <translate key="Originals">Originals</translate>
+            <translate>Originals</translate>
           </router-link>
 
-          <router-link v-for="(item, index) in breadcrumbs" :key="index" :to="item.path">
+          <router-link v-for="dir in breadcrumbs" :key="dir.key" :to="dir.uri">
             <v-icon>{{ navIcon }}</v-icon>
-            {{ item.name }}
+            {{ dir.name }}
           </router-link>
         </v-toolbar-title>
 
@@ -19,66 +19,65 @@
       </v-toolbar>
     </v-form>
 
-    <v-container v-if="loading" fluid class="pa-6">
+    <div v-if="loading" class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
-    </v-container>
-    <v-container v-else fluid class="pa-0">
+    </div>
+    <div v-else>
       <p-file-clipboard :refresh="refresh" :selection="selection" :clear-selection="clearSelection"></p-file-clipboard>
 
       <p-scroll :loading="loading"></p-scroll>
 
-      <v-container grid-list-xs fluid class="pa-2 p-files p-files-cards">
-        <v-alert v-if="results.length === 0" icon="mdi-lightbulb-outline" class="no-results ma-2 opacity-70" variant="outlined">
-          <h3 class="text-subtitle-2 ma-0 pa-0">
+      <div class="p-files p-files-cards">
+        <v-alert v-if="results.length === 0" color="primary" icon="mdi-lightbulb-outline" class="ma-3 no-results opacity-60" variant="outlined">
+          <div class="font-weight-bold">
             <translate>No pictures found</translate>
-          </h3>
-          <p class="mt-2 mb-0 pa-0">
+          </div>
+          <div class="mt-2 mb-0 pa-0">
             <translate>Duplicates will be skipped and only appear once.</translate>
             <translate>In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.</translate>
-          </p>
+          </div>
         </v-alert>
-        <div class="v-row search-results file-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="(model, index) in results" :key="model.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
-            <div :data-uid="model.UID" class="result" :class="model.classes(selection.includes(model.UID))" @contextmenu.stop="onContextMenu($event, index)">
-              <v-img
-                :src="model.thumbnailUrl('tile_500')"
-                :alt="model.Name"
-                :transition="false"
-                loading="lazy"
-                aspect-ratio="1"
+        <div v-else class="v-row search-results file-results cards-view" :class="{ 'select-results': selection.length > 0 }">
+          <div v-for="(m, index) in results" :key="m.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+            <div :data-uid="m.UID" class="result" :class="m.classes(selection.includes(m.UID))" @contextmenu.stop="onContextMenu($event, index)">
+              <div
+                :title="m.Name"
+                :style="`background-image: url(${m.thumbnailUrl('tile_500')})`"
                 class="preview"
                 @touchstart.passive="input.touchStart($event, index)"
                 @touchend.stop.prevent="onClick($event, index)"
                 @mousedown.stop.prevent="input.mouseDown($event, index)"
                 @click.stop.prevent="onClick($event, index)"
               >
-                <v-btn :ripple="false" icon variant="text" position="absolute" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
-                  <v-icon color="white" class="select-on">mdi-check-circle</v-icon>
-                  <v-icon color="white" class="select-off">mdi-radiobox-blank</v-icon>
-                </v-btn>
-              </v-img>
+                <div class="preview__overlay"></div>
 
-              <div v-if="model.isFile()" class="meta">
-                <button :title="model.Name" class="meta-title" @click.exact="openFile(index)">
-                  {{ model.baseName() }}
+                <button class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+                  <i class="mdi mdi-check-circle select-on" />
+                  <i class="mdi mdi-circle-outline select-off" />
+                </button>
+              </div>
+
+              <div v-if="m.isFile()" class="meta">
+                <button :title="m.Name" class="meta-title" @click.exact="openFile(index)">
+                  {{ m.baseName() }}
                 </button>
                 <div class="meta-description">
-                  {{ model.getInfo() }}
+                  {{ m.getInfo() }}
                 </div>
               </div>
               <div v-else class="meta">
-                <button :title="model.Title" class="meta-title" @click.exact="openFile(index)">
-                  {{ model.baseName() }}
+                <button :title="m.Title" class="meta-title" @click.exact="openFile(index)">
+                  {{ m.baseName() }}
                 </button>
                 <div class="meta-description">
-                  <translate key="Folder">Folder</translate>
+                  <translate>Folder</translate>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </v-container>
-    </v-container>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -120,7 +119,7 @@ export default {
       filter: filter,
       lastFilter: {},
       routeName: routeName,
-      path: "",
+      path: [],
       page: 0,
       files: {
         limit: 999,
@@ -166,14 +165,16 @@ export default {
   methods: {
     getBreadcrumbs() {
       let result = [];
-      let path = "/index/files";
+      let uri = "/index/files";
+      let key = "B";
 
       const crumbs = [...this.path];
 
       crumbs.forEach((dir) => {
         if (dir) {
-          path += "/" + dir;
-          result.push({ path: path, name: dir });
+          key += "_" + dir;
+          uri += "/" + dir;
+          result.push({ key, uri, name: dir });
         }
       });
 
@@ -367,6 +368,13 @@ export default {
       this.dirty = true;
       this.search();
     },
+    getPathAsString() {
+      if (Array.isArray(this.path)) {
+        return this.path.join("/");
+      }
+
+      return "";
+    },
     search() {
       // Don't query the same data more than once
       if (!this.dirty && JSON.stringify(this.lastFilter) === JSON.stringify(this.filter)) {
@@ -384,7 +392,7 @@ export default {
 
       const params = this.searchParams();
 
-      Folder.originals(this.path, params)
+      Folder.originals(this.getPathAsString(), params)
         .then((response) => {
           this.files.offset = this.files.limit;
 
