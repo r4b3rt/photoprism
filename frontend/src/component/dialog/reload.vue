@@ -1,8 +1,8 @@
 <template>
-  <v-dialog :model-value="show" max-width="380">
+  <v-dialog :model-value="show" max-width="400">
     <v-card>
-      <v-card-title class="d-flex justify-start align-center flex-nowrap ga-3 text-h6">
-        <v-icon icon="mdi-alert-decagram-outline" color="primary"></v-icon>
+      <v-card-title class="d-flex justify-start align-center flex-nowrap ga-3">
+        <v-icon icon="mdi-alert-decagram-outline" size="28" color="primary"></v-icon>
         <h6 class="text-h6"><translate>Software Update</translate></h6>
       </v-card-title>
       <v-card-text class="d-flex justify-start flex-column ga-3">

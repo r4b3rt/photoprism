@@ -2,17 +2,26 @@
   <v-dialog :model-value="show" persistent max-width="400" class="p-service-upload-dialog" @keydown.esc="cancel">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
+        <v-icon size="28" color="primary">mdi-cloud</v-icon>
         <h6 class="text-h6"><translate>WebDAV Upload</translate></h6>
-        <v-btn icon variant="text" color="primary" @click.stop="setup">
-          <v-icon>mdi-cloud</v-icon>
-        </v-btn>
       </v-card-title>
       <v-card-text class="dense">
         <v-row dense>
-          <v-col cols="12" class="text-start">
-            <v-select v-model="service" hide-details hide-no-data :label="$gettext('Account')" item-title="AccName" item-value="ID" return-object :disabled="loading || noServices" :items="services" @update:model-value="onChange"> </v-select>
+          <v-col cols="12">
+            <v-select
+              v-model="service"
+              hide-details
+              hide-no-data
+              :label="$gettext('Account')"
+              item-title="AccName"
+              item-value="ID"
+              return-object
+              :disabled="loading || noServices"
+              :items="services"
+              @update:model-value="onChange">
+            </v-select>
           </v-col>
-          <v-col cols="12" class="text-start">
+          <v-col cols="12">
             <v-autocomplete
               v-model="path"
               hide-details
@@ -174,6 +183,7 @@ export default {
           if (!response.models.length) {
             this.noServices = true;
             this.loading = false;
+            this.services.length = 0;
           } else {
             this.service = response.models[0];
             this.services = response.models;

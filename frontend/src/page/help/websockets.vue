@@ -8,10 +8,10 @@
       example:</p
     >
 
-    <v-expansion-panels class="elevation-0" variant="accordion" density="comfortable" rounded="6">
+    <v-expansion-panels variant="accordion" density="comfortable" rounded="6" class="elevation-0">
       <v-expansion-panel color="secondary" title="NGINX">
         <v-expansion-panel-text>
-          <v-card class="bg-secondary-light">
+          <v-card color="secondary-light">
             <v-card-text>
               <p>WebSockets can be enabled either through the NGINX Proxy Manager UI or in the server configuration files, as shown in this example:</p>
               <pre>
@@ -52,7 +52,7 @@ http {
       </v-expansion-panel>
       <v-expansion-panel color="secondary" title="Caddy 1">
         <v-expansion-panel-text>
-          <v-card class="bg-secondary-light">
+          <v-card color="secondary-light">
             <v-card-text>
               <p>If you are using Caddy 1 as reverse proxy, you can allow WebSocket connections as shown in this example:</p>
               <pre>
@@ -71,7 +71,7 @@ example.com {
       </v-expansion-panel>
       <v-expansion-panel color="secondary" title="Caddy 2">
         <v-expansion-panel-text class="bg-secondary-light">
-          <v-card class="bg-secondary-light">
+          <v-card color="secondary-light">
             <v-card-text>
               <p>WebSocket proxying automatically works in Caddy 2. There is no need to enable this as necessary for Caddy 1, Apache, and NGINX. In addition, Caddy 2 may automatically create and update Let's Encrypt HTTPS certificates.</p>
               <p>Example configuration:</p>
@@ -87,7 +87,7 @@ example.com {
       </v-expansion-panel>
       <v-expansion-panel color="secondary" title="Apache">
         <v-expansion-panel-text>
-          <v-card class="bg-secondary-light">
+          <v-card color="secondary-light">
             <v-card-text>
               <p>If you are using Apache 2.4 as reverse proxy, you can allow WebSocket connections as shown in this example:</p>
               <pre>

@@ -111,6 +111,24 @@ body.dark-theme {
     min-width: 75px;
 }
 
+/* Expansion Panels */
+
+.v-expansion-panels .v-expansion-panel .v-card>.v-card-text.grid,
+.v-expansion-panels .v-expansion-panel .v-card>.v-card-text.dense {
+    margin: 0;
+    padding: 12px;
+}
+
+.v-expansion-panels .v-expansion-panel .v-card>.v-card-actions {
+    padding: 0;
+    margin: 8px 20px 10px 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 /* Lists */
 
 .v-menu>.v-overlay__content>.v-list:not(.v-list--nav) {
