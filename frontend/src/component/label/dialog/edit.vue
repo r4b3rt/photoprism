@@ -7,7 +7,7 @@
           <h6 class="text-h6"><translate :translate-params="{ name: model.modelName() }">Edit %{name}</translate></h6>
         </v-card-title>
         <v-card-text class="dense">
-          <v-row dense>
+          <v-row align="center" dense>
             <v-col cols="12">
               <v-text-field v-model="model.Name" hide-details autofocus :rules="[titleRule]" :label="$gettext('Name')" :disabled="disabled" class="input-title" @keyup.enter="confirm"></v-text-field>
             </v-col>

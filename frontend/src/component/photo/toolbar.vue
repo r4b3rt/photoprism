@@ -74,7 +74,7 @@
     <div :class="{ 'toolbar-expansion-panel--visible': expanded }" class="toolbar-expansion-panel">
       <v-card flat color="secondary">
         <v-card-text class="dense">
-          <v-row dense>
+          <v-row align="center" dense>
             <v-col cols="12" sm="6" md="3" class="p-countries-select">
               <v-select
                 :model-value="filter.country"

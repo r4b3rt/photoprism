@@ -8,7 +8,7 @@
         </h6>
       </v-card-title>
       <v-card-text class="dense">
-        <v-row dense>
+        <v-row align="center" dense>
           <v-col cols="12">
             <v-text-field v-model="model.AccURL" hide-details autofocus :label="$gettext('Service URL')" placeholder="https://www.example.com/" autocorrect="off" autocapitalize="none"></v-text-field>
           </v-col>

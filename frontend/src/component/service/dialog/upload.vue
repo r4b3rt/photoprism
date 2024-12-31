@@ -6,7 +6,7 @@
         <h6 class="text-h6"><translate>WebDAV Upload</translate></h6>
       </v-card-title>
       <v-card-text class="dense">
-        <v-row dense>
+        <v-row align="center" dense>
           <v-col cols="12">
             <v-select
               v-model="service"

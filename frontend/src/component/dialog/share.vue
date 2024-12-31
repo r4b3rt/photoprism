@@ -17,7 +17,7 @@
             <v-expansion-panel-text>
               <v-card color="secondary-light">
                 <v-card-text class="dense">
-                  <v-row dense>
+                  <v-row align="center" dense>
                     <v-col cols="12">
                       <v-text-field :model-value="link.url()" hide-details density="comfortable" variant="solo" flat readonly :label="$gettext('URL')" autocorrect="off" autocapitalize="none" autocomplete="off" class="input-url" @click.stop="selectText($event)"> </v-text-field>
                     </v-col>

@@ -8,7 +8,7 @@
         </v-card-title>
 
         <v-card-text class="dense">
-          <v-row dense>
+          <v-row align="center" dense>
             <v-col v-if="album.Type !== 'month'" cols="12">
               <v-text-field v-model="model.Title" hide-details autofocus :rules="[titleRule]" :label="$gettext('Name')" :disabled="disabled" class="input-title" @keyup.enter="confirm"></v-text-field>
             </v-col>
