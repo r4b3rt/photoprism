@@ -5,7 +5,7 @@
         <v-col class="pa-2 hidden-sm-and-down align-stretch" cols="12" md="2" xxl="1">
           <p-photo-preview :model="model"></p-photo-preview>
         </v-col>
-        <v-col class="pa-2-md-and-up" cols="12" md="10" xxl="1">
+        <v-col class="pa-2-md-and-up" cols="12" md="10" xxl="11">
           <v-data-table
               v-model="selected"
               :headers="listColumns"
