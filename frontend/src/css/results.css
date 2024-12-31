@@ -264,7 +264,6 @@ body.chrome .search-results .result {
     background-repeat: no-repeat;
     transition: none !important;
     overflow: hidden !important;
-    contain: layout paint style size;
 }
 
 .search-results .preview > .preview__overlay {
@@ -281,12 +280,10 @@ body.chrome .search-results .result {
 
 .search-results.list-view .preview > .preview__overlay,
 .search-results.cards-view .preview > .preview__overlay {
-    contain: layout paint style size;
     opacity: 0.2;
 }
 
 .search-results.mosaic-view .preview > .preview__overlay {
-    contain: layout paint style size;
     opacity: 0.5;
 }
 
@@ -353,7 +350,7 @@ body.chrome .search-results .result {
 }
 
 .mosaic-view .preview .preview-details>div.info-text {
-    margin: 5px 6px;
+    margin: 6px;
     font-size: 15px;
 }
 
