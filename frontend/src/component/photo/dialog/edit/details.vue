@@ -81,8 +81,8 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="6" sm="6" lg="4" xl="2">
-              <v-autocomplete v-model="model.TimeZone" :disabled="disabled" :label="$gettext('Time Zone')" hide-details flat hide-no-data color="surface-variant" item-value="ID" item-title="Name" :items="options.TimeZones()" class="input-timezone" @update:model-value="updateTime"> </v-autocomplete>
+            <v-col cols="6" lg="4" xl="2">
+              <v-autocomplete v-model="model.TimeZone" :disabled="disabled" :label="$gettext('Time Zone')" hide-no-data item-value="ID" item-title="Name" :items="options.TimeZones()" class="input-timezone" @update:model-value="updateTime"></v-autocomplete>
             </v-col>
 
             <v-col cols="12" sm="8" md="4" xl="3">
