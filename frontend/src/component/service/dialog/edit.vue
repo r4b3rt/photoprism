@@ -128,7 +128,7 @@
           </v-col>
         </v-row>
       </v-card-text>
-      <v-card-actions class="action-buttons">
+      <v-card-actions class="action-buttons mt-4">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
           <translate>Cancel</translate>
         </v-btn>
