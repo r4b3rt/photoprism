@@ -329,7 +329,7 @@ body.chrome .search-results .result {
     top: 0;
     right: 0;
     color: #f6f6f6;
-    opacity: 0.89;
+    opacity: 0.91;
 }
 
 .search-results .preview .preview-details>div {
@@ -348,8 +348,8 @@ body.chrome .search-results .result {
 }
 
 .cards-view .preview .preview-details>div.info-text {
-    margin: 7px 8px;
-    font-size: 17px;
+    margin: 8px;
+    font-size: 16px;
 }
 
 .mosaic-view .preview .preview-details>div.info-text {
