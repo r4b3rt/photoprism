@@ -31,7 +31,7 @@
       </template>
     </v-data-table>
     <v-container fluid>
-      <p class="text-caption pt-3 clickable" @click.stop.prevent="webdavDialog">
+      <p class="text-caption py-1 clickable" @click.stop.prevent="webdavDialog">
         <translate>Note:</translate>
         <translate>WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. </translate>
         <translate>This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local. </translate>
