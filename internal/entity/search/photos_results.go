@@ -27,7 +27,6 @@ type Photo struct {
 	TimeZone         string        `json:"TimeZone" select:"photos.time_zone"`
 	PhotoPath        string        `json:"Path" select:"photos.photo_path"`
 	PhotoName        string        `json:"Name" select:"photos.photo_name"`
-	OriginalName     string        `json:"OriginalName" select:"photos.original_name"`
 	PhotoTitle       string        `json:"Title" select:"photos.photo_title"`
 	PhotoDescription string        `json:"Description" select:"photos.photo_description"`
 	PhotoYear        int           `json:"Year" select:"photos.photo_year"`
@@ -73,6 +72,7 @@ type Photo struct {
 	FileUID          string        `json:"FileUID" select:"files.file_uid"`
 	FileRoot         string        `json:"FileRoot" select:"files.file_root"`
 	FileName         string        `json:"FileName" select:"files.file_name"`
+	OriginalName     string        `json:"OriginalName" select:"files.original_name"`
 	FileHash         string        `json:"Hash" select:"files.file_hash"`
 	FileWidth        int           `json:"Width" select:"files.file_width"`
 	FileHeight       int           `json:"Height" select:"files.file_height"`

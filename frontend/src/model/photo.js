@@ -336,23 +336,31 @@ export class Photo extends RestModel {
   });
 
   getOriginalName() {
-    return this.generateOriginalName();
+    const file = this.originalFile();
+    return this.generateOriginalName(file);
   }
 
-  generateOriginalName = memoizeOne(() => {
+  generateOriginalName = memoizeOne((file) => {
     let name = "";
-    const main = this.originalFile();
 
-    if (main) {
-      if (main.OriginalName) {
-        name = main.OriginalName;
-      } else {
-        name = main.Name;
+    if (file) {
+      if (file.OriginalName) {
+        name = file.OriginalName;
+      } else if (file.Name) {
+        name = file.Name;
       }
     }
 
     if (!name) {
-      name = this.FileName;
+      if (this.OriginalName) {
+        name = this.OriginalName;
+      } else if (this.FileName) {
+        name = this.FileName;
+      } else if (this.Name) {
+        name = this.Name;
+      } else {
+        return $gettext("Unknown");
+      }
     }
 
     return this.fileBase(name);
