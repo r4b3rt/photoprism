@@ -29,6 +29,16 @@ describe("common/util", () => {
     const duration = Util.duration(600000000000);
     assert.equal(duration, "10:00");
   });
+  it("should return formatted camera name", () => {
+    const iPhone15Pro = Util.formatCamera({ Make: "Apple", Model: "iPhone 15 Pro" }, 23, "Apple", "iPhone 15 Pro");
+    assert.equal(iPhone15Pro, "iPhone 15 Pro");
+
+    const iPhone14 = Util.formatCamera({ Make: "Apple", Model: "iPhone 14" }, 22, "Apple", "iPhone 14");
+    assert.equal(iPhone14, "iPhone 14");
+
+    const iPhone13 = Util.formatCamera(null, 21, "Apple", "iPhone 13");
+    assert.equal(iPhone13, "iPhone 13");
+  });
   it("should convert -1 to roman", () => {
     const roman = Util.arabicToRoman(-1);
     assert.equal(roman, "");

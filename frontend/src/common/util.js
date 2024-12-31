@@ -245,6 +245,26 @@ export default class Util {
     }
   }
 
+  static formatCamera(camera, cameraID, cameraMake, cameraModel) {
+    if (camera) {
+      if (camera.Model.length > 7) {
+        return camera.Model;
+      } else {
+        return camera.Make + " " + camera.Model;
+      }
+    } else if (cameraMake && cameraModel) {
+      if (cameraModel.length > 7) {
+        return cameraModel;
+      } else {
+        return cameraMake + " " + cameraModel;
+      }
+    } else if (cameraID > 1 && cameraModel) {
+      return cameraModel;
+    }
+
+    return "";
+  }
+
   static formatCodec(codec) {
     if (!codec) {
       return "";

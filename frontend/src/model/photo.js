@@ -924,15 +924,21 @@ export class Photo extends RestModel {
   // Example: 1:03:46, HEVC, 1440 × 1920, 4.2 MB
   getVideoInfo = () => {
     let file = this.videoFile() || this.mainFile();
-    return this.generateVideoInfo(file);
+    return this.generateVideoInfo(this.Camera, this.CameraID, this.CameraMake, this.CameraModel, file);
   };
 
-  generateVideoInfo = memoizeOne((file) => {
+  generateVideoInfo = memoizeOne((camera, cameraId, cameraMake, cameraModel, file) => {
     if (!file) {
       return $gettext("Video");
     }
 
     const info = [];
+
+    const cameraInfo = Util.formatCamera(camera, cameraId, cameraMake, cameraModel);
+
+    if (cameraInfo) {
+      info.push(cameraInfo);
+    }
 
     /* if (file.Duration > 0) {
       info.push(Util.duration(file.Duration));
@@ -978,20 +984,10 @@ export class Photo extends RestModel {
   generatePhotoInfo = memoizeOne((camera, cameraId, cameraMake, cameraModel, file) => {
     let info = [];
 
-    if (camera) {
-      if (camera.Model.length > 7) {
-        info.push(camera.Model);
-      } else {
-        info.push(camera.Make + " " + camera.Model);
-      }
-    } else if (cameraMake && cameraModel) {
-      if ((cameraMake + cameraModel).length > 19) {
-        info.push(cameraModel);
-      } else {
-        info.push(cameraMake + " " + cameraModel);
-      }
-    } else if (cameraId > 1 && cameraModel) {
-      info.push(cameraModel);
+    const cameraInfo = Util.formatCamera(camera, cameraId, cameraMake, cameraModel);
+
+    if (cameraInfo) {
+      info.push(cameraInfo);
     }
 
     if (file && file.Width && file.Codec) {
