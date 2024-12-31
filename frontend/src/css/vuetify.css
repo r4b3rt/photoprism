@@ -1,12 +1,18 @@
 /* Custom Vuetify 3 Component Styles */
 
+.v-overlay__scrim {
+    background: rgb(var(--v-overlay-color, #121212));
+    opacity: var(--v-overlay-opacity, .32);
+}
+
+/* Tabs */
+
 .v-tabs button.v-tab:not(.v-tab-item--selected) {
     opacity: 0.8;
 }
 
-.v-overlay__scrim {
-    background: rgb(var(--v-overlay-color, #121212));
-    opacity: var(--v-overlay-opacity, .32);
+.v-tab.v-tab.v-btn {
+    min-width: 60px;
 }
 
 .v-slide-group .v-ripple__container {
