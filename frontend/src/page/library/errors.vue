@@ -68,21 +68,20 @@
       </v-alert>
     </div>
     <p-confirm-dialog :show="dialog.delete" icon="mdi-delete-outline" @cancel="dialog.delete = false" @confirm="onConfirmDelete"></p-confirm-dialog>
-    <v-dialog v-model="details.show" max-width="500">
+    <v-dialog v-model="details.show" max-width="550">
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon v-if="details.err.Level === 'error'" icon="mdi-alert-circle-outline" color="error"></v-icon>
           <v-icon v-else-if="details.err.Level === 'warning'" icon="mdi-alert" color="warning"></v-icon>
           <v-icon v-else icon="mdi-information-outline" color="info"></v-icon>
-          <h6 class="text-h6 text-capitalize">{{ details.err.Level }}</h6>
+          <h6 class="text-h6 text-capitalize">{{ formatLevel(details.err.Level) }}</h6>
         </v-card-title>
 
-        <v-card-text class="text-body-2 text-break">
-          {{ details.err.Message }}
-        </v-card-text>
-
-        <v-card-text class="text-caption mt-2">
-          {{ formatTime(details.err.Time) }}
+        <v-card-text>
+          <p :class="'p-log-' + details.err.Level" class="p-log-message text-body-2 text-selectable" dir="ltr">
+            <span class="font-weight-medium">{{ formatTime(details.err.Time) }}</span
+            >&puncsp;<span class="text-break">{{ details.err.Message }}</span>
+          </p>
         </v-card-text>
 
         <v-card-actions>
@@ -275,12 +274,23 @@ export default {
     level(s) {
       return s.substring(0, 4).toUpperCase();
     },
+
     localTime(s) {
       if (!s) {
         return this.$gettext("Unknown");
       }
 
       return DateTime.fromISO(s).toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS);
+    },
+    formatLevel(level) {
+      switch (level) {
+        case "error":
+          return this.$gettext("Error");
+        case "warning":
+          return this.$gettext("Warning");
+      }
+
+      return level;
     },
     formatTime(s) {
       if (!s) {
