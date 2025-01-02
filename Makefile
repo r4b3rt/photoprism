@@ -384,7 +384,7 @@ docker-pull:
 	$(DOCKER_COMPOSE) -f compose.latest.yaml pull --ignore-pull-failures
 docker-build:
 	$(DOCKER_COMPOSE) --profile=all pull --ignore-pull-failures
-	$(DOCKER_COMPOSE) build
+	$(DOCKER_COMPOSE) build --pull
 docker-local-up:
 	$(DOCKER_COMPOSE) -f compose.local.yaml up --force-recreate
 docker-local-down:

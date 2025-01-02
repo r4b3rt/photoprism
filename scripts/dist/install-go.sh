@@ -9,6 +9,8 @@ DESTDIR=$(realpath "${1:-/usr/local}")
 
 # Query version.
 if [[ -z $GOLANG_VERSION ]]; then
+  GOLANG_VERSION="go1.22.10"
+elif [[ $GOLANG_VERSION == "latest" ]]; then
   GOLANG_VERSION=$(curl -fsSL https://go.dev/VERSION?m=text | head -n 1)
 fi
 
