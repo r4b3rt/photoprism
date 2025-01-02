@@ -62,6 +62,7 @@ all: dep build-js
 dep: dep-tensorflow dep-js
 biuld: build
 build: build-go
+watch: watch-js
 build-all: build-go build-js
 pull: docker-pull
 test: test-js test-go
