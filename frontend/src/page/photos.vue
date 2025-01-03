@@ -376,11 +376,12 @@ export default {
        * preferVideo is true, when the user explicitly clicks the live-image-icon.
        */
       if ((preferVideo && selected.Type === MediaLive) || selected.Type === MediaVideo || selected.Type === MediaAnimated) {
-        if (selected.isPlayable()) {
-          this.$viewer.play({ video: selected });
-        } else {
-          this.$viewer.show(Thumb.fromPhotos(this.results), index);
-        }
+        // Todo: Should be refactored/simplified when the new hybrid photo/video viewer is fully functional.
+        // if (selected.isPlayable()) {
+        //   this.$viewer.play({ video: selected });
+        // } else {
+        this.$viewer.show(Thumb.fromPhotos(this.results), index);
+        // }
       } else if (showMerged) {
         this.$viewer.show(Thumb.fromFiles([selected]), 0);
       } else {

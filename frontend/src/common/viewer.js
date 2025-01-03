@@ -24,7 +24,7 @@ Additional information can be found in our Developer Guide:
 */
 
 import PhotoSwipe from "photoswipe";
-import PhotoSwipeUI_Default from "photoswipe/dist/photoswipe-ui-default.js";
+import LightBox from "photoswipe/lightbox";
 import Event from "pubsub-js";
 import Util from "util.js";
 import Api from "./api";
@@ -35,7 +35,7 @@ const thumbs = window.__CONFIG__.thumbs;
 class Viewer {
   constructor() {
     this.el = null;
-    this.gallery = null;
+    this.lightbox = null;
   }
 
   getEl() {
@@ -100,121 +100,156 @@ class Viewer {
       },
     ];
 
+    console.log("(0) Items", items);
+
+    // PhotoSwipe configuration options, see https://photoswipe.com/options/.
     const options = {
+      pswpModule: PhotoSwipe,
+      dataSource: items,
       index: index,
-      history: true,
+      mouseMovePan: true,
+      arrowPrev: true,
+      arrowNext: true,
+      zoom: true,
+      close: true,
+      counter: true,
+      initialZoomLevel: "fit",
+      secondaryZoomLevel: "fill",
+      maxZoomLevel: 3,
+      bgOpacity: 1,
       preload: [1, 1],
-      focus: true,
-      modal: true,
-      closeEl: true,
-      captionEl: true,
-      fullscreenEl: true,
-      zoomEl: true,
-      shareEl: true,
-      shareButtons: shareButtons,
-      counterEl: false,
-      arrowEl: true,
-      preloaderEl: true,
-      addCaptionHTMLFn: function (item, captionEl /*, isFake */) {
-        // item      - slide object
-        // captionEl - caption DOM element
-        // isFake    - true when content is added to fake caption container
-        //             (used to get size of next or previous caption)
-
-        item.title = item.Title;
-
-        if (!item.Title) {
-          captionEl.children[0].innerHTML = "";
-          return false;
-        }
-
-        captionEl.children[0].innerHTML = Util.encodeHTML(item.Title);
-
-        if (item.Playable) {
-          captionEl.children[0].innerHTML += ' <i aria-hidden="true" class="v-icon material-icons theme--dark mdi mdi-play-circle" title="Play"></i>';
-        }
-
-        if (item.Description) {
-          captionEl.children[0].innerHTML += '<br><span class="description">' + Util.encodeHTML(item.Description) + "</span>";
-        }
-
-        if (item.Playable) {
-          captionEl.children[0].innerHTML = "<button>" + captionEl.children[0].innerHTML + "</button>";
-        }
-
-        return true;
-      },
+      returnFocus: true,
+      showHideAnimationType: "none",
+      tapAction: "toggle-controls",
+      imageClickAction: "toggle-controls",
     };
 
-    let gallery = new PhotoSwipe(this.getEl(), PhotoSwipeUI_Default, items, options);
-    let realViewportWidth;
-    let realViewportHeight;
-    let previousSize;
-    let nextSize;
-    let firstResize = true;
-    let photoSrcWillChange;
+    // Create PhotoSwipe instance.
+    let lightbox = new LightBox(options);
+    let firstPicture = true;
 
-    this.gallery = gallery;
+    // Keep reference to PhotoSwipe instance.
+    this.lightbox = lightbox;
 
     Event.publish("viewer.show");
 
-    gallery.listen("close", () => {
+    // Add a close event handler to destroy the viewer after use.
+    lightbox.on("close", () => {
+      this.lightbox.destroy();
+      this.lightbox = null;
       Event.publish("viewer.pause");
       Event.publish("viewer.hide");
     });
-    gallery.listen("shareLinkClick", () => Event.publish("viewer.pause"));
-    gallery.listen("initialZoomIn", () => Event.publish("viewer.pause"));
-    gallery.listen("initialZoomOut", () => Event.publish("viewer.pause"));
 
-    gallery.listen("beforeChange", () => Event.publish("viewer.change", { gallery: gallery, item: gallery.currItem }));
+    // Add user interface controls.
+    //
+    // Todo: The same controls as with PhotoSwipe 4 should be usable/available!
+    lightbox.on("uiRegister", function () {
+      // Download button displayed at the top.
+      // Todo: Proof-of-concept, requires refactoring.
+      lightbox.pswp.ui.registerElement({
+        name: "download-button",
+        order: 8,
+        isButton: true,
+        tagName: "a",
 
-    gallery.listen("beforeResize", () => {
-      realViewportWidth = gallery.viewportSize.x * window.devicePixelRatio;
-      realViewportHeight = gallery.viewportSize.y * window.devicePixelRatio;
+        // SVG with outline
+        html: {
+          isCustomSVG: true,
+          inner: '<path d="M20.5 14.3 17.1 18V10h-2.2v7.9l-3.4-3.6L10 16l6 6.1 6-6.1ZM23 23H9v2h14Z" id="pswp__icn-download"/>',
+          outlineID: "pswp__icn-download",
+        },
 
-      if (!previousSize) {
-        previousSize = "tile_720";
-      }
+        onInit: (el, pswp) => {
+          el.setAttribute("download", "");
+          el.setAttribute("target", "_blank");
+          el.setAttribute("rel", "noopener");
 
-      nextSize = this.constructor.mapViewportToImageSize(realViewportWidth, realViewportHeight);
+          pswp.on("change", () => {
+            console.log("change");
+            el.href = pswp.currSlide.data.src;
+          });
+        },
+      });
 
-      if (nextSize !== previousSize) {
-        photoSrcWillChange = true;
-      }
+      // Picture caption displayed at the bottom.
+      lightbox.pswp.ui.registerElement({
+        name: "caption",
+        order: 9,
+        isButton: false,
+        appendTo: "root",
+        html: "",
+        onInit: (el, pswp) => {
+          lightbox.pswp.on("change", () => {
+            const data = items[lightbox.pswp.currSlide.index];
 
-      if (photoSrcWillChange && !firstResize) {
-        gallery.invalidateCurrItems();
-      }
+            let caption = "";
 
-      if (firstResize) {
-        firstResize = false;
-      }
+            if (data.Title) {
+              caption += `<h4>${Util.encodeHTML(data.Title)}</h4>`;
+            }
 
-      photoSrcWillChange = false;
+            if (data.Description) {
+              caption += `<p>${Util.encodeHTML(data.Description)}</p>`;
+            }
+
+            if (data.Playable) {
+              el.classList.add("pswp__caption-video");
+            } else {
+              el.classList.remove("pswp__caption-video");
+            }
+
+            el.innerHTML = Util.sanitizeHtml(caption);
+          });
+        },
+      });
     });
 
-    gallery.listen("gettingData", function (index, item) {
-      item.src = item.Thumbs[nextSize].src;
-      item.w = item.Thumbs[nextSize].w;
-      item.h = item.Thumbs[nextSize].h;
-      previousSize = nextSize;
+    // Process raw data for PhotoSwipe, see https://photoswipe.com/filters/#itemdata.
+    //
+    // Todo: Should be improved to allow dynamic zooming and play videos in their native format whenever possible.
+    lightbox.addFilter("itemData", (el, i) => {
+      const data = items[i];
+      const viewportWidth = window.innerWidth * window.devicePixelRatio;
+      const viewportHeight = window.innerHeight * window.devicePixelRatio;
+
+      const s = Util.thumbSize(viewportWidth, viewportHeight);
+
+      const imgSrc = data.Thumbs[s].src;
+
+      if (data.Playable) {
+        const videoSrc = Util.videoUrl(data.Hash);
+        if (firstPicture) {
+          firstPicture = false;
+          return {
+            html: `<video class="pswp__video" autoplay controls playsinline poster="${imgSrc}" style="width: 100vw; height: 100vh" preload="auto"><source src="${videoSrc}" /></video>`,
+          };
+        } else {
+          return {
+            html: `<video class="pswp__video" controls playsinline poster="${imgSrc}" style="width: 100vw; height: 100vh" preload="auto"><source src="${videoSrc}" /></video>`,
+          };
+        }
+      }
+
+      el.src = imgSrc;
+      el.w = Number(data.Thumbs[s].w);
+      el.h = Number(data.Thumbs[s].h);
+
+      if (firstPicture) {
+        firstPicture = false;
+      }
+
+      return el;
     });
 
-    gallery.init();
+    // Init PhotoSwipe.
+    lightbox.init();
+
+    // Show first image.
+    lightbox.loadAndOpen(index);
   }
 
-  static mapViewportToImageSize(viewportWidth, viewportHeight) {
-    for (let i = 0; i < thumbs.length; i++) {
-      let t = thumbs[i];
-
-      if (t.w >= viewportWidth || t.h >= viewportHeight) {
-        return t.size;
-      }
-    }
-
-    return "fit_7680";
-  }
-
+  // Loads picture data and then opens the viewer.
   static show(ctx, index) {
     if (ctx.loading || !ctx.listen || ctx.viewer.loading || !ctx.results[index]) {
       return false;

@@ -42,6 +42,7 @@ export class Thumb extends Model {
       DownloadUrl: "",
       Width: 0,
       Height: 0,
+      Hash: "",
       Thumbs: {},
     };
   }
@@ -79,6 +80,7 @@ export class Thumb extends Model {
       DownloadUrl: "",
       Width: 0,
       Height: 0,
+      Hash: "",
       Thumbs: {},
     };
 
@@ -125,6 +127,7 @@ export class Thumb extends Model {
       DownloadUrl: this.downloadUrl(photo),
       Width: photo.Width,
       Height: photo.Height,
+      Hash: photo.Hash,
       Thumbs: {},
     };
 
@@ -157,6 +160,7 @@ export class Thumb extends Model {
       DownloadUrl: this.downloadUrl(file),
       Width: file.Width,
       Height: file.Height,
+      Hash: file.Hash,
       Thumbs: {},
     };
 

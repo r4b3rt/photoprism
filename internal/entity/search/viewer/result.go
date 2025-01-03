@@ -17,6 +17,7 @@ type Result struct {
 	DownloadUrl  string       `json:"DownloadUrl"`
 	Width        int          `json:"Width"`
 	Height       int          `json:"Height"`
+	Hash         string       `json:"Hash"`
 	Thumbs       thumb.Public `json:"Thumbs"`
 }
 

@@ -1,11 +1,37 @@
-/* Scrollbar Styles */
+/* Global Styles for <HTML> and <BODY> */
 
-/*
-see https://css-tricks.com/custom-scrollbars-in-webkit/#aa-the-different-pieces
-*/
+body {
+    color: #333333;
+    font-size: 17px;
+}
 
-/* Hide scrollbar in navigation to save space */
+html,
+body {
+    /* Use a system font for faster rendering and a native look */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+    /* Text rendering defaults. */
+    letter-spacing: normal !important;
+    line-height: normal;
+    text-justify: inter-word;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+
+    /* Support for Safari and Chrome. */
+
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Enable font features. */
+    font-feature-settings: 'kern', 'liga';
+}
+
+/* Browser Scrollbar, see https://css-tricks.com/custom-scrollbars-in-webkit/#aa-the-different-pieces */
+
 #p-navigation ::-webkit-scrollbar {
+    /* Hides scrollbar in sidebar navigation to save space */
     width: 0;
     background: transparent;
 }
@@ -41,11 +67,13 @@ body.dark-theme {
     color-scheme: dark !important;
 }
 
+/* Scrollbar Styles for Mozilla Firefox: */
+
 body.firefox.dark-theme {
     scrollbar-color: dark !important;
 }
 
-/* Chrome specific styles */
+/* Scrollbar Styles for Google Chrome (and compatible browsers): */
 
 ::-webkit-scrollbar {
     height: 7px;

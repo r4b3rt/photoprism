@@ -58,11 +58,9 @@
           <div class="pswp__share-tooltip"></div>
         </div>
 
-        <button class="pswp__button pswp__button--arrow--left action-previous" title="Previous (arrow left)">
-</button>
+        <button class="pswp__button pswp__button--arrow--left action-previous" title="Previous (arrow left)"></button>
 
-        <button class="pswp__button pswp__button--arrow--right action-next" title="Next (arrow right)">
-</button>
+        <button class="pswp__button pswp__button--arrow--right action-next" title="Next (arrow right)"></button>
 
         <div class="pswp__caption" @click="onPlay">
           <div class="pswp__caption__center"></div>
@@ -77,14 +75,17 @@
 </template>
 
 <script>
-import "photoswipe/dist/photoswipe.css";
-import "photoswipe/dist/default-skin/default-skin.css";
+// Todo: These imports were required for PhotoSwipe 4 and can be removed after the upgrade.
+// import "photoswipe/dist/photoswipe.css";
+// import "photoswipe/dist/default-skin/default-skin.css";
 import Event from "pubsub-js";
 import Thumb from "model/thumb";
 import { Photo, DATE_FULL } from "model/photo";
 import Notify from "common/notify";
 import { DateTime } from "luxon";
 
+// Todo: This functionality must be preserved in the new hybrid photo/video viewer (based on PhotoSwipe 5).
+// Todo: However, it seems that the PPhotoViewer may no longer be needed and can be removed after the upgrade.
 export default {
   name: "PPhotoViewer",
   data() {
@@ -148,7 +149,7 @@ export default {
       this.$scrollbar.show();
     },
     onChange(ev, data) {
-      const psp = this.$viewer.gallery;
+      const psp = this.$viewer.lightbox;
 
       if (psp && this.slideshow.next !== psp.getCurrentIndex()) {
         this.onPause();
@@ -218,7 +219,7 @@ export default {
       this.slideshow.active = true;
 
       const self = this;
-      const psp = this.$viewer.gallery;
+      const psp = this.$viewer.lightbox;
 
       self.interval = setInterval(() => {
         if (psp && typeof psp.next === "function") {
@@ -244,7 +245,7 @@ export default {
     onEdit() {
       this.onPause();
 
-      const g = this.$viewer.gallery; // Gallery
+      const g = this.$viewer.lightbox; // Gallery
       let index = 0;
 
       // remove duplicates

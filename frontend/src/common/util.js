@@ -23,6 +23,21 @@ Additional information can be found in our Developer Guide:
 
 */
 
+import { canUseAv1, canUseHevc, canUseOGV, canUseVP8, canUseVP9, canUseWebM } from "./caniuse";
+import { config } from "app/session";
+import {
+  CodecAv01,
+  CodecAv1C,
+  CodecHev1,
+  CodecHvc1,
+  CodecOGV,
+  CodecVP8,
+  CodecVP9, FormatAv1,
+  FormatAvc,
+  FormatHevc, FormatWebM
+} from "model/photo";
+import sanitizeHtml from "sanitize-html";
+
 const Nanosecond = 1;
 const Microsecond = 1000 * Nanosecond;
 const Millisecond = 1000 * Microsecond;
@@ -129,6 +144,10 @@ export default class Util {
     } else {
       return str;
     }
+  }
+
+  static sanitizeHtml(html) {
+    return sanitizeHtml(html);
   }
 
   static encodeHTML(text) {
@@ -444,6 +463,46 @@ export default class Util {
       default:
         return value.toUpperCase();
     }
+  }
+
+  static thumbSize(viewportWidth, viewportHeight) {
+    const thumbs = config.values.thumbs;
+
+    for (let i = 0; i < thumbs.length; i++) {
+      let t = thumbs[i];
+
+      console.log(t.w, viewportWidth, t.h, viewportHeight);
+
+      if (t.w >= viewportWidth && t.h >= viewportHeight) {
+        return t.size;
+      }
+    }
+
+    return "fit_7680";
+  }
+
+  static videoUrl(hash, codec) {
+    if (codec) {
+      let videoFormat = FormatAvc;
+
+      if (canUseHevc && (codec === CodecHvc1 || codec === CodecHev1)) {
+        videoFormat = FormatHevc;
+      } else if (canUseOGV && codec === CodecOGV) {
+        videoFormat = CodecOGV;
+      } else if (canUseVP8 && codec === CodecVP8) {
+        videoFormat = CodecVP8;
+      } else if (canUseVP9 && codec === CodecVP9) {
+        videoFormat = CodecVP9;
+      } else if (canUseAv1 && (codec === CodecAv01 || codec === CodecAv1C)) {
+        videoFormat = FormatAv1;
+      } else if (canUseWebM && codec === FormatWebM) {
+        videoFormat = FormatWebM;
+      }
+
+      return `${config.videoUri}/videos/${hash}/${config.previewToken}/${videoFormat}`;
+    }
+
+    return `${config.videoUri}/videos/${hash}/${config.previewToken}/${FormatAvc}`;
   }
 
   static async copyToMachineClipboard(text) {

@@ -41,7 +41,14 @@ module.exports = {
     // 'comma-dangle': ['error', 'always-multiline'],
     indent: ["error", 2, { SwitchCase: 1 }],
     "linebreak-style": ["error", "unix"],
-    quotes: ["off", "double"], // Easier for Go developers!
+    quotes: [
+      "off",
+      "double",
+      {
+        avoidEscape: true,
+        allowTemplateLiterals: true,
+      },
+    ],
     semi: ["error", "always"],
     "no-unused-vars": ["warn"],
     "no-console": 0,
