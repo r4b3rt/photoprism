@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This installs the static FFmpeg build available at https://johnvansickle.com/ffmpeg/.
+# Installs the static FFmpeg build available at https://johnvansickle.com/ffmpeg/.
 # bash <(curl -s https://raw.githubusercontent.com/photoprism/photoprism/develop/scripts/dist/install-ffmpeg.sh)
 
 PATH="/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/scripts:$PATH"

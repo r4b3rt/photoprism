@@ -172,7 +172,7 @@ install:
 	chmod -R $(INSTALL_MODE_BIN) $(DESTDIR)/bin $(DESTDIR)/lib
 	@echo "PhotoPrism $(BUILD_TAG) has been successfully installed in \"$(DESTDIR)\".\nEnjoy!"
 install-go:
-	sudo scripts/dist/install-go.sh
+	sudo scripts/dist/install-go.sh latest
 	go build -v ./...
 install-tensorflow:
 	sudo scripts/dist/install-tensorflow.sh

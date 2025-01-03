@@ -74,8 +74,8 @@ RUN echo 'APT::Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries && \
     /scripts/install-libheif.sh && \
     /scripts/install-chrome.sh && \
     echo "ALL ALL=(ALL) NOPASSWD:SETENV: ALL" >> /etc/sudoers.d/all && \
-    mkdir -p /etc/skel/.config/go && \
-    echo 'off 2024-08-27' > '/etc/skel/.config/go/telemetry' && \
+    mkdir -p /etc/skel/.config/go/telemetry && \
+    echo 'off 2025-01-03' > '/etc/skel/.config/go/telemetry/mode' && \
     cp -r /etc/skel/.config /root/.config && \
     GOLANG_VERSION=go1.22.10 /scripts/install-go.sh && \
     /scripts/install-go-tools.sh && \
