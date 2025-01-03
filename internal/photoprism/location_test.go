@@ -4,9 +4,10 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+
 	"github.com/photoprism/photoprism/internal/config"
 	"github.com/photoprism/photoprism/pkg/geo/s2"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestMediaFile_Location(t *testing.T) {
@@ -29,7 +30,7 @@ func TestMediaFile_Location(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.Equal(t, "姫路市", location.City())
+		assert.Equal(t, "高砂市", location.City())
 		assert.Equal(t, "兵庫県", location.State())
 		assert.Equal(t, "Japan", location.CountryName())
 		assert.Equal(t, "", location.Category())
@@ -44,7 +45,7 @@ func TestMediaFile_Location(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.Equal(t, "姫路市", location2.City())
+		assert.Equal(t, "高砂市", location2.City())
 		assert.Equal(t, "兵庫県", location2.State())
 	})
 	t.Run("iphone_15_pro.heic", func(t *testing.T) {
