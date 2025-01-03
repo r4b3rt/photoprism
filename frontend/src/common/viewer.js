@@ -62,46 +62,6 @@ class Viewer {
       return;
     }
 
-    const shareButtons = [
-      {
-        id: "fit_720",
-        template: "Tiny (size)",
-        label: "Tiny",
-        url: "{{raw_image_url}}",
-        download: true,
-      },
-      {
-        id: "fit_1280",
-        template: "Small (size)",
-        label: "Small",
-        url: "{{raw_image_url}}",
-        download: true,
-      },
-      {
-        id: "fit_1920",
-        template: "Medium (size)",
-        label: "Medium",
-        url: "{{raw_image_url}}",
-        download: true,
-      },
-      {
-        id: "fit_2560",
-        template: "Large (size)",
-        label: "Large",
-        url: "{{raw_image_url}}",
-        download: true,
-      },
-      {
-        id: "original",
-        template: "Original (size)",
-        label: "Original",
-        url: "{{raw_image_url}}",
-        download: true,
-      },
-    ];
-
-    console.log("(0) Items", items);
-
     // PhotoSwipe configuration options, see https://photoswipe.com/options/.
     const options = {
       pswpModule: PhotoSwipe,
@@ -166,7 +126,6 @@ class Viewer {
           el.setAttribute("rel", "noopener");
 
           pswp.on("change", () => {
-            console.log("change");
             el.href = pswp.currSlide.data.src;
           });
         },
