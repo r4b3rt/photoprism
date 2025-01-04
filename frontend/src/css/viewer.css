@@ -181,15 +181,15 @@
 }
 
 .pswp__top-bar .pswp__button {
-    height: 46px;
-    width: 38px;
+    height: 48px;
+    width: 40px;
 }
 
 .pswp__top-bar .pswp__button .pswp__icn {
-    width: 32px;
-    height: 32px;
-    top: 7px;
-    left: 3px;
+    width: 28px;
+    height: 28px;
+    top: 10px;
+    left: 6px;
 }
 
 .pswp__button--arrow .pswp__icn {
