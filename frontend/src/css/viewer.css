@@ -164,11 +164,6 @@
     padding: 0;
 }
 
-.pswp__dynamic-caption--aside,
-.pswp__dynamic-caption--below {
-    opacity: 1 !important;
-}
-
 .pswp__content {
     display: flex;
     flex-direction: column;
