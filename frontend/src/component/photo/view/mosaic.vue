@@ -214,10 +214,14 @@ export default {
     },
     pauseLive(photo) {
       const player = this.livePlayer(photo);
-      try {
-        if (player) player.pause();
-      } catch (e) {
-        // Ignore.
+      if (player) {
+        try {
+          if (!player.paused) {
+            player.pause();
+          }
+        } catch (e) {
+          console.log(e);
+        }
       }
     },
     toggleLike(ev, index) {

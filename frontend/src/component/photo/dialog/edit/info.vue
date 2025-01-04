@@ -349,7 +349,7 @@ export default {
       this.$emit("close");
     },
     openPhoto() {
-      this.$viewer.show(Thumb.fromFiles([this.model]), 0);
+      this.$root.$refs.viewer.showThumbs(Thumb.fromFiles([this.model]), 0);
     },
     albumUrl(m) {
       if (!m) {

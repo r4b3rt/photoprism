@@ -406,7 +406,7 @@ export default {
       this.$emit("prev");
     },
     openPhoto() {
-      this.$viewer.show(Thumb.fromFiles([this.model]), 0);
+      this.$root.$refs.viewer.showThumbs(Thumb.fromFiles([this.model]), 0);
     },
     save(close) {
       if (this.invalidDate) {

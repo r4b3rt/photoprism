@@ -39,7 +39,6 @@ import routes from "app/routes";
 import { config, session } from "app/session";
 import { Settings as Luxon } from "luxon";
 import Socket from "common/websocket";
-import Viewer from "common/viewer";
 import { createApp } from "vue";
 import { createVuetify } from "vuetify";
 import Vue3Sanitize from "vue-3-sanitize";
@@ -66,7 +65,6 @@ config.progress(50);
 config.update().finally(() => {
   // Initialize libs and framework.
   config.progress(66);
-  const viewer = new Viewer();
   const isPublic = config.isPublic();
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
 
@@ -84,7 +82,6 @@ config.update().finally(() => {
   app.config.globalProperties.$event = Event;
   app.config.globalProperties.$notify = Notify;
   app.config.globalProperties.$scrollbar = Scrollbar;
-  app.config.globalProperties.$viewer = viewer;
   app.config.globalProperties.$session = session;
   app.config.globalProperties.$api = Api;
   app.config.globalProperties.$log = Log;

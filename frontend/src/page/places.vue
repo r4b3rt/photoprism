@@ -445,7 +445,7 @@ export default {
         .then((r) => {
           if (r && r.data && r.data.length > 0) {
             // Show photos.
-            this.$viewer.show(Thumb.wrap(r.data), 0);
+            this.$root.$refs.viewer.showThumbs(Thumb.wrap(r.data), 0);
           } else {
             // Don't open viewer if nothing was found.
             this.$notify.warn(this.$gettext("No pictures found"));

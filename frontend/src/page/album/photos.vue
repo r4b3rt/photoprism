@@ -23,11 +23,10 @@
 </template>
 
 <script>
-import { Photo, MediaLive, MediaRaw, MediaVideo, MediaAnimated } from "model/photo";
+import { Photo, MediaRaw } from "model/photo";
 import Album from "model/album";
 import Thumb from "model/thumb";
 import Event from "pubsub-js";
-import Viewer from "common/viewer";
 
 export default {
   name: "PPageAlbumPhotos",
@@ -233,17 +232,10 @@ export default {
        *
        * preferVideo is true, when the user explicitly clicks the live-image-icon.
        */
-      if ((preferVideo && selected.Type === MediaLive) || selected.Type === MediaVideo || selected.Type === MediaAnimated) {
-        // Todo: Should be refactored/simplified when the new hybrid photo/video viewer is fully functional.
-        // if (selected.isPlayable()) {
-        //   this.$viewer.play({ video: selected, album: this.album });
-        // } else {
-        this.$viewer.show(Thumb.fromPhotos(this.results), index);
-        // }
-      } else if (showMerged) {
-        this.$viewer.show(Thumb.fromFiles([selected]), 0);
+      if (showMerged) {
+        this.$root.$refs.viewer.showThumbs(Thumb.fromFiles([selected]), 0);
       } else {
-        Viewer.show(this, index);
+        this.$root.$refs.viewer.showContext(this, index);
       }
 
       return true;

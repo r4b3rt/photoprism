@@ -24,9 +24,8 @@
 </template>
 
 <script>
-import { MediaAnimated, MediaLive, MediaRaw, MediaVideo, Photo } from "model/photo";
+import { Photo, MediaRaw } from "model/photo";
 import Thumb from "model/thumb";
-import Viewer from "common/viewer";
 import Event from "pubsub-js";
 
 export default {
@@ -375,17 +374,10 @@ export default {
        *
        * preferVideo is true, when the user explicitly clicks the live-image-icon.
        */
-      if ((preferVideo && selected.Type === MediaLive) || selected.Type === MediaVideo || selected.Type === MediaAnimated) {
-        // Todo: Should be refactored/simplified when the new hybrid photo/video viewer is fully functional.
-        // if (selected.isPlayable()) {
-        //   this.$viewer.play({ video: selected });
-        // } else {
-        this.$viewer.show(Thumb.fromPhotos(this.results), index);
-        // }
-      } else if (showMerged) {
-        this.$viewer.show(Thumb.fromFiles([selected]), 0);
+      if (showMerged) {
+        this.$root.$refs.viewer.showThumbs(Thumb.fromFiles([selected]), 0);
       } else {
-        Viewer.show(this, index);
+        this.$root.$refs.viewer.showContext(this, index);
       }
 
       return true;

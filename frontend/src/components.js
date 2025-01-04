@@ -27,8 +27,7 @@ import PNotify from "component/notify.vue";
 import PScroll from "component/scroll.vue";
 import PNavigation from "component/navigation.vue";
 import PLoadingBar from "component/loading-bar.vue";
-import PVideoPlayer from "component/video/player.vue";
-import PVideoViewer from "component/video/viewer.vue";
+import PViewer from "component/viewer.vue";
 
 import PAboutFooter from "component/about/footer.vue";
 
@@ -67,7 +66,6 @@ import PPhotoList from "component/photo/view/list.vue";
 import PPhotoClipboard from "component/photo/clipboard.vue";
 import PPhotoToolbar from "component/photo/toolbar.vue";
 import PPhotoPreview from "component/photo/preview.vue";
-import PPhotoViewer from "component/photo/viewer.vue";
 import PPhotoArchiveDialog from "component/photo/dialog/archive.vue";
 import PPhotoAlbumDialog from "component/photo/dialog/album.vue";
 import PPhotoEditDialog from "component/photo/dialog/edit.vue";
@@ -90,8 +88,7 @@ export function install(app) {
   app.component("PScroll", PScroll);
   app.component("PNavigation", PNavigation);
   app.component("PLoadingBar", PLoadingBar);
-  app.component("PVideoPlayer", PVideoPlayer);
-  app.component("PVideoViewer", PVideoViewer);
+  app.component("PViewer", PViewer);
 
   app.component("PAboutFooter", PAboutFooter);
 
@@ -134,7 +131,6 @@ export function install(app) {
   app.component("PPhotoClipboard", PPhotoClipboard);
   app.component("PPhotoToolbar", PPhotoToolbar);
   app.component("PPhotoPreview", PPhotoPreview);
-  app.component("PPhotoViewer", PPhotoViewer);
   app.component("PPhotoArchiveDialog", PPhotoArchiveDialog);
   app.component("PPhotoAlbumDialog", PPhotoAlbumDialog);
   app.component("PPhotoEditDialog", PPhotoEditDialog);

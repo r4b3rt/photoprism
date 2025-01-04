@@ -174,11 +174,11 @@ export class File extends RestModel {
     }
 
     if (this.Duration > 0) {
-      info.push(Util.duration(this.Duration));
+      info.push(Util.formatDuration(this.Duration));
     }
 
     if (this.FPS > 0) {
-      info.push(Util.fps(this.FPS));
+      info.push(Util.formatFPS(this.FPS));
     }
 
     this.addSizeInfo(info);

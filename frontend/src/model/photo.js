@@ -941,7 +941,7 @@ export class Photo extends RestModel {
     }
 
     /* if (file.Duration > 0) {
-      info.push(Util.duration(file.Duration));
+      info.push(Util.formatDuration(file.Duration));
     } */
 
     if (file.Codec) {
@@ -969,7 +969,7 @@ export class Photo extends RestModel {
     if (!file) {
       return "";
     } else if (file.Duration && file.Duration > 0) {
-      return Util.duration(file.Duration);
+      return Util.formatDuration(file.Duration);
     }
 
     return "";

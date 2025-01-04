@@ -369,7 +369,7 @@ export default {
         return "";
       }
 
-      return Util.duration(file.Duration);
+      return Util.formatDuration(file.Duration);
     },
     fileType(file) {
       if (!file || !file.FileType) {
@@ -386,7 +386,7 @@ export default {
       return Util.codecName(file.Codec);
     },
     openFile(file) {
-      this.$viewer.show([Thumb.fromFile(this.model, file)], 0);
+      this.$root.$refs.viewer.showThumbs([Thumb.fromFile(this.model, file)], 0);
     },
     folderUrl(m) {
       if (!m) {

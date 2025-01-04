@@ -25,6 +25,7 @@ Additional information can be found in our Developer Guide:
 
 @import url("../../node_modules/vuetify/dist/vuetify.min.css");
 @import url("../../node_modules/photoswipe/dist/photoswipe.css");
+@import url("../../node_modules/photoswipe-dynamic-caption-plugin/photoswipe-dynamic-caption-plugin.css");
 @import url("../../node_modules/maplibre-gl/dist/maplibre-gl.css");
 @import url("body.css");
 @import url("text.css");

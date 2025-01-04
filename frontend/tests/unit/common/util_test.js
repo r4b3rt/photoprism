@@ -6,27 +6,27 @@ let assert = chai.assert;
 
 describe("common/util", () => {
   it("should return duration 3ns", () => {
-    const duration = Util.duration(-3);
+    const duration = Util.formatDuration(-3);
     assert.equal(duration, "3ns");
   });
   it("should return duration 0s", () => {
-    const duration = Util.duration(0);
+    const duration = Util.formatDuration(0);
     assert.equal(duration, "0s");
   });
   it("should return duration 2µs", () => {
-    const duration = Util.duration(2000);
+    const duration = Util.formatDuration(2000);
     assert.equal(duration, "2µs");
   });
   it("should return duration 4ms", () => {
-    const duration = Util.duration(4000000);
+    const duration = Util.formatDuration(4000000);
     assert.equal(duration, "4ms");
   });
   it("should return duration 6s", () => {
-    const duration = Util.duration(6000000000);
+    const duration = Util.formatDuration(6000000000);
     assert.equal(duration, "0:06");
   });
   it("should return duration 10min", () => {
-    const duration = Util.duration(600000000000);
+    const duration = Util.formatDuration(600000000000);
     assert.equal(duration, "10:00");
   });
   it("should return formatted camera name", () => {

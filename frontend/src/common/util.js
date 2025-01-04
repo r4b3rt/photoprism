@@ -25,18 +25,9 @@ Additional information can be found in our Developer Guide:
 
 import { canUseAv1, canUseHevc, canUseOGV, canUseVP8, canUseVP9, canUseWebM } from "./caniuse";
 import { config } from "app/session";
-import {
-  CodecAv01,
-  CodecAv1C,
-  CodecHev1,
-  CodecHvc1,
-  CodecOGV,
-  CodecVP8,
-  CodecVP9, FormatAv1,
-  FormatAvc,
-  FormatHevc, FormatWebM
-} from "model/photo";
+import { DATE_FULL, CodecAv01, CodecAv1C, CodecHev1, CodecHvc1, CodecOGV, CodecVP8, CodecVP9, FormatAv1, FormatAvc, FormatHevc, FormatWebM } from "model/photo";
 import sanitizeHtml from "sanitize-html";
+import { DateTime } from "luxon";
 
 const Nanosecond = 1;
 const Microsecond = 1000 * Nanosecond;
@@ -47,11 +38,21 @@ const Hour = 60 * Minute;
 let start = new Date();
 
 export default class Util {
-  static fps(fps) {
-    return `${fps.toFixed(1)} FPS`;
+  formatDate(s) {
+    if (!s || !s.length) {
+      return s;
+    }
+
+    const l = s.length;
+
+    if (l !== 20 || s[l - 1] !== "Z") {
+      return s;
+    }
+
+    return DateTime.fromISO(s, { zone: "UTC" }).toLocaleString(DATE_FULL);
   }
 
-  static duration(d) {
+  static formatDuration(d) {
     let u = d;
 
     let neg = d < 0;
@@ -96,6 +97,10 @@ export default class Util {
     // return `${h}h${min}m${sec}s`
 
     return result.join(":");
+  }
+
+  static formatFPS(fps) {
+    return `${fps.toFixed(1)} FPS`;
   }
 
   static arabicToRoman(number) {
@@ -147,6 +152,10 @@ export default class Util {
   }
 
   static sanitizeHtml(html) {
+    if (!html) {
+      return "";
+    }
+
     return sanitizeHtml(html);
   }
 
@@ -470,8 +479,6 @@ export default class Util {
 
     for (let i = 0; i < thumbs.length; i++) {
       let t = thumbs[i];
-
-      console.log(t.w, viewportWidth, t.h, viewportHeight);
 
       if (t.w >= viewportWidth && t.h >= viewportHeight) {
         return t.size;

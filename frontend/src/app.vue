@@ -12,8 +12,7 @@
       </v-main>
     </v-app>
 
-    <p-video-viewer></p-video-viewer>
-    <p-photo-viewer></p-photo-viewer>
+    <p-viewer ref="viewer"></p-viewer>
   </div>
 </template>
 
