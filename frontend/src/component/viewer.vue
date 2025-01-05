@@ -120,11 +120,11 @@ export default {
     }
   },
   methods: {
-    // Returns the active PhotoSwipe 5 instance, if any.
+    // Returns the active PhotoSwipe instance, if any.
     pswp() {
       return this.lightbox?.pswp;
     },
-    // Returns the lightbox HTML element, if any.
+    // Returns the lightbox container HTML element, if any.
     getLightbox() {
       return this.$refs?.lightbox;
     },
@@ -225,7 +225,7 @@ export default {
         return;
       }
 
-      // Set PhotoSwipe 5 configuration options, see https://photoswipe.com/options/.
+      // Set PhotoSwipe configuration options, see https://photoswipe.com/options/.
       const options = {
         appendToEl: this.getLightbox(),
         pswpModule: PhotoSwipe,
@@ -366,14 +366,18 @@ export default {
 
         if (model.Playable) {
           const videoSrc = Util.videoUrl(model.Hash);
+          /*
+            Todo: (a) Check if there is a more convenient and/or safer way to render the video slide.
+                  (b) Perform security tests to make sure no code can be injected.
+          */
           if (firstPicture) {
             firstPicture = false;
             return {
-              html: `<video class="pswp__video" autoplay controls playsinline poster="${imgSrc}" preload="auto"><source src="${videoSrc}" /></video>`,
+              html: `<video class="pswp__video" autoplay controls playsinline disablepictureinpicture poster="${imgSrc}" preload="auto"><source src="${videoSrc}" /></video>`,
             };
           } else {
             return {
-              html: `<video class="pswp__video" controls playsinline poster="${imgSrc}" preload="auto"><source src="${videoSrc}" /></video>`,
+              html: `<video class="pswp__video" controls playsinline disablepictureinpicture poster="${imgSrc}" preload="metadata"><source src="${videoSrc}" /></video>`,
             };
           }
         }
@@ -555,7 +559,7 @@ export default {
       this.pauseVideos();
       this.pauseSlideshow();
     },
-    // Returns the <video> elements in the lightbox as an HTMLCollection.
+    // Returns the <video> elements in the lightbox container as an HTMLCollection.
     getVideos() {
       const el = this.getLightbox();
 
