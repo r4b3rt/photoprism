@@ -65,6 +65,10 @@ describe("common/util", () => {
   });
   it("should encode html", () => {
     const result = Util.encodeHTML("Micha & Theresa > < 'Lilly'");
-    assert.equal(result, "Micha &amp; Theresa &gt; &lt; &#x27;Lilly&#x27;");
+    assert.equal(result, "Micha &amp; Theresa &gt; &lt; &apos;Lilly&apos;");
+  });
+  it("should encode link", () => {
+    const result = Util.encodeHTML("Try this: https://photoswipe.com/options/?foo=bar&bar=baz. It's a link!");
+    assert.equal(result, `Try this: <a href="https://photoswipe.com/options/" target="_blank">https://photoswipe.com/options/</a> It&apos;s a link!`);
   });
 });

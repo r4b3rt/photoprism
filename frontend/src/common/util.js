@@ -160,19 +160,32 @@ export default class Util {
   }
 
   static encodeHTML(text) {
-    const linkRegex = /(https?:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
+    const linkRegex = /(https?:\/\/)[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&;/=]*)/g;
 
     function linkFunc(matched) {
-      let withProtocol = matched;
-
-      if (!withProtocol.startsWith("https")) {
-        withProtocol = "https://" + matched;
+      if (!matched) {
+        return "";
       }
 
-      return `<a href="${withProtocol}" target="_blank">${matched}</a>`;
+      // Strip query parameters for added security and shorter links.
+      matched = matched.split("?")[0];
+
+      // Ampersand characters (&) should generally be ok in the link URL (though it should already be stripped as it may only be part of the query).
+      let url = matched.replace(/&amp;/g, "&");
+
+      // Make sure the URL starts with "http://" or "https://".
+      if (!url.startsWith("https")) {
+        url = "https://" + matched;
+      }
+
+      // Return HTML link markup.
+      return `<a href="${url}" target="_blank">${matched}</a>`;
     }
 
-    text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
+    // Escape HTML control characters.
+    text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+
+    // Make URLs clickable.
     text = text.replace(linkRegex, linkFunc);
 
     return text;
