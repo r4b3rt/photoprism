@@ -1,6 +1,6 @@
 <template>
   <div v-if="visible" ref="container" class="p-viewer" tabindex="-1" role="dialog">
-    <div ref="lightbox" class="p-viewer__lightbox" :class="{ slideshow: slideshow.active }"></div>
+    <div ref="lightbox" class="p-viewer__lightbox" :class="{ slideshow: slideshow.active, sidebar: sidebarVisible }"></div>
     <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar"></div>
 
     <!-- div class="pswp__bg"></div>
@@ -272,6 +272,7 @@ export default {
         mainClass: "media-viewer-lightbox",
         bgClickAction: (point, e) => this.onBgClick(e),
         paddingFn: (s) => this.getPadding(s),
+        getViewportSizeFn: () => this.getViewportSize(),
         closeTitle: this.$gettext("Close"),
         zoomTitle: this.$gettext("Zoom"),
         arrowPrevTitle: this.$gettext("Previous"),
@@ -281,7 +282,11 @@ export default {
 
       // Create PhotoSwipe instance.
       let lightbox = new Lightbox(options);
+      let self = this;
       let firstPicture = true;
+
+      // Only add a sidebar toggle button if the window is large enough.
+      const addSidebarButton = window.innerWidth > 600 && window.innerWidth > window.innerHeight;
 
       // Keep reference to PhotoSwipe instance.
       this.lightbox = lightbox;
@@ -317,12 +322,31 @@ export default {
       // Add user interface elements, see https://photoswipe.com/adding-ui-elements/.
       //
       // Todo: The same controls as with PhotoSwipe 4 should be usable/available!
-      lightbox.on("uiRegister", function () {
+      lightbox.on("uiRegister", () => {
+        // Sidebar information panel toggle button.
+        // Todo: Proof-of-concept, requires improvements.
+        if (addSidebarButton) {
+          // Only add button if the window is large enough for the sidebar.
+          lightbox.pswp.ui.registerElement({
+            name: "sidebar-button",
+            order: 9,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: '<path d="M11 7V9H13V7H11M14 17V15H13V11H10V13H11V15H10V17H14M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12M20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12Z" id="pswp__icn-sidebar"/>',
+              outlineID: "pswp__icn-sidebar",
+            },
+            onClick: (e) => {
+              return this.toggleSidebar(e);
+            },
+          });
+        }
+
         // Download button displayed at the top.
-        // Todo: Proof-of-concept, requires refactoring.
+        // Todo: Proof-of-concept, requires improvements.
         lightbox.pswp.ui.registerElement({
           name: "download-button",
-          order: 8,
+          order: 10,
           isButton: true,
           tagName: "a",
 
@@ -610,7 +634,6 @@ export default {
 
       this.slideshow.active = true;
 
-      const self = this;
       const pswp = this.pswp();
 
       self.interval = setInterval(() => {
@@ -658,6 +681,20 @@ export default {
       pswp.close(); // Close Gallery
 
       this.$event.publish("dialog.edit", { selection, album, index }); // Open Edit Dialog
+    },
+    toggleSidebar(e) {
+      this.sidebarVisible = !this.sidebarVisible;
+
+      this.$nextTick(() => {
+        const pswp = this.pswp();
+        if (pswp) {
+          pswp.updateSize(true);
+        }
+      });
+
+      if (e && typeof e.stopPropagation === "function") {
+        e.stopPropagation();
+      }
     },
     toggleControls(e) {
       if (this.pswp() && this.pswp().element) {
@@ -731,6 +768,21 @@ export default {
       if (this.captionTimer) {
         window.clearTimeout(this.captionTimer);
         this.captionTimer = false;
+      }
+    },
+    getViewportSize() {
+      const el = this.getLightbox();
+
+      if (el) {
+        return {
+          x: el.clientWidth,
+          y: el.clientHeight,
+        };
+      } else {
+        return {
+          x: window.innerWidth,
+          y: window.innerHeight,
+        };
       }
     },
     getPadding(s) {
