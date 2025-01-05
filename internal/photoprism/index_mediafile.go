@@ -872,7 +872,7 @@ func (ind *Index) UserMediaFile(m *MediaFile, o IndexOptions, originalName, phot
 	if file.FilePrimary {
 		photoLabels := photo.ClassifyLabels()
 
-		if err = photo.UpdateTitle(photoLabels); err != nil {
+		if err = photo.GenerateTitle(photoLabels); err != nil {
 			log.Debugf("%s in %s (update title)", err, logName)
 		}
 

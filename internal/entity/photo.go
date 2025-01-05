@@ -185,7 +185,7 @@ func SavePhotoForm(model Photo, form form.Photo) error {
 		log.Errorf("photo: %s %s while updating labels", model.String(), err)
 	}
 
-	if err := model.UpdateTitle(model.ClassifyLabels()); err != nil {
+	if err := model.GenerateTitle(model.ClassifyLabels()); err != nil {
 		log.Info(err)
 	}
 
@@ -352,7 +352,7 @@ func (m *Photo) SaveLabels() error {
 
 	m.UpdateDateFields()
 
-	if err := m.UpdateTitle(labels); err != nil {
+	if err := m.GenerateTitle(labels); err != nil {
 		log.Info(err)
 	}
 
