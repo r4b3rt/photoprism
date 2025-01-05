@@ -35,7 +35,7 @@ func (w *Convert) JpegConvertCommands(f *MediaFile, jpegName string, xmpName str
 		// TODO: Adjust command flags for correct colors with HDR10-encoded HEVC videos,
 		// see https://github.com/photoprism/photoprism/issues/4488
 		result = append(result, NewConvertCommand(
-			exec.Command(w.conf.FFmpegBin(), "-y", "-ss", timeOffset, "-i", f.FileName(), "-vframes", "1",
+			exec.Command(w.conf.FFmpegBin(), "-y", "-strict", "-2", "-ss", timeOffset, "-i", f.FileName(), "-vframes", "1",
 				// Unfortunately, this filter renders thumbnails of non-HDR videos too dark:
 				// "-vf", "zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=gamma:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p",
 				jpegName)),

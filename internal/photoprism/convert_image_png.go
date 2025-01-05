@@ -31,7 +31,7 @@ func (w *Convert) PngConvertCommands(f *MediaFile, pngName string) (result Conve
 	if f.IsAnimated() && !f.IsWebP() && w.conf.FFmpegEnabled() {
 		// Use "ffmpeg" to extract a PNG still image from the video.
 		result = append(result, NewConvertCommand(
-			exec.Command(w.conf.FFmpegBin(), "-y", "-ss", ffmpeg.PreviewTimeOffset(f.Duration()), "-i", f.FileName(), "-vframes", "1", pngName)),
+			exec.Command(w.conf.FFmpegBin(), "-y", "-strict", "-2", "-ss", ffmpeg.PreviewTimeOffset(f.Duration()), "-i", f.FileName(), "-vframes", "1", pngName)),
 		)
 	}
 

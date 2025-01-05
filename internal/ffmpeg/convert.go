@@ -30,12 +30,13 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 	if fs.TypeAnimated[fs.FileType(fileName)] != "" {
 		result = exec.Command(
 			ffmpeg,
+			"-y",
+			"-strict", "-2",
 			"-i", fileName,
 			"-pix_fmt", FormatYUV420P.String(),
 			"-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2",
 			"-f", "mp4",
 			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			"-y",
 			avcName,
 		)
 
@@ -52,6 +53,8 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 		// ffmpeg -hide_banner -h encoder=h264_qsv
 		result = exec.Command(
 			ffmpeg,
+			"-y",
+			"-strict", "-2",
 			"-hwaccel", "qsv",
 			"-hwaccel_output_format", "qsv",
 			"-qsv_device", "/dev/dri/renderD128",
@@ -66,7 +69,6 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 			"-bitrate", opt.Bitrate,
 			"-f", "mp4",
 			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			"-y",
 			avcName,
 		)
 
@@ -74,6 +76,8 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 		// ffmpeg -hide_banner -h encoder=h264_videotoolbox
 		result = exec.Command(
 			ffmpeg,
+			"-y",
+			"-strict", "-2",
 			"-i", fileName,
 			"-c:v", opt.Encoder.String(),
 			"-map", opt.MapVideo,
@@ -86,13 +90,14 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 			"-b:v", opt.Bitrate,
 			"-f", "mp4",
 			"-movflags", "+faststart",
-			"-y",
 			avcName,
 		)
 
 	case VAAPIEncoder:
 		result = exec.Command(
 			ffmpeg,
+			"-y",
+			"-strict", "-2",
 			"-hwaccel", "vaapi",
 			"-i", fileName,
 			"-c:a", "aac",
@@ -104,7 +109,6 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 			"-b:v", opt.Bitrate,
 			"-f", "mp4",
 			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			"-y",
 			avcName,
 		)
 
@@ -112,6 +116,8 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 		// ffmpeg -hide_banner -h encoder=h264_nvenc
 		result = exec.Command(
 			ffmpeg,
+			"-y",
+			"-strict", "-2",
 			"-hwaccel", "auto",
 			"-i", fileName,
 			"-pix_fmt", FormatYUV420P.String(),
@@ -133,7 +139,6 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 			"-coder:v", "1",
 			"-f", "mp4",
 			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			"-y",
 			avcName,
 		)
 
@@ -141,6 +146,8 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 		// ffmpeg -hide_banner -h encoder=h264_v4l2m2m
 		result = exec.Command(
 			ffmpeg,
+			"-y",
+			"-strict", "-2",
 			"-i", fileName,
 			"-c:v", opt.Encoder.String(),
 			"-map", opt.MapVideo,
@@ -155,13 +162,14 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 			"-b:v", opt.Bitrate,
 			"-f", "mp4",
 			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			"-y",
 			avcName,
 		)
 
 	default:
 		result = exec.Command(
 			ffmpeg,
+			"-y",
+			"-strict", "-2",
 			"-i", fileName,
 			"-c:v", opt.Encoder.String(),
 			"-map", opt.MapVideo,
@@ -174,7 +182,6 @@ func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd,
 			"-b:v", opt.Bitrate,
 			"-f", "mp4",
 			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			"-y",
 			avcName,
 		)
 	}
