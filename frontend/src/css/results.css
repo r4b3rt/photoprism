@@ -335,7 +335,7 @@ body.chrome .search-results .result {
     height: auto;
     margin: 4px;
     padding: 0;
-    text-shadow: -1px -1px 0 #0004, 1px -1px 0 #0004, -1px 1px 0 #0004, 1px 1px 0 #0004;
+    text-shadow: -1px -1px 0 #0003, 1px -1px 0 #0003, -1px 1px 0 #0003, 1px 1px 0 #0003;
 }
 
 .search-results .preview .preview-details > div.info-text {
@@ -530,7 +530,12 @@ body.chrome .search-results .result {
 .cards-view .result .preview button,
 .list-view .result .preview button,
 .mosaic-view .result.preview button {
-    text-shadow: -1px -1px 0 #0004, 1px -1px 0 #0004, -1px 1px 0 #0004, 1px 1px 0 #0004;
+    text-shadow: -1px -1px 0 #0003, 1px -1px 0 #0003, -1px 1px 0 #0003, 1px 1px 0 #0003;
+}
+
+.cards-view .result.is-favorite .preview button.input-favorite,
+.mosaic-view .result.is-favorite.preview button.input-favorite {
+    text-shadow: none;
 }
 
 .search-results .result .input-select .select-off,
