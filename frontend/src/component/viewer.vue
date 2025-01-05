@@ -373,11 +373,11 @@ export default {
           if (firstPicture) {
             firstPicture = false;
             return {
-              html: `<video class="pswp__video" autoplay controls playsinline disablepictureinpicture poster="${imgSrc}" preload="auto"><source src="${videoSrc}" /></video>`,
+              html: `<video class="pswp__video" autoplay controls playsinline poster="${imgSrc}" preload="auto"><source src="${videoSrc}" /></video>`,
             };
           } else {
             return {
-              html: `<video class="pswp__video" controls playsinline disablepictureinpicture poster="${imgSrc}" preload="metadata"><source src="${videoSrc}" /></video>`,
+              html: `<video class="pswp__video" controls playsinline poster="${imgSrc}" preload="metadata"><source src="${videoSrc}" /></video>`,
             };
           }
         }
