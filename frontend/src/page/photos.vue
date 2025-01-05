@@ -6,13 +6,7 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else>
-      <p-scroll
-        :hide-panel="hideExpansionPanel"
-        :load-more="loadMore"
-        :load-disabled="scrollDisabled"
-        :load-distance="scrollDistance"
-        :loading="loading">
-      </p-scroll>
+      <p-scroll :hide-panel="hideExpansionPanel" :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"> </p-scroll>
 
       <p-photo-clipboard :context="context" :refresh="refresh"></p-photo-clipboard>
 
@@ -185,12 +179,12 @@ export default {
     this.subscriptions.push(Event.subscribe("photos", (ev, data) => this.onUpdate(ev, data)));
 
     this.subscriptions.push(
-      Event.subscribe("viewer.show", (ev, data) => {
+      this.$event.subscribe("viewer.opened", (ev, data) => {
         this.viewer.open = true;
       })
     );
     this.subscriptions.push(
-      Event.subscribe("viewer.hide", (ev, data) => {
+      this.$event.subscribe("viewer.closed", (ev, data) => {
         this.viewer.open = false;
       })
     );

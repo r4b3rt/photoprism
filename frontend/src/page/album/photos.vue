@@ -6,12 +6,7 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else>
-      <p-scroll
-        :load-more="loadMore"
-        :load-disabled="scrollDisabled"
-        :load-distance="scrollDistance"
-        :loading="loading">
-      </p-scroll>
+      <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"> </p-scroll>
 
       <p-photo-clipboard :refresh="refresh" :album="model" context="album"></p-photo-clipboard>
 
@@ -131,6 +126,17 @@ export default {
     this.subscriptions.push(Event.subscribe("albums.updated", (ev, data) => this.onAlbumsUpdated(ev, data)));
     this.subscriptions.push(Event.subscribe("photos", (ev, data) => this.onUpdate(ev, data)));
 
+    this.subscriptions.push(
+      this.$event.subscribe("viewer.opened", (ev, data) => {
+        this.viewer.open = true;
+      })
+    );
+    this.subscriptions.push(
+      this.$event.subscribe("viewer.closed", (ev, data) => {
+        this.viewer.open = false;
+      })
+    );
+
     this.subscriptions.push(Event.subscribe("touchmove.top", () => this.refresh()));
     this.subscriptions.push(Event.subscribe("touchmove.bottom", () => this.loadMore()));
   },
@@ -175,7 +181,7 @@ export default {
         return;
       }
 
-      this.$router.push({ query: { q: "taken:" + photo.TakenAt.substring(0, 10) }});
+      this.$router.push({ query: { q: "taken:" + photo.TakenAt.substring(0, 10) } });
     },
     openLocation(index) {
       if (!this.hasPlaces) {

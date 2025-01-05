@@ -1,5 +1,8 @@
 <template>
   <div v-if="visible" ref="container" class="p-viewer" tabindex="-1" role="dialog">
+    <div ref="lightbox" class="p-viewer__lightbox" :class="{ slideshow: slideshow.active }"></div>
+    <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar"></div>
+
     <!-- div class="pswp__bg"></div>
     <div class="pswp__scroll-wrap">
       <div class="pswp__container" :class="{ slideshow: slideshow.active }">
@@ -72,7 +75,7 @@
 
 <script>
 import PhotoSwipe from "photoswipe";
-import LightBox from "photoswipe/lightbox";
+import Lightbox from "photoswipe/lightbox";
 import PhotoSwipeDynamicCaption from "photoswipe-dynamic-caption-plugin";
 import Util from "common/util";
 import Api from "common/api";
@@ -95,17 +98,19 @@ export default {
   data() {
     return {
       visible: false,
+      sidebarVisible: false,
       lightbox: null,
       captionPlugin: null,
       captionTimer: false,
       hasTouch: false,
-      idleTime: 4000,
+      idleTime: 6500, // Auto-hide viewer controls after 6.5 seconds.
+      controlsShown: -1,
       canEdit: this.$config.allow("photos", "update") && this.$config.feature("edit"),
       canLike: this.$config.allow("photos", "manage") && this.$config.feature("favorites"),
       canDownload: this.$config.allow("photos", "download") && this.$config.feature("download"),
       selection: this.$clipboard.selection,
       config: this.$config.values,
-      slide: new Thumb(),
+      model: new Thumb(),
       subscriptions: [],
       interval: false,
       slideshow: {
@@ -127,28 +132,40 @@ export default {
     // this.subscriptions["viewer.change"] = this.$event.subscribe("viewer.change", this.onChange);
     this.subscriptions["viewer.pause"] = this.$event.subscribe("viewer.pause", this.onPause);
     // this.subscriptions["viewer.show"] = this.$event.subscribe("viewer.show", this.onShow);
-    this.subscriptions["viewer.hide"] = this.$event.subscribe("viewer.hide", this.onHide);
+    this.subscriptions["viewer.close"] = this.$event.subscribe("viewer.close", this.onClose);
   },
-  unmounted() {
+  beforeUnmount() {
     this.onPause();
-
-    this.lightbox.destroy();
-    this.lightbox = null;
+    this.destroyLightbox();
 
     for (let i = 0; i < this.subscriptions.length; i++) {
       this.$event.unsubscribe(this.subscriptions[i]);
     }
   },
   methods: {
-    getEl() {
-      return this.$refs?.container;
-    },
-    getPhotoSwipe() {
+    // Returns the active PhotoSwipe 5 instance, if any.
+    pswp() {
       return this.lightbox?.pswp;
     },
-    getVideos() {
-      return this.getEl().getElementsByTagName("video");
+    // Returns the lightbox HTML element, if any.
+    getLightbox() {
+      return this.$refs?.lightbox;
     },
+    // Displays the thumbnail images and/or videos that belong to the specified models in the lightbox.
+    showThumbs(models, index = 0) {
+      // Check if at least one model was passed, as otherwise no content can be displayed.
+      if (!Array.isArray(models) || models.length === 0 || index >= models.length) {
+        console.log("model list passed to viewer is empty:", models);
+        return;
+      }
+
+      this.onShow();
+
+      this.$nextTick(() => {
+        this.renderLightbox(models, index);
+      });
+    },
+    // Loads the pictures that belong to the page context and displays them in the lightbox.
     showContext(ctx, index) {
       if (ctx.loading || !ctx.listen || ctx.viewer.loading || !ctx.results[index]) {
         return false;
@@ -222,35 +239,25 @@ export default {
           ctx.viewer.loading = false;
         });
     },
-    showThumbs(slides, index = 0) {
-      if (!Array.isArray(slides) || slides.length === 0 || index >= slides.length) {
-        console.log("item list passed to viewer is empty:", slides);
+    // Initializes and opens the PhotoSwipe lightbox with the
+    // images and/or videos that belong to the specified models.
+    renderLightbox(models, index = 0) {
+      // Check if at least one model was passed, as otherwise no content can be displayed.
+      if (!Array.isArray(models) || models.length === 0 || index >= models.length) {
+        console.log("model list passed to viewer is empty:", models);
         return;
       }
 
-      this.onShow();
-
-      this.$nextTick(() => {
-        this.renderLightBox(slides, index);
-      });
-    },
-    renderLightBox(slides, index = 0) {
-      if (!Array.isArray(slides) || slides.length === 0 || index >= slides.length) {
-        console.log("item list passed to viewer is empty:", slides);
-        return;
-      }
-
-      this.$event.publish("viewer.show");
-
-      // PhotoSwipe configuration options, see https://photoswipe.com/options/.
+      // Set PhotoSwipe 5 configuration options, see https://photoswipe.com/options/.
       const options = {
-        appendToEl: this.getEl(),
+        appendToEl: this.getLightbox(),
         pswpModule: PhotoSwipe,
-        dataSource: slides,
+        dataSource: models,
         index: index,
         mouseMovePan: true,
         arrowPrev: true,
         arrowNext: true,
+        loop: true,
         zoom: true,
         close: true,
         counter: false,
@@ -260,21 +267,15 @@ export default {
         bgOpacity: 1,
         preload: [1, 1],
         showHideAnimationType: "none",
-        tapAction: "toggle-controls",
+        tapAction: (point, e) => this.toggleControls(e),
         imageClickAction: "zoom",
         mainClass: "media-viewer-lightbox",
-        paddingFn: () => {
-          return {
-            top: 24,
-            bottom: 24,
-            left: 0,
-            right: 0,
-          };
-        },
+        bgClickAction: (point, e) => this.onBgClick(e),
+        paddingFn: (s) => this.getPadding(s),
       };
 
       // Create PhotoSwipe instance.
-      let lightbox = new LightBox(options);
+      let lightbox = new Lightbox(options);
       let firstPicture = true;
 
       // Keep reference to PhotoSwipe instance.
@@ -282,31 +283,33 @@ export default {
       this.captionTimer = false;
       this.hasTouch = false;
 
-      // Add dynamic caption plugin.
+      // Use dynamic caption plugin,
+      // see https://github.com/dimsemenov/photoswipe-dynamic-caption-plugin.
       this.captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
         type: "auto",
         captionContent: (slide) => {
-          if (!slide || !slides || slide?.index < 0) {
+          if (!slide || !models || slide?.index < 0) {
             return "";
           }
 
-          const media = slides[slide.index];
+          const model = models[slide.index];
 
-          if (media) {
-            return this.formatCaption(media);
+          if (model) {
+            return this.formatCaption(model);
           }
 
           return "";
         },
       });
 
-      // Add a close event handler to destroy the viewer after use.
+      // Add a close event handler to destroy the viewer after use,
+      // see https://photoswipe.com/events/#closing-events.
       lightbox.on("close", () => {
         this.$event.publish("viewer.pause");
-        this.$event.publish("viewer.hide");
+        this.$event.publish("viewer.close");
       });
 
-      // Add user interface controls.
+      // Add user interface elements, see https://photoswipe.com/adding-ui-elements/.
       //
       // Todo: The same controls as with PhotoSwipe 4 should be usable/available!
       lightbox.on("uiRegister", function () {
@@ -337,29 +340,32 @@ export default {
         });
       });
 
-      // Auto hide PhotoSwipe UI.
+      // Trigger onChange() event handler when slide is changed and on initialization,
+      // see https://photoswipe.com/events/#initialization-events.
       this.lightbox.on("change", () => {
-        this.onChange(slides);
+        this.onChange(models);
       });
 
+      // Trigger onDestroy() event handler when the PhotoSwipe lightbox is destroyed,
+      // see https://photoswipe.com/events/#closing-events.
       this.lightbox.on("destroy", () => {
-        this.stopHideTimer();
+        this.onDestroy();
       });
 
       // Process raw data for PhotoSwipe, see https://photoswipe.com/filters/#itemdata.
       //
       // Todo: Should be improved to allow dynamic zooming and play videos in their native format whenever possible.
       lightbox.addFilter("itemData", (el, i) => {
-        const data = slides[i];
+        const model = models[i];
         const viewportWidth = window.innerWidth * window.devicePixelRatio;
         const viewportHeight = window.innerHeight * window.devicePixelRatio;
 
         const s = Util.thumbSize(viewportWidth, viewportHeight);
 
-        const imgSrc = data.Thumbs[s].src;
+        const imgSrc = model.Thumbs[s].src;
 
-        if (data.Playable) {
-          const videoSrc = Util.videoUrl(data.Hash);
+        if (model.Playable) {
+          const videoSrc = Util.videoUrl(model.Hash);
           if (firstPicture) {
             firstPicture = false;
             return {
@@ -373,8 +379,8 @@ export default {
         }
 
         el.src = imgSrc;
-        el.w = Number(data.Thumbs[s].w);
-        el.h = Number(data.Thumbs[s].h);
+        el.w = Number(model.Thumbs[s].w);
+        el.h = Number(model.Thumbs[s].h);
 
         if (firstPicture) {
           firstPicture = false;
@@ -388,45 +394,78 @@ export default {
 
       // Show first image.
       lightbox.loadAndOpen(index);
+
+      // Publish event to be consumed by other components.
+      this.$event.publish("viewer.opened");
     },
-    formatCaption(media) {
-      if (!media) {
+    // Destroys the PhotoSwipe lightbox after use.
+    destroyLightbox() {
+      if (this.lightbox) {
+        this.lightbox?.destroy();
+        this.lightbox = null;
+      }
+    },
+    // Returns the picture (model) caption as sanitized HTML, if any.
+    formatCaption(model) {
+      if (!model) {
         return "";
       }
 
       let caption = "";
 
-      if (media.Title) {
-        caption += `<h4>${Util.encodeHTML(media.Title)}</h4>`;
+      if (model.Title) {
+        caption += `<h4>${Util.encodeHTML(model.Title)}</h4>`;
       }
 
-      // TODO: Find a good position and styles for the date information.
-      /* if (media.TakenAtLocal) {
-        caption += `<div>${Util.formatDate(media.TakenAtLocal)}</div>`;
+      /* TODO: Find a good position for the date information that
+               works for all screen sizes and image dimensions. */
+      /* if (model.TakenAtLocal) {
+         caption += `<div>${Util.formatDate(model.TakenAtLocal)}</div>`;
       } */
 
-      if (media.Caption) {
-        caption += `<p>${Util.encodeHTML(media.Caption)}</p>`;
-      } else if (media.Description) {
-        caption += `<p>${Util.encodeHTML(media.Description)}</p>`;
+      if (model.Caption) {
+        caption += `<p>${Util.encodeHTML(model.Caption)}</p>`;
+      } else if (model.Description) {
+        caption += `<p>${Util.encodeHTML(model.Description)}</p>`;
       }
 
+      // TODO: Perform security tests to see if unwanted code can be injected.
       return Util.sanitizeHtml(caption);
     },
     onShow() {
+      // Hide the browser scrollbar as it is not wanted in the viewer.
       this.$scrollbar.hide();
+
+      // Render the component template.
       this.visible = true;
+
+      // Publish event to be consumed by other components.
+      this.$event.publish("viewer.show");
     },
-    onHide() {
-      this.pauseVideos();
-      this.lightbox.destroy();
-      this.lightbox = null;
-      this.slide = new Thumb();
-      this.visible = false;
+    // Destroys the PhotoSwipe lightbox, resets the component state, and unhides the browser scrollbar.
+    onClose() {
+      this.destroyLightbox();
+
+      // Reset component state.
+      this.onReset();
+
+      // Restore browser scrollbar state.
       this.$scrollbar.show();
+
+      // Publish event to be consumed by other components.
+      this.$event.publish("viewer.closed");
     },
-    onChange(slides) {
-      const pswp = this.getPhotoSwipe();
+    // Resets the component state after closing the lightbox.
+    onReset() {
+      this.visible = false;
+      this.sidebarVisible = false;
+      this.model = new Thumb();
+      this.controlsShown = -1;
+    },
+    // Called when the slide is changed and on initialization,
+    // see https://photoswipe.com/events/#initialization-events.
+    onChange(models) {
+      const pswp = this.pswp();
 
       if (!pswp) {
         return;
@@ -451,22 +490,41 @@ export default {
       );
 
       if (this.slideshow.next !== pswp.currIndex) {
-        this.onPause();
+        this.pauseSlideshow();
       }
 
-      if (pswp.currIndex && slides && pswp.currIndex >= 0 && pswp.currIndex < slides.length) {
-        this.slide = slides[pswp.currIndex];
+      if (pswp.currIndex && models && pswp.currIndex >= 0 && pswp.currIndex < models.length) {
+        this.model = models[pswp.currIndex];
+      }
+    },
+    // Called when the PhotoSwipe lightbox is destroyed,
+    // see https://photoswipe.com/events/#closing-events.
+    onDestroy() {
+      this.onPause();
+      this.stopHideTimer();
+    },
+    // Called when the user clicks on the PhotoSwipe lightbox background,
+    // see https://photoswipe.com/click-and-tap-actions.
+    onBgClick(e) {
+      if (this.controlsVisible()) {
+        this.onClose();
+      } else {
+        this.showControls();
+      }
+
+      if (e && typeof e.stopPropagation === "function") {
+        e.stopPropagation();
       }
     },
     onLike() {
-      this.slide.toggleLike();
+      this.model.toggleLike();
     },
     onSelect() {
-      this.$clipboard.toggle(this.slide);
+      this.$clipboard.toggle(this.model);
     },
     onPlay() {
-      if (this.slide && this.slide.Playable) {
-        new Photo().find(this.slide.UID).then((video) => this.openPlayer(video));
+      if (this.model && this.model.Playable) {
+        new Photo().find(this.model.UID).then((video) => this.openPlayer(video));
       }
     },
     openPlayer(video) {
@@ -492,14 +550,23 @@ export default {
       // Play video.
       this.player.show = true;
     },
+    // Pauses the lightbox slideshow and any videos that are playing.
     onPause() {
-      this.slideshow.active = false;
-
-      if (this.interval) {
-        clearInterval(this.interval);
-        this.interval = false;
-      }
+      this.pauseVideos();
+      this.pauseSlideshow();
     },
+    // Returns the <video> elements in the lightbox as an HTMLCollection.
+    getVideos() {
+      const el = this.getLightbox();
+
+      // Call https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName to find videos.
+      if (el) {
+        return el.getElementsByTagName("video");
+      }
+
+      return [];
+    },
+    // Pauses all videos currently playing in the lightbox.
     pauseVideos() {
       const videos = this.getVideos();
 
@@ -510,6 +577,8 @@ export default {
       for (let video of videos) {
         if (typeof video.pause === "function") {
           try {
+            // Calling pause() before a play promise has been resolved may result in an error,
+            // see https://github.com/flutter/flutter/issues/136309 (we'll ignore this for now).
             if (!video.paused) {
               video.pause();
             }
@@ -519,51 +588,60 @@ export default {
         }
       }
     },
+    // Pauses the lightbox slideshow, if currently active.
+    pauseSlideshow() {
+      this.slideshow.active = false;
+
+      if (this.interval) {
+        clearInterval(this.interval);
+        this.interval = false;
+      }
+    },
     onSlideshow() {
       if (this.interval) {
-        this.onPause();
+        this.pauseSlideshow();
         return;
       }
 
       this.slideshow.active = true;
 
       const self = this;
-      const psp = this.getPhotoSwipe();
+      const pswp = this.pswp();
 
       self.interval = setInterval(() => {
-        if (psp && typeof psp.next === "function") {
-          psp.next();
-          this.slideshow.next = psp.currIndex;
+        if (pswp && typeof pswp.next === "function") {
+          pswp.next();
+          this.slideshow.next = pswp.currIndex;
         } else {
-          this.onPause();
+          this.pauseSlideshow();
         }
       }, 5000);
     },
     onDownload() {
-      this.onPause();
+      this.pauseSlideshow();
 
-      if (!this.slide || !this.slide.DownloadUrl) {
+      if (!this.model || !this.model.DownloadUrl) {
         console.warn("photo viewer: no download url");
         return;
       }
 
       Notify.success(this.$gettext("Downloading…"));
 
-      new Photo().find(this.slide.UID).then((p) => p.downloadAll());
+      new Photo().find(this.model.UID).then((p) => p.downloadAll());
     },
     onEdit() {
       this.onPause();
 
-      const g = this.getPhotoSwipe();
+      const pswp = this.pswp();
       let index = 0;
 
       // remove duplicates
-      let filtered = g.items.filter(function (p, i, s) {
+      let filtered = pswp.items.filter(function (p, i, s) {
         return !(i > 0 && p.UID === s[i - 1].UID);
       });
 
       let selection = filtered.map((p, i) => {
-        if (g.currItem.UID === p.UID) {
+        if (this.model.UID === p.UID) {
           index = i;
         }
 
@@ -572,24 +650,58 @@ export default {
 
       let album = null;
 
-      g.close(); // Close Gallery
+      pswp.close(); // Close Gallery
 
       this.$event.publish("dialog.edit", { selection, album, index }); // Open Edit Dialog
     },
-    showUI() {
-      if (this.getPhotoSwipe() && this.getPhotoSwipe().element) {
-        this.getPhotoSwipe().element.classList.add("pswp--ui-visible");
+    toggleControls(e) {
+      if (this.pswp() && this.pswp().element) {
+        const el = this.pswp().element;
+        if (el.classList.contains("pswp--ui-visible")) {
+          this.controlsShown = 0;
+          el.classList.remove("pswp--ui-visible");
+        } else {
+          this.controlsShown = Date.now();
+          el.classList.add("pswp--ui-visible");
+        }
+      }
+
+      if (e && typeof e.stopPropagation === "function") {
+        e.stopPropagation();
       }
     },
-    hideUI() {
-      if (this.getPhotoSwipe() && this.getPhotoSwipe().element) {
-        this.getPhotoSwipe().element.classList.remove("pswp--ui-visible");
+    showControls() {
+      if (this.pswp() && this.pswp().element) {
+        this.controlsShown = Date.now();
+        this.pswp().element.classList.add("pswp--ui-visible");
       }
+    },
+    hideControls() {
+      if (this.pswp() && this.pswp().element) {
+        this.controlsShown = 0;
+        this.pswp().element.classList.remove("pswp--ui-visible");
+      }
+    },
+    controlsVisible() {
+      if (this.controlsShown === 0) {
+        return false;
+      } else if (this.controlsShown < 0) {
+        return true;
+      }
+
+      if (this.pswp() && this.pswp().element) {
+        const el = this.pswp().element;
+        if (el.classList.contains("pswp--ui-visible") && (Date.now() - this.controlsShown) > 120) {
+          return true;
+        }
+      }
+
+      return false;
     },
     mouseMove() {
       this.stopHideTimer();
       if (this.lightbox) {
-        this.showUI();
+        this.showControls();
         this.startHideTimer();
       }
     },
@@ -600,7 +712,7 @@ export default {
 
       this.stopHideTimer();
       this.captionTimer = window.setTimeout(() => {
-        this.hideUI();
+        this.hideControls();
       }, this.idleTime);
       document.addEventListener(
         "mousemove",
@@ -616,6 +728,33 @@ export default {
         this.captionTimer = false;
       }
     },
+    getPadding(s) {
+      if (!s || s.x <= 600) {
+        // Use no left or right padding on mobile screens.
+        return {
+          top: 16,
+          bottom: 16,
+          left: 0,
+          right: 0,
+        };
+      } else if (s.x === 720 || s.x === 1080 || s.x === 1280 || s.x === 1920 || s.x === 2560 || s.x === 3840 || s.x === 4096 || s.x === 4096 || s.x === 7680) {
+        // Viewport has a standardized size, e.g. on a TV or a browser in full-screen mode.
+        return {
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+        };
+      } else {
+        // Default.
+        return {
+          top: 4,
+          bottom: 4,
+          left: 4,
+          right: 4,
+        };
+      }
+    }
   },
 };
 </script>

@@ -216,6 +216,8 @@ export default {
       const player = this.livePlayer(photo);
       if (player) {
         try {
+          // Calling pause() before a play promise has been resolved may result in an error,
+          // see https://github.com/flutter/flutter/issues/136309 (we'll ignore this for now).
           if (!player.paused) {
             player.pause();
           }

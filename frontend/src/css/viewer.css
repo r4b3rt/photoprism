@@ -1,56 +1,5 @@
-/* Video Viewer */
+/* Photo/Video Viewer Styles */
 
-#photoprism .video-viewer {
-    z-index: 2147483647;
-    position: fixed;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.72);
-}
-
-#photoprism .video-wrapper {
-    overflow: hidden !important;
-    position: relative;
-    border: none;
-    outline: none;
-    border-image-width: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-    background-color: transparent;
-    box-shadow: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 100vw;
-    max-height: 100vh;
-}
-
-#photoprism .video-player {
-    overflow: hidden !important;
-    position: absolute;
-    border: none;
-    outline: none;
-    border-image-width: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-    background-color: transparent;
-    box-shadow: none;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    max-width: 100vw;
-    max-height: 100vh;
-}
-
-/* Photo Viewer */
-
-.p-viewer,
 .p-viewer {
     position: fixed;
     top: 0;
@@ -58,35 +7,160 @@
     bottom: 0;
     right: 0;
     z-index: 2500;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+    overflow: hidden;
 }
 
-.pswp__caption__center {
-    text-align: center;
-    max-width: 80%;
-    margin: 0 auto;
+.p-viewer .p-viewer__lightbox {
+    display: block;
+    overflow: hidden;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.p-viewer .p-viewer__sidebar {
+    display: block;
+    overflow: auto;
+}
+
+/* Viewer Content */
+
+.pswp__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.pswp__video {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+}
+
+.pswp__container.slideshow {
+    transition: transform 0.8s ease-in-out;
+}
+
+.pswp__img {
+    -webkit-touch-callout: default;
+}
+
+.pswp-caption-content,
+.hidden-caption-content {
+    display: none;
+}
+
+/* Dynamic Content Captions */
+
+.pswp__dynamic-caption {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    transition: opacity 120ms linear !important; /* override default */
     font-size: 14px;
-    padding: 10px;
-    line-height: 20px;
-    color: #E0E0E0;
+    font-weight: 400;
+    color: #f3f3f3;
+}
+
+.pswp__dynamic-caption--faded {
+    opacity: 0 !important;
+}
+
+.pswp__dynamic-caption--aside {
+    width: auto;
+    max-width: 300px;
+    padding: 16px;
+    margin-top: 56px;
+}
+
+.pswp__dynamic-caption--below {
+    width: auto;
+    max-width: 700px;
+    padding: 16px 0 0;
+}
+
+.pswp__dynamic-caption--on-hor-edge {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.pswp__dynamic-caption--mobile {
+    padding: 16px 16px 48px 16px;
+    background: rgba(0,0,0,0.5);
+    left: 0 !important;
+    right: 0;
+    top: auto !important;
+    bottom: 0;
+}
+
+.pswp__dynamic-caption h4,
+.pswp__dynamic-caption div,
+.pswp__dynamic-caption p {
+    font-size: 14px;
+    text-align: start;
+    color: #f3f3f3;
+    text-shadow: #000000ff 0 0 3px;
+    line-height: normal;
+    letter-spacing: normal;
+    margin: 0 0 8px 0;
+    padding: 0;
+}
+
+.pswp__dynamic-caption a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.pswp__dynamic-caption h4 {
+    font-weight: 600;
+    word-wrap: normal;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.pswp__dynamic-caption div {
     font-weight: 400;
 }
 
-.pswp__caption__center .v-icon,
-.pswp__caption__center a {
+.pswp__dynamic-caption p {
     font-weight: 400;
-    font-size: 17px;
-    text-decoration: none;
-    padding-left: 4px;
+    white-space: pre-wrap;
 }
 
-.pswp__caption__center .description {
-    font-weight: 300;
-    font-size: 13px;
+/* Viewer Controls */
+
+.pswp__top-bar .pswp__button {
+    height: 48px;
+    width: 44px;
 }
 
-.pswp__caption__center .taken {
-    font-weight: 300;
-    font-size: 13px;
+.pswp__top-bar .pswp__button .pswp__icn {
+    width: 30px;
+    height: 30px;
+    top: 9px;
+    left: 7px;
+}
+
+.pswp__button--arrow .pswp__icn {
+    height: 50px;
+    margin-top: -25px;
+    top: 50%;
+    width: 50px;
+}
+
+.pswp__button--arrow {
+    height: 200px;
+    margin-top: -100px;
+    width: 100px;
 }
 
 .pswp__taken {
@@ -111,96 +185,4 @@
     transition: opacity 0.2s;
     -webkit-box-shadow: none;
     box-shadow: none;
-}
-
-.pswp__container.slideshow {
-    transition: transform 0.8s ease-in-out;
-}
-
-.pswp__img {
-    -webkit-touch-callout: default;
-}
-
-.hidden-caption-content {
-    display: none;
-}
-
-.pswp__dynamic-caption {
-    color: #f2f2f2;
-    font-weight: 400;
-    text-shadow: #000000ff 0 0 3px;
-}
-
-.pswp__dynamic-caption a {
-    color: inherit;
-    text-decoration: underline;
-}
-
-.pswp__dynamic-caption h4 {
-    color: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: normal;
-    margin: 0 0 8px 0;
-    padding: 0;
-}
-
-.pswp__dynamic-caption div {
-    color: inherit;
-    font-size: 14px;
-    margin: 0 0 8px 0;
-    letter-spacing: normal;
-    line-height: normal;
-}
-
-.pswp__dynamic-caption p {
-    color: inherit;
-    font-size: 14px;
-    line-height: normal;
-    letter-spacing: normal;
-    white-space: pre-wrap;
-    margin: 0 0 6px 0;
-    padding: 0;
-}
-
-.pswp__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-.pswp__video {
-    width: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    height: auto;
-}
-
-.pswp__top-bar .pswp__button {
-    height: 48px;
-    width: 40px;
-}
-
-.pswp__top-bar .pswp__button .pswp__icn {
-    width: 28px;
-    height: 28px;
-    top: 10px;
-    left: 6px;
-}
-
-.pswp__button--arrow .pswp__icn {
-    height: 50px;
-    margin-top: -25px;
-    top: 50%;
-    width: 50px;
-}
-
-.pswp__button--arrow {
-    height: 200px;
-    margin-top: -100px;
-    width: 100px;
 }
