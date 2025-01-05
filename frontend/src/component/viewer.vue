@@ -3,73 +3,50 @@
     <div ref="lightbox" class="p-viewer__lightbox" :class="{ slideshow: slideshow.active, sidebar: sidebarVisible }"></div>
     <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar"></div>
 
-    <!-- div class="pswp__bg"></div>
-    <div class="pswp__scroll-wrap">
-      <div class="pswp__container" :class="{ slideshow: slideshow.active }">
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
-        <div class="pswp__item"></div>
+    <!-- TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
+    <div class="pswp__ui pswp__ui--hidden">
+      <div class="pswp__top-bar">
+        <div class="pswp__taken hidden-xs">
+          {{ formatDate(slide.TakenAtLocal) }}
+        </div>
+
+        <div class="pswp__counter"></div>
+
+        <button class="pswp__button pswp__button--close action-close" :title="$gettext('Close')"></button>
+
+        <button v-if="canDownload" class="pswp__button action-download" style="background: none" :title="$gettext('Download')" @click.exact="onDownload">
+          <v-icon size="16" color="white">mdi-download</v-icon>
+        </button>
+
+        <button v-if="canEdit" class="pswp__button action-edit hidden-shared-only" style="background: none" :title="$gettext('Edit')" @click.exact="onEdit">
+          <v-icon size="16" color="white">mdi-pencil</v-icon>
+        </button>
+
+        <button class="pswp__button action-select" style="background: none" :title="$gettext('Select')" @click.exact="onSelect">
+          <v-icon v-if="selection.length && $clipboard.has(item)" size="16" color="white">mdi-check-circle</v-icon>
+          <v-icon v-else size="16" color="white">mdi-circle-outline</v-icon>
+        </button>
+
+        <button v-if="canLike" class="pswp__button action-like hidden-shared-only" style="background: none" :title="$gettext('Like')" @click.exact="onLike">
+          <v-icon v-if="slide.Favorite" icon="mdi-star" size="19" color="white"></v-icon>
+          <v-icon v-else icon="mdi-star-outline" size="19" color="white"></v-icon>
+        </button>
+
+        <button class="pswp__button pswp__button--fs action-toggle-fullscreen" :title="$gettext('Fullscreen')"></button>
+
+        <button class="pswp__button pswp__button--zoom action-zoom" :title="$gettext('Zoom in/out')"></button>
+
+        <button class="pswp__button action-slideshow" style="background: none" :title="$gettext('Start/Stop Slideshow')" @click.exact="onSlideshow">
+          <v-icon v-show="!interval" size="18" color="white">mdi-play</v-icon>
+          <v-icon v-show="interval" size="16" color="white">mdi-pause</v-icon>
+        </button>
       </div>
 
-      <div class="pswp__ui pswp__ui--hidden">
-        <div class="pswp__top-bar">
-          <div class="pswp__taken hidden-xs">
-            {{ formatDate(slide.TakenAtLocal) }}
-          </div>
-
-          <div class="pswp__counter"></div>
-
-          <button class="pswp__button pswp__button--close action-close" :title="$gettext('Close')"></button>
-
-          <button v-if="canDownload" class="pswp__button action-download" style="background: none" :title="$gettext('Download')" @click.exact="onDownload">
-            <v-icon size="16" color="white">mdi-download</v-icon>
-          </button>
-
-          <button v-if="canEdit" class="pswp__button action-edit hidden-shared-only" style="background: none" :title="$gettext('Edit')" @click.exact="onEdit">
-            <v-icon size="16" color="white">mdi-pencil</v-icon>
-          </button>
-
-          <button class="pswp__button action-select" style="background: none" :title="$gettext('Select')" @click.exact="onSelect">
-            <v-icon v-if="selection.length && $clipboard.has(item)" size="16" color="white">mdi-check-circle</v-icon>
-            <v-icon v-else size="16" color="white">mdi-circle-outline</v-icon>
-          </button>
-
-          <button v-if="canLike" class="pswp__button action-like hidden-shared-only" style="background: none" :title="$gettext('Like')" @click.exact="onLike">
-            <v-icon v-if="slide.Favorite" icon="mdi-star" size="19" color="white"></v-icon>
-            <v-icon v-else icon="mdi-star-outline" size="19" color="white"></v-icon>
-          </button>
-
-          <button class="pswp__button pswp__button--fs action-toggle-fullscreen" :title="$gettext('Fullscreen')"></button>
-
-          <button class="pswp__button pswp__button--zoom action-zoom" :title="$gettext('Zoom in/out')"></button>
-
-          <button class="pswp__button action-slideshow" style="background: none" :title="$gettext('Start/Stop Slideshow')" @click.exact="onSlideshow">
-            <v-icon v-show="!interval" size="18" color="white">mdi-play</v-icon>
-            <v-icon v-show="interval" size="16" color="white">mdi-pause</v-icon>
-          </button>
-
-          <div class="pswp__preloader">
-            <div class="pswp__preloader__icn">
-              <div class="pswp__preloader__cut">
-                <div class="pswp__preloader__donut"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-          <div class="pswp__share-tooltip"></div>
-        </div>
-
-        <button class="pswp__button pswp__button--arrow--left action-previous" title="Previous (arrow left)"></button>
-
-        <button class="pswp__button pswp__button--arrow--right action-next" title="Next (arrow right)"></button>
-
-        <div class="pswp__caption" @click="onPlay">
-          <div class="pswp__caption__center"></div>
-        </div>
+      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        <div class="pswp__share-tooltip"></div>
       </div>
-    </div -->
+    </div>
+     -->
   </div>
 </template>
 
@@ -87,9 +64,9 @@ import Notify from "common/notify";
   TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
     1. Some of the controls that the old viewer had (e.g. (a) select, (b) play slideshow, (c) fullscreen,
        (d) edit, (e) date info,...) are still missing.
-    2. The existing controls need improvements (e.g. (a) the download button currently only downloads the
-       thumbnail instead of having the same functionality as before, (b) the zoom doesn't load a larger
-       version of the image yet).
+    2. The already added controls may need some improvements (e.g. (a) the sidebar toggle button (info icon) shows
+       the sidebar, but the functionality there is not implemented yet, (b) the zoom doesn't load a larger version
+       of the image yet).
     3. Finally, after the refactoring/upgrade, (a) the old/unused code (e.g. for the separate video player) needs
        to be removed and (b) everything needs to be thoroughly tested on all major browsers and mobile devices.
 */
@@ -103,7 +80,7 @@ export default {
       captionPlugin: null,
       captionTimer: false,
       hasTouch: false,
-      idleTime: 6500, // Auto-hide viewer controls after 6.5 seconds.
+      idleTime: 6000, // Automatically hide viewer controls after 6 seconds until user settings are implemented.
       controlsShown: -1,
       canEdit: this.$config.allow("photos", "update") && this.$config.feature("edit"),
       canLike: this.$config.allow("photos", "manage") && this.$config.feature("favorites"),
@@ -282,11 +259,10 @@ export default {
 
       // Create PhotoSwipe instance.
       let lightbox = new Lightbox(options);
-      let self = this;
       let firstPicture = true;
 
       // Only add a sidebar toggle button if the window is large enough.
-      const addSidebarButton = window.innerWidth > 600 && window.innerWidth > window.innerHeight;
+      const addSidebarButton = this.canEdit && window.innerWidth > 600 && window.innerWidth > window.innerHeight;
 
       // Keep reference to PhotoSwipe instance.
       this.lightbox = lightbox;
@@ -319,22 +295,24 @@ export default {
         this.$event.publish("viewer.close");
       });
 
-      // Add user interface elements, see https://photoswipe.com/adding-ui-elements/.
+      // Add viewer controls, see https://photoswipe.com/adding-ui-elements/.
       //
       // Todo: The same controls as with PhotoSwipe 4 should be usable/available!
       lightbox.on("uiRegister", () => {
-        // Sidebar information panel toggle button.
-        // Todo: Proof-of-concept, requires improvements.
+        // Add info panel toggle button.
+        // Todo: Proof-of-concept only, requires the sidebar to be fully implemented.
         if (addSidebarButton) {
-          // Only add button if the window is large enough for the sidebar.
+          // Only add button if the window is large enough for the sidebar info panel.
           lightbox.pswp.ui.registerElement({
             name: "sidebar-button",
+            className: "pswp__button--sidebar-button pswp__button--mdi",
             order: 9,
             isButton: true,
             html: {
               isCustomSVG: true,
               inner: '<path d="M11 7V9H13V7H11M14 17V15H13V11H10V13H11V15H10V17H14M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12M20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12Z" id="pswp__icn-sidebar"/>',
               outlineID: "pswp__icn-sidebar",
+              size: 24,
             },
             onClick: (e) => {
               return this.toggleSidebar(e);
@@ -342,31 +320,24 @@ export default {
           });
         }
 
-        // Download button displayed at the top.
-        // Todo: Proof-of-concept, requires improvements.
-        lightbox.pswp.ui.registerElement({
-          name: "download-button",
-          order: 10,
-          isButton: true,
-          tagName: "a",
-
-          // SVG with outline
-          html: {
-            isCustomSVG: true,
-            inner: '<path d="M20.5 14.3 17.1 18V10h-2.2v7.9l-3.4-3.6L10 16l6 6.1 6-6.1ZM23 23H9v2h14Z" id="pswp__icn-download"/>',
-            outlineID: "pswp__icn-download",
-          },
-
-          onInit: (el, pswp) => {
-            el.setAttribute("download", "");
-            el.setAttribute("target", "_blank");
-            el.setAttribute("rel", "noopener");
-
-            pswp.on("change", () => {
-              el.href = pswp.currSlide.data.src;
-            });
-          },
-        });
+        // Add download button if user has permission to download pictures.
+        if (this.canDownload) {
+          lightbox.pswp.ui.registerElement({
+            name: "download-button",
+            className: "pswp__button--download-button pswp__button--mdi",
+            order: 10,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: `<path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" id="pswp__icn-download" />`,
+              outlineID: "pswp__icn-download",
+              size: 24,
+            },
+            onClick: (e) => {
+              return this.onDownload(e);
+            },
+          });
+        }
       });
 
       // Trigger onChange() event handler when slide is changed and on initialization,
@@ -645,7 +616,11 @@ export default {
         }
       }, 5000);
     },
-    onDownload() {
+    onDownload(e) {
+      if (e && typeof e.stopPropagation === "function") {
+        e.stopPropagation();
+      }
+
       this.pauseSlideshow();
 
       if (!this.model || !this.model.DownloadUrl) {

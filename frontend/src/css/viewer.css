@@ -122,7 +122,7 @@
     font-size: 14px;
     text-align: start;
     color: #f3f3f3;
-    text-shadow: #000000ff 0 0 3px;
+    text-shadow: -1px -1px 0 #0006, 1px -1px 0 #0006, -1px 1px 0 #0006, 1px 1px 0 #0006;
     line-height: normal;
     letter-spacing: normal;
     margin: 0 0 8px 0;
@@ -132,6 +132,13 @@
 .pswp__dynamic-caption a {
     color: inherit;
     text-decoration: underline;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-wrap: normal;
+    word-break: break-word;
+    text-align: start;
+    text-overflow: ellipsis;
+    hyphens: auto;
 }
 
 .pswp__dynamic-caption h4 {
@@ -152,22 +159,45 @@
 
 /* Viewer Controls */
 
+.pswp__top-bar {
+    align-items: center;
+}
+
 .pswp__top-bar .pswp__button {
     height: 48px;
     width: 44px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .pswp__top-bar .pswp__button .pswp__icn {
-    width: 30px;
-    height: 30px;
-    top: 9px;
-    left: 7px;
+    display: block;
+    position: static;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    right: auto;
+    width: 32px;
+    height: 32px;
+}
+
+.pswp__top-bar .pswp__button--mdi .pswp__icn {
+    width: 22px;
+    height: 22px;
 }
 
 .pswp__top-bar .pswp__button--sidebar-button .pswp__icn {
-    top: 15px;
-    width: 26px;
-    height: 26px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Navigation Arrows */
+
+.pswp__button--arrow {
+    height: 220px;
+    margin-top: -110px;
+    width: 150px;
 }
 
 .pswp__button--arrow .pswp__icn {
@@ -177,11 +207,7 @@
     width: 50px;
 }
 
-.pswp__button--arrow {
-    height: 220px;
-    margin-top: -110px;
-    width: 150px;
-}
+/* Other / Unused Styles */
 
 .pswp__taken {
     padding: 10px;

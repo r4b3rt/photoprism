@@ -160,7 +160,22 @@ export default class Util {
   }
 
   static encodeHTML(text) {
-    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
+    const linkRegex = /(https?:\/\/)?(www\.)?[^\s]+\.[^\s]+/g;
+
+    function linkFunc(matched) {
+      let withProtocol = matched;
+
+      if (!withProtocol.startsWith("https")) {
+        withProtocol = "https://" + matched;
+      }
+
+      return `<a href="${withProtocol}" target="_blank">${matched}</a>`;
+    }
+
+    text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
+    text = text.replace(linkRegex, linkFunc);
+
+    return text;
   }
 
   static resetTimer() {
