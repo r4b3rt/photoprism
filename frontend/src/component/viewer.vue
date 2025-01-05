@@ -272,6 +272,11 @@ export default {
         mainClass: "media-viewer-lightbox",
         bgClickAction: (point, e) => this.onBgClick(e),
         paddingFn: (s) => this.getPadding(s),
+        closeTitle: this.$gettext("Close"),
+        zoomTitle: this.$gettext("Zoom"),
+        arrowPrevTitle: this.$gettext("Previous"),
+        arrowNextTitle: this.$gettext("Next"),
+        errorMsg: this.$gettext("Error"),
       };
 
       // Create PhotoSwipe instance.
@@ -691,7 +696,7 @@ export default {
 
       if (this.pswp() && this.pswp().element) {
         const el = this.pswp().element;
-        if (el.classList.contains("pswp--ui-visible") && (Date.now() - this.controlsShown) > 120) {
+        if (el.classList.contains("pswp--ui-visible") && Date.now() - this.controlsShown > 120) {
           return true;
         }
       }
@@ -754,7 +759,7 @@ export default {
           right: 4,
         };
       }
-    }
+    },
   },
 };
 </script>
