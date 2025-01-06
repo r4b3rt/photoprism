@@ -255,18 +255,20 @@ export default {
     },
   },
   data() {
+    const input = new Input();
+    const debug = this.$config.get("debug");
+    const trace = this.$config.get("trace");
     const featPlaces = this.$config.getSettings().features.places;
     const featPrivate = this.$config.getSettings().features.private;
     const featDownload = this.$config.feature("download");
-    const input = new Input();
-    const debug = this.$config.get("debug");
 
     return {
       featPlaces,
       featPrivate,
       featDownload,
-      debug,
       input,
+      debug,
+      trace,
       firstVisibleElementIndex: 0,
       lastVisibleElementIndex: 0,
       visibleElementIndices: new Set(),
@@ -326,10 +328,21 @@ export default {
     },
     playLive(photo) {
       const player = this.livePlayer(photo);
-      try {
-        if (player) player.play();
-      } catch (e) {
-        // Ignore.
+      if (player) {
+        try {
+          // Calling pause() before a play promise has been resolved may result in an error,
+          // see https://developer.chrome.com/blog/play-request-was-interrupted.
+          const playPromise = player.play();
+          if (playPromise !== undefined) {
+            playPromise.catch((e) => {
+              if (this.trace) {
+                console.log(e.message);
+              }
+            });
+          }
+        } catch (e) {
+          // Ignore.
+        }
       }
     },
     pauseLive(photo) {
@@ -337,12 +350,14 @@ export default {
       if (player) {
         try {
           // Calling pause() before a play promise has been resolved may result in an error,
-          // see https://github.com/flutter/flutter/issues/136309 (we'll ignore this for now).
+          // see https://developer.chrome.com/blog/play-request-was-interrupted.
           if (!player.paused) {
             player.pause();
           }
         } catch (e) {
-          console.log(e);
+          if (this.trace) {
+            console.log(e);
+          }
         }
       }
     },

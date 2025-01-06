@@ -59,6 +59,7 @@ export default class Config {
       const now = new Date();
 
       this.debug = true;
+      this.trace = false;
       this.test = true;
       this.demo = false;
       this.version = `${now.getUTCFullYear().toString().substr(-2)}${now.getMonth() + 1}${now.getDate()}-TEST`;
@@ -113,6 +114,7 @@ export default class Config {
 
     this.values = reactive(values);
     this.debug = !!values.debug;
+    this.trace = !!values.trace;
     this.test = !!values.test;
     this.demo = !!values.demo;
     this.version = values.version;
