@@ -39,7 +39,7 @@
 <script>
 import Album from "model/album";
 
-// Todo: Handle cases where users have more than 10000 albums.
+// TODO: Handle cases where users have more than 10000 albums.
 const MaxResults = 10000;
 
 export default {
