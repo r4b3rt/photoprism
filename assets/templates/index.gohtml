@@ -26,10 +26,8 @@
   {{if .config.SiteDescription}}<meta name="description" content="{{ .config.SiteDescription }}"/>{{end}}
 
 {{template "favicons.gohtml" .}}
-
-  <link rel="stylesheet" href="{{ .config.CssUri }}">
-  <link rel="manifest" href="{{ .config.ManifestUri }}" crossorigin="use-credentials">
-
+{{template "styles.gohtml" .}}
+{{template "manifest.gohtml" .}}
   <script>
     window.__CONFIG__ = {{ .config }};
   </script>

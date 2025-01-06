@@ -21,10 +21,14 @@ func registerWebAppRoutes(router *gin.Engine, conf *config.Config) {
 			return
 		}
 
+		clientConfig := conf.ClientPublic()
+		splashCss := clientConfig.ClientAssets.SplashCssFileContents()
+
 		// Set values for UI bootstrap template.
 		values := gin.H{
-			"signUp": config.SignUp,
-			"config": conf.ClientPublic(),
+			"signUp":    config.SignUp,
+			"config":    clientConfig,
+			"splashCss": splashCss,
 		}
 
 		// Render UI bootstrap template.

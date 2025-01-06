@@ -1,33 +1,3 @@
-/* Global Styles for <HTML> and <BODY> */
-
-body {
-    color: #333333;
-    font-size: 17px;
-}
-
-html,
-body {
-    /* Use a system font for faster rendering and a native look */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-
-    /* Text rendering defaults. */
-    letter-spacing: normal !important;
-    line-height: normal;
-    text-justify: inter-word;
-
-    /* Support for all WebKit browsers. */
-    -webkit-font-smoothing: antialiased;
-
-    /* Support for Safari and Chrome. */
-
-    text-rendering: optimizeLegibility;
-    /* Support for Firefox. */
-    -moz-osx-font-smoothing: grayscale;
-
-    /* Enable font features. */
-    font-feature-settings: 'kern', 'liga';
-}
-
 /* Browser Scrollbar, see https://css-tricks.com/custom-scrollbars-in-webkit/#aa-the-different-pieces */
 
 #p-navigation ::-webkit-scrollbar {

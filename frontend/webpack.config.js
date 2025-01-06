@@ -42,6 +42,7 @@ const PATHS = {
   modules: path.join(__dirname, "node_modules"),
   app: path.join(__dirname, "src/app.js"),
   share: path.join(__dirname, "src/share.js"),
+  splash: path.join(__dirname, "src/splash.js"),
   build: path.join(__dirname, "../assets/static/build"),
   public: "./",
 };
@@ -65,6 +66,7 @@ const config = {
   entry: {
     app: PATHS.app,
     share: PATHS.share,
+    splash: PATHS.splash,
   },
   output: {
     path: PATHS.build,
