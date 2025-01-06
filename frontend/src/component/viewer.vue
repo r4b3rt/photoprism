@@ -355,14 +355,21 @@ export default {
          TODO: Rendering of slides needs to be improved to allow dynamic zooming (loading higher resolution thumbs
                depending on zoom level) and playing videos in their native format whenever possible (see below).
         */
+
+        // Get the current slide model data.
         const model = this.models[i];
-        const viewportWidth = window.innerWidth * window.devicePixelRatio;
-        const viewportHeight = window.innerHeight * window.devicePixelRatio;
 
-        const s = Util.thumbSize(viewportWidth, viewportHeight);
+        // Get the screen (window) resolution in real pixels,
+        // depending on the width/height and pixel density.
+        const pixels = this.getWindowPixels();
 
+        // Get the right thumbnail size based on the screen resolution in pixels.
+        const s = Util.thumbSize(pixels.width, pixels.height);
+
+        // Get thumbnail image URL.
         const imgSrc = model.Thumbs[s].src;
 
+        // Render videos and animations as custom HTML.
         if (model.Playable) {
           const videoSrc = Util.videoUrl(model.Hash);
           /*
@@ -390,15 +397,17 @@ export default {
           }
         }
 
-        el.src = imgSrc;
-        el.w = Number(model.Thumbs[s].w);
-        el.h = Number(model.Thumbs[s].h);
-
         if (firstPicture) {
           firstPicture = false;
         }
 
-        return el;
+        // Return the data that PhotoSwipe needs to show the image,
+        // see https://photoswipe.com/data-sources/#dynamically-generated-data.
+        return {
+          src: imgSrc, // Thumbnail image URL.
+          width: model.Thumbs[s].w, // Actual thumbnail image width (x).
+          height: model.Thumbs[s].h, // Actual thumbnail image height (y).
+        };
       });
 
       // Init PhotoSwipe.
@@ -781,6 +790,12 @@ export default {
         },
         { once: true }
       );
+    },
+    getWindowPixels() {
+      return {
+        width: window.innerWidth * window.devicePixelRatio,
+        height: window.innerHeight * window.devicePixelRatio,
+      };
     },
     getLightboxViewport() {
       const el = this.getLightbox();

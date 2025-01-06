@@ -502,13 +502,13 @@ export default class Util {
     }
   }
 
-  static thumbSize(viewportWidth, viewportHeight) {
+  static thumbSize(pixelsWidth, pixelsHeight) {
     const thumbs = config.values.thumbs;
 
     for (let i = 0; i < thumbs.length; i++) {
       let t = thumbs[i];
 
-      if (t.w >= viewportWidth && t.h >= viewportHeight) {
+      if (t.w >= pixelsWidth && t.h >= pixelsHeight) {
         return t.size;
       }
     }
