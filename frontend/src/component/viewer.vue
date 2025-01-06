@@ -58,7 +58,6 @@ import Util from "common/util";
 import Api from "common/api";
 import Thumb from "model/thumb";
 import { Photo } from "model/photo";
-import Notify from "common/notify";
 
 /*
   TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
@@ -76,32 +75,26 @@ export default {
     return {
       visible: false,
       sidebarVisible: false,
-      lightbox: null,
-      captionPlugin: null,
+      lightbox: null, // Current PhotoSwipe lightbox instance.
+      captionPlugin: null, // Current PhotoSwipe caption plugin instance.
       captionTimer: false,
       hasTouch: false,
       idleTime: 6000, // Automatically hide viewer controls after 6 seconds until user settings are implemented.
-      controlsShown: -1,
+      controlsShown: -1, // -1 or a positive Date.now() timestamp indicates that the PhotoSwipe controls are shown.
       canEdit: this.$config.allow("photos", "update") && this.$config.feature("edit"),
       canLike: this.$config.allow("photos", "manage") && this.$config.feature("favorites"),
       canDownload: this.$config.allow("photos", "download") && this.$config.feature("download"),
+      experimental: this.$config.get("experimental"), // Experimental features flag.
       selection: this.$clipboard.selection,
       config: this.$config.values,
-      model: new Thumb(),
-      subscriptions: [],
+      model: new Thumb(), // Current slide.
+      models: [],
+      index: 0,
+      subscriptions: [], // Event subscriptions.
       interval: false,
       slideshow: {
         active: false,
         next: 0,
-      },
-      player: {
-        show: false,
-        loop: false,
-        autoplay: true,
-        source: "",
-        poster: "",
-        width: 640,
-        height: 480,
       },
     };
   },
@@ -120,13 +113,44 @@ export default {
     }
   },
   methods: {
-    // Returns the active PhotoSwipe instance, if any.
-    pswp() {
-      return this.lightbox?.pswp;
-    },
-    // Returns the lightbox container HTML element, if any.
+    // Returns the PhotoSwipe container HTML element, if visible.
     getLightbox() {
       return this.$refs?.lightbox;
+    },
+    // Returns the PhotoSwipe config options, see https://photoswipe.com/options/.
+    getLightboxOptions() {
+      return {
+        appendToEl: this.getLightbox(),
+        pswpModule: PhotoSwipe,
+        dataSource: this.models,
+        index: this.index,
+        mouseMovePan: true,
+        arrowPrev: true,
+        arrowNext: true,
+        loop: true,
+        zoom: true,
+        close: true,
+        counter: false,
+        trapFocus: false,
+        returnFocus: false,
+        initialZoomLevel: "fit",
+        secondaryZoomLevel: "fill",
+        maxZoomLevel: 3,
+        bgOpacity: 1,
+        preload: [1, 1],
+        showHideAnimationType: "none",
+        tapAction: (point, e) => this.toggleControls(e),
+        imageClickAction: "zoom",
+        mainClass: "media-viewer-lightbox",
+        bgClickAction: (point, e) => this.onBgClick(e),
+        paddingFn: (s) => this.getLightboxPadding(s),
+        getViewportSizeFn: () => this.getLightboxViewport(),
+        closeTitle: this.$gettext("Close"),
+        zoomTitle: this.$gettext("Zoom"),
+        arrowPrevTitle: this.$gettext("Previous"),
+        arrowNextTitle: this.$gettext("Next"),
+        errorMsg: this.$gettext("Error"),
+      };
     },
     // Displays the thumbnail images and/or videos that belong to the specified models in the lightbox.
     showThumbs(models, index = 0) {
@@ -225,44 +249,20 @@ export default {
         return;
       }
 
-      // Set PhotoSwipe configuration options, see https://photoswipe.com/options/.
-      const options = {
-        appendToEl: this.getLightbox(),
-        pswpModule: PhotoSwipe,
-        dataSource: models,
-        index: index,
-        mouseMovePan: true,
-        arrowPrev: true,
-        arrowNext: true,
-        loop: true,
-        zoom: true,
-        close: true,
-        counter: false,
-        initialZoomLevel: "fit",
-        secondaryZoomLevel: "fill",
-        maxZoomLevel: 3,
-        bgOpacity: 1,
-        preload: [1, 1],
-        showHideAnimationType: "none",
-        tapAction: (point, e) => this.toggleControls(e),
-        imageClickAction: "zoom",
-        mainClass: "media-viewer-lightbox",
-        bgClickAction: (point, e) => this.onBgClick(e),
-        paddingFn: (s) => this.getPadding(s),
-        getViewportSizeFn: () => this.getViewportSize(),
-        closeTitle: this.$gettext("Close"),
-        zoomTitle: this.$gettext("Zoom"),
-        arrowPrevTitle: this.$gettext("Previous"),
-        arrowNextTitle: this.$gettext("Next"),
-        errorMsg: this.$gettext("Error"),
-      };
+      // Set the initial model list and start index.
+      // TODO: In the future, additional models should be dynamically loaded when the index reaches the end of the list.
+      this.models = models;
+      this.index = index;
+
+      // Focus lightbox element.
+      this.getLightbox().focus();
+
+      // Get PhotoSwipe lightbox config options, see https://photoswipe.com/options/.
+      const options = this.getLightboxOptions();
 
       // Create PhotoSwipe instance.
       let lightbox = new Lightbox(options);
       let firstPicture = true;
-
-      // Only add a sidebar toggle button if the window is large enough.
-      const addSidebarButton = this.canEdit && window.innerWidth > 600 && window.innerWidth > window.innerHeight;
 
       // Keep reference to PhotoSwipe instance.
       this.lightbox = lightbox;
@@ -274,11 +274,11 @@ export default {
       this.captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
         type: "auto",
         captionContent: (slide) => {
-          if (!slide || !models || slide?.index < 0) {
+          if (!slide || !this.models || slide?.index < 0) {
             return "";
           }
 
-          const model = models[slide.index];
+          const model = this.models[slide.index];
 
           if (model) {
             return this.formatCaption(model);
@@ -297,22 +297,24 @@ export default {
 
       // Add viewer controls, see https://photoswipe.com/adding-ui-elements/.
       //
-      // Todo: The same controls as with PhotoSwipe 4 should be usable/available!
+      // TODO: The same controls as with PhotoSwipe 4 should be usable/available!
       lightbox.on("uiRegister", () => {
-        // Add info panel toggle button.
-        // Todo: Proof-of-concept only, requires the sidebar to be fully implemented.
-        if (addSidebarButton) {
-          // Only add button if the window is large enough for the sidebar info panel.
+        // Add a sidebar toggle button only if the window is large enough.
+        // TODO: Proof-of-concept only, the sidebar needs to be fully implemented before this can be released.
+        // TODO: Once this is fully implemented, remove the "this.experimental" flag check below.
+        // IDEA: We can later try to add styles that display the sidebar at the bottom
+        //       instead of on the side, to allow use on mobile devices.
+        if (this.experimental && this.canEdit && window.innerWidth > 600) {
           lightbox.pswp.ui.registerElement({
             name: "sidebar-button",
-            className: "pswp__button--sidebar-button pswp__button--mdi",
+            className: "pswp__button--sidebar-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
             order: 9,
             isButton: true,
             html: {
               isCustomSVG: true,
               inner: '<path d="M11 7V9H13V7H11M14 17V15H13V11H10V13H11V15H10V17H14M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12M20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12Z" id="pswp__icn-sidebar"/>',
-              outlineID: "pswp__icn-sidebar",
-              size: 24,
+              outlineID: "pswp__icn-sidebar", // Add this to the <path> in the inner property.
+              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
             },
             onClick: (e) => {
               return this.toggleSidebar(e);
@@ -320,18 +322,19 @@ export default {
           });
         }
 
-        // Add download button if user has permission to download pictures.
+        // Add download button if user has permission to download pictures,
+        // see https://photoswipe.com/adding-ui-elements/.
         if (this.canDownload) {
           lightbox.pswp.ui.registerElement({
             name: "download-button",
-            className: "pswp__button--download-button pswp__button--mdi",
+            className: "pswp__button--download-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
             order: 10,
             isButton: true,
             html: {
               isCustomSVG: true,
               inner: `<path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" id="pswp__icn-download" />`,
-              outlineID: "pswp__icn-download",
-              size: 24,
+              outlineID: "pswp__icn-download", // Add this to the <path> in the inner property.
+              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
             },
             onClick: (e) => {
               return this.onDownload(e);
@@ -343,20 +346,16 @@ export default {
       // Trigger onChange() event handler when slide is changed and on initialization,
       // see https://photoswipe.com/events/#initialization-events.
       this.lightbox.on("change", () => {
-        this.onChange(models);
+        this.onChange();
       });
 
-      // Trigger onDestroy() event handler when the PhotoSwipe lightbox is destroyed,
-      // see https://photoswipe.com/events/#closing-events.
-      this.lightbox.on("destroy", () => {
-        this.onDestroy();
-      });
-
-      // Process raw data for PhotoSwipe, see https://photoswipe.com/filters/#itemdata.
-      //
-      // Todo: Should be improved to allow dynamic zooming and play videos in their native format whenever possible.
+      // Processes model data for rendering slides with PhotoSwipe, see https://photoswipe.com/filters/#itemdata.
       lightbox.addFilter("itemData", (el, i) => {
-        const model = models[i];
+        /*
+         TODO: Rendering of slides needs to be improved to allow dynamic zooming (loading higher resolution thumbs
+               depending on zoom level) and playing videos in their native format whenever possible (see below).
+        */
+        const model = this.models[i];
         const viewportWidth = window.innerWidth * window.devicePixelRatio;
         const viewportHeight = window.innerHeight * window.devicePixelRatio;
 
@@ -367,8 +366,17 @@ export default {
         if (model.Playable) {
           const videoSrc = Util.videoUrl(model.Hash);
           /*
-            Todo: (a) Check if there is a more convenient and/or safer way to render the video slide.
-                  (b) Perform security tests to make sure no code can be injected.
+            TODO: (a) Check to see if there is a more convenient and/or secure way to render the video slide,
+                      then perform security tests to ensure that no code can be injected.
+                  (b) If the browser can natively handle the video file format, don't default to the AVC video URL,
+                      as this may require transcoding, which is slow and resource-intensive.
+                      For this, the Util.videoUrl() function has a second argument for the codec. We can also consider
+                      using the .m3u8 file format for this later, so the browsr can select the best stream.
+                  (c) Short videos / animations (e.g. GIFs and Live Photos) below a certain duration should possibly be
+                      looped and played automatically (autoplay attribute). This needs to be discussed / tested for UX.
+                  (d) In a later release, the server should (additionally) provide a video/animation still from time
+                      index 0 that can be used as a poster (the current thumbnail is taken at a later time for longer
+                      videos, since the first frame is often black).
           */
           if (firstPicture) {
             firstPicture = false;
@@ -402,7 +410,7 @@ export default {
       // Publish event to be consumed by other components.
       this.$event.publish("viewer.opened");
     },
-    // Destroys the PhotoSwipe lightbox after use.
+    // Destroys the PhotoSwipe lightbox instance after use, see onClose().
     destroyLightbox() {
       if (this.lightbox) {
         this.lightbox?.destroy();
@@ -448,39 +456,87 @@ export default {
     },
     // Destroys the PhotoSwipe lightbox, resets the component state, and unhides the browser scrollbar.
     onClose() {
+      // Pause slideshow and any videos that are playing.
+      this.onPause();
+
+      // Destroy PhotoSwipe lightbox.
       this.destroyLightbox();
 
       // Reset component state.
       this.onReset();
 
-      // Restore browser scrollbar state.
-      this.$scrollbar.show();
+      // Hide lightbox and sidebar.
+      this.hideViewer();
 
       // Publish event to be consumed by other components.
       this.$event.publish("viewer.closed");
     },
+    // Pauses the lightbox slideshow and any videos that are playing.
+    onPause() {
+      this.pauseVideos();
+      this.pauseSlideshow();
+    },
     // Resets the component state after closing the lightbox.
     onReset() {
-      this.visible = false;
-      this.sidebarVisible = false;
-      this.model = new Thumb();
+      this.resetTimer();
+      this.resetControls();
+      this.resetModels();
+    },
+    // Resets the timer for hiding the viewer controls.
+    resetTimer() {
+      if (this.captionTimer) {
+        window.clearTimeout(this.captionTimer);
+        this.captionTimer = false;
+      }
+    },
+    // Resets the state of the viewer controls.
+    resetControls() {
+      this.hasTouch = false;
       this.controlsShown = -1;
+    },
+    // Reset the viewer models and index.
+    resetModels() {
+      this.model = new Thumb();
+      this.models = [];
+      this.index = 0;
+    },
+    // Hides the viewer and restores the scrollbar state.
+    hideViewer() {
+      // Hide sidebar.
+      this.hideSidebar();
+
+      // Remove lightbox focus and hide viewer.
+      if (this.visible) {
+        this.$refs?.lightbox?.blur();
+        this.visible = false;
+      }
+
+      // Restore browser scrollbar state.
+      this.$scrollbar.show();
+    },
+    // Returns the active PhotoSwipe instance, if any.
+    // Be sure to check the result before using it!
+    pswp() {
+      return this.lightbox?.pswp;
     },
     // Called when the slide is changed and on initialization,
     // see https://photoswipe.com/events/#initialization-events.
-    onChange(models) {
+    onChange() {
+      // Get active PhotoSwipe instance.
       const pswp = this.pswp();
 
       if (!pswp) {
         return;
       }
 
+      // Find and pause videos that are currently playing.
       this.pauseVideos();
 
+      // Attach touch and mouse event handlers to automatically hide controls.
       document.addEventListener(
         "touchstart",
         () => {
-          this.stopHideTimer();
+          this.resetTimer();
           this.hasTouch = true;
         },
         { once: true }
@@ -488,24 +544,25 @@ export default {
       document.addEventListener(
         "mousemove",
         () => {
-          this.startHideTimer();
+          this.startTimer();
         },
         { once: true }
       );
 
-      if (this.slideshow.next !== pswp.currIndex) {
-        this.pauseSlideshow();
+      // Set current slide (model) list index.
+      if (typeof pswp.currIndex === "number") {
+        this.index = pswp.currIndex;
       }
 
-      if (pswp.currIndex && models && pswp.currIndex >= 0 && pswp.currIndex < models.length) {
-        this.model = models[pswp.currIndex];
+      // Set current slide model.
+      if (this.index >= 0 && this.models.length > 0 && this.index < this.models.length) {
+        this.model = this.models[this.index];
       }
-    },
-    // Called when the PhotoSwipe lightbox is destroyed,
-    // see https://photoswipe.com/events/#closing-events.
-    onDestroy() {
-      this.onPause();
-      this.stopHideTimer();
+
+      // Pause the slideshow if the index of the next slide does not match.
+      if (this.slideshow.next !== this.index) {
+        this.pauseSlideshow();
+      }
     },
     // Called when the user clicks on the PhotoSwipe lightbox background,
     // see https://photoswipe.com/click-and-tap-actions.
@@ -520,44 +577,13 @@ export default {
         e.stopPropagation();
       }
     },
+    // TODO: Toggles the current picture to be flagged as a favorite.
     onLike() {
       this.model.toggleLike();
     },
+    // TODO: Toggles the selection of the current picture in the global photo clipboard.
     onSelect() {
       this.$clipboard.toggle(this.model);
-    },
-    onPlay() {
-      if (this.model && this.model.Playable) {
-        new Photo().find(this.model.UID).then((video) => this.openPlayer(video));
-      }
-    },
-    openPlayer(video) {
-      if (!video) {
-        this.$notify.error(this.$gettext("No video selected"));
-        return;
-      }
-
-      const params = video.videoParams();
-
-      if (params.error) {
-        this.$notify.error(params.error);
-        return;
-      }
-
-      // Set video parameters.
-      this.player.loop = params.loop;
-      this.player.width = params.width;
-      this.player.height = params.height;
-      this.player.poster = params.poster;
-      this.player.source = params.uri;
-
-      // Play video.
-      this.player.show = true;
-    },
-    // Pauses the lightbox slideshow and any videos that are playing.
-    onPause() {
-      this.pauseVideos();
-      this.pauseSlideshow();
     },
     // Returns the <video> elements in the lightbox container as an HTMLCollection.
     getVideos() {
@@ -570,7 +596,7 @@ export default {
 
       return [];
     },
-    // Pauses all videos currently playing in the lightbox.
+    // Finds and pauses all videos currently playing in the lightbox.
     pauseVideos() {
       const videos = this.getVideos();
 
@@ -601,6 +627,8 @@ export default {
         this.interval = false;
       }
     },
+    // Toggles the lightbox slideshow.
+    // TODO: Does not work yet, needs to be reimplemented for the new viewer.
     onSlideshow() {
       if (this.interval) {
         this.pauseSlideshow();
@@ -620,6 +648,7 @@ export default {
         }
       }, 5000);
     },
+    // Downloads the original files of the current picture.
     onDownload(e) {
       if (e && typeof e.stopPropagation === "function") {
         e.stopPropagation();
@@ -627,12 +656,15 @@ export default {
 
       this.pauseSlideshow();
 
+      /* TODO: Once all the viewer's core functionality has been restored, add a file size/type
+               selection dialog so the user can choose which format and quality to download. */
+
       if (!this.model || !this.model.DownloadUrl) {
         console.warn("photo viewer: no download url");
         return;
       }
 
-      Notify.success(this.$gettext("Downloading…"));
+      this.$notify.success(this.$gettext("Downloading…"));
 
       new Photo().find(this.model.UID).then((p) => p.downloadAll());
     },
@@ -673,6 +705,13 @@ export default {
 
       if (e && typeof e.stopPropagation === "function") {
         e.stopPropagation();
+      }
+    },
+    // Hides the viewer sidebar, if visible.
+    hideSidebar() {
+      if (this.sidebarVisible) {
+        this.$refs?.sidebar?.blur();
+        this.sidebarVisible = false;
       }
     },
     toggleControls(e) {
@@ -720,18 +759,18 @@ export default {
       return false;
     },
     mouseMove() {
-      this.stopHideTimer();
+      this.resetTimer();
       if (this.lightbox) {
         this.showControls();
-        this.startHideTimer();
+        this.startTimer();
       }
     },
-    startHideTimer() {
+    startTimer() {
       if (this.hasTouch) {
         return;
       }
 
-      this.stopHideTimer();
+      this.resetTimer();
       this.captionTimer = window.setTimeout(() => {
         this.hideControls();
       }, this.idleTime);
@@ -743,13 +782,7 @@ export default {
         { once: true }
       );
     },
-    stopHideTimer() {
-      if (this.captionTimer) {
-        window.clearTimeout(this.captionTimer);
-        this.captionTimer = false;
-      }
-    },
-    getViewportSize() {
+    getLightboxViewport() {
       const el = this.getLightbox();
 
       if (el) {
@@ -764,12 +797,12 @@ export default {
         };
       }
     },
-    getPadding(s) {
-      if (!s || s.x <= 600) {
-        // Use no left or right padding on mobile screens.
+    getLightboxPadding(s) {
+      if (!s || (s.x <= 600 && s.x < s.y)) {
+        // Vertical padding on mobile screens to avoid obscuring controls (except when zooming into pictures).
         return {
-          top: 16,
-          bottom: 16,
+          top: 56,
+          bottom: 8,
           left: 0,
           right: 0,
         };
