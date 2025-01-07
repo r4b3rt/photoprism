@@ -373,17 +373,24 @@ export default {
         if (model.Playable) {
           const videoSrc = Util.videoUrl(model.Hash);
           /*
-            TODO: (a) Check to see if there is a more convenient and/or secure way to render the video slide,
-                      then perform security tests to ensure that no code can be injected.
-                  (b) If the browser can natively handle the video file format, don't default to the AVC video URL,
-                      as this may require transcoding, which is slow and resource-intensive.
-                      For this, the Util.videoUrl() function has a second argument for the codec. We can also consider
-                      using the .m3u8 file format for this later, so the browsr can select the best stream.
-                  (c) Short videos / animations (e.g. GIFs and Live Photos) below a certain duration should possibly be
-                      looped and played automatically (autoplay attribute). This needs to be discussed / tested for UX.
-                  (d) In a later release, the server should (additionally) provide a video/animation still from time
-                      index 0 that can be used as a poster (the current thumbnail is taken at a later time for longer
-                      videos, since the first frame is often black).
+            TODO: (a) Check if there is a more convenient and/or secure way to render the video slide, then perform
+                      security tests to ensure that no code can be injected, e.g. create an HTMLVideoElement object,
+                      set the properties based on the media type/video duration, and then return it instead of the
+                      plain HTML as implemented in the proof-of-concept.
+                  (b) Live Photos and Animations (e.g. GIFs) must be looped and played automatically (autoplay attribute).
+                  (c) If the browser can naively handle the video file format, don't default to the AVC video URL, as
+                      this may require transcoding, which is slow and resource-intensive. For this, the Util.videoUrl()
+                      function has a second argument for the codec (might need to be added to the server response,
+                      which is something we can help with).
+
+                  Once this is released, the following enhancements can be worked on and shipped in a future release:
+
+                  (d) We should consider using the .m3u8 file format for specifying the stream URL(s), so that the
+                      browser can choose the best format/codec (first develop a simple/static proof-of-concept to see
+                      if/how it works).
+                  (e) The server should (additionally) provide a video/animation still from time index 0 that can be
+                      used as a poster (the current thumbnail is taken later for longer videos, since the first frame is
+                      often black).
           */
           if (firstPicture) {
             firstPicture = false;
