@@ -705,7 +705,7 @@ export default {
       new Photo().find(this.model.UID).then((p) => p.downloadAll());
     },
     onEdit() {
-      this.pauseSlideshow();
+      this.onPause();
 
       const pswp = this.pswp();
       let index = 0;
