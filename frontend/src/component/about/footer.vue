@@ -1,7 +1,7 @@
 <template>
   <footer class="p-about-footer text-ltr">
     <p class="flex-fill text-sm-start">
-      <strong><router-link to="/about" class="text-link">{{ about }}{{ getMembership() }}</router-link></strong>
+      <strong><router-link to="/about" class="text-link">{{ about }} {{ getMembership() }}</router-link></strong>
       <span class="body-link">Build&nbsp;<a href="https://docs.photoprism.app/release-notes/" target="_blank" :title="version" class="body-link">{{ build }}</a></span>
     </p>
     <p class="hidden-xs text-sm-start">
@@ -34,17 +34,21 @@ export default {
   methods: {
     getMembership() {
       if (this.isDemo) {
-        return " Demo";
+        return "Demo";
       }
 
       const tier = this.$config.getTier();
-      if (tier < 4) {
-        return " CE";
-      } else if (tier === 4) {
-        return " Essentials";
+      const edition = this.$config.getEdition();
+
+      if (edition === "plus" && tier > 7) {
+        return "Plus";
+      } else if (edition === "plus" && tier > 5) {
+        return "Essentials+";
+      } else if (tier > 3) {
+        return "Essentials";
       }
 
-      return "";
+      return "CE";
     },
   },
 };
