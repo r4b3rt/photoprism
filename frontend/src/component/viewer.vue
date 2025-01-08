@@ -341,6 +341,26 @@ export default {
             },
           });
         }
+
+        // Add edit button if user has permission to edit pictures,
+        // see https://photoswipe.com/adding-ui-elements/.
+        if (this.canEdit) {
+          lightbox.pswp.ui.registerElement({
+            name: "edit-button",
+            className: "pswp__button--edit-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
+            order: 10,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: `<path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" id="pswp__icn-edit" />`,
+              outlineID: "pswp__icn-edit", // Add this to the <path> in the inner property.
+              size: 26, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+            },
+            onClick: () => {
+              return this.onEdit();
+            },
+          });
+        }
       });
 
       // Trigger onChange() event handler when slide is changed and on initialization,
@@ -691,7 +711,7 @@ export default {
       let index = 0;
 
       // remove duplicates
-      let filtered = pswp.items.filter(function (p, i, s) {
+      let filtered = this.models?.filter(function (p, i, s) {
         return !(i > 0 && p.UID === s[i - 1].UID);
       });
 
