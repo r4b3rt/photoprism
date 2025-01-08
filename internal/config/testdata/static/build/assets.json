@@ -1,22 +1,8 @@
 {
-  "app.css": "app.6ea2755a30e3f9eb1169.css",
-  "app.js": "app.dbde125e18ba925d22fe.js",
-  "share.css": "share.2259c0edcc020e7af593.css",
-  "share.js": "share.61248f7eb0aa9c8a7b21.js",
-  "splash.css": "splash.a62e8b4d5ec0c8dc4ed4.css",
-  "splash.js": "splash.52b94e6f2bf9a5ba2e0a.js",
-  "materialdesignicons-webfont.eot": "2146c3c82b553977abc7.eot",
-  "materialdesignicons-webfont.eot?v=7.4.47": "2146c3c82b553977abc7.eot?v=7.4.47",
-  "materialdesignicons-webfont.ttf?v=7.4.47": "1fcc36272ea3e53d0031.ttf?v=7.4.47",
-  "materialdesignicons-webfont.woff?v=7.4.47": "e55a20c80650829ec5fd.woff?v=7.4.47",
-  "materialdesignicons-webfont.woff2?v=7.4.47": "ec024da790d2972da002.woff2?v=7.4.47",
-  "__offline_serviceworker": "__offline_serviceworker",
-  "default-skin.svg": "2f15497756e1a99037f3.svg",
-  "preloader.gif": "14d740b6ee64510747b0.gif",
-  "default-skin.png": "0ff4d62150facee6b7de.png",
-  "app.css.map": "app.6ea2755a30e3f9eb1169.css.map",
-  "app.js.map": "app.dbde125e18ba925d22fe.js.map",
-  "share.js.map": "share.61248f7eb0aa9c8a7b21.js.map",
-  "splash.css.map": "splash.a62e8b4d5ec0c8dc4ed4.css.map",
-  "splash.js.map": "splash.52b94e6f2bf9a5ba2e0a.js.map"
+  "app.css": "app.test.css",
+  "app.js": "app.test.js",
+  "share.css": "share.test.css",
+  "share.js": "share.test.js",
+  "splash.css": "splash.test.css",
+  "splash.js": "splash.test.js"
 }

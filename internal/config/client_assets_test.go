@@ -1,6 +1,7 @@
 package config
 
 import (
+	"html/template"
 	"strings"
 	"testing"
 
@@ -19,16 +20,16 @@ func TestClientAssets_Load(t *testing.T) {
 		assert.NoError(t, err)
 
 		assert.Equal(t, "/static", a.BaseUri)
-		assert.Equal(t, "app.6ea2755a30e3f9eb1169.css", a.AppCss) // app.6ea2755a30e3f9eb1169.css
-		assert.Equal(t, "/static/build/app.6ea2755a30e3f9eb1169.css", a.AppCssUri())
-		assert.Equal(t, "app.dbde125e18ba925d22fe.js", a.AppJs)
-		assert.Equal(t, "/static/build/app.dbde125e18ba925d22fe.js", a.AppJsUri())
-		assert.Equal(t, "share.2259c0edcc020e7af593.css", a.ShareCss)
-		assert.Equal(t, "/static/build/share.2259c0edcc020e7af593.css", a.ShareCssUri())
-		assert.Equal(t, "share.61248f7eb0aa9c8a7b21.js", a.ShareJs)
-		assert.Equal(t, "/static/build/share.61248f7eb0aa9c8a7b21.js", a.ShareJsUri())
-		assert.Equal(t, "/static/build/splash.a62e8b4d5ec0c8dc4ed4.css", a.SplashCssUri())
-		assert.Equal(t, "splash.a62e8b4d5ec0c8dc4ed4.css", a.SplashCssFile())
+		assert.Equal(t, "app.test.css", a.AppCss) // app.test.css
+		assert.Equal(t, "/static/build/app.test.css", a.AppCssUri())
+		assert.Equal(t, "app.test.js", a.AppJs)
+		assert.Equal(t, "/static/build/app.test.js", a.AppJsUri())
+		assert.Equal(t, "share.test.css", a.ShareCss)
+		assert.Equal(t, "/static/build/share.test.css", a.ShareCssUri())
+		assert.Equal(t, "share.test.js", a.ShareJs)
+		assert.Equal(t, "/static/build/share.test.js", a.ShareJsUri())
+		assert.Equal(t, "/static/build/splash.test.css", a.SplashCssUri())
+		assert.Equal(t, "splash.test.css", a.SplashCssFile())
 		assert.NotEmpty(t, a.SplashCssFileContents())
 	})
 
@@ -62,18 +63,18 @@ func TestConfig_ClientAssets(t *testing.T) {
 	a := c.ClientAssets()
 
 	assert.Equal(t, "https://mycdn.com/foo/static", a.BaseUri)
-	assert.Equal(t, "app.6ea2755a30e3f9eb1169.css", a.AppCss)
-	assert.Equal(t, "https://mycdn.com/foo/static/build/app.6ea2755a30e3f9eb1169.css", a.AppCssUri())
-	assert.Equal(t, "app.dbde125e18ba925d22fe.js", a.AppJs)
-	assert.Equal(t, "https://mycdn.com/foo/static/build/app.dbde125e18ba925d22fe.js", a.AppJsUri())
-	assert.Equal(t, "share.2259c0edcc020e7af593.css", a.ShareCss)
-	assert.Equal(t, "https://mycdn.com/foo/static/build/share.2259c0edcc020e7af593.css", a.ShareCssUri())
-	assert.Equal(t, "share.61248f7eb0aa9c8a7b21.js", a.ShareJs)
-	assert.Equal(t, "https://mycdn.com/foo/static/build/share.61248f7eb0aa9c8a7b21.js", a.ShareJsUri())
+	assert.Equal(t, "app.test.css", a.AppCss)
+	assert.Equal(t, "https://mycdn.com/foo/static/build/app.test.css", a.AppCssUri())
+	assert.Equal(t, "app.test.js", a.AppJs)
+	assert.Equal(t, "https://mycdn.com/foo/static/build/app.test.js", a.AppJsUri())
+	assert.Equal(t, "share.test.css", a.ShareCss)
+	assert.Equal(t, "https://mycdn.com/foo/static/build/share.test.css", a.ShareCssUri())
+	assert.Equal(t, "share.test.js", a.ShareJs)
+	assert.Equal(t, "https://mycdn.com/foo/static/build/share.test.js", a.ShareJsUri())
 	assert.Equal(t, "https://mycdn.com/foo/static/img/wallpaper/default.jpg", c.WallpaperUri())
-	assert.Equal(t, "https://mycdn.com/foo/static/build/splash.a62e8b4d5ec0c8dc4ed4.css", a.SplashCssUri())
-	assert.Equal(t, "splash.a62e8b4d5ec0c8dc4ed4.css", a.SplashCssFile())
-	assert.NotEmpty(t, a.SplashCssFileContents())
+	assert.Equal(t, "https://mycdn.com/foo/static/build/splash.test.css", a.SplashCssUri())
+	assert.Equal(t, "splash.test.css", a.SplashCssFile())
+	assert.Equal(t, template.CSS("body{color: black;}"), a.SplashCssFileContents())
 
 	c.options.AssetsPath = "testdata/invalid"
 	c.options.CdnUrl = ""
