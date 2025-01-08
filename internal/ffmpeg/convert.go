@@ -4,187 +4,72 @@ import (
 	"fmt"
 	"os/exec"
 
+	"github.com/photoprism/photoprism/internal/ffmpeg/apple"
+	"github.com/photoprism/photoprism/internal/ffmpeg/encode"
+	"github.com/photoprism/photoprism/internal/ffmpeg/intel"
+	"github.com/photoprism/photoprism/internal/ffmpeg/nvidia"
+	"github.com/photoprism/photoprism/internal/ffmpeg/v4l"
+	"github.com/photoprism/photoprism/internal/ffmpeg/vaapi"
 	"github.com/photoprism/photoprism/pkg/fs"
 )
 
-// AvcConvertCommand returns the command for converting video files to MPEG-4 AVC.
-func AvcConvertCommand(fileName, avcName string, opt Options) (result *exec.Cmd, useMutex bool, err error) {
-	if fileName == "" {
-		return nil, false, fmt.Errorf("empty input filename")
-	} else if avcName == "" {
-		return nil, false, fmt.Errorf("empty output filename")
+// AvcConvertCmd returns the command for converting video files to MPEG-4 AVC.
+func AvcConvertCmd(srcName, destName string, opt encode.Options) (cmd *exec.Cmd, useMutex bool, err error) {
+	if srcName == "" {
+		return nil, false, fmt.Errorf("empty source filename")
+	} else if destName == "" {
+		return nil, false, fmt.Errorf("empty destination filename")
 	}
 
 	// Don't transcode more than one video at the same time.
 	useMutex = true
 
-	// Get configured ffmpeg command name.
-	ffmpeg := opt.Bin
-
-	// Use default ffmpeg command name?
-	if ffmpeg == "" {
-		ffmpeg = DefaultBin
+	// Use default ffmpeg command name.
+	if opt.Bin == "" {
+		opt.Bin = DefaultBin
 	}
 
 	// Don't use hardware transcoding for animated images.
-	if fs.TypeAnimated[fs.FileType(fileName)] != "" {
-		result = exec.Command(
-			ffmpeg,
+	if fs.TypeAnimated[fs.FileType(srcName)] != "" {
+		cmd = exec.Command(
+			opt.Bin,
 			"-y",
 			"-strict", "-2",
-			"-i", fileName,
-			"-pix_fmt", FormatYUV420P.String(),
-			"-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2",
+			"-i", srcName,
+			"-pix_fmt", encode.FormatYUV420P.String(),
+			"-vf", "scale='trunc(iw/2)*2:trunc(ih/2)*2'",
 			"-f", "mp4",
 			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			avcName,
+			destName,
 		)
 
-		return result, useMutex, nil
+		return cmd, useMutex, nil
 	}
 
 	// Display encoder info.
-	if opt.Encoder != SoftwareEncoder {
+	if opt.Encoder != encode.SoftwareAvc {
 		log.Infof("convert: ffmpeg encoder %s selected", opt.Encoder.String())
 	}
 
 	switch opt.Encoder {
-	case IntelEncoder:
-		// ffmpeg -hide_banner -h encoder=h264_qsv
-		result = exec.Command(
-			ffmpeg,
-			"-y",
-			"-strict", "-2",
-			"-hwaccel", "qsv",
-			"-hwaccel_output_format", "qsv",
-			"-qsv_device", "/dev/dri/renderD128",
-			"-i", fileName,
-			"-c:a", "aac",
-			"-vf", opt.VideoFilter(FormatQSV),
-			"-c:v", opt.Encoder.String(),
-			"-map", opt.MapVideo,
-			"-map", opt.MapAudio,
-			"-r", "30",
-			"-b:v", opt.Bitrate,
-			"-bitrate", opt.Bitrate,
-			"-f", "mp4",
-			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			avcName,
-		)
+	case encode.IntelAvc:
+		cmd = intel.AvcConvertCmd(srcName, destName, opt)
 
-	case AppleEncoder:
-		// ffmpeg -hide_banner -h encoder=h264_videotoolbox
-		result = exec.Command(
-			ffmpeg,
-			"-y",
-			"-strict", "-2",
-			"-i", fileName,
-			"-c:v", opt.Encoder.String(),
-			"-map", opt.MapVideo,
-			"-map", opt.MapAudio,
-			"-c:a", "aac",
-			"-vf", opt.VideoFilter(FormatYUV420P),
-			"-profile", "high",
-			"-level", "51",
-			"-r", "30",
-			"-b:v", opt.Bitrate,
-			"-f", "mp4",
-			"-movflags", "+faststart",
-			avcName,
-		)
+	case encode.AppleAvc:
+		cmd = apple.AvcConvertCmd(srcName, destName, opt)
 
-	case VAAPIEncoder:
-		result = exec.Command(
-			ffmpeg,
-			"-y",
-			"-strict", "-2",
-			"-hwaccel", "vaapi",
-			"-i", fileName,
-			"-c:a", "aac",
-			"-vf", opt.VideoFilter(FormatNV12),
-			"-c:v", opt.Encoder.String(),
-			"-map", opt.MapVideo,
-			"-map", opt.MapAudio,
-			"-r", "30",
-			"-b:v", opt.Bitrate,
-			"-f", "mp4",
-			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			avcName,
-		)
+	case encode.VaapiAvc:
+		cmd = vaapi.AvcConvertCmd(srcName, destName, opt)
 
-	case NvidiaEncoder:
-		// ffmpeg -hide_banner -h encoder=h264_nvenc
-		result = exec.Command(
-			ffmpeg,
-			"-y",
-			"-strict", "-2",
-			"-hwaccel", "auto",
-			"-i", fileName,
-			"-pix_fmt", FormatYUV420P.String(),
-			"-c:v", opt.Encoder.String(),
-			"-map", opt.MapVideo,
-			"-map", opt.MapAudio,
-			"-c:a", "aac",
-			"-preset", "15",
-			"-pixel_format", "yuv420p",
-			"-gpu", "any",
-			"-vf", opt.VideoFilter(FormatYUV420P),
-			"-rc:v", "constqp",
-			"-cq", "0",
-			"-tune", "2",
-			"-r", "30",
-			"-b:v", opt.Bitrate,
-			"-profile:v", "1",
-			"-level:v", "auto",
-			"-coder:v", "1",
-			"-f", "mp4",
-			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			avcName,
-		)
+	case encode.NvidiaAvc:
+		cmd = nvidia.AvcConvertCmd(srcName, destName, opt)
 
-	case Video4LinuxEncoder:
-		// ffmpeg -hide_banner -h encoder=h264_v4l2m2m
-		result = exec.Command(
-			ffmpeg,
-			"-y",
-			"-strict", "-2",
-			"-i", fileName,
-			"-c:v", opt.Encoder.String(),
-			"-map", opt.MapVideo,
-			"-map", opt.MapAudio,
-			"-c:a", "aac",
-			"-vf", opt.VideoFilter(FormatYUV420P),
-			"-num_output_buffers", "72",
-			"-num_capture_buffers", "64",
-			"-max_muxing_queue_size", "1024",
-			"-crf", "23",
-			"-r", "30",
-			"-b:v", opt.Bitrate,
-			"-f", "mp4",
-			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			avcName,
-		)
+	case encode.V4LAvc:
+		cmd = v4l.AvcConvertCmd(srcName, destName, opt)
 
 	default:
-		result = exec.Command(
-			ffmpeg,
-			"-y",
-			"-strict", "-2",
-			"-i", fileName,
-			"-c:v", opt.Encoder.String(),
-			"-map", opt.MapVideo,
-			"-map", opt.MapAudio,
-			"-c:a", "aac",
-			"-vf", opt.VideoFilter(FormatYUV420P),
-			"-max_muxing_queue_size", "1024",
-			"-crf", "23",
-			"-r", "30",
-			"-b:v", opt.Bitrate,
-			"-f", "mp4",
-			"-movflags", "+faststart", // puts headers at the beginning for faster streaming
-			avcName,
-		)
+		cmd = encode.AvcConvertCmd(srcName, destName, opt)
 	}
 
-	return result, useMutex, nil
+	return cmd, useMutex, nil
 }

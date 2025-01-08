@@ -1,4 +1,4 @@
-package ffmpeg
+package encode
 
 // PixelFormat represents a standard pixel format.
 type PixelFormat string

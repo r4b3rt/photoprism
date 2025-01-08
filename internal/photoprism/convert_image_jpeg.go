@@ -9,9 +9,9 @@ import (
 	"github.com/photoprism/photoprism/internal/ffmpeg"
 )
 
-// JpegConvertCommands returns the supported commands for converting a MediaFile to JPEG, sorted by priority.
-func (w *Convert) JpegConvertCommands(f *MediaFile, jpegName string, xmpName string) (result ConvertCommands, useMutex bool, err error) {
-	result = NewConvertCommands()
+// JpegConvertCmds returns the supported commands for converting a MediaFile to JPEG, sorted by priority.
+func (w *Convert) JpegConvertCmds(f *MediaFile, jpegName string, xmpName string) (result ConvertCmds, useMutex bool, err error) {
+	result = NewConvertCmds()
 
 	if f == nil {
 		return result, useMutex, fmt.Errorf("file is nil - you may have found a bug")
@@ -23,7 +23,7 @@ func (w *Convert) JpegConvertCommands(f *MediaFile, jpegName string, xmpName str
 
 	// Apple Scriptable image processing system: https://ss64.com/osx/sips.html
 	if (f.IsRaw() || f.IsHEIF()) && w.conf.SipsEnabled() && w.sipsExclude.Allow(fileExt) {
-		result = append(result, NewConvertCommand(
+		result = append(result, NewConvertCmd(
 			exec.Command(w.conf.SipsBin(), "-Z", maxSize, "-s", "format", "jpeg", "--out", jpegName, f.FileName())),
 		)
 	}
@@ -34,7 +34,7 @@ func (w *Convert) JpegConvertCommands(f *MediaFile, jpegName string, xmpName str
 
 		// TODO: Adjust command flags for correct colors with HDR10-encoded HEVC videos,
 		// see https://github.com/photoprism/photoprism/issues/4488
-		result = append(result, NewConvertCommand(
+		result = append(result, NewConvertCmd(
 			exec.Command(w.conf.FFmpegBin(), "-y", "-strict", "-2", "-ss", timeOffset, "-i", f.FileName(), "-vframes", "1",
 				// Unfortunately, this filter renders thumbnails of non-HDR videos too dark:
 				// "-vf", "zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=gamma:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p",
@@ -44,7 +44,7 @@ func (w *Convert) JpegConvertCommands(f *MediaFile, jpegName string, xmpName str
 
 	// Use heif-convert for HEIC/HEIF and AVIF image files.
 	if (f.IsHEIC() || f.IsAVIF()) && w.conf.HeifConvertEnabled() {
-		result = append(result, NewConvertCommand(
+		result = append(result, NewConvertCmd(
 			exec.Command(w.conf.HeifConvertBin(), "-q", w.conf.JpegQuality().String(), f.FileName(), jpegName)).
 			WithOrientation(w.conf.HeifConvertOrientation()),
 		)
@@ -82,7 +82,7 @@ func (w *Convert) JpegConvertCommands(f *MediaFile, jpegName string, xmpName str
 				args = append(args, "--cachedir", dir)
 			}
 
-			result = append(result, NewConvertCommand(
+			result = append(result, NewConvertCmd(
 				exec.Command(w.conf.DarktableBin(), args...)),
 			)
 		}
@@ -93,7 +93,7 @@ func (w *Convert) JpegConvertCommands(f *MediaFile, jpegName string, xmpName str
 
 			args := []string{"-o", jpegName, "-p", profile, "-s", "-d", jpegQuality, "-js3", "-b8", "-c", f.FileName()}
 
-			result = append(result, NewConvertCommand(
+			result = append(result, NewConvertCmd(
 				exec.Command(w.conf.RawTherapeeBin(), args...)),
 			)
 		}
@@ -102,14 +102,14 @@ func (w *Convert) JpegConvertCommands(f *MediaFile, jpegName string, xmpName str
 	// Extract preview image from DNG files.
 	if f.IsDNG() && w.conf.ExifToolEnabled() {
 		// Example: exiftool -b -PreviewImage -w IMG_4691.DNG.jpg IMG_4691.DNG
-		result = append(result, NewConvertCommand(
+		result = append(result, NewConvertCmd(
 			exec.Command(w.conf.ExifToolBin(), "-q", "-q", "-b", "-PreviewImage", f.FileName())),
 		)
 	}
 
 	// Decode JPEG XL image if support is enabled.
 	if f.IsJpegXL() && w.conf.JpegXLEnabled() {
-		result = append(result, NewConvertCommand(
+		result = append(result, NewConvertCmd(
 			exec.Command(w.conf.JpegXLDecoderBin(), f.FileName(), jpegName)),
 		)
 	}
@@ -120,7 +120,7 @@ func (w *Convert) JpegConvertCommands(f *MediaFile, jpegName string, xmpName str
 		quality := fmt.Sprintf("%d", w.conf.JpegQuality())
 		resize := fmt.Sprintf("%dx%d>", w.conf.JpegSize(), w.conf.JpegSize())
 		args := []string{f.FileName(), "-flatten", "-resize", resize, "-quality", quality, jpegName}
-		result = append(result, NewConvertCommand(
+		result = append(result, NewConvertCmd(
 			exec.Command(w.conf.ImageMagickBin(), args...)),
 		)
 	}

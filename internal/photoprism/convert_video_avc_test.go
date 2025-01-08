@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/photoprism/photoprism/internal/config"
-	"github.com/photoprism/photoprism/internal/ffmpeg"
+	"github.com/photoprism/photoprism/internal/ffmpeg/encode"
 	"github.com/photoprism/photoprism/pkg/fs"
 )
 
@@ -30,7 +30,7 @@ func TestConvert_ToAvc(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		avcFile, err := convert.ToAvc(mf, ffmpeg.SoftwareEncoder, false, false)
+		avcFile, err := convert.ToAvc(mf, encode.SoftwareAvc, false, false)
 
 		if err != nil {
 			t.Fatal(err)
@@ -137,7 +137,7 @@ func TestConvert_AvcBitrate(t *testing.T) {
 	})
 }
 
-func TestConvert_AvcConvertCommand(t *testing.T) {
+func TestConvert_AvcConvertCmd(t *testing.T) {
 	conf := config.TestConfig()
 	convert := NewConvert(conf)
 
@@ -149,7 +149,7 @@ func TestConvert_AvcConvertCommand(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		r, _, err := convert.AvcConvertCommand(mf, "avc1", ffmpeg.SoftwareEncoder)
+		r, _, err := convert.AvcConvertCmd(mf, "avc1", encode.SoftwareAvc)
 
 		if err != nil {
 			t.Fatal(err)
@@ -166,7 +166,7 @@ func TestConvert_AvcConvertCommand(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		r, useMutex, err := convert.AvcConvertCommand(mf, "avc1", ffmpeg.SoftwareEncoder)
+		r, useMutex, err := convert.AvcConvertCmd(mf, "avc1", encode.SoftwareAvc)
 
 		assert.False(t, useMutex)
 		assert.Error(t, err)
@@ -181,7 +181,7 @@ func TestConvert_AvcConvertCommand(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		r, useMutex, err := convert.AvcConvertCommand(mf, avcName, ffmpeg.SoftwareEncoder)
+		r, useMutex, err := convert.AvcConvertCmd(mf, avcName, encode.SoftwareAvc)
 
 		if err != nil {
 			t.Fatal(err)

@@ -1,11 +1,11 @@
-package ffmpeg
+package encode
 
 import "fmt"
 
 // Options represents transcoding options.
 type Options struct {
 	Bin      string
-	Encoder  AvcEncoder
+	Encoder  Encoder
 	Size     int
 	Bitrate  string
 	MapVideo string
