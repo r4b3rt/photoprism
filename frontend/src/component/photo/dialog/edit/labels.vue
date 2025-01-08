@@ -3,7 +3,9 @@
     <v-form ref="form" validate-on="blur" accept-charset="UTF-8" @submit.prevent>
       <v-row class="pa-2-md-and-up d-flex align-stretch" align="start">
         <v-col class="pa-2 hidden-sm-and-down align-stretch" cols="12" md="2" xxl="1">
-          <p-photo-preview :model="model"></p-photo-preview>
+          <v-card tile color="background" class="pa-0 ma-0 elevation-0 flex-grow-1">
+            <v-img :src="model.thumbnailUrl('tile_500')" aspect-ratio="1" rounded="6" class="card elevation-0 clickable" @click.exact="openPhoto()"></v-img>
+          </v-card>
         </v-col>
         <v-col class="pa-2-md-and-up" cols="12" md="10" xxl="11">
           <v-data-table
