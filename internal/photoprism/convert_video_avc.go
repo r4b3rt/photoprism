@@ -66,7 +66,7 @@ func (w *Convert) ToAvc(f *MediaFile, encoder encode.Encoder, noMutex, force boo
 		avcName, _ = fs.FileName(f.FileName(), w.conf.SidecarPath(), w.conf.OriginalsPath(), fs.ExtAVC)
 	}
 
-	cmd, useMutex, err := w.AvcConvertCmd(f, avcName, encoder)
+	cmd, useMutex, err := w.TranscodeToAvcCmd(f, avcName, encoder)
 
 	// Return if an error occurred.
 	if err != nil {
@@ -152,8 +152,8 @@ func (w *Convert) ToAvc(f *MediaFile, encoder encode.Encoder, noMutex, force boo
 	return NewMediaFile(avcName)
 }
 
-// AvcConvertCmd returns the command for converting video files to MPEG-4 AVC.
-func (w *Convert) AvcConvertCmd(f *MediaFile, avcName string, encoder encode.Encoder) (result *exec.Cmd, useMutex bool, err error) {
+// TranscodeToAvcCmd returns the command for converting video files to MPEG-4 AVC.
+func (w *Convert) TranscodeToAvcCmd(f *MediaFile, avcName string, encoder encode.Encoder) (result *exec.Cmd, useMutex bool, err error) {
 	fileExt := f.Extension()
 	fileName := f.FileName()
 
@@ -174,7 +174,7 @@ func (w *Convert) AvcConvertCmd(f *MediaFile, avcName string, encoder encode.Enc
 	if opt, err = w.conf.FFmpegOptions(encoder, w.AvcBitrate(f)); err != nil {
 		return nil, false, fmt.Errorf("convert: failed to transcode %s (%s)", clean.Log(f.BaseName()), err)
 	} else {
-		return ffmpeg.AvcConvertCmd(fileName, avcName, opt)
+		return ffmpeg.TranscodeCmd(fileName, avcName, opt)
 	}
 }
 

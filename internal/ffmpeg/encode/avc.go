@@ -2,8 +2,8 @@ package encode
 
 import "os/exec"
 
-// AvcConvertCmd returns the command for software transcoding of video files to MPEG-4 AVC.
-func AvcConvertCmd(srcName, destName string, opt Options) *exec.Cmd {
+// TranscodeToAvcCmd returns the default FFmpeg command for transcoding video files to MPEG-4 AVC.
+func TranscodeToAvcCmd(srcName, destName string, opt Options) *exec.Cmd {
 	return exec.Command(
 		opt.Bin,
 		"-y",
@@ -17,7 +17,7 @@ func AvcConvertCmd(srcName, destName string, opt Options) *exec.Cmd {
 		"-max_muxing_queue_size", "1024",
 		"-crf", "23",
 		"-r", "30",
-		"-b:v", opt.Bitrate,
+		"-b:v", opt.DestBitrate,
 		"-f", "mp4",
 		"-movflags", "+faststart", // puts headers at the beginning for faster streaming
 		destName,

@@ -1,11 +1,16 @@
-package ffmpeg
+package encode
 
 import "time"
 
-// PreviewTimeOffset returns an appropriate time offset depending on the duration for extracting a preview image.
+// PreviewTimeOffset returns a time offset depending on the video duration for extracting a cover image,
+// see https://trac.ffmpeg.org/wiki/Seeking and https://ffmpeg.org/ffmpeg-utils.html#time-duration-syntax.
 func PreviewTimeOffset(d time.Duration) string {
-	// Default.
+	// Default time offset.
 	result := "00:00:00.001"
+
+	if d <= 0 {
+		return result
+	}
 
 	// If the video is long enough, don't use the first frames to avoid completely
 	// black or white thumbnails in case there is an effect or intro.

@@ -13,8 +13,8 @@ import (
 	"github.com/photoprism/photoprism/pkg/fs"
 )
 
-// AvcConvertCmd returns the command for converting video files to MPEG-4 AVC.
-func AvcConvertCmd(srcName, destName string, opt encode.Options) (cmd *exec.Cmd, useMutex bool, err error) {
+// TranscodeCmd returns the FFmpeg command for transcoding existing video files to MPEG-4 AVC.
+func TranscodeCmd(srcName, destName string, opt encode.Options) (cmd *exec.Cmd, useMutex bool, err error) {
 	if srcName == "" {
 		return nil, false, fmt.Errorf("empty source filename")
 	} else if destName == "" {
@@ -24,7 +24,7 @@ func AvcConvertCmd(srcName, destName string, opt encode.Options) (cmd *exec.Cmd,
 	// Don't transcode more than one video at the same time.
 	useMutex = true
 
-	// Use default ffmpeg command name.
+	// Use default FFmpeg command name.
 	if opt.Bin == "" {
 		opt.Bin = DefaultBin
 	}
@@ -53,22 +53,22 @@ func AvcConvertCmd(srcName, destName string, opt encode.Options) (cmd *exec.Cmd,
 
 	switch opt.Encoder {
 	case encode.IntelAvc:
-		cmd = intel.AvcConvertCmd(srcName, destName, opt)
+		cmd = intel.TranscodeToAvcCmd(srcName, destName, opt)
 
 	case encode.AppleAvc:
-		cmd = apple.AvcConvertCmd(srcName, destName, opt)
+		cmd = apple.TranscodeToAvcCmd(srcName, destName, opt)
 
 	case encode.VaapiAvc:
-		cmd = vaapi.AvcConvertCmd(srcName, destName, opt)
+		cmd = vaapi.TranscodeToAvcCmd(srcName, destName, opt)
 
 	case encode.NvidiaAvc:
-		cmd = nvidia.AvcConvertCmd(srcName, destName, opt)
+		cmd = nvidia.TranscodeToAvcCmd(srcName, destName, opt)
 
 	case encode.V4LAvc:
-		cmd = v4l.AvcConvertCmd(srcName, destName, opt)
+		cmd = v4l.TranscodeToAvcCmd(srcName, destName, opt)
 
 	default:
-		cmd = encode.AvcConvertCmd(srcName, destName, opt)
+		cmd = encode.TranscodeToAvcCmd(srcName, destName, opt)
 	}
 
 	return cmd, useMutex, nil

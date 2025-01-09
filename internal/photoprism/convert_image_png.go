@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/photoprism/photoprism/internal/ffmpeg"
+	"github.com/photoprism/photoprism/internal/ffmpeg/encode"
 )
 
 // PngConvertCmds returns commands for converting a media file to PNG, if possible.
@@ -31,7 +32,7 @@ func (w *Convert) PngConvertCmds(f *MediaFile, pngName string) (result ConvertCm
 	if f.IsAnimated() && !f.IsWebP() && w.conf.FFmpegEnabled() {
 		// Use "ffmpeg" to extract a PNG still image from the video.
 		result = append(result, NewConvertCmd(
-			exec.Command(w.conf.FFmpegBin(), "-y", "-strict", "-2", "-ss", ffmpeg.PreviewTimeOffset(f.Duration()), "-i", f.FileName(), "-vframes", "1", pngName)),
+			ffmpeg.ExtractPngImageCmd(f.FileName(), pngName, encode.NewPreviewImageOptions(w.conf.FFmpegBin(), f.Duration()))),
 		)
 	}
 

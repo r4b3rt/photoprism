@@ -6,8 +6,8 @@ import (
 	"github.com/photoprism/photoprism/internal/ffmpeg/encode"
 )
 
-// AvcConvertCmd returns the command for hardware-accelerated transcoding of video files to MPEG-4 AVC.
-func AvcConvertCmd(srcName, destName string, opt encode.Options) *exec.Cmd {
+// TranscodeToAvcCmd returns the FFmpeg command for hardware-accelerated transcoding to MPEG-4 AVC.
+func TranscodeToAvcCmd(srcName, destName string, opt encode.Options) *exec.Cmd {
 	// ffmpeg -hide_banner -h encoder=h264_nvenc
 	return exec.Command(
 		opt.Bin,
@@ -28,7 +28,7 @@ func AvcConvertCmd(srcName, destName string, opt encode.Options) *exec.Cmd {
 		"-cq", "0",
 		"-tune", "2",
 		"-r", "30",
-		"-b:v", opt.Bitrate,
+		"-b:v", opt.DestBitrate,
 		"-profile:v", "1",
 		"-level:v", "auto",
 		"-coder:v", "1",

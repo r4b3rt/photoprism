@@ -109,7 +109,7 @@ func TestConfig_FFmpegOptions(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Equal(t, c.FFmpegBin(), opt.Bin)
 	assert.Equal(t, encode.SoftwareAvc, opt.Encoder)
-	assert.Equal(t, bitrate, opt.Bitrate)
+	assert.Equal(t, bitrate, opt.DestBitrate)
 	assert.Equal(t, ffmpeg.MapVideoDefault, opt.MapVideo)
 	assert.Equal(t, ffmpeg.MapAudioDefault, opt.MapAudio)
 	assert.Equal(t, c.FFmpegMapVideo(), opt.MapVideo)

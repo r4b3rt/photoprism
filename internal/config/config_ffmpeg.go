@@ -77,12 +77,12 @@ func (c *Config) FFmpegMapAudio() string {
 func (c *Config) FFmpegOptions(encoder encode.Encoder, bitrate string) (encode.Options, error) {
 	// Transcode all other formats with FFmpeg.
 	opt := encode.Options{
-		Bin:      c.FFmpegBin(),
-		Encoder:  encoder,
-		Size:     c.FFmpegSize(),
-		Bitrate:  bitrate,
-		MapVideo: c.FFmpegMapVideo(),
-		MapAudio: c.FFmpegMapAudio(),
+		Bin:         c.FFmpegBin(),
+		Encoder:     encoder,
+		DestSize:    c.FFmpegSize(),
+		DestBitrate: bitrate,
+		MapVideo:    c.FFmpegMapVideo(),
+		MapAudio:    c.FFmpegMapAudio(),
 	}
 
 	// Check

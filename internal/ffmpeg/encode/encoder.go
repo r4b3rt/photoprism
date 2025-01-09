@@ -10,7 +10,7 @@ func (name Encoder) String() string {
 	return string(name)
 }
 
-// Supported FFmpeg AVC encoders.
+// Currently supported FFmpeg output encoders.
 const (
 	SoftwareAvc Encoder = "libx264"           // SoftwareAvc see https://trac.ffmpeg.org/wiki/HWAccelIntro.
 	IntelAvc    Encoder = "h264_qsv"          // IntelAvc is the Intel Quick Sync H.264 encoder.
