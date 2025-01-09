@@ -6,7 +6,7 @@
     </p>
     <p class="hidden-xs text-sm-start">
       <a href="https://raw.githubusercontent.com/photoprism/photoprism/develop/NOTICE" target="_blank" class="text-link">3rd-party software packages</a>
-      <a href="https://www.photoprism.app/about/team/" target="_blank" class="body-link">© 2018-2024 PhotoPrism UG</a>
+      <a href="https://www.photoprism.app/about/team/" target="_blank" class="body-link">© 2018-2025 PhotoPrism UG</a>
     </p>
   </footer>
 </template>
