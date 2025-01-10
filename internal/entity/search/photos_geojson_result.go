@@ -21,7 +21,7 @@ type GeoResult struct {
 	TakenAt          time.Time     `json:"TakenAt" select:"photos.taken_at"`
 	TakenAtLocal     time.Time     `json:"TakenAtLocal" select:"photos.taken_at_local"`
 	PhotoFavorite    bool          `json:"Favorite,omitempty" select:"photos.photo_favorite"`
-	PhotoDuration    time.Duration `json:"Duration,omitempty" yaml:"photos.photo_duration"`
+	PhotoDuration    time.Duration `json:"Duration,omitempty" select:"photos.photo_duration"`
 	FileID           uint          `json:"-" select:"files.id AS file_id"` // File
 	FileWidth        int           `json:"Width" select:"files.file_width"`
 	FileHeight       int           `json:"Height" select:"files.file_height"`
