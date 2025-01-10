@@ -193,6 +193,31 @@ func (m *Photo) IsPlayable() bool {
 	}
 }
 
+// MediaInfo returns the media file hash and codec depending on the media type.
+func (m *Photo) MediaInfo() (mediaHash, mediaCodec string) {
+	if m.PhotoType == entity.MediaVideo || m.PhotoType == entity.MediaLive {
+		for _, f := range m.Files {
+			if f.FileVideo && f.FileHash != "" {
+				return f.FileHash, f.FileCodec
+			}
+		}
+	} else if m.PhotoType == entity.MediaVector {
+		for _, f := range m.Files {
+			if f.MediaType == entity.MediaVector && f.FileHash != "" {
+				return f.FileHash, f.FileCodec
+			}
+		}
+	} else if m.PhotoType == entity.MediaDocument {
+		for _, f := range m.Files {
+			if f.MediaType == entity.MediaDocument && f.FileHash != "" {
+				return f.FileHash, f.FileCodec
+			}
+		}
+	}
+
+	return m.FileHash, ""
+}
+
 // ShareBase returns a meaningful file name for sharing.
 func (m *Photo) ShareBase(seq int) string {
 	var name string

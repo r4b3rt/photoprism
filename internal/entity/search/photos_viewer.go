@@ -24,7 +24,8 @@ func UserPhotosViewerResults(f form.SearchPhotos, sess *entity.Session, contentU
 }
 
 // ViewerResult returns a new photo viewer result.
-func (m Photo) ViewerResult(contentUri, apiUri, previewToken, downloadToken string) viewer.Result {
+func (m *Photo) ViewerResult(contentUri, apiUri, previewToken, downloadToken string) viewer.Result {
+	mediaHash, mediaCodec := m.MediaInfo()
 	return viewer.Result{
 		UID:          m.PhotoUID,
 		Type:         m.PhotoType,
@@ -38,7 +39,8 @@ func (m Photo) ViewerResult(contentUri, apiUri, previewToken, downloadToken stri
 		Duration:     m.PhotoDuration,
 		Width:        m.FileWidth,
 		Height:       m.FileHeight,
-		Hash:         m.FileHash,
+		Hash:         mediaHash,
+		Codec:        mediaCodec,
 		Thumbs: thumb.Public{
 			Fit720:  thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit720], contentUri, previewToken),
 			Fit1280: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit1280], contentUri, previewToken),
@@ -83,6 +85,7 @@ func (m GeoResult) ViewerResult(contentUri, apiUri, previewToken, downloadToken 
 		Width:        m.FileWidth,
 		Height:       m.FileHeight,
 		Hash:         m.FileHash,
+		Codec:        m.FileCodec,
 		Thumbs: thumb.Public{
 			Fit720:  thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit720], contentUri, previewToken),
 			Fit1280: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit1280], contentUri, previewToken),

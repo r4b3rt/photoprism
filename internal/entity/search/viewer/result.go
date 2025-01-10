@@ -12,8 +12,8 @@ type Result struct {
 	Type         string        `json:"Type,omitempty"`
 	Title        string        `json:"Title,omitempty"`
 	Description  string        `json:"Description,omitempty"`
-	Lat          float64       `json:"Lat"`
-	Lng          float64       `json:"Lng"`
+	Lat          float64       `json:"Lat,omitempty"`
+	Lng          float64       `json:"Lng,omitempty"`
 	TakenAtLocal time.Time     `json:"TakenAtLocal"`
 	Favorite     bool          `json:"Favorite"`
 	Playable     bool          `json:"Playable"`
@@ -21,6 +21,7 @@ type Result struct {
 	Width        int           `json:"Width"`
 	Height       int           `json:"Height"`
 	Hash         string        `json:"Hash"`
+	Codec        string        `json:"Codec,omitempty"`
 	Thumbs       thumb.Public  `json:"Thumbs"`
 	DownloadUrl  string        `json:"DownloadUrl,omitempty"`
 }

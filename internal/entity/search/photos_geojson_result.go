@@ -22,9 +22,13 @@ type GeoResult struct {
 	TakenAtLocal     time.Time     `json:"TakenAtLocal" select:"photos.taken_at_local"`
 	PhotoFavorite    bool          `json:"Favorite,omitempty" select:"photos.photo_favorite"`
 	PhotoDuration    time.Duration `json:"Duration,omitempty" yaml:"photos.photo_duration"`
+	FileID           uint          `json:"-" select:"files.id AS file_id"` // File
 	FileWidth        int           `json:"Width" select:"files.file_width"`
 	FileHeight       int           `json:"Height" select:"files.file_height"`
 	FileHash         string        `json:"Hash" select:"files.file_hash"`
+	FileCodec        string        `json:"-" select:"files.file_codec"`
+	FileVideo        bool          `json:"-" select:"files.file_video"`
+	MediaType        string        `json:"-" select:"files.media_type"`
 }
 
 // Lat returns the position latitude.
