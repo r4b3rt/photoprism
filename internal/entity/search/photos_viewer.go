@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 
 	"github.com/photoprism/photoprism/internal/entity"
-
 	"github.com/photoprism/photoprism/internal/entity/search/viewer"
 	"github.com/photoprism/photoprism/internal/form"
 	"github.com/photoprism/photoprism/internal/thumb"
@@ -28,12 +27,15 @@ func UserPhotosViewerResults(f form.SearchPhotos, sess *entity.Session, contentU
 func (m Photo) ViewerResult(contentUri, apiUri, previewToken, downloadToken string) viewer.Result {
 	return viewer.Result{
 		UID:          m.PhotoUID,
+		Type:         m.PhotoType,
 		Title:        m.PhotoTitle,
-		TakenAtLocal: m.TakenAtLocal,
 		Description:  m.PhotoDescription,
+		Lat:          m.PhotoLat,
+		Lng:          m.PhotoLng,
+		TakenAtLocal: m.TakenAtLocal,
 		Favorite:     m.PhotoFavorite,
 		Playable:     m.IsPlayable(),
-		DownloadUrl:  viewer.DownloadUrl(m.FileHash, apiUri, downloadToken),
+		Duration:     m.PhotoDuration,
 		Width:        m.FileWidth,
 		Height:       m.FileHeight,
 		Hash:         m.FileHash,
@@ -45,6 +47,7 @@ func (m Photo) ViewerResult(contentUri, apiUri, previewToken, downloadToken stri
 			Fit4096: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit4096], contentUri, previewToken),
 			Fit7680: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit7680], contentUri, previewToken),
 		},
+		DownloadUrl: viewer.DownloadUrl(m.FileHash, apiUri, downloadToken),
 	}
 }
 
@@ -65,26 +68,30 @@ func (m PhotoResults) ViewerResults(contentUri, apiUri, previewToken, downloadTo
 }
 
 // ViewerResult creates a new photo viewer result.
-func (photo GeoResult) ViewerResult(contentUri, apiUri, previewToken, downloadToken string) viewer.Result {
+func (m GeoResult) ViewerResult(contentUri, apiUri, previewToken, downloadToken string) viewer.Result {
 	return viewer.Result{
-		UID:          photo.PhotoUID,
-		Title:        photo.PhotoTitle,
-		TakenAtLocal: photo.TakenAtLocal,
-		Description:  photo.PhotoDescription,
-		Favorite:     photo.PhotoFavorite,
-		Playable:     photo.IsPlayable(),
-		DownloadUrl:  viewer.DownloadUrl(photo.FileHash, apiUri, downloadToken),
-		Width:        photo.FileWidth,
-		Height:       photo.FileHeight,
-		Hash:         photo.FileHash,
+		UID:          m.PhotoUID,
+		Type:         m.PhotoType,
+		Title:        m.PhotoTitle,
+		Description:  m.PhotoDescription,
+		Lat:          m.PhotoLat,
+		Lng:          m.PhotoLng,
+		TakenAtLocal: m.TakenAtLocal,
+		Favorite:     m.PhotoFavorite,
+		Playable:     m.IsPlayable(),
+		Duration:     m.PhotoDuration,
+		Width:        m.FileWidth,
+		Height:       m.FileHeight,
+		Hash:         m.FileHash,
 		Thumbs: thumb.Public{
-			Fit720:  thumb.New(photo.FileWidth, photo.FileHeight, photo.FileHash, thumb.Sizes[thumb.Fit720], contentUri, previewToken),
-			Fit1280: thumb.New(photo.FileWidth, photo.FileHeight, photo.FileHash, thumb.Sizes[thumb.Fit1280], contentUri, previewToken),
-			Fit1920: thumb.New(photo.FileWidth, photo.FileHeight, photo.FileHash, thumb.Sizes[thumb.Fit1920], contentUri, previewToken),
-			Fit2560: thumb.New(photo.FileWidth, photo.FileHeight, photo.FileHash, thumb.Sizes[thumb.Fit2560], contentUri, previewToken),
-			Fit4096: thumb.New(photo.FileWidth, photo.FileHeight, photo.FileHash, thumb.Sizes[thumb.Fit4096], contentUri, previewToken),
-			Fit7680: thumb.New(photo.FileWidth, photo.FileHeight, photo.FileHash, thumb.Sizes[thumb.Fit7680], contentUri, previewToken),
+			Fit720:  thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit720], contentUri, previewToken),
+			Fit1280: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit1280], contentUri, previewToken),
+			Fit1920: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit1920], contentUri, previewToken),
+			Fit2560: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit2560], contentUri, previewToken),
+			Fit4096: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit4096], contentUri, previewToken),
+			Fit7680: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit7680], contentUri, previewToken),
 		},
+		DownloadUrl: viewer.DownloadUrl(m.FileHash, apiUri, downloadToken),
 	}
 }
 
