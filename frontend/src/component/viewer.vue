@@ -1,6 +1,6 @@
 <template>
   <div v-if="visible" ref="container" class="p-viewer" tabindex="-1" role="dialog">
-    <div ref="lightbox" class="p-viewer__lightbox" :class="{ slideshow: slideshow.active, sidebar: sidebarVisible, 'is-favorite': model.Favorite, 'is-selected': $clipboard.has(model) }"></div>
+    <div ref="lightbox" class="p-viewer__lightbox" :class="{ slideshow: slideshow.active, sidebar: sidebarVisible, 'is-fullscreen': isFullscreen, 'is-favorite': model.Favorite, 'is-selected': $clipboard.has(model) }"></div>
     <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar"></div>
 
     <!-- TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
@@ -84,6 +84,8 @@ export default {
       canEdit: this.$config.allow("photos", "update") && this.$config.feature("edit"),
       canLike: this.$config.allow("photos", "manage") && this.$config.feature("favorites"),
       canDownload: this.$config.allow("photos", "download") && this.$config.feature("download"),
+      canFullscreen: !this.$isMobile,
+      isFullscreen: !window.screenTop && !window.screenY,
       experimental: this.$config.get("experimental"), // Experimental features flag.
       selection: this.$clipboard.selection,
       config: this.$config.values,
@@ -318,6 +320,26 @@ export default {
             },
             onClick: (e) => {
               return this.toggleSidebar(e);
+            },
+          });
+        }
+
+        // Fullscreen: <path d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" /></svg>
+        // Fullscreen exit: <path d="M14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19Z" /></svg>
+        // Add viewer fullscreen toggle.
+        if (this.canFullscreen) {
+          lightbox.pswp.ui.registerElement({
+            name: "fullscreen-toggle",
+            className: "pswp__button--fullscreen-toggle pswp__button--mdi", // Sets the icon style/size in viewer.css.
+            order: 10,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: `<use class="pswp__icn-shadow pswp__icn-fullscreen-on" xlink:href="#pswp__icn-fullscreen-on"></use><path d="M14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19Z" id="pswp__icn-fullscreen-on" class="pswp__icn-fullscreen-on" /><use class="pswp__icn-shadow pswp__icn-fullscreen-off" xlink:href="#pswp__icn-fullscreen-off"></use><path d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" id="pswp__icn-fullscreen-off" class="pswp__icn-fullscreen-off" />`,
+              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+            },
+            onClick: () => {
+              return this.onFullscreen();
             },
           });
         }
@@ -688,6 +710,20 @@ export default {
 
       if (e && typeof e.stopPropagation === "function") {
         e.stopPropagation();
+      }
+    },
+    onFullscreen() {
+      if (document.fullscreenElement) {
+        document
+          .exitFullscreen()
+          .then(() => {
+            this.isFullscreen = false;
+          })
+          .catch((err) => console.error(err));
+      } else {
+        document.documentElement.requestFullscreen().then(() => {
+          this.isFullscreen = true;
+        });
       }
     },
     // Toggles the favorite flag of the current picture.

@@ -208,6 +208,14 @@
     display: none;
 }
 
+.p-viewer__lightbox.is-fullscreen .pswp__button--fullscreen-toggle .pswp__icn-fullscreen-off {
+    display: none;
+}
+
+.p-viewer__lightbox:not(.is-fullscreen) .pswp__button--fullscreen-toggle .pswp__icn-fullscreen-on {
+    display: none;
+}
+
 /* Navigation Arrows */
 
 .pswp__button--arrow {
