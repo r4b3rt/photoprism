@@ -1,6 +1,6 @@
 <template>
   <div v-if="visible" ref="container" class="p-viewer" tabindex="-1" role="dialog">
-    <div ref="lightbox" class="p-viewer__lightbox" :class="{ slideshow: slideshow.active, sidebar: sidebarVisible, 'is-favorite': model.Favorite }"></div>
+    <div ref="lightbox" class="p-viewer__lightbox" :class="{ slideshow: slideshow.active, sidebar: sidebarVisible, 'is-favorite': model.Favorite, 'is-selected': $clipboard.has(model) }"></div>
     <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar"></div>
 
     <!-- TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
@@ -322,25 +322,39 @@ export default {
           });
         }
 
-        // Add download button if user has permission to download pictures,
-        // see https://photoswipe.com/adding-ui-elements/.
-        if (this.canDownload) {
+        // Add favorite toggle if user has permission to like pictures.
+        if (this.canLike) {
           lightbox.pswp.ui.registerElement({
-            name: "download-button",
-            className: "pswp__button--download-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
+            name: "favorite-toggle",
+            className: "pswp__button--favorite-toggle pswp__button--mdi", // Sets the icon style/size in viewer.css.
             order: 10,
             isButton: true,
             html: {
               isCustomSVG: true,
-              inner: `<path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" id="pswp__icn-download" />`,
-              outlineID: "pswp__icn-download", // Add this to the <path> in the inner property.
+              inner: `<path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" class="pswp__icn-favorite-on" /><path d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" class="pswp__icn-favorite-off" />`,
               size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
             },
-            onClick: (e) => {
-              return this.onDownload(e);
+            onClick: () => {
+              return this.onLike();
             },
           });
         }
+
+        // Add picture selection toggle.
+        lightbox.pswp.ui.registerElement({
+          name: "select-toggle",
+          className: "pswp__button--select-toggle pswp__button--mdi", // Sets the icon style/size in viewer.css.
+          order: 10,
+          isButton: true,
+          html: {
+            isCustomSVG: true,
+            inner: `<path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" class="pswp__icn-select-on" /><path d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" class="pswp__icn-select-off" />`,
+            size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+          },
+          onClick: () => {
+            return this.onSelect();
+          },
+        });
 
         // Add edit button if user has permission to edit pictures,
         // see https://photoswipe.com/adding-ui-elements/.
@@ -362,19 +376,22 @@ export default {
           });
         }
 
-        if (this.canLike) {
+        // Add download button if user has permission to download pictures,
+        // see https://photoswipe.com/adding-ui-elements/.
+        if (this.canDownload) {
           lightbox.pswp.ui.registerElement({
-            name: "toggle-like-button",
-            className: "pswp__button--mdi pswp__button--toggle-like-button", // Sets the icon style/size in viewer.css.
+            name: "download-button",
+            className: "pswp__button--download-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
             order: 10,
             isButton: true,
             html: {
               isCustomSVG: true,
-              inner: `<path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" id="pswp__icn-like" /><path d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" id="pswp__icn-like-outline" />`,
+              inner: `<path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" id="pswp__icn-download" />`,
+              outlineID: "pswp__icn-download", // Add this to the <path> in the inner property.
               size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
             },
-            onClick: () => {
-              return this.onLike();
+            onClick: (e) => {
+              return this.onDownload(e);
             },
           });
         }
@@ -630,10 +647,11 @@ export default {
         e.stopPropagation();
       }
     },
+    // Toggles the favorite flag of the current picture.
     onLike() {
       this.model.toggleLike();
     },
-    // TODO: Toggles the selection of the current picture in the global photo clipboard.
+    // Toggles the selection of the current picture in the global photo clipboard.
     onSelect() {
       this.$clipboard.toggle(this.model);
     },

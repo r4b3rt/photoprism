@@ -166,7 +166,7 @@
 .pswp__top-bar .pswp__button {
     height: 48px;
     width: 44px;
-    display: flex !important;
+    display: flex;
     justify-content: center !important;
     align-items: center !important;
 }
@@ -192,14 +192,20 @@
     height: 20px;
 }
 
-.is-favorite #pswp__icn-like-outline,
-#pswp__icn-like {
-    display: none !important;
+.p-viewer__lightbox.is-selected .pswp__button--select-toggle .pswp__icn-select-off {
+    display: none;
 }
 
-.is-favorite #pswp__icn-like,
-#pswp__icn-like-outline {
-    display: inline !important;
+.p-viewer__lightbox:not(.is-selected) .pswp__button--select-toggle .pswp__icn-select-on {
+    display: none;
+}
+
+.p-viewer__lightbox.is-favorite .pswp__button--favorite-toggle .pswp__icn-favorite-off {
+    display: none;
+}
+
+.p-viewer__lightbox:not(.is-favorite) .pswp__button--favorite-toggle .pswp__icn-favorite-on {
+    display: none;
 }
 
 /* Navigation Arrows */

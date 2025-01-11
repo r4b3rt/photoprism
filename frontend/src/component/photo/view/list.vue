@@ -93,18 +93,13 @@
                 <td v-if="!isSharedView" class="text-center">
                   <div class="table-actions">
                     <template v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex">
-                      <!-- div v-if="hidePrivate" class="v-btn v-btn--icon v-btn--small" / -->
                       <div class="v-btn v-btn--icon v-btn--small" />
                     </template>
 
                     <template v-else>
-                      <!-- v-btn v-if="hidePrivate" icon density="compact" variant="text" :ripple="false" :data-uid="photo.UID" class="input-private" @click.stop.prevent="photo.togglePrivate()">
-                        <v-icon v-if="photo.Private" icon="mdi-lock" color="surface-variant" class="select-on"></v-icon>
-                        <v-icon v-else icon="mdi-lock-open-outline" color="surface-variant" class="select-off opacity-40"></v-icon>
-                      </v-btn -->
                       <v-btn icon density="comfortable" variant="text" :ripple="false" :data-uid="m.UID" class="input-favorite" @click.stop.prevent="m.toggleLike()">
-                        <v-icon v-if="m.Favorite" icon="mdi-star" color="favorite" :data-uid="m.UID" class="select-on"></v-icon>
-                        <v-icon v-else icon="mdi-star-outline" color="surface" :data-uid="m.UID" class="select-off"></v-icon>
+                        <v-icon v-if="m.Favorite" icon="mdi-star" color="favorite" :data-uid="m.UID" class="favorite-on"></v-icon>
+                        <v-icon v-else icon="mdi-star-outline" color="surface" :data-uid="m.UID" class="favorite-off"></v-icon>
                       </v-btn>
                     </template>
                   </div>
