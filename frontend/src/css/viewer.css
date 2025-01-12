@@ -37,7 +37,7 @@
     background: #1e1e1e;
 }
 
-/* Viewer Content */
+/* Image and Video Content */
 
 .pswp__content {
     display: flex;
@@ -53,10 +53,6 @@
     max-width: 100%;
     max-height: 100%;
     height: auto;
-}
-
-.pswp__container.slideshow {
-    transition: transform 0.8s ease-in-out;
 }
 
 .pswp__img {
@@ -81,11 +77,15 @@
     color: #f3f3f3;
 }
 
-.p-viewer__lightbox.sidebar .pswp__dynamic-caption {
+.p-viewer__lightbox.slideshow-active .pswp__dynamic-caption {
+    opacity: 1 !important;
+}
+
+.p-viewer__lightbox.sidebar-visible .pswp__dynamic-caption {
     display: none !important;
 }
 
-.pswp__dynamic-caption--faded {
+.p-viewer__lightbox:not(.slideshow-active) .pswp__dynamic-caption--faded {
     opacity: 0 !important;
 }
 
@@ -157,7 +157,7 @@
     white-space: pre-wrap;
 }
 
-/* Viewer Controls */
+/* Top Bar Button and Toggle Controls */
 
 .pswp__top-bar {
     align-items: center;
@@ -192,13 +192,31 @@
     height: 20px;
 }
 
-.p-viewer__lightbox.is-selected .pswp__button--select-toggle .pswp__icn-select-off {
+/* Slideshow Toggle Icon and Animation */
+
+.p-viewer__lightbox.slideshow-active .pswp__button--slideshow-toggle .pswp__icn-slideshow-off {
     display: none;
 }
 
-.p-viewer__lightbox:not(.is-selected) .pswp__button--select-toggle .pswp__icn-select-on {
+.p-viewer__lightbox:not(.slideshow-active) .pswp__button--slideshow-toggle .pswp__icn-slideshow-on {
     display: none;
 }
+
+.pswp__container.slideshow-active {
+    transition: transform 0.8s ease-in-out;
+}
+
+/* Fullscreen Toggle Icon */
+
+.p-viewer__lightbox.is-fullscreen .pswp__button--fullscreen-toggle .pswp__icn-fullscreen-off {
+    display: none;
+}
+
+.p-viewer__lightbox:not(.is-fullscreen) .pswp__button--fullscreen-toggle .pswp__icn-fullscreen-on {
+    display: none;
+}
+
+/* Favorite Toggle Icon */
 
 .p-viewer__lightbox.is-favorite .pswp__button--favorite-toggle .pswp__icn-favorite-off {
     display: none;
@@ -208,11 +226,13 @@
     display: none;
 }
 
-.p-viewer__lightbox.is-fullscreen .pswp__button--fullscreen-toggle .pswp__icn-fullscreen-off {
+/* Selection Toggle Icon */
+
+.p-viewer__lightbox.is-selected .pswp__button--select-toggle .pswp__icn-select-off {
     display: none;
 }
 
-.p-viewer__lightbox:not(.is-fullscreen) .pswp__button--fullscreen-toggle .pswp__icn-fullscreen-on {
+.p-viewer__lightbox:not(.is-selected) .pswp__button--select-toggle .pswp__icn-select-on {
     display: none;
 }
 

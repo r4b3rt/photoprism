@@ -1,52 +1,9 @@
 <template>
   <div v-if="visible" ref="container" class="p-viewer" tabindex="-1" role="dialog">
-    <div ref="lightbox" class="p-viewer__lightbox" :class="{ slideshow: slideshow.active, sidebar: sidebarVisible, 'is-fullscreen': isFullscreen, 'is-favorite': model.Favorite, 'is-selected': $clipboard.has(model) }"></div>
-    <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar"></div>
-
-    <!-- TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
-    <div class="pswp__ui pswp__ui--hidden">
-      <div class="pswp__top-bar">
-        <div class="pswp__taken hidden-xs">
-          {{ formatDate(slide.TakenAtLocal) }}
-        </div>
-
-        <div class="pswp__counter"></div>
-
-        <button class="pswp__button pswp__button--close action-close" :title="$gettext('Close')"></button>
-
-        <button v-if="canDownload" class="pswp__button action-download" style="background: none" :title="$gettext('Download')" @click.exact="onDownload">
-          <v-icon size="16" color="white">mdi-download</v-icon>
-        </button>
-
-        <button v-if="canEdit" class="pswp__button action-edit hidden-shared-only" style="background: none" :title="$gettext('Edit')" @click.exact="onEdit">
-          <v-icon size="16" color="white">mdi-pencil</v-icon>
-        </button>
-
-        <button class="pswp__button action-select" style="background: none" :title="$gettext('Select')" @click.exact="onSelect">
-          <v-icon v-if="selection.length && $clipboard.has(item)" size="16" color="white">mdi-check-circle</v-icon>
-          <v-icon v-else size="16" color="white">mdi-circle-outline</v-icon>
-        </button>
-
-        <button v-if="canLike" class="pswp__button action-like hidden-shared-only" style="background: none" :title="$gettext('Like')" @click.exact="onLike">
-          <v-icon v-if="slide.Favorite" icon="mdi-star" size="19" color="white"></v-icon>
-          <v-icon v-else icon="mdi-star-outline" size="19" color="white"></v-icon>
-        </button>
-
-        <button class="pswp__button pswp__button--fs action-toggle-fullscreen" :title="$gettext('Fullscreen')"></button>
-
-        <button class="pswp__button pswp__button--zoom action-zoom" :title="$gettext('Zoom in/out')"></button>
-
-        <button class="pswp__button action-slideshow" style="background: none" :title="$gettext('Start/Stop Slideshow')" @click.exact="onSlideshow">
-          <v-icon v-show="!interval" size="18" color="white">mdi-play</v-icon>
-          <v-icon v-show="interval" size="16" color="white">mdi-pause</v-icon>
-        </button>
-      </div>
-
-      <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-        <div class="pswp__share-tooltip"></div>
-      </div>
+    <div ref="lightbox" class="p-viewer__lightbox" :class="{ 'sidebar-visible': sidebarVisible, 'slideshow-active': slideshow.active, 'is-fullscreen': isFullscreen, 'is-favorite': model.Favorite, 'is-selected': $clipboard.has(model) }"></div>
+    <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar">
+      <!-- TODO: Create a reusable sidebar component that allows users to view/edit metadata. -->
     </div>
-     -->
   </div>
 </template>
 
@@ -61,9 +18,8 @@ import { Photo, MediaAnimated, MediaLive } from "model/photo";
 
 /*
   TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
-    1. Some of the controls that the old viewer had (e.g. (a) select, (b) play slideshow, (c) fullscreen,
-       (d) edit, (e) date info,...) are still missing.
-    2. The already added controls may need some improvements (e.g. (a) the sidebar toggle button (info icon) shows
+    1. Some of the controls that the old viewer had are still missing e.g. "play slideshow".
+    2. The already added controls might need further improvements (e.g. (a) the sidebar toggle button (info icon) shows
        the sidebar, but the functionality there is not implemented yet, (b) the zoom doesn't load a larger version
        of the image yet).
     3. Finally, after the refactoring/upgrade, (a) the old/unused code (e.g. for the separate video player) needs
@@ -72,14 +28,16 @@ import { Photo, MediaAnimated, MediaLive } from "model/photo";
 export default {
   name: "PViewer",
   data() {
+    const debug = this.$config.get("debug");
+    const trace = this.$config.get("trace");
     return {
       visible: false,
       sidebarVisible: false,
       lightbox: null, // Current PhotoSwipe lightbox instance.
       captionPlugin: null, // Current PhotoSwipe caption plugin instance.
-      captionTimer: false,
       hasTouch: false,
       idleTime: 6000, // Automatically hide viewer controls after 6 seconds until user settings are implemented.
+      idleTimer: false,
       controlsShown: -1, // -1 or a positive Date.now() timestamp indicates that the PhotoSwipe controls are shown.
       canEdit: this.$config.allow("photos", "update") && this.$config.feature("edit"),
       canLike: this.$config.allow("photos", "manage") && this.$config.feature("favorites"),
@@ -93,11 +51,14 @@ export default {
       models: [],
       index: 0,
       subscriptions: [], // Event subscriptions.
-      interval: false,
       slideshow: {
         active: false,
-        next: 0,
+        interval: false,
+        wait: 5000,
+        next: -1,
       },
+      debug,
+      trace,
     };
   },
   created() {
@@ -141,14 +102,14 @@ export default {
         bgOpacity: 1,
         preload: [1, 1],
         showHideAnimationType: "none",
-        tapAction: (point, e) => this.toggleControls(e),
+        tapAction: (point, ev) => this.toggleControls(ev),
         imageClickAction: "zoom",
         mainClass: "media-viewer-lightbox",
-        bgClickAction: (point, e) => this.onBgClick(e),
+        bgClickAction: (point, ev) => this.onBgClick(ev),
         paddingFn: (s) => this.getLightboxPadding(s),
         getViewportSizeFn: () => this.getLightboxViewport(),
         closeTitle: this.$gettext("Close"),
-        zoomTitle: this.$gettext("Zoom"),
+        zoomTitle: this.$gettext("Zoom in/out"),
         arrowPrevTitle: this.$gettext("Previous"),
         arrowNextTitle: this.$gettext("Next"),
         errorMsg: this.$gettext("Error"),
@@ -268,7 +229,7 @@ export default {
 
       // Keep reference to PhotoSwipe instance.
       this.lightbox = lightbox;
-      this.captionTimer = false;
+      this.idleTimer = false;
       this.hasTouch = false;
 
       // Use dynamic caption plugin,
@@ -297,127 +258,9 @@ export default {
         this.$event.publish("viewer.close");
       });
 
-      // Add viewer controls, see https://photoswipe.com/adding-ui-elements/.
-      //
-      // TODO: The same controls as with PhotoSwipe 4 should be usable/available!
-      lightbox.on("uiRegister", () => {
-        // Add a sidebar toggle button only if the window is large enough.
-        // TODO: Proof-of-concept only, the sidebar needs to be fully implemented before this can be released.
-        // TODO: Once this is fully implemented, remove the "this.experimental" flag check below.
-        // IDEA: We can later try to add styles that display the sidebar at the bottom
-        //       instead of on the side, to allow use on mobile devices.
-        if (this.experimental && this.canEdit && window.innerWidth > 600) {
-          lightbox.pswp.ui.registerElement({
-            name: "sidebar-button",
-            className: "pswp__button--sidebar-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
-            order: 9,
-            isButton: true,
-            html: {
-              isCustomSVG: true,
-              inner: '<path d="M11 7V9H13V7H11M14 17V15H13V11H10V13H11V15H10V17H14M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12M20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12Z" id="pswp__icn-sidebar"/>',
-              outlineID: "pswp__icn-sidebar", // Add this to the <path> in the inner property.
-              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
-            },
-            onClick: (e) => {
-              return this.toggleSidebar(e);
-            },
-          });
-        }
-
-        // Fullscreen: <path d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" /></svg>
-        // Fullscreen exit: <path d="M14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19Z" /></svg>
-        // Add viewer fullscreen toggle.
-        if (this.canFullscreen) {
-          lightbox.pswp.ui.registerElement({
-            name: "fullscreen-toggle",
-            className: "pswp__button--fullscreen-toggle pswp__button--mdi", // Sets the icon style/size in viewer.css.
-            order: 10,
-            isButton: true,
-            html: {
-              isCustomSVG: true,
-              inner: `<use class="pswp__icn-shadow pswp__icn-fullscreen-on" xlink:href="#pswp__icn-fullscreen-on"></use><path d="M14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19Z" id="pswp__icn-fullscreen-on" class="pswp__icn-fullscreen-on" /><use class="pswp__icn-shadow pswp__icn-fullscreen-off" xlink:href="#pswp__icn-fullscreen-off"></use><path d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" id="pswp__icn-fullscreen-off" class="pswp__icn-fullscreen-off" />`,
-              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
-            },
-            onClick: () => {
-              return this.onFullscreen();
-            },
-          });
-        }
-
-        // Add favorite toggle if user has permission to like pictures.
-        if (this.canLike) {
-          lightbox.pswp.ui.registerElement({
-            name: "favorite-toggle",
-            className: "pswp__button--favorite-toggle pswp__button--mdi", // Sets the icon style/size in viewer.css.
-            order: 10,
-            isButton: true,
-            html: {
-              isCustomSVG: true,
-              inner: `<use class="pswp__icn-shadow pswp__icn-favorite-on" xlink:href="#pswp__icn-favorite-on"></use><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" id="pswp__icn-favorite-on" class="pswp__icn-favorite-on" /><use class="pswp__icn-shadow pswp__icn-favorite-off" xlink:href="#pswp__icn-favorite-off"></use><path d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" id="pswp__icn-favorite-off" class="pswp__icn-favorite-off" />`,
-              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
-            },
-            onClick: () => {
-              return this.onLike();
-            },
-          });
-        }
-
-        // Add picture selection toggle.
-        lightbox.pswp.ui.registerElement({
-          name: "select-toggle",
-          className: "pswp__button--select-toggle pswp__button--mdi", // Sets the icon style/size in viewer.css.
-          order: 10,
-          isButton: true,
-          html: {
-            isCustomSVG: true,
-            inner: `<use class="pswp__icn-shadow pswp__icn-select-on" xlink:href="#pswp__icn-select-on"></use><path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" id="pswp__icn-select-on" class="pswp__icn-select-on" /><use class="pswp__icn-shadow pswp__icn-select-off" xlink:href="#pswp__icn-select-off"></use><path d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" id="pswp__icn-select-off" class="pswp__icn-select-off" />`,
-            size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
-          },
-          onClick: () => {
-            return this.onSelect();
-          },
-        });
-
-        // Add edit button if user has permission to edit pictures,
-        // see https://photoswipe.com/adding-ui-elements/.
-        if (this.canEdit) {
-          lightbox.pswp.ui.registerElement({
-            name: "edit-button",
-            className: "pswp__button--edit-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
-            order: 10,
-            isButton: true,
-            html: {
-              isCustomSVG: true,
-              inner: `<path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" id="pswp__icn-edit" />`,
-              outlineID: "pswp__icn-edit", // Add this to the <path> in the inner property.
-              size: 26, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
-            },
-            onClick: () => {
-              return this.onEdit();
-            },
-          });
-        }
-
-        // Add download button if user has permission to download pictures,
-        // see https://photoswipe.com/adding-ui-elements/.
-        if (this.canDownload) {
-          lightbox.pswp.ui.registerElement({
-            name: "download-button",
-            className: "pswp__button--download-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
-            order: 10,
-            isButton: true,
-            html: {
-              isCustomSVG: true,
-              inner: `<path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" id="pswp__icn-download" />`,
-              outlineID: "pswp__icn-download", // Add this to the <path> in the inner property.
-              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
-            },
-            onClick: (e) => {
-              return this.onDownload(e);
-            },
-          });
-        }
-      });
+      // Add PhotoSwipe lightbox controls,
+      // see https://photoswipe.com/adding-ui-elements/.
+      this.addLightboxControls(lightbox);
 
       // Trigger onChange() event handler when slide is changed and on initialization,
       // see https://photoswipe.com/events/#initialization-events.
@@ -425,12 +268,13 @@ export default {
         this.onChange();
       });
 
-      // Processes model data for rendering slides with PhotoSwipe, see https://photoswipe.com/filters/#itemdata.
+      // Processes model data for rendering slides with PhotoSwipe,
+      // see https://photoswipe.com/filters/#itemdata.
       lightbox.addFilter("itemData", (el, i) => {
         /*
-         TODO: Rendering of slides needs to be improved to allow dynamic zooming (loading higher resolution thumbs
-               depending on zoom level) and playing videos in their native format whenever possible (see below).
-        */
+          TODO: Rendering of slides needs to be improved to allow dynamic zooming (loading higher resolution thumbs
+                depending on zoom level and screen resolution).
+         */
 
         // Get the current slide model data.
         const model = this.models[i];
@@ -447,25 +291,9 @@ export default {
         // Check if content is playable.
         if (model.Playable) {
           /*
-            TODO: (a) Check if there is a more convenient and/or secure way to render the video slide, then perform
-                      security tests to ensure that no code can be injected, e.g. create an HTMLVideoElement object,
-                      set the properties based on the media type/video duration, and then return it instead of the
-                      plain HTML as implemented in the proof-of-concept.
-                  (b) Live Photos and Animations (e.g. GIFs) must be looped and played automatically (autoplay attribute).
-                  (c) If the browser can naively handle the video file format, don't default to the AVC video URL, as
-                      this may require transcoding, which is slow and resource-intensive. For this, the Util.videoUrl()
-                      function has a second argument for the codec (might need to be added to the server response,
-                      which is something we can help with).
-
-                  Once this is released, the following enhancements can be worked on and shipped in a future release:
-
-                  (d) We should consider using the .m3u8 file format for specifying the stream URL(s), so that the
-                      browser can choose the best format/codec (first develop a simple/static proof-of-concept to see
-                      if/how it works).
-                  (e) The server should (additionally) provide a video/animation still from time index 0 that can be
-                      used as a poster (the current thumbnail is taken later for longer videos, since the first frame is
-                      often black).
-          */
+            TODO: The server should (additionally) provide a video/animation still from time index 0 that can be used as
+                  poster (the current thumbnail is taken later for longer videos, since the first frame is often black).
+           */
           return {
             type: "html",
             html: `<div class="pswp__error-msg">Loading video...</div>`,
@@ -483,11 +311,13 @@ export default {
         };
       });
 
-      lightbox.on("contentLoad", (e) => {
-        const { content } = e;
-        if (content.data.type === "html") {
+      // Renders content when a slide starts to load (can be default prevented),
+      // see https://photoswipe.com/events/#slide-content-events.
+      lightbox.on("contentLoad", (ev) => {
+        const { content } = ev;
+        if (content.data?.type === "html") {
           // Prevent default loading behavior.
-          e.preventDefault();
+          ev.preventDefault();
 
           const model = content.data.model;
           const posterSrc = content.data.msrc;
@@ -499,16 +329,60 @@ export default {
             const videoSrc = Util.videoUrl(model.Hash, model?.Codec);
 
             // Create video element.
-            content.element = this.createVideoElement(videoSrc, posterSrc, isSpecialType || firstPicture, isSpecialType || isShortVideo, false);
+            content.element = this.createVideoElement(videoSrc, posterSrc, false, isSpecialType || isShortVideo, false);
             content.state = "loading";
             content.onLoaded();
           } catch (err) {
             content.element.innerHTML = '<div class="pswp__error-msg">Failed to load video</div>';
           }
         }
+      });
 
+      // Pauses videos, animations, and live photos when slide content becomes active (can be default prevented),
+      // see https://photoswipe.com/events/#slide-content-events.
+      lightbox.on("contentActivate", (ev) => {
+        const { content } = ev;
+
+        if (content.data?.type === "html") {
+          const model = content.data?.model;
+          if (model?.Type === MediaAnimated || model?.Type === MediaLive || this.slideshow.active || firstPicture) {
+            const video = content.element;
+            if (video && typeof video.play === "function" && video.paused) {
+              try {
+                // Calling pause() before a play promise has been resolved may result in an error,
+                // see https://developer.chrome.com/blog/play-request-was-interrupted.
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                  playPromise.catch((e) => {
+                    if (this.trace) {
+                      console.log(e.message);
+                    }
+                  });
+                }
+              } catch (_) {
+                // Ignore.
+              }
+            }
+          }
+        }
+
+        // Flag first picture as being displayed/activated.
         if (firstPicture) {
           firstPicture = false;
+        }
+      });
+
+      // Pauses videos, animations, and live photos when content becomes active (can be default prevented),
+      // see https://photoswipe.com/events/#slide-content-events.
+      lightbox.on("contentDeactivate", (ev) => {
+        const { content } = ev;
+        const video = content.element;
+        if (video && typeof video.pause === "function" && !video.paused) {
+          try {
+            video.pause();
+          } catch (e) {
+            console.log(e);
+          }
         }
       });
 
@@ -521,28 +395,187 @@ export default {
       // Publish event to be consumed by other components.
       this.$event.publish("viewer.opened");
     },
+    // Adds PhotoSwipe lightbox controls, see https://photoswipe.com/adding-ui-elements/.
+    addLightboxControls(lightbox) {
+      // TODO: The same controls as with PhotoSwipe 4 should be usable/available!
+      lightbox.on("uiRegister", () => {
+        // Add a sidebar toggle button only if the window is large enough.
+        // TODO: Proof-of-concept only, the sidebar needs to be fully implemented before this can be released.
+        // TODO: Once this is fully implemented, remove the "this.experimental" flag check below.
+        // IDEA: We can later try to add styles that display the sidebar at the bottom
+        //       instead of on the side, to allow use on mobile devices.
+        if (this.experimental && this.canEdit && window.innerWidth > 600) {
+          lightbox.pswp.ui.registerElement({
+            name: "sidebar-button",
+            className: "pswp__button--sidebar-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
+            ariaLabel: this.$gettext("Show/Hide Sidebar"),
+            order: 9,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: '<path d="M11 7V9H13V7H11M14 17V15H13V11H10V13H11V15H10V17H14M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12M20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12Z" id="pswp__icn-sidebar"/>',
+              outlineID: "pswp__icn-sidebar", // Add this to the <path> in the inner property.
+              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+            },
+            onClick: (ev) => {
+              return this.toggleSidebar(ev);
+            },
+          });
+        }
 
+        // Add slideshow play/pause toggle control,
+        // see https://photoswipe.com/adding-ui-elements/.
+        lightbox.pswp.ui.registerElement({
+          name: "slideshow-toggle",
+          className: "pswp__button--slideshow-toggle pswp__button--mdi", // Sets the icon style/size in viewer.css.
+          ariaLabel: this.$gettext("Start/Stop Slideshow"),
+          order: 10,
+          isButton: true,
+          html: {
+            isCustomSVG: true,
+            inner: `<use class="pswp__icn-shadow pswp__icn-slideshow-on" xlink:href="#pswp__icn-slideshow-on"></use><path d="M14,19H18V5H14M6,19H10V5H6V19Z" id="pswp__icn-slideshow-on" class="pswp__icn-slideshow-on" /><use class="pswp__icn-shadow pswp__icn-slideshow-off" xlink:href="#pswp__icn-slideshow-off"></use><path d="M8,5.14V19.14L19,12.14L8,5.14Z" id="pswp__icn-slideshow-off" class="pswp__icn-slideshow-off" />`,
+            size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+          },
+          onClick: () => {
+            return this.onSlideshow();
+          },
+        });
+
+        // Add fullscreen mode toggle control,
+        // see https://photoswipe.com/adding-ui-elements/.
+        if (this.canFullscreen) {
+          lightbox.pswp.ui.registerElement({
+            name: "fullscreen-toggle",
+            className: "pswp__button--fullscreen-toggle pswp__button--mdi", // Sets the icon style/size in viewer.css.
+            ariaLabel: this.$gettext("Fullscreen"),
+            order: 10,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: `<use class="pswp__icn-shadow pswp__icn-fullscreen-on" xlink:href="#pswp__icn-fullscreen-on"></use><path d="M14,14H19V16H16V19H14V14M5,14H10V19H8V16H5V14M8,5H10V10H5V8H8V5M19,8V10H14V5H16V8H19Z" id="pswp__icn-fullscreen-on" class="pswp__icn-fullscreen-on" /><use class="pswp__icn-shadow pswp__icn-fullscreen-off" xlink:href="#pswp__icn-fullscreen-off"></use><path d="M5,5H10V7H7V10H5V5M14,5H19V10H17V7H14V5M17,14H19V19H14V17H17V14M10,17V19H5V14H7V17H10Z" id="pswp__icn-fullscreen-off" class="pswp__icn-fullscreen-off" />`,
+              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+            },
+            onClick: () => {
+              return this.onFullscreen();
+            },
+          });
+        }
+
+        // Add favorite toggle control if user has permission to use it,
+        // see https://photoswipe.com/adding-ui-elements/.
+        if (this.canLike) {
+          lightbox.pswp.ui.registerElement({
+            name: "favorite-toggle",
+            className: "pswp__button--favorite-toggle pswp__button--mdi hidden-shared-only", // Sets the icon style/size in viewer.css.
+            ariaLabel: this.$gettext("Like"),
+            order: 10,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: `<use class="pswp__icn-shadow pswp__icn-favorite-on" xlink:href="#pswp__icn-favorite-on"></use><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" id="pswp__icn-favorite-on" class="pswp__icn-favorite-on" /><use class="pswp__icn-shadow pswp__icn-favorite-off" xlink:href="#pswp__icn-favorite-off"></use><path d="M12,15.39L8.24,17.66L9.23,13.38L5.91,10.5L10.29,10.13L12,6.09L13.71,10.13L18.09,10.5L14.77,13.38L15.76,17.66M22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.45,13.97L5.82,21L12,17.27L18.18,21L16.54,13.97L22,9.24Z" id="pswp__icn-favorite-off" class="pswp__icn-favorite-off" />`,
+              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+            },
+            onClick: () => {
+              return this.onLike();
+            },
+          });
+        }
+
+        // Add selection toggle control,
+        // see https://photoswipe.com/adding-ui-elements/.
+        lightbox.pswp.ui.registerElement({
+          name: "select-toggle",
+          className: "pswp__button--select-toggle pswp__button--mdi", // Sets the icon style/size in viewer.css.
+          ariaLabel: this.$gettext("Select"),
+          order: 10,
+          isButton: true,
+          html: {
+            isCustomSVG: true,
+            inner: `<use class="pswp__icn-shadow pswp__icn-select-on" xlink:href="#pswp__icn-select-on"></use><path d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" id="pswp__icn-select-on" class="pswp__icn-select-on" /><use class="pswp__icn-shadow pswp__icn-select-off" xlink:href="#pswp__icn-select-off"></use><path d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" id="pswp__icn-select-off" class="pswp__icn-select-off" />`,
+            size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+          },
+          onClick: () => {
+            return this.onSelect();
+          },
+        });
+
+        // Add edit button control if user has permission to use it.
+        // see https://photoswipe.com/adding-ui-elements/.
+        if (this.canEdit) {
+          lightbox.pswp.ui.registerElement({
+            name: "edit-button",
+            className: "pswp__button--edit-button pswp__button--mdi hidden-shared-only", // Sets the icon style/size in viewer.css.
+            ariaLabel: this.$gettext("Edit"),
+            order: 10,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: `<path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" id="pswp__icn-edit" />`,
+              outlineID: "pswp__icn-edit", // Add this to the <path> in the inner property.
+              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+            },
+            onClick: () => {
+              return this.onEdit();
+            },
+          });
+        }
+
+        // Add download button control if user has permission to use it.
+        // see https://photoswipe.com/adding-ui-elements/.
+        if (this.canDownload) {
+          lightbox.pswp.ui.registerElement({
+            name: "download-button",
+            className: "pswp__button--download-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
+            ariaLabel: this.$gettext("Download"),
+            order: 10,
+            isButton: true,
+            html: {
+              isCustomSVG: true,
+              inner: `<path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" id="pswp__icn-download" />`,
+              outlineID: "pswp__icn-download", // Add this to the <path> in the inner property.
+              size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
+            },
+            onClick: (ev) => {
+              return this.onDownload(ev);
+            },
+          });
+        }
+      });
+    },
+    // Creates an HTMLMediaElement for playing videos, animations, and live photos.
     createVideoElement(videoSrc, posterSrc, autoplay = false, loop = false, mute = false) {
-      // Create video element.
+      // See https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement.
       const video = document.createElement("video");
 
-      // Set essential attributes.
-      video.className = "pswp__video";
-      video.controls = true;
-      video.playsInline = true;
-      video.poster = posterSrc;
-      video.preload = autoplay ? "auto" : "metadata";
-      video.autoplay = autoplay;
-      video.loop = loop;
-      video.mute = mute;
+      // Check if a slideshow is running.
+      const slideshow = this.slideshow.active;
 
-      // Create and append source element.
+      // Set HTMLMediaElement properties.
+      video.className = "pswp__video";
+      video.poster = posterSrc;
+      video.autoplay = autoplay;
+      video.loop = loop && !slideshow;
+      video.mute = mute;
+      video.preload = autoplay ? "auto" : "metadata";
+      video.playsInline = true;
+      video.controls = true;
+
+      // Disable download control is downloads are not allowed.
+      if (!this.canDownload) {
+        video.controlsList.add("nodownload");
+      }
+
+      // Create and append video source element.
+      /*
+        TODO: Provide alternative sources and/or an m3u8 playlist to let the browser choose the best format (first check
+              best practices on Google and in the code of other open source software, then develop a simple/static proof
+              of concept to see if/how it works).
+       */
       const source = document.createElement("source");
       source.src = videoSrc;
-
       video.appendChild(source);
 
-      // Return the DOM element.
+      // Return HTMLMediaElement.
       return video;
     },
     // Destroys the PhotoSwipe lightbox instance after use, see onClose().
@@ -564,8 +597,10 @@ export default {
         caption += `<h4>${Util.encodeHTML(model.Title)}</h4>`;
       }
 
-      /* TODO: Find a good position for the date information that
-               works for all screen sizes and image dimensions. */
+      /*
+        TODO: Find a good position for the date information that works for all screen sizes and image dimensions.
+              We MAY postpone this and display it along with other metadata in the new sidebar.
+       */
       /* if (model.TakenAtLocal) {
          caption += `<div>${Util.formatDate(model.TakenAtLocal)}</div>`;
       } */
@@ -576,7 +611,7 @@ export default {
         caption += `<p>${Util.encodeHTML(model.Description)}</p>`;
       }
 
-      // TODO: Perform security tests to see if unwanted code can be injected.
+      // TODO: Perform SECURITY tests to see if ANY unwanted code can be injected.
       return Util.sanitizeHtml(caption);
     },
     onShow() {
@@ -619,9 +654,9 @@ export default {
     },
     // Resets the timer for hiding the viewer controls.
     resetTimer() {
-      if (this.captionTimer) {
-        window.clearTimeout(this.captionTimer);
-        this.captionTimer = false;
+      if (this.idleTimer) {
+        window.clearTimeout(this.idleTimer);
+        this.idleTimer = false;
       }
     },
     // Resets the state of the viewer controls.
@@ -664,9 +699,6 @@ export default {
         return;
       }
 
-      // Find and pause videos that are currently playing.
-      this.pauseVideos();
-
       // Attach touch and mouse event handlers to automatically hide controls.
       document.addEventListener(
         "touchstart",
@@ -701,15 +733,15 @@ export default {
     },
     // Called when the user clicks on the PhotoSwipe lightbox background,
     // see https://photoswipe.com/click-and-tap-actions.
-    onBgClick(e) {
+    onBgClick(ev) {
       if (this.controlsVisible()) {
         this.onClose();
       } else {
         this.showControls();
       }
 
-      if (e && typeof e.stopPropagation === "function") {
-        e.stopPropagation();
+      if (ev && typeof ev.stopPropagation === "function") {
+        ev.stopPropagation();
       }
     },
     onFullscreen() {
@@ -767,46 +799,73 @@ export default {
         }
       }
     },
-    // Pauses the lightbox slideshow, if currently active.
-    pauseSlideshow() {
-      this.slideshow.active = false;
-
-      if (this.interval) {
-        clearInterval(this.interval);
-        this.interval = false;
+    // Starts/stops a slideshow.
+    onSlideshow() {
+      if (this.slideshow.active || this.slideshow.interval) {
+        this.pauseSlideshow();
+      } else {
+        this.playSlideshow();
       }
     },
-    // Toggles the lightbox slideshow.
-    // TODO: Does not work yet, needs to be reimplemented for the new viewer.
-    onSlideshow() {
-      if (this.interval) {
-        this.pauseSlideshow();
+    // Starts a slideshow, if not already active.
+    playSlideshow() {
+      // Return if already playing.
+      if (this.slideshow.active) {
         return;
       }
 
+      // Flag slideshow as active.
       this.slideshow.active = true;
 
+      // Get PhotoSwipe instance.
       const pswp = this.pswp();
 
-      self.interval = setInterval(() => {
-        if (pswp && typeof pswp.next === "function") {
+      // Show next slide at regular intervals.
+      this.slideshow.interval = setInterval(() => {
+        if (!pswp || typeof pswp.next !== "function" || !pswp.currSlide?.content) {
+          this.pauseSlideshow();
+          return;
+        }
+
+        const content = pswp.currSlide.content;
+
+        if (content.data?.type === "html" && content.element instanceof HTMLMediaElement && !content.element?.paused) {
+          // Do nothing if a video is still playing.
+        } else if (this.models.length > this.index + 1) {
+          // Show the next slide.
+          this.slideshow.next = this.index + 1;
           pswp.next();
-          this.slideshow.next = pswp.currIndex;
         } else {
+          // Pause slideshow if this is the end.
           this.pauseSlideshow();
         }
-      }, 5000);
+      }, this.slideshow.wait);
+    },
+    // Pauses the slideshow, if currently active.
+    pauseSlideshow() {
+      if (this.slideshow.active) {
+        this.slideshow.active = false;
+      }
+
+      if (this.slideshow.interval) {
+        clearInterval(this.slideshow.interval);
+        this.slideshow.interval = false;
+      }
+
+      this.slideshow.next = -1;
     },
     // Downloads the original files of the current picture.
-    onDownload(e) {
-      if (e && typeof e.stopPropagation === "function") {
-        e.stopPropagation();
+    onDownload(ev) {
+      if (ev && typeof ev.stopPropagation === "function") {
+        ev.stopPropagation();
       }
 
       this.pauseSlideshow();
 
-      /* TODO: Once all the viewer's core functionality has been restored, add a file size/type
-               selection dialog so the user can choose which format and quality to download. */
+      /*
+        TODO: Once all the viewer's core functionality has been restored, add a file size/type
+              selection dialog so the user can choose which format and quality to download.
+       */
 
       if (!this.model || !this.model.DownloadUrl) {
         console.warn("photo viewer: no download url");
@@ -842,7 +901,7 @@ export default {
 
       this.$event.publish("dialog.edit", { selection, album, index }); // Open Edit Dialog
     },
-    toggleSidebar(e) {
+    toggleSidebar(ev) {
       this.sidebarVisible = !this.sidebarVisible;
 
       this.$nextTick(() => {
@@ -852,8 +911,8 @@ export default {
         }
       });
 
-      if (e && typeof e.stopPropagation === "function") {
-        e.stopPropagation();
+      if (ev && typeof ev.stopPropagation === "function") {
+        ev.stopPropagation();
       }
     },
     // Hides the viewer sidebar, if visible.
@@ -863,7 +922,7 @@ export default {
         this.sidebarVisible = false;
       }
     },
-    toggleControls(e) {
+    toggleControls(ev) {
       if (this.pswp() && this.pswp().element) {
         const el = this.pswp().element;
         if (el.classList.contains("pswp--ui-visible")) {
@@ -875,8 +934,8 @@ export default {
         }
       }
 
-      if (e && typeof e.stopPropagation === "function") {
-        e.stopPropagation();
+      if (ev && typeof ev.stopPropagation === "function") {
+        ev.stopPropagation();
       }
     },
     showControls() {
@@ -920,7 +979,7 @@ export default {
       }
 
       this.resetTimer();
-      this.captionTimer = window.setTimeout(() => {
+      this.idleTimer = window.setTimeout(() => {
         this.hideControls();
       }, this.idleTime);
       document.addEventListener(
