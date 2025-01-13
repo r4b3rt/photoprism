@@ -283,15 +283,25 @@ export default {
         // Get the screen (window) resolution in real pixels
         const pixels = this.getWindowPixels();
 
+        console.log('model', model);
+        // Get the image srcSet
+        const srcSet = this.generateSrcset(model);
+
         // Get the right thumbnail size based on the screen resolution in pixels.
         const thumbSize = Util.thumbSize(pixels.width, pixels.height);
 
         // Get thumbnail image URL, width, and height.
+        // TODO: change sizes to be dynamic
         const img = {
+          scrSet: srcSet,
           src: model.Thumbs[thumbSize].src,
           width: model.Thumbs[thumbSize].w,
           height: model.Thumbs[thumbSize].h,
           alt: model?.Title,
+          pswpSrcset: srcSet,
+          sizes: "100vw",
+          pswpWidth: model.Thumbs[thumbSize].w,
+          pswpHeight: model.Thumbs[thumbSize].h,
         };
 
         // Check if content is playable and return the data needed to render it in "contentLoad".
@@ -338,6 +348,15 @@ export default {
             content.element.innerHTML = '<div class="pswp__error-msg">Failed to load video</div>';
           }
         }
+      });
+
+      // Function only to check the data on size changing
+      lightbox.on('imageSizeChange', () => {
+        const slide = lightbox.pswp.currSlide;
+
+        console.log('Current slide:', slide.data);
+        console.log('Current image source:', slide.currSlideContent?.element?.src);
+        console.log('Zoom level:', slide.currZoomLevel);
       });
 
       // Pauses videos, animations, and live photos when slide content becomes active (can be default prevented),
@@ -997,6 +1016,21 @@ export default {
         width: window.innerWidth * window.devicePixelRatio,
         height: window.innerHeight * window.devicePixelRatio,
       };
+    },
+    generateSrcset(image) {
+      // Extract all the fit_* resolutions from the image object
+      const resolutions = Object.keys(image.Thumbs)
+        .filter(key => key.startsWith("fit_"))
+        .map(key => image.Thumbs[key]);
+      console.log('image resolution', resolutions);
+
+      // Construct the srcset string
+      const srcset = resolutions
+        .map(res => `${res.src} ${res.w}w`)
+        .join(", ");
+      console.log('image srcset', srcset);
+
+      return srcset;
     },
     getLightboxViewport() {
       const el = this.getLightbox();
