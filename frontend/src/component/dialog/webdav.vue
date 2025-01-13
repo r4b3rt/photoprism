@@ -11,7 +11,7 @@
       </v-card-text>
 
       <v-card-text class="text-body-2">
-        <v-text-field autocorrect="off" autocapitalize="none" autocomplete="off" hide-details readonly single-line :model-value="webdavUrl()" class="input-url" @click.stop="selectText($event)"> </v-text-field>
+        <v-text-field append-inner-icon="mdi-content-copy" @click:append-inner="copyText(webdavUrl())" autocorrect="off" autocapitalize="none" autocomplete="off" hide-details readonly single-line :model-value="webdavUrl()" class="input-url" @click.stop="copyText(webdavUrl())"></v-text-field>
       </v-card-text>
 
       <v-card-text class="text-body-2 clickable" @click="windowsHelp($event)">
@@ -19,7 +19,7 @@
       </v-card-text>
 
       <v-card-text class="text-body-2">
-        <v-text-field autocorrect="off" autocapitalize="none" autocomplete="off" hide-details readonly single-line :model-value="windowsUrl()" class="input-url" @click.stop="selectText($event)"> </v-text-field>
+        <v-text-field append-inner-icon="mdi-content-copy" @click:append-inner="copyText(windowsUrl())" autocorrect="off" autocapitalize="none" autocomplete="off" hide-details readonly single-line :model-value="windowsUrl()" class="input-url" @click.stop="copyText(windowsUrl())"></v-text-field>
       </v-card-text>
 
       <v-card-text class="text-body-2">
@@ -68,20 +68,15 @@ export default {
     },
   },
   methods: {
-    selectText(ev) {
-      if (!ev || !ev.target) {
+    async copyText(text) {
+      if (!text) {
         return;
       }
 
-      ev.target.select();
-
-      this.copyUrl();
-    },
-    async copyUrl() {
       try {
-        await Util.copyToMachineClipboard(this.webdavUrl());
+        await Util.copyToMachineClipboard(text);
         this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (error) {
+      } catch (_) {
         this.$notify.error(this.$gettext("Failed copying to clipboard"));
       }
     },
