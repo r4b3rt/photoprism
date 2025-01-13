@@ -5,7 +5,7 @@
         <v-icon size="54" color="primary">mdi-delete-outline</v-icon>
         <p class="text-subtitle-1"><translate>Are you sure you want to delete this account?</translate></p>
       </v-card-title>
-      <v-card-actions class="action-buttons">
+      <v-card-actions class="action-buttons mt-1">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
           <translate>Cancel</translate>
         </v-btn>

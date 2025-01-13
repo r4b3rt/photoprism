@@ -6,7 +6,7 @@
         <p v-if="text === ''" class="text-subtitle-1"><translate>Are you sure you want to permanently delete these pictures?</translate></p>
         <p v-else class="text-subtitle-1">{{ text }}</p>
       </v-card-title>
-      <v-card-actions class="action-buttons">
+      <v-card-actions class="action-buttons mt-1">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
           <translate>Cancel</translate>
         </v-btn>
