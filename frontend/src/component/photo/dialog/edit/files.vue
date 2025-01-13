@@ -54,7 +54,7 @@
                             </tr>
                             <tr>
                               <td title="Unique ID">UID</td>
-                              <td>
+                              <td class="text-break">
                                 <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.UID)">{{ file.UID }}</span>
                               </td>
                             </tr>
@@ -62,7 +62,7 @@
                               <td>
                                 <translate>Instance ID</translate>
                               </td>
-                              <td>
+                              <td class="text-break">
                                 <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.InstanceID)">{{ file.InstanceID }}</span>
                               </td>
                             </tr>
@@ -70,15 +70,17 @@
                               <td title="SHA-1">
                                 <translate>Hash</translate>
                               </td>
-                              <td><span class="clickable text-break" @click.stop.prevent="copyText(file.Hash)">{{ file.Hash }}</span></td
-                              >
+                              <td class="text-break">
+                                <span class="clickable text-break" @click.stop.prevent="copyText(file.Hash)">{{ file.Hash }}</span>
+                              </td>
                             </tr>
                             <tr v-if="file.Name">
                               <td>
                                 <translate>Filename</translate>
                               </td>
-                              <td class="text-break"><span class="clickable" @click.stop.prevent="copyText(file.Name)">{{ file.Name }}</span></td
-                              >
+                              <td class="text-break">
+                                <span class="clickable" @click.stop.prevent="copyText(file.Name)">{{ file.Name }}</span>
+                              </td>
                             </tr>
                             <tr v-if="file.Root">
                               <td>
@@ -122,7 +124,7 @@
                               <td>
                                 <translate>Codec</translate>
                               </td>
-                              <td>{{ codecName(file) }}</td>
+                              <td class="text-break">{{ codecName(file) }}</td>
                             </tr>
                             <tr v-if="file.Duration && file.Duration > 0">
                               <td>

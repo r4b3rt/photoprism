@@ -6,13 +6,13 @@
           <tbody>
             <tr>
               <td>UID</td>
-              <td>
+              <td class="text-break">
                 <span class="clickable text-uppercase" @click.stop.prevent="copyText(model.UID)">{{ model.UID }}</span>
               </td>
             </tr>
             <tr v-if="model.DocumentID">
               <td>Document ID</td>
-              <td>
+              <td class="text-break">
                 <span class="clickable text-uppercase" @click.stop.prevent="copyText(model.DocumentID)">{{ model.DocumentID }}</span>
               </td>
             </tr>
@@ -43,17 +43,17 @@
               <td>
                 <translate>Folder</translate>
               </td>
-              <td
-                ><span class="clickable" @click.stop.prevent="copyText(model.Path)">{{ model.Path }}</span></td
-              >
+              <td class="text-break">
+                <span class="clickable" @click.stop.prevent="copyText(model.Path)">{{ model.Path }}</span>
+              </td>
             </tr>
             <tr>
               <td>
                 <translate>Name</translate>
               </td>
-              <td
-                ><span class="clickable" @click.stop.prevent="copyText(model.Name)">{{ model.Name }}</span></td
-              >
+              <td class="text-break">
+                <span class="clickable" @click.stop.prevent="copyText(model.Name)">{{ model.Name }}</span>
+              </td>
             </tr>
             <tr v-if="model.OriginalName">
               <td>
@@ -68,7 +68,7 @@
                 <translate>Title</translate>
               </td>
               <td :title="sourceName(model.TitleSrc)">
-                <div class="text-flex">
+                <div class="text-flex text-break">
                   <span class="clickable" @click.stop.prevent="copyText(model.Title)">{{ model.Title }}</span>
                   <v-icon v-if="model.TitleSrc === 'name'" icon="mdi-file" class="src"></v-icon>
                   <v-icon v-else-if="model.TitleSrc === 'manual'" icon="mdi-check" class="src"></v-icon>
@@ -80,7 +80,7 @@
                 <translate>Taken</translate>
               </td>
               <td :title="sourceName(model.TakenSrc)">
-                <div class="text-flex">
+                <div class="text-flex text-break">
                   <div>{{ model.getDateString() }}</div>
                   <v-icon v-if="model.TakenSrc === ''" icon="mdi-file-clock-outline" class="src"></v-icon>
                   <!-- v-icon v-else-if="model.TakenSrc === 'meta'" icon="mdi-camera" class="src"></v-icon -->
@@ -94,7 +94,7 @@
               <td>
                 <translate>Albums</translate>
               </td>
-              <td>
+              <td class="text-break">
                 <a v-for="(a, i) in albums" :key="i" :href="a.url" class="text-primary text-link" target="_blank"><span v-if="i > 0">, </span>{{ a.title }}</a>
               </td>
             </tr>
@@ -122,7 +122,7 @@
               <td>
                 <translate>Camera Serial</translate>
               </td>
-              <td>{{ model.CameraSerial }} </td>
+              <td class="text-break">{{ model.CameraSerial }} </td>
             </tr>
             <tr v-if="model.Stack < 1">
               <td>
@@ -211,7 +211,7 @@
               <td>
                 <translate>Created</translate>
               </td>
-              <td>
+              <td class="text-break">
                 {{ formatTime(model.CreatedAt) }}
               </td>
             </tr>
@@ -219,7 +219,7 @@
               <td>
                 <translate>Updated</translate>
               </td>
-              <td>
+              <td class="text-break">
                 {{ formatTime(model.UpdatedAt) }}
               </td>
             </tr>
@@ -227,7 +227,7 @@
               <td>
                 <translate>Edited</translate>
               </td>
-              <td>
+              <td class="text-break">
                 {{ formatTime(model.EditedAt) }}
               </td>
             </tr>
@@ -235,7 +235,7 @@
               <td>
                 <translate>Checked</translate>
               </td>
-              <td>
+              <td class="text-break">
                 {{ formatTime(model.CheckedAt) }}
               </td>
             </tr>
@@ -243,7 +243,7 @@
               <td>
                 <translate>Archived</translate>
               </td>
-              <td>
+              <td class="text-break">
                 {{ formatTime(model.DeletedAt) }}
               </td>
             </tr>
