@@ -355,7 +355,7 @@ export default {
         const slide = lightbox.pswp.currSlide;
 
         console.log('Current slide:', slide.data);
-        console.log('Current image source:', slide.currSlideContent?.element?.src);
+        console.log('Current image source:', slide.content?.element?.src);
         console.log('Zoom level:', slide.currZoomLevel);
       });
 
