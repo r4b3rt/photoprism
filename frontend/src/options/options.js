@@ -467,6 +467,23 @@ export const FeedbackCategories = () => [
   { value: "other", text: $gettext("Other") },
 ];
 
+export const Thumbs = () => {
+  return config.values.thumbs;
+};
+
+export const ThumbSizes = () => {
+  const thumbs = Thumbs();
+  const result = [{ text: $gettext("Originals"), value: "" }];
+
+  for (let i = 0; i < thumbs.length; i++) {
+    let t = thumbs[i];
+
+    result.push({ text: t.w + " × " + t.h, value: t.size });
+  }
+
+  return result;
+};
+
 export const ThumbFilters = () => [
   { value: "blackman", text: $gettext("Blackman: Lanczos Modification, Less Ringing Artifacts") },
   { value: "lanczos", text: $gettext("Lanczos: Detail Preservation, Minimal Artifacts") },
@@ -486,3 +503,5 @@ export const Orientations = () => [
   { value: 3, text: "180°" },
   { value: 8, text: "270°" },
 ];
+
+export const AccountTypes = () => [{ value: "webdav", text: $gettext("WebDAV") }];
