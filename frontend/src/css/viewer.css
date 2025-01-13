@@ -57,6 +57,7 @@
 
 .pswp__img {
     -webkit-touch-callout: default;
+    cursor: zoom-in;
 }
 
 .pswp-caption-content,

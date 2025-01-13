@@ -44,6 +44,7 @@ export default {
       canDownload: this.$config.allow("photos", "download") && this.$config.feature("download"),
       canFullscreen: !this.$isMobile,
       isFullscreen: !window.screenTop && !window.screenY,
+      mobileBreakpoint: 600, // Minimum viewport width for large screens.
       experimental: this.$config.get("experimental"), // Experimental features flag.
       selection: this.$clipboard.selection,
       config: this.$config.values,
@@ -106,7 +107,7 @@ export default {
         imageClickAction: "zoom",
         mainClass: "media-viewer-lightbox",
         bgClickAction: (point, ev) => this.onBgClick(ev),
-        paddingFn: (s) => this.getLightboxPadding(s),
+        paddingFn: (viewport, data) => this.getLightboxPadding(viewport, data),
         getViewportSizeFn: () => this.getLightboxViewport(),
         closeTitle: this.$gettext("Close"),
         zoomTitle: this.$gettext("Zoom in/out"),
@@ -285,10 +286,15 @@ export default {
         // Get the right thumbnail size based on the screen resolution in pixels.
         const thumbSize = Util.thumbSize(pixels.width, pixels.height);
 
-        // Get thumbnail image URL.
-        const imgSrc = model.Thumbs[thumbSize].src;
+        // Get thumbnail image URL, width, and height.
+        const img = {
+          src: model.Thumbs[thumbSize].src,
+          width: model.Thumbs[thumbSize].w,
+          height: model.Thumbs[thumbSize].h,
+          alt: model?.Title,
+        };
 
-        // Check if content is playable.
+        // Check if content is playable and return the data needed to render it in "contentLoad".
         if (model.Playable) {
           /*
             TODO: The server should (additionally) provide a video/animation still from time index 0 that can be used as
@@ -298,17 +304,13 @@ export default {
             type: "html",
             html: `<div class="pswp__error-msg">Loading video...</div>`,
             model: model, // Pass the entire model data.
-            msrc: imgSrc, // Pass the thumbnail image URL.
+            msrc: img.src, // Pass the thumbnail image URL.
           };
         }
 
-        // Return the data that PhotoSwipe needs to show the image
+        // Return the image data so that PhotoSwipe can render it in the viewer,
         // see https://photoswipe.com/data-sources/#dynamically-generated-data.
-        return {
-          src: imgSrc,
-          width: model.Thumbs[thumbSize].w,
-          height: model.Thumbs[thumbSize].h,
-        };
+        return img;
       });
 
       // Renders content when a slide starts to load (can be default prevented),
@@ -404,7 +406,7 @@ export default {
         // TODO: Once this is fully implemented, remove the "this.experimental" flag check below.
         // IDEA: We can later try to add styles that display the sidebar at the bottom
         //       instead of on the side, to allow use on mobile devices.
-        if (this.experimental && this.canEdit && window.innerWidth > 600) {
+        if (this.experimental && this.canEdit && window.innerWidth > this.mobileBreakpoint) {
           lightbox.pswp.ui.registerElement({
             name: "sidebar-button",
             className: "pswp__button--sidebar-button pswp__button--mdi", // Sets the icon style/size in viewer.css.
@@ -974,7 +976,7 @@ export default {
       }
     },
     startTimer() {
-      if (this.hasTouch) {
+      if (this.hasTouch || this.$isMobile) {
         return;
       }
 
@@ -1011,32 +1013,44 @@ export default {
         };
       }
     },
-    getLightboxPadding(s) {
-      if (!s || (s.x <= 600 && s.x < s.y)) {
-        // Vertical padding on mobile screens to avoid obscuring controls (except when zooming into pictures).
-        return {
-          top: 56,
-          bottom: 8,
-          left: 0,
-          right: 0,
-        };
-      } else if (s.x === 720 || s.x === 1080 || s.x === 1280 || s.x === 1920 || s.x === 2560 || s.x === 3840 || s.x === 4096 || s.x === 4096 || s.x === 7680) {
-        // Viewport has a standardized size, e.g. on a TV or a browser in full-screen mode.
-        return {
-          top: 0,
-          bottom: 0,
-          left: 0,
-          right: 0,
-        };
-      } else {
-        // Default.
-        return {
-          top: 4,
-          bottom: 4,
-          left: 4,
-          right: 4,
-        };
+    getLightboxPadding(viewport, data) {
+      let top = 0,
+        bottom = 0,
+        left = 0,
+        right = 0;
+
+      // No lightbox padding if content width or height is not specified.
+      if (!viewport || !data?.width || !data?.height) {
+        return { top, bottom, left, right };
       }
+
+      // Determine lightbox padding based on content and viewport size.
+      if (viewport.x > this.mobileBreakpoint) {
+        // Large screens.
+        if (data.width % viewport.x !== 0 && viewport.x > viewport.y) {
+          left = 48;
+          right = 48;
+        }
+
+        if (data.height % viewport.y === 0) {
+          top = 48;
+          bottom = 48;
+          left = 48;
+          right = 48;
+        } else if (data.height > data.width) {
+          top = 48;
+          bottom = 48;
+        } else {
+          top = 72;
+          bottom = 64;
+        }
+      } else {
+        // Small screens.
+        top = 56;
+        bottom = 8;
+      }
+
+      return { top, bottom, left, right };
     },
   },
 };
