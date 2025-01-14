@@ -309,8 +309,6 @@ export default {
         // Save the start width and height of the image
         this.imageThumbsSize.width = model.Thumbs[thumbSize].w;
         this.imageThumbsSize.height = model.Thumbs[thumbSize].h;
-        console.log('start this.imageThumbsSize.width', this.imageThumbsSize.width);
-        console.log('start this.imageThumbsSize.height', this.imageThumbsSize.height);
 
         // Check if content is playable and return the data needed to render it in "contentLoad".
         if (model.Playable) {
@@ -1116,8 +1114,6 @@ export default {
       }
       this.imageThumbsSize.width = model.Thumbs[bestThumbSize].w;
       this.imageThumbsSize.height = model.Thumbs[bestThumbSize].h;
-      console.log('new width', this.imageThumbsSize.width);
-      console.log('new height', this.imageThumbsSize.height);
 
       // Load higher quality image
       const newImage = new Image();
