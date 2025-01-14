@@ -209,6 +209,10 @@ body.dark-theme {
     caret-color: rgb(var(--v-theme-surface-variant));
 }
 
+.v-field--variant-solo-filled .v-field__overlay {
+    opacity: var(--v-fill-opacity, .04);
+}
+
 .v-input.v-select.v-input--density-compact>.v-input__control>.v-field .v-select__selection,
 .v-menu>.v-overlay__content>.v-list>.v-list-item.v-list-item--density-compact>.v-list-item__prepend {
     display: flex;
