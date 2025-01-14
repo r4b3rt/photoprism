@@ -510,7 +510,7 @@ let themes = {
       card: "#262524",
       selected: "#ffc430",
       table: "#373532",
-      button: "##262523",
+      button: "#262523",
       primary: "#ffb700",
       highlight: "#ffb700",
       secondary: "#1a1918",
