@@ -266,6 +266,7 @@ export default {
       // Handle zoom level changes to load higher quality thumbnails
       // when image size changes
       lightbox.on("imageSizeChange", ({ content, width, height, slide }) => {
+        const pswp = this.pswp();
         if (slide === pswp.currSlide) {
           this.handleZoomLevelChange();
         }
