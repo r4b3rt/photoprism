@@ -58,6 +58,10 @@ export default {
         wait: 5000,
         next: -1,
       },
+      imageThumbsSize: {
+        width: 0,
+        height: 0,
+      },
       debug,
       trace,
     };
@@ -302,6 +306,12 @@ export default {
           height: model.Thumbs[thumbSize].h,
           alt: model?.Title,
         };
+
+        // Save the start width and height of the image
+        this.imageThumbsSize.width = model.Thumbs[thumbSize].w;
+        this.imageThumbsSize.height = model.Thumbs[thumbSize].h;
+        console.log('start this.imageThumbsSize.width', this.imageThumbsSize.width);
+        console.log('start this.imageThumbsSize.height', this.imageThumbsSize.height);
 
         // Check if content is playable and return the data needed to render it in "contentLoad".
         if (model.Playable) {
@@ -1061,7 +1071,7 @@ export default {
 
       return { top, bottom, left, right };
     },
-    // Handles zoom level changes and loads higher quality thumbnails when needed
+    // Handle zoom level changes and load higher quality thumbnails when needed
     handleZoomLevelChange() {
       const pswp = this.pswp();
       if (!pswp || !pswp.currSlide) return;
@@ -1069,7 +1079,7 @@ export default {
       const zoomLevel = pswp.currSlide.currZoomLevel;
       const currSlide = pswp.currSlide;
       const model = this.models[this.index];
-      
+
       if (!model || !model.Thumbs) return;
 
       // Skip if zoom level is less than initial fit state
@@ -1101,17 +1111,26 @@ export default {
         return;
       }
 
+      // If current image thumbs size not equal new one then update the values (not to make a lot of calls in Network)
+      if (this.imageThumbsSize.width === model.Thumbs[bestThumbSize].w && this.imageThumbsSize.height === model.Thumbs[bestThumbSize].h) {
+        return;
+      }
+      this.imageThumbsSize.width = model.Thumbs[bestThumbSize].w;
+      this.imageThumbsSize.height = model.Thumbs[bestThumbSize].h;
+      console.log('new width', this.imageThumbsSize.width);
+      console.log('new height', this.imageThumbsSize.height);
+
       // Load higher quality image
       const newImage = new Image();
       newImage.src = model.Thumbs[bestThumbSize].src;
 
       newImage.onload = () => {
         if (!pswp.currSlide) return;
-        
+
         currSlide.content.element.src = newImage.src;
         currSlide.content.element.width = model.Thumbs[bestThumbSize].w;
         currSlide.content.element.height = model.Thumbs[bestThumbSize].h;
-        
+
         // Update slide data
         currSlide.data = {
           src: newImage.src,
