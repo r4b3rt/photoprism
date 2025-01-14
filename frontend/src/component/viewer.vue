@@ -263,6 +263,14 @@ export default {
       // see https://photoswipe.com/adding-ui-elements/.
       this.addLightboxControls(lightbox);
 
+      // Handle zoom level changes to load higher quality thumbnails
+      // when image size changes
+      lightbox.on("imageSizeChange", ({ content, width, height, slide }) => {
+        if (slide === pswp.currSlide) {
+          this.handleZoomLevelChange();
+        }
+      });
+
       // Trigger onChange() event handler when slide is changed and on initialization,
       // see https://photoswipe.com/events/#initialization-events.
       this.lightbox.on("change", () => {
@@ -283,25 +291,15 @@ export default {
         // Get the screen (window) resolution in real pixels
         const pixels = this.getWindowPixels();
 
-        console.log('model', model);
-        // Get the image srcSet
-        const srcSet = this.generateSrcset(model);
-
         // Get the right thumbnail size based on the screen resolution in pixels.
         const thumbSize = Util.thumbSize(pixels.width, pixels.height);
 
         // Get thumbnail image URL, width, and height.
-        // TODO: change sizes to be dynamic
         const img = {
-          scrSet: srcSet,
           src: model.Thumbs[thumbSize].src,
           width: model.Thumbs[thumbSize].w,
           height: model.Thumbs[thumbSize].h,
           alt: model?.Title,
-          pswpSrcset: srcSet,
-          sizes: "100vw",
-          pswpWidth: model.Thumbs[thumbSize].w,
-          pswpHeight: model.Thumbs[thumbSize].h,
         };
 
         // Check if content is playable and return the data needed to render it in "contentLoad".
@@ -348,15 +346,6 @@ export default {
             content.element.innerHTML = '<div class="pswp__error-msg">Failed to load video</div>';
           }
         }
-      });
-
-      // Function only to check the data on size changing
-      lightbox.on('imageSizeChange', () => {
-        const slide = lightbox.pswp.currSlide;
-
-        console.log('Current slide:', slide.data);
-        console.log('Current image source:', slide.content?.element?.src);
-        console.log('Zoom level:', slide.currZoomLevel);
       });
 
       // Pauses videos, animations, and live photos when slide content becomes active (can be default prevented),
@@ -1017,21 +1006,6 @@ export default {
         height: window.innerHeight * window.devicePixelRatio,
       };
     },
-    generateSrcset(image) {
-      // Extract all the fit_* resolutions from the image object
-      const resolutions = Object.keys(image.Thumbs)
-        .filter(key => key.startsWith("fit_"))
-        .map(key => image.Thumbs[key]);
-      console.log('image resolution', resolutions);
-
-      // Construct the srcset string
-      const srcset = resolutions
-        .map(res => `${res.src} ${res.w}w`)
-        .join(", ");
-      console.log('image srcset', srcset);
-
-      return srcset;
-    },
     getLightboxViewport() {
       const el = this.getLightbox();
 
@@ -1085,6 +1059,65 @@ export default {
       }
 
       return { top, bottom, left, right };
+    },
+    // Handles zoom level changes and loads higher quality thumbnails when needed
+    handleZoomLevelChange() {
+      const pswp = this.pswp();
+      if (!pswp || !pswp.currSlide) return;
+
+      const zoomLevel = pswp.currSlide.currZoomLevel;
+      const currSlide = pswp.currSlide;
+      const model = this.models[this.index];
+      
+      if (!model || !model.Thumbs) return;
+
+      // Skip if zoom level is less than initial fit state
+      if (zoomLevel < 0.95) return;
+
+      const currentWidth = Math.round(currSlide.width * zoomLevel);
+      const currentHeight = Math.round(currSlide.height * zoomLevel);
+
+      // Find the best matching thumb size based on zoomed dimensions
+      let bestThumbSize = null;
+      let bestThumbArea = Infinity;
+
+      Object.entries(model.Thumbs).forEach(([size, thumb]) => {
+        // Only consider thumbnails that are larger than the current dimensions
+        if (thumb.w >= currentWidth && thumb.h >= currentHeight) {
+          // Calculate the area difference
+          const areaDiff = (thumb.w * thumb.h) - (currentWidth * currentHeight);
+
+          // Find the thumbnail with the smallest area difference
+          if (areaDiff < bestThumbArea) {
+            bestThumbSize = size;
+            bestThumbArea = areaDiff;
+          }
+        }
+      });
+
+      // If no better thumb found or already using the best quality, return
+      if (!bestThumbSize || (currSlide.data && currSlide.data.src === model.Thumbs[bestThumbSize].src)) {
+        return;
+      }
+
+      // Load higher quality image
+      const newImage = new Image();
+      newImage.src = model.Thumbs[bestThumbSize].src;
+
+      newImage.onload = () => {
+        if (!pswp.currSlide) return;
+        
+        currSlide.content.element.src = newImage.src;
+        currSlide.content.element.width = model.Thumbs[bestThumbSize].w;
+        currSlide.content.element.height = model.Thumbs[bestThumbSize].h;
+        
+        // Update slide data
+        currSlide.data = {
+          src: newImage.src,
+          width: model.Thumbs[bestThumbSize].w,
+          height: model.Thumbs[bestThumbSize].h,
+        };
+      };
     },
   },
 };
