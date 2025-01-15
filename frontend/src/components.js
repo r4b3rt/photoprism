@@ -154,7 +154,7 @@ export const defaults = {
   VSwitch: {
     flat: true,
     density: "compact",
-    baseColor: "surface",
+    baseColor: "switch",
     color: "surface-variant",
     hideDetails: "auto",
     minWidth: 32,

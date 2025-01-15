@@ -20,6 +20,7 @@ let themes = {
       selected: "#5e319b",
       table: "#242426", // Variations: 242628, 212325, 1E2022, 1C1D1F, 191A1C, 161718, 131415, 111112
       button: "#1D1E1F",
+      switch: "#101112",
       primary: "#9E7BEA",
       highlight: "#5e319b",
       secondary: "#191A1C",
