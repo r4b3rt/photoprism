@@ -1122,16 +1122,10 @@ export default {
       newImage.onload = () => {
         if (!pswp.currSlide) return;
 
-        currSlide.content.element.src = newImage.src;
-        currSlide.content.element.width = model.Thumbs[bestThumbSize].w;
-        currSlide.content.element.height = model.Thumbs[bestThumbSize].h;
-
-        // Update slide data
-        currSlide.data = {
-          src: newImage.src,
-          width: model.Thumbs[bestThumbSize].w,
-          height: model.Thumbs[bestThumbSize].h,
-        };
+        // Update the slide content
+        pswp.currSlide.content.element.src = newImage.src;
+        pswp.currSlide.content.element.width = model.Thumbs[bestThumbSize].w;
+        pswp.currSlide.content.element.height = model.Thumbs[bestThumbSize].h;
       };
     },
   },
