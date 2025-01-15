@@ -22,7 +22,7 @@ type Result struct {
 	Height       int           `json:"Height"`
 	Hash         string        `json:"Hash"`
 	Codec        string        `json:"Codec,omitempty"`
-	Thumbs       thumb.Public  `json:"Thumbs"`
+	Thumbs       *thumb.Viewer `json:"Thumbs"`
 	DownloadUrl  string        `json:"DownloadUrl,omitempty"`
 }
 

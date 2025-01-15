@@ -41,15 +41,8 @@ func (m *Photo) ViewerResult(contentUri, apiUri, previewToken, downloadToken str
 		Height:       m.FileHeight,
 		Hash:         mediaHash,
 		Codec:        mediaCodec,
-		Thumbs: thumb.Public{
-			Fit720:  thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit720], contentUri, previewToken),
-			Fit1280: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit1280], contentUri, previewToken),
-			Fit1920: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit1920], contentUri, previewToken),
-			Fit2560: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit2560], contentUri, previewToken),
-			Fit4096: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit4096], contentUri, previewToken),
-			Fit7680: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit7680], contentUri, previewToken),
-		},
-		DownloadUrl: viewer.DownloadUrl(m.FileHash, apiUri, downloadToken),
+		Thumbs:       thumb.ViewerThumbs(m.FileWidth, m.FileHeight, m.FileHash, contentUri, previewToken),
+		DownloadUrl:  viewer.DownloadUrl(m.FileHash, apiUri, downloadToken),
 	}
 }
 
@@ -86,15 +79,8 @@ func (m GeoResult) ViewerResult(contentUri, apiUri, previewToken, downloadToken 
 		Height:       m.FileHeight,
 		Hash:         m.FileHash,
 		Codec:        m.FileCodec,
-		Thumbs: thumb.Public{
-			Fit720:  thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit720], contentUri, previewToken),
-			Fit1280: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit1280], contentUri, previewToken),
-			Fit1920: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit1920], contentUri, previewToken),
-			Fit2560: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit2560], contentUri, previewToken),
-			Fit4096: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit4096], contentUri, previewToken),
-			Fit7680: thumb.New(m.FileWidth, m.FileHeight, m.FileHash, thumb.Sizes[thumb.Fit7680], contentUri, previewToken),
-		},
-		DownloadUrl: viewer.DownloadUrl(m.FileHash, apiUri, downloadToken),
+		Thumbs:       thumb.ViewerThumbs(m.FileWidth, m.FileHeight, m.FileHash, contentUri, previewToken),
+		DownloadUrl:  viewer.DownloadUrl(m.FileHash, apiUri, downloadToken),
 	}
 }
 
