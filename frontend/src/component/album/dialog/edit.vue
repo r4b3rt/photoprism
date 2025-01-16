@@ -4,7 +4,9 @@
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon size="28" color="primary">mdi-bookmark</v-icon>
-          <h6 class="text-h6"><translate :translate-params="{ name: model.modelName() }">Edit %{name}</translate></h6>
+          <h6 class="text-h6">
+            <translate :translate-params="{ name: model.modelName() }">Edit %{name}</translate>
+          </h6>
         </v-card-title>
 
         <v-card-text class="dense">
@@ -19,19 +21,35 @@
               <v-textarea v-model="model.Description" auto-grow hide-details autocomplete="off" :label="$gettext('Description')" :rows="1" :disabled="disabled" class="input-description"></v-textarea>
             </v-col>
             <v-col cols="12">
-              <!-- TODO: check property return-masked-value TEST -->
-              <!-- TODO: check property allow-overflow TEST -->
-              <v-combobox v-model="model.Category" hide-details :search.sync="model.Category" :items="categories" :disabled="disabled" :label="$gettext('Category')" return-masked-value class="input-category"></v-combobox>
+              <v-combobox
+                v-model="category"
+                class="input-category"
+                :search.sync="category"
+                :items="categories"
+                :disabled="disabled"
+                :label="$gettext('Category')"
+                hide-details
+                @update:model-value="onChange"
+              ></v-combobox>
             </v-col>
             <v-col cols="12" sm="6">
-              <v-select v-model="model.Order" :label="$gettext('Sort Order')" :menu-props="{ maxHeight: 400 }" hide-details :items="sorting" :disabled="disabled" item-value="value" item-title="text"></v-select>
+              <v-select
+                v-model="model.Order"
+                :label="$gettext('Sort Order')"
+                :menu-props="{ maxHeight: 400 }"
+                hide-details
+                :items="sorting"
+                :disabled="disabled"
+                item-value="value"
+                item-title="text"
+              ></v-select>
             </v-col>
             <v-col sm="3">
               <!-- TODO: check property flat TEST -->
-              <v-checkbox v-model="model.Favorite" :disabled="disabled" :label="$gettext('Favorite')" hide-details> </v-checkbox>
+              <v-checkbox v-model="model.Favorite" :disabled="disabled" :label="$gettext('Favorite')" hide-details></v-checkbox>
             </v-col>
             <v-col v-if="experimental && featPrivate" sm="3">
-              <v-checkbox v-model="model.Private" :disabled="disabled" :label="$gettext('Private')" hide-details> </v-checkbox>
+              <v-checkbox v-model="model.Private" :disabled="disabled" :label="$gettext('Private')" hide-details></v-checkbox>
             </v-col>
           </v-row>
         </v-card-text>
@@ -77,6 +95,7 @@ export default {
         { value: "duration", text: this.$gettext("Video Duration") },
         { value: "relevance", text: this.$gettext("Most Relevant") },
       ],
+      category: null,
       categories: this.$config.albumCategories(),
       titleRule: (v) => v.length <= this.$config.get("clip") || this.$gettext("Name too long"),
     };
@@ -85,6 +104,7 @@ export default {
     show: function (show) {
       if (show) {
         this.model = this.album.clone();
+        this.category = this.model.Category ? this.model.Category : null;
       }
     },
   },
@@ -94,6 +114,13 @@ export default {
     },
     close() {
       this.$emit("close");
+    },
+    onChange() {
+      if (this.category) {
+        this.model.Category = this.category;
+      } else {
+        this.model.Category = "";
+      }
     },
     confirm() {
       if (this.disabled) {
