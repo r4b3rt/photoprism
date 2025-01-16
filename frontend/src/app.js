@@ -32,6 +32,7 @@ import Scrollbar from "common/scrollbar";
 import { PhotoClipboard } from "common/clipboard";
 import Event from "pubsub-js";
 import Log from "common/log";
+import * as components from "component/components";
 import PhotoPrism from "app.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "app/routes";
@@ -52,7 +53,6 @@ import * as offline from "@lcdp/offline-plugin/runtime";
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import "vuetify/styles";
 import "@mdi/font/css/materialdesignicons.css";
-import * as components from "component/components";
 import { passiveSupport } from "passive-events-support/src/utils";
 
 passiveSupport({ events: ["touchstart", "touchmove", "wheel", "mousewheel"] });
