@@ -30,7 +30,6 @@ import Api from "common/api";
 import Notify from "common/notify";
 import Scrollbar from "common/scrollbar";
 import { PhotoClipboard } from "common/clipboard";
-import * as components from "components";
 import Event from "pubsub-js";
 import Log from "common/log";
 import PhotoPrism from "app.vue";
@@ -45,8 +44,6 @@ import Vue3Sanitize from "vue-3-sanitize";
 import VueSanitize from "vue-sanitize-directive";
 import VueLuxon from "vue-luxon";
 import * as themes from "options/themes";
-// import VueFilters from "vue2-filters";
-// import VueFullscreen from "vue-fullscreen";
 import Hls from "hls.js";
 import "common/maptiler-lang";
 import { createGettext, T } from "common/gettext";
@@ -55,7 +52,7 @@ import * as offline from "@lcdp/offline-plugin/runtime";
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import "vuetify/styles";
 import "@mdi/font/css/materialdesignicons.css";
-
+import * as components from "components";
 import { passiveSupport } from "passive-events-support/src/utils";
 
 passiveSupport({ events: ["touchstart", "touchmove", "wheel", "mousewheel"] });
