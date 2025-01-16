@@ -301,6 +301,7 @@ export default {
           height: model.Thumbs[thumbSize].h,
           alt: model?.Title,
         };
+
         // Check if content is playable and return the data needed to render it in "contentLoad".
         if (model.Playable) {
           /*
@@ -1062,61 +1063,74 @@ export default {
     // Handle zoom level changes and load higher quality thumbnails when needed
     handleZoomLevelChange() {
       const pswp = this.pswp();
-      if (!pswp || !pswp.currSlide) return;
 
+      if (!pswp || !pswp.currSlide) {
+        return;
+      }
+
+      // Get current slide and zoom level.
       const zoomLevel = pswp.currSlide.currZoomLevel;
       const currSlide = pswp.currSlide;
-      const model = this.models[this.index];
+      const currIndex = pswp.currIndex;
+      const model = this.models[currIndex];
 
-      if (!model || !model.Thumbs) return;
+      // Don't continue if current model is not set.
+      if (!model || !model.Thumbs) {
+        return;
+      }
 
-      // Skip if zoom level is less than initial fit state
-      if (zoomLevel < 0.95) return;
+      // Don't continue if slide is not zoomed.
+      if (zoomLevel < 1) {
+        return;
+      }
 
-      const currentWidth = Math.round(currSlide.width * zoomLevel);
-      const currentHeight = Math.round(currSlide.height * zoomLevel);
+      // Calculate thumbnail width and height based on slide size multiplied by zoom level and pixel ratio.
+      const currentWidth = Math.round(currSlide.width * zoomLevel * window.devicePixelRatio);
+      const currentHeight = Math.round(currSlide.height * zoomLevel * window.devicePixelRatio);
 
-      // Find the best matching thumb size based on zoomed dimensions
-      let bestThumbSize = null;
-      let bestThumbArea = Infinity;
+      // Find the right thumbnail size based on the slide size and zoom level in pixels.
+      const thumbSize = Util.thumbSize(currentWidth, currentHeight);
 
-      Object.entries(model.Thumbs).forEach(([size, thumb]) => {
-        // Only consider thumbnails that are larger than the current dimensions
-        if (thumb.w >= currentWidth && thumb.h >= currentHeight) {
-          // Calculate the area difference
-          const areaDiff = thumb.w * thumb.h - currentWidth * currentHeight;
+      // Don't continue of no matching size was found.
+      if (!thumbSize) {
+        return;
+      }
 
-          // Find the thumbnail with the smallest area difference
-          if (areaDiff < bestThumbArea) {
-            bestThumbSize = size;
-            bestThumbArea = areaDiff;
-          }
-        }
-      });
+      // New thumbnail image URL, width, and height.
+      const img = {
+        src: model.Thumbs[thumbSize].src,
+        width: model.Thumbs[thumbSize].w,
+        height: model.Thumbs[thumbSize].h,
+      };
 
-      // If no better thumb found, return
-      if (!bestThumbSize) return;
-
-      const newThumbUrl = model.Thumbs[bestThumbSize].src;
+      // Get current thumbnail image URL.
       const currentSrc = currSlide.data?.src;
 
-      // If URLs point to the same size image, skip loading
-      if (currentSrc && newThumbUrl && currentSrc.endsWith(newThumbUrl.split("/").pop())) return;
+      // Don't update thumbnail if the URL stays the same.
+      if (currentSrc === img.src) {
+        return;
+      }
 
-      // Load higher quality image
-      const newImage = new Image();
-      newImage.src = newThumbUrl;
+      // Create HTMLImageElement to load thumbnail image in the matching size.
+      const el = new Image();
+      el.src = img.src;
 
-      newImage.onload = () => {
-        if (!pswp.currSlide) return;
+      // Swap thumbnails when the new image has loaded.
+      el.onload = () => {
+        // Abort if image URL is empty or the current slide is undefined.
+        if (!pswp.currSlide || !el?.src) {
+          return;
+        }
 
-        // content.element.src: Updates the source of the displayed DOM element (the image user sees)
-        pswp.currSlide.content.element.src = newImage.src;
-        pswp.currSlide.content.element.width = model.Thumbs[bestThumbSize].w;
-        pswp.currSlide.content.element.height = model.Thumbs[bestThumbSize].h;
+        // Update the slide's HTMLImageElement to use the new thumbnail image.
+        pswp.currSlide.content.element.src = el.src;
+        pswp.currSlide.content.element.width = img.width;
+        pswp.currSlide.content.element.height = img.height;
 
-        // data.src: Updates PhotoSwipe's internal state (reference to prevent reloading)
-        pswp.currSlide.data.src = newImage.src;
+        // Update PhotoSwipe's slide data.
+        pswp.currSlide.data.src = img.src;
+        pswp.currSlide.data.width = img.width;
+        pswp.currSlide.data.height = img.height;
       };
     },
   },
