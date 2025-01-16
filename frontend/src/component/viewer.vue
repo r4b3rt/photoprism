@@ -1,6 +1,16 @@
 <template>
   <div v-if="visible" ref="container" class="p-viewer" tabindex="-1" role="dialog">
-    <div ref="lightbox" class="p-viewer__lightbox" :class="{ 'sidebar-visible': sidebarVisible, 'slideshow-active': slideshow.active, 'is-fullscreen': isFullscreen, 'is-favorite': model.Favorite, 'is-selected': $clipboard.has(model) }"></div>
+    <div
+      ref="lightbox"
+      class="p-viewer__lightbox"
+      :class="{
+        'sidebar-visible': sidebarVisible,
+        'slideshow-active': slideshow.active,
+        'is-fullscreen': isFullscreen,
+        'is-favorite': model.Favorite,
+        'is-selected': $clipboard.has(model),
+      }"
+    ></div>
     <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar">
       <!-- TODO: Create a reusable sidebar component that allows users to view/edit metadata. -->
     </div>
@@ -148,7 +158,11 @@ export default {
           i = ctx.viewer.results.findIndex((p) => p.UID === selected.UID);
         }
 
-        if (i > -1 && (((ctx.viewer.complete || ctx.complete) && ctx.viewer.results.length >= ctx.results.length) || i + ctx.viewer.batchSize <= ctx.viewer.results.length)) {
+        if (
+          i > -1 &&
+          (((ctx.viewer.complete || ctx.complete) && ctx.viewer.results.length >= ctx.results.length) ||
+            i + ctx.viewer.batchSize <= ctx.viewer.results.length)
+        ) {
           this.showThumbs(ctx.viewer.results, i);
           return;
         }
@@ -423,7 +437,8 @@ export default {
             isButton: true,
             html: {
               isCustomSVG: true,
-              inner: '<path d="M11 7V9H13V7H11M14 17V15H13V11H10V13H11V15H10V17H14M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12M20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12Z" id="pswp__icn-sidebar"/>',
+              inner:
+                '<path d="M11 7V9H13V7H11M14 17V15H13V11H10V13H11V15H10V17H14M22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2C17.5 2 22 6.5 22 12M20 12C20 7.58 16.42 4 12 4C7.58 4 4 7.58 4 12C4 16.42 7.58 20 12 20C16.42 20 20 16.42 20 12Z" id="pswp__icn-sidebar"/>',
               outlineID: "pswp__icn-sidebar", // Add this to the <path> in the inner property.
               size: 24, // Depends on the original SVG viewBox, e.g. use 24 for viewBox="0 0 24 24".
             },
