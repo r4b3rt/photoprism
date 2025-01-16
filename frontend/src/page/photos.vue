@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { Photo, MediaRaw } from "model/photo";
+import { Photo } from "model/photo";
 import Thumb from "model/thumb";
 import Event from "pubsub-js";
 
@@ -349,8 +349,8 @@ export default {
 
       const selected = this.results[index];
 
-      // Don't open as stack when user is selecting pictures, or a RAW has only one JPEG.
-      if (this.selection.length > 0 || (selected.Type === MediaRaw && selected.jpegFiles().length < 2)) {
+      // Do not open as stack if there is only one JPEG or if multiple pictures are selected.
+      if (this.selection.length > 0 || selected.jpegFiles().length < 2) {
         showMerged = false;
       }
 
