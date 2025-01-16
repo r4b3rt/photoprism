@@ -6,8 +6,13 @@ module.exports = {
     node: true,
     mocha: true,
   },
-  extends: ["eslint:recommended", "plugin:vue/recommended", "plugin:prettier/recommended", "plugin:vue/base", "plugin:vuetify/base"],
-
+  extends: [
+    "eslint:recommended",
+    "plugin:vue/recommended",
+    "plugin:prettier/recommended",
+    "plugin:vue/base",
+    "plugin:vuetify/base",
+  ],
   settings: {
     "prettier/prettier": {
       // Settings for how to process Vue SFC Blocks
@@ -32,16 +37,15 @@ module.exports = {
       },
     },
   },
-
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
   },
   rules: {
     // 'comma-dangle': ['error', 'always-multiline'],
-    indent: ["error", 2, { SwitchCase: 1 }],
+    "indent": ["error", 2, { SwitchCase: 1 }],
     "linebreak-style": ["error", "unix"],
-    quotes: [
+    "quotes": [
       "off",
       "double",
       {
@@ -49,7 +53,7 @@ module.exports = {
         allowTemplateLiterals: true,
       },
     ],
-    semi: ["error", "always"],
+    "semi": ["error", "always"],
     "no-unused-vars": ["warn"],
     "no-console": 0,
     "no-case-declarations": 0,
@@ -62,7 +66,20 @@ module.exports = {
       {
         ignoreWhenNoAttributes: true,
         ignoreWhenEmpty: true,
-        ignores: ["pre", "textarea", "span", "translate", "a", "v-icon", "v-text-field", "v-input", "v-select", "v-switch", "v-checkbox", "v-img"],
+        ignores: [
+          "pre",
+          "textarea",
+          "span",
+          "translate",
+          "a",
+          "v-icon",
+          "v-text-field",
+          "v-input",
+          "v-select",
+          "v-switch",
+          "v-checkbox",
+          "v-img",
+        ],
         externalIgnores: [],
       },
     ],
@@ -76,7 +93,7 @@ module.exports = {
     "prettier/prettier": [
       "warn",
       {
-        printWidth: 200,
+        printWidth: 120,
         semi: true,
         singleQuote: false,
         bracketSpacing: true,
