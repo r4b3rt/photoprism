@@ -1084,7 +1084,7 @@ export default {
         // Only consider thumbnails that are larger than the current dimensions
         if (thumb.w >= currentWidth && thumb.h >= currentHeight) {
           // Calculate the area difference
-          const areaDiff = (thumb.w * thumb.h) - (currentWidth * currentHeight);
+          const areaDiff = thumb.w * thumb.h - currentWidth * currentHeight;
 
           // Find the thumbnail with the smallest area difference
           if (areaDiff < bestThumbArea) {
@@ -1099,9 +1099,10 @@ export default {
 
       const newThumbUrl = model.Thumbs[bestThumbSize].src;
       const currentSrc = currSlide.data?.src;
-      
-      // Extract the size part from URLs (e.g. 'fit_720', 'fit_1280' etc.)
-      const getCurrentSize = (url) => url?.split('/')?.pop();
+
+      // Extract the size part from URLs e.g. 'fit_720', 'fit_1280' etc.
+      // TODO: Why not compare the full URL? There should be no need to extract and compare just the size?
+      const getCurrentSize = (url) => url?.split("/")?.pop();
       const currentSize = getCurrentSize(currentSrc);
       const newSize = getCurrentSize(newThumbUrl);
 
@@ -1115,17 +1116,17 @@ export default {
       newImage.onload = () => {
         if (!pswp.currSlide) return;
 
-        console.log('Loading new image:', {
+        /* console.log("Loading new image:", {
           oldSrc: pswp.currSlide.data.src,
           newSrc: newImage.src,
-          size: bestThumbSize
-        });
+          size: bestThumbSize,
+        }); */
 
         // content.element.src: Updates the source of the displayed DOM element (the image user sees)
         pswp.currSlide.content.element.src = newImage.src;
         pswp.currSlide.content.element.width = model.Thumbs[bestThumbSize].w;
         pswp.currSlide.content.element.height = model.Thumbs[bestThumbSize].h;
-        
+
         // data.src: Updates PhotoSwipe's internal state (reference to prevent reloading)
         pswp.currSlide.data.src = newImage.src;
       };
