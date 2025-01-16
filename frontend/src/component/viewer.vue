@@ -1100,14 +1100,8 @@ export default {
       const newThumbUrl = model.Thumbs[bestThumbSize].src;
       const currentSrc = currSlide.data?.src;
 
-      // Extract the size part from URLs e.g. 'fit_720', 'fit_1280' etc.
-      // TODO: Why not compare the full URL? There should be no need to extract and compare just the size?
-      const getCurrentSize = (url) => url?.split("/")?.pop();
-      const currentSize = getCurrentSize(currentSrc);
-      const newSize = getCurrentSize(newThumbUrl);
-
       // If URLs point to the same size image, skip loading
-      if (currentSize && newSize && currentSize === newSize) return;
+      if (currentSrc && newThumbUrl && currentSrc.endsWith(newThumbUrl.split("/").pop())) return;
 
       // Load higher quality image
       const newImage = new Image();
@@ -1115,12 +1109,6 @@ export default {
 
       newImage.onload = () => {
         if (!pswp.currSlide) return;
-
-        /* console.log("Loading new image:", {
-          oldSrc: pswp.currSlide.data.src,
-          newSrc: newImage.src,
-          size: bestThumbSize,
-        }); */
 
         // content.element.src: Updates the source of the displayed DOM element (the image user sees)
         pswp.currSlide.content.element.src = newImage.src;
