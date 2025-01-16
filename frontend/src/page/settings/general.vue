@@ -3,7 +3,7 @@
     <v-form ref="form" validate-on="blur" class="p-form-settings" accept-charset="UTF-8" @submit.prevent="onChange">
       <v-card flat tile class="mt-0 px-1 bg-background">
         <v-card-title class="pb-2 text-subtitle-2">
-          <translate key="User Interface">User Interface</translate>
+          {{ $gettext(`User Interface`) }}
         </v-card-title>
 
         <v-card-actions>
@@ -301,7 +301,7 @@
 
       <v-card v-if="settings.features.places && !config.disable.places" flat tile class="mt-0 px-1 bg-background">
         <v-card-title class="pb-2 text-subtitle-2">
-          <translate key="Places">Places</translate>
+          {{ $gettext(`Places`) }}
         </v-card-title>
 
         <v-card-actions>
@@ -342,7 +342,7 @@
 
       <v-card v-if="settings.features.download" flat tile class="mt-0 px-1 bg-background">
         <v-card-title class="pb-0 text-subtitle-2">
-          <translate>Download</translate>
+          {{ $gettext(`Download`) }}
         </v-card-title>
 
         <v-card-actions>

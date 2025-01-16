@@ -4,7 +4,7 @@
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon icon="mdi-image-album" size="28" color="primary"></v-icon>
-          <h6 class="text-h6"><translate>Add to album</translate></h6>
+          <h6 class="text-h6">{{ $gettext(`Add to album`) }}</h6>
         </v-card-title>
         <v-card-text>
           <v-combobox
@@ -26,10 +26,10 @@
         </v-card-text>
         <v-card-actions class="action-buttons">
           <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-            <translate>Cancel</translate>
+            {{ $gettext(`Cancel`) }}
           </v-btn>
           <v-btn :disabled="!album" variant="flat" color="highlight" class="action-confirm text-white" @click.stop="confirm">
-            <translate>Confirm</translate>
+            {{ $gettext(`Confirm`) }}
           </v-btn>
         </v-card-actions>
       </v-card>

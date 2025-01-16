@@ -93,10 +93,10 @@
       </v-card-text>
       <v-card-actions class="action-buttons mt-4">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-          <translate>Cancel</translate>
+          {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn variant="flat" color="highlight" class="action-save" @click.stop="save">
-          <translate>Save</translate>
+          {{ $gettext(`Save`) }}
         </v-btn>
       </v-card-actions>
     </v-card>

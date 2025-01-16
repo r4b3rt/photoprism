@@ -125,22 +125,22 @@
       <div v-if="results.length === 0" class="pa-3">
         <v-alert color="primary" icon="mdi-lightbulb-outline" class="no-results opacity-60" variant="outlined">
           <div class="font-weight-bold">
-            <translate>No albums found</translate>
+            {{ $gettext(`No albums found`) }}
           </div>
           <div class="mt-2 mb-0 pa-0">
-            <translate>Try again using other filters or keywords.</translate>
+            {{ $gettext(`Try again using other filters or keywords.`) }}
             <template v-if="staticFilter.type === 'album'">
-              <translate>After selecting pictures from search results, you can add them to an album using the context menu.</translate>
+              {{ $gettext(`After selecting pictures from search results, you can add them to an album using the context menu.`) }}
             </template>
             <template v-else>
-              <translate>Your library is continuously analyzed to automatically create albums of special moments, trips, and places.</translate>
+              {{ $gettext(`Your library is continuously analyzed to automatically create albums of special moments, trips, and places.`) }}
             </template>
           </div>
         </v-alert>
 
         <div v-if="canManage && staticFilter.type === 'album' && config.count.albums === 0" class="d-flex justify-center mt-8 mb-4">
           <v-btn color="secondary" rounded variant="flat" class="action-add" @click.prevent="create">
-            <translate>Add Album</translate>
+            {{ $gettext(`Add Album`) }}
           </v-btn>
         </div>
       </div>
@@ -186,14 +186,14 @@
                 {{ album.Description }}
               </button>
               <button v-else-if="album.Type === 'album' && !album.PhotoCount" class="meta-description" @click.stop.prevent="$router.push({ name: 'browse' })">
-                <translate>Add pictures from search results by selecting them.</translate>
+                {{ $gettext(`Add pictures from search results by selecting them.`) }}
               </button>
 
               <div v-if="album.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
-                <translate>Contains one picture.</translate>
+                {{ $gettext(`Contains one picture.`) }}
               </div>
               <div v-else-if="album.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
-                <translate :translate-params="{ n: album.PhotoCount }">Contains %{n} pictures.</translate>
+                {{ $gettext(`Contains %{n} pictures.`, { n: album.PhotoCount }) }}
               </div>
 
               <div class="meta-details">

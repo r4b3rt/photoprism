@@ -5,9 +5,9 @@
         <p class="text-body-1">
           <span v-if="fileName" class="text-break">{{ action }} {{ fileName }}…</span>
           <span v-else-if="action">{{ action }}…</span>
-          <span v-else-if="busy"><translate>Indexing media and sidecar files…</translate></span>
-          <span v-else-if="completed"><translate>Done.</translate></span>
-          <span v-else><translate>Press button to start indexing…</translate></span>
+          <span v-else-if="busy">{{ $gettext(`Indexing media and sidecar files…`) }}</span>
+          <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
+          <span v-else>{{ $gettext(`Press button to start indexing…`) }}</span>
         </p>
 
         <v-autocomplete
@@ -55,18 +55,18 @@
 
         <div class="action-buttons">
           <v-btn :disabled="!busy || !ready" variant="flat" color="button" class="action-cancel" @click.stop="cancelIndexing()">
-            <translate>Cancel</translate>
+            {{ $gettext(`Cancel`) }}
           </v-btn>
 
           <v-btn :disabled="busy || !ready" variant="flat" color="highlight" class="action-index" @click.stop="startIndexing()">
-            <translate>Start</translate>
+            {{ $gettext(`Start`) }}
             <v-icon end>mdi-update</v-icon>
           </v-btn>
         </div>
 
         <v-alert v-if="ready && !busy && config.count.hidden > 1" color="error" icon="mdi-exclamation" class="mt-6" variant="outlined">
-          <translate :translate-params="{ n: config.count.hidden }">The index currently contains %{n} hidden files.</translate>
-          <translate>Their format may not be supported, they haven't been converted to JPEG yet or there are duplicates.</translate>
+          {{ $gettext(`The index currently contains %{n} hidden files.`, { n: config.count.hidden }) }}
+          {{ $gettext(`Their format may not be supported, they haven't been converted to JPEG yet or there are duplicates.`) }}
         </v-alert>
       </v-container>
     </v-form>

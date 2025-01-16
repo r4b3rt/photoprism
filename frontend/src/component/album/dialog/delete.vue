@@ -3,14 +3,14 @@
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon icon="mdi-delete-outline" size="54" color="primary"></v-icon>
-        <p class="text-subtitle-1"><translate>Are you sure you want to delete these albums?</translate></p>
+        <p class="text-subtitle-1">{{ $gettext(`Are you sure you want to delete these albums?`) }}</p>
       </v-card-title>
       <v-card-actions class="action-buttons mt-1">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-          <translate key="Cancel">Cancel</translate>
+          {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
-          <translate key="Delete">Delete</translate>
+          {{ $gettext(`Delete`) }}
         </v-btn>
       </v-card-actions>
     </v-card>

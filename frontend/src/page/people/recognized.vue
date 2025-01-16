@@ -59,12 +59,12 @@
       <div v-if="results.length === 0" class="pa-3">
         <v-alert color="primary" icon="mdi-lightbulb-outline" class="no-results opacity-60" variant="outlined">
           <div class="font-weight-bold">
-            <translate>No people found</translate>
+            {{ $gettext(`No people found`) }}
           </div>
           <div class="mt-2 mb-0 pa-0">
-            <translate>Try again using other filters or keywords.</translate>
-            <translate>You may rescan your library to find additional faces.</translate>
-            <translate>Recognition starts after indexing has been completed.</translate>
+            {{ $gettext(`Try again using other filters or keywords.`) }}
+            {{ $gettext(`You may rescan your library to find additional faces.`) }}
+            {{ $gettext(`Recognition starts after indexing has been completed.`) }}
           </div>
         </v-alert>
       </div>
@@ -123,10 +123,10 @@
               </div>
 
               <div v-if="m.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
-                <translate>Contains one picture.</translate>
+                {{ $gettext(`Contains one picture.`) }}
               </div>
               <div v-else-if="m.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
-                <translate :translate-params="{ n: m.PhotoCount }">Contains %{n} pictures.</translate>
+                {{ $gettext(`Contains %{n} pictures.`, { n: m.PhotoCount }) }}
               </div>
             </div>
           </div>

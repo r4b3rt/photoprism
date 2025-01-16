@@ -3,17 +3,17 @@
     <div v-if="photos.length === 0" class="pa-3">
       <v-alert color="primary" :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'" class="no-results opacity-60" variant="outlined">
         <div v-if="filter.order === 'edited'" class="font-weight-bold">
-          <translate>No recently edited pictures</translate>
+          {{ $gettext(`No recently edited pictures`) }}
         </div>
         <div v-else class="font-weight-bold">
-          <translate>No pictures found</translate>
+          {{ $gettext(`No pictures found`) }}
         </div>
         <div class="mt-2 mb-0 pa-0">
-          <translate>Try again using other filters or keywords.</translate>
+          {{ $gettext(`Try again using other filters or keywords.`) }}
           <template v-if="!isSharedView">
-            <translate>In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.</translate>
+            {{ $gettext(`In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`) }}
             <template v-if="$config.feature('review')">
-              <translate>Non-photographic and low-quality images require a review before they appear in search results.</translate>
+              {{ $gettext(`Non-photographic and low-quality images require a review before they appear in search results.`) }}
             </template>
           </template>
         </div>

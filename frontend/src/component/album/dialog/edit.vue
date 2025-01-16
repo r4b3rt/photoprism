@@ -5,7 +5,7 @@
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon size="28" color="primary">mdi-bookmark</v-icon>
           <h6 class="text-h6">
-            <translate :translate-params="{ name: model.modelName() }">Edit %{name}</translate>
+            {{ $gettext(`Edit %{name}`,{ name: model.modelName() }) }}
           </h6>
         </v-card-title>
 
@@ -55,10 +55,10 @@
         </v-card-text>
         <v-card-actions class="action-buttons">
           <v-btn variant="flat" color="button" class="action-cancel" @click.stop="close">
-            <translate>Cancel</translate>
+            {{ $gettext(`Cancel`) }}
           </v-btn>
           <v-btn variant="flat" color="highlight" class="action-confirm" :disabled="disabled" @click.stop="confirm">
-            <translate>Save</translate>
+            {{ $gettext(`Save`) }}
           </v-btn>
         </v-card-actions>
       </v-card>

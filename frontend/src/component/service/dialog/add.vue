@@ -4,7 +4,7 @@
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="28" color="primary">mdi-swap-horizontal</v-icon>
         <h6 class="text-h6">
-          <translate>Add Account</translate>
+          {{ $gettext(`Add Account`) }}
         </h6>
       </v-card-title>
       <v-card-text class="dense">
@@ -29,8 +29,8 @@
             ></v-text-field>
           </v-col>
           <v-col cols="12" class="text-start text-caption">
-            <translate>Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload.</translate>
-            <translate>Support for additional services, like Google Drive, will be added over time.</translate>
+            {{ $gettext(`Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload.`) }}
+            {{ $gettext(`Support for additional services, like Google Drive, will be added over time.`) }}
           </v-col>
         </v-row>
       </v-card-text>

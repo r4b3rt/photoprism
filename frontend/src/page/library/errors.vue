@@ -60,10 +60,10 @@
     <div v-else class="pa-3">
       <v-alert color="primary" icon="mdi-check-circle-outline" class="no-results opacity-60" variant="outlined">
         <div v-if="filter.q">
-          <translate>No warnings or error containing this keyword. Note that search is case-sensitive.</translate>
+          {{ $gettext(`No warnings or error containing this keyword. Note that search is case-sensitive.`) }}
         </div>
         <div v-else>
-          <translate>Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues.</translate>
+          {{ $gettext(`Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues.`) }}
         </div>
       </v-alert>
     </div>
@@ -86,7 +86,7 @@
 
         <v-card-actions>
           <v-btn color="button" variant="flat" class="action-close" @click="details.show = false">
-            <translate>Close</translate>
+            {{ $gettext(`Close`) }}
           </v-btn>
         </v-card-actions>
       </v-card>

@@ -2,19 +2,19 @@
   <div class="p-page p-page-discover">
     <v-tabs v-model="active" elevation="0" grow class="bg-transparent" bg-color="secondary" slider-color="surface-variant" :height="$vuetify.display.smAndDown ? 48 : 64">
       <v-tab id="tab-discover-colors" ripple @click="changePath('/discover')">
-        <translate>Colors</translate>
+        {{ $gettext(`Colors`) }}
       </v-tab>
 
       <v-tab id="tab-discover-similar" ripple @click="changePath('/discover/similar')">
-        <translate>Similar</translate>
+        {{ $gettext(`Similar`) }}
       </v-tab>
 
       <v-tab id="tab-discover-season" ripple @click="changePath('/discover/season')">
-        <translate>Season</translate>
+        {{ $gettext(`Season`) }}
       </v-tab>
 
       <v-tab id="tab-discover-random" ripple @click="changePath('/discover/random')">
-        <translate>Random</translate>
+        {{ $gettext(`Random`) }}
       </v-tab>
 
       <v-tabs-window v-model="active">

@@ -18,7 +18,7 @@
             </tr>
             <tr>
               <td :title="model.TypeSrc">
-                <translate>Type</translate>
+                {{ $gettext(`Type`) }}
               </td>
               <td>
                 <v-select
@@ -41,7 +41,7 @@
             </tr>
             <tr v-if="model.Path">
               <td>
-                <translate>Folder</translate>
+                {{ $gettext(`Folder`) }}
               </td>
               <td class="text-break">
                 <span class="clickable" @click.stop.prevent="copyText(model.Path)">{{ model.Path }}</span>
@@ -49,7 +49,7 @@
             </tr>
             <tr>
               <td>
-                <translate>Name</translate>
+                {{ $gettext(`Name`) }}
               </td>
               <td class="text-break">
                 <span class="clickable" @click.stop.prevent="copyText(model.Name)">{{ model.Name }}</span>
@@ -57,7 +57,7 @@
             </tr>
             <tr v-if="model.OriginalName">
               <td>
-                <translate>Original Name</translate>
+                {{ $gettext(`Original Name`) }}
               </td>
               <td>
                 <v-text-field v-model="model.OriginalName" flat variant="solo" bg-color="transparent" density="compact" hide-details autocomplete="off" autocorrect="off" autocapitalize="none" @change="save"></v-text-field>
@@ -65,7 +65,7 @@
             </tr>
             <tr>
               <td :title="sourceName(model.TitleSrc)">
-                <translate>Title</translate>
+                {{ $gettext(`Title`) }}
               </td>
               <td :title="sourceName(model.TitleSrc)">
                 <div class="text-flex text-break">
@@ -77,7 +77,7 @@
             </tr>
             <tr>
               <td :title="sourceName(model.TakenSrc)">
-                <translate>Taken</translate>
+                {{ $gettext(`Taken`) }}
               </td>
               <td :title="sourceName(model.TakenSrc)">
                 <div class="text-flex text-break">
@@ -92,7 +92,7 @@
             </tr>
             <tr v-if="albums.length > 0">
               <td>
-                <translate>Albums</translate>
+                {{ $gettext(`Albums`) }}
               </td>
               <td class="text-break">
                 <a v-for="(a, i) in albums" :key="i" :href="a.url" class="text-primary text-link" target="_blank"><span v-if="i > 0">, </span>{{ a.title }}</a>
@@ -100,7 +100,7 @@
             </tr>
             <tr>
               <td>
-                <translate>Quality Score</translate>
+                {{ $gettext(`Quality Score`) }}
               </td>
               <td>
                 <v-rating v-model="model.Quality" :length="7" size="small" density="compact" readonly></v-rating>
@@ -108,25 +108,25 @@
             </tr>
             <tr>
               <td>
-                <translate>Resolution</translate>
+                {{ $gettext(`Resolution`) }}
               </td>
               <td>{{ model.Resolution }} MP</td>
             </tr>
             <tr v-if="model.Faces > 0">
               <td>
-                <translate>Faces</translate>
+                {{ $gettext(`Faces`) }}
               </td>
               <td>{{ model.Faces }}</td>
             </tr>
             <tr v-if="model.CameraSerial">
               <td>
-                <translate>Camera Serial</translate>
+                {{ $gettext(`Camera Serial`) }}
               </td>
               <td class="text-break">{{ model.CameraSerial }} </td>
             </tr>
             <tr v-if="model.Stack < 1">
               <td>
-                <translate>Stackable</translate>
+                {{ $gettext(`Stackable`) }}
               </td>
               <td>
                 <v-switch v-model="model.Stack" hide-details class="input-stackable" :true-value="0" :false-value="-1" :label="model.Stack > -1 ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
@@ -134,7 +134,7 @@
             </tr>
             <tr>
               <td>
-                <translate>Favorite</translate>
+                {{ $gettext(`Favorite`) }}
               </td>
               <td>
                 <v-switch v-model="model.Favorite" hide-details class="input-favorite ml-2" :label="model.Favorite ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
@@ -142,7 +142,7 @@
             </tr>
             <tr v-if="$config.feature('private')">
               <td>
-                <translate>Private</translate>
+                {{ $gettext(`Private`) }}
               </td>
               <td>
                 <v-switch v-model="model.Private" hide-details class="input-private ml-2" :label="model.Private ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
@@ -150,7 +150,7 @@
             </tr>
             <tr>
               <td>
-                <translate>Scan</translate>
+                {{ $gettext(`Scan`) }}
               </td>
               <td>
                 <v-switch v-model="model.Scan" hide-details class="input-scan ml-2" :label="model.Scan ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
@@ -158,7 +158,7 @@
             </tr>
             <tr>
               <td>
-                <translate>Panorama</translate>
+                {{ $gettext(`Panorama`) }}
               </td>
               <td>
                 <v-switch v-model="model.Panorama" hide-details class="input-panorama ml-2" :label="model.Panorama ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
@@ -166,7 +166,7 @@
             </tr>
             <tr>
               <td :title="sourceName(model.PlaceSrc)">
-                <translate>Place</translate>
+                {{ $gettext(`Place`) }}
               </td>
               <td :title="sourceName(model.PlaceSrc)">
                 <div class="text-flex">
@@ -179,7 +179,7 @@
             </tr>
             <tr v-if="model.Lat">
               <td>
-                <translate>Latitude</translate>
+                {{ $gettext(`Latitude`) }}
               </td>
               <td>
                 {{ model.Lat }}
@@ -187,7 +187,7 @@
             </tr>
             <tr v-if="model.Lng">
               <td>
-                <translate>Longitude</translate>
+                {{ $gettext(`Longitude`) }}
               </td>
               <td>
                 {{ model.Lng }}
@@ -195,13 +195,13 @@
             </tr>
             <tr v-if="model.Altitude">
               <td>
-                <translate>Altitude</translate>
+                {{ $gettext(`Altitude`) }}
               </td>
               <td> {{ model.Altitude }} m </td>
             </tr>
             <tr v-if="model.Lat">
               <td>
-                <translate>Accuracy</translate>
+                {{ $gettext(`Accuracy`) }}
               </td>
               <td>
                 <v-text-field v-model="model.CellAccuracy" variant="solo" bg-color="transparent" density="compact" hide-details autocomplete="off" autocorrect="off" autocapitalize="none" type="number" suffix="m" :max-width="100" @change="save"></v-text-field>
@@ -209,7 +209,7 @@
             </tr>
             <tr>
               <td>
-                <translate>Created</translate>
+                {{ $gettext(`Created`) }}
               </td>
               <td class="text-break">
                 {{ formatTime(model.CreatedAt) }}
@@ -217,7 +217,7 @@
             </tr>
             <tr>
               <td>
-                <translate>Updated</translate>
+                {{ $gettext(`Updated`) }}
               </td>
               <td class="text-break">
                 {{ formatTime(model.UpdatedAt) }}
@@ -225,7 +225,7 @@
             </tr>
             <tr v-if="model.EditedAt">
               <td>
-                <translate>Edited</translate>
+                {{ $gettext(`Edited`) }}
               </td>
               <td class="text-break">
                 {{ formatTime(model.EditedAt) }}
@@ -233,7 +233,7 @@
             </tr>
             <tr v-if="model.CheckedAt">
               <td>
-                <translate>Checked</translate>
+                {{ $gettext(`Checked`) }}
               </td>
               <td class="text-break">
                 {{ formatTime(model.CheckedAt) }}
@@ -241,7 +241,7 @@
             </tr>
             <tr v-if="model.DeletedAt">
               <td>
-                <translate>Archived</translate>
+                {{ $gettext(`Archived`) }}
               </td>
               <td class="text-break">
                 {{ formatTime(model.DeletedAt) }}

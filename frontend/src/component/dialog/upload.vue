@@ -6,7 +6,7 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-toolbar-title>
-          <translate>Upload</translate>
+          {{ $gettext(`Upload`) }}
         </v-toolbar-title>
       </v-toolbar>
       <v-container grid-list-xs ext-xs-left fluid>
@@ -33,17 +33,12 @@
                 <template #no-data>
                   <v-list-item>
                     <v-list-item-title>
-                      <translate key="Press enter to create a new album.">Press enter to create a new album.</translate>
+                      {{ $gettext(`Press enter to create a new album.`) }}
                     </v-list-item-title>
                   </v-list-item>
                 </template>
                 <template #chip="data">
-                  <v-chip
-                      :model-value="data.selected"
-                      :disabled="data.disabled"
-                      class="bg-highlight rounded-xl text-truncate d-block"
-                      @click:close="removeSelection(data.index)"
-                  >
+                  <v-chip :model-value="data.selected" :disabled="data.disabled" class="bg-highlight rounded-xl text-truncate d-block" @click:close="removeSelection(data.index)">
                     <v-icon class="pr-1">mdi-bookmark</v-icon>
                     <!-- TODO: change this filter -->
                     <!-- {{ data.item.Title ? data.item.Title : data.item | truncate(40) }} -->
@@ -51,12 +46,12 @@
                   </v-chip>
                 </template>
               </v-combobox>
-              <span v-else-if="failed"><translate>Upload failed</translate></span>
+              <span v-else-if="failed">{{ $gettext(`Upload failed`) }}</span>
               <span v-else-if="total > 0 && completedTotal < 100">
-                <translate :translate-params="{ n: current, t: total }">Uploading %{n} of %{t}…</translate>
+                {{ $gettext(`Uploading %{n} of %{t}…`, { n: current, t: total }) }}
               </span>
-              <span v-else-if="indexing"><translate>Upload complete. Indexing…</translate></span>
-              <span v-else-if="completedTotal === 100"><translate key="Done">Done.</translate></span>
+              <span v-else-if="indexing">{{ $gettext(`Upload complete. Indexing…`) }}</span>
+              <span v-else-if="completedTotal === 100">{{ $gettext(`Done.`) }}</span>
             </p>
 
             <v-progress-linear v-model="completedTotal" :indeterminate="indexing" class="py-1" :height="21">
@@ -66,20 +61,20 @@
             </v-progress-linear>
 
             <p v-if="isDemo" class="text-body-2 py-2">
-              <translate :translate-params="{ n: fileLimit }">You can upload up to %{n} files for test purposes.</translate>
-              <translate>Please do not upload any private, unlawful or offensive pictures. </translate>
+              {{ $gettext(`You can upload up to %{n} files for test purposes.`, { n: fileLimit }) }}
+              {{ $gettext(`Please do not upload any private, unlawful or offensive pictures. `) }}
             </p>
             <p v-else-if="rejectNSFW" class="text-body-2 py-2">
-              <translate>Please don't upload photos containing offensive content.</translate>
-              <translate>Uploads that may contain such images will be rejected automatically.</translate>
+              {{ $gettext(`Please don't upload photos containing offensive content.`) }}
+              {{ $gettext(`Uploads that may contain such images will be rejected automatically.`) }}
             </p>
 
             <p v-if="featReview" class="text-body-2 py-2">
-              <translate>Non-photographic and low-quality images require a review before they appear in search results.</translate>
+              {{ $gettext(`Non-photographic and low-quality images require a review before they appear in search results.`) }}
             </p>
 
             <v-btn :disabled="busy" color="highlight" class="text-white ml-0 mt-2 action-upload" variant="flat" @click.stop="onUploadDialog()">
-              <translate>Upload</translate>
+              {{ $gettext(`Upload`) }}
               <v-icon icon="mdi-cloud-upload" end></v-icon>
             </v-btn>
           </v-container>

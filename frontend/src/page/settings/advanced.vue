@@ -7,7 +7,7 @@
             <v-col cols="12" class="pa-2 text-start">
               <v-alert color="primary" icon="mdi-information" class="pa-2" type="info" variant="outlined">
                 <a style="color: inherit" href="#restart">
-                  <translate>Changes to the advanced settings require a restart to take effect.</translate>
+                  {{ $gettext(`Changes to the advanced settings require a restart to take effect.`) }}
                 </a>
               </v-alert>
             </v-col>
@@ -15,7 +15,7 @@
         </v-card-actions>
 
         <v-card-title class="pb-0 text-subtitle-2">
-          <translate>Global Options</translate>
+          {{ $gettext(`Global Options`) }}
         </v-card-title>
 
         <v-card-actions>
@@ -152,7 +152,7 @@
 
         <template v-if="!settings.DisableBackups">
           <v-card-title class="pb-0 text-subtitle-2">
-            <translate>Backup</translate>
+            {{ $gettext(`Backup`) }}
           </v-card-title>
 
           <v-card-actions>
@@ -209,7 +209,7 @@
         </template>
 
         <v-card-title class="pb-0 text-subtitle-2">
-          <translate>Preview Images</translate>
+          {{ $gettext(`Preview Images`) }}
         </v-card-title>
 
         <v-card-actions class="grid">
@@ -252,7 +252,7 @@
         </v-card-actions>
 
         <v-card-title class="pb-0 text-subtitle-2">
-          <translate>Image Quality</translate>
+          {{ $gettext(`Image Quality`) }}
         </v-card-title>
 
         <v-card-actions class="grid">
@@ -281,7 +281,7 @@
         </v-card-actions>
 
         <v-card-title class="py-0 text-subtitle-2">
-          <translate>File Conversion</translate>
+          {{ $gettext(`File Conversion`) }}
         </v-card-title>
 
         <v-card-actions>
@@ -387,7 +387,7 @@
         <v-card-actions v-if="!config.disable.restart" class="pt-6 d-flex flex-wrap ga-2">
           <a id="restart"></a>
           <v-btn color="highlight" :block="$vuetify.display.xs" :disabled="busy || !$config.values.restart" variant="flat" @click.stop.p.prevent="onRestart">
-            <translate>Restart</translate>
+            {{ $gettext(`Restart`) }}
             <v-icon end>mdi-restart</v-icon>
           </v-btn>
         </v-card-actions>

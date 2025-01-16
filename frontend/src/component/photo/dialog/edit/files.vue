@@ -22,7 +22,7 @@
                           <tbody>
                             <tr v-if="file.FileType === 'jpg' || file.FileType === 'png'">
                               <td>
-                                <translate>Preview</translate>
+                                {{ $gettext(`Preview`) }}
                               </td>
                               <td>
                                 <v-img :src="file.thumbnailUrl('tile_224')" aspect-ratio="1" max-width="112" max-height="112" rounded="4" class="card elevation-0 clickable my-1" @click.exact="openFile(file)"></v-img>
@@ -30,24 +30,24 @@
                             </tr>
                             <tr>
                               <td>
-                                <translate>Actions</translate>
+                                {{ $gettext(`Actions`) }}
                               </td>
                               <td>
                                 <div class="action-buttons justify-start">
                                   <v-btn v-if="features.download" density="comfortable" variant="flat" color="highlight" class="btn-action action-download" :disabled="busy" @click.stop.prevent="downloadFile(file)">
-                                    <translate>Download</translate>
+                                    {{ $gettext(`Download`) }}
                                   </v-btn>
                                   <v-btn v-if="features.edit && (file.FileType === 'jpg' || file.FileType === 'png') && !file.Error && !file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-primary" :disabled="busy" @click.stop.prevent="primaryFile(file)">
-                                    <translate>Primary</translate>
+                                    {{ $gettext(`Primary`) }}
                                   </v-btn>
                                   <v-btn v-if="features.edit && !file.Sidecar && !file.Error && !file.Primary && file.Root === '/'" density="comfortable" variant="flat" color="highlight" class="btn-action action-unstack" :disabled="busy" @click.stop.prevent="unstackFile(file)">
-                                    <translate>Unstack</translate>
+                                    {{ $gettext(`Unstack`) }}
                                   </v-btn>
                                   <v-btn v-if="features.delete && !file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-delete" :disabled="busy" @click.stop.prevent="showDeleteDialog(file)">
-                                    <translate>Delete</translate>
+                                    {{ $gettext(`Delete`) }}
                                   </v-btn>
                                   <v-btn v-if="experimental && canAccessPrivate && file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-open-folder" :href="folderUrl(file)" target="_blank">
-                                    <translate>File Browser</translate>
+                                    {{ $gettext(`File Browser`) }}
                                   </v-btn>
                                 </div>
                               </td>
@@ -60,7 +60,7 @@
                             </tr>
                             <tr v-if="file.InstanceID" title="XMP">
                               <td>
-                                <translate>Instance ID</translate>
+                                {{ $gettext(`Instance ID`) }}
                               </td>
                               <td class="text-break">
                                 <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.InstanceID)">{{ file.InstanceID }}</span>
@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                               <td title="SHA-1">
-                                <translate>Hash</translate>
+                                {{ $gettext(`Hash`) }}
                               </td>
                               <td class="text-break">
                                 <span class="clickable text-break" @click.stop.prevent="copyText(file.Hash)">{{ file.Hash }}</span>
@@ -76,7 +76,7 @@
                             </tr>
                             <tr v-if="file.Name">
                               <td>
-                                <translate>Filename</translate>
+                                {{ $gettext(`Filename`) }}
                               </td>
                               <td class="text-break">
                                 <span class="clickable" @click.stop.prevent="copyText(file.Name)">{{ file.Name }}</span>
@@ -84,105 +84,105 @@
                             </tr>
                             <tr v-if="file.Root">
                               <td>
-                                <translate>Storage</translate>
+                                {{ $gettext(`Storage`) }}
                               </td>
                               <td>{{ file.storageInfo() }}</td>
                             </tr>
                             <tr v-if="file.OriginalName">
                               <td>
-                                <translate>Original Name</translate>
+                                {{ $gettext(`Original Name`) }}
                               </td>
                               <td class="text-break"><span class="clickable" @click.stop.prevent="copyText(file.OriginalName)">{{ file.OriginalName }}</span></td>
                             </tr>
                             <tr>
                               <td>
-                                <translate>Size</translate>
+                                {{ $gettext(`Size`) }}
                               </td>
                               <td>{{ file.sizeInfo() }}</td>
                             </tr>
                             <tr v-if="file.Software">
                               <td>
-                                <translate>Software</translate>
+                                {{ $gettext(`Software`) }}
                               </td>
                               <td class="text-break">{{ file.Software }}</td>
                             </tr>
                             <tr v-if="file.FileType">
                               <td>
-                                <translate>Type</translate>
+                                {{ $gettext(`Type`) }}
                               </td>
                               <td class="text-break">{{ file.typeInfo() }}</td>
                             </tr>
                             <tr v-if="file.isAnimated()">
                               <td>
-                                <translate>Animated</translate>
+                                {{ $gettext(`Animated`) }}
                               </td>
                               <td>
-                                <translate>Yes</translate>
+                                {{ $gettext(`Yes`) }}
                               </td>
                             </tr>
                             <tr v-if="file.Codec && file.Codec !== file.FileType">
                               <td>
-                                <translate>Codec</translate>
+                                {{ $gettext(`Codec`) }}
                               </td>
                               <td class="text-break">{{ codecName(file) }}</td>
                             </tr>
                             <tr v-if="file.Duration && file.Duration > 0">
                               <td>
-                                <translate>Duration</translate>
+                                {{ $gettext(`Duration`) }}
                               </td>
                               <td>{{ formatDuration(file) }}</td>
                             </tr>
                             <tr v-if="file.Frames">
                               <td>
-                                <translate>Frames</translate>
+                                {{ $gettext(`Frames`) }}
                               </td>
                               <td>{{ file.Frames }}</td>
                             </tr>
                             <tr v-if="file.FPS">
                               <td>
-                                <translate>FPS</translate>
+                                {{ $gettext(`FPS`) }}
                               </td>
                               <td>{{ file.FPS.toFixed(1) }}</td>
                             </tr>
                             <tr v-if="file.Primary">
                               <td>
-                                <translate>Primary</translate>
+                                {{ $gettext(`Primary`) }}
                               </td>
                               <td>
-                                <translate>Yes</translate>
+                                {{ $gettext(`Yes`) }}
                               </td>
                             </tr>
                             <tr v-if="file.HDR">
                               <td>
-                                <translate>High Dynamic Range (HDR)</translate>
+                                {{ $gettext(`High Dynamic Range (HDR)`) }}
                               </td>
                               <td>
-                                <translate>Yes</translate>
+                                {{ $gettext(`Yes`) }}
                               </td>
                             </tr>
                             <tr v-if="file.Portrait">
                               <td>
-                                <translate>Portrait</translate>
+                                {{ $gettext(`Portrait`) }}
                               </td>
                               <td>
-                                <translate>Yes</translate>
+                                {{ $gettext(`Yes`) }}
                               </td>
                             </tr>
                             <tr v-if="file.Projection">
                               <td>
-                                <translate>Projection</translate>
+                                {{ $gettext(`Projection`) }}
                               </td>
                               <td class="text-capitalize">{{ file.Projection }}</td>
                             </tr>
                             <tr v-if="file.AspectRatio">
                               <td>
-                                <translate>Aspect Ratio</translate>
+                                {{ $gettext(`Aspect Ratio`) }}
                               </td>
                               <td>{{ file.AspectRatio }} : 1</td>
                             </tr>
                             <tr v-if="file.Orientation">
                               <td>
-                                <translate>Orientation</translate>
+                                {{ $gettext(`Orientation`) }}
                               </td>
                               <td>
                                 <v-select
@@ -218,13 +218,13 @@
                             </tr>
                             <tr v-if="file.ColorProfile">
                               <td>
-                                <translate>Color Profile</translate>
+                                {{ $gettext(`Color Profile`) }}
                               </td>
                               <td class="text-break">{{ file.ColorProfile }}</td>
                             </tr>
                             <tr v-if="file.MainColor">
                               <td>
-                                <translate>Main Color</translate>
+                                {{ $gettext(`Main Color`) }}
                               </td>
                               <!--                            TODO: change filter-->
                               <!--                            <td>{{ file.MainColor | capitalize }}</td>-->
@@ -232,24 +232,24 @@
                             </tr>
                             <tr v-if="file.Chroma">
                               <td>
-                                <translate>Chroma</translate>
+                                {{ $gettext(`Chroma`) }}
                               </td>
                               <td><v-progress-linear :model-value="file.Chroma" style="max-width: 300px" :title="`${file.Chroma}%`"></v-progress-linear></td>
                             </tr>
                             <tr v-if="file.Missing">
                               <td>
-                                <translate>Missing</translate>
+                                {{ $gettext(`Missing`) }}
                               </td>
                               <td>
-                                <translate>Yes</translate>
+                                {{ $gettext(`Yes`) }}
                               </td>
                             </tr>
                             <tr>
                               <td>
-                                <translate>Added</translate>
+                                {{ $gettext(`Added`) }}
                               </td>
                               <td class="text-break">{{ formatTime(file.CreatedAt) }}
-                                <translate>in</translate>
+                                {{ $gettext(`in`) }}
                                 <!--                              TODO: change filter-->
                                 <!--                              {{ Math.round(file.CreatedIn / 1000000) | number("0,0") }} ms-->
                                 {{ Math.round(file.CreatedIn / 1000000) }} ms
@@ -257,10 +257,10 @@
                             </tr>
                             <tr v-if="file.UpdatedIn">
                               <td>
-                                <translate>Updated</translate>
+                                {{ $gettext(`Updated`) }}
                               </td>
                               <td class="text-break">{{ formatTime(file.UpdatedAt) }}
-                                <translate>in</translate>
+                                {{ $gettext(`in`) }}
                                 <!--                              TODO: change filter-->
                                 <!--                              {{ Math.round(file.UpdatedIn / 1000000) | number("0,0") }} ms-->
                                 {{ Math.round(file.UpdatedIn / 1000000) }} ms

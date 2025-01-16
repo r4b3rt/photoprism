@@ -2,7 +2,7 @@
   <v-dialog :model-value="show" persistent max-width="540" class="p-share-dialog" @keydown.esc="close">
     <v-card>
       <v-card-title class="d-flex justify-space-between align-center ga-3">
-        <h6 class="text-h6"><translate :translate-params="{ name: model.modelName() }">Share %{name}</translate></h6>
+        <h6 class="text-h6">{{ $gettext(`Share %{name}`, { name: model.modelName() }) }}</h6>
         <v-btn icon="mdi-link-plus" variant="text" color="primary" :title="$gettext('Add Link')" class="action-add-link" @click.stop="add"></v-btn>
       </v-card-title>
       <v-card-text>
@@ -43,7 +43,7 @@
                     <v-col cols="12" class="d-flex justify-space-between align-center ga-3">
                       <v-btn variant="text" color="remove" density="comfortable" icon="mdi-delete" :title="$gettext('Delete')" class="action-delete" @click.stop.exact="remove(index)"> </v-btn>
                       <v-btn variant="flat" color="highlight" class="action-save" @click.stop.exact="update(link)">
-                        <translate>Save</translate>
+                        {{ $gettext(`Save`) }}
                       </v-btn>
                     </v-col>
                   </v-row>
@@ -54,18 +54,18 @@
         </v-expansion-panels>
 
         <div class="pt-3 text-caption">
-          <translate :translate-params="{ name: model.modelName() }">People you share a link with will be able to view public contents.</translate>
-          <translate>A click will copy it to your clipboard.</translate>
-          <translate>Any private photos and videos remain private and won't be shared.</translate>
-          <translate>Alternatively, you can upload files directly to WebDAV servers like Nextcloud.</translate>
+          {{ $gettext(`People you share a link with will be able to view public contents.`, { name: model.modelName() }) }}
+          {{ $gettext(`A click will copy it to your clipboard.`) }}
+          {{ $gettext(`Any private photos and videos remain private and won't be shared.`) }}
+          {{ $gettext(`Alternatively, you can upload files directly to WebDAV servers like Nextcloud.`) }}
         </div>
       </v-card-text>
       <v-card-actions>
         <v-btn variant="flat" color="button" class="action-webdav" @click.stop="upload">
-          <translate>WebDAV Upload</translate>
+          {{ $gettext(`WebDAV Upload`) }}
         </v-btn>
         <v-btn variant="flat" color="button" class="action-close" @click.stop="confirm">
-          <translate>Close</translate>
+          {{ $gettext(`Close`) }}
         </v-btn>
       </v-card-actions>
     </v-card>

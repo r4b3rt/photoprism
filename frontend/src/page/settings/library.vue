@@ -3,7 +3,7 @@
     <v-form ref="form" validate-on="blur" class="p-form-settings" accept-charset="UTF-8" @submit.prevent="onChange">
       <v-card flat tile class="mt-0 px-1 bg-background">
         <v-card-title class="pb-0 text-subtitle-2">
-          <translate>Index</translate>
+          {{ $gettext(`Index`) }}
         </v-card-title>
 
         <v-card-actions>
@@ -61,7 +61,7 @@
 
       <v-card flat tile class="mt-0 px-1 bg-background">
         <v-card-title class="pb-0 text-subtitle-2" :title="$gettext('Stacks group files with a similar frame of reference, but differences of quality, format, size or color.')">
-          <translate>Stacks</translate>
+          {{ $gettext(`Stacks`) }}
         </v-card-title>
 
         <v-card-actions>

@@ -3,15 +3,15 @@
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="54" color="primary">mdi-delete-outline</v-icon>
-        <p v-if="text === ''" class="text-subtitle-1"><translate>Are you sure you want to permanently delete these pictures?</translate></p>
+        <p v-if="text === ''" class="text-subtitle-1">{{ $gettext(`Are you sure you want to permanently delete these pictures?`) }}</p>
         <p v-else class="text-subtitle-1">{{ text }}</p>
       </v-card-title>
       <v-card-actions class="action-buttons mt-1">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-          <translate>Cancel</translate>
+          {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn v-if="action === ''" color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
-          <translate>Delete</translate>
+          {{ $gettext(`Delete`) }}
         </v-btn>
         <v-btn v-else color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
           {{ action }}

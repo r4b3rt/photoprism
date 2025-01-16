@@ -27,11 +27,11 @@
       <div v-if="results.length === 0" class="pa-3">
         <v-alert color="primary" icon="mdi-check-circle-outline" class="no-results opacity-60" variant="outlined">
           <div class="font-weight-bold">
-            <translate>No people found</translate>
+            {{ $gettext(`No people found`) }}
           </div>
           <div class="mt-2 mb-0 pa-0">
-            <translate>You may rescan your library to find additional faces.</translate>
-            <translate>Recognition starts after indexing has been completed.</translate>
+            {{ $gettext(`You may rescan your library to find additional faces.`) }}
+            {{ $gettext(`Recognition starts after indexing has been completed.`) }}
           </div>
         </v-alert>
       </div>
@@ -112,7 +112,7 @@
         </div>
         <div class="d-flex justify-center mt-8 mb-4">
           <v-btn color="secondary" rounded variant="flat" :to="{ name: 'all', query: { q: 'face:new' } }">
-            <translate>Show all new faces</translate>
+            {{ $gettext(`Show all new faces`) }}
           </v-btn>
         </div>
       </div>

@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="28" color="primary">mdi-cloud</v-icon>
-        <h6 class="text-h6"><translate>WebDAV Upload</translate></h6>
+        <h6 class="text-h6">{{ $gettext(`WebDAV Upload`) }}</h6>
       </v-card-title>
       <v-card-text class="dense">
         <v-row align="center" dense>
@@ -42,13 +42,13 @@
       </v-card-text>
       <v-card-actions class="action-buttons">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-          <translate>Cancel</translate>
+          {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn v-if="noServices" :disabled="isPublic && !isDemo" color="highlight" variant="flat" class="action-setup" @click.stop="setup">
-          <translate>Setup</translate>
+          {{ $gettext(`Setup`) }}
         </v-btn>
         <v-btn v-else :disabled="noServices" color="highlight" variant="flat" class="action-upload" @click.stop="confirm">
-          <translate>Upload</translate>
+          {{ $gettext(`Upload`) }}
         </v-btn>
       </v-card-actions>
     </v-card>

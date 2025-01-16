@@ -59,7 +59,7 @@
               <v-list-item to="/browse" variant="text" class="nav-browse activator" :ripple="false" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
-                    <translate>Search</translate>
+                    {{ $gettext(`Search`) }}
                   </p>
                   <span v-if="config.count.all > 0" :class="`nav-count-group ${rtl ? '--rtl' : ''}`">{{ config.count.all }}</span>
                 </v-list-item-title>
@@ -74,57 +74,57 @@
 
                 <v-list-item :to="{ name: 'browse', query: { q: 'mono:true quality:3 photo:true' } }" :exact="true" variant="text" class="nav-monochrome" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Monochrome</translate>
+                    {{ $gettext(`Monochrome`) }}
                   </v-list-item-title>
                 </v-list-item>
 
                 <v-list-item :to="{ name: 'browse', query: { q: 'panoramas' } }" :exact="true" variant="text" class="nav-panoramas" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Panoramas</translate>
+                    {{ $gettext(`Panoramas`) }}
                   </v-list-item-title>
                 </v-list-item>
 
                 <v-list-item :to="{ name: 'browse', query: { q: 'animated' } }" :exact="true" variant="text" class="nav-animated" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Animated</translate>
+                    {{ $gettext(`Animated`) }}
                   </v-list-item-title>
                 </v-list-item>
 
                 <v-list-item v-show="isSponsor" :to="{ name: 'browse', query: { q: 'vectors' } }" :exact="true" variant="text" class="nav-vectors" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Vectors</translate>
+                    {{ $gettext(`Vectors`) }}
                   </v-list-item-title>
                 </v-list-item>
 
                 <v-list-item :to="{ name: 'photos', query: { q: 'stacks' } }" :exact="true" variant="text" class="nav-stacks" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Stacks</translate>
+                    {{ $gettext(`Stacks`) }}
                   </v-list-item-title>
                 </v-list-item>
 
                 <v-list-item :to="{ name: 'photos', query: { q: 'scans' } }" :exact="true" variant="text" class="nav-scans" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Scans</translate>
+                    {{ $gettext(`Scans`) }}
                   </v-list-item-title>
                 </v-list-item>
 
                 <v-list-item v-if="canManagePhotos" v-show="$config.feature('review')" to="/review" variant="text" class="nav-review" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Review</translate>
+                    {{ $gettext(`Review`) }}
                   </v-list-item-title>
                   <span v-show="config.count.review > 0" class="nav-count-item">{{ config.count.review }}</span>
                 </v-list-item>
 
                 <v-list-item v-if="canAccessPrivate" v-show="$config.feature('private')" to="/private" variant="text" class="nav-private" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Private</translate>
+                    {{ $gettext(`Private`) }}
                   </v-list-item-title>
                   <span v-show="config.count.private > 0" class="nav-count-item">{{ config.count.private }}</span>
                 </v-list-item>
 
                 <v-list-item v-show="$config.feature('archive')" to="/archive" variant="text" class="nav-archive" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Archive</translate>
+                    {{ $gettext(`Archive`) }}
                   </v-list-item-title>
                   <span v-show="config.count.archived > 0" class="nav-count-item">{{ config.count.archived }}</span>
                 </v-list-item>
@@ -138,7 +138,7 @@
               <v-list-item to="/albums" variant="text" class="nav-albums activator" :ripple="false" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
-                    <translate>Albums</translate>
+                    {{ $gettext(`Albums`) }}
                   </p>
                   <span v-if="config.count.albums > 0" :class="`nav-count-group ${rtl ? '--rtl' : ''}`">{{ config.count.albums }}</span>
                 </v-list-item-title>
@@ -153,7 +153,7 @@
 
                 <v-list-item to="/unsorted" variant="text" class="nav-unsorted" :ripple="false">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Unsorted</translate>
+                    {{ $gettext(`Unsorted`) }}
                   </v-list-item-title>
                 </v-list-item>
               </v-list-group>
@@ -166,7 +166,7 @@
               <v-list-item to="/videos" variant="text" class="nav-video activator" :ripple="false" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
-                    <translate>Videos</translate>
+                    {{ $gettext(`Videos`) }}
                   </p>
                   <span v-show="config.count.videos > 0" :class="`nav-count-group ${rtl ? '--rtl' : ''}`">{{ config.count.videos }}</span>
                 </v-list-item-title>
@@ -181,7 +181,7 @@
 
                 <v-list-item :to="{ name: 'live' }" variant="text" class="nav-live" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Live Photos</translate>
+                    {{ $gettext(`Live Photos`) }}
                   </v-list-item-title>
                   <span v-show="config.count.live > 0" class="nav-count-item">{{ config.count.live }}</span>
                 </v-list-item>
@@ -195,7 +195,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-account</v-icon>
                 <p class="nav-item-title">
-                  <translate>People</translate>
+                  {{ $gettext(`People`) }}
                 </p>
               </v-list-item-title>
               <span v-show="config.count.people > 0" class="nav-count-item">{{ config.count.people }}</span>
@@ -208,7 +208,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-star</v-icon>
                 <p class="nav-item-title">
-                  <translate>Favorites</translate>
+                  {{ $gettext(`Favorites`) }}
                 </p>
               </v-list-item-title>
               <span v-show="config.count.favorites > 0" class="nav-count-item">{{ config.count.favorites }}</span>
@@ -217,7 +217,7 @@
             <v-list-item v-if="isRestricted" v-show="$config.feature('places')" to="/states" variant="text" class="nav-states" :ripple="false" @click.stop="">
               <v-list-item-title class="nav-menu-item" @click.stop="">
                 <v-icon>mdi-near-me</v-icon>
-                <translate>States</translate>
+                {{ $gettext(`States`) }}
               </v-list-item-title>
               <span v-show="config.count.states > 0" class="nav-count-item">{{ config.count.states }}</span>
             </v-list-item>
@@ -230,7 +230,7 @@
                 <v-list-item to="/places" variant="text" class="nav-places activator" :ripple="false" @click.stop="">
                   <v-list-item-title class="nav-menu-item">
                     <p class="nav-item-title">
-                      <translate>Places</translate>
+                      {{ $gettext(`Places`) }}
                     </p>
                     <span v-show="config.count.places > 0" :class="`nav-count-group ${rtl ? '--rtl' : ''}`">{{ config.count.places }}</span>
                   </v-list-item-title>
@@ -245,7 +245,7 @@
 
                   <v-list-item to="/states" variant="text" class="nav-states" @click.stop="">
                     <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                      <translate>States</translate>
+                      {{ $gettext(`States`) }}
                     </v-list-item-title>
                     <span v-show="config.count.states > 0" class="nav-count-item">{{ config.count.states }}</span>
                   </v-list-item>
@@ -260,7 +260,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-calendar</v-icon>
                 <p class="nav-item-title">
-                  <translate>Calendar</translate>
+                  {{ $gettext(`Calendar`) }}
                 </p>
               </v-list-item-title>
               <span v-show="config.count.months > 0" class="nav-count-item">{{ config.count.months }}</span>
@@ -273,7 +273,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-filmstrip-box</v-icon>
                 <p class="nav-item-title">
-                  <translate>Moments</translate>
+                  {{ $gettext(`Moments`) }}
                 </p>
               </v-list-item-title>
               <span v-show="config.count.moments > 0" class="nav-count-item">{{ config.count.moments }}</span>
@@ -286,7 +286,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-label</v-icon>
                 <p class="nav-item-title">
-                  <translate>Labels</translate>
+                  {{ $gettext(`Labels`) }}
                 </p>
               </v-list-item-title>
               <span v-show="config.count.labels > 0" class="nav-count-item">{{ config.count.labels }}</span>
@@ -299,7 +299,7 @@
               <v-list-item-title class="nav-menu-item">
                 <v-icon>mdi-folder</v-icon>
                 <p class="nav-item-title">
-                  <translate>Folders</translate>
+                  {{ $gettext(`Folders`) }}
                 </p>
               </v-list-item-title>
               <span v-show="config.count.folders > 0" class="nav-count-item">{{ config.count.folders }}</span>
@@ -312,7 +312,7 @@
               <v-list-item :to="{ name: 'library_index' }" variant="text" class="nav-library activator" :ripple="false" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
-                    <translate>Library</translate>
+                    {{ $gettext(`Library`) }}
                   </p>
                 </v-list-item-title>
               </v-list-item>
@@ -326,21 +326,21 @@
 
                 <v-list-item v-show="$config.feature('files')" to="/index/files" variant="text" class="nav-originals" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Originals</translate>
+                    {{ $gettext(`Originals`) }}
                   </v-list-item-title>
                   <span v-show="config.count.files > 0 && canAccessPrivate" class="nav-count-item">{{ config.count.files }}</span>
                 </v-list-item>
 
                 <v-list-item :to="{ name: 'hidden' }" variant="text" class="nav-hidden" :ripple="false" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Hidden</translate>
+                    {{ $gettext(`Hidden`) }}
                   </v-list-item-title>
                   <span v-show="config.count.hidden > 0" class="nav-count-item">{{ config.count.hidden }}</span>
                 </v-list-item>
 
                 <v-list-item :to="{ name: 'errors' }" variant="text" class="nav-errors" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item ${rtl ? '--rtl' : ''}`">
-                    <translate>Errors</translate>
+                    {{ $gettext(`Errors`) }}
                   </v-list-item-title>
                 </v-list-item>
               </v-list-group>
@@ -354,7 +354,7 @@
                 <v-list-item :to="{ name: 'settings' }" variant="text" class="nav-settings activator" :ripple="false" @click.stop="">
                   <v-list-item-title class="nav-menu-item">
                     <p class="nav-item-title">
-                      <translate>Settings</translate>
+                      {{ $gettext(`Settings`) }}
                     </p>
                   </v-list-item-title>
                 </v-list-item>
@@ -368,31 +368,31 @@
 
                   <v-list-item v-if="canManageUsers" :to="{ path: '/admin/users' }" :exact="false" variant="text" class="nav-admin-users" :ripple="false" @click.stop="">
                     <v-list-item-title :class="`menu-item ${rtl ? '--rtl' : ''}`">
-                      <translate>Users</translate>
+                      {{ $gettext(`Users`) }}
                     </v-list-item-title>
                   </v-list-item>
 
                   <v-list-item v-show="featFeedback" :to="{ name: 'feedback' }" :exact="true" variant="text" class="nav-feedback" :ripple="false" @click.stop="">
                     <v-list-item-title :class="`menu-item ${rtl ? '--rtl' : ''}`">
-                      <translate>Feedback</translate>
+                      {{ $gettext(`Feedback`) }}
                     </v-list-item-title>
                   </v-list-item>
 
                   <v-list-item :to="{ name: 'license' }" :exact="true" variant="text" class="nav-license" :ripple="false" @click.stop="">
                     <v-list-item-title :class="`menu-item ${rtl ? '--rtl' : ''}`">
-                      <translate>License</translate>
+                      {{ $gettext(`License`) }}
                     </v-list-item-title>
                   </v-list-item>
 
                   <v-list-item v-if="featUpgrade && !featMembership" :to="{ name: 'upgrade' }" variant="text" class="nav-upgrade" :exact="true" :ripple="false" @click.stop="">
                     <v-list-item-title :class="`menu-item ${rtl ? '--rtl' : ''}`">
-                      <translate>Upgrade</translate>
+                      {{ $gettext(`Upgrade`) }}
                     </v-list-item-title>
                   </v-list-item>
 
                   <v-list-item :to="{ name: 'about' }" :exact="true" variant="text" class="nav-about" :ripple="false" @click.stop="">
                     <v-list-item-title :class="`menu-item ${rtl ? '--rtl' : ''}`">
-                      <translate>About</translate>
+                      {{ $gettext(`About`) }}
                     </v-list-item-title>
                   </v-list-item>
                 </v-list-group>
@@ -402,7 +402,7 @@
             <v-list-item v-show="!auth" :to="{ name: 'login' }" variant="text" class="nav-login" @click.stop="">
               <v-list-item-title>
                 <v-icon>mdi-lock</v-icon>
-                <translate>Login</translate>
+                {{ $gettext(`Login`) }}
               </v-list-item-title>
             </v-list-item>
 
@@ -414,13 +414,13 @@
               <v-list-item-title v-if="isPro" class="nav-menu-item">
                 <v-icon>mdi-check-circle</v-icon>
                 <p class="nav-item-title">
-                  <translate>Upgrade</translate>
+                  {{ $gettext(`Upgrade`) }}
                 </p>
               </v-list-item-title>
               <v-list-item-title v-else class="nav-menu-item">
                 <v-icon>mdi-diamond</v-icon>
                 <p class="nav-item-title">
-                  <translate>Support Our Mission</translate>
+                  {{ $gettext(`Support Our Mission`) }}
                 </p>
               </v-list-item-title>
             </v-list-item>
@@ -432,7 +432,7 @@
               <v-icon color="warning" size="25">mdi-wifi-off</v-icon>
             </div>
             <div v-if="!isMini" class="text-start mt-1 text-body-2">
-              <translate>No server connection</translate>
+              {{ $gettext(`No server connection`) }}
             </div>
           </div>
           <div v-show="auth && !isPublic && !disconnected" class="nav-info user-info">
@@ -483,49 +483,49 @@
           <div v-if="auth && !routeName('browse') && $config.feature('search')" class="menu-action nav-search">
             <router-link to="/browse">
               <v-icon>mdi-magnify</v-icon>
-              <translate>Search</translate>
+              {{ $gettext(`Search`) }}
             </router-link>
           </div>
           <div v-if="auth && !routeName('albums') && $config.feature('albums')" class="menu-action nav-albums">
             <router-link to="/albums">
               <v-icon>mdi-bookmark</v-icon>
-              <translate>Albums</translate>
+              {{ $gettext(`Albums`) }}
             </router-link>
           </div>
           <div v-if="auth && canManagePeople && !routeName('people') && $config.feature('people')" class="menu-action nav-people">
             <router-link to="/people">
               <v-icon>mdi-account</v-icon>
-              <translate>People</translate>
+              {{ $gettext(`People`) }}
             </router-link>
           </div>
           <div v-if="auth && canSearchPlaces && !routeName('places') && $config.feature('places')" class="menu-action nav-places">
             <router-link to="/places">
               <v-icon>mdi-map-marker</v-icon>
-              <translate>Places</translate>
+              {{ $gettext(`Places`) }}
             </router-link>
           </div>
           <div v-if="auth && !routeName('files') && $config.feature('files') && $config.feature('library')" class="menu-action nav-files">
             <router-link to="/index/files">
               <v-icon>mdi-folder</v-icon>
-              <translate>Files</translate>
+              {{ $gettext(`Files`) }}
             </router-link>
           </div>
           <div v-if="auth && !routeName('library_index') && $config.feature('library')" class="menu-action nav-index">
             <router-link :to="{ name: 'library_index' }">
               <v-icon>mdi-film</v-icon>
-              <translate>Index</translate>
+              {{ $gettext(`Index`) }}
             </router-link>
           </div>
           <div v-if="auth && !routeName('index') && $config.feature('library') && $config.feature('logs')" class="menu-action nav-logs">
             <router-link :to="{ name: 'library_logs' }">
               <v-icon>mdi-file-document</v-icon>
-              <translate>Logs</translate>
+              {{ $gettext(`Logs`) }}
             </router-link>
           </div>
           <div class="menu-action nav-manual">
             <a href="https://link.photoprism.app/docs" target="_blank">
               <v-icon>mdi-book-open-page-variant</v-icon>
-              <translate>User Guide</translate>
+              {{ $gettext(`User Guide`) }}
             </a>
           </div>
           <div v-if="featUpgrade" class="menu-action nav-upgrade">
@@ -534,7 +534,7 @@
                 <a :href="href" :class="{ active: isActive }" @click="navigate">
                   <v-icon v-if="isPro">mdi-check-circle</v-icon>
                   <v-icon v-else>mdi-diamond</v-icon>
-                  <translate>Upgrade</translate>
+                  {{ $gettext(`Upgrade`) }}
                 </a>
               </template>
             </router-link>
@@ -542,7 +542,7 @@
           <div v-if="config.legalUrl" class="menu-action nav-legal">
             <a :href="config.legalUrl" target="_blank">
               <v-icon>mdi-information</v-icon>
-              <translate>Legal Information</translate>
+              {{ $gettext(`Legal Information`) }}
             </a>
           </div>
         </div>

@@ -2,7 +2,7 @@
   <div class="p-page p-page-help">
     <v-toolbar flat color="secondary" :density="$vuetify.display.smAndDown ? 'compact' : 'default'">
       <v-toolbar-title class="flex-grow-1">
-        <translate>Help</translate>
+        {{ $gettext(`Help`) }}
       </v-toolbar-title>
 
       <v-btn icon href="https://docs.photoprism.app/getting-started/troubleshooting/" target="_blank" class="action-info mx-2" :title="$gettext('Learn more')">

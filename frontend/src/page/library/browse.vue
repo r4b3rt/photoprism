@@ -4,7 +4,7 @@
       <v-toolbar flat color="secondary" :density="$vuetify.display.smAndDown ? 'compact' : 'default'">
         <v-toolbar-title>
           <router-link to="/index/files">
-            <translate>Originals</translate>
+            {{ $gettext(`Originals`) }}
           </router-link>
 
           <router-link v-for="dir in breadcrumbs" :key="dir.key" :to="dir.uri">
@@ -30,11 +30,11 @@
       <div class="p-files p-files-cards">
         <v-alert v-if="results.length === 0" color="primary" icon="mdi-lightbulb-outline" class="ma-3 no-results opacity-60" variant="outlined">
           <div class="font-weight-bold">
-            <translate>No pictures found</translate>
+            {{ $gettext(`No pictures found`) }}
           </div>
           <div class="mt-2 mb-0 pa-0">
-            <translate>Duplicates will be skipped and only appear once.</translate>
-            <translate>In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.</translate>
+            {{ $gettext(`Duplicates will be skipped and only appear once.`) }}
+            {{ $gettext(`In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`) }}
           </div>
         </v-alert>
         <div v-else class="v-row search-results file-results cards-view" :class="{ 'select-results': selection.length > 0 }">
@@ -70,7 +70,7 @@
                   {{ m.baseName() }}
                 </button>
                 <div class="meta-description">
-                  <translate>Folder</translate>
+                  {{ $gettext(`Folder`) }}
                 </div>
               </div>
             </div>

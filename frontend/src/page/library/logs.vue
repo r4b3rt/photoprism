@@ -3,7 +3,7 @@
     <v-row class="pa-0 ma-4 d-flex align-stretch">
       <v-col cols="12" class="grow pa-2 bg-terminal elevation-0 p-logs" style="overflow: auto">
         <p v-if="logs.length === 0" class="p-log-empty flex-grow-1">
-          <translate>Nothing to see here yet.</translate>
+          {{ $gettext(`Nothing to see here yet.`) }}
         </p>
         <p v-for="log in logs" :key="log.id" class="p-log-message text-selectable flex-grow-1" :class="'p-log-' + log.level">
           {{ formatTime(log.time) }} {{ level(log) }} <span>{{ log.message }}</span>

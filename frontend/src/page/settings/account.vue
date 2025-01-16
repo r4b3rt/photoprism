@@ -141,19 +141,19 @@
         </v-card>
         <v-card flat tile class="my-3 pa-0 bg-background">
           <v-card-title class="ma-0 pa-2 text-subtitle-2">
-            <translate>Security and Access</translate>
+            {{ $gettext(`Security and Access`) }}
           </v-card-title>
           <v-card-actions class="ma-0 pa-0">
             <v-row align="start" dense>
               <v-col cols="12" sm="6">
                 <v-btn block variant="flat" color="button" class="action-change-password" :disabled="isPublic || isDemo || user.Name === '' || getProvider() !== 'local'" @click.stop="showDialog('password')">
-                  <translate>Change Password</translate>
+                  {{ $gettext(`Change Password`) }}
                   <v-icon end>mdi-lock</v-icon>
                 </v-btn>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-btn block variant="flat" color="button" class="action-passcode-dialog" :disabled="isPublic || isDemo || user.disablePasscodeSetup(session.hasPassword())" @click.stop="showDialog('passcode')">
-                  <translate>2-Factor Authentication</translate>
+                  {{ $gettext(`2-Factor Authentication`) }}
                   <v-icon v-if="user.AuthMethod === '2fa'" end>mdi-shield-alert</v-icon>
                   <v-icon v-else-if="user.disablePasscodeSetup(session.hasPassword())" end>mdi-shield-check</v-icon>
                   <v-icon v-else end>mdi-shield-alert</v-icon>
@@ -161,13 +161,13 @@
               </v-col>
               <v-col cols="12" sm="6">
                 <v-btn block variant="flat" color="button" class="action-apps-dialog" :disabled="isPublic || isDemo || user.Name === ''" @click.stop="showDialog('apps')">
-                  <translate>Apps and Devices</translate>
+                  {{ $gettext(`Apps and Devices`) }}
                   <v-icon end>mdi-cellphone-link</v-icon>
                 </v-btn>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-btn block variant="flat" color="button" class="action-webdav-dialog" :disabled="isPublic || isDemo || !user.hasWebDAV()" @click.stop="showDialog('webdav')">
-                  <translate>Connect via WebDAV</translate>
+                  {{ $gettext(`Connect via WebDAV`) }}
                   <v-icon end>mdi-swap-horizontal</v-icon>
                 </v-btn>
               </v-col>
@@ -176,7 +176,7 @@
         </v-card>
         <v-card flat tile class="my-3 pa-0 bg-background">
           <v-card-title class="ma-0 pa-2 text-subtitle-2">
-            <translate>Birth Date</translate>
+            {{ $gettext(`Birth Date`) }}
           </v-card-title>
           <v-card-actions class="ma-0 pa-0">
             <v-row align="start" dense>
@@ -235,7 +235,7 @@
         </v-card>
         <v-card flat tile class="my-3 pa-0 bg-background">
           <v-card-title class="ma-0 pa-2 text-subtitle-2">
-            <translate>Contact Details</translate>
+            {{ $gettext(`Contact Details`) }}
           </v-card-title>
           <v-card-actions class="ma-0 pa-0">
             <v-row align="start" dense>

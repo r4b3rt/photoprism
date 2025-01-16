@@ -3,14 +3,14 @@
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="54" color="primary">{{ icon }}</v-icon>
-        <p class="text-subtitle-1"><translate>Are you sure?</translate></p>
+        <p class="text-subtitle-1">{{ $gettext(`Are you sure?`) }}</p>
       </v-card-title>
       <v-card-actions class="action-buttons">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-          <translate key="Cancel">Cancel</translate>
+          {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
-          <translate key="Delete">Yes</translate>
+          {{ $gettext(`Yes`) }}
         </v-btn>
       </v-card-actions>
     </v-card>

@@ -3,11 +3,11 @@
     <v-container grid-list-xs fluid class="pa-2 p-faces">
       <v-alert v-if="markers.length === 0" color="surface-variant" icon="mdi-lightbulb-outline" class="no-results ma-2 opacity-70" variant="outlined">
         <h3 class="text-subtitle-2 ma-0 pa-0">
-          <translate>No people found</translate>
+          {{ $gettext(`No people found`) }}
         </h3>
         <p class="text-body-2 mt-2 mb-0 pa-0">
-          <translate>You may rescan your library to find additional faces.</translate>
-          <translate>Recognition starts after indexing has been completed.</translate>
+          {{ $gettext(`You may rescan your library to find additional faces.`) }}
+          {{ $gettext(`Recognition starts after indexing has been completed.`) }}
         </p>
       </v-alert>
       <v-row v-else class="search-results face-results cards-view d-flex align-stretch ma-0">

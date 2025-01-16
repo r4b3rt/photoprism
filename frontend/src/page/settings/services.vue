@@ -32,20 +32,20 @@
     </v-data-table>
     <v-container fluid>
       <p class="text-caption py-1 clickable" @click.stop.prevent="webdavDialog">
-        <translate>Note:</translate>
-        <translate>WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. </translate>
-        <translate>This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local. </translate>
+        {{ $gettext(`Note:`) }}
+        {{ $gettext(`WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. `) }}
+        {{ $gettext(`This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local. `) }}
       </p>
 
       <v-form ref="form" validate-on="blur" class="p-form-settings" accept-charset="UTF-8" @submit.prevent="add">
         <div class="action-buttons">
           <v-btn v-if="user.hasWebDAV()" color="button" variant="flat" class="action-webdav-dialog" :block="$vuetify.display.xs" :disabled="isPublic || isDemo" @click.stop="webdavDialog">
-            <translate>Connect via WebDAV</translate>
+            {{ $gettext(`Connect via WebDAV`) }}
             <v-icon end>mdi-swap-horizontal</v-icon>
           </v-btn>
 
           <v-btn color="highlight" class="compact" :block="$vuetify.display.xs" :disabled="isPublic || isDemo" variant="flat" @click.stop="add">
-            <translate>Connect</translate>
+            {{ $gettext(`Connect`) }}
             <v-icon icon="mdi-plus" end></v-icon>
           </v-btn>
         </div>

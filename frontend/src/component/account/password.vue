@@ -4,12 +4,12 @@
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon size="28" color="primary">mdi-lock</v-icon>
-          <h6 class="text-h6"><translate>Change Password</translate></h6>
+          <h6 class="text-h6">{{ $gettext(`Change Password`) }}</h6>
         </v-card-title>
         <v-card-text class="dense">
           <v-row align="start" dense>
             <v-col v-if="oldRequired" cols="12" class="text-caption">
-              <translate>Please note that changing your password will log you out on other devices and browsers.</translate>
+              {{ $gettext(`Please note that changing your password will log you out on other devices and browsers.`) }}
             </v-col>
             <v-col v-if="oldRequired" cols="12">
               <v-text-field
@@ -71,10 +71,10 @@
         </v-card-text>
         <v-card-actions class="action-buttons">
           <v-btn variant="flat" color="button" class="action-cancel" @click.stop="close">
-            <translate>Cancel</translate>
+            {{ $gettext(`Cancel`) }}
           </v-btn>
           <v-btn variant="flat" color="highlight" class="action-confirm" :disabled="isDisabled()" @click.stop="onConfirm">
-            <translate>Save</translate>
+            {{ $gettext(`Save`) }}
           </v-btn>
         </v-card-actions>
       </v-card>

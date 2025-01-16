@@ -6,14 +6,14 @@
           <v-icon v-if="action === 'add'" size="28" color="primary">mdi-plus</v-icon>
           <v-icon v-else-if="action === 'copy'" size="28" color="primary">mdi-shield-lock</v-icon>
           <v-icon v-else size="28" color="primary">mdi-cellphone-link</v-icon>
-          <h6 class="text-h6"><translate>Apps and Devices</translate></h6>
+          <h6 class="text-h6">{{ $gettext(`Apps and Devices`) }}</h6>
         </v-card-title>
         <!-- Confirm -->
         <template v-if="confirmAction !== ''">
           <v-card-text class="dense">
             <v-row align="start" dense>
               <v-col cols="12" class="text-body-2">
-                <translate>Enter your password to confirm the action and continue:</translate>
+                {{ $gettext(`Enter your password to confirm the action and continue:`) }}
               </v-col>
               <v-col cols="12">
                 <v-text-field
@@ -39,10 +39,10 @@
           </v-card-text>
           <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="secondary-light" class="action-back" @click.stop="onBack">
-              <translate>Back</translate>
+              {{ $gettext(`Back`) }}
             </v-btn>
             <v-btn variant="flat" color="highlight" :disabled="!password || password.length < 4" class="action-confirm" @click.stop="onConfirm">
-              <translate>Continue</translate>
+              {{ $gettext(`Continue`) }}
             </v-btn>
           </v-card-actions>
         </template>
@@ -51,7 +51,7 @@
           <v-card-text class="dense">
             <v-row align="start" dense>
               <v-col cols="12" class="text-body-2">
-                <translate>Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:</translate>
+                {{ $gettext(`Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:`) }}
               </v-col>
               <v-col cols="12">
                 <v-text-field v-model="appPassword" type="text" hide-details readonly autocorrect="off" autocapitalize="none" autocomplete="off" class="input-app-password text-selectable" append-inner-icon="mdi-content-copy" @click:append-inner="onCopyAppPassword"> </v-text-field>
@@ -60,13 +60,13 @@
           </v-card-text>
           <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-close" @click.stop="close">
-              <translate>Close</translate>
+              {{ $gettext(`Close`) }}
             </v-btn>
             <v-btn v-if="appPasswordCopied" variant="flat" color="highlight" :disabled="busy" class="action-done" @click.stop="onDone">
-              <translate>Done</translate>
+              {{ $gettext(`Done`) }}
             </v-btn>
             <v-btn v-else variant="flat" color="highlight" class="action-copy" @click.stop="onCopyAppPassword">
-              <translate>Copy</translate>
+              {{ $gettext(`Copy`) }}
             </v-btn>
           </v-card-actions>
         </template>
@@ -75,7 +75,7 @@
           <v-card-text class="dense">
             <v-row align="start" dense>
               <v-col cols="12" class="text-body-2">
-                <translate>To generate a new app-specific password, please enter the name and authorization scope of the application and select an expiration date:</translate>
+                {{ $gettext(`To generate a new app-specific password, please enter the name and authorization scope of the application and select an expiration date:`) }}
               </v-col>
               <v-col cols="12">
                 <v-text-field v-model="app.client_name" :disabled="busy" name="client_name" type="text" :label="$gettext('Name')" required autofocus hide-details autocorrect="off" autocapitalize="none" autocomplete="off" class="input-name text-selectable"></v-text-field>
@@ -90,10 +90,10 @@
           </v-card-text>
           <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-cancel" @click.stop="onCancel">
-              <translate>Cancel</translate>
+              {{ $gettext(`Cancel`) }}
             </v-btn>
             <v-btn variant="flat" color="highlight" :disabled="app.client_name === '' || app.scope === ''" class="action-generate" @click.stop="onGenerate">
-              <translate>Generate</translate>
+              {{ $gettext(`Generate`) }}
             </v-btn>
           </v-card-actions>
         </template>
@@ -130,10 +130,10 @@
           </v-card-text>
           <v-card-actions class="action-buttons">
             <v-btn variant="flat" color="button" class="action-close" @click.stop="close">
-              <translate>Close</translate>
+              {{ $gettext(`Close`) }}
             </v-btn>
             <v-btn variant="flat" color="highlight" class="action-add" @click.stop="onAdd">
-              <translate>Add</translate>
+              {{ $gettext(`Add`) }}
             </v-btn>
           </v-card-actions>
         </template>

@@ -2,7 +2,7 @@
   <div class="p-page p-page-license">
     <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
       <v-toolbar-title>
-        <translate>License</translate>
+        {{ $gettext(`License`) }}
       </v-toolbar-title>
 
       <a target="_blank" href="https://www.gnu.org/licenses/agpl-3.0.en.html">

@@ -56,11 +56,11 @@
       <div v-if="results.length === 0" class="pa-3">
         <v-alert color="primary" icon="mdi-lightbulb-outline" class="no-results opacity-60" variant="outlined">
           <div class="font-weight-bold">
-            <translate>No labels found</translate>
+            {{ $gettext(`No labels found`) }}
           </div>
           <div class="mt-2 mb-0 pa-0">
-            <translate>Try again using other filters or keywords.</translate>
-            <translate>In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.</translate>
+            {{ $gettext(`Try again using other filters or keywords.`) }}
+            {{ $gettext(`In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`) }}
           </div>
         </v-alert>
       </div>
@@ -96,10 +96,10 @@
               </div>
 
               <div v-if="label.PhotoCount === 1" class="meta-count" @click.stop.prevent="">
-                <translate>Contains one picture.</translate>
+                {{ $gettext(`Contains one picture.`) }}
               </div>
               <div v-else-if="label.PhotoCount > 0" class="meta-count" @click.stop.prevent="">
-                <translate :translate-params="{ n: label.PhotoCount }">Contains %{n} pictures.</translate>
+                {{ $gettext(`Contains %{n} pictures.`, { n: label.PhotoCount }) }}
               </div>
             </div>
           </div>

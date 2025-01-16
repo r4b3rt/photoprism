@@ -3,10 +3,10 @@
     <v-form ref="form" class="p-photo-import" validate-on="blur" @submit.prevent="submit">
       <v-container fluid>
         <p class="text-body-1">
-          <span v-if="fileName" class="text-break"><translate :translate-params="{ name: fileName }">Importing %{name}…</translate></span>
-          <span v-else-if="busy"><translate>Importing files to originals…</translate></span>
-          <span v-else-if="completed"><translate>Done.</translate></span>
-          <span v-else><translate>Press button to start importing…</translate></span>
+          <span v-if="fileName" class="text-break">{{ $gettext(`Importing %{name}…`, { name: fileName }) }}</span>
+          <span v-else-if="busy">{{ $gettext(`Importing files to originals…`) }}</span>
+          <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
+          <span v-else>{{ $gettext(`Press button to start importing…`) }}</span>
         </p>
 
         <v-autocomplete
@@ -44,10 +44,10 @@
           >
           </v-checkbox>
           <p>
-            <translate>Imported files will be sorted by date and given a unique name to avoid duplicates.</translate>
-            <translate>JPEGs and thumbnails are automatically rendered as needed.</translate>
-            <translate>Original file names will be stored and indexed.</translate>
-            <translate>Note you may manually manage your originals folder and importing is optional.</translate>
+            {{ $gettext(`Imported files will be sorted by date and given a unique name to avoid duplicates.`) }}
+            {{ $gettext(`JPEGs and thumbnails are automatically rendered as needed.`) }}
+            {{ $gettext(`Original file names will be stored and indexed.`) }}
+            {{ $gettext(`Note you may manually manage your originals folder and importing is optional.`) }}
           </p>
         </div>
         <!-- v-row align="start" class="my-3 mx-0" no-gutters>
@@ -55,26 +55,26 @@
           </v-col>
           <v-col cols="12">
             <p class="text-body-2 py-3">
-              <translate>Imported files will be sorted by date and given a unique name to avoid duplicates.</translate>
-              <translate>JPEGs and thumbnails are automatically rendered as needed.</translate>
-              <translate>Original file names will be stored and indexed.</translate>
-              <translate>Note you may manually manage your originals folder and importing is optional.</translate>
+              {{ $gettext(`Imported files will be sorted by date and given a unique name to avoid duplicates.`) }}
+              {{ $gettext(`JPEGs and thumbnails are automatically rendered as needed.`) }}
+              {{ $gettext(`Original file names will be stored and indexed.`) }}
+              {{ $gettext(`Note you may manually manage your originals folder and importing is optional.`) }}
             </p>
           </v-col>
         </v-row -->
 
         <div class="action-buttons">
           <v-btn :disabled="!busy || !ready" variant="flat" color="button" class="action-cancel" @click.stop="cancelImport()">
-            <translate>Cancel</translate>
+            {{ $gettext(`Cancel`) }}
           </v-btn>
 
           <v-btn v-if="!$config.values.readonly && $config.feature('upload')" :disabled="busy || !ready" variant="flat" color="highlight" class="hidden-xs action-upload" @click.stop="showUpload()">
-            <translate>Upload</translate>
+            {{ $gettext(`Upload`) }}
             <v-icon end>mdi-cloud-upload</v-icon>
           </v-btn>
 
           <v-btn :disabled="busy || !ready" variant="flat" color="highlight" class="action-import" @click.stop="startImport()">
-            <translate>Import</translate>
+            {{ $gettext(`Import`) }}
             <v-icon end>mdi-sync</v-icon>
           </v-btn>
         </div>

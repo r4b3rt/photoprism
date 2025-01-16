@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title class="d-flex justify-start align-center flex-nowrap ga-3">
         <v-icon icon="mdi-alert-decagram-outline" size="28" color="primary"></v-icon>
-        <h6 class="text-h6"><translate>Software Update</translate></h6>
+        <h6 class="text-h6">{{ $gettext(`Software Update`) }}</h6>
       </v-card-title>
       <v-card-text class="d-flex justify-start flex-column ga-3">
         <div class="text-body-2 data-message">{{ getMessage() }}</div>
@@ -13,10 +13,10 @@
       </v-card-text>
       <v-card-actions>
         <v-btn color="button" variant="flat" @click="close">
-          <translate>Close</translate>
+          {{ $gettext(`Close`) }}
         </v-btn>
         <v-btn color="highlight" class="action-update-reload" variant="flat" @click="reload">
-          <translate>Reload</translate>
+          {{ $gettext(`Reload`) }}
         </v-btn>
       </v-card-actions>
     </v-card>

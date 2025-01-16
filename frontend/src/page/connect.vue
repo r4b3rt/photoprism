@@ -2,19 +2,19 @@
   <div class="p-page p-page-upgrade">
     <v-toolbar flat color="secondary" :density="$vuetify.display.smAndDown ? 'compact' : 'default'">
       <v-toolbar-title>
-        <translate>Membership</translate>
+        {{ $gettext(`Membership`) }}
         <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'"></v-icon>
         <span v-if="busy">
-          <translate>Busy, please wait…</translate>
+          {{ $gettext(`Busy, please wait…`) }}
         </span>
         <span v-else-if="success">
-          <translate>Successfully Connected</translate>
+          {{ $gettext(`Successfully Connected`) }}
         </span>
         <span v-else-if="error">
-          <translate>Error</translate>
+          {{ $gettext(`Error`) }}
         </span>
         <span v-else>
-          <translate>Upgrade</translate>
+          {{ $gettext(`Upgrade`) }}
         </span>
       </v-toolbar-title>
 
@@ -33,44 +33,44 @@
           </v-alert>
           <div class="action-buttons">
             <v-btn color="primary" :block="$vuetify.display.xs" variant="outlined" :disabled="busy" @click.stop="reset">
-              <translate>Cancel</translate>
+              {{ $gettext(`Cancel`) }}
             </v-btn>
             <v-btn color="highlight" :block="$vuetify.display.xs" href="https://www.photoprism.app/contact" target="_blank" variant="flat" class="action-contact">
-              <translate>Contact Us</translate>
+              {{ $gettext(`Contact Us`) }}
             </v-btn>
           </div>
         </div>
         <div v-else-if="success">
           <v-alert color="primary" icon="mdi-check-decagram" variant="outlined">
-            <translate>Your account has been successfully connected.</translate>
+            {{ $gettext(`Your account has been successfully connected.`) }}
             <span v-if="$config.values.restart">
-              <translate>Please restart your instance for the changes to take effect.</translate>
+              {{ $gettext(`Please restart your instance for the changes to take effect.`) }}
             </span>
           </v-alert>
 
           <div class="action-buttons">
             <v-btn href="https://my.photoprism.app/dashboard" target="_blank" color="primary" :block="$vuetify.display.xs" variant="outlined" class="action-manage" :disabled="busy">
-              <translate>Manage Account</translate>
+              {{ $gettext(`Manage Account`) }}
             </v-btn>
             <v-btn v-if="$config.values.restart && !$config.values.disable.restart" color="highlight" :block="$vuetify.display.xs" variant="flat" :disabled="busy" class="px-5 action-restart" @click.stop.p.prevent="onRestart">
-              <translate>Restart</translate>
+              {{ $gettext(`Restart`) }}
               <v-icon end>mdi-restart</v-icon>
             </v-btn>
             <v-btn v-if="$config.getTier() < 4" href="https://my.photoprism.app/dashboard/membership" target="_blank" color="highlight" :block="$vuetify.display.xs" variant="flat" class="px-5 action-upgrade" :disabled="busy">
-              <translate>Upgrade Now</translate>
+              {{ $gettext(`Upgrade Now`) }}
               <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'" size="20" end></v-icon>
             </v-btn>
           </div>
         </div>
         <div v-else>
           <div v-if="$config.getTier() < 4" class="pb-6 text-subtitle-2 text-break text-selectable">
-            <translate>Become a member today, support our mission and enjoy our member benefits!</translate>
-            <translate>Your continued support helps us provide regular updates and remain independent, so we can fulfill our mission and protect your privacy.</translate>
+            {{ $gettext(`Become a member today, support our mission and enjoy our member benefits!`) }}
+            {{ $gettext(`Your continued support helps us provide regular updates and remain independent, so we can fulfill our mission and protect your privacy.`) }}
           </div>
 
           <v-alert color="primary" variant="outlined">
             <p class="text-body-2 text-break text-selectable">
-              <strong><translate>To upgrade, you can either enter an activation code or click "Register" to sign up on our website:</translate></strong>
+              <strong>{{ $gettext(`To upgrade, you can either enter an activation code or click "Register" to sign up on our website:`) }}</strong>
             </p>
 
             <!-- TODO: check property return-masked-value TEST -->
@@ -78,26 +78,26 @@
 
             <div class="action-buttons">
               <v-btn v-if="$config.getTier() >= 4" href="https://my.photoprism.app/dashboard" target="_blank" color="primary" :block="$vuetify.display.xs" variant="outlined" class="action-manage" :disabled="busy">
-                <translate>Manage Account</translate>
+                {{ $gettext(`Manage Account`) }}
               </v-btn>
               <v-btn v-else color="primary" :block="$vuetify.display.xs" variant="outlined" :disabled="busy" class="action-compare" @click.stop="compare">
-                <translate>Compare Editions</translate>
+                {{ $gettext(`Compare Editions`) }}
               </v-btn>
 
               <v-btn v-if="!form.token.length" color="highlight" :block="$vuetify.display.xs" variant="flat" :disabled="busy" class="px-5 action-proceed" @click.stop="connect">
-                <translate>Register</translate>
+                {{ $gettext(`Register`) }}
                 <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'" size="20" end></v-icon>
               </v-btn>
               <v-btn v-else color="highlight" :block="$vuetify.display.xs" variant="flat" :disabled="busy || form.token.length !== tokenMask.length" class="px-5 action-activate" @click.stop="activate">
-                <translate>Activate</translate>
+                {{ $gettext(`Activate`) }}
                 <v-icon :icon="rtl ? 'mdi-chevron-left' : 'mdi-chevron-right'" end></v-icon>
               </v-btn>
             </div>
           </v-alert>
 
           <div class="pt-6 text-caption text-break text-selectable">
-            <translate>You are welcome to contact us at membership@photoprism.app for questions regarding your membership.</translate>
-            <translate>By using the software and services we provide, you agree to our terms of service, privacy policy, and code of conduct.</translate>
+            {{ $gettext(`You are welcome to contact us at membership@photoprism.app for questions regarding your membership.`) }}
+            {{ $gettext(`By using the software and services we provide, you agree to our terms of service, privacy policy, and code of conduct.`) }}
           </div>
         </div>
       </v-form>

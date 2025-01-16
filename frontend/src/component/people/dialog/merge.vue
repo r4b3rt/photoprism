@@ -7,10 +7,10 @@
       </v-card-title>
       <v-card-actions class="dialog-merge action-buttons">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
-          <translate>No</translate>
+          {{ $gettext(`No`) }}
         </v-btn>
         <v-btn color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
-          <translate>Yes</translate>
+          {{ $gettext(`Yes`) }}
         </v-btn>
       </v-card-actions>
     </v-card>
