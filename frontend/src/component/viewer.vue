@@ -58,10 +58,6 @@ export default {
         wait: 5000,
         next: -1,
       },
-      imageThumbsSize: {
-        width: 0,
-        height: 0,
-      },
       debug,
       trace,
     };
@@ -305,11 +301,6 @@ export default {
           height: model.Thumbs[thumbSize].h,
           alt: model?.Title,
         };
-
-        // Save the start width and height of the image
-        this.imageThumbsSize.width = model.Thumbs[thumbSize].w;
-        this.imageThumbsSize.height = model.Thumbs[thumbSize].h;
-
         // Check if content is playable and return the data needed to render it in "contentLoad".
         if (model.Playable) {
           /*
@@ -1103,29 +1094,40 @@ export default {
         }
       });
 
-      // If no better thumb found or already using the best quality, return
-      if (!bestThumbSize || (currSlide.data && currSlide.data.src === model.Thumbs[bestThumbSize].src)) {
-        return;
-      }
+      // If no better thumb found, return
+      if (!bestThumbSize) return;
 
-      // If current image thumbs size not equal new one then update the values (not to make a lot of calls in Network)
-      if (this.imageThumbsSize.width === model.Thumbs[bestThumbSize].w && this.imageThumbsSize.height === model.Thumbs[bestThumbSize].h) {
-        return;
-      }
-      this.imageThumbsSize.width = model.Thumbs[bestThumbSize].w;
-      this.imageThumbsSize.height = model.Thumbs[bestThumbSize].h;
+      const newThumbUrl = model.Thumbs[bestThumbSize].src;
+      const currentSrc = currSlide.data?.src;
+      
+      // Extract the size part from URLs (e.g. 'fit_720', 'fit_1280' etc.)
+      const getCurrentSize = (url) => url?.split('/')?.pop();
+      const currentSize = getCurrentSize(currentSrc);
+      const newSize = getCurrentSize(newThumbUrl);
+
+      // If URLs point to the same size image, skip loading
+      if (currentSize && newSize && currentSize === newSize) return;
 
       // Load higher quality image
       const newImage = new Image();
-      newImage.src = model.Thumbs[bestThumbSize].src;
+      newImage.src = newThumbUrl;
 
       newImage.onload = () => {
         if (!pswp.currSlide) return;
 
-        // Update the slide content
+        console.log('Loading new image:', {
+          oldSrc: pswp.currSlide.data.src,
+          newSrc: newImage.src,
+          size: bestThumbSize
+        });
+
+        // content.element.src: Updates the source of the displayed DOM element (the image user sees)
         pswp.currSlide.content.element.src = newImage.src;
         pswp.currSlide.content.element.width = model.Thumbs[bestThumbSize].w;
         pswp.currSlide.content.element.height = model.Thumbs[bestThumbSize].h;
+        
+        // data.src: Updates PhotoSwipe's internal state (reference to prevent reloading)
+        pswp.currSlide.data.src = newImage.src;
       };
     },
   },
