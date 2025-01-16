@@ -1,46 +1,31 @@
-/*
-
-Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
-
-    This program is free software: you can redistribute it and/or modify
-    it under Version 3 of the GNU Affero General Public License (the "AGPL"):
-    <https://docs.photoprism.app/license/agpl>
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
-
-    The AGPL is supplemented by our Trademark and Brand Guidelines,
-    which describe how our Brand Assets may be used:
-    <https://www.photoprism.app/trademark>
-
-Feel free to send an email to hello@photoprism.app if you have questions,
-want to support our work, or just want to say hello.
-
-Additional information can be found in our Developer Guide:
-<https://docs.photoprism.app/developer-guide/>
-
-*/
-
+// Global site components.
 import PNotify from "notify.vue";
 import PScroll from "scroll.vue";
 import PNavigation from "navigation.vue";
 import PLoadingBar from "loading-bar.vue";
 import PViewer from "viewer.vue";
 
+// Icons.
+import IconLivePhoto from "icon/live-photo.vue";
+import IconSponsor from "icon/sponsor.vue";
+import IconPrism from "icon/prism.vue";
+
+// User account management.
 import PAccountAppsDialog from "account/apps.vue";
 import PAccountPasscodeDialog from "account/passcode.vue";
 import PAccountPasswordDialog from "account/password.vue";
 
+// Albums.
 import PAlbumClipboard from "album/clipboard.vue";
 import PAlbumToolbar from "album/toolbar.vue";
 import PAlbumEditDialog from "album/dialog/edit.vue";
 import PAlbumDeleteDialog from "album/dialog/delete.vue";
 
+// Login.
 import PAuthHeader from "auth/header.vue";
 import PAuthFooter from "auth/footer.vue";
 
+// Dialogs.
 import PUploadDialog from "dialog/upload.vue";
 import PShareDialog from "dialog/share.vue";
 import PWebdavDialog from "dialog/webdav.vue";
@@ -48,16 +33,21 @@ import PReloadDialog from "dialog/reload.vue";
 import PSponsorDialog from "dialog/sponsor.vue";
 import PConfirmDialog from "dialog/confirm.vue";
 
+// Originals.
 import PFileClipboard from "file/clipboard.vue";
 import PFileDeleteDialog from "file/dialog/delete.vue";
 
-import IconLivePhoto from "icon/live-photo.vue";
-import IconSponsor from "icon/sponsor.vue";
-import IconPrism from "icon/prism.vue";
+// Labels.
+import PLabelClipboard from "label/clipboard.vue";
+import PLabelDeleteDialog from "label/dialog/delete.vue";
+import PLabelEditDialog from "label/dialog/edit.vue";
 
+// People.
 import PPeopleMergeDialog from "people/dialog/merge.vue";
 import PPeopleEditDialog from "people/dialog/edit.vue";
+import PSubjectClipboard from "subject/clipboard.vue";
 
+// Photos.
 import PPhotoCards from "photo/view/cards.vue";
 import PPhotoMosaic from "photo/view/mosaic.vue";
 import PPhotoList from "photo/view/list.vue";
@@ -69,16 +59,11 @@ import PPhotoAlbumDialog from "photo/dialog/album.vue";
 import PPhotoEditDialog from "photo/dialog/edit.vue";
 import PPhotoDeleteDialog from "photo/dialog/delete.vue";
 
+// Settings > Services.
 import PServiceAddDialog from "service/dialog/add.vue";
 import PServiceRemoveDialog from "service/dialog/remove.vue";
 import PServiceEditDialog from "service/dialog/edit.vue";
 import PServiceUploadDialog from "service/dialog/upload.vue";
-
-import PLabelClipboard from "label/clipboard.vue";
-import PLabelDeleteDialog from "label/dialog/delete.vue";
-import PLabelEditDialog from "label/dialog/edit.vue";
-
-import PSubjectClipboard from "subject/clipboard.vue";
 
 // Installs the components imported above.
 export function install(app) {
@@ -87,6 +72,10 @@ export function install(app) {
   app.component("PNavigation", PNavigation);
   app.component("PLoadingBar", PLoadingBar);
   app.component("PViewer", PViewer);
+
+  app.component("IconLivePhoto", IconLivePhoto);
+  app.component("IconSponsor", IconSponsor);
+  app.component("IconPrism", IconPrism);
 
   app.component("PAccountAppsDialog", PAccountAppsDialog);
   app.component("PAccountPasscodeDialog", PAccountPasscodeDialog);
@@ -110,16 +99,13 @@ export function install(app) {
   app.component("PFileClipboard", PFileClipboard);
   app.component("PFileDeleteDialog", PFileDeleteDialog);
 
-  app.component("IconLivePhoto", IconLivePhoto);
-  app.component("IconSponsor", IconSponsor);
-  app.component("IconPrism", IconPrism);
-
   app.component("PLabelClipboard", PLabelClipboard);
   app.component("PLabelDeleteDialog", PLabelDeleteDialog);
   app.component("PLabelEditDialog", PLabelEditDialog);
 
   app.component("PPeopleMergeDialog", PPeopleMergeDialog);
   app.component("PPeopleEditDialog", PPeopleEditDialog);
+  app.component("PSubjectClipboard", PSubjectClipboard);
 
   app.component("PPhotoCards", PPhotoCards);
   app.component("PPhotoMosaic", PPhotoMosaic);
@@ -136,6 +122,4 @@ export function install(app) {
   app.component("PServiceRemoveDialog", PServiceRemoveDialog);
   app.component("PServiceEditDialog", PServiceEditDialog);
   app.component("PServiceUploadDialog", PServiceUploadDialog);
-
-  app.component("PSubjectClipboard", PSubjectClipboard);
 }
