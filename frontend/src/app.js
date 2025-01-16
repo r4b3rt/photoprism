@@ -210,7 +210,7 @@ config.update().finally(() => {
           params: { nextUrl: to.fullPath },
         });
       }
-    } else if (to.matched.some((record) => record.meta.auth)) {
+    } else if (to.matched.some((record) => record.meta.requiresAuth)) {
       if (isPublic || session.isUser()) {
         next();
       } else {
