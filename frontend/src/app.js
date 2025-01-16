@@ -33,6 +33,8 @@ import { PhotoClipboard } from "common/clipboard";
 import Event from "pubsub-js";
 import Log from "common/log";
 import * as components from "component/components";
+import icons from "component/icons";
+import defaults from "component/defaults";
 import PhotoPrism from "app.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "app/routes";
@@ -44,6 +46,7 @@ import { createVuetify } from "vuetify";
 import Vue3Sanitize from "vue-3-sanitize";
 import VueSanitize from "vue-sanitize-directive";
 import VueLuxon from "vue-luxon";
+import { passiveSupport } from "passive-events-support/src/utils";
 import * as themes from "options/themes";
 import Hls from "hls.js";
 import "common/maptiler-lang";
@@ -53,8 +56,9 @@ import * as offline from "@lcdp/offline-plugin/runtime";
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import "vuetify/styles";
 import "@mdi/font/css/materialdesignicons.css";
-import { passiveSupport } from "passive-events-support/src/utils";
+import "css/app.css";
 
+// see https://www.npmjs.com/package/passive-events-support
 passiveSupport({ events: ["touchstart", "touchmove", "wheel", "mousewheel"] });
 
 config.progress(50);
@@ -102,13 +106,13 @@ config.update().finally(() => {
 
   // Create Vuetify 3 instance.
   const vuetify = createVuetify({
-    defaults: components.defaults,
+    defaults,
     icons: {
       defaultSet: "mdi",
       aliases,
       sets: {
         mdi,
-        ...components.icons,
+        ...icons,
       },
     },
     theme: {
