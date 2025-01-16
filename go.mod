@@ -70,7 +70,7 @@ require github.com/go-ldap/ldap/v3 v3.4.10
 
 require (
 	github.com/prometheus/client_golang v1.20.5
-	github.com/prometheus/common v0.61.0
+	github.com/prometheus/common v0.62.0
 )
 
 require github.com/dustinkirkland/golang-petname v0.0.0-20240428194347-eebcea082ee0
@@ -78,7 +78,7 @@ require github.com/dustinkirkland/golang-petname v0.0.0-20240428194347-eebcea082
 require golang.org/x/text v0.21.0
 
 require (
-	github.com/davidbyttow/govips/v2 v2.15.0
+	github.com/davidbyttow/govips/v2 v2.16.0
 	github.com/go-co-op/gocron/v2 v2.14.2
 	github.com/pquerna/otp v1.4.0
 	github.com/robfig/cron/v3 v3.0.1
