@@ -126,9 +126,13 @@
 import Settings from "model/settings";
 import * as options from "options/options";
 import Event from "pubsub-js";
+import PAboutFooter from "component/about/footer.vue";
 
 export default {
   name: "PSettingsLibrary",
+  components: {
+    PAboutFooter
+  },
   data() {
     const isDemo = this.$config.get("demo");
 

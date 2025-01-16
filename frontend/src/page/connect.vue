@@ -110,9 +110,13 @@
 import * as options from "options/options";
 import Api from "common/api";
 import { restart } from "common/server";
+import PAboutFooter from "component/about/footer.vue";
 
 export default {
   name: "PPageConnect",
+  components: {
+    PAboutFooter,
+  },
   data() {
     const token = this.$route.params.token ? this.$route.params.token : "";
     const membership = this.$config.getMembership();

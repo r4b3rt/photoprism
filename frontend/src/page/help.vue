@@ -20,11 +20,13 @@
 
 <script>
 import PHelpWebsockets from "./help/websockets.vue";
+import PAboutFooter from "component/about/footer.vue";
 
 export default {
   name: "PPageHelp",
   components: {
     PHelpWebsockets,
+    PAboutFooter,
   },
   data() {
     return {

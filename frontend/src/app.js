@@ -52,7 +52,7 @@ import * as offline from "@lcdp/offline-plugin/runtime";
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import "vuetify/styles";
 import "@mdi/font/css/materialdesignicons.css";
-import * as components from "components";
+import * as components from "component/components";
 import { passiveSupport } from "passive-events-support/src/utils";
 
 passiveSupport({ events: ["touchstart", "touchmove", "wheel", "mousewheel"] });

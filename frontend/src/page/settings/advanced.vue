@@ -402,9 +402,13 @@
 import ConfigOptions from "model/config-options";
 import * as options from "options/options";
 import { restart } from "common/server";
+import PAboutFooter from "component/about/footer.vue";
 
 export default {
   name: "PSettingsAdvanced",
+  components: {
+    PAboutFooter,
+  },
   data() {
     return {
       busy: this.$config.get("demo"),

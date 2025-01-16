@@ -407,9 +407,15 @@ import Settings from "model/settings";
 import * as options from "options/options";
 import * as themes from "options/themes";
 import Event from "pubsub-js";
+import PAboutFooter from "component/about/footer.vue";
+import PSponsorDialog from "component/dialog/sponsor.vue";
 
 export default {
   name: "PSettingsGeneral",
+  components: {
+    PAboutFooter,
+    PSponsorDialog,
+  },
   data() {
     return {
       isDemo: this.$config.get("demo"),

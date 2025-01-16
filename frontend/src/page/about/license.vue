@@ -411,8 +411,13 @@
 </template>
 
 <script>
+import PAboutFooter from "component/about/footer.vue";
+
 export default {
   name: "PPageLicense",
+  components: {
+    PAboutFooter,
+  },
   data() {
     return {};
   },

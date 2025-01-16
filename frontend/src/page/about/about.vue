@@ -104,8 +104,13 @@
 </template>
 
 <script>
+import PAboutFooter from "component/about/footer.vue";
+
 export default {
   name: "PPageAbout",
+  components: {
+    PAboutFooter,
+  },
   data() {
     const tier = this.$config.getTier();
     const membership = this.$config.getMembership();

@@ -68,9 +68,13 @@
 <script>
 import * as options from "options/options";
 import Api from "common/api";
+import PAboutFooter from "component/about/footer.vue";
 
 export default {
   name: "PPageSupport",
+  components: {
+    PAboutFooter,
+  },
   data() {
     return {
       sent: false,
