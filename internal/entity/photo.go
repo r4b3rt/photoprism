@@ -516,7 +516,7 @@ func (m *Photo) UpdateCaptionLabels() error {
 			}
 
 			labelIds = append(labelIds, label.ID)
-			FirstOrCreatePhotoLabel(NewPhotoLabel(m.ID, label.ID, 20, classify.SrcCaption))
+			FirstOrCreatePhotoLabel(NewPhotoLabel(m.ID, label.ID, 15, classify.SrcCaption))
 		}
 	}
 
