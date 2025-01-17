@@ -18,7 +18,8 @@
               return-object
               :disabled="loading || noServices"
               :items="services"
-              @update:model-value="onChange">
+              @update:model-value="onChange"
+            >
             </v-select>
           </v-col>
           <v-col cols="12">
@@ -27,7 +28,7 @@
               hide-details
               hide-no-data
               autocomplete="off"
-              hint="Folder"
+              :hint="$gettext('Folder')"
               :search.sync="search"
               :items="pathItems"
               :loading="loading"
@@ -44,10 +45,24 @@
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
           {{ $gettext(`Cancel`) }}
         </v-btn>
-        <v-btn v-if="noServices" :disabled="isPublic && !isDemo" color="highlight" variant="flat" class="action-setup" @click.stop="setup">
+        <v-btn
+          v-if="noServices"
+          :disabled="isPublic && !isDemo"
+          color="highlight"
+          variant="flat"
+          class="action-setup"
+          @click.stop="setup"
+        >
           {{ $gettext(`Setup`) }}
         </v-btn>
-        <v-btn v-else :disabled="noServices" color="highlight" variant="flat" class="action-upload" @click.stop="confirm">
+        <v-btn
+          v-else
+          :disabled="noServices"
+          color="highlight"
+          variant="flat"
+          class="action-upload"
+          @click.stop="confirm"
+        >
           {{ $gettext(`Upload`) }}
         </v-btn>
       </v-card-actions>

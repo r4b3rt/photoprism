@@ -24,46 +24,143 @@
       <v-card-text class="dense">
         <v-row v-if="scope === 'sharing'" dense>
           <v-col cols="12">
-            <v-autocomplete v-model="model.SharePath" hide-details hide-no-data flat autocomplete="off" hint="Folder" :search.sync="search" :items="pathItems" :loading="loading" item-title="abs" item-value="abs" :label="$gettext('Default Folder')" :disabled="!model.AccShare || loading">
+            <v-autocomplete
+              v-model="model.SharePath"
+              hide-details
+              hide-no-data
+              flat
+              autocomplete="off"
+              :hint="$gettext('Folder')"
+              :search.sync="search"
+              :items="pathItems"
+              :loading="loading"
+              item-title="abs"
+              item-value="abs"
+              :label="$gettext('Default Folder')"
+              :disabled="!model.AccShare || loading"
+            >
             </v-autocomplete>
           </v-col>
           <v-col cols="12" sm="6" class="input-share-size">
-            <v-select v-model="model.ShareSize" :disabled="!model.AccShare" :label="$gettext('Size')" autocomplete="off" item-title="text" item-value="value" :items="options.ThumbSizes()"></v-select>
+            <v-select
+              v-model="model.ShareSize"
+              :disabled="!model.AccShare"
+              :label="$gettext('Size')"
+              autocomplete="off"
+              item-title="text"
+              item-value="value"
+              :items="options.ThumbSizes()"
+            ></v-select>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-select v-model="model.ShareExpires" :disabled="!model.AccShare" :label="$gettext('Expires')" autocomplete="off" item-title="text" item-value="value" :items="options.Expires()"></v-select>
+            <v-select
+              v-model="model.ShareExpires"
+              :disabled="!model.AccShare"
+              :label="$gettext('Expires')"
+              autocomplete="off"
+              item-title="text"
+              item-value="value"
+              :items="options.Expires()"
+            ></v-select>
           </v-col>
         </v-row>
         <v-row v-else-if="scope === 'sync'" dense>
           <v-col cols="12" sm="6">
-            <v-autocomplete v-model="model.SyncPath" hide-details hide-no-data flat autocomplete="off" :hint="$gettext('Folder')" :search.sync="search" :items="pathItems" :loading="loading" item-title="abs" item-value="abs" :label="$gettext('Folder')" :disabled="!model.AccSync || loading">
+            <v-autocomplete
+              v-model="model.SyncPath"
+              hide-details
+              hide-no-data
+              flat
+              autocomplete="off"
+              :hint="$gettext('Folder')"
+              :search.sync="search"
+              :items="pathItems"
+              :loading="loading"
+              item-title="abs"
+              item-value="abs"
+              :label="$gettext('Folder')"
+              :disabled="!model.AccSync || loading"
+            >
             </v-autocomplete>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-select v-model="model.SyncInterval" :disabled="!model.AccSync" :label="$gettext('Interval')" autocomplete="off" hide-details flat color="surface-variant" item-title="text" item-value="value" :items="options.Intervals()"></v-select>
+            <v-select
+              v-model="model.SyncInterval"
+              :disabled="!model.AccSync"
+              :label="$gettext('Interval')"
+              autocomplete="off"
+              hide-details
+              flat
+              color="surface-variant"
+              item-title="text"
+              item-value="value"
+              :items="options.Intervals()"
+            ></v-select>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-checkbox v-model="model.SyncDownload" density="compact" :disabled="!model.AccSync || readonly" hide-details true-icon="mdi-radiobox-marked" false-icon="mdi-radiobox-blank" :label="$gettext('Download remote files')" @update:model-value="onChangeSync('download')"></v-checkbox>
+            <v-checkbox
+              v-model="model.SyncDownload"
+              density="compact"
+              :disabled="!model.AccSync || readonly"
+              hide-details
+              true-icon="mdi-radiobox-marked"
+              false-icon="mdi-radiobox-blank"
+              :label="$gettext('Download remote files')"
+              @update:model-value="onChangeSync('download')"
+            ></v-checkbox>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-checkbox v-model="model.SyncUpload" density="compact" :disabled="!model.AccSync" true-icon="mdi-radiobox-marked" false-icon="mdi-radiobox-blank" :label="$gettext('Upload local files')" hide-details @update:model-value="onChangeSync('upload')"></v-checkbox>
+            <v-checkbox
+              v-model="model.SyncUpload"
+              density="compact"
+              :disabled="!model.AccSync"
+              true-icon="mdi-radiobox-marked"
+              false-icon="mdi-radiobox-blank"
+              :label="$gettext('Upload local files')"
+              hide-details
+              @update:model-value="onChangeSync('upload')"
+            ></v-checkbox>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-checkbox v-model="model.SyncFilenames" density="compact" :disabled="!model.AccSync" :label="$gettext('Preserve filenames')" hide-details></v-checkbox>
+            <v-checkbox
+              v-model="model.SyncFilenames"
+              density="compact"
+              :disabled="!model.AccSync"
+              :label="$gettext('Preserve filenames')"
+              hide-details
+            ></v-checkbox>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-checkbox v-model="model.SyncRaw" density="compact" :disabled="!model.AccSync" :label="$gettext('Sync raw and video files')" hide-details></v-checkbox>
+            <v-checkbox
+              v-model="model.SyncRaw"
+              density="compact"
+              :disabled="!model.AccSync"
+              :label="$gettext('Sync raw and video files')"
+              hide-details
+            ></v-checkbox>
           </v-col>
         </v-row>
         <v-row v-else dense>
           <v-col cols="12">
-            <v-text-field v-model="model.AccName" autofocus autocomplete="off" :label="$gettext('Name')" placeholder="" required></v-text-field>
+            <v-text-field
+              v-model="model.AccName"
+              autofocus
+              autocomplete="off"
+              :label="$gettext('Name')"
+              placeholder=""
+              required
+            ></v-text-field>
           </v-col>
           <v-col cols="12">
-            <v-text-field v-model="model.AccURL" autocomplete="off" :label="$gettext('Service URL')" placeholder="https://www.example.com/"></v-text-field>
+            <v-text-field
+              v-model="model.AccURL"
+              autocomplete="off"
+              :label="$gettext('Service URL')"
+              placeholder="https://www.example.com/"
+            ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-text-field v-model="model.AccUser" autocomplete="off" :label="$gettext('Username')" placeholder="optional"></v-text-field>
+            <v-text-field v-model="model.AccUser" autocomplete="off" :label="$gettext('Username')"></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
@@ -71,23 +168,65 @@
               hide-details
               autocomplete="new-password"
               :label="$gettext('Password')"
-              placeholder="optional"
+              placeholder="********"
               :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :type="showPassword ? 'text' : 'password'"
               @click:append-inner="showPassword = !showPassword"
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-text-field v-model="model.AccKey" hide-details flat autocomplete="off" :label="$gettext('API Key')" placeholder="optional" color="surface-variant" required></v-text-field>
+            <v-text-field
+              v-model="model.AccKey"
+              hide-details
+              flat
+              autocomplete="off"
+              :label="$gettext('API Key')"
+              placeholder="********"
+              color="surface-variant"
+              required
+            ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" class="input-account-type">
-            <v-select v-model="model.AccType" :label="$gettext('Type')" autocomplete="off" hide-details flat color="surface-variant" item-title="text" item-value="value" :items="options.AccountTypes()"> </v-select>
+            <v-select
+              v-model="model.AccType"
+              :label="$gettext('Type')"
+              autocomplete="off"
+              hide-details
+              flat
+              color="surface-variant"
+              item-title="text"
+              item-value="value"
+              :items="options.AccountTypes()"
+            >
+            </v-select>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-select v-model="model.AccTimeout" :label="$gettext('Timeout')" autocomplete="off" hide-details flat color="surface-variant" item-title="text" item-value="value" :items="options.Timeouts()"> </v-select>
+            <v-select
+              v-model="model.AccTimeout"
+              :label="$gettext('Timeout')"
+              autocomplete="off"
+              hide-details
+              flat
+              color="surface-variant"
+              item-title="text"
+              item-value="value"
+              :items="options.Timeouts()"
+            >
+            </v-select>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-select v-model="model.RetryLimit" :label="$gettext('Retry Limit')" autocomplete="off" hide-details flat color="surface-variant" item-title="text" item-value="value" :items="options.RetryLimits()"> </v-select>
+            <v-select
+              v-model="model.RetryLimit"
+              :label="$gettext('Retry Limit')"
+              autocomplete="off"
+              hide-details
+              flat
+              color="surface-variant"
+              item-title="text"
+              item-value="value"
+              :items="options.RetryLimits()"
+            >
+            </v-select>
           </v-col>
         </v-row>
       </v-card-text>
@@ -202,14 +341,15 @@ export default {
       this.model
         .Folders()
         .then((p) => {
-          for (let i = 0; i < p.length; i++) {
-            this.paths.push(p[i]);
+          if (p && p.length > 0) {
+            this.paths = p;
+            this.pathItems = [...this.paths];
+            this.path = this.model.SharePath;
           }
-
-          this.pathItems = [...this.paths];
-          this.path = this.model.SharePath;
         })
-        .finally(() => (this.loading = false));
+        .finally(() => {
+          this.loading = false;
+        });
     },
   },
 };

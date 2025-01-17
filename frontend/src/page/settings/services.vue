@@ -1,6 +1,17 @@
 <template>
   <div class="p-tab p-settings-services">
-    <v-data-table v-model="selected" :headers="listColumns" :items="results" tile hover hide-default-footer item-key="ID" :no-data-text="$gettext('No services configured.')" :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="elevation-0 account-results list-view">
+    <v-data-table
+      v-model="selected"
+      :headers="listColumns"
+      :items="results"
+      tile
+      hover
+      hide-default-footer
+      item-key="ID"
+      :no-data-text="$gettext('No services configured.')"
+      :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+      class="elevation-0 account-results list-view"
+    >
       <template #item="props">
         <tr :data-name="props.item.AccName">
           <td class="p-account">
@@ -9,13 +20,29 @@
             </button>
           </td>
           <td class="text-center">
-            <v-btn icon density="comfortable" variant="plain" :ripple="false" class="action-toggle-share" @click.stop.prevent="editSharing(props.item)">
+            <v-btn
+              icon
+              density="comfortable"
+              variant="plain"
+              :ripple="false"
+              class="action-toggle-share"
+              @click.stop.prevent="editSharing(props.item)"
+            >
               <v-icon :icon="props.item.AccShare ? 'mdi-check' : 'mdi-cog'" color="surface-variant"></v-icon>
             </v-btn>
           </td>
           <td class="text-center">
-            <v-btn icon density="comfortable" variant="plain" :ripple="false" class="action-toggle-sync" @click.stop.prevent="editSync(props.item)">
-              <v-icon v-if="props.item.AccErrors" color="surface-variant" :title="props.item.AccError">mdi-alert </v-icon>
+            <v-btn
+              icon
+              density="comfortable"
+              variant="plain"
+              :ripple="false"
+              class="action-toggle-sync"
+              @click.stop.prevent="editSync(props.item)"
+            >
+              <v-icon v-if="props.item.AccErrors" color="surface-variant" :title="props.item.AccError"
+                >mdi-alert
+              </v-icon>
               <v-icon v-else-if="props.item.AccSync" color="surface-variant">mdi-sync</v-icon>
               <v-icon v-else color="surface-variant">mdi-sync-off</v-icon>
             </v-btn>
@@ -24,8 +51,24 @@
             {{ formatDate(props.item.SyncDate) }}
           </td>
           <td class="hidden-xs text-end" nowrap>
-            <v-btn icon="mdi-delete" color="surface-variant" density="comfortable" variant="plain" :ripple="false" class="action-remove action-secondary" @click.stop.prevent="remove(props.item)"></v-btn>
-            <v-btn icon="mdi-pencil" color="surface-variant" density="comfortable" variant="plain" :ripple="false" class="action-edit" @click.stop.prevent="edit(props.item)"></v-btn>
+            <v-btn
+              icon="mdi-delete"
+              color="surface-variant"
+              density="comfortable"
+              variant="plain"
+              :ripple="false"
+              class="action-remove action-secondary"
+              @click.stop.prevent="remove(props.item)"
+            ></v-btn>
+            <v-btn
+              icon="mdi-pencil"
+              color="surface-variant"
+              density="comfortable"
+              variant="plain"
+              :ripple="false"
+              class="action-edit"
+              @click.stop.prevent="edit(props.item)"
+            ></v-btn>
           </td>
         </tr>
       </template>
@@ -33,18 +76,41 @@
     <v-container fluid>
       <p class="text-caption py-1 clickable" @click.stop.prevent="webdavDialog">
         {{ $gettext(`Note:`) }}
-        {{ $gettext(`WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. `) }}
-        {{ $gettext(`This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local. `) }}
+        {{
+          $gettext(
+            `WebDAV clients, like Microsoft’s Windows Explorer or Apple's Finder, can connect directly to PhotoPrism. `
+          )
+        }}
+        {{
+          $gettext(
+            `This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local. `
+          )
+        }}
       </p>
 
       <v-form ref="form" validate-on="blur" class="p-form-settings" accept-charset="UTF-8" @submit.prevent="add">
         <div class="action-buttons">
-          <v-btn v-if="user.hasWebDAV()" color="button" variant="flat" class="action-webdav-dialog" :block="$vuetify.display.xs" :disabled="isPublic || isDemo" @click.stop="webdavDialog">
+          <v-btn
+            v-if="user.hasWebDAV()"
+            color="button"
+            variant="flat"
+            class="action-webdav-dialog"
+            :block="$vuetify.display.xs"
+            :disabled="isPublic || isDemo"
+            @click.stop="webdavDialog"
+          >
             {{ $gettext(`Connect via WebDAV`) }}
             <v-icon end>mdi-swap-horizontal</v-icon>
           </v-btn>
 
-          <v-btn color="highlight" class="compact" :block="$vuetify.display.xs" :disabled="isPublic || isDemo" variant="flat" @click.stop="add">
+          <v-btn
+            color="highlight"
+            class="compact"
+            :block="$vuetify.display.xs"
+            :disabled="isPublic || isDemo"
+            variant="flat"
+            @click.stop="add"
+          >
             {{ $gettext(`Connect`) }}
             <v-icon icon="mdi-plus" end></v-icon>
           </v-btn>
@@ -53,8 +119,20 @@
     </v-container>
 
     <p-service-add-dialog :show="dialog.add" @cancel="close('add')" @confirm="onAdded"></p-service-add-dialog>
-    <p-service-remove-dialog :show="dialog.remove" :model="model" @cancel="close('remove')" @confirm="onRemoved"></p-service-remove-dialog>
-    <p-service-edit-dialog :show="dialog.edit" :model="model" :scope="editScope" @remove="remove(model)" @cancel="close('edit')" @confirm="onEdited"></p-service-edit-dialog>
+    <p-service-remove-dialog
+      :show="dialog.remove"
+      :model="model"
+      @cancel="close('remove')"
+      @confirm="onRemoved"
+    ></p-service-remove-dialog>
+    <p-service-edit-dialog
+      :show="dialog.edit"
+      :model="model"
+      :scope="editScope"
+      @remove="remove(model)"
+      @cancel="close('edit')"
+      @confirm="onEdited"
+    ></p-service-edit-dialog>
     <p-webdav-dialog :show="dialog.webdav" @close="dialog.webdav = false"></p-webdav-dialog>
   </div>
 </template>

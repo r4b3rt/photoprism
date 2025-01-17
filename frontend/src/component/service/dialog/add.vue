@@ -10,10 +10,25 @@
       <v-card-text class="dense">
         <v-row align="center" dense>
           <v-col cols="12">
-            <v-text-field v-model="model.AccURL" hide-details autofocus :label="$gettext('Service URL')" placeholder="https://www.example.com/" autocorrect="off" autocapitalize="none"></v-text-field>
+            <v-text-field
+              v-model="model.AccURL"
+              hide-details
+              autofocus
+              :label="$gettext('Service URL')"
+              placeholder="https://www.example.com/"
+              autocorrect="off"
+              autocapitalize="none"
+            ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
-            <v-text-field v-model="model.AccUser" hide-details :label="$gettext('Username')" placeholder="optional" autocorrect="off" autocapitalize="none"></v-text-field>
+            <v-text-field
+              v-model="model.AccUser"
+              hide-details
+              :label="$gettext('Username')"
+              :placeholder="$gettext('optional')"
+              autocorrect="off"
+              autocapitalize="none"
+            ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6">
             <v-text-field
@@ -22,14 +37,18 @@
               autocomplete="new-password"
               autocapitalize="none"
               :label="$gettext('Password')"
-              placeholder="optional"
+              :placeholder="$gettext('optional')"
               :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :type="showPassword ? 'text' : 'password'"
               @click:append-inner="showPassword = !showPassword"
             ></v-text-field>
           </v-col>
           <v-col cols="12" class="text-start text-caption">
-            {{ $gettext(`Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload.`) }}
+            {{
+              $gettext(
+                `Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload.`
+              )
+            }}
             {{ $gettext(`Support for additional services, like Google Drive, will be added over time.`) }}
           </v-col>
         </v-row>

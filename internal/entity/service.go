@@ -38,9 +38,9 @@ type Service struct {
 	AccOwner      string `gorm:"type:VARCHAR(160);"`
 	AccURL        string `gorm:"type:VARCHAR(255);"`
 	AccType       string `gorm:"type:VARBINARY(255);"`
-	AccKey        string `gorm:"type:VARBINARY(255);"`
+	AccKey        string `gorm:"type:VARBINARY(255);" json:"-"`
 	AccUser       string `gorm:"type:VARBINARY(255);"`
-	AccPass       string `gorm:"type:VARBINARY(255);"`
+	AccPass       string `gorm:"type:VARBINARY(255);" json:"-"`
 	AccTimeout    string `gorm:"type:VARBINARY(16);"`
 	AccError      string `gorm:"type:VARBINARY(512);"`
 	AccErrors     int
