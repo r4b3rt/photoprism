@@ -113,7 +113,15 @@
     left: 0 !important;
     right: 0;
     top: auto !important;
+    pointer-events: none !important;
     bottom: 0;
+}
+
+.pswp__dynamic-caption--mobile h4,
+.pswp__dynamic-caption--mobile p,
+.pswp__dynamic-caption--mobile a {
+    position: relative;
+    pointer-events: auto;
 }
 
 .pswp__dynamic-caption h4,
