@@ -1200,7 +1200,7 @@ describe("model/photo", () => {
       Name: "_MG_9509",
       OriginalName: "",
       Title: "Unknown / 2018",
-      Description: "",
+      Caption: "",
       Year: 2018,
       Month: 10,
       Day: 5,
@@ -1451,7 +1451,7 @@ describe("model/photo", () => {
       Lng: 3.3,
       CameraID: 123,
       Title: "Test Titel",
-      Description: "Super nice video",
+      Caption: "Super nice video",
       Day: 10,
       Country: "es",
       Files: [
@@ -1477,7 +1477,7 @@ describe("model/photo", () => {
     const photo = new Photo(values);
     photo.Title = "New Title";
     photo.Type = "newtype";
-    photo.Description = "New description";
+    photo.Caption = "New description";
     photo.Day = 21;
     photo.Country = "de";
     photo.CameraID = "newcameraid";
@@ -1498,7 +1498,7 @@ describe("model/photo", () => {
       });
     assert.equal(photo.Title, "New Title");
     assert.equal(photo.Type, "newtype");
-    assert.equal(photo.Description, "New description");
+    assert.equal(photo.Caption, "New description");
     assert.equal(photo.Day, 21);
     assert.equal(photo.Country, "de");
     assert.equal(photo.CameraID, "newcameraid");
@@ -1518,7 +1518,7 @@ describe("model/photo", () => {
       Lng: 3.3,
       CameraID: 123,
       Title: "Test Titel",
-      Description: "Super nice video",
+      Caption: "Super nice video",
       Files: [
         {
           UID: "fqbfk181n4ca5sud",
@@ -1539,7 +1539,7 @@ describe("model/photo", () => {
       Lng: 3.3,
       CameraID: 123,
       Title: "Test Titel",
-      Description: "Super nice video",
+      Caption: "Super nice video",
       Files: [
         {
           UID: "fqbfk181n4ca5sud",

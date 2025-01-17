@@ -250,6 +250,6 @@ describe("model/subject", () => {
 
   it("should get model name", () => {
     const result = Subject.getModelName();
-    assert.equal(result, "Subject");
+    assert.equal(result, "Person");
   });
 });

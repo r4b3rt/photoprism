@@ -66,6 +66,7 @@ export default {
         this.close();
         return;
       }
+
       this.$emit("confirm", this.model);
     },
   },

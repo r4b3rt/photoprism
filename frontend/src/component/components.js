@@ -45,7 +45,7 @@ import PLabelEditDialog from "label/dialog/edit.vue";
 // People.
 import PPeopleMergeDialog from "people/dialog/merge.vue";
 import PPeopleEditDialog from "people/dialog/edit.vue";
-import PSubjectClipboard from "subject/clipboard.vue";
+import PPeopleClipboard from "component/people/clipboard.vue";
 
 // Photos.
 import PPhotoCards from "photo/view/cards.vue";
@@ -105,7 +105,7 @@ export function install(app) {
 
   app.component("PPeopleMergeDialog", PPeopleMergeDialog);
   app.component("PPeopleEditDialog", PPeopleEditDialog);
-  app.component("PSubjectClipboard", PSubjectClipboard);
+  app.component("PPeopleClipboard", PPeopleClipboard);
 
   app.component("PPhotoCards", PPhotoCards);
   app.component("PPhotoMosaic", PPhotoMosaic);

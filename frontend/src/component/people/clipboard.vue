@@ -4,7 +4,7 @@
       <v-speed-dial
         id="t-clipboard"
         v-model="expanded"
-        :class="`p-clipboard p-subject-clipboard`"
+        :class="`p-clipboard p-people-clipboard`"
         :end="!rtl"
         :start="rtl"
         :attach="true"
@@ -32,7 +32,7 @@ import Notify from "common/notify";
 import download from "common/download";
 
 export default {
-  name: "PSubjectClipboard",
+  name: "PPeopleClipboard",
   props: {
     selection: {
       type: Array,

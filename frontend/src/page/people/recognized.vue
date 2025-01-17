@@ -52,7 +52,7 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else style="min-height: 100vh">
-      <p-subject-clipboard :refresh="refresh" :selection="selection" :clear-selection="clearSelection"></p-subject-clipboard>
+      <p-people-clipboard :refresh="refresh" :selection="selection" :clear-selection="clearSelection"></p-people-clipboard>
 
       <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
 
@@ -253,8 +253,7 @@ export default {
       }
 
       const existing = this.$config.getPerson(m.Name);
-
-      if (!existing) {
+      if (!existing || existing.UID === m.UID) {
         this.busy = true;
         m.update()
           .then((m) => {
@@ -263,10 +262,12 @@ export default {
           })
           .finally(() => {
             this.busy = false;
+            this.dialog.edit = false;
           });
-      } else if (existing.UID !== m.UID) {
+      } else {
         this.merge.subj1 = m;
         this.merge.subj2 = existing;
+        this.dialog.edit = false;
         this.merge.show = true;
       }
     },

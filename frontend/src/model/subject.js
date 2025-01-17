@@ -155,7 +155,7 @@ export class Subject extends RestModel {
   }
 
   static getModelName() {
-    return $gettext("Subject");
+    return $gettext("Person");
   }
 }
 
