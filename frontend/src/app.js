@@ -32,6 +32,7 @@ import Scrollbar from "common/scrollbar";
 import { PhotoClipboard } from "common/clipboard";
 import Event from "pubsub-js";
 import Log from "common/log";
+import Util from "common/util";
 import * as components from "component/components";
 import icons from "component/icons";
 import defaults from "component/defaults";
@@ -67,7 +68,9 @@ config.update().finally(() => {
   // Initialize libs and framework.
   config.progress(66);
   const isPublic = config.isPublic();
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
 
   let app = createApp(PhotoPrism);
   // Initialize language and detect alignment.
@@ -91,6 +94,7 @@ config.update().finally(() => {
   app.config.globalProperties.$clipboard = PhotoClipboard;
   app.config.globalProperties.$isMobile = isMobile;
   app.config.globalProperties.$rtl = rtl;
+  app.config.globalProperties.$util = Util;
   app.config.globalProperties.$sponsorFeatures = () => {
     return config.load().finally(() => {
       if (config.values.sponsor) {
@@ -130,7 +134,10 @@ config.update().finally(() => {
   app.use(gettext);
 
   // Use HTML sanitizer with v-sanitize directive.
-  app.use(Vue3Sanitize, { allowedTags: ["b", "strong", "span"], allowedAttributes: { b: ["dir"], strong: ["dir"], span: ["dir"] } });
+  app.use(Vue3Sanitize, {
+    allowedTags: ["b", "strong", "span"],
+    allowedAttributes: { b: ["dir"], strong: ["dir"], span: ["dir"] },
+  });
   app.use(VueSanitize);
 
   // TODO: check it

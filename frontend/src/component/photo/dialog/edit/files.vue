@@ -18,14 +18,27 @@
                   <v-row class="d-flex align-stretch" align="center" justify="center">
                     <v-col cols="12" class="pa-0 flex-grow-1">
                       <div class="v-table__overflow">
-                        <v-table tile hover :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="photo-files d-flex bg-transparent">
+                        <v-table
+                          tile
+                          hover
+                          :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+                          class="photo-files d-flex bg-transparent"
+                        >
                           <tbody>
                             <tr v-if="file.FileType === 'jpg' || file.FileType === 'png'">
                               <td>
                                 {{ $gettext(`Preview`) }}
                               </td>
                               <td>
-                                <v-img :src="file.thumbnailUrl('tile_224')" aspect-ratio="1" max-width="112" max-height="112" rounded="4" class="card elevation-0 clickable my-1" @click.exact="openFile(file)"></v-img>
+                                <v-img
+                                  :src="file.thumbnailUrl('tile_224')"
+                                  aspect-ratio="1"
+                                  max-width="112"
+                                  max-height="112"
+                                  rounded="4"
+                                  class="card elevation-0 clickable my-1"
+                                  @click.exact="openFile(file)"
+                                ></v-img>
                               </td>
                             </tr>
                             <tr>
@@ -34,19 +47,70 @@
                               </td>
                               <td>
                                 <div class="action-buttons justify-start">
-                                  <v-btn v-if="features.download" density="comfortable" variant="flat" color="highlight" class="btn-action action-download" :disabled="busy" @click.stop.prevent="downloadFile(file)">
+                                  <v-btn
+                                    v-if="features.download"
+                                    density="comfortable"
+                                    variant="flat"
+                                    color="highlight"
+                                    class="btn-action action-download"
+                                    :disabled="busy"
+                                    @click.stop.prevent="downloadFile(file)"
+                                  >
                                     {{ $gettext(`Download`) }}
                                   </v-btn>
-                                  <v-btn v-if="features.edit && (file.FileType === 'jpg' || file.FileType === 'png') && !file.Error && !file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-primary" :disabled="busy" @click.stop.prevent="primaryFile(file)">
+                                  <v-btn
+                                    v-if="
+                                      features.edit &&
+                                      (file.FileType === 'jpg' || file.FileType === 'png') &&
+                                      !file.Error &&
+                                      !file.Primary
+                                    "
+                                    density="comfortable"
+                                    variant="flat"
+                                    color="highlight"
+                                    class="btn-action action-primary"
+                                    :disabled="busy"
+                                    @click.stop.prevent="primaryFile(file)"
+                                  >
                                     {{ $gettext(`Primary`) }}
                                   </v-btn>
-                                  <v-btn v-if="features.edit && !file.Sidecar && !file.Error && !file.Primary && file.Root === '/'" density="comfortable" variant="flat" color="highlight" class="btn-action action-unstack" :disabled="busy" @click.stop.prevent="unstackFile(file)">
+                                  <v-btn
+                                    v-if="
+                                      features.edit &&
+                                      !file.Sidecar &&
+                                      !file.Error &&
+                                      !file.Primary &&
+                                      file.Root === '/'
+                                    "
+                                    density="comfortable"
+                                    variant="flat"
+                                    color="highlight"
+                                    class="btn-action action-unstack"
+                                    :disabled="busy"
+                                    @click.stop.prevent="unstackFile(file)"
+                                  >
                                     {{ $gettext(`Unstack`) }}
                                   </v-btn>
-                                  <v-btn v-if="features.delete && !file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-delete" :disabled="busy" @click.stop.prevent="showDeleteDialog(file)">
+                                  <v-btn
+                                    v-if="features.delete && !file.Primary"
+                                    density="comfortable"
+                                    variant="flat"
+                                    color="highlight"
+                                    class="btn-action action-delete"
+                                    :disabled="busy"
+                                    @click.stop.prevent="showDeleteDialog(file)"
+                                  >
                                     {{ $gettext(`Delete`) }}
                                   </v-btn>
-                                  <v-btn v-if="experimental && canAccessPrivate && file.Primary" density="comfortable" variant="flat" color="highlight" class="btn-action action-open-folder" :href="folderUrl(file)" target="_blank">
+                                  <v-btn
+                                    v-if="experimental && canAccessPrivate && file.Primary"
+                                    density="comfortable"
+                                    variant="flat"
+                                    color="highlight"
+                                    class="btn-action action-open-folder"
+                                    :href="folderUrl(file)"
+                                    target="_blank"
+                                  >
                                     {{ $gettext(`File Browser`) }}
                                   </v-btn>
                                 </div>
@@ -55,7 +119,9 @@
                             <tr>
                               <td title="Unique ID">UID</td>
                               <td class="text-break">
-                                <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.UID)">{{ file.UID }}</span>
+                                <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.UID)">{{
+                                  file.UID
+                                }}</span>
                               </td>
                             </tr>
                             <tr v-if="file.InstanceID" title="XMP">
@@ -63,7 +129,11 @@
                                 {{ $gettext(`Instance ID`) }}
                               </td>
                               <td class="text-break">
-                                <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.InstanceID)">{{ file.InstanceID }}</span>
+                                <span
+                                  class="clickable text-uppercase"
+                                  @click.stop.prevent="copyText(file.InstanceID)"
+                                  >{{ file.InstanceID }}</span
+                                >
                               </td>
                             </tr>
                             <tr>
@@ -71,7 +141,9 @@
                                 {{ $gettext(`Hash`) }}
                               </td>
                               <td class="text-break">
-                                <span class="clickable text-break" @click.stop.prevent="copyText(file.Hash)">{{ file.Hash }}</span>
+                                <span class="clickable text-break" @click.stop.prevent="copyText(file.Hash)">{{
+                                  file.Hash
+                                }}</span>
                               </td>
                             </tr>
                             <tr v-if="file.Name">
@@ -92,7 +164,11 @@
                               <td>
                                 {{ $gettext(`Original Name`) }}
                               </td>
-                              <td class="text-break"><span class="clickable" @click.stop.prevent="copyText(file.OriginalName)">{{ file.OriginalName }}</span></td>
+                              <td class="text-break"
+                                ><span class="clickable" @click.stop.prevent="copyText(file.OriginalName)">{{
+                                  file.OriginalName
+                                }}</span></td
+                              >
                             </tr>
                             <tr>
                               <td>
@@ -197,7 +273,14 @@
                                   item-title="text"
                                   item-value="value"
                                   :list-props="{ density: 'compact' }"
-                                  :readonly="readonly || !features.edit || file.Error || (file.Frames && file.Frames > 1) || (file.Duration && file.Duration > 1) || (file.FileType !== 'jpg' && file.FileType !== 'png')"
+                                  :readonly="
+                                    readonly ||
+                                    !features.edit ||
+                                    file.Error ||
+                                    (file.Frames && file.Frames > 1) ||
+                                    (file.Duration && file.Duration > 1) ||
+                                    (file.FileType !== 'jpg' && file.FileType !== 'png')
+                                  "
                                   :disabled="busy"
                                   class="input-orientation"
                                   @update:model-value="changeOrientation(file)"
@@ -226,15 +309,19 @@
                               <td>
                                 {{ $gettext(`Main Color`) }}
                               </td>
-                              <!--                            TODO: change filter-->
-                              <!--                            <td>{{ file.MainColor | capitalize }}</td>-->
-                              <td>{{ file.MainColor }}</td>
+                              <td class="text-capitalize">{{ file.MainColor }}</td>
                             </tr>
                             <tr v-if="file.Chroma">
                               <td>
                                 {{ $gettext(`Chroma`) }}
                               </td>
-                              <td><v-progress-linear :model-value="file.Chroma" style="max-width: 300px" :title="`${file.Chroma}%`"></v-progress-linear></td>
+                              <td
+                                ><v-progress-linear
+                                  :model-value="file.Chroma"
+                                  style="max-width: 300px"
+                                  :title="`${file.Chroma}%`"
+                                ></v-progress-linear
+                              ></td>
                             </tr>
                             <tr v-if="file.Missing">
                               <td>
@@ -248,22 +335,20 @@
                               <td>
                                 {{ $gettext(`Added`) }}
                               </td>
-                              <td class="text-break">{{ formatTime(file.CreatedAt) }}
+                              <td class="text-break"
+                                >{{ formatTime(file.CreatedAt) }}
                                 {{ $gettext(`in`) }}
-                                <!--                              TODO: change filter-->
-                                <!--                              {{ Math.round(file.CreatedIn / 1000000) | number("0,0") }} ms-->
-                                {{ Math.round(file.CreatedIn / 1000000) }} ms
+                                {{ $util.formatNs(file.CreatedIn) }}
                               </td>
                             </tr>
                             <tr v-if="file.UpdatedIn">
                               <td>
                                 {{ $gettext(`Updated`) }}
                               </td>
-                              <td class="text-break">{{ formatTime(file.UpdatedAt) }}
+                              <td class="text-break"
+                                >{{ formatTime(file.UpdatedAt) }}
                                 {{ $gettext(`in`) }}
-                                <!--                              TODO: change filter-->
-                                <!--                              {{ Math.round(file.UpdatedIn / 1000000) | number("0,0") }} ms-->
-                                {{ Math.round(file.UpdatedIn / 1000000) }} ms
+                                {{ $util.formatNs(file.UpdatedIn) }}
                               </td>
                             </tr>
                           </tbody>
@@ -278,7 +363,11 @@
         </v-expansion-panel>
       </template>
     </v-expansion-panels>
-    <p-file-delete-dialog :show="deleteFile.dialog" @cancel="closeDeleteDialog" @confirm="confirmDeleteFile"></p-file-delete-dialog>
+    <p-file-delete-dialog
+      :show="deleteFile.dialog"
+      @cancel="closeDeleteDialog"
+      @confirm="confirmDeleteFile"
+    ></p-file-delete-dialog>
   </div>
 </template>
 
@@ -312,7 +401,8 @@ export default {
       config: this.$config.values,
       readonly: this.$config.get("readonly"),
       experimental: this.$config.get("experimental"),
-      canAccessPrivate: this.$config.allow("photos", "access_library") && this.$config.allow("photos", "access_private"),
+      canAccessPrivate:
+        this.$config.allow("photos", "access_library") && this.$config.allow("photos", "access_private"),
       options: options,
       busy: false,
       rtl: this.$rtl,

@@ -25,7 +25,20 @@ Additional information can be found in our Developer Guide:
 
 import { canUseAv1, canUseHevc, canUseOGV, canUseVP8, canUseVP9, canUseWebM } from "./caniuse";
 import { config } from "app/session";
-import { DATE_FULL, CodecAv01, CodecAv1C, CodecHev1, CodecHvc1, CodecOGV, CodecVP8, CodecVP9, FormatAv1, FormatAvc, FormatHevc, FormatWebM } from "model/photo";
+import {
+  DATE_FULL,
+  CodecAv01,
+  CodecAv1C,
+  CodecHev1,
+  CodecHvc1,
+  CodecOGV,
+  CodecVP8,
+  CodecVP9,
+  FormatAv1,
+  FormatAvc,
+  FormatHevc,
+  FormatWebM,
+} from "model/photo";
 import sanitizeHtml from "sanitize-html";
 import { DateTime } from "luxon";
 
@@ -97,6 +110,16 @@ export default class Util {
     // return `${h}h${min}m${sec}s`
 
     return result.join(":");
+  }
+
+  static formatNs(d) {
+    if (!d || typeof d !== "number") {
+      return "";
+    }
+
+    const ms = Math.round(d / 1000000).toLocaleString();
+
+    return `${ms} ms`;
   }
 
   static formatFPS(fps) {
@@ -183,7 +206,12 @@ export default class Util {
     }
 
     // Escape HTML control characters.
-    text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+    text = text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&apos;");
 
     // Make URLs clickable.
     text = text.replace(linkRegex, linkFunc);

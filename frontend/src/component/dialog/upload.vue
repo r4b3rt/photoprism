@@ -40,8 +40,6 @@
                 <template #chip="data">
                   <v-chip :model-value="data.selected" :disabled="data.disabled" class="bg-highlight rounded-xl text-truncate d-block" @click:close="removeSelection(data.index)">
                     <v-icon class="pr-1">mdi-bookmark</v-icon>
-                    <!-- TODO: change this filter -->
-                    <!-- {{ data.item.Title ? data.item.Title : data.item | truncate(40) }} -->
                     {{ data.item.title ? data.item.title : data.item }}
                   </v-chip>
                 </template>

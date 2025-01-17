@@ -29,6 +29,12 @@ describe("common/util", () => {
     const duration = Util.formatDuration(600000000000);
     assert.equal(duration, "10:00");
   });
+  it("should return formatted milliseconds", () => {
+    const short = Util.formatNs(45065875);
+    assert.equal(short, "45 ms");
+    const long = Util.formatNs(45065875453454);
+    assert.equal(long, "45,065,875 ms");
+  });
   it("should return formatted camera name", () => {
     const iPhone15Pro = Util.formatCamera({ Make: "Apple", Model: "iPhone 15 Pro" }, 23, "Apple", "iPhone 15 Pro");
     assert.equal(iPhone15Pro, "iPhone 15 Pro");
