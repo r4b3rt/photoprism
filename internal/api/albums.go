@@ -91,10 +91,10 @@ func CreateAlbum(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Album
+		var frm form.Album
 
 		// Assign and validate request form values.
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
@@ -102,8 +102,8 @@ func CreateAlbum(router *gin.RouterGroup) {
 		albumMutex.Lock()
 		defer albumMutex.Unlock()
 
-		a := entity.NewUserAlbum(f.AlbumTitle, entity.AlbumManual, s.UserUID)
-		a.AlbumFavorite = f.AlbumFavorite
+		a := entity.NewUserAlbum(frm.AlbumTitle, entity.AlbumManual, s.UserUID)
+		a.AlbumFavorite = frm.AlbumFavorite
 
 		// Existing album?
 		if found := a.Find(); found == nil {
@@ -174,7 +174,7 @@ func UpdateAlbum(router *gin.RouterGroup) {
 			return
 		}
 
-		f, err := form.NewAlbum(a)
+		frm, err := form.NewAlbum(a)
 
 		if err != nil {
 			log.Error(err)
@@ -183,7 +183,7 @@ func UpdateAlbum(router *gin.RouterGroup) {
 		}
 
 		// Assign and validate request form values.
-		if err = c.BindJSON(&f); err != nil {
+		if err = c.BindJSON(frm); err != nil {
 			log.Error(err)
 			AbortBadRequest(c)
 			return
@@ -192,7 +192,7 @@ func UpdateAlbum(router *gin.RouterGroup) {
 		albumMutex.Lock()
 		defer albumMutex.Unlock()
 
-		if err = a.SaveForm(f); err != nil {
+		if err = a.SaveForm(frm); err != nil {
 			log.Error(err)
 			AbortSaveFailed(c)
 			return
@@ -421,17 +421,17 @@ func CloneAlbums(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
 		// Assign and validate request form values.
-		if err = c.BindJSON(&f); err != nil {
+		if err = c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
 		var added []entity.PhotoAlbum
 
-		for _, albumUid := range f.Albums {
+		for _, albumUid := range frm.Albums {
 			cloneAlbum, queryErr := query.AlbumByUID(albumUid)
 
 			if queryErr != nil {
@@ -481,10 +481,10 @@ func AddPhotosToAlbum(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
 		// Assign and validate request form values.
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
@@ -507,13 +507,13 @@ func AddPhotosToAlbum(router *gin.RouterGroup) {
 		} else if !a.HasID() {
 			AbortAlbumNotFound(c)
 			return
-		} else if f.Empty() {
+		} else if frm.Empty() {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
 		// Fetch selection from index.
-		photos, err := query.SelectedPhotos(f)
+		photos, err := query.SelectedPhotos(frm)
 
 		if err != nil {
 			log.Errorf("album: %s", err)
@@ -591,15 +591,15 @@ func RemovePhotosFromAlbum(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
 		// Assign and validate request form values.
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
+		if len(frm.Photos) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
@@ -624,7 +624,7 @@ func RemovePhotosFromAlbum(router *gin.RouterGroup) {
 			return
 		}
 
-		removed := a.RemovePhotos(f.Photos)
+		removed := a.RemovePhotos(frm.Photos)
 
 		if len(removed) > 0 {
 			if len(removed) == 1 {
@@ -641,6 +641,6 @@ func RemovePhotosFromAlbum(router *gin.RouterGroup) {
 			SaveAlbumYaml(a)
 		}
 
-		c.JSON(http.StatusOK, gin.H{"code": http.StatusOK, "message": i18n.Msg(i18n.MsgChangesSaved), "album": a, "photos": f.Photos, "removed": removed})
+		c.JSON(http.StatusOK, gin.H{"code": http.StatusOK, "message": i18n.Msg(i18n.MsgChangesSaved), "album": a, "photos": frm.Photos, "removed": removed})
 	})
 }

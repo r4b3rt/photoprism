@@ -6,9 +6,11 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
+	"github.com/ulule/deepcopier"
 
 	"github.com/photoprism/photoprism/internal/ai/classify"
 	"github.com/photoprism/photoprism/internal/event"
+	"github.com/photoprism/photoprism/internal/form"
 
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/rnd"
@@ -102,6 +104,26 @@ func (m *Label) Save() error {
 	return Db().Save(m).Error
 }
 
+// SaveForm updates the entity using form data and stores it in the database.
+func (m *Label) SaveForm(f *form.Label) error {
+	if f == nil {
+		return fmt.Errorf("form is nil")
+	} else if f.LabelName == "" {
+		return fmt.Errorf("missing name")
+	}
+
+	labelMutex.Lock()
+	defer labelMutex.Unlock()
+
+	if err := deepcopier.Copy(m).From(f); err != nil {
+		return err
+	}
+
+	m.SetName(f.LabelName)
+
+	return Db().Save(m).Error
+}
+
 // Create inserts the label to the database.
 func (m *Label) Create() error {
 	labelMutex.Lock()
@@ -157,7 +179,7 @@ func FirstOrCreateLabel(m *Label) *Label {
 		}
 
 		return m
-	} else if err := UnscopedDb().Where("label_slug = ? OR custom_slug = ?", m.LabelSlug, m.CustomSlug).First(&result).Error; err == nil {
+	} else if err = UnscopedDb().Where("label_slug = ? OR custom_slug = ?", m.LabelSlug, m.CustomSlug).First(&result).Error; err == nil {
 		return &result
 	} else {
 		log.Errorf("label: %s (find or create %s)", createErr, m.LabelSlug)
@@ -167,33 +189,33 @@ func FirstOrCreateLabel(m *Label) *Label {
 }
 
 // FindLabel find the matching label based on the string provided or an error if not found.
-func FindLabel(s string, cached bool) (m Label, err error) {
+func FindLabel(s string, cached bool) (*Label, error) {
 	labelSlug := txt.Slug(s)
 
 	if labelSlug == "" {
-		return m, fmt.Errorf("invalid label slug %s", clean.LogQuote(labelSlug))
+		return &Label{}, fmt.Errorf("invalid label slug %s", clean.LogQuote(labelSlug))
 	}
 
 	// Return cached label, if found.
 	if cached {
 		if cacheData, ok := labelCache.Get(labelSlug); ok {
 			log.Tracef("label: cache hit for %s", labelSlug)
-			return cacheData.(Label), nil
+			return cacheData.(*Label), nil
 		}
 	}
 
 	// Fetch and cache label from database.
-	m = Label{}
+	result := &Label{}
 
-	if r := Db().First(&m, "label_slug = ? OR custom_slug = ?", labelSlug, labelSlug); r.RecordNotFound() {
+	if find := Db().First(result, "label_slug = ? OR custom_slug = ?", labelSlug, labelSlug); find.RecordNotFound() {
 		labelCache.Delete(labelSlug)
-		return m, fmt.Errorf("label not found")
-	} else if r.Error != nil {
+		return result, fmt.Errorf("label not found")
+	} else if find.Error != nil {
 		labelCache.Delete(labelSlug)
-		return m, r.Error
+		return result, find.Error
 	} else {
-		labelCache.SetDefault(m.LabelSlug, m)
-		return m, nil
+		labelCache.SetDefault(result.LabelSlug, result)
+		return result, nil
 	}
 }
 

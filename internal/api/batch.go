@@ -39,24 +39,24 @@ func BatchPhotosArchive(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
 		// Assign and validate request form values.
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
+		if len(frm.Photos) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
-		log.Infof("photos: archiving %s", clean.Log(f.String()))
+		log.Infof("photos: archiving %s", clean.Log(frm.String()))
 
 		if get.Config().SidecarYaml() {
 			// Fetch selection from index.
-			photos, err := query.SelectedPhotos(f)
+			photos, err := query.SelectedPhotos(frm)
 
 			if err != nil {
 				AbortEntityNotFound(c)
@@ -70,12 +70,12 @@ func BatchPhotosArchive(router *gin.RouterGroup) {
 					SaveSidecarYaml(&p)
 				}
 			}
-		} else if err := entity.Db().Where("photo_uid IN (?)", f.Photos).Delete(&entity.Photo{}).Error; err != nil {
-			log.Errorf("archive: failed to archive %d pictures (%s)", len(f.Photos), err)
+		} else if err := entity.Db().Where("photo_uid IN (?)", frm.Photos).Delete(&entity.Photo{}).Error; err != nil {
+			log.Errorf("archive: failed to archive %d pictures (%s)", len(frm.Photos), err)
 			AbortSaveFailed(c)
 			return
-		} else if err = entity.Db().Model(&entity.PhotoAlbum{}).Where("photo_uid IN (?)", f.Photos).UpdateColumn("hidden", true).Error; err != nil {
-			log.Errorf("archive: failed to flag %d pictures as hidden (%s)", len(f.Photos), err)
+		} else if err = entity.Db().Model(&entity.PhotoAlbum{}).Where("photo_uid IN (?)", frm.Photos).UpdateColumn("hidden", true).Error; err != nil {
+			log.Errorf("archive: failed to flag %d pictures as hidden (%s)", len(frm.Photos), err)
 		}
 
 		// Update precalculated photo and file counts.
@@ -86,7 +86,7 @@ func BatchPhotosArchive(router *gin.RouterGroup) {
 
 		UpdateClientConfig()
 
-		event.EntitiesArchived("photos", f.Photos)
+		event.EntitiesArchived("photos", frm.Photos)
 
 		c.JSON(http.StatusOK, i18n.NewResponse(http.StatusOK, i18n.MsgSelectionArchived))
 	})
@@ -110,23 +110,23 @@ func BatchPhotosRestore(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
+		if len(frm.Photos) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
-		log.Infof("photos: restoring %s", clean.Log(f.String()))
+		log.Infof("photos: restoring %s", clean.Log(frm.String()))
 
 		if get.Config().SidecarYaml() {
 			// Fetch selection from index.
-			photos, err := query.SelectedPhotos(f)
+			photos, err := query.SelectedPhotos(frm)
 
 			if err != nil {
 				AbortEntityNotFound(c)
@@ -140,7 +140,7 @@ func BatchPhotosRestore(router *gin.RouterGroup) {
 					SaveSidecarYaml(&p)
 				}
 			}
-		} else if err := entity.Db().Unscoped().Model(&entity.Photo{}).Where("photo_uid IN (?)", f.Photos).
+		} else if err := entity.Db().Unscoped().Model(&entity.Photo{}).Where("photo_uid IN (?)", frm.Photos).
 			UpdateColumn("deleted_at", gorm.Expr("NULL")).Error; err != nil {
 			log.Errorf("restore: %s", err)
 			AbortSaveFailed(c)
@@ -155,7 +155,7 @@ func BatchPhotosRestore(router *gin.RouterGroup) {
 
 		UpdateClientConfig()
 
-		event.EntitiesRestored("photos", f.Photos)
+		event.EntitiesRestored("photos", frm.Photos)
 
 		c.JSON(http.StatusOK, i18n.NewResponse(http.StatusOK, i18n.MsgSelectionRestored))
 	})
@@ -179,22 +179,22 @@ func BatchPhotosApprove(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
+		if len(frm.Photos) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
-		log.Infof("photos: approving %s", clean.Log(f.String()))
+		log.Infof("photos: approving %s", clean.Log(frm.String()))
 
 		// Fetch selection from index.
-		photos, err := query.SelectedPhotos(f)
+		photos, err := query.SelectedPhotos(frm)
 
 		if err != nil {
 			AbortEntityNotFound(c)
@@ -238,22 +238,22 @@ func BatchAlbumsDelete(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
 		// Get album UIDs.
-		albumUIDs := f.Albums
+		albumUIDs := frm.Albums
 
 		if len(albumUIDs) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoAlbumsSelected)
 			return
 		}
 
-		log.Infof("albums: deleting %s", clean.Log(f.String()))
+		log.Infof("albums: deleting %s", clean.Log(frm.String()))
 
 		// Fetch albums.
 		albums, queryErr := query.AlbumsByUID(albumUIDs, false)
@@ -311,21 +311,21 @@ func BatchPhotosPrivate(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
+		if len(frm.Photos) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
-		log.Infof("photos: updating private flag for %s", clean.Log(f.String()))
+		log.Infof("photos: updating private flag for %s", clean.Log(frm.String()))
 
-		if err := entity.Db().Model(entity.Photo{}).Where("photo_uid IN (?)", f.Photos).UpdateColumn("photo_private",
+		if err := entity.Db().Model(entity.Photo{}).Where("photo_uid IN (?)", frm.Photos).UpdateColumn("photo_private",
 			gorm.Expr("CASE WHEN photo_private > 0 THEN 0 ELSE 1 END")).Error; err != nil {
 			log.Errorf("private: %s", err)
 			AbortSaveFailed(c)
@@ -336,7 +336,7 @@ func BatchPhotosPrivate(router *gin.RouterGroup) {
 		logWarn("index", entity.UpdateCounts())
 
 		// Fetch selection from index.
-		if photos, err := query.SelectedPhotos(f); err == nil {
+		if photos, err := query.SelectedPhotos(frm); err == nil {
 			for _, p := range photos {
 				SaveSidecarYaml(&p)
 			}
@@ -370,24 +370,24 @@ func BatchLabelsDelete(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Labels) == 0 {
+		if len(frm.Labels) == 0 {
 			log.Error("no labels selected")
 			Abort(c, http.StatusBadRequest, i18n.ErrNoLabelsSelected)
 			return
 		}
 
-		log.Infof("labels: deleting %s", clean.Log(f.String()))
+		log.Infof("labels: deleting %s", clean.Log(frm.String()))
 
 		var labels entity.Labels
 
-		if err := entity.Db().Where("label_uid IN (?)", f.Labels).Find(&labels).Error; err != nil {
+		if err := entity.Db().Where("label_uid IN (?)", frm.Labels).Find(&labels).Error; err != nil {
 			Error(c, http.StatusInternalServerError, err, i18n.ErrDeleteFailed)
 			return
 		}
@@ -398,7 +398,7 @@ func BatchLabelsDelete(router *gin.RouterGroup) {
 
 		UpdateClientConfig()
 
-		event.EntitiesDeleted("labels", f.Labels)
+		event.EntitiesDeleted("labels", frm.Labels)
 
 		c.JSON(http.StatusOK, i18n.NewResponse(http.StatusOK, i18n.MsgLabelsDeleted))
 	})
@@ -429,9 +429,9 @@ func BatchPhotosDelete(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
@@ -442,19 +442,19 @@ func BatchPhotosDelete(router *gin.RouterGroup) {
 		var err error
 
 		// Abort if user wants to delete all but does not have sufficient privileges.
-		if f.All && !acl.Rules.AllowAll(acl.ResourcePhotos, s.UserRole(), acl.Permissions{acl.AccessAll, acl.ActionManage}) {
+		if frm.All && !acl.Rules.AllowAll(acl.ResourcePhotos, s.UserRole(), acl.Permissions{acl.AccessAll, acl.ActionManage}) {
 			AbortForbidden(c)
 			return
 		}
 
 		// Get selection or all archived photos if f.All is true.
-		if len(f.Photos) == 0 && !f.All {
+		if len(frm.Photos) == 0 && !frm.All {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
-		} else if f.All {
+		} else if frm.All {
 			photos, err = query.ArchivedPhotos(1000000, 0)
 		} else {
-			photos, err = query.SelectedPhotos(f)
+			photos, err = query.SelectedPhotos(frm)
 		}
 
 		// Abort if the query failed or no photos were found.

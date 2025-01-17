@@ -2414,7 +2414,7 @@ func TestMediaFile_SkipTranscoding(t *testing.T) {
 }
 
 func TestMediaFile_RenameSidecarFiles(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		conf := config.TestConfig()
 
 		jpegExample := filepath.Join(conf.ExamplesPath(), "/limes.jpg")
@@ -2464,7 +2464,7 @@ func TestMediaFile_RenameSidecarFiles(t *testing.T) {
 }
 
 func TestMediaFile_RemoveSidecarFiles(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		conf := config.TestConfig()
 
 		jpegExample := filepath.Join(conf.ExamplesPath(), "/limes.jpg")

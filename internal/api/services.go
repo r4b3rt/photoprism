@@ -124,21 +124,21 @@ func AddService(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Service
+		var frm form.Service
 
 		// Assign and validate request form values.
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if err := f.Discovery(); err != nil {
+		if err := frm.Discovery(); err != nil {
 			log.Error(err)
 			Abort(c, http.StatusBadRequest, i18n.ErrConnectionFailed)
 			return
 		}
 
-		m, err := entity.AddService(f)
+		m, err := entity.AddService(frm)
 
 		if err != nil {
 			log.Error(err)
@@ -178,7 +178,7 @@ func UpdateService(router *gin.RouterGroup) {
 		}
 
 		// 1) Init form with model values
-		f, err := form.NewService(m)
+		frm, err := form.NewService(m)
 
 		if err != nil {
 			log.Error(err)
@@ -187,14 +187,14 @@ func UpdateService(router *gin.RouterGroup) {
 		}
 
 		// 2) Update form with values from request
-		if err = c.BindJSON(&f); err != nil {
+		if err = c.BindJSON(&frm); err != nil {
 			log.Error(err)
 			AbortBadRequest(c)
 			return
 		}
 
 		// 3) Save model with values from form
-		if err = m.SaveForm(f); err != nil {
+		if err = m.SaveForm(frm); err != nil {
 			log.Error(err)
 			AbortSaveFailed(c)
 			return

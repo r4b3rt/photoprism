@@ -31,16 +31,16 @@ func SearchServices(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.SearchServices
+		var frm form.SearchServices
 
-		err := c.MustBindWith(&f, binding.Form)
+		err := c.MustBindWith(&frm, binding.Form)
 
 		if err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		result, err := search.Accounts(f)
+		result, err := search.Accounts(frm)
 
 		if err != nil {
 			AbortBadRequest(c)
@@ -48,8 +48,8 @@ func SearchServices(router *gin.RouterGroup) {
 		}
 
 		// TODO c.Header("X-Count", strconv.Itoa(count))
-		AddLimitHeader(c, f.Count)
-		AddOffsetHeader(c, f.Offset)
+		AddLimitHeader(c, frm.Count)
+		AddOffsetHeader(c, frm.Offset)
 
 		c.JSON(http.StatusOK, result)
 	})

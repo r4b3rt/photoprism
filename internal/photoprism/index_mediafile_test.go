@@ -77,7 +77,7 @@ func TestIndex_MediaFile(t *testing.T) {
 		assert.Equal(t, "Blue Gopher", mediaFile.metaData.Title)
 		assert.Equal(t, IndexStatus("added"), result.Status)
 	})
-	t.Run("error", func(t *testing.T) {
+	t.Run("Error", func(t *testing.T) {
 		cfg := config.TestConfig()
 
 		cfg.InitializeTestData()

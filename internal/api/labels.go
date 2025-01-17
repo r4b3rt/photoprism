@@ -6,7 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/photoprism/photoprism/internal/auth/acl"
-	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/event"
 	"github.com/photoprism/photoprism/internal/form"
@@ -36,14 +35,7 @@ func UpdateLabel(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Label
-
-		// Assign and validate request form values.
-		if err := c.BindJSON(&f); err != nil {
-			AbortBadRequest(c)
-			return
-		}
-
+		// Find label by UID.
 		id := clean.UID(c.Param("uid"))
 		m, err := query.LabelByUID(id)
 
@@ -52,8 +44,26 @@ func UpdateLabel(router *gin.RouterGroup) {
 			return
 		}
 
-		m.SetName(f.LabelName)
-		entity.Db().Save(&m)
+		// Create new label form.
+		f, formErr := form.NewLabel(m)
+
+		if formErr != nil {
+			Abort(c, http.StatusBadRequest, i18n.ErrBadRequest)
+			return
+		}
+
+		// Set form values from request.
+		if formErr = c.BindJSON(f); formErr != nil {
+			AbortBadRequest(c)
+			return
+		}
+
+		// Save label and return new model values if successful.
+		if err = m.SaveForm(f); err != nil {
+			log.Error(err)
+			AbortSaveFailed(c)
+			return
+		}
 
 		event.SuccessMsg(i18n.MsgLabelSaved)
 
@@ -130,7 +140,7 @@ func DislikeLabel(router *gin.RouterGroup) {
 			return
 		}
 
-		if err := label.Update("LabelFavorite", false); err != nil {
+		if err = label.Update("LabelFavorite", false); err != nil {
 			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": txt.UpperFirst(err.Error())})
 			return
 		}

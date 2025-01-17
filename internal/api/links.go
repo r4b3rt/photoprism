@@ -25,10 +25,10 @@ func UpdateLink(c *gin.Context) {
 		return
 	}
 
-	var f form.Link
+	var frm form.Link
 
 	// Assign and validate request form values.
-	if err := c.BindJSON(&f); err != nil {
+	if err := c.BindJSON(&frm); err != nil {
 		log.Debugf("share: %s", err)
 		AbortBadRequest(c)
 		return
@@ -36,16 +36,16 @@ func UpdateLink(c *gin.Context) {
 
 	link := entity.FindLink(clean.Token(c.Param("link")))
 
-	link.SetSlug(f.ShareSlug)
-	link.MaxViews = f.MaxViews
-	link.LinkExpires = f.LinkExpires
+	link.SetSlug(frm.ShareSlug)
+	link.MaxViews = frm.MaxViews
+	link.LinkExpires = frm.LinkExpires
 
-	if f.LinkToken != "" {
-		link.LinkToken = strings.TrimSpace(strings.ToLower(f.LinkToken))
+	if frm.LinkToken != "" {
+		link.LinkToken = strings.TrimSpace(strings.ToLower(frm.LinkToken))
 	}
 
-	if f.Password != "" {
-		if err := link.SetPassword(f.Password); err != nil {
+	if frm.Password != "" {
+		if err := link.SetPassword(frm.Password); err != nil {
 			c.AbortWithStatusJSON(http.StatusConflict, gin.H{"error": txt.UpperFirst(err.Error())})
 			return
 		}
@@ -106,9 +106,9 @@ func CreateLink(c *gin.Context) {
 		return
 	}
 
-	var f form.Link
+	var frm form.Link
 
-	if err := c.BindJSON(&f); err != nil {
+	if err := c.BindJSON(&frm); err != nil {
 		log.Debugf("share: %s", err)
 		AbortBadRequest(c)
 		return
@@ -116,12 +116,12 @@ func CreateLink(c *gin.Context) {
 
 	link := entity.NewUserLink(uid, s.UserUID)
 
-	link.SetSlug(f.ShareSlug)
-	link.MaxViews = f.MaxViews
-	link.LinkExpires = f.LinkExpires
+	link.SetSlug(frm.ShareSlug)
+	link.MaxViews = frm.MaxViews
+	link.LinkExpires = frm.LinkExpires
 
-	if f.Password != "" {
-		if err := link.SetPassword(f.Password); err != nil {
+	if frm.Password != "" {
+		if err := link.SetPassword(frm.Password); err != nil {
 			c.AbortWithStatusJSON(http.StatusConflict, gin.H{"error": txt.UpperFirst(err.Error())})
 			return
 		}
