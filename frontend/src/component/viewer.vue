@@ -317,16 +317,23 @@ export default {
         };
 
         // Check if content is playable and return the data needed to render it in "contentLoad".
-        if (model.Playable) {
+        if (model?.Playable && model?.Hash) {
           /*
             TODO: The server should (additionally) provide a video/animation still from time index 0 that can be used as
                   poster (the current thumbnail is taken later for longer videos, since the first frame is often black).
            */
+
+          // Check if the video duration is known and 5 seconds or less.
+          const isShort = model?.Duration ? model.Duration > 0 && model.Duration <= 5000000000 : false;
+
+          // Set the slide data needed to render and play the video.
           return {
-            type: "html",
-            html: `<div class="pswp__error-msg">Loading video...</div>`,
-            model: model, // Pass the entire model data.
-            msrc: img.src, // Pass the thumbnail image URL.
+            type: "html", // Render custom HTML.
+            html: `<div class="pswp__error-msg">Loading video...</div>`, // Replaced with the <video> element.
+            model: model, // Thumbnail model.
+            loop: isShort || model?.Type === MediaAnimated || model?.Type === MediaLive, // If possible, loop these types.
+            url: Util.videoUrl(model.Hash, model?.Codec), // Video URL.
+            msrc: img.src, // Image URL.
           };
         }
 
@@ -343,17 +350,9 @@ export default {
           // Prevent default loading behavior.
           ev.preventDefault();
 
-          const model = content.data.model;
-          const posterSrc = content.data.msrc;
-
           try {
-            const duration = model.Duration ? model.Duration / 1000000 : 0;
-            const isShortVideo = duration > 0 && duration <= 5000;
-            const isSpecialType = model.Type === MediaAnimated || model.Type === MediaLive;
-            const videoSrc = Util.videoUrl(model.Hash, model?.Codec);
-
             // Create video element.
-            content.element = this.createVideoElement(videoSrc, posterSrc, false, isSpecialType || isShortVideo, false);
+            content.element = this.createVideoElement(content.data.url, content.data.msrc, false, false, false);
             content.state = "loading";
             content.onLoaded();
           } catch (err) {
@@ -367,26 +366,17 @@ export default {
       lightbox.on("contentActivate", (ev) => {
         const { content } = ev;
 
-        if (content.data?.type === "html") {
-          const model = content.data?.model;
-          if (model?.Type === MediaAnimated || model?.Type === MediaLive || this.slideshow.active || firstPicture) {
-            const video = content.element;
-            if (video && typeof video.play === "function" && video.paused) {
-              try {
-                // Calling pause() before a play promise has been resolved may result in an error,
-                // see https://developer.chrome.com/blog/play-request-was-interrupted.
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                  playPromise.catch((e) => {
-                    if (this.trace) {
-                      console.log(e.message);
-                    }
-                  });
-                }
-              } catch (_) {
-                // Ignore.
-              }
-            }
+        // Automatically play video on this slide if it's the first item,
+        // a slideshow is active, or it's an animation or live photo.
+        if (content.data?.type === "html" && content?.element) {
+          const data = content.data;
+          if (
+            data.model?.Type === MediaAnimated ||
+            data.model?.Type === MediaLive ||
+            this.slideshow.active ||
+            firstPicture
+          ) {
+            this.playVideo(content.element, content.data?.loop);
           }
         }
 
@@ -400,13 +390,10 @@ export default {
       // see https://photoswipe.com/events/#slide-content-events.
       lightbox.on("contentDeactivate", (ev) => {
         const { content } = ev;
-        const video = content.element;
-        if (video && typeof video.pause === "function" && !video.paused) {
-          try {
-            video.pause();
-          } catch (e) {
-            console.log(e);
-          }
+
+        // Stop any video currently playing on this slide.
+        if (content.data?.type === "html" && content?.element) {
+          this.pauseVideo(content.element);
         }
       });
 
@@ -824,7 +811,42 @@ export default {
         }
       }
     },
-    // Starts/stops a slideshow.
+    // Starts playback on the specified video element, if any.
+    playVideo(el, loop) {
+      if (!el || typeof el.play !== "function") {
+        return;
+      }
+
+      el.loop = loop && !this.slideshow.active;
+
+      if (el.paused) {
+        try {
+          // Calling pause() before a play promise has been resolved may result in an error,
+          // see https://developer.chrome.com/blog/play-request-was-interrupted.
+          const playPromise = el.play();
+          if (playPromise !== undefined) {
+            playPromise.catch((e) => {
+              if (this.trace) {
+                console.log(e.message);
+              }
+            });
+          }
+        } catch (_) {
+          // Ignore.
+        }
+      }
+    },
+    // Stops playback on the specified video element, if any.
+    pauseVideo(el) {
+      if (el && typeof el.pause === "function" && !el.paused) {
+        try {
+          el.pause();
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    },
+    // Starts/stops a slideshow so that the next slide opens automatically at regular intervals.
     onSlideshow() {
       if (this.slideshow.active || this.slideshow.interval) {
         this.pauseSlideshow();
@@ -844,6 +866,9 @@ export default {
 
       // Get PhotoSwipe instance.
       const pswp = this.pswp();
+
+      // Play video, if any, but without looping.
+      this.playVideo(pswp.currSlide?.content?.element, false);
 
       // Show next slide at regular intervals.
       this.slideshow.interval = setInterval(() => {
