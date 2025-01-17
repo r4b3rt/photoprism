@@ -479,7 +479,7 @@ func (m *Photo) UpdateTitleLabels() error {
 
 	for _, w := range keywords {
 		if label, err := FindLabel(w, true); err == nil {
-			if label.Deleted() {
+			if label.Skip() {
 				continue
 			}
 
@@ -509,7 +509,7 @@ func (m *Photo) UpdateSubjectLabels() error {
 
 	for _, w := range keywords {
 		if label, err := FindLabel(w, true); err == nil {
-			if label.Deleted() {
+			if label.Skip() {
 				continue
 			}
 
@@ -537,7 +537,7 @@ func (m *Photo) UpdateKeywordLabels() error {
 
 	for _, w := range keywords {
 		if label, err := FindLabel(w, true); err == nil {
-			if label.Deleted() {
+			if label.Skip() {
 				continue
 			}
 

@@ -11,7 +11,6 @@ import (
 	"github.com/photoprism/photoprism/internal/ai/classify"
 	"github.com/photoprism/photoprism/internal/event"
 	"github.com/photoprism/photoprism/internal/form"
-
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/rnd"
 	"github.com/photoprism/photoprism/pkg/txt"
@@ -63,6 +62,13 @@ func (m *Label) AfterUpdate(tx *gorm.DB) (err error) {
 func (m *Label) AfterDelete(tx *gorm.DB) (err error) {
 	FlushLabelCache()
 	return
+}
+
+// AfterCreate sets the New column used for database callback
+func (m *Label) AfterCreate(scope *gorm.Scope) error {
+	m.New = true
+	FlushLabelCache()
+	return nil
 }
 
 // BeforeCreate creates a random UID if needed before inserting a new row to the database.
@@ -158,6 +164,37 @@ func (m *Label) Restore() error {
 	return nil
 }
 
+// HasID tests if the entity has an ID and a valid UID.
+func (m *Label) HasID() bool {
+	if m == nil {
+		return false
+	}
+
+	return m.ID > 0 && m.HasUID()
+}
+
+// HasUID tests if the entity has a valid UID.
+func (m *Label) HasUID() bool {
+	if m == nil {
+		return false
+	}
+
+	return rnd.IsUID(m.LabelUID, LabelUID)
+}
+
+// Skip tests if the entity has invalid IDs or has been deleted and therefore should not be assigned.
+func (m *Label) Skip() bool {
+	if m == nil {
+		return true
+	} else if !m.HasID() {
+		return true
+	} else if m.Deleted() {
+		return true
+	}
+
+	return false
+}
+
 // Update a label property in the database.
 func (m *Label) Update(attr string, value interface{}) error {
 	return UnscopedDb().Model(m).UpdateColumn(attr, value).Error
@@ -185,43 +222,6 @@ func FirstOrCreateLabel(m *Label) *Label {
 		log.Errorf("label: %s (find or create %s)", createErr, m.LabelSlug)
 	}
 
-	return nil
-}
-
-// FindLabel find the matching label based on the string provided or an error if not found.
-func FindLabel(s string, cached bool) (*Label, error) {
-	labelSlug := txt.Slug(s)
-
-	if labelSlug == "" {
-		return &Label{}, fmt.Errorf("invalid label slug %s", clean.LogQuote(labelSlug))
-	}
-
-	// Return cached label, if found.
-	if cached {
-		if cacheData, ok := labelCache.Get(labelSlug); ok {
-			log.Tracef("label: cache hit for %s", labelSlug)
-			return cacheData.(*Label), nil
-		}
-	}
-
-	// Fetch and cache label from database.
-	result := &Label{}
-
-	if find := Db().First(result, "label_slug = ? OR custom_slug = ?", labelSlug, labelSlug); find.RecordNotFound() {
-		labelCache.Delete(labelSlug)
-		return result, fmt.Errorf("label not found")
-	} else if find.Error != nil {
-		labelCache.Delete(labelSlug)
-		return result, find.Error
-	} else {
-		labelCache.SetDefault(result.LabelSlug, result)
-		return result, nil
-	}
-}
-
-// AfterCreate sets the New column used for database callback
-func (m *Label) AfterCreate(scope *gorm.Scope) error {
-	m.New = true
 	return nil
 }
 
