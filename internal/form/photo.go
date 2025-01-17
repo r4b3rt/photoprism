@@ -36,8 +36,8 @@ type Photo struct {
 	PhotoDay         int       `json:"Day"`
 	PhotoTitle       string    `json:"Title"`
 	TitleSrc         string    `json:"TitleSrc"`
-	PhotoDescription string    `json:"Description"`
-	DescriptionSrc   string    `json:"DescriptionSrc"`
+	PhotoCaption     string    `json:"Caption"`
+	CaptionSrc       string    `json:"CaptionSrc"`
 	Details          Details   `json:"Details"`
 	PhotoStack       int8      `json:"Stack"`
 	PhotoFavorite    bool      `json:"Favorite"`

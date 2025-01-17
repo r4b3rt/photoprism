@@ -64,7 +64,7 @@ func (m *Photo) GenerateTitle(labels classify.Labels) error {
 	// Find people in the picture.
 	people := m.SubjectNames()
 
-	m.GenerateDescription(people)
+	m.GenerateCaption(people)
 
 	if n := len(people); n > 0 && n < 4 {
 		names = txt.JoinNames(people, false)
@@ -201,17 +201,17 @@ func (m *Photo) GenerateAndSaveTitle() error {
 	return nil
 }
 
-// GenerateDescription updates the photo descriptions based on available metadata.
-func (m *Photo) GenerateDescription(people []string) {
-	if m.DescriptionSrc != SrcAuto {
+// GenerateCaption generates the caption from the specified list of at least 3 names if CaptionSrc is auto.
+func (m *Photo) GenerateCaption(names []string) {
+	if m.CaptionSrc != SrcAuto {
 		return
 	}
 
-	// Add subject names to description when there's more than one person.
-	if len(people) > 3 {
-		m.PhotoDescription = txt.JoinNames(people, false)
+	// Generate caption from the specified list of names.
+	if len(names) > 3 {
+		m.PhotoCaption = txt.JoinNames(names, false)
 	} else {
-		m.PhotoDescription = ""
+		m.PhotoCaption = ""
 	}
 }
 

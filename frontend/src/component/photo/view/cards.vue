@@ -28,8 +28,8 @@
             <button v-if="m.Title" class="action-title-edit meta-title text-truncate" :data-uid="m.UID">
               {{ m.Title }}
             </button>
-            <button v-if="m.Description" class="meta-caption">
-              {{ m.Description }}
+            <button v-if="m.Caption" class="meta-caption">
+              {{ m.Caption }}
             </button>
             <div class="meta-details">
               <button class="action-open-date meta-date" :data-uid="m.UID">
@@ -154,8 +154,8 @@
             <button v-if="m.Title" :title="m.Title" class="action-title-edit meta-title text-truncate" :data-uid="m.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
               {{ m.Title }}
             </button>
-            <button v-if="m.Description" :title="$gettext('Caption')" class="meta-caption" @click.exact="editPhoto(index)">
-              {{ m.Description }}
+            <button v-if="m.Caption" :title="$gettext('Caption')" class="meta-caption" @click.exact="editPhoto(index)">
+              {{ m.Caption }}
             </button>
             <div class="meta-details">
               <button class="action-open-date meta-date" :data-uid="m.UID" @click.exact="openDate(index)">

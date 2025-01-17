@@ -49,8 +49,8 @@ type Photo struct {
 	TypeSrc          string        `gorm:"type:VARBINARY(8);" json:"TypeSrc" yaml:"TypeSrc,omitempty"`
 	PhotoTitle       string        `gorm:"type:VARCHAR(200);" json:"Title" yaml:"Title"`
 	TitleSrc         string        `gorm:"type:VARBINARY(8);" json:"TitleSrc" yaml:"TitleSrc,omitempty"`
-	PhotoDescription string        `gorm:"type:VARCHAR(4096);" json:"Description" yaml:"Description,omitempty"`
-	DescriptionSrc   string        `gorm:"type:VARBINARY(8);" json:"DescriptionSrc" yaml:"DescriptionSrc,omitempty"`
+	PhotoCaption     string        `gorm:"type:VARCHAR(4096);" json:"Caption" yaml:"Caption,omitempty"`
+	CaptionSrc       string        `gorm:"type:VARBINARY(8);" json:"CaptionSrc" yaml:"CaptionSrc,omitempty"`
 	PhotoPath        string        `gorm:"type:VARBINARY(1024);index:idx_photos_path_name;" json:"Path" yaml:"-"`
 	PhotoName        string        `gorm:"type:VARBINARY(255);index:idx_photos_path_name;" json:"Name" yaml:"-"`
 	OriginalName     string        `gorm:"type:VARBINARY(755);" json:"OriginalName" yaml:"OriginalName,omitempty"`
@@ -452,6 +452,10 @@ func (m *Photo) UpdateLabels() error {
 		return err
 	}
 
+	if err := m.UpdateCaptionLabels(); err != nil {
+		return err
+	}
+
 	if err := m.UpdateSubjectLabels(); err != nil {
 		return err
 	}
@@ -491,6 +495,34 @@ func (m *Photo) UpdateTitleLabels() error {
 	return Db().Where("label_src = ? AND photo_id = ? AND label_id NOT IN (?)", classify.SrcTitle, m.ID, labelIds).Delete(&PhotoLabel{}).Error
 }
 
+// UpdateCaptionLabels updates the labels assigned based on the photo caption.
+func (m *Photo) UpdateCaptionLabels() error {
+	if m == nil {
+		return nil
+	} else if m.PhotoCaption == "" {
+		return nil
+	} else if SrcPriority[m.CaptionSrc] < SrcPriority[SrcMeta] {
+		return nil
+	}
+
+	keywords := txt.UniqueKeywords(m.PhotoCaption)
+
+	var labelIds []uint
+
+	for _, w := range keywords {
+		if label, err := FindLabel(w, true); err == nil {
+			if label.Skip() {
+				continue
+			}
+
+			labelIds = append(labelIds, label.ID)
+			FirstOrCreatePhotoLabel(NewPhotoLabel(m.ID, label.ID, 20, classify.SrcCaption))
+		}
+	}
+
+	return Db().Where("label_src = ? AND photo_id = ? AND label_id NOT IN (?)", classify.SrcCaption, m.ID, labelIds).Delete(&PhotoLabel{}).Error
+}
+
 // UpdateSubjectLabels updates the labels assigned based on photo subject metadata.
 func (m *Photo) UpdateSubjectLabels() error {
 	details := m.GetDetails()
@@ -499,7 +531,7 @@ func (m *Photo) UpdateSubjectLabels() error {
 		return nil
 	} else if details.Subject == "" {
 		return nil
-	} else if SrcPriority[details.SubjectSrc] < SrcPriority[SrcName] {
+	} else if SrcPriority[details.SubjectSrc] < SrcPriority[SrcMeta] {
 		return nil
 	}
 
@@ -514,7 +546,7 @@ func (m *Photo) UpdateSubjectLabels() error {
 			}
 
 			labelIds = append(labelIds, label.ID)
-			FirstOrCreatePhotoLabel(NewPhotoLabel(m.ID, label.ID, 15, classify.SrcSubject))
+			FirstOrCreatePhotoLabel(NewPhotoLabel(m.ID, label.ID, 20, classify.SrcSubject))
 		}
 	}
 
@@ -557,9 +589,9 @@ func (m *Photo) IndexKeywords() error {
 	var keywordIds []uint
 	var keywords []string
 
-	// Add title, description and other keywords
+	// Extract keywords from title, caption, and other sources.
 	keywords = append(keywords, txt.Keywords(m.PhotoTitle)...)
-	keywords = append(keywords, txt.Keywords(m.PhotoDescription)...)
+	keywords = append(keywords, txt.Keywords(m.PhotoCaption)...)
 	keywords = append(keywords, m.SubjectKeywords()...)
 	keywords = append(keywords, txt.Words(details.Keywords)...)
 	keywords = append(keywords, txt.Keywords(details.Subject)...)
@@ -643,12 +675,12 @@ func (m *Photo) UnknownLens() bool {
 	return m.LensID == 0 || m.LensID == UnknownLens.ID
 }
 
-// HasDescription checks if the photo has a description.
-func (m *Photo) HasDescription() bool {
-	return m.PhotoDescription != ""
+// HasCaption checks if the photo has a caption.
+func (m *Photo) HasCaption() bool {
+	return m.PhotoCaption != ""
 }
 
-// GetDetails returns the photo description details.
+// GetDetails returns optional photo metadata.
 func (m *Photo) GetDetails() *Details {
 	if m.Details != nil {
 		m.Details.PhotoID = m.ID
@@ -719,20 +751,20 @@ func (m *Photo) AddLabels(labels classify.Labels) {
 	Db().Set("gorm:auto_preload", true).Model(m).Related(&m.Labels)
 }
 
-// SetDescription changes the photo description if not empty and from the same source.
-func (m *Photo) SetDescription(desc, source string) {
-	newDesc := txt.Clip(desc, txt.ClipLongText)
+// SetCaption sets the specified caption if is not empty and from the same source.
+func (m *Photo) SetCaption(caption, source string) {
+	newCaption := txt.Clip(caption, txt.ClipLongText)
 
-	if newDesc == "" {
+	if newCaption == "" {
 		return
 	}
 
-	if (SrcPriority[source] < SrcPriority[m.DescriptionSrc]) && m.HasDescription() {
+	if (SrcPriority[source] < SrcPriority[m.CaptionSrc]) && m.HasCaption() {
 		return
 	}
 
-	m.PhotoDescription = newDesc
-	m.DescriptionSrc = source
+	m.PhotoCaption = newCaption
+	m.CaptionSrc = source
 }
 
 // SetCamera updates the camera.
@@ -917,9 +949,9 @@ func (m *Photo) DeletePermanently() (files Files, err error) {
 	return files, UnscopedDb().Delete(m).Error
 }
 
-// NoDescription returns true if the photo has no description.
-func (m *Photo) NoDescription() bool {
-	return m.PhotoDescription == ""
+// NoCaption returns true if the photo has no caption.
+func (m *Photo) NoCaption() bool {
+	return m.PhotoCaption == ""
 }
 
 // Update a column in the database.

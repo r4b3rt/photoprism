@@ -3,8 +3,9 @@ package entity
 import (
 	"testing"
 
-	"github.com/photoprism/photoprism/internal/ai/classify"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/photoprism/photoprism/internal/ai/classify"
 )
 
 func TestPhoto_HasTitle(t *testing.T) {
@@ -214,9 +215,9 @@ func TestPhoto_GenerateTitle(t *testing.T) {
 		m := PhotoFixtures.Get("Photo10")
 
 		assert.Equal(t, SrcAuto, m.TitleSrc)
-		assert.Equal(t, SrcAuto, m.DescriptionSrc)
+		assert.Equal(t, SrcAuto, m.CaptionSrc)
 		assert.Equal(t, "Title", m.PhotoTitle)
-		assert.Equal(t, "", m.PhotoDescription)
+		assert.Equal(t, "", m.PhotoCaption)
 
 		err := m.GenerateTitle(classify.Labels{})
 
@@ -225,7 +226,7 @@ func TestPhoto_GenerateTitle(t *testing.T) {
 		}
 
 		assert.Equal(t, SrcAuto, m.TitleSrc)
-		assert.Equal(t, SrcAuto, m.DescriptionSrc)
+		assert.Equal(t, SrcAuto, m.CaptionSrc)
 
 		// TODO: Unstable
 		if len(m.SubjectNames()) > 0 {
@@ -234,15 +235,15 @@ func TestPhoto_GenerateTitle(t *testing.T) {
 			assert.Equal(t, "Holiday Park / Germany / 2016", m.PhotoTitle)
 		}
 
-		assert.Equal(t, "", m.PhotoDescription)
+		assert.Equal(t, "", m.PhotoCaption)
 	})
 	t.Run("People", func(t *testing.T) {
 		m := PhotoFixtures.Get("Photo04")
 
 		assert.Equal(t, SrcAuto, m.TitleSrc)
-		assert.Equal(t, SrcAuto, m.DescriptionSrc)
+		assert.Equal(t, SrcAuto, m.CaptionSrc)
 		assert.Equal(t, "Neckarbrücke", m.PhotoTitle)
-		assert.Equal(t, "", m.PhotoDescription)
+		assert.Equal(t, "", m.PhotoCaption)
 
 		err := m.GenerateTitle(classify.Labels{})
 
@@ -251,9 +252,9 @@ func TestPhoto_GenerateTitle(t *testing.T) {
 		}
 
 		assert.Equal(t, SrcAuto, m.TitleSrc)
-		assert.Equal(t, SrcAuto, m.DescriptionSrc)
+		assert.Equal(t, SrcAuto, m.CaptionSrc)
 		assert.Equal(t, "Corn McCornface & Jens Mander / 2014", m.PhotoTitle)
-		assert.Equal(t, "", m.PhotoDescription)
+		assert.Equal(t, "", m.PhotoCaption)
 	})
 }
 

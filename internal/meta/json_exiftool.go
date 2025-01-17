@@ -381,9 +381,9 @@ func (data *Data) Exiftool(jsonData []byte, originalName string) (err error) {
 		data.AddKeywords(KeywordPanorama)
 	}
 
-	if data.Description != "" {
-		data.AutoAddKeywords(data.Description)
-		data.Description = SanitizeDescription(data.Description)
+	if data.Caption != "" {
+		data.AutoAddKeywords(data.Caption)
+		data.Caption = SanitizeCaption(data.Caption)
 	}
 
 	data.Title = SanitizeTitle(data.Title)

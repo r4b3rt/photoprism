@@ -11,7 +11,7 @@ type Result struct {
 	UID          string        `json:"UID"`
 	Type         string        `json:"Type,omitempty"`
 	Title        string        `json:"Title,omitempty"`
-	Description  string        `json:"Description,omitempty"`
+	Caption      string        `json:"Caption,omitempty"`
 	Lat          float64       `json:"Lat,omitempty"`
 	Lng          float64       `json:"Lng,omitempty"`
 	TakenAtLocal time.Time     `json:"TakenAtLocal"`

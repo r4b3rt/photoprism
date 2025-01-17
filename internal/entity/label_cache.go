@@ -20,9 +20,9 @@ const (
 // labelCache stores Label entities for faster indexing.
 var labelCache = gc.New(labelDefaultExpiration, labelCleanupInterval)
 
-// FindLabel find the matching label based on the string provided or an error if not found.
-func FindLabel(s string, cached bool) (*Label, error) {
-	labelSlug := txt.Slug(s)
+// FindLabel find the matching label based on the name provided or an error if not found.
+func FindLabel(name string, cached bool) (*Label, error) {
+	labelSlug := txt.Slug(name)
 
 	if labelSlug == "" {
 		return &Label{}, fmt.Errorf("invalid label slug %s", clean.LogQuote(labelSlug))
@@ -32,20 +32,23 @@ func FindLabel(s string, cached bool) (*Label, error) {
 	if cached {
 		if cacheData, ok := labelCache.Get(labelSlug); ok {
 			log.Tracef("label: cache hit for %s", labelSlug)
-			return cacheData.(*Label), nil
+
+			if result := cacheData.(*Label); !result.HasID() {
+				return &Label{}, fmt.Errorf("label not found")
+			} else {
+				return result, nil
+			}
 		}
 	}
 
 	// Fetch and cache label from database.
 	result := &Label{}
 
-	if find := Db().First(result, "label_slug = ? OR custom_slug = ?", labelSlug, labelSlug); find.RecordNotFound() {
-		labelCache.Delete(labelSlug)
-		labelCache.Set(result.LabelSlug, result, labelErrorExpiration)
+	if find := Db().First(result, "(label_slug <> '' AND label_slug = ? OR custom_slug <> '' AND custom_slug = ?)", labelSlug, labelSlug); find.RecordNotFound() {
+		labelCache.Set(labelSlug, result, labelErrorExpiration)
 		return result, fmt.Errorf("label not found")
 	} else if find.Error != nil {
-		labelCache.Delete(labelSlug)
-		labelCache.Set(result.LabelSlug, result, labelErrorExpiration)
+		labelCache.Set(labelSlug, result, labelErrorExpiration)
 		return result, find.Error
 	} else {
 		labelCache.SetDefault(result.LabelSlug, result)

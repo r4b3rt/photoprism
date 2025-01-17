@@ -28,7 +28,7 @@ type Photo struct {
 	PhotoPath        string        `json:"Path" select:"photos.photo_path"`
 	PhotoName        string        `json:"Name" select:"photos.photo_name"`
 	PhotoTitle       string        `json:"Title" select:"photos.photo_title"`
-	PhotoDescription string        `json:"Description" select:"photos.photo_description"`
+	PhotoCaption     string        `json:"Caption" select:"photos.photo_caption"`
 	PhotoYear        int           `json:"Year" select:"photos.photo_year"`
 	PhotoMonth       int           `json:"Month" select:"photos.photo_month"`
 	PhotoDay         int           `json:"Day" select:"photos.photo_day"`

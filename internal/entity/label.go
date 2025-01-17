@@ -135,7 +135,7 @@ func (m *Label) Create() error {
 	labelMutex.Lock()
 	defer labelMutex.Unlock()
 
-	return Db().Create(m).Error
+	return UnscopedDb().Create(m).Error
 }
 
 // Delete removes the label from the database.
@@ -202,10 +202,12 @@ func (m *Label) Update(attr string, value interface{}) error {
 
 // FirstOrCreateLabel returns the existing label, inserts a new label or nil in case of errors.
 func FirstOrCreateLabel(m *Label) *Label {
-	result := Label{}
+	result := &Label{}
 
-	if err := UnscopedDb().Where("label_slug = ? OR custom_slug = ?", m.LabelSlug, m.CustomSlug).First(&result).Error; err == nil {
-		return &result
+	if err := UnscopedDb().
+		Where("label_slug = ? OR (custom_slug <> '' AND custom_slug = ? OR label_slug <> '' AND label_slug = ?)", m.LabelSlug, m.CustomSlug, m.LabelSlug).
+		First(result).Error; err == nil {
+		return result
 	} else if createErr := m.Create(); createErr == nil {
 		if m.LabelPriority >= 0 {
 			event.EntitiesCreated("labels", []*Label{m})
@@ -216,8 +218,10 @@ func FirstOrCreateLabel(m *Label) *Label {
 		}
 
 		return m
-	} else if err = UnscopedDb().Where("label_slug = ? OR custom_slug = ?", m.LabelSlug, m.CustomSlug).First(&result).Error; err == nil {
-		return &result
+	} else if err = UnscopedDb().
+		Where("label_slug = ? OR (custom_slug <> '' AND custom_slug = ? OR label_slug <> '' AND label_slug = ?)", m.LabelSlug, m.CustomSlug, m.LabelSlug).
+		First(result).Error; err == nil {
+		return result
 	} else {
 		log.Errorf("label: %s (find or create %s)", createErr, m.LabelSlug)
 	}
@@ -235,6 +239,17 @@ func (m *Label) SetName(name string) {
 
 	m.LabelName = txt.Clip(name, txt.ClipName)
 	m.CustomSlug = txt.Slug(name)
+}
+
+// GetSlug returns the label slug.
+func (m *Label) GetSlug() string {
+	if m.CustomSlug != "" {
+		return m.CustomSlug
+	} else if m.LabelSlug != "" {
+		return m.LabelSlug
+	}
+
+	return txt.Slug(m.LabelName)
 }
 
 // UpdateClassify updates a label if necessary
@@ -279,7 +294,7 @@ func (m *Label) UpdateClassify(label classify.Label) error {
 				continue
 			}
 
-			if sn.Deleted() {
+			if sn.Skip() {
 				continue
 			}
 

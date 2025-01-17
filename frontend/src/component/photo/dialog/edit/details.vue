@@ -194,7 +194,7 @@
             </v-col>
 
             <v-col cols="12">
-              <v-textarea v-model="model.Description" :append-inner-icon="model.DescriptionSrc === 'manual' ? 'mdi-check' : ''" :disabled="disabled" hide-details autocomplete="off" auto-grow :label="$gettext('Caption')" placeholder="" :rows="1" class="input-caption"></v-textarea>
+              <v-textarea v-model="model.Caption" :append-inner-icon="model.CaptionSrc === 'manual' ? 'mdi-check' : ''" :disabled="disabled" hide-details autocomplete="off" auto-grow :label="$gettext('Caption')" placeholder="" :rows="1" class="input-caption"></v-textarea>
             </v-col>
 
             <v-col cols="12" md="6">

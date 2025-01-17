@@ -121,8 +121,8 @@ export class Photo extends RestModel {
       OriginalName: "",
       Title: "",
       TitleSrc: "",
-      Description: "",
-      DescriptionSrc: "",
+      Caption: "",
+      CaptionSrc: "",
       Resolution: 0,
       Quality: 0,
       Faces: 0,
@@ -1172,8 +1172,8 @@ export class Photo extends RestModel {
       values.TypeSrc = src.Manual;
     }
 
-    if (typeof values.Description === "string") {
-      values.DescriptionSrc = src.Manual;
+    if (typeof values.Caption === "string") {
+      values.CaptionSrc = src.Manual;
     }
 
     if (values.Lat || values.Lng || values.Country) {
