@@ -1,367 +1,364 @@
 <template>
   <div class="p-tab p-tab-photo-files">
     <v-expansion-panels v-model="state" class="pa-0 elevation-0" variant="accordion" multiple>
-      <template v-for="file in model.fileModels()">
-        <v-expansion-panel v-if="!file.Missing" class="pa-0 elevation-0" style="margin-top: 1px">
-          <v-expansion-panel-title>
-            <div class="text-caption font-weight-bold filename">
-              {{ file.baseName(70) }}
-            </div>
-          </v-expansion-panel-title>
-          <v-expansion-panel-text>
-            <v-card tile>
-              <v-card-text class="pa-0">
-                <v-container fluid class="pa-0">
-                  <v-alert v-if="file.Error" type="error" class="my-0 text-capitalize">
-                    {{ file.Error }}
-                  </v-alert>
-                  <v-row class="d-flex align-stretch" align="center" justify="center">
-                    <v-col cols="12" class="pa-0 flex-grow-1">
-                      <div class="v-table__overflow">
-                        <v-table
-                          tile
-                          hover
-                          :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
-                          class="photo-files d-flex bg-transparent"
-                        >
-                          <tbody>
-                            <tr v-if="file.FileType === 'jpg' || file.FileType === 'png'">
-                              <td>
-                                {{ $gettext(`Preview`) }}
-                              </td>
-                              <td>
-                                <v-img
-                                  :src="file.thumbnailUrl('tile_224')"
-                                  aspect-ratio="1"
-                                  max-width="112"
-                                  max-height="112"
-                                  rounded="4"
-                                  class="card elevation-0 clickable my-1"
-                                  @click.exact="openFile(file)"
-                                ></v-img>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                {{ $gettext(`Actions`) }}
-                              </td>
-                              <td>
-                                <div class="action-buttons justify-start">
-                                  <v-btn
-                                    v-if="features.download"
-                                    density="comfortable"
-                                    variant="flat"
-                                    color="highlight"
-                                    class="btn-action action-download"
-                                    :disabled="busy"
-                                    @click.stop.prevent="downloadFile(file)"
-                                  >
-                                    {{ $gettext(`Download`) }}
-                                  </v-btn>
-                                  <v-btn
-                                    v-if="
-                                      features.edit &&
-                                      (file.FileType === 'jpg' || file.FileType === 'png') &&
-                                      !file.Error &&
-                                      !file.Primary
-                                    "
-                                    density="comfortable"
-                                    variant="flat"
-                                    color="highlight"
-                                    class="btn-action action-primary"
-                                    :disabled="busy"
-                                    @click.stop.prevent="primaryFile(file)"
-                                  >
-                                    {{ $gettext(`Primary`) }}
-                                  </v-btn>
-                                  <v-btn
-                                    v-if="
-                                      features.edit &&
-                                      !file.Sidecar &&
-                                      !file.Error &&
-                                      !file.Primary &&
-                                      file.Root === '/'
-                                    "
-                                    density="comfortable"
-                                    variant="flat"
-                                    color="highlight"
-                                    class="btn-action action-unstack"
-                                    :disabled="busy"
-                                    @click.stop.prevent="unstackFile(file)"
-                                  >
-                                    {{ $gettext(`Unstack`) }}
-                                  </v-btn>
-                                  <v-btn
-                                    v-if="features.delete && !file.Primary"
-                                    density="comfortable"
-                                    variant="flat"
-                                    color="highlight"
-                                    class="btn-action action-delete"
-                                    :disabled="busy"
-                                    @click.stop.prevent="showDeleteDialog(file)"
-                                  >
-                                    {{ $gettext(`Delete`) }}
-                                  </v-btn>
-                                  <v-btn
-                                    v-if="experimental && canAccessPrivate && file.Primary"
-                                    density="comfortable"
-                                    variant="flat"
-                                    color="highlight"
-                                    class="btn-action action-open-folder"
-                                    :href="folderUrl(file)"
-                                    target="_blank"
-                                  >
-                                    {{ $gettext(`File Browser`) }}
-                                  </v-btn>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td title="Unique ID">UID</td>
-                              <td class="text-break">
-                                <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.UID)">{{
-                                  file.UID
-                                }}</span>
-                              </td>
-                            </tr>
-                            <tr v-if="file.InstanceID" title="XMP">
-                              <td>
-                                {{ $gettext(`Instance ID`) }}
-                              </td>
-                              <td class="text-break">
-                                <span
-                                  class="clickable text-uppercase"
-                                  @click.stop.prevent="copyText(file.InstanceID)"
-                                  >{{ file.InstanceID }}</span
-                                >
-                              </td>
-                            </tr>
-                            <tr>
-                              <td title="SHA-1">
-                                {{ $gettext(`Hash`) }}
-                              </td>
-                              <td class="text-break">
-                                <span class="clickable text-break" @click.stop.prevent="copyText(file.Hash)">{{
-                                  file.Hash
-                                }}</span>
-                              </td>
-                            </tr>
-                            <tr v-if="file.Name">
-                              <td>
-                                {{ $gettext(`Filename`) }}
-                              </td>
-                              <td class="text-break">
-                                <span class="clickable" @click.stop.prevent="copyText(file.Name)">{{ file.Name }}</span>
-                              </td>
-                            </tr>
-                            <tr v-if="file.Root">
-                              <td>
-                                {{ $gettext(`Storage`) }}
-                              </td>
-                              <td>{{ file.storageInfo() }}</td>
-                            </tr>
-                            <tr v-if="file.OriginalName">
-                              <td>
-                                {{ $gettext(`Original Name`) }}
-                              </td>
-                              <td class="text-break"
-                                ><span class="clickable" @click.stop.prevent="copyText(file.OriginalName)">{{
-                                  file.OriginalName
-                                }}</span></td
-                              >
-                            </tr>
-                            <tr>
-                              <td>
-                                {{ $gettext(`Size`) }}
-                              </td>
-                              <td>{{ file.sizeInfo() }}</td>
-                            </tr>
-                            <tr v-if="file.Software">
-                              <td>
-                                {{ $gettext(`Software`) }}
-                              </td>
-                              <td class="text-break">{{ file.Software }}</td>
-                            </tr>
-                            <tr v-if="file.FileType">
-                              <td>
-                                {{ $gettext(`Type`) }}
-                              </td>
-                              <td class="text-break">{{ file.typeInfo() }}</td>
-                            </tr>
-                            <tr v-if="file.isAnimated()">
-                              <td>
-                                {{ $gettext(`Animated`) }}
-                              </td>
-                              <td>
-                                {{ $gettext(`Yes`) }}
-                              </td>
-                            </tr>
-                            <tr v-if="file.Codec && file.Codec !== file.FileType">
-                              <td>
-                                {{ $gettext(`Codec`) }}
-                              </td>
-                              <td class="text-break">{{ codecName(file) }}</td>
-                            </tr>
-                            <tr v-if="file.Duration && file.Duration > 0">
-                              <td>
-                                {{ $gettext(`Duration`) }}
-                              </td>
-                              <td>{{ formatDuration(file) }}</td>
-                            </tr>
-                            <tr v-if="file.Frames">
-                              <td>
-                                {{ $gettext(`Frames`) }}
-                              </td>
-                              <td>{{ file.Frames }}</td>
-                            </tr>
-                            <tr v-if="file.FPS">
-                              <td>
-                                {{ $gettext(`FPS`) }}
-                              </td>
-                              <td>{{ file.FPS.toFixed(1) }}</td>
-                            </tr>
-                            <tr v-if="file.Primary">
-                              <td>
-                                {{ $gettext(`Primary`) }}
-                              </td>
-                              <td>
-                                {{ $gettext(`Yes`) }}
-                              </td>
-                            </tr>
-                            <tr v-if="file.HDR">
-                              <td>
-                                {{ $gettext(`High Dynamic Range (HDR)`) }}
-                              </td>
-                              <td>
-                                {{ $gettext(`Yes`) }}
-                              </td>
-                            </tr>
-                            <tr v-if="file.Portrait">
-                              <td>
-                                {{ $gettext(`Portrait`) }}
-                              </td>
-                              <td>
-                                {{ $gettext(`Yes`) }}
-                              </td>
-                            </tr>
-                            <tr v-if="file.Projection">
-                              <td>
-                                {{ $gettext(`Projection`) }}
-                              </td>
-                              <td class="text-capitalize">{{ file.Projection }}</td>
-                            </tr>
-                            <tr v-if="file.AspectRatio">
-                              <td>
-                                {{ $gettext(`Aspect Ratio`) }}
-                              </td>
-                              <td>{{ file.AspectRatio }} : 1</td>
-                            </tr>
-                            <tr v-if="file.Orientation">
-                              <td>
-                                {{ $gettext(`Orientation`) }}
-                              </td>
-                              <td>
-                                <v-select
-                                  v-model="file.Orientation"
-                                  autocomplete="off"
-                                  hide-details
-                                  variant="solo"
-                                  max-width="120"
-                                  bg-color="transparent"
-                                  density="compact"
-                                  :items="options.Orientations()"
-                                  item-title="text"
-                                  item-value="value"
-                                  :list-props="{ density: 'compact' }"
-                                  :readonly="
-                                    readonly ||
-                                    !features.edit ||
-                                    file.Error ||
-                                    (file.Frames && file.Frames > 1) ||
-                                    (file.Duration && file.Duration > 1) ||
-                                    (file.FileType !== 'jpg' && file.FileType !== 'png')
-                                  "
+      <v-expansion-panel
+        v-for="file in model.fileModels().filter((f) => !f.Missing)"
+        :key="file.UID"
+        class="pa-0 elevation-0"
+        style="margin-top: 1px"
+      >
+        <v-expansion-panel-title>
+          <div class="text-caption font-weight-bold filename">
+            {{ file.baseName(70) }}
+          </div>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <v-card tile>
+            <v-card-text class="pa-0">
+              <v-container fluid class="pa-0">
+                <v-alert v-if="file.Error" type="error" class="my-0 text-capitalize">
+                  {{ file.Error }}
+                </v-alert>
+                <v-row class="d-flex align-stretch" align="center" justify="center">
+                  <v-col cols="12" class="pa-0 flex-grow-1">
+                    <div class="v-table__overflow">
+                      <v-table
+                        tile
+                        hover
+                        :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+                        class="photo-files d-flex bg-transparent"
+                      >
+                        <tbody>
+                          <tr v-if="file.FileType === 'jpg' || file.FileType === 'png'">
+                            <td>
+                              {{ $gettext(`Preview`) }}
+                            </td>
+                            <td>
+                              <v-img
+                                :src="file.thumbnailUrl('tile_224')"
+                                aspect-ratio="1"
+                                max-width="112"
+                                max-height="112"
+                                rounded="4"
+                                class="card elevation-0 clickable my-1"
+                                @click.exact="openFile(file)"
+                              ></v-img>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              {{ $gettext(`Actions`) }}
+                            </td>
+                            <td>
+                              <div class="action-buttons justify-start">
+                                <v-btn
+                                  v-if="features.download"
+                                  density="comfortable"
+                                  variant="flat"
+                                  color="highlight"
+                                  class="btn-action action-download"
                                   :disabled="busy"
-                                  class="input-orientation"
-                                  @update:model-value="changeOrientation(file)"
+                                  @click.stop.prevent="downloadFile(file)"
                                 >
-                                  <template #selection="{ item }">
-                                    <v-icon :class="orientationClass(item)">mdi-account-box-outline</v-icon>
-                                    <span>{{ item.title }}</span>
-                                  </template>
-                                  <template #item="{ props, item }">
-                                    <v-list-item v-bind="props">
-                                      <template #prepend>
-                                        <v-icon :class="orientationClass(item)">mdi-account-box-outline</v-icon>
-                                      </template>
-                                    </v-list-item>
-                                  </template>
-                                </v-select>
-                              </td>
-                            </tr>
-                            <tr v-if="file.ColorProfile">
-                              <td>
-                                {{ $gettext(`Color Profile`) }}
-                              </td>
-                              <td class="text-break">{{ file.ColorProfile }}</td>
-                            </tr>
-                            <tr v-if="file.MainColor">
-                              <td>
-                                {{ $gettext(`Main Color`) }}
-                              </td>
-                              <td class="text-capitalize">{{ file.MainColor }}</td>
-                            </tr>
-                            <tr v-if="file.Chroma">
-                              <td>
-                                {{ $gettext(`Chroma`) }}
-                              </td>
-                              <td
-                                ><v-progress-linear
-                                  :model-value="file.Chroma"
-                                  style="max-width: 300px"
-                                  :title="`${file.Chroma}%`"
-                                ></v-progress-linear
-                              ></td>
-                            </tr>
-                            <tr v-if="file.Missing">
-                              <td>
-                                {{ $gettext(`Missing`) }}
-                              </td>
-                              <td>
-                                {{ $gettext(`Yes`) }}
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                {{ $gettext(`Added`) }}
-                              </td>
-                              <td class="text-break"
-                                >{{ formatTime(file.CreatedAt) }}
-                                {{ $gettext(`in`) }}
-                                {{ $util.formatNs(file.CreatedIn) }}
-                              </td>
-                            </tr>
-                            <tr v-if="file.UpdatedIn">
-                              <td>
-                                {{ $gettext(`Updated`) }}
-                              </td>
-                              <td class="text-break"
-                                >{{ formatTime(file.UpdatedAt) }}
-                                {{ $gettext(`in`) }}
-                                {{ $util.formatNs(file.UpdatedIn) }}
-                              </td>
-                            </tr>
-                          </tbody>
-                        </v-table>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-            </v-card>
-          </v-expansion-panel-text>
-        </v-expansion-panel>
-      </template>
+                                  {{ $gettext(`Download`) }}
+                                </v-btn>
+                                <v-btn
+                                  v-if="
+                                    features.edit &&
+                                    (file.FileType === 'jpg' || file.FileType === 'png') &&
+                                    !file.Error &&
+                                    !file.Primary
+                                  "
+                                  density="comfortable"
+                                  variant="flat"
+                                  color="highlight"
+                                  class="btn-action action-primary"
+                                  :disabled="busy"
+                                  @click.stop.prevent="primaryFile(file)"
+                                >
+                                  {{ $gettext(`Primary`) }}
+                                </v-btn>
+                                <v-btn
+                                  v-if="
+                                    features.edit && !file.Sidecar && !file.Error && !file.Primary && file.Root === '/'
+                                  "
+                                  density="comfortable"
+                                  variant="flat"
+                                  color="highlight"
+                                  class="btn-action action-unstack"
+                                  :disabled="busy"
+                                  @click.stop.prevent="unstackFile(file)"
+                                >
+                                  {{ $gettext(`Unstack`) }}
+                                </v-btn>
+                                <v-btn
+                                  v-if="features.delete && !file.Primary"
+                                  density="comfortable"
+                                  variant="flat"
+                                  color="highlight"
+                                  class="btn-action action-delete"
+                                  :disabled="busy"
+                                  @click.stop.prevent="showDeleteDialog(file)"
+                                >
+                                  {{ $gettext(`Delete`) }}
+                                </v-btn>
+                                <v-btn
+                                  v-if="experimental && canAccessPrivate && file.Primary"
+                                  density="comfortable"
+                                  variant="flat"
+                                  color="highlight"
+                                  class="btn-action action-open-folder"
+                                  :href="folderUrl(file)"
+                                  target="_blank"
+                                >
+                                  {{ $gettext(`File Browser`) }}
+                                </v-btn>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td title="Unique ID">UID</td>
+                            <td class="text-break">
+                              <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.UID)">{{
+                                file.UID
+                              }}</span>
+                            </td>
+                          </tr>
+                          <tr v-if="file.InstanceID" title="XMP">
+                            <td>
+                              {{ $gettext(`Instance ID`) }}
+                            </td>
+                            <td class="text-break">
+                              <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.InstanceID)">{{
+                                file.InstanceID
+                              }}</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td title="SHA-1">
+                              {{ $gettext(`Hash`) }}
+                            </td>
+                            <td class="text-break">
+                              <span class="clickable text-break" @click.stop.prevent="copyText(file.Hash)">{{
+                                file.Hash
+                              }}</span>
+                            </td>
+                          </tr>
+                          <tr v-if="file.Name">
+                            <td>
+                              {{ $gettext(`Filename`) }}
+                            </td>
+                            <td class="text-break">
+                              <span class="clickable" @click.stop.prevent="copyText(file.Name)">{{ file.Name }}</span>
+                            </td>
+                          </tr>
+                          <tr v-if="file.Root">
+                            <td>
+                              {{ $gettext(`Storage`) }}
+                            </td>
+                            <td>{{ file.storageInfo() }}</td>
+                          </tr>
+                          <tr v-if="file.OriginalName">
+                            <td>
+                              {{ $gettext(`Original Name`) }}
+                            </td>
+                            <td class="text-break"
+                              ><span class="clickable" @click.stop.prevent="copyText(file.OriginalName)">{{
+                                file.OriginalName
+                              }}</span></td
+                            >
+                          </tr>
+                          <tr>
+                            <td>
+                              {{ $gettext(`Size`) }}
+                            </td>
+                            <td>{{ file.sizeInfo() }}</td>
+                          </tr>
+                          <tr v-if="file.Software">
+                            <td>
+                              {{ $gettext(`Software`) }}
+                            </td>
+                            <td class="text-break">{{ file.Software }}</td>
+                          </tr>
+                          <tr v-if="file.FileType">
+                            <td>
+                              {{ $gettext(`Type`) }}
+                            </td>
+                            <td class="text-break">{{ file.typeInfo() }}</td>
+                          </tr>
+                          <tr v-if="file.isAnimated()">
+                            <td>
+                              {{ $gettext(`Animated`) }}
+                            </td>
+                            <td>
+                              {{ $gettext(`Yes`) }}
+                            </td>
+                          </tr>
+                          <tr v-if="file.Codec && file.Codec !== file.FileType">
+                            <td>
+                              {{ $gettext(`Codec`) }}
+                            </td>
+                            <td class="text-break">{{ codecName(file) }}</td>
+                          </tr>
+                          <tr v-if="file.Duration && file.Duration > 0">
+                            <td>
+                              {{ $gettext(`Duration`) }}
+                            </td>
+                            <td>{{ formatDuration(file) }}</td>
+                          </tr>
+                          <tr v-if="file.Frames">
+                            <td>
+                              {{ $gettext(`Frames`) }}
+                            </td>
+                            <td>{{ file.Frames }}</td>
+                          </tr>
+                          <tr v-if="file.FPS">
+                            <td>
+                              {{ $gettext(`FPS`) }}
+                            </td>
+                            <td>{{ file.FPS.toFixed(1) }}</td>
+                          </tr>
+                          <tr v-if="file.Primary">
+                            <td>
+                              {{ $gettext(`Primary`) }}
+                            </td>
+                            <td>
+                              {{ $gettext(`Yes`) }}
+                            </td>
+                          </tr>
+                          <tr v-if="file.HDR">
+                            <td>
+                              {{ $gettext(`High Dynamic Range (HDR)`) }}
+                            </td>
+                            <td>
+                              {{ $gettext(`Yes`) }}
+                            </td>
+                          </tr>
+                          <tr v-if="file.Portrait">
+                            <td>
+                              {{ $gettext(`Portrait`) }}
+                            </td>
+                            <td>
+                              {{ $gettext(`Yes`) }}
+                            </td>
+                          </tr>
+                          <tr v-if="file.Projection">
+                            <td>
+                              {{ $gettext(`Projection`) }}
+                            </td>
+                            <td class="text-capitalize">{{ file.Projection }}</td>
+                          </tr>
+                          <tr v-if="file.AspectRatio">
+                            <td>
+                              {{ $gettext(`Aspect Ratio`) }}
+                            </td>
+                            <td>{{ file.AspectRatio }} : 1</td>
+                          </tr>
+                          <tr v-if="file.Orientation">
+                            <td>
+                              {{ $gettext(`Orientation`) }}
+                            </td>
+                            <td>
+                              <v-select
+                                v-model="file.Orientation"
+                                autocomplete="off"
+                                hide-details
+                                variant="solo"
+                                max-width="120"
+                                bg-color="transparent"
+                                density="compact"
+                                :items="options.Orientations()"
+                                item-title="text"
+                                item-value="value"
+                                :list-props="{ density: 'compact' }"
+                                :readonly="
+                                  readonly ||
+                                  !features.edit ||
+                                  file.Error ||
+                                  (file.Frames && file.Frames > 1) ||
+                                  (file.Duration && file.Duration > 1) ||
+                                  (file.FileType !== 'jpg' && file.FileType !== 'png')
+                                "
+                                :disabled="busy"
+                                class="input-orientation"
+                                @update:model-value="changeOrientation(file)"
+                              >
+                                <template #selection="{ item }">
+                                  <v-icon :class="orientationClass(item)">mdi-account-box-outline</v-icon>
+                                  <span>{{ item.title }}</span>
+                                </template>
+                                <template #item="{ props, item }">
+                                  <v-list-item v-bind="props">
+                                    <template #prepend>
+                                      <v-icon :class="orientationClass(item)">mdi-account-box-outline</v-icon>
+                                    </template>
+                                  </v-list-item>
+                                </template>
+                              </v-select>
+                            </td>
+                          </tr>
+                          <tr v-if="file.ColorProfile">
+                            <td>
+                              {{ $gettext(`Color Profile`) }}
+                            </td>
+                            <td class="text-break">{{ file.ColorProfile }}</td>
+                          </tr>
+                          <tr v-if="file.MainColor">
+                            <td>
+                              {{ $gettext(`Main Color`) }}
+                            </td>
+                            <td class="text-capitalize">{{ file.MainColor }}</td>
+                          </tr>
+                          <tr v-if="file.Chroma">
+                            <td>
+                              {{ $gettext(`Chroma`) }}
+                            </td>
+                            <td
+                              ><v-progress-linear
+                                :model-value="file.Chroma"
+                                style="max-width: 300px"
+                                :title="`${file.Chroma}%`"
+                              ></v-progress-linear
+                            ></td>
+                          </tr>
+                          <tr v-if="file.Missing">
+                            <td>
+                              {{ $gettext(`Missing`) }}
+                            </td>
+                            <td>
+                              {{ $gettext(`Yes`) }}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              {{ $gettext(`Added`) }}
+                            </td>
+                            <td class="text-break"
+                              >{{ formatTime(file.CreatedAt) }}
+                              {{ $gettext(`in`) }}
+                              {{ $util.formatNs(file.CreatedIn) }}
+                            </td>
+                          </tr>
+                          <tr v-if="file.UpdatedIn">
+                            <td>
+                              {{ $gettext(`Updated`) }}
+                            </td>
+                            <td class="text-break"
+                              >{{ formatTime(file.UpdatedAt) }}
+                              {{ $gettext(`in`) }}
+                              {{ $util.formatNs(file.UpdatedIn) }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </v-table>
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+          </v-card>
+        </v-expansion-panel-text>
+      </v-expansion-panel>
     </v-expansion-panels>
     <p-file-delete-dialog
       :show="deleteFile.dialog"

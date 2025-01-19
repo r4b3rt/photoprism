@@ -4,70 +4,153 @@
       <v-row class="pa-2-md-and-up d-flex align-stretch" align="start">
         <v-col class="pa-2 hidden-sm-and-down align-stretch" cols="12" md="2" xxl="1">
           <v-card tile color="background" class="pa-0 ma-0 elevation-0 flex-grow-1">
-            <v-img :src="model.thumbnailUrl('tile_500')" aspect-ratio="1" rounded="6" class="card elevation-0 clickable" @click.exact="openPhoto()"></v-img>
+            <v-img
+              :src="model.thumbnailUrl('tile_500')"
+              aspect-ratio="1"
+              rounded="6"
+              class="card elevation-0 clickable"
+              @click.exact="openPhoto()"
+            ></v-img>
           </v-card>
         </v-col>
         <v-col class="pa-2-md-and-up" cols="12" md="10" xxl="11">
-          <v-data-table
-              v-model="selected"
-              :headers="listColumns"
-              :items="model.Labels"
-              hover
-              hide-default-footer
-              item-key="ID"
-              :no-data-text="$gettext('No labels found')"
-              :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
-              class="elevation-0 p-results"
+          <div
+            :class="$vuetify.display.smAndDown ? 'v-table--density-compact' : 'v-table--density-comfortable'"
+            class="v-table v-table--has-top v-table--hover v-data-table elevation-0 edit-table list-view"
           >
-            <template #item="props">
-              <tr class="p-file">
-                <td>
-                  {{ props.item.Label.Name }}
-<!--                  TODO: add this dialog later-->
-<!--                  <v-dialog class="p-inline-edit" @save="renameLabel(props.item.Label)">-->
-<!--                    {{ props.item.Label.Name }}-->
-<!--                    <template #input>-->
-<!--                      <v-text-field v-model="props.item.Label.Name" :rules="[nameRule]" :label="$gettext('Name')" color="surface-variant" class="input-rename background-inherit elevation-0" single-line autofocus variant="solo" hide-details></v-text-field>-->
-<!--                    </template>-->
-<!--                  </v-dialog>-->
-                </td>
-                <td class="text-start">
-                  {{ sourceName(props.item.LabelSrc) }}
-                </td>
-                <td class="text-center"> {{ 100 - props.item.Uncertainty }}% </td>
-                <td class="text-center">
-                  <v-btn v-if="disabled" icon density="comfortable" variant="text" :ripple="false" class="action-view" title="Search" @click.stop.prevent="searchLabel(props.item.Label)">
-                    <v-icon color="surface-variant">mdi-magnify</v-icon>
-                  </v-btn>
-                  <v-btn v-else-if="props.item.Uncertainty < 100 && props.item.LabelSrc === 'manual'" icon density="comfortable" variant="text" :ripple="false" class="action-delete" title="Delete" @click.stop.prevent="removeLabel(props.item.Label)">
-                    <v-icon color="surface-variant">mdi-delete</v-icon>
-                  </v-btn>
-                  <v-btn v-else-if="props.item.Uncertainty < 100" icon density="comfortable" variant="text" :ripple="false" class="action-remove" title="Remove" @click.stop.prevent="removeLabel(props.item.Label)">
-                    <v-icon color="surface-variant">mdi-minus</v-icon>
-                  </v-btn>
-                  <v-btn v-else icon density="comfortable" variant="text" :ripple="false" class="action-on" title="Activate" @click.stop.prevent="activateLabel(props.item.Label)">
-                    <v-icon color="surface-variant">mdi-plus</v-icon>
-                  </v-btn>
-                </td>
-              </tr>
-            </template>
-            <template v-if="!disabled" #tfoot>
-              <tr>
-                <td>
-                  <v-text-field v-model="newLabel" :rules="[nameRule]" color="surface-variant" autocomplete="off" :label="$gettext('Name')" single-line flat variant="plain" hide-details autofocus class="input-label" @keyup.enter="addLabel"></v-text-field>
-                </td>
-                <td class="text-start">
-                  {{ sourceName("manual") }}
-                </td>
-                <td class="text-center"> 100% </td>
-                <td class="text-center">
-                  <v-btn icon density="comfortable" variant="text" :ripple="false" title="Add" class="p-photo-label-add" @click.stop.prevent="addLabel">
-                    <v-icon color="surface-variant">mdi-plus</v-icon>
-                  </v-btn>
-                </td>
-              </tr>
-            </template>
-          </v-data-table>
+            <div class="v-table__wrapper">
+              <table>
+                <thead
+                  ><tr
+                    ><th
+                      class="v-data-table__td v-data-table-column--align-left v-data-table__th"
+                      colspan="1"
+                      rowspan="1"
+                      ><div class="v-data-table-header__content"><span>Label</span></div></th
+                    ><th
+                      class="v-data-table__td v-data-table-column--align-left v-data-table__th"
+                      colspan="1"
+                      rowspan="1"
+                      ><div class="v-data-table-header__content"><span>Source</span></div></th
+                    ><th
+                      class="v-data-table__td v-data-table-column--align-center v-data-table__th"
+                      colspan="1"
+                      rowspan="1"
+                      ><div class="v-data-table-header__content"><span>Confidence</span></div></th
+                    ><th
+                      class="v-data-table__td v-data-table-column--align-center v-data-table__th"
+                      colspan="1"
+                      rowspan="1"
+                      ><div class="v-data-table-header__content"><span>Action</span></div></th
+                    ></tr
+                  >
+                </thead>
+                <tbody>
+                  <tr v-for="label in model.Labels" :key="label.LabelID" class="label result">
+                    <td class="text-start">
+                      {{ label.Label.Name }}
+                      <!--                  TODO: add this dialog later-->
+                      <!--                  <v-dialog class="p-inline-edit" @save="renameLabel(props.item.Label)">-->
+                      <!--                    {{ props.item.Label.Name }}-->
+                      <!--                    <template #input>-->
+                      <!--                      <v-text-field v-model="props.item.Label.Name" :rules="[nameRule]" :label="$gettext('Name')" color="surface-variant" class="input-rename background-inherit elevation-0" single-line autofocus variant="solo" hide-details></v-text-field>-->
+                      <!--                    </template>-->
+                      <!--                  </v-dialog>-->
+                    </td>
+                    <td class="text-start">
+                      {{ sourceName(label.LabelSrc) }}
+                    </td>
+                    <td class="text-center"> {{ 100 - label.Uncertainty }}% </td>
+                    <td class="text-center">
+                      <v-btn
+                        v-if="disabled"
+                        icon
+                        density="comfortable"
+                        variant="text"
+                        :ripple="false"
+                        class="action-view"
+                        title="Search"
+                        @click.stop.prevent="searchLabel(label.Label)"
+                      >
+                        <v-icon color="surface-variant">mdi-magnify</v-icon>
+                      </v-btn>
+                      <v-btn
+                        v-else-if="label.Uncertainty < 100 && label.LabelSrc === 'manual'"
+                        icon
+                        density="comfortable"
+                        variant="text"
+                        :ripple="false"
+                        class="action-delete"
+                        title="Delete"
+                        @click.stop.prevent="removeLabel(label.Label)"
+                      >
+                        <v-icon color="surface-variant">mdi-delete</v-icon>
+                      </v-btn>
+                      <v-btn
+                        v-else-if="label.Uncertainty < 100"
+                        icon
+                        density="comfortable"
+                        variant="text"
+                        :ripple="false"
+                        class="action-remove"
+                        title="Remove"
+                        @click.stop.prevent="removeLabel(label.Label)"
+                      >
+                        <v-icon color="surface-variant">mdi-minus</v-icon>
+                      </v-btn>
+                      <v-btn
+                        v-else
+                        icon
+                        density="comfortable"
+                        variant="text"
+                        :ripple="false"
+                        class="action-on"
+                        title="Activate"
+                        @click.stop.prevent="activateLabel(label.Label)"
+                      >
+                        <v-icon color="surface-variant">mdi-plus</v-icon>
+                      </v-btn>
+                    </td>
+                  </tr>
+                  <tr v-if="!disabled" class="label result">
+                    <td class="text-start">
+                      <v-text-field
+                        v-model="newLabel"
+                        :rules="[nameRule]"
+                        color="surface-variant"
+                        autocomplete="off"
+                        :label="$gettext('Name')"
+                        single-line
+                        flat
+                        variant="plain"
+                        hide-details
+                        autofocus
+                        class="input-label ma-0 pa-0"
+                        @keyup.enter="addLabel"
+                      ></v-text-field>
+                    </td>
+                    <td class="text-start">
+                      {{ sourceName("manual") }}
+                    </td>
+                    <td class="text-center"> 100% </td>
+                    <td class="text-center">
+                      <v-btn
+                        icon
+                        density="comfortable"
+                        variant="text"
+                        :ripple="false"
+                        title="Add"
+                        class="p-photo-label-add"
+                        @click.stop.prevent="addLabel"
+                      >
+                        <v-icon color="surface-variant">mdi-plus</v-icon>
+                      </v-btn>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </v-col>
       </v-row>
       <!-- div class="mt-1 clear"></div -->
