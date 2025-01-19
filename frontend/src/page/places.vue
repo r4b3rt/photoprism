@@ -145,6 +145,7 @@ export default {
   },
   methods: {
     noWebGlSupport() {
+      // see https://maplibre.org/maplibre-gl-js/docs/examples/check-for-support/
       if (window.WebGLRenderingContext) {
         const canvas = document.createElement("canvas");
         try {
