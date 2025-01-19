@@ -47,6 +47,7 @@ func GetSubject(router *gin.RouterGroup) {
 //	@Summary	updates subject properties
 //	@Id			UpdateSubject
 //	@Tags		Subjects
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Subject
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response
@@ -113,6 +114,7 @@ func UpdateSubject(router *gin.RouterGroup) {
 //	@Summary	flags a subject as favorite
 //	@Id			LikeSubject
 //	@Tags		Subjects
+//	@Accept		json
 //	@Produce	json
 //	@Failure	401,403,404,429,500	{object}	i18n.Response
 //	@Param		uid					path		string	true	"subject uid"
@@ -149,6 +151,7 @@ func LikeSubject(router *gin.RouterGroup) {
 //	@Summary	removes the favorite flag from a subject
 //	@Id			DislikeSubject
 //	@Tags		Subjects
+//	@Accept		json
 //	@Produce	json
 //	@Failure	401,403,404,429,500	{object}	i18n.Response
 //	@Param		uid					path		string	true	"subject uid"

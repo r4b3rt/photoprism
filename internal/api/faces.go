@@ -50,6 +50,7 @@ func GetFace(router *gin.RouterGroup) {
 //	@Summary	updates face properties
 //	@Id			UpdateFace
 //	@Tags		Faces
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Face
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response

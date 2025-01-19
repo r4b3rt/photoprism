@@ -21,6 +21,7 @@ import (
 //	@Summary	updates label name
 //	@Id			UpdateLabel
 //	@Tags		Labels
+//	@Accept		json
 //	@Produce	json
 //	@Success	200				{object}	entity.Label
 //	@Failure	401,403,404,429	{object}	i18n.Response
@@ -78,6 +79,7 @@ func UpdateLabel(router *gin.RouterGroup) {
 //	@Summary	sets favorite flag for a label
 //	@Id			LikeLabel
 //	@Tags		Labels
+//	@Accept		json
 //	@Produce	json
 //	@Failure	401,403,404,429	{object}	i18n.Response
 //	@Param		uid				path		string	true	"Label UID"
@@ -120,6 +122,7 @@ func LikeLabel(router *gin.RouterGroup) {
 //	@Summary	removes favorite flag from a label
 //	@Id			DislikeLabel
 //	@Tags		Labels
+//	@Accept		json
 //	@Produce	json
 //	@Failure	401,403,404,429	{object}	i18n.Response
 //	@Param		uid				path		string	true	"Label UID"

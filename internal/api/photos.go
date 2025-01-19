@@ -69,6 +69,7 @@ func GetPhoto(router *gin.RouterGroup) {
 //	@Summary	updates picture details and returns them as JSON
 //	@Id			UpdatePhoto
 //	@Tags		Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Photo
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response
@@ -217,6 +218,7 @@ func GetPhotoYaml(router *gin.RouterGroup) {
 //	@Summary	marks a photo in review as approved
 //	@Id			ApprovePhoto
 //	@Tags		Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	gin.H
 //	@Failure	401,403,404,429,500	{object}	i18n.Response
@@ -257,6 +259,7 @@ func ApprovePhoto(router *gin.RouterGroup) {
 //	@Summary	sets the primary file for a photo
 //	@Id			PhotoPrimary
 //	@Tags		Photos, Stacks
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	entity.Photo
 //	@Failure	401,403,404,429,500	{object}	i18n.Response

@@ -33,6 +33,7 @@ const (
 //	@Summary	start import
 //	@Id			StartImport
 //	@Tags		Library
+//	@Accept		json
 //	@Produce	json
 //	@Success	200			{object}	i18n.Response
 //	@Failure	400,401,403	{object}	i18n.Response

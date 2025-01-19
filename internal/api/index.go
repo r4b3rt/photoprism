@@ -24,6 +24,7 @@ import (
 //	@Summary	start indexing
 //	@Id			StartIndexing
 //	@Tags		Library
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	i18n.Response
 //	@Failure	400,401,403,429,500	{object}	i18n.Response

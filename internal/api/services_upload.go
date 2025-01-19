@@ -22,6 +22,7 @@ import (
 //	@Summary	uploads files to the selected service account
 //	@Id			UploadToService
 //	@Tags		Services
+//	@Accept		json
 //	@Produce	json
 //	@Param		id				path		string	true	"service id"
 //	@Success	200				{object}	entity.Files

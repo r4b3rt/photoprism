@@ -81,6 +81,9 @@
                 }
             },
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -193,6 +196,9 @@
                 }
             },
             "put": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -265,6 +271,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -318,6 +327,9 @@
         },
         "/api/v1/albums/{uid}/clone": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -434,6 +446,9 @@
         },
         "/api/v1/albums/{uid}/like": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -485,6 +500,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -590,6 +608,9 @@
                 }
             },
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -665,6 +686,9 @@
         },
         "/api/v1/albums/{uid}/links/{linkuid}": {
             "put": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -745,6 +769,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -806,6 +833,9 @@
         },
         "/api/v1/albums/{uid}/photos": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -872,6 +902,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1009,6 +1042,9 @@
         },
         "/api/v1/batch/albums/delete": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1070,6 +1106,9 @@
         },
         "/api/v1/batch/labels/delete": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1131,6 +1170,9 @@
         },
         "/api/v1/batch/photos/approve": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1192,6 +1234,9 @@
         },
         "/api/v1/batch/photos/archive": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1259,6 +1304,9 @@
         },
         "/api/v1/batch/photos/delete": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1314,6 +1362,9 @@
         },
         "/api/v1/batch/photos/private": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1381,6 +1432,9 @@
         },
         "/api/v1/batch/photos/restore": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1485,6 +1539,9 @@
                 }
             },
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1656,6 +1713,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -1848,6 +1908,9 @@
                 }
             },
             "put": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -2157,6 +2220,9 @@
         },
         "/api/v1/import/": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -2206,6 +2272,9 @@
         },
         "/api/v1/index": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -2342,6 +2411,9 @@
         },
         "/api/v1/labels/{uid}": {
             "put": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -2404,6 +2476,9 @@
         },
         "/api/v1/labels/{uid}/like": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -2449,6 +2524,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -2817,6 +2895,9 @@
                 }
             },
             "put": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -2891,6 +2972,9 @@
         },
         "/api/v1/photos/{uid}/approve": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -2992,6 +3076,9 @@
         },
         "/api/v1/photos/{uid}/files/{fileuid}": {
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3058,6 +3145,9 @@
         },
         "/api/v1/photos/{uid}/files/{fileuid}/orientation": {
             "put": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3139,6 +3229,9 @@
         },
         "/api/v1/photos/{uid}/files/{fileuid}/primary": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3206,6 +3299,9 @@
         },
         "/api/v1/photos/{uid}/files/{fileuid}/unstack": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3279,6 +3375,9 @@
         },
         "/api/v1/photos/{uid}/label": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3354,6 +3453,9 @@
         },
         "/api/v1/photos/{uid}/label/{id}": {
             "put": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3434,6 +3536,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3507,6 +3612,9 @@
         },
         "/api/v1/photos/{uid}/like": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3558,6 +3666,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3715,6 +3826,9 @@
                 }
             },
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3801,6 +3915,9 @@
                 }
             },
             "put": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3843,6 +3960,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -3925,6 +4045,9 @@
         },
         "/api/v1/services/{id}/upload": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -4033,6 +4156,9 @@
                 }
             },
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -4265,6 +4391,9 @@
                 }
             },
             "put": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -4339,6 +4468,9 @@
         },
         "/api/v1/subjects/{uid}/like": {
             "post": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -4390,6 +4522,9 @@
                 }
             },
             "delete": {
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -7050,6 +7185,24 @@
         "time.Duration": {
             "type": "integer",
             "enum": [
+                -9223372036854775808,
+                9223372036854775807,
+                1,
+                1000,
+                1000000,
+                1000000000,
+                60000000000,
+                3600000000000,
+                -9223372036854775808,
+                9223372036854775807,
+                1,
+                1000,
+                1000000,
+                1000000000,
+                60000000000,
+                3600000000000,
+                -9223372036854775808,
+                9223372036854775807,
                 1,
                 1000,
                 1000000,
@@ -7058,6 +7211,24 @@
                 3600000000000
             ],
             "x-enum-varnames": [
+                "minDuration",
+                "maxDuration",
+                "Nanosecond",
+                "Microsecond",
+                "Millisecond",
+                "Second",
+                "Minute",
+                "Hour",
+                "minDuration",
+                "maxDuration",
+                "Nanosecond",
+                "Microsecond",
+                "Millisecond",
+                "Second",
+                "Minute",
+                "Hour",
+                "minDuration",
+                "maxDuration",
                 "Nanosecond",
                 "Microsecond",
                 "Millisecond",

@@ -26,6 +26,7 @@ import (
 //	@Summary	moves multiple photos to the archive
 //	@Id			BatchPhotosArchive
 //	@Tags		Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	i18n.Response
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response
@@ -97,6 +98,7 @@ func BatchPhotosArchive(router *gin.RouterGroup) {
 //	@Summary	restores multiple photos from the archive
 //	@Id			BatchPhotosRestore
 //	@Tags		Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	i18n.Response
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response
@@ -166,6 +168,7 @@ func BatchPhotosRestore(router *gin.RouterGroup) {
 //	@Summary	approves multiple photos that are currently under review
 //	@Id			BatchPhotosApprove
 //	@Tags		Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	i18n.Response
 //	@Failure	400,401,403,404,429	{object}	i18n.Response
@@ -225,6 +228,7 @@ func BatchPhotosApprove(router *gin.RouterGroup) {
 //	@Summary	permanently removes multiple albums
 //	@Id			BatchAlbumsDelete
 //	@Tags		Albums
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	i18n.Response
 //	@Failure	400,401,403,404,429	{object}	i18n.Response
@@ -298,6 +302,7 @@ func BatchAlbumsDelete(router *gin.RouterGroup) {
 //	@Summary	toggles private state of multiple photos
 //	@Id			BatchPhotosPrivate
 //	@Tags		Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	i18n.Response
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response
@@ -357,6 +362,7 @@ func BatchPhotosPrivate(router *gin.RouterGroup) {
 //	@Summary	deletes multiple labels
 //	@Id			BatchLabelsDelete
 //	@Tags		Labels
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	i18n.Response
 //	@Failure	400,401,403,429,500	{object}	i18n.Response
@@ -409,6 +415,7 @@ func BatchLabelsDelete(router *gin.RouterGroup) {
 //	@Summary	permanently removes multiple or all photos from the archive
 //	@Id			BatchPhotosDelete
 //	@Tags		Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200				{object}	i18n.Response
 //	@Failure	400,401,403,429	{object}	i18n.Response

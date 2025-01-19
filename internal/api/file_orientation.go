@@ -19,6 +19,7 @@ import (
 //	@Summary	changes the orientation of a file
 //	@Id			ChangeFileOrientation
 //	@Tags		Files
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Photo
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response

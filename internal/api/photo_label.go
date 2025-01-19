@@ -21,6 +21,7 @@ import (
 //	@Summary	adds a label to a photo
 //	@Id			AddPhotoLabel
 //	@Tags		Labels, Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Photo
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response
@@ -103,6 +104,7 @@ func AddPhotoLabel(router *gin.RouterGroup) {
 //	@Summary	removes a label from a photo
 //	@Id			RemovePhotoLabel
 //	@Tags		Labels, Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Photo
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response
@@ -176,6 +178,7 @@ func RemovePhotoLabel(router *gin.RouterGroup) {
 //	@Summary	changes a photo label
 //	@Id			UpdatePhotoLabel
 //	@Tags		Labels, Photos
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Photo
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response

@@ -121,6 +121,7 @@ func GetServiceFolders(router *gin.RouterGroup) {
 //	@Summary	creates a new remote service account configuration
 //	@Id			AddService
 //	@Tags		Services
+//	@Accept		json
 //	@Produce	json
 //	@Success	200				{object}	entity.Service
 //	@Failure	401,403,404,429	{object}	i18n.Response
@@ -171,6 +172,7 @@ func AddService(router *gin.RouterGroup) {
 //	@Summary	updates a remote account configuration
 //	@Id			UpdateService
 //	@Tags		Services
+//	@Accept		json
 //	@Produce	json
 //	@Success	200				{object}	entity.Service
 //	@Failure	401,403,404,429	{object}	i18n.Response
@@ -242,6 +244,7 @@ func UpdateService(router *gin.RouterGroup) {
 //	@Summary	removes a remote service account configuration
 //	@Id			DeleteService
 //	@Tags		Services
+//	@Accept		json
 //	@Produce	json
 //	@Success	200				{object}	entity.Service
 //	@Failure	401,403,404,429	{object}	i18n.Response

@@ -144,6 +144,7 @@ func CreateLink(c *gin.Context) {
 //	@Summary	adds a new album share link and return it as JSON
 //	@Id			CreateAlbumLink
 //	@Tags		Links, Albums
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Link
 //	@Failure	400,401,403,404,409,429	{object}	i18n.Response
@@ -172,6 +173,7 @@ func CreateAlbumLink(router *gin.RouterGroup) {
 //	@Summary	updates an album share link and return it as JSON
 //	@Id			UpdateAlbumLink
 //	@Tags		Links, Albums
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Link
 //	@Failure	400,401,403,429,409,500	{object}	i18n.Response
@@ -196,6 +198,7 @@ func UpdateAlbumLink(router *gin.RouterGroup) {
 //	@Summary	deletes an album share link
 //	@Id			DeleteAlbumLink
 //	@Tags		Links, Albums
+//	@Accept		json
 //	@Produce	json
 //	@Success	200				{object}	entity.Link
 //	@Failure	401,403,429,409	{object}	i18n.Response

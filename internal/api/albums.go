@@ -78,6 +78,7 @@ func GetAlbum(router *gin.RouterGroup) {
 //	@Summary	creates a new album
 //	@Id			CreateAlbum
 //	@Tags		Albums
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	entity.Album
 //	@Failure	400,401,403,429,500	{object}	i18n.Response
@@ -143,6 +144,7 @@ func CreateAlbum(router *gin.RouterGroup) {
 //	@Summary	updates album metadata like title and description
 //	@Id			UpdateAlbum
 //	@Tags		Albums
+//	@Accept		json
 //	@Produce	json
 //	@Success	200						{object}	entity.Album
 //	@Failure	400,401,403,404,429,500	{object}	i18n.Response
@@ -216,6 +218,7 @@ func UpdateAlbum(router *gin.RouterGroup) {
 //	@Summary	deletes an existing album
 //	@Id			DeleteAlbum
 //	@Tags		Albums
+//	@Accept		json
 //	@Produce	json
 //	@Failure	401,403,404,429,500	{object}	i18n.Response
 //	@Param		uid					path		string	true	"Album UID"
@@ -290,6 +293,7 @@ func DeleteAlbum(router *gin.RouterGroup) {
 //	@Summary	sets the favorite flag for an album
 //	@Id			LikeAlbum
 //	@Tags		Albums
+//	@Accept		json
 //	@Produce	json
 //	@Failure	401,403,404,429,500	{object}	i18n.Response
 //	@Param		uid					path		string	true	"Album UID"
@@ -340,6 +344,7 @@ func LikeAlbum(router *gin.RouterGroup) {
 //	@Summary	removes the favorite flag from an album
 //	@Id			DislikeAlbum
 //	@Tags		Albums
+//	@Accept		json
 //	@Produce	json
 //	@Failure	401,403,404,429,500	{object}	i18n.Response
 //	@Param		uid					path		string	true	"Album UID"
@@ -390,6 +395,7 @@ func DislikeAlbum(router *gin.RouterGroup) {
 //	@Summary	creates a new album containing pictures from other albums
 //	@Id			CloneAlbums
 //	@Tags		Albums
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	gin.H
 //	@Failure	400,401,403,404,429	{object}	i18n.Response
@@ -467,6 +473,7 @@ func CloneAlbums(router *gin.RouterGroup) {
 //	@Summary	adds photos to an album
 //	@Id			AddPhotosToAlbum
 //	@Tags		Albums
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	gin.H
 //	@Failure	400,401,403,404,429	{object}	i18n.Response
@@ -577,6 +584,7 @@ func AddPhotosToAlbum(router *gin.RouterGroup) {
 //	@Summary	removes photos from an album
 //	@Id			RemovePhotosFromAlbum
 //	@Tags		Albums
+//	@Accept		json
 //	@Produce	json
 //	@Success	200					{object}	gin.H
 //	@Failure	400,401,403,404,429	{object}	i18n.Response
