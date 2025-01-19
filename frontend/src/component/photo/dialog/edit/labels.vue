@@ -26,22 +26,30 @@
                       class="v-data-table__td v-data-table-column--align-left v-data-table__th"
                       colspan="1"
                       rowspan="1"
-                      ><div class="v-data-table-header__content"><span>Label</span></div></th
+                      ><div class="v-data-table-header__content"
+                        ><span>{{ $gettext(`Label`) }}</span></div
+                      ></th
                     ><th
                       class="v-data-table__td v-data-table-column--align-left v-data-table__th"
                       colspan="1"
                       rowspan="1"
-                      ><div class="v-data-table-header__content"><span>Source</span></div></th
+                      ><div class="v-data-table-header__content"
+                        ><span>{{ $gettext(`Source`) }}</span></div
+                      ></th
                     ><th
                       class="v-data-table__td v-data-table-column--align-center v-data-table__th"
                       colspan="1"
                       rowspan="1"
-                      ><div class="v-data-table-header__content"><span>Confidence</span></div></th
+                      ><div class="v-data-table-header__content"
+                        ><span>{{ $gettext(`Confidence`) }}</span></div
+                      ></th
                     ><th
                       class="v-data-table__td v-data-table-column--align-center v-data-table__th"
                       colspan="1"
                       rowspan="1"
-                      ><div class="v-data-table-header__content"><span>Action</span></div></th
+                      ><div class="v-data-table-header__content"
+                        ><span>{{ $gettext(`Action`) }}</span></div
+                      ></th
                     ></tr
                   >
                 </thead>
@@ -200,13 +208,19 @@ export default {
     sourceName(s) {
       switch (s) {
         case "manual":
-          return this.$gettext("manual");
+          return this.$gettext("Manual");
+        case "title":
+          return this.$gettext("Title");
+        case "caption":
+          return this.$gettext("Caption");
+        case "subject":
+          return this.$gettext("Subject");
         case "image":
-          return this.$gettext("image");
+          return this.$gettext("Image");
         case "location":
-          return this.$gettext("location");
+          return this.$gettext("Location");
         default:
-          return s;
+          return this.$util.ucFirst(s);
       }
     },
     removeLabel(label) {
