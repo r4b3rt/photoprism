@@ -1,7 +1,26 @@
 <template>
   <v-container :class="$config.aclClasses('places')" fluid class="pa-0 p-page p-page-places fill-height">
     <div class="places">
-      <div v-if="canSearch" class="map-control search-control">
+      <div v-if="mapError">
+        <v-toolbar
+          flat
+          :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+          class="page-toolbar"
+          color="secondary"
+        >
+          <v-toolbar-title>
+            {{ $gettext("Places") }}
+          </v-toolbar-title>
+        </v-toolbar>
+        <div class="pa-3">
+          <v-alert color="primary" icon="mdi-alert-circle-outline" class="places-error opacity-60" variant="outlined">
+            <div class="font-weight-bold">
+              {{ mapError }}
+            </div>
+          </v-alert>
+        </div>
+      </div>
+      <div v-else-if="canSearch" class="map-control search-control">
         <div class="maplibregl-ctrl maplibregl-ctrl-group map-control-search">
           <v-text-field
             v-model.lazy.trim="filter.q"
@@ -78,6 +97,7 @@ export default {
       canSearch: this.$config.allow("places", "search"),
       initialized: false,
       map: null,
+      mapError: false,
       markers: {},
       markersOnScreen: {},
       clusterIds: [],
@@ -89,7 +109,8 @@ export default {
         "outdoor-v2": "terrain-rgb",
         "414c531c-926d-4164-a057-455a215c0eee": "terrain_rgb_virtual",
       },
-      attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+      attribution:
+        '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
       maxCount: 500000,
       options: {},
       mapFont: ["Open Sans Regular"],
@@ -113,12 +134,43 @@ export default {
     },
   },
   mounted() {
-    this.initMap().then(() => this.renderMap());
-    this.openClusterFromUrl();
+    this.initMap()
+      .then(() => {
+        this.renderMap();
+        this.openClusterFromUrl();
+      })
+      .catch((err) => {
+        this.mapError = err;
+      });
   },
   methods: {
+    noWebGlSupport() {
+      if (window.WebGLRenderingContext) {
+        const canvas = document.createElement("canvas");
+        try {
+          // Note that { failIfMajorPerformanceCaveat: true } can be passed as a second argument
+          // to canvas.getContext(), causing the check to fail if hardware rendering is not available. See
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
+          // for more details.
+          const context = canvas.getContext("webgl2") || canvas.getContext("webgl");
+          if (context && typeof context.getParameter == "function") {
+            return false;
+          }
+        } catch (e) {
+          // WebGL is supported, but disabled.
+        }
+        return this.$gettext("WebGL support is disabled in your browser");
+      }
+
+      // WebGL is not supported.
+      return this.$gettext("Your browser does not support WebGL");
+    },
     initMap() {
       return this.$config.load().finally(() => {
+        const err = this.noWebGlSupport();
+        if (err) {
+          return Promise.reject(err);
+        }
         this.configureMap(this.$config.values.settings.maps.style);
         return Promise.resolve();
       });
