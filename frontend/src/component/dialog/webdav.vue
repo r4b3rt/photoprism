@@ -11,7 +11,19 @@
       </v-card-text>
 
       <v-card-text class="text-body-2">
-        <v-text-field append-inner-icon="mdi-content-copy" @click:append-inner="copyText(webdavUrl())" autocorrect="off" autocapitalize="none" autocomplete="off" hide-details readonly single-line :model-value="webdavUrl()" class="input-url" @click.stop="copyText(webdavUrl())"></v-text-field>
+        <v-text-field
+          append-inner-icon="mdi-content-copy"
+          autocorrect="off"
+          autocapitalize="none"
+          autocomplete="off"
+          hide-details
+          readonly
+          single-line
+          :model-value="webdavUrl()"
+          class="input-url"
+          @click:append-inner="copyText(webdavUrl())"
+          @click.stop="copyText(webdavUrl())"
+        ></v-text-field>
       </v-card-text>
 
       <v-card-text class="text-body-2 clickable" @click="windowsHelp($event)">
@@ -19,16 +31,37 @@
       </v-card-text>
 
       <v-card-text class="text-body-2">
-        <v-text-field append-inner-icon="mdi-content-copy" @click:append-inner="copyText(windowsUrl())" autocorrect="off" autocapitalize="none" autocomplete="off" hide-details readonly single-line :model-value="windowsUrl()" class="input-url" @click.stop="copyText(windowsUrl())"></v-text-field>
+        <v-text-field
+          append-inner-icon="mdi-content-copy"
+          autocorrect="off"
+          autocapitalize="none"
+          autocomplete="off"
+          hide-details
+          readonly
+          single-line
+          :model-value="windowsUrl()"
+          class="input-url"
+          @click:append-inner="copyText(windowsUrl())"
+          @click.stop="copyText(windowsUrl())"
+        ></v-text-field>
       </v-card-text>
 
       <v-card-text class="text-body-2">
-        {{ $gettext(`This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local.`) }}
+        {{
+          $gettext(
+            `This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local.`
+          )
+        }}
       </v-card-text>
 
       <v-card-text class="pt-3 text-body-2">
         <v-alert color="surface-variant" icon="mdi-information" class="pa-2" variant="outlined">
-          <a class="text-link" style="color: inherit" href="https://docs.photoprism.app/user-guide/sync/webdav/" target="_blank">
+          <a
+            class="text-link"
+            style="color: inherit"
+            href="https://docs.photoprism.app/user-guide/sync/webdav/"
+            target="_blank"
+          >
             {{ $gettext(`Detailed instructions can be found in our User Guide.`) }}
           </a>
         </v-alert>

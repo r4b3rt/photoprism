@@ -313,7 +313,7 @@ export default {
       try {
         await Util.copyToMachineClipboard(text);
         this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (error) {
+      } catch (_) {
         this.$notify.error(this.$gettext("Failed copying to clipboard"));
       }
     },

@@ -3,29 +3,80 @@
     <v-card>
       <v-card-title class="d-flex justify-space-between align-center ga-3">
         <h6 class="text-h6">{{ $gettext(`Share %{name}`, { name: model.modelName() }) }}</h6>
-        <v-btn icon="mdi-link-plus" variant="text" color="primary" :title="$gettext('Add Link')" class="action-add-link" @click.stop="add"></v-btn>
+        <v-btn
+          icon="mdi-link-plus"
+          variant="text"
+          color="primary"
+          :title="$gettext('Add Link')"
+          class="action-add-link"
+          @click.stop="add"
+        ></v-btn>
       </v-card-title>
       <v-card-text>
         <v-expansion-panels variant="accordion" density="compact" rounded="6" class="elevation-0">
           <v-expansion-panel v-for="(link, index) in links" :key="link.UID" color="secondary" class="pa-0 elevation-0">
             <v-expansion-panel-title class="d-flex justify-start align-center ga-3 text-body-2 px-4">
               <v-icon icon="mdi-link"></v-icon>
-              <button class="text-start action-url d-inline-flex" style="user-select: none" @click.stop="copyUrl(link)">
-                /s/<strong v-if="link.Token" style="font-weight: 500"> {{ link.getToken() }} </strong><span v-else>…</span>
-              </button>
+              <div
+                class="text-start action-url d-inline-flex"
+                style="user-select: none"
+              >
+                /s/<strong v-if="link.Token" style="font-weight: 500">{{ link.getToken() }}</strong
+                ><span v-else>…</span>
+              </div>
             </v-expansion-panel-title>
             <v-expansion-panel-text>
               <v-card color="secondary-light">
                 <v-card-text class="dense">
                   <v-row align="center" dense>
                     <v-col cols="12">
-                      <v-text-field :model-value="link.url()" hide-details density="comfortable" variant="solo" flat readonly :label="$gettext('URL')" autocorrect="off" autocapitalize="none" autocomplete="off" class="input-url" @click.stop="selectText($event)"> </v-text-field>
+                      <v-text-field
+                        :model-value="link.url()"
+                        append-inner-icon="mdi-content-copy"
+                        hide-details
+                        density="comfortable"
+                        variant="solo"
+                        flat
+                        readonly
+                        autocorrect="off"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        class="input-url"
+                        @click:append-inner="copyText(link.url())"
+                      >
+                      </v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6">
-                      <v-select v-model="link.Expires" hide-details density="comfortable" variant="solo" flat :label="expires(link)" browser-autocomplete="off" :items="options.Expires()" item-title="text" item-value="value" class="input-expires"> </v-select>
+                      <v-select
+                        v-model="link.Expires"
+                        hide-details
+                        density="comfortable"
+                        variant="solo"
+                        flat
+                        :label="expires(link)"
+                        browser-autocomplete="off"
+                        :items="options.Expires()"
+                        item-title="text"
+                        item-value="value"
+                        class="input-expires"
+                      >
+                      </v-select>
                     </v-col>
                     <v-col cols="12" sm="6">
-                      <v-text-field v-model="link.Token" hide-details density="comfortable" variant="solo" flat required autocomplete="off" autocorrect="off" autocapitalize="none" :label="$gettext('Secret')" :placeholder="$gettext('Token')" class="input-secret"></v-text-field>
+                      <v-text-field
+                        v-model="link.Token"
+                        hide-details
+                        density="comfortable"
+                        variant="solo"
+                        flat
+                        required
+                        autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="none"
+                        :label="$gettext('Secret')"
+                        :placeholder="$gettext('Token')"
+                        class="input-secret"
+                      ></v-text-field>
                     </v-col>
                     <!-- <v-col cols="12" sm="6" class="pa-2">
                       <v-text-field
@@ -41,7 +92,16 @@
                       ></v-text-field>
                     </v-col> -->
                     <v-col cols="12" class="d-flex justify-space-between align-center ga-3">
-                      <v-btn variant="text" color="remove" density="comfortable" icon="mdi-delete" :title="$gettext('Delete')" class="action-delete" @click.stop.exact="remove(index)"> </v-btn>
+                      <v-btn
+                        variant="text"
+                        color="remove"
+                        density="comfortable"
+                        icon="mdi-delete"
+                        :title="$gettext('Delete')"
+                        class="action-delete"
+                        @click.stop.exact="remove(index)"
+                      >
+                      </v-btn>
                       <v-btn variant="flat" color="highlight" class="action-save" @click.stop.exact="update(link)">
                         {{ $gettext(`Save`) }}
                       </v-btn>
@@ -54,7 +114,9 @@
         </v-expansion-panels>
 
         <div class="pt-3 text-caption">
-          {{ $gettext(`People you share a link with will be able to view public contents.`, { name: model.modelName() }) }}
+          {{
+            $gettext(`People you share a link with will be able to view public contents.`, { name: model.modelName() })
+          }}
           {{ $gettext(`A click will copy it to your clipboard.`) }}
           {{ $gettext(`Any private photos and videos remain private and won't be shared.`) }}
           {{ $gettext(`Alternatively, you can upload files directly to WebDAV servers like Nextcloud.`) }}
@@ -121,19 +183,15 @@ export default {
     },
   },
   methods: {
-    selectText(ev) {
-      if (!ev || !ev.target) {
+    async copyText(text) {
+      if (!text) {
         return;
       }
 
-      ev.target.select();
-    },
-    async copyUrl(link) {
       try {
-        const url = link.url();
-        await Util.copyToMachineClipboard(url);
+        await Util.copyToMachineClipboard(text);
         this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (error) {
+      } catch (_) {
         this.$notify.error(this.$gettext("Failed copying to clipboard"));
       }
     },

@@ -1,5 +1,11 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="610" class="modal-dialog p-account-apps-dialog" @keydown.esc="close">
+  <v-dialog
+    :model-value="show"
+    persistent
+    max-width="610"
+    class="modal-dialog p-account-apps-dialog"
+    @keydown.esc="close"
+  >
     <v-form ref="form" validate-on="blur" class="form-password" accept-charset="UTF-8" @submit.prevent>
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
@@ -41,7 +47,13 @@
             <v-btn variant="flat" color="secondary-light" class="action-back" @click.stop="onBack">
               {{ $gettext(`Back`) }}
             </v-btn>
-            <v-btn variant="flat" color="highlight" :disabled="!password || password.length < 4" class="action-confirm" @click.stop="onConfirm">
+            <v-btn
+              variant="flat"
+              color="highlight"
+              :disabled="!password || password.length < 4"
+              class="action-confirm"
+              @click.stop="onConfirm"
+            >
               {{ $gettext(`Continue`) }}
             </v-btn>
           </v-card-actions>
@@ -51,10 +63,26 @@
           <v-card-text class="dense">
             <v-row align="start" dense>
               <v-col cols="12" class="text-body-2">
-                {{ $gettext(`Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:`) }}
+                {{
+                  $gettext(
+                    `Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:`
+                  )
+                }}
               </v-col>
               <v-col cols="12">
-                <v-text-field v-model="appPassword" type="text" hide-details readonly autocorrect="off" autocapitalize="none" autocomplete="off" class="input-app-password text-selectable" append-inner-icon="mdi-content-copy" @click:append-inner="onCopyAppPassword"> </v-text-field>
+                <v-text-field
+                  v-model="appPassword"
+                  type="text"
+                  hide-details
+                  readonly
+                  autocorrect="off"
+                  autocapitalize="none"
+                  autocomplete="off"
+                  class="input-app-password text-selectable"
+                  append-inner-icon="mdi-content-copy"
+                  @click:append-inner="onCopyAppPassword"
+                >
+                </v-text-field>
               </v-col>
             </v-row>
           </v-card-text>
@@ -62,7 +90,14 @@
             <v-btn variant="flat" color="button" class="action-close" @click.stop="close">
               {{ $gettext(`Close`) }}
             </v-btn>
-            <v-btn v-if="appPasswordCopied" variant="flat" color="highlight" :disabled="busy" class="action-done" @click.stop="onDone">
+            <v-btn
+              v-if="appPasswordCopied"
+              variant="flat"
+              color="highlight"
+              :disabled="busy"
+              class="action-done"
+              @click.stop="onDone"
+            >
               {{ $gettext(`Done`) }}
             </v-btn>
             <v-btn v-else variant="flat" color="highlight" class="action-copy" @click.stop="onCopyAppPassword">
@@ -75,16 +110,53 @@
           <v-card-text class="dense">
             <v-row align="start" dense>
               <v-col cols="12" class="text-body-2">
-                {{ $gettext(`To generate a new app-specific password, please enter the name and authorization scope of the application and select an expiration date:`) }}
+                {{
+                  $gettext(
+                    `To generate a new app-specific password, please enter the name and authorization scope of the application and select an expiration date:`
+                  )
+                }}
               </v-col>
               <v-col cols="12">
-                <v-text-field v-model="app.client_name" :disabled="busy" name="client_name" type="text" :label="$gettext('Name')" required autofocus hide-details autocorrect="off" autocapitalize="none" autocomplete="off" class="input-name text-selectable"></v-text-field>
+                <v-text-field
+                  v-model="app.client_name"
+                  :disabled="busy"
+                  name="client_name"
+                  type="text"
+                  :label="$gettext('Name')"
+                  required
+                  autofocus
+                  hide-details
+                  autocorrect="off"
+                  autocapitalize="none"
+                  autocomplete="off"
+                  class="input-name text-selectable"
+                ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-select v-model="app.scope" hide-details :disabled="busy" item-title="text" item-value="value" :items="auth.ScopeOptions()" :label="$gettext('Scope')" :menu-props="{ maxHeight: 346 }" class="input-scope"></v-select>
+                <v-select
+                  v-model="app.scope"
+                  hide-details
+                  :disabled="busy"
+                  item-title="text"
+                  item-value="value"
+                  :items="auth.ScopeOptions()"
+                  :label="$gettext('Scope')"
+                  :menu-props="{ maxHeight: 346 }"
+                  class="input-scope"
+                ></v-select>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-select v-model="app.expires_in" :disabled="busy" :label="$gettext('Expires')" autocomplete="off" hide-details class="input-expires" item-title="text" item-value="value" :items="options.Expires()"></v-select>
+                <v-select
+                  v-model="app.expires_in"
+                  :disabled="busy"
+                  :label="$gettext('Expires')"
+                  autocomplete="off"
+                  hide-details
+                  class="input-expires"
+                  item-title="text"
+                  item-value="value"
+                  :items="options.Expires()"
+                ></v-select>
               </v-col>
             </v-row>
           </v-card-text>
@@ -92,7 +164,13 @@
             <v-btn variant="flat" color="button" class="action-cancel" @click.stop="onCancel">
               {{ $gettext(`Cancel`) }}
             </v-btn>
-            <v-btn variant="flat" color="highlight" :disabled="app.client_name === '' || app.scope === ''" class="action-generate" @click.stop="onGenerate">
+            <v-btn
+              variant="flat"
+              color="highlight"
+              :disabled="app.client_name === '' || app.scope === ''"
+              class="action-generate"
+              @click.stop="onGenerate"
+            >
               {{ $gettext(`Generate`) }}
             </v-btn>
           </v-card-actions>
@@ -102,7 +180,17 @@
           <v-card-text>
             <v-row align="start" no-gutters>
               <v-col cols="12">
-                <v-data-table v-model="selected" :headers="listColumns" :items="results" :items-per-page-options="[]" hide-default-footer item-key="ID" :no-data-text="$gettext('Nothing was found.')" density="compact" class="elevation-0 user-results list-view">
+                <v-data-table
+                  v-model="selected"
+                  :headers="listColumns"
+                  :items="results"
+                  :items-per-page-options="[]"
+                  hide-default-footer
+                  item-key="ID"
+                  :no-data-text="$gettext('Nothing was found.')"
+                  density="compact"
+                  class="elevation-0 user-results list-view"
+                >
                   <template #item="props">
                     <tr :data-name="props.item.ClientName">
                       <td class="text-selectable text-break text-start">
@@ -119,7 +207,15 @@
                       </td>
                       <td>
                         <div class="table-actions">
-                          <v-btn icon="mdi-delete" color="surface-variant" density="compact" variant="plain" :ripple="false" class="action-remove action-secondary" @click.stop.prevent="onRevoke(props.item)"></v-btn>
+                          <v-btn
+                            icon="mdi-delete"
+                            color="surface-variant"
+                            density="compact"
+                            variant="plain"
+                            :ripple="false"
+                            class="action-remove action-secondary"
+                            @click.stop.prevent="onRevoke(props.item)"
+                          ></v-btn>
                         </div>
                       </td>
                     </tr>
@@ -139,7 +235,12 @@
         </template>
       </v-card>
     </v-form>
-    <p-confirm-dialog :show="revoke.dialog" icon="mdi-delete-outline" @cancel="revoke.dialog = false" @confirm="onRevoked"></p-confirm-dialog>
+    <p-confirm-dialog
+      :show="revoke.dialog"
+      icon="mdi-delete-outline"
+      @cancel="revoke.dialog = false"
+      @confirm="onRevoked"
+    ></p-confirm-dialog>
   </v-dialog>
 </template>
 <script>
@@ -243,7 +344,7 @@ export default {
       try {
         await Util.copyToMachineClipboard(text);
         this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (error) {
+      } catch (_) {
         this.$notify.error(this.$gettext("Failed copying to clipboard"));
       }
     },
