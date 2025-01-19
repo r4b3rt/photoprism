@@ -15,7 +15,13 @@ import (
 
 // SearchServices finds account settings and returns them as JSON.
 //
-// GET /api/v1/services
+//	@Summary	finds services and returns them as JSON
+//	@Id			SearchServices
+//	@Tags		Services
+//	@Produce	json
+//	@Success	200				{object}	entity.Services
+//	@Failure	401,403,404,429	{object}	i18n.Response
+//	@Router		/api/v1/services [get]
 func SearchServices(router *gin.RouterGroup) {
 	router.GET("/services", func(c *gin.Context) {
 		s := Auth(c, acl.ResourceServices, acl.ActionSearch)

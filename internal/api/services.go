@@ -25,7 +25,13 @@ const (
 
 // GetService returns an account as JSON.
 //
-// GET /api/v1/services/:id
+//	@Summary	returns the specified remote service account configuration as JSON
+//	@Id			GetService
+//	@Tags		Services
+//	@Produce	json
+//	@Success	200				{object}	entity.Service
+//	@Failure	401,403,404,429	{object}	i18n.Response
+//	@Router		/api/v1/services/{id} [get]
 func GetService(router *gin.RouterGroup) {
 	router.GET("/services/:id", func(c *gin.Context) {
 		s := Auth(c, acl.ResourceServices, acl.ActionView)
@@ -51,9 +57,14 @@ func GetService(router *gin.RouterGroup) {
 	})
 }
 
-// GetServiceFolders returns folders that belong to an account as JSON.
+// GetServiceFolders returns folders that belong to an account.
 //
-// GET /api/v1/services/:id/folders
+//	@Summary	returns folders that belong to a remote service account
+//	@Id			GetServiceFolders
+//	@Tags		Services
+//	@Produce	json
+//	@Failure	401,403,404,429	{object}	i18n.Response
+//	@Router		/api/v1/services/{id}/folders [get]
 func GetServiceFolders(router *gin.RouterGroup) {
 	router.GET("/services/:id/folders", func(c *gin.Context) {
 		s := Auth(c, acl.ResourceServices, acl.ActionView)
@@ -107,8 +118,13 @@ func GetServiceFolders(router *gin.RouterGroup) {
 
 // AddService creates a new remote account configuration.
 //
-//	@Tags	Services
-//	@Router	/api/v1/services [post]
+//	@Summary	creates a new remote service account configuration
+//	@Id			AddService
+//	@Tags		Services
+//	@Produce	json
+//	@Success	200				{object}	entity.Service
+//	@Failure	401,403,404,429	{object}	i18n.Response
+//	@Router		/api/v1/services [post]
 func AddService(router *gin.RouterGroup) {
 	router.POST("/services", func(c *gin.Context) {
 		s := Auth(c, acl.ResourceServices, acl.ActionCreate)
@@ -152,7 +168,13 @@ func AddService(router *gin.RouterGroup) {
 
 // UpdateService updates a remote account configuration.
 //
-// PUT /api/v1/services/:id
+//	@Summary	updates a remote account configuration
+//	@Id			UpdateService
+//	@Tags		Services
+//	@Produce	json
+//	@Success	200				{object}	entity.Service
+//	@Failure	401,403,404,429	{object}	i18n.Response
+//	@Router		/api/v1/services/{id} [put]
 func UpdateService(router *gin.RouterGroup) {
 	router.PUT("/services/:id", func(c *gin.Context) {
 		s := Auth(c, acl.ResourceServices, acl.ActionUpdate)
@@ -217,7 +239,13 @@ func UpdateService(router *gin.RouterGroup) {
 
 // DeleteService removes a remote account configuration.
 //
-// DELETE /api/v1/services/:id
+//	@Summary	removes a remote service account configuration
+//	@Id			DeleteService
+//	@Tags		Services
+//	@Produce	json
+//	@Success	200				{object}	entity.Service
+//	@Failure	401,403,404,429	{object}	i18n.Response
+//	@Router		/api/v1/services/{id} [delete]
 func DeleteService(router *gin.RouterGroup) {
 	router.DELETE("/services/:id", func(c *gin.Context) {
 		s := Auth(c, acl.ResourceServices, acl.ActionDelete)
