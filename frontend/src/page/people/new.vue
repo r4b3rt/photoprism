@@ -29,7 +29,7 @@
           <div class="font-weight-bold">
             {{ $gettext(`No people found`) }}
           </div>
-          <div class="mt-2 mb-0 pa-0">
+          <div class="mt-2">
             {{ $gettext(`You may rescan your library to find additional faces.`) }}
             {{ $gettext(`Recognition starts after indexing has been completed.`) }}
           </div>

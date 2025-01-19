@@ -8,7 +8,7 @@
         <div v-else class="font-weight-bold">
           {{ $gettext(`No pictures found`) }}
         </div>
-        <div class="mt-2 mb-0 pa-0">
+        <div class="mt-2">
           {{ $gettext(`Try again using other filters or keywords.`) }}
           <template v-if="!isSharedView">
             {{ $gettext(`In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`) }}

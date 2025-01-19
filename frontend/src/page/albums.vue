@@ -127,7 +127,7 @@
           <div class="font-weight-bold">
             {{ $gettext(`No albums found`) }}
           </div>
-          <div class="mt-2 mb-0 pa-0">
+          <div class="mt-2">
             {{ $gettext(`Try again using other filters or keywords.`) }}
             <template v-if="staticFilter.type === 'album'">
               {{ $gettext(`After selecting pictures from search results, you can add them to an album using the context menu.`) }}

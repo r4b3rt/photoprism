@@ -23,7 +23,7 @@
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-      <v-tabs v-model="active" elevation="0" class="form" :density="$vuetify.display.smAndDown ? 'compact' : 'default'">
+      <v-tabs v-model="active" elevation="0" class="form" :density="$vuetify.display.smAndDown ? 'comfortable' : 'default'">
         <v-tab id="tab-details" ripple>
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Details')">mdi-pencil</v-icon>
           <template v-else>
@@ -37,8 +37,8 @@
           <template v-else>
             <v-icon :size="18" start>mdi-label</v-icon>
             {{ $gettext(`Labels`) }}
-            <v-badge v-if="model.Labels.length" color="surface-variant" inline :content="model.Labels.length"></v-badge>
           </template>
+          <v-badge v-if="model.Labels.length" color="surface-variant" inline :content="model.Labels.length"></v-badge>
         </v-tab>
 
         <v-tab id="tab-people" :disabled="!$config.feature('people')" ripple>
@@ -46,8 +46,8 @@
           <template v-else>
             <v-icon :size="18" start>mdi-account-multiple</v-icon>
             {{ $gettext(`People`) }}
-            <v-badge v-if="model.Faces" color="surface-variant" inline :content="model.Faces"></v-badge>
           </template>
+          <v-badge v-if="model.Faces" color="surface-variant" inline :content="model.Faces"></v-badge>
         </v-tab>
 
         <v-tab id="tab-files" ripple>
@@ -55,8 +55,8 @@
           <template v-else>
             <v-icon :size="18" start>mdi-film</v-icon>
             {{ $gettext(`Files`) }}
-            <v-badge v-if="model.Files.length" color="surface-variant" inline :content="model.Files.length"></v-badge>
           </template>
+          <v-badge v-if="model.Files.length" color="surface-variant" inline :content="model.Files.length"></v-badge>
         </v-tab>
 
         <v-tab v-if="$config.feature('edit')" id="tab-info" ripple>

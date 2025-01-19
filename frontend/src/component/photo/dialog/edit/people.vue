@@ -1,21 +1,43 @@
 <template>
   <div class="p-tab p-tab-photo-people">
     <v-container grid-list-xs fluid class="pa-2 p-faces">
-      <v-alert v-if="markers.length === 0" color="surface-variant" icon="mdi-lightbulb-outline" class="no-results ma-2 opacity-70" variant="outlined">
-        <h3 class="text-subtitle-2 ma-0 pa-0">
+      <v-alert
+        v-if="markers.length === 0"
+        color="surface-variant"
+        icon="mdi-lightbulb-outline"
+        class="no-results ma-2 opacity-70"
+        variant="outlined"
+      >
+        <div class="font-weight-bold">
           {{ $gettext(`No people found`) }}
-        </h3>
-        <p class="text-body-2 mt-2 mb-0 pa-0">
+        </div>
+        <div class="mt-2">
           {{ $gettext(`You may rescan your library to find additional faces.`) }}
           {{ $gettext(`Recognition starts after indexing has been completed.`) }}
-        </p>
+        </div>
       </v-alert>
       <v-row v-else class="search-results face-results cards-view d-flex align-stretch ma-0">
         <v-col v-for="marker in markers" :key="marker.UID" cols="12" sm="6" md="3" xl="2" class="d-flex">
-          <v-card tile :data-id="marker.UID" style="user-select: none" :class="marker.classes()" class="result flex-grow-1">
+          <v-card
+            tile
+            :data-id="marker.UID"
+            style="user-select: none"
+            :class="marker.classes()"
+            class="result flex-grow-1"
+          >
             <div class="card-background card"></div>
             <v-img :src="marker.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card">
-              <v-btn v-if="!marker.SubjUID && !marker.Invalid" :ripple="false" class="input-reject" icon variant="text" density="comfortable" position="absolute" :title="$gettext('Remove')" @click.stop.prevent="onReject(marker)">
+              <v-btn
+                v-if="!marker.SubjUID && !marker.Invalid"
+                :ripple="false"
+                class="input-reject"
+                icon
+                variant="text"
+                density="comfortable"
+                position="absolute"
+                :title="$gettext('Remove')"
+                @click.stop.prevent="onReject(marker)"
+              >
                 <v-icon color="white" class="action-reject">mdi-close</v-icon>
               </v-btn>
             </v-img>
@@ -23,7 +45,16 @@
             <v-card-actions class="meta pa-0">
               <v-row v-if="marker.Invalid" align="center">
                 <v-col cols="12" class="text-center pa-0">
-                  <v-btn :disabled="busy" size="large" variant="flat" block :rounded="false" class="action-undo text-center" :title="$gettext('Undo')" @click.stop="onApprove(marker)">
+                  <v-btn
+                    :disabled="busy"
+                    size="large"
+                    variant="flat"
+                    block
+                    :rounded="false"
+                    class="action-undo text-center"
+                    :title="$gettext('Undo')"
+                    @click.stop="onApprove(marker)"
+                  >
                     <v-icon>mdi-undo</v-icon>
                   </v-btn>
                 </v-col>

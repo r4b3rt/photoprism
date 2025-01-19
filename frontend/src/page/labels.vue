@@ -58,7 +58,7 @@
           <div class="font-weight-bold">
             {{ $gettext(`No labels found`) }}
           </div>
-          <div class="mt-2 mb-0 pa-0">
+          <div class="mt-2">
             {{ $gettext(`Try again using other filters or keywords.`) }}
             {{ $gettext(`In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`) }}
           </div>
