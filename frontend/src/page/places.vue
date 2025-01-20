@@ -44,7 +44,7 @@
           ></v-text-field>
         </div>
       </div>
-      <div ref="map" class="map-container"></div>
+      <div ref="map" class="map-container" :class="{ 'map-loaded': initialized }"></div>
       <div v-if="showCluster" class="cluster-control">
         <v-card class="cluster-control-container">
           <p-page-photos ref="cluster" :static-filter="cluster" :on-close="closeCluster" :embedded="true" />
@@ -639,9 +639,10 @@ export default {
             exaggeration: 1,
           })
         );
-
-        this.map.addControl(new maplibregl.GlobeControl());
       }
+
+      // Add 3D globe control.
+      this.map.addControl(new maplibregl.GlobeControl());
 
       // Add fullscreen control.
       this.map.addControl(new maplibregl.FullscreenControl({ container: document.querySelector("body") }), controlPos);

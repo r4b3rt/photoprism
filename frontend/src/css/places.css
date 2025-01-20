@@ -15,6 +15,10 @@
     right: 0;
 }
 
+.map-container.map-loaded {
+    background-color: #060618;
+}
+
 .map-control {
     position: absolute;
     background: transparent;
