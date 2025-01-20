@@ -1,6 +1,20 @@
 <template>
-  <v-form ref="form" validate-on="blur" autocomplete="off" class="p-photo-toolbar" accept-charset="UTF-8" :class="{ embedded: embedded }" @submit.prevent="updateQuery()">
-    <v-toolbar flat :density="$vuetify.display.smAndDown && !embedded ? 'compact' : 'default'" :height="embedded ? 45 : undefined" class="page-toolbar" color="secondary">
+  <v-form
+    ref="form"
+    validate-on="blur"
+    autocomplete="off"
+    class="p-photo-toolbar"
+    accept-charset="UTF-8"
+    :class="{ embedded: embedded }"
+    @submit.prevent="updateQuery()"
+  >
+    <v-toolbar
+      flat
+      :density="$vuetify.display.smAndDown && !embedded ? 'compact' : 'default'"
+      :height="embedded ? 45 : undefined"
+      class="page-toolbar"
+      color="secondary"
+    >
       <template v-if="!embedded">
         <v-text-field
           :model-value="filter.q"
@@ -32,7 +46,13 @@
           "
         ></v-text-field>
 
-        <v-btn v-if="filter.latlng" icon :title="$gettext('Show more')" class="action-clear-location" @click.stop="clearLocation()">
+        <v-btn
+          v-if="filter.latlng"
+          icon
+          :title="$gettext('Show more')"
+          class="action-clear-location"
+          @click.stop="clearLocation()"
+        >
           <v-icon>mdi-map-marker-off</v-icon>
         </v-btn>
 
@@ -40,25 +60,61 @@
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
 
-        <v-btn v-if="settings.view === 'list'" icon class="action-view-mosaic" :title="$gettext('Toggle View')" @click.stop="setView('mosaic')">
+        <v-btn
+          v-if="settings.view === 'list'"
+          icon
+          class="action-view-mosaic"
+          :title="$gettext('Toggle View')"
+          @click.stop="setView('mosaic')"
+        >
           <v-icon>mdi-view-comfy</v-icon>
         </v-btn>
-        <v-btn v-else-if="settings.view === 'cards' && listView" icon class="action-view-list" :title="$gettext('Toggle View')" @click.stop="setView('list')">
+        <v-btn
+          v-else-if="settings.view === 'cards' && listView"
+          icon
+          class="action-view-list"
+          :title="$gettext('Toggle View')"
+          @click.stop="setView('list')"
+        >
           <v-icon>mdi-view-list</v-icon>
         </v-btn>
-        <v-btn v-else-if="settings.view === 'cards'" icon class="action-view-mosaic" :title="$gettext('Toggle View')" @click.stop="setView('mosaic')">
+        <v-btn
+          v-else-if="settings.view === 'cards'"
+          icon
+          class="action-view-mosaic"
+          :title="$gettext('Toggle View')"
+          @click.stop="setView('mosaic')"
+        >
           <v-icon>mdi-view-comfy</v-icon>
         </v-btn>
         <v-btn v-else icon class="action-view-cards" :title="$gettext('Toggle View')" @click.stop="setView('cards')">
           <v-icon>mdi-view-column</v-icon>
         </v-btn>
-        <v-btn v-if="canDelete && context === 'archive' && config.count.archived > 0" icon class="hidden-sm-and-down action-delete-all" :title="$gettext('Delete All')" @click.stop="deleteAll()">
+        <v-btn
+          v-if="canDelete && context === 'archive' && config.count.archived > 0"
+          icon
+          class="hidden-sm-and-down action-delete-all"
+          :title="$gettext('Delete All')"
+          @click.stop="deleteAll()"
+        >
           <v-icon>mdi-delete-sweep</v-icon>
         </v-btn>
-        <v-btn v-else-if="canUpload" icon class="hidden-sm-and-down action-upload" :title="$gettext('Upload')" @click.stop="showUpload()">
+        <v-btn
+          v-else-if="canUpload"
+          icon
+          class="hidden-sm-and-down action-upload"
+          :title="$gettext('Upload')"
+          @click.stop="showUpload()"
+        >
           <v-icon>mdi-cloud-upload</v-icon>
         </v-btn>
-        <v-btn :icon="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'" :title="$gettext('Expand Search')" class="action-expand" :class="{ 'action-expand--active': expanded }" @click.stop="toggleExpansionPanel"></v-btn>
+        <v-btn
+          :icon="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+          :title="$gettext('Expand Search')"
+          class="action-expand"
+          :class="{ 'action-expand--active': expanded }"
+          @click.stop="toggleExpansionPanel"
+        ></v-btn>
       </template>
       <template v-else>
         <v-spacer></v-spacer>
@@ -71,129 +127,130 @@
       </template>
     </v-toolbar>
 
-    <div :class="{ 'toolbar-expansion-panel--visible': expanded }" class="toolbar-expansion-panel">
-      <v-card flat color="secondary">
-        <v-card-text class="dense">
-          <v-row align="center" dense>
-            <v-col cols="12" sm="6" md="3" class="p-countries-select">
-              <v-select
-                :model-value="filter.country"
-                :label="$gettext('Country')"
-                :menu-props="{ maxHeight: 346 }"
-                single-line
-                hide-details
-                variant="solo-filled"
-                :density="density"
-                :items="countryOptions"
-                item-title="Name"
-                item-value="ID"
-                class="input-countries"
-                @update:model-value="
-                  (v) => {
-                    onUpdate({ country: v });
-                  }
-                "
-              >
-              </v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="3" class="p-camera-select">
-              <v-select
-                :model-value="filter.camera"
-                :label="$gettext('Camera')"
-                :menu-props="{ maxHeight: 346 }"
-                single-line
-                hide-details
-                variant="solo-filled"
-                :density="density"
-                :items="cameraOptions"
-                item-title="Name"
-                item-value="ID"
-                @update:model-value="
-                  (v) => {
-                    onUpdate({ camera: v });
-                  }
-                "
-              >
-              </v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="3" class="p-view-select">
-              <v-select
-                id="viewSelect"
-                :model-value="settings.view"
-                :label="$gettext('View')"
-                single-line
-                hide-details
-                variant="solo-filled"
-                :density="density"
-                :items="viewOptions"
-                item-title="text"
-                item-value="value"
-                @update:model-value="
-                  (v) => {
-                    setView(v);
-                  }
-                "
-              >
-              </v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="3" class="p-time-select">
-              <v-select
-                :model-value="filter.order"
-                :label="$gettext('Sort Order')"
-                :menu-props="{ maxHeight: 400 }"
-                single-line
-                variant="solo-filled"
-                :density="density"
-                :items="sortOptions"
-                item-title="text"
-                item-value="value"
-                @update:model-value="
-                  (v) => {
-                    onUpdate({ order: v });
-                  }
-                "
-              >
-              </v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="3" class="p-year-select">
-              <v-select
-                :model-value="filter.year"
-                :label="$gettext('Year')"
-                :menu-props="{ maxHeight: 346 }"
-                single-line
-                variant="solo-filled"
-                :density="density"
-                :items="yearOptions()"
-                item-title="text"
-                item-value="value"
-                @update:model-value="
-                  (v) => {
-                    onUpdate({ year: v });
-                  }
-                "
-              >
-              </v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="3" class="p-month-select">
-              <v-select
-                :model-value="filter.month"
-                :label="$gettext('Month')"
-                :menu-props="{ maxHeight: 346 }"
-                single-line
-                variant="solo-filled"
-                :density="density"
-                :items="monthOptions()"
-                item-title="text"
-                item-value="value"
-                @update:model-value="
-                  (v) => {
-                    onUpdate({ month: v });
-                  }
-                "
-              >
-              </v-select>
-            </v-col>
-            <!-- v-col cols="12" sm="6" md="3" class="p-lens-select">
+    <div class="toolbar-expansion-panel">
+      <v-expand-transition>
+        <v-card v-show="expanded" flat color="secondary">
+          <v-card-text class="dense">
+            <v-row align="center" dense>
+              <v-col cols="12" sm="6" md="3" class="p-countries-select">
+                <v-select
+                  :model-value="filter.country"
+                  :label="$gettext('Country')"
+                  :menu-props="{ maxHeight: 346 }"
+                  single-line
+                  hide-details
+                  variant="solo-filled"
+                  :density="density"
+                  :items="countryOptions"
+                  item-title="Name"
+                  item-value="ID"
+                  class="input-countries"
+                  @update:model-value="
+                    (v) => {
+                      onUpdate({ country: v });
+                    }
+                  "
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6" md="3" class="p-camera-select">
+                <v-select
+                  :model-value="filter.camera"
+                  :label="$gettext('Camera')"
+                  :menu-props="{ maxHeight: 346 }"
+                  single-line
+                  hide-details
+                  variant="solo-filled"
+                  :density="density"
+                  :items="cameraOptions"
+                  item-title="Name"
+                  item-value="ID"
+                  @update:model-value="
+                    (v) => {
+                      onUpdate({ camera: v });
+                    }
+                  "
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6" md="3" class="p-view-select">
+                <v-select
+                  id="viewSelect"
+                  :model-value="settings.view"
+                  :label="$gettext('View')"
+                  single-line
+                  hide-details
+                  variant="solo-filled"
+                  :density="density"
+                  :items="viewOptions"
+                  item-title="text"
+                  item-value="value"
+                  @update:model-value="
+                    (v) => {
+                      setView(v);
+                    }
+                  "
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6" md="3" class="p-time-select">
+                <v-select
+                  :model-value="filter.order"
+                  :label="$gettext('Sort Order')"
+                  :menu-props="{ maxHeight: 400 }"
+                  single-line
+                  variant="solo-filled"
+                  :density="density"
+                  :items="sortOptions"
+                  item-title="text"
+                  item-value="value"
+                  @update:model-value="
+                    (v) => {
+                      onUpdate({ order: v });
+                    }
+                  "
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6" md="3" class="p-year-select">
+                <v-select
+                  :model-value="filter.year"
+                  :label="$gettext('Year')"
+                  :menu-props="{ maxHeight: 346 }"
+                  single-line
+                  variant="solo-filled"
+                  :density="density"
+                  :items="yearOptions()"
+                  item-title="text"
+                  item-value="value"
+                  @update:model-value="
+                    (v) => {
+                      onUpdate({ year: v });
+                    }
+                  "
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6" md="3" class="p-month-select">
+                <v-select
+                  :model-value="filter.month"
+                  :label="$gettext('Month')"
+                  :menu-props="{ maxHeight: 346 }"
+                  single-line
+                  variant="solo-filled"
+                  :density="density"
+                  :items="monthOptions()"
+                  item-title="text"
+                  item-value="value"
+                  @update:model-value="
+                    (v) => {
+                      onUpdate({ month: v });
+                    }
+                  "
+                >
+                </v-select>
+              </v-col>
+              <!-- v-col cols="12" sm="6" md="3" class="p-lens-select">
                 <v-select @change="dropdownChange"
                           :label="labels.lens"
                           flat
@@ -207,51 +264,59 @@
                           :items="lensOptions">
                 </v-select>
             </v-col -->
-            <v-col cols="12" sm="6" md="3" class="p-color-select">
-              <v-select
-                :model-value="filter.color"
-                :label="$gettext('Color')"
-                :menu-props="{ maxHeight: 346 }"
-                single-line
-                hide-details
-                variant="solo-filled"
-                :density="density"
-                :items="colorOptions()"
-                item-title="Name"
-                item-value="Slug"
-                @update:model-value="
-                  (v) => {
-                    onUpdate({ color: v });
-                  }
-                "
-              >
-              </v-select>
-            </v-col>
-            <v-col cols="12" sm="6" md="3" class="p-category-select">
-              <v-select
-                :model-value="filter.label"
-                :label="$gettext('Category')"
-                :menu-props="{ maxHeight: 346 }"
-                single-line
-                hide-details
-                variant="solo-filled"
-                :density="density"
-                :items="categoryOptions"
-                item-title="Name"
-                item-value="Slug"
-                @update:model-value="
-                  (v) => {
-                    onUpdate({ label: v });
-                  }
-                "
-              >
-              </v-select>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
+              <v-col cols="12" sm="6" md="3" class="p-color-select">
+                <v-select
+                  :model-value="filter.color"
+                  :label="$gettext('Color')"
+                  :menu-props="{ maxHeight: 346 }"
+                  single-line
+                  hide-details
+                  variant="solo-filled"
+                  :density="density"
+                  :items="colorOptions()"
+                  item-title="Name"
+                  item-value="Slug"
+                  @update:model-value="
+                    (v) => {
+                      onUpdate({ color: v });
+                    }
+                  "
+                >
+                </v-select>
+              </v-col>
+              <v-col cols="12" sm="6" md="3" class="p-category-select">
+                <v-select
+                  :model-value="filter.label"
+                  :label="$gettext('Category')"
+                  :menu-props="{ maxHeight: 346 }"
+                  single-line
+                  hide-details
+                  variant="solo-filled"
+                  :density="density"
+                  :items="categoryOptions"
+                  item-title="Name"
+                  item-value="Slug"
+                  @update:model-value="
+                    (v) => {
+                      onUpdate({ label: v });
+                    }
+                  "
+                >
+                </v-select>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-expand-transition>
     </div>
-    <p-photo-delete-dialog :show="dialog.delete" :text="$gettext('Are you sure you want to delete all archived pictures?')" :action="$gettext('Delete All')" @cancel="dialog.delete = false" @confirm="batchDelete"> </p-photo-delete-dialog>
+    <p-photo-delete-dialog
+      :show="dialog.delete"
+      :text="$gettext('Are you sure you want to delete all archived pictures?')"
+      :action="$gettext('Delete All')"
+      @cancel="dialog.delete = false"
+      @confirm="batchDelete"
+    >
+    </p-photo-delete-dialog>
   </v-form>
 </template>
 <script>

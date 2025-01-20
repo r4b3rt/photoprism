@@ -1,18 +1,67 @@
 <template>
   <div style="user-select: none" :class="$config.aclClasses('photos')" class="p-page p-page-photos">
-    <p-photo-toolbar ref="toolbar" :context="context" :filter="filter" :static-filter="staticFilter" :settings="settings" :refresh="refresh" :update-filter="updateFilter" :update-query="updateQuery" :on-close="onClose" :embedded="embedded" />
+    <p-photo-toolbar
+      ref="toolbar"
+      :context="context"
+      :filter="filter"
+      :static-filter="staticFilter"
+      :settings="settings"
+      :refresh="refresh"
+      :update-filter="updateFilter"
+      :update-query="updateQuery"
+      :on-close="onClose"
+      :embedded="embedded"
+    />
 
     <div v-if="loading" class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else>
-      <p-scroll :hide-panel="hideExpansionPanel" :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"> </p-scroll>
+      <p-scroll
+        :hide-panel="hideExpansionPanel"
+        :load-more="loadMore"
+        :load-disabled="scrollDisabled"
+        :load-distance="scrollDistance"
+        :loading="loading"
+      >
+      </p-scroll>
 
       <p-photo-clipboard :context="context" :refresh="refresh"></p-photo-clipboard>
 
-      <p-photo-mosaic v-if="settings.view === 'mosaic'" :context="context" :photos="results" :select-mode="selectMode" :filter="filter" :edit-photo="editPhoto" :open-photo="openPhoto" :is-shared-view="isShared"></p-photo-mosaic>
-      <p-photo-list v-else-if="settings.view === 'list'" :context="context" :photos="results" :select-mode="selectMode" :filter="filter" :open-photo="openPhoto" :edit-photo="editPhoto" :open-date="openDate" :open-location="openLocation" :is-shared-view="isShared"></p-photo-list>
-      <p-photo-cards v-else :context="context" :photos="results" :select-mode="selectMode" :filter="filter" :open-photo="openPhoto" :edit-photo="editPhoto" :open-date="openDate" :open-location="openLocation" :is-shared-view="isShared"></p-photo-cards>
+      <p-photo-mosaic
+        v-if="settings.view === 'mosaic'"
+        :context="context"
+        :photos="results"
+        :select-mode="selectMode"
+        :filter="filter"
+        :edit-photo="editPhoto"
+        :open-photo="openPhoto"
+        :is-shared-view="isShared"
+      ></p-photo-mosaic>
+      <p-photo-list
+        v-else-if="settings.view === 'list'"
+        :context="context"
+        :photos="results"
+        :select-mode="selectMode"
+        :filter="filter"
+        :open-photo="openPhoto"
+        :edit-photo="editPhoto"
+        :open-date="openDate"
+        :open-location="openLocation"
+        :is-shared-view="isShared"
+      ></p-photo-list>
+      <p-photo-cards
+        v-else
+        :context="context"
+        :photos="results"
+        :select-mode="selectMode"
+        :filter="filter"
+        :open-photo="openPhoto"
+        :edit-photo="editPhoto"
+        :open-date="openDate"
+        :open-location="openLocation"
+        :is-shared-view="isShared"
+      ></p-photo-cards>
     </div>
   </div>
 </template>
@@ -411,7 +460,9 @@ export default {
             this.setOffset(response.offset);
 
             if (!this.embedded && this.results.length > 1) {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("%{n} pictures found"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("%{n} pictures found"), { n: this.results.length })
+              );
             }
           } else if (this.results.length >= Photo.limit()) {
             this.setOffset(response.offset);
@@ -584,7 +635,9 @@ export default {
             } else if (!this.embedded && this.results.length === 1) {
               this.$notify.info(this.$gettext("One picture found"));
             } else if (!this.embedded) {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("%{n} pictures found"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("%{n} pictures found"), { n: this.results.length })
+              );
             }
           } else {
             // this.$notify.info(this.$gettextInterpolate(this.$gettext("More than %{n} pictures found"), {n: 100}));

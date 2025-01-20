@@ -29,7 +29,7 @@ export default {
     },
     hidePanelDistance: {
       type: Number,
-      default: 12,
+      default: 250,
     },
     resetDistance: {
       type: Number,

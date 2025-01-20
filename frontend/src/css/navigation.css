@@ -232,18 +232,13 @@ nav .v-list__item__title.title {
 
 .toolbar-expansion-panel {
     position: relative;
-    display: none;
-}
-
-.toolbar-expansion-panel.toolbar-expansion-panel--visible {
-    display: block;
 }
 
 .toolbar-expansion-panel>.v-card {
     position: absolute;
     top: 0;
-    left: 3px;
-    right: 3px;
+    left: 2px;
+    right: 2px;
     height: auto;
     overflow: hidden;
     z-index: 2;

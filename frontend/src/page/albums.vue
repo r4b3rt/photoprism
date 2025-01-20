@@ -1,7 +1,12 @@
 <template>
   <div :class="$config.aclClasses('albums')" class="p-page p-page-albums" style="user-select: none">
     <v-form ref="form" class="p-albums-search" validate-on="blur" @submit.prevent="updateQuery()">
-      <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
+      <v-toolbar
+        flat
+        :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+        class="page-toolbar"
+        color="secondary"
+      >
         <v-text-field
           :model-value="filter.q"
           hide-details
@@ -34,83 +39,106 @@
         <v-btn icon class="action-reload" :title="$gettext('Reload')" @click.stop="refresh()">
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
-        <v-btn v-if="canUpload" icon class="hidden-sm-and-down action-upload" :title="$gettext('Upload')" @click.stop="showUpload()">
+        <v-btn
+          v-if="canUpload"
+          icon
+          class="hidden-sm-and-down action-upload"
+          :title="$gettext('Upload')"
+          @click.stop="showUpload()"
+        >
           <v-icon>mdi-cloud-upload</v-icon>
         </v-btn>
-        <v-btn v-if="canManage && staticFilter.type === 'album'" icon class="action-add" :title="$gettext('Add Album')" @click.prevent="create()">
+        <v-btn
+          v-if="canManage && staticFilter.type === 'album'"
+          icon
+          class="action-add"
+          :title="$gettext('Add Album')"
+          @click.prevent="create()"
+        >
           <v-icon>mdi-plus</v-icon>
         </v-btn>
-        <v-btn v-if="canManage && !staticFilter['order']" :icon="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'" :title="$gettext('Expand Search')" class="action-expand" :class="{ 'action-expand--active': expanded }" @click.stop="toggleExpansionPanel"></v-btn>
+        <v-btn
+          v-if="canManage && !staticFilter['order']"
+          :icon="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+          :title="$gettext('Expand Search')"
+          class="action-expand"
+          :class="{ 'action-expand--active': expanded }"
+          @click.stop="toggleExpansionPanel"
+        ></v-btn>
       </v-toolbar>
 
-      <div :class="{ 'toolbar-expansion-panel--visible': expanded }" class="toolbar-expansion-panel">
-        <v-card flat color="secondary">
-          <v-card-text class="dense">
-            <v-row dense>
-              <v-col cols="12" sm="4" class="p-year-select">
-                <v-select
-                  :model-value="filter.year"
-                  :label="$gettext('Year')"
-                  :disabled="context === 'state'"
-                  :menu-props="{ maxHeight: 346 }"
-                  single-line
-                  hide-details
-                  variant="solo-filled"
-                  :density="density"
-                  :items="yearOptions()"
-                  item-title="text"
-                  item-value="value"
-                  @update:model-value="
-                    (v) => {
-                      updateQuery({ year: v });
-                    }
-                  "
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="4" class="p-category-select">
-                <v-select
-                  :model-value="filter.category"
-                  :label="$gettext('Category')"
-                  :menu-props="{ maxHeight: 346 }"
-                  single-line
-                  hide-details
-                  variant="solo-filled"
-                  :density="density"
-                  :items="categories"
-                  item-title="text"
-                  item-value="value"
-                  @update:model-value="
-                    (v) => {
-                      updateQuery({ category: v });
-                    }
-                  "
-                >
-                </v-select>
-              </v-col>
-              <v-col cols="12" sm="4" class="p-sort-select">
-                <v-select
-                  :model-value="filter.order"
-                  :label="$gettext('Sort Order')"
-                  :menu-props="{ maxHeight: 400 }"
-                  single-line
-                  hide-details
-                  variant="solo-filled"
-                  :density="density"
-                  :items="context === 'album' ? options.sorting : options.sorting.filter((item) => item.value !== 'edited')"
-                  item-title="text"
-                  item-value="value"
-                  @update:model-value="
-                    (v) => {
-                      updateQuery({ order: v });
-                    }
-                  "
-                >
-                </v-select>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
+      <div class="toolbar-expansion-panel">
+        <v-expand-transition>
+          <v-card v-show="expanded" flat color="secondary">
+            <v-card-text class="dense">
+              <v-row dense>
+                <v-col cols="12" sm="4" class="p-year-select">
+                  <v-select
+                    :model-value="filter.year"
+                    :label="$gettext('Year')"
+                    :disabled="context === 'state'"
+                    :menu-props="{ maxHeight: 346 }"
+                    single-line
+                    hide-details
+                    variant="solo-filled"
+                    :density="density"
+                    :items="yearOptions()"
+                    item-title="text"
+                    item-value="value"
+                    @update:model-value="
+                      (v) => {
+                        updateQuery({ year: v });
+                      }
+                    "
+                  >
+                  </v-select>
+                </v-col>
+                <v-col cols="12" sm="4" class="p-category-select">
+                  <v-select
+                    :model-value="filter.category"
+                    :label="$gettext('Category')"
+                    :menu-props="{ maxHeight: 346 }"
+                    single-line
+                    hide-details
+                    variant="solo-filled"
+                    :density="density"
+                    :items="categories"
+                    item-title="text"
+                    item-value="value"
+                    @update:model-value="
+                      (v) => {
+                        updateQuery({ category: v });
+                      }
+                    "
+                  >
+                  </v-select>
+                </v-col>
+                <v-col cols="12" sm="4" class="p-sort-select">
+                  <v-select
+                    :model-value="filter.order"
+                    :label="$gettext('Sort Order')"
+                    :menu-props="{ maxHeight: 400 }"
+                    single-line
+                    hide-details
+                    variant="solo-filled"
+                    :density="density"
+                    :items="
+                      context === 'album' ? options.sorting : options.sorting.filter((item) => item.value !== 'edited')
+                    "
+                    item-title="text"
+                    item-value="value"
+                    @update:model-value="
+                      (v) => {
+                        updateQuery({ order: v });
+                      }
+                    "
+                  >
+                  </v-select>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </v-expand-transition>
       </div>
     </v-form>
 
@@ -118,9 +146,23 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else>
-      <p-scroll :hide-panel="hideExpansionPanel" :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"> </p-scroll>
+      <p-scroll
+        :hide-panel="hideExpansionPanel"
+        :load-more="loadMore"
+        :load-disabled="scrollDisabled"
+        :load-distance="scrollDistance"
+        :loading="loading"
+      >
+      </p-scroll>
 
-      <p-album-clipboard :refresh="refresh" :selection="selection" :share="share" :edit="edit" :clear-selection="clearSelection" :context="context"></p-album-clipboard>
+      <p-album-clipboard
+        :refresh="refresh"
+        :selection="selection"
+        :share="share"
+        :edit="edit"
+        :clear-selection="clearSelection"
+        :context="context"
+      ></p-album-clipboard>
 
       <div v-if="results.length === 0" class="pa-3">
         <v-alert color="primary" icon="mdi-lightbulb-outline" class="no-results opacity-60" variant="outlined">
@@ -130,23 +172,49 @@
           <div class="mt-2">
             {{ $gettext(`Try again using other filters or keywords.`) }}
             <template v-if="staticFilter.type === 'album'">
-              {{ $gettext(`After selecting pictures from search results, you can add them to an album using the context menu.`) }}
+              {{
+                $gettext(
+                  `After selecting pictures from search results, you can add them to an album using the context menu.`
+                )
+              }}
             </template>
             <template v-else>
-              {{ $gettext(`Your library is continuously analyzed to automatically create albums of special moments, trips, and places.`) }}
+              {{
+                $gettext(
+                  `Your library is continuously analyzed to automatically create albums of special moments, trips, and places.`
+                )
+              }}
             </template>
           </div>
         </v-alert>
 
-        <div v-if="canManage && staticFilter.type === 'album' && config.count.albums === 0" class="d-flex justify-center mt-8 mb-4">
+        <div
+          v-if="canManage && staticFilter.type === 'album' && config.count.albums === 0"
+          class="d-flex justify-center mt-8 mb-4"
+        >
           <v-btn color="secondary" rounded variant="flat" class="action-add" @click.prevent="create">
             {{ $gettext(`Add Album`) }}
           </v-btn>
         </div>
       </div>
-      <div v-else class="v-row search-results album-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-        <div v-for="(album, index) in results" :key="album.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
-          <div :data-uid="album.UID" style="user-select: none" class="result" :class="album.classes(selection.includes(album.UID))" @contextmenu.stop="onContextMenu($event, index)">
+      <div
+        v-else
+        class="v-row search-results album-results cards-view"
+        :class="{ 'select-results': selection.length > 0 }"
+      >
+        <div
+          v-for="(album, index) in results"
+          :key="album.UID"
+          ref="items"
+          class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1"
+        >
+          <div
+            :data-uid="album.UID"
+            style="user-select: none"
+            class="result"
+            :class="album.classes(selection.includes(album.UID))"
+            @contextmenu.stop="onContextMenu($event, index)"
+          >
             <div
               :key="album.UID"
               :title="album.Title"
@@ -158,34 +226,81 @@
               @click.stop.prevent="onClick($event, index)"
             >
               <div class="preview__overlay"></div>
-              <button v-if="canShare && album.LinkCount > 0" class="action-share" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onShare($event, index)" @touchmove.stop.prevent @click.stop.prevent="onShare($event, index)">
+              <button
+                v-if="canShare && album.LinkCount > 0"
+                class="action-share"
+                @touchstart.stop.prevent="input.touchStart($event, index)"
+                @touchend.stop.prevent="onShare($event, index)"
+                @touchmove.stop.prevent
+                @click.stop.prevent="onShare($event, index)"
+              >
                 <i class="mdi mdi-share-variant" />
               </button>
-              <button class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+              <button
+                class="input-select"
+                @touchstart.stop.prevent="input.touchStart($event, index)"
+                @touchend.stop.prevent="onSelect($event, index)"
+                @touchmove.stop.prevent
+                @click.stop.prevent="onSelect($event, index)"
+              >
                 <i class="mdi mdi-check-circle select-on" />
                 <i class="mdi mdi-circle-outline select-off" />
               </button>
-              <button class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+              <button
+                class="input-favorite"
+                @touchstart.stop.prevent="input.touchStart($event, index)"
+                @touchend.stop.prevent="toggleLike($event, index)"
+                @touchmove.stop.prevent
+                @click.stop.prevent="toggleLike($event, index)"
+              >
                 <i v-if="album.Favorite" class="mdi mdi-star text-favorite select-on" />
                 <i v-else class="mdi mdi-star-outline select-off" />
               </button>
-              <button v-if="canManage && experimental && featPrivate && album.Private" class="input-private" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onEdit($event, index)" @touchmove.stop.prevent @click.stop.prevent="onEdit($event, index)">
+              <button
+                v-if="canManage && experimental && featPrivate && album.Private"
+                class="input-private"
+                @touchstart.stop.prevent="input.touchStart($event, index)"
+                @touchend.stop.prevent="onEdit($event, index)"
+                @touchmove.stop.prevent
+                @click.stop.prevent="onEdit($event, index)"
+              >
                 <i class="mdi mdi-lock" />
               </button>
             </div>
 
             <div class="meta">
-              <button v-if="album.Type === 'month'" :title="album.Title" class="action-title-edit meta-title text-capitalize" :data-uid="album.UID" @click.stop.prevent="edit(album)">
+              <button
+                v-if="album.Type === 'month'"
+                :title="album.Title"
+                class="action-title-edit meta-title text-capitalize"
+                :data-uid="album.UID"
+                @click.stop.prevent="edit(album)"
+              >
                 {{ album.getDateString() }}
               </button>
-              <button v-else-if="album.Title" :title="album.Title" class="action-title-edit meta-title" :data-uid="album.UID" @click.stop.prevent="edit(album)">
+              <button
+                v-else-if="album.Title"
+                :title="album.Title"
+                class="action-title-edit meta-title"
+                :data-uid="album.UID"
+                @click.stop.prevent="edit(album)"
+              >
                 {{ album.Title }}
               </button>
 
-              <button v-if="album.Description" :title="$gettext('Description')" class="meta-description" @click.exact="edit(album)">
+              <button
+                v-if="album.Description"
+                :title="$gettext('Description')"
+                class="meta-description"
+                @click.exact="edit(album)"
+              >
                 {{ album.Description }}
               </button>
-              <button v-else-if="album.Type === 'album' && !album.PhotoCount" class="meta-description" @click.stop.prevent="$router.push({ name: 'browse' })">
+              <button
+                v-else-if="album.Type === 'album' && !album.PhotoCount"
+                class="meta-description"
+                @click.stop.prevent="$router.push({ name: 'browse' })"
+              >
                 {{ $gettext(`Add pictures from search results by selecting them.`) }}
               </button>
 
@@ -197,15 +312,29 @@
               </div>
 
               <div class="meta-details">
-                <button v-if="album.Type === 'folder'" :title="'/' + album.Path" class="meta-path" @click.exact="edit(album)">
+                <button
+                  v-if="album.Type === 'folder'"
+                  :title="'/' + album.Path"
+                  class="meta-path"
+                  @click.exact="edit(album)"
+                >
                   <i class="mdi mdi-folder" />
                   /{{ album.Path }}
                 </button>
-                <button v-if="album.Category !== ''" :title="album.Category" class="meta-category" @click.exact="edit(album)">
+                <button
+                  v-if="album.Category !== ''"
+                  :title="album.Category"
+                  class="meta-category"
+                  @click.exact="edit(album)"
+                >
                   <i class="mdi mdi-tag" />
                   {{ album.Category }}
                 </button>
-                <button v-if="album.getLocation() !== ''" class="meta-location text-truncate" @click.exact="edit(album)">
+                <button
+                  v-if="album.getLocation() !== ''"
+                  class="meta-location text-truncate"
+                  @click.exact="edit(album)"
+                >
                   <i class="mdi mdi-map-marker" />
                   {{ album.getLocation() }}
                 </button>
@@ -215,8 +344,19 @@
         </div>
       </div>
     </div>
-    <p-share-dialog :show="dialog.share" :model="model" @upload="webdavUpload" @close="dialog.share = false"></p-share-dialog>
-    <p-service-upload-dialog :show="dialog.upload" :items="{ albums: selection }" :model="model" @cancel="dialog.upload = false" @confirm="dialog.upload = false"></p-service-upload-dialog>
+    <p-share-dialog
+      :show="dialog.share"
+      :model="model"
+      @upload="webdavUpload"
+      @close="dialog.share = false"
+    ></p-share-dialog>
+    <p-service-upload-dialog
+      :show="dialog.upload"
+      :items="{ albums: selection }"
+      :model="model"
+      @cancel="dialog.upload = false"
+      @confirm="dialog.upload = false"
+    ></p-service-upload-dialog>
     <p-album-edit-dialog :show="dialog.edit" :album="model" @close="dialog.edit = false"></p-album-edit-dialog>
   </div>
 </template>
@@ -604,7 +744,9 @@ export default {
             this.setOffset(resp.offset);
 
             if (this.results.length > 1) {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("All %{n} albums loaded"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("All %{n} albums loaded"), { n: this.results.length })
+              );
             }
           } else {
             this.setOffset(resp.offset + resp.limit);
@@ -746,7 +888,9 @@ export default {
             } else if (this.results.length === 1) {
               this.$notify.info(this.$gettext("One album found"));
             } else {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("%{n} albums found"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("%{n} albums found"), { n: this.results.length })
+              );
             }
           } else {
             // this.$notify.info(this.$gettext('More than 20 albums found'));

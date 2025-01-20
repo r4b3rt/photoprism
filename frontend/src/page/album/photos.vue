@@ -1,18 +1,66 @@
 <template>
   <div class="p-page p-page-album-photos">
-    <p-album-toolbar ref="toolbar" :filter="filter" :album="model" :settings="settings" :refresh="refresh" :update-filter="updateFilter" :update-query="updateQuery"></p-album-toolbar>
+    <p-album-toolbar
+      ref="toolbar"
+      :filter="filter"
+      :album="model"
+      :settings="settings"
+      :refresh="refresh"
+      :update-filter="updateFilter"
+      :update-query="updateQuery"
+    ></p-album-toolbar>
 
     <div v-if="loading" class="pa-6">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else>
-      <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"> </p-scroll>
+      <p-scroll
+        :load-more="loadMore"
+        :load-disabled="scrollDisabled"
+        :load-distance="scrollDistance"
+        :loading="loading"
+      >
+      </p-scroll>
 
       <p-photo-clipboard :refresh="refresh" :album="model" context="album"></p-photo-clipboard>
 
-      <p-photo-mosaic v-if="settings.view === 'mosaic'" context="album" :photos="results" :select-mode="selectMode" :filter="filter" :album="model" :edit-photo="editPhoto" :open-photo="openPhoto" :is-shared-view="isShared"></p-photo-mosaic>
-      <p-photo-list v-else-if="settings.view === 'list'" context="album" :photos="results" :select-mode="selectMode" :filter="filter" :album="model" :open-photo="openPhoto" :edit-photo="editPhoto" :open-date="openDate" :open-location="openLocation" :is-shared-view="isShared"></p-photo-list>
-      <p-photo-cards v-else context="album" :photos="results" :select-mode="selectMode" :filter="filter" :album="model" :open-photo="openPhoto" :edit-photo="editPhoto" :open-date="openDate" :open-location="openLocation" :is-shared-view="isShared"></p-photo-cards>
+      <p-photo-mosaic
+        v-if="settings.view === 'mosaic'"
+        context="album"
+        :photos="results"
+        :select-mode="selectMode"
+        :filter="filter"
+        :album="model"
+        :edit-photo="editPhoto"
+        :open-photo="openPhoto"
+        :is-shared-view="isShared"
+      ></p-photo-mosaic>
+      <p-photo-list
+        v-else-if="settings.view === 'list'"
+        context="album"
+        :photos="results"
+        :select-mode="selectMode"
+        :filter="filter"
+        :album="model"
+        :open-photo="openPhoto"
+        :edit-photo="editPhoto"
+        :open-date="openDate"
+        :open-location="openLocation"
+        :is-shared-view="isShared"
+      ></p-photo-list>
+      <p-photo-cards
+        v-else
+        context="album"
+        :photos="results"
+        :select-mode="selectMode"
+        :filter="filter"
+        :album="model"
+        :open-photo="openPhoto"
+        :edit-photo="editPhoto"
+        :open-date="openDate"
+        :open-location="openLocation"
+        :is-shared-view="isShared"
+      ></p-photo-cards>
     </div>
   </div>
 </template>
@@ -282,7 +330,9 @@ export default {
             this.offset = offset;
 
             if (this.results.length > 1) {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("%{n} pictures found"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("%{n} pictures found"), { n: this.results.length })
+              );
             }
           } else if (this.results.length >= Photo.limit()) {
             this.offset = offset;
@@ -443,7 +493,9 @@ export default {
             } else if (this.results.length === 1) {
               this.$notify.info(this.$gettext("One picture found"));
             } else {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("%{n} pictures found"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("%{n} pictures found"), { n: this.results.length })
+              );
             }
           } else {
             // this.$notify.info(this.$gettextInterpolate(this.$gettext("More than %{n} pictures found"), {n: 100}));
