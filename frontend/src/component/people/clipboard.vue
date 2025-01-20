@@ -13,17 +13,55 @@
         offset="12"
       >
         <template #activator="{ props }">
-          <v-btn v-bind="props" icon size="52" color="highlight" variant="elevated" density="comfortable" class="action-menu opacity-95 ma-5">
+          <v-btn
+            v-bind="props"
+            icon
+            size="52"
+            color="highlight"
+            variant="elevated"
+            density="comfortable"
+            class="action-menu opacity-95 ma-5"
+          >
             <span class="count-clipboard">{{ selection.length }}</span>
           </v-btn>
         </template>
 
-        <v-btn key="action-download" :title="$gettext('Download')" icon="mdi-download" color="download" density="comfortable"  class="action-download" :disabled="!canDownload || selection.length !== 1" @click.stop="download()"></v-btn>
-        <v-btn v-if="canAddAlbums" key="action-album" :title="$gettext('Add to album')" icon="mdi-bookmark" color="album" density="comfortable"  :disabled="selection.length === 0" class="action-album" @click.stop="dialog.album = true"></v-btn>
-        <v-btn key="action-close" icon="mdi-close" color="grey-darken-2" density="comfortable" class="action-clear" @click.stop="clearClipboard()"></v-btn>
+        <v-btn
+          key="action-download"
+          :title="$gettext('Download')"
+          icon="mdi-download"
+          color="download"
+          density="comfortable"
+          class="action-download"
+          :disabled="!canDownload || selection.length !== 1"
+          @click.stop="download()"
+        ></v-btn>
+        <v-btn
+          v-if="canAddAlbums"
+          key="action-album"
+          :title="$gettext('Add to album')"
+          icon="mdi-bookmark"
+          color="album"
+          density="comfortable"
+          :disabled="selection.length === 0"
+          class="action-album"
+          @click.stop="dialog.album = true"
+        ></v-btn>
+        <v-btn
+          key="action-close"
+          icon="mdi-close"
+          color="grey-darken-2"
+          density="comfortable"
+          class="action-clear"
+          @click.stop="clearClipboard()"
+        ></v-btn>
       </v-speed-dial>
     </div>
-    <p-photo-album-dialog :show="dialog.album" @cancel="dialog.album = false" @confirm="addToAlbum"></p-photo-album-dialog>
+    <p-photo-album-dialog
+      :show="dialog.album"
+      @cancel="dialog.album = false"
+      @confirm="addToAlbum"
+    ></p-photo-album-dialog>
   </div>
 </template>
 <script>

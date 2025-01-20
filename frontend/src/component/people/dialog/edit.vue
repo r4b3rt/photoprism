@@ -1,5 +1,12 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="500" class="dialog-person-edit" color="background" @keydown.esc="close">
+  <v-dialog
+    :model-value="show"
+    persistent
+    max-width="500"
+    class="dialog-person-edit"
+    color="background"
+    @keydown.esc="close"
+  >
     <v-form ref="form" validate-on="blur" class="form-person-edit" accept-charset="UTF-8" @submit.prevent="confirm">
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
@@ -9,13 +16,24 @@
         <v-card-text class="dense">
           <v-row align="center" dense>
             <v-col cols="12">
-              <v-text-field v-model="model.Name" hide-details autofocus :rules="[titleRule]" :label="$gettext('Name')" :disabled="disabled" class="input-title" @keyup.enter="confirm"></v-text-field>
+              <v-text-field
+                v-model="model.Name"
+                hide-details
+                autofocus
+                :rules="[titleRule]"
+                :label="$gettext('Name')"
+                :disabled="disabled"
+                class="input-title"
+                @keyup.enter="confirm"
+              ></v-text-field>
             </v-col>
             <v-col sm="4">
-              <v-checkbox v-model="model.Favorite" :disabled="disabled" :label="$gettext('Favorite')" hide-details> </v-checkbox>
+              <v-checkbox v-model="model.Favorite" :disabled="disabled" :label="$gettext('Favorite')" hide-details>
+              </v-checkbox>
             </v-col>
             <v-col sm="4">
-              <v-checkbox v-model="model.Hidden" :disabled="disabled" :label="$gettext('Hidden')" hide-details> </v-checkbox>
+              <v-checkbox v-model="model.Hidden" :disabled="disabled" :label="$gettext('Hidden')" hide-details>
+              </v-checkbox>
             </v-col>
           </v-row>
         </v-card-text>
