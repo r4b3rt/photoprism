@@ -286,30 +286,59 @@ func TestPhoto_FileTitle(t *testing.T) {
 	})
 }
 
-func TestPhoto_SubjectNames(t *testing.T) {
-	t.Run("Photo09", func(t *testing.T) {
-		m := PhotoFixtures.Get("Photo09")
+func TestPhoto_UpdateTitleLabels(t *testing.T) {
+	FirstOrCreateLabel(NewLabel("Food", 1))
+	FirstOrCreateLabel(NewLabel("Wine", 2))
+	FirstOrCreateLabel(&Label{LabelName: "Bar", LabelSlug: "bar", CustomSlug: "bar", DeletedAt: TimeStamp()})
 
-		if names := m.SubjectNames(); len(names) > 0 {
-			t.Errorf("no name expected: %#v", names)
+	t.Run("Success", func(t *testing.T) {
+		details := &Details{Keywords: "snake, otter, food", KeywordsSrc: SrcMeta}
+		photo := Photo{ID: 234567, PhotoTitle: "I was in a nice Wine Bar!", TitleSrc: SrcName, PhotoCaption: "cow, flower, food", CaptionSrc: SrcMeta, Details: details}
+
+		if err := photo.Save(); err != nil {
+			t.Fatal(err)
 		}
+
+		p := FindPhoto(photo)
+
+		assert.Equal(t, 0, len(p.Labels))
+
+		if err := p.UpdateTitleLabels(); err != nil {
+			t.Fatal(err)
+		}
+
+		t.Logf("(1) %#v", p.Labels)
+
+		p = FindPhoto(*p)
+
+		t.Logf("(2) %#v", p.Labels)
+
+		assert.Equal(t, "I was in a nice Wine Bar!", p.PhotoTitle)
+		assert.Equal(t, "cow, flower, food", p.PhotoCaption)
+		assert.Equal(t, "snake, otter, food", p.Details.Keywords)
+		assert.Equal(t, 1, len(p.Labels))
 	})
-	t.Run("Photo10", func(t *testing.T) {
-		m := PhotoFixtures.Get("Photo10")
+	t.Run("EmptyTitle", func(t *testing.T) {
+		details := &Details{Keywords: "snake, otter, food", KeywordsSrc: SrcMeta}
+		photo := Photo{ID: 234568, PhotoTitle: "", TitleSrc: SrcName, PhotoCaption: "cow, flower, food", CaptionSrc: SrcMeta, Details: details}
 
-		if names := m.SubjectNames(); len(names) == 1 {
-			assert.Equal(t, "Actor A", names[0])
-		} else {
-			t.Logf("unstable subject list: %#v", names)
+		if err := photo.Save(); err != nil {
+			t.Fatal(err)
 		}
-	})
-	t.Run("Photo04", func(t *testing.T) {
-		m := PhotoFixtures.Get("Photo04")
 
-		if names := m.SubjectNames(); len(names) != 2 {
-			t.Errorf("two names expected: %#v", names)
-		} else {
-			assert.Equal(t, []string{"Corn McCornface", "Jens Mander"}, names)
+		p := FindPhoto(photo)
+
+		assert.Equal(t, 0, len(p.Labels))
+
+		if err := p.UpdateTitleLabels(); err != nil {
+			t.Fatal(err)
 		}
+
+		p = FindPhoto(*p)
+
+		assert.Equal(t, "", p.PhotoTitle)
+		assert.Equal(t, "cow, flower, food", p.PhotoCaption)
+		assert.Equal(t, "snake, otter, food", p.Details.Keywords)
+		assert.Equal(t, 0, len(p.Labels))
 	})
 }

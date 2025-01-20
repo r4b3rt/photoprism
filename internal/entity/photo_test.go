@@ -50,7 +50,7 @@ func TestSavePhotoForm(t *testing.T) {
 
 		m := PhotoFixtures.Get("Photo08")
 
-		if err := SavePhotoForm(m, f); err != nil {
+		if err := SavePhotoForm(&m, f); err != nil {
 			t.Fatal(err)
 		}
 
@@ -275,27 +275,6 @@ func TestPhoto_AddLabels(t *testing.T) {
 	})
 }
 
-func TestPhoto_SetCaption(t *testing.T) {
-	t.Run("EmptyDescription", func(t *testing.T) {
-		m := PhotoFixtures.Get("Photo15")
-		assert.Equal(t, "photo description non-photographic", m.PhotoCaption)
-		m.SetCaption("", SrcManual)
-		assert.Equal(t, "photo description non-photographic", m.PhotoCaption)
-	})
-	t.Run("DescriptionNotFromTheSameSource", func(t *testing.T) {
-		m := PhotoFixtures.Get("Photo15")
-		assert.Equal(t, "photo description non-photographic", m.PhotoCaption)
-		m.SetCaption("new photo description", SrcName)
-		assert.Equal(t, "photo description non-photographic", m.PhotoCaption)
-	})
-	t.Run("Ok", func(t *testing.T) {
-		m := PhotoFixtures.Get("Photo15")
-		assert.Equal(t, "photo description non-photographic", m.PhotoCaption)
-		m.SetCaption("new photo description", SrcMeta)
-		assert.Equal(t, "new photo description", m.PhotoCaption)
-	})
-}
-
 func TestPhoto_Delete(t *testing.T) {
 	t.Run("NotPermanent", func(t *testing.T) {
 		m := PhotoFixtures.Get("Photo16")
@@ -475,113 +454,31 @@ func TestPhoto_UpdateLabels(t *testing.T) {
 	})
 }
 
-func TestPhoto_UpdateTitleLabels(t *testing.T) {
-	FirstOrCreateLabel(NewLabel("Food", 1))
-	FirstOrCreateLabel(NewLabel("Wine", 2))
-	FirstOrCreateLabel(&Label{LabelName: "Bar", LabelSlug: "bar", CustomSlug: "bar", DeletedAt: TimeStamp()})
+func TestPhoto_SubjectNames(t *testing.T) {
+	t.Run("Photo09", func(t *testing.T) {
+		m := PhotoFixtures.Get("Photo09")
 
-	t.Run("Success", func(t *testing.T) {
-		details := &Details{Keywords: "snake, otter, food", KeywordsSrc: SrcMeta}
-		photo := Photo{ID: 234567, PhotoTitle: "I was in a nice Wine Bar!", TitleSrc: SrcName, PhotoCaption: "cow, flower, food", CaptionSrc: SrcMeta, Details: details}
-
-		if err := photo.Save(); err != nil {
-			t.Fatal(err)
+		if names := m.SubjectNames(); len(names) > 0 {
+			t.Errorf("no name expected: %#v", names)
 		}
-
-		p := FindPhoto(photo)
-
-		assert.Equal(t, 0, len(p.Labels))
-
-		if err := p.UpdateTitleLabels(); err != nil {
-			t.Fatal(err)
-		}
-
-		t.Logf("(1) %#v", p.Labels)
-
-		p = FindPhoto(*p)
-
-		t.Logf("(2) %#v", p.Labels)
-
-		assert.Equal(t, "I was in a nice Wine Bar!", p.PhotoTitle)
-		assert.Equal(t, "cow, flower, food", p.PhotoCaption)
-		assert.Equal(t, "snake, otter, food", p.Details.Keywords)
-		assert.Equal(t, 1, len(p.Labels))
 	})
-	t.Run("EmptyTitle", func(t *testing.T) {
-		details := &Details{Keywords: "snake, otter, food", KeywordsSrc: SrcMeta}
-		photo := Photo{ID: 234568, PhotoTitle: "", TitleSrc: SrcName, PhotoCaption: "cow, flower, food", CaptionSrc: SrcMeta, Details: details}
+	t.Run("Photo10", func(t *testing.T) {
+		m := PhotoFixtures.Get("Photo10")
 
-		if err := photo.Save(); err != nil {
-			t.Fatal(err)
+		if names := m.SubjectNames(); len(names) == 1 {
+			assert.Equal(t, "Actor A", names[0])
+		} else {
+			t.Logf("unstable subject list: %#v", names)
 		}
-
-		p := FindPhoto(photo)
-
-		assert.Equal(t, 0, len(p.Labels))
-
-		if err := p.UpdateTitleLabels(); err != nil {
-			t.Fatal(err)
-		}
-
-		p = FindPhoto(*p)
-
-		assert.Equal(t, "", p.PhotoTitle)
-		assert.Equal(t, "cow, flower, food", p.PhotoCaption)
-		assert.Equal(t, "snake, otter, food", p.Details.Keywords)
-		assert.Equal(t, 0, len(p.Labels))
 	})
-}
+	t.Run("Photo04", func(t *testing.T) {
+		m := PhotoFixtures.Get("Photo04")
 
-func TestPhoto_UpdateCaptionLabels(t *testing.T) {
-	FirstOrCreateLabel(NewLabel("Food", 1))
-	FirstOrCreateLabel(NewLabel("Wine", 2))
-	FirstOrCreateLabel(&Label{LabelName: "Bar", LabelSlug: "bar", CustomSlug: "bar", DeletedAt: TimeStamp()})
-
-	t.Run("Success", func(t *testing.T) {
-		details := &Details{Keywords: "snake, otter", KeywordsSrc: SrcMeta}
-		photo := Photo{ID: 234667, PhotoTitle: "I was in a nice Bar!", TitleSrc: SrcName, PhotoCaption: "globe, wine, food", CaptionSrc: SrcMeta, Details: details}
-
-		if err := photo.Save(); err != nil {
-			t.Fatal(err)
+		if names := m.SubjectNames(); len(names) != 2 {
+			t.Errorf("two names expected: %#v", names)
+		} else {
+			assert.Equal(t, []string{"Corn McCornface", "Jens Mander"}, names)
 		}
-
-		p := FindPhoto(photo)
-
-		assert.Equal(t, 0, len(p.Labels))
-
-		if err := p.UpdateCaptionLabels(); err != nil {
-			t.Fatal(err)
-		}
-
-		p = FindPhoto(*p)
-
-		assert.Equal(t, "I was in a nice Bar!", p.PhotoTitle)
-		assert.Equal(t, "globe, wine, food", p.PhotoCaption)
-		assert.Equal(t, "snake, otter", p.Details.Keywords)
-		assert.Equal(t, 2, len(p.Labels))
-	})
-	t.Run("EmptyCaption", func(t *testing.T) {
-		details := &Details{Keywords: "snake, otter, food", KeywordsSrc: SrcMeta}
-		photo := Photo{ID: 234668, PhotoTitle: "cow, wine, food", TitleSrc: SrcName, PhotoCaption: "", CaptionSrc: SrcMeta, Details: details}
-
-		if err := photo.Save(); err != nil {
-			t.Fatal(err)
-		}
-
-		p := FindPhoto(photo)
-
-		assert.Equal(t, 0, len(p.Labels))
-
-		if err := p.UpdateCaptionLabels(); err != nil {
-			t.Fatal(err)
-		}
-
-		p = FindPhoto(*p)
-
-		assert.Equal(t, "cow, wine, food", p.PhotoTitle)
-		assert.Equal(t, "", p.PhotoCaption)
-		assert.Equal(t, "snake, otter, food", p.Details.Keywords)
-		assert.Equal(t, 0, len(p.Labels))
 	})
 }
 
@@ -749,28 +646,6 @@ func TestPhoto_LoadPlace(t *testing.T) {
 		location := &Cell{Place: nil}
 		photo := Photo{PhotoName: "Holiday", Cell: location}
 		assert.Error(t, photo.LoadPlace())
-	})
-}
-
-func TestPhoto_HasCaption(t *testing.T) {
-	t.Run("False", func(t *testing.T) {
-		photo := Photo{PhotoCaption: ""}
-		assert.False(t, photo.HasCaption())
-	})
-	t.Run("True", func(t *testing.T) {
-		photo := Photo{PhotoCaption: "bcss"}
-		assert.True(t, photo.HasCaption())
-	})
-}
-
-func TestPhoto_NoCaption(t *testing.T) {
-	t.Run("True", func(t *testing.T) {
-		photo := Photo{PhotoCaption: ""}
-		assert.True(t, photo.NoCaption())
-	})
-	t.Run("False", func(t *testing.T) {
-		photo := Photo{PhotoCaption: "bcss"}
-		assert.False(t, photo.NoCaption())
 	})
 }
 

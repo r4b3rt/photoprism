@@ -24,6 +24,11 @@ func (m *Photo) NoTitle() bool {
 	return m.PhotoTitle == ""
 }
 
+// GetTitle returns the photo title, if any.
+func (m *Photo) GetTitle() string {
+	return m.PhotoTitle
+}
+
 // SetTitle changes the photo title and clips it to 300 characters.
 func (m *Photo) SetTitle(title, source string) {
 	title = strings.Trim(title, "_&|{}<>: \n\r\t\\")
@@ -201,20 +206,6 @@ func (m *Photo) GenerateAndSaveTitle() error {
 	return nil
 }
 
-// GenerateCaption generates the caption from the specified list of at least 3 names if CaptionSrc is auto.
-func (m *Photo) GenerateCaption(names []string) {
-	if m.CaptionSrc != SrcAuto {
-		return
-	}
-
-	// Generate caption from the specified list of names.
-	if len(names) > 3 {
-		m.PhotoCaption = txt.JoinNames(names, false)
-	} else {
-		m.PhotoCaption = ""
-	}
-}
-
 // FileTitle returns a photo title based on the file name and/or path.
 func (m *Photo) FileTitle() string {
 	// Generate title based on photo name, if not generated:
@@ -241,16 +232,30 @@ func (m *Photo) FileTitle() string {
 	return ""
 }
 
-// SubjectNames returns all known subject names.
-func (m *Photo) SubjectNames() []string {
-	if f, err := m.PrimaryFile(); err == nil {
-		return f.SubjectNames()
+// UpdateTitleLabels updates the labels assigned based on the photo title.
+func (m *Photo) UpdateTitleLabels() error {
+	if m == nil {
+		return nil
+	} else if m.PhotoTitle == "" {
+		return nil
+	} else if SrcPriority[m.TitleSrc] < SrcPriority[SrcName] {
+		return nil
 	}
 
-	return nil
-}
+	keywords := txt.UniqueKeywords(m.PhotoTitle)
 
-// SubjectKeywords returns keywords for all known subject names.
-func (m *Photo) SubjectKeywords() []string {
-	return txt.Words(strings.Join(m.SubjectNames(), " "))
+	var labelIds []uint
+
+	for _, w := range keywords {
+		if label, err := FindLabel(w, true); err == nil {
+			if label.Skip() {
+				continue
+			}
+
+			labelIds = append(labelIds, label.ID)
+			FirstOrCreatePhotoLabel(NewPhotoLabel(m.ID, label.ID, 10, classify.SrcTitle))
+		}
+	}
+
+	return Db().Where("label_src = ? AND photo_id = ? AND label_id NOT IN (?)", classify.SrcTitle, m.ID, labelIds).Delete(&PhotoLabel{}).Error
 }

@@ -101,13 +101,13 @@ func UpdatePhoto(router *gin.RouterGroup) {
 		}
 
 		// 2) Assign and validate request form values.
-		if err := c.BindJSON(&frm); err != nil {
+		if err = c.BindJSON(&frm); err != nil {
 			Abort(c, http.StatusBadRequest, i18n.ErrBadRequest)
 			return
 		}
 
 		// 3) Save model with values from form
-		if err := entity.SavePhotoForm(m, frm); err != nil {
+		if err = entity.SavePhotoForm(&m, frm); err != nil {
 			Abort(c, http.StatusInternalServerError, i18n.ErrSaveFailed)
 			return
 		} else if frm.PhotoPrivate {

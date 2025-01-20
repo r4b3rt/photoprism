@@ -38,6 +38,8 @@ type Photo struct {
 	TitleSrc         string    `json:"TitleSrc"`
 	PhotoCaption     string    `json:"Caption"`
 	CaptionSrc       string    `json:"CaptionSrc"`
+	PhotoDescription string    `json:"Description"`
+	DescriptionSrc   string    `json:"DescriptionSrc"`
 	Details          Details   `json:"Details"`
 	PhotoStack       int8      `json:"Stack"`
 	PhotoFavorite    bool      `json:"Favorite"`
