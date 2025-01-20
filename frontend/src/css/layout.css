@@ -176,10 +176,6 @@
     border-radius: 24px !important;
 }
 
-#photoprism div.v-dialog.v-dialog--fullscreen > div.v-card {
-    border-radius: 0;
-}
-
 .v-autocomplete__content.v-menu__content,
 .v-autocomplete__content.v-menu__content .v-card {
     border-radius: 0 0 4px 4px;

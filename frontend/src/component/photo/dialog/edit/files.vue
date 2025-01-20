@@ -25,7 +25,7 @@
                       <v-table
                         tile
                         hover
-                        :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+                        density="compact"
                         class="photo-files d-flex bg-transparent"
                       >
                         <tbody>
@@ -309,7 +309,7 @@
                             </td>
                             <td class="text-capitalize">{{ file.MainColor }}</td>
                           </tr>
-                          <tr v-if="file.Chroma">
+                          <tr v-if="file?.Chroma > 0">
                             <td>
                               {{ $gettext(`Chroma`) }}
                             </td>

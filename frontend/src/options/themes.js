@@ -1,7 +1,15 @@
 import { $gettext, T } from "common/gettext";
 import { style, colors, variables } from "ui";
 
-/* Theme Definitions */
+/* Theme Color Variations */
+
+export const variations = {
+  colors: ["primary", "highlight", "secondary", "surface", "surface-variant", "navigation"],
+  lighten: 2,
+  darken: 1,
+};
+
+/* User Interface Themes */
 
 let themes = {
   /* Default user interface theme */
@@ -684,14 +692,6 @@ let themes = {
       "focus-opacity": 0.0,
     },
   },
-};
-
-/* Automatically Generated Theme Color variations */
-
-export const variations = {
-  colors: ["primary", "highlight", "secondary", "surface", "surface-variant", "navigation"],
-  lighten: 2,
-  darken: 1,
 };
 
 /* Themes Available for Selection in Settings > General */

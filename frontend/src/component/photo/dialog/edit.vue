@@ -1,16 +1,17 @@
 <template>
   <v-dialog
+    ref="dialog"
     :model-value="show"
-    fullscreen
-    :scrim="false"
+    :fullscreen="$vuetify.display.mdAndDown"
+    scrim
     scrollable
     persistent
-    class="p-photo-edit-dialog"
+    class="p-photo-edit-dialog v-dialog--large"
     @click.stop
     @keydown.esc="close"
   >
-    <v-card tile color="background">
-      <v-toolbar flat color="navigation" :density="$vuetify.display.smAndDown ? 'compact' : 'comfortable'">
+    <v-card :tile="$vuetify.display.mdAndDown" color="background">
+      <v-toolbar flat color="secondary" :density="$vuetify.display.mdAndDown ? 'compact' : 'comfortable'">
         <v-btn icon class="action-close" @click.stop="close">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -32,12 +33,7 @@
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-      <v-tabs
-        v-model="active"
-        elevation="0"
-        class="form"
-        :density="$vuetify.display.smAndDown ? 'comfortable' : 'default'"
-      >
+      <v-tabs v-model="active" elevation="0" :density="$vuetify.display.smAndDown ? 'comfortable' : 'default'">
         <v-tab id="tab-details" ripple>
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Details')">mdi-pencil</v-icon>
           <template v-else>
@@ -78,7 +74,7 @@
         </v-tab>
       </v-tabs>
 
-      <v-tabs-window v-model="active" class="overflow-y-auto" style="height: 100%">
+      <v-tabs-window v-model="active">
         <v-tabs-window-item>
           <p-tab-photo-details
             ref="details"
@@ -176,7 +172,12 @@ export default {
   watch: {
     show: function (show) {
       if (show) {
+        // Disable the browser scrollbar.
+        this.$scrollbar.hide();
         this.find(this.index);
+      } else {
+        // Re-enable the browser scrollbar.
+        this.$scrollbar.show();
       }
     },
   },

@@ -152,8 +152,16 @@ export default {
       },
     };
   },
+  watch: {
+    model: function () {
+      this.refresh();
+    },
+  },
   methods: {
-    refresh() {},
+    refresh() {
+      this.markers = this.model.getMarkers(true);
+      this.imageUrl = this.model.thumbnailUrl("fit_720");
+    },
     onReject(marker) {
       if (this.busy || !marker) return;
 
