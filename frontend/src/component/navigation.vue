@@ -112,7 +112,7 @@
               <v-icon class="ma-auto">mdi-magnify</v-icon>
             </v-list-item>
             <div v-else-if="!isMini && $config.feature('search')">
-              <v-list-item to="/browse" variant="text" class="nav-browse activator" :ripple="false" @click.stop="">
+              <v-list-item to="/browse" variant="text" class="nav-browse activator" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
                     {{ $gettext(`Search`) }}
@@ -123,13 +123,7 @@
 
               <v-list-group>
                 <template #activator="{ props }">
-                  <v-list-item
-                    v-bind="props"
-                    variant="text"
-                    class="nav-browse activator-parent"
-                    :ripple="false"
-                    @click.stop=""
-                  >
+                  <v-list-item v-bind="props" variant="text" class="nav-browse activator-parent" @click.stop="">
                     <v-icon>mdi-magnify</v-icon>
                   </v-list-item>
                 </template>
@@ -139,7 +133,6 @@
                   :exact="true"
                   variant="text"
                   class="nav-monochrome"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -152,7 +145,6 @@
                   :exact="true"
                   variant="text"
                   class="nav-panoramas"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -165,7 +157,6 @@
                   :exact="true"
                   variant="text"
                   class="nav-animated"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -179,7 +170,6 @@
                   :exact="true"
                   variant="text"
                   class="nav-vectors"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -192,7 +182,6 @@
                   :exact="true"
                   variant="text"
                   class="nav-stacks"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -205,7 +194,6 @@
                   :exact="true"
                   variant="text"
                   class="nav-scans"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -219,7 +207,6 @@
                   to="/review"
                   variant="text"
                   class="nav-review"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -234,7 +221,6 @@
                   to="/private"
                   variant="text"
                   class="nav-private"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -248,7 +234,6 @@
                   to="/archive"
                   variant="text"
                   class="nav-archive"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -271,7 +256,7 @@
               <v-icon class="ma-auto">mdi-bookmark</v-icon>
             </v-list-item>
             <div v-else-if="!isMini" v-show="$config.feature('albums')">
-              <v-list-item to="/albums" variant="text" class="nav-albums activator" :ripple="false" @click.stop="">
+              <v-list-item to="/albums" variant="text" class="nav-albums activator" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
                     {{ $gettext(`Albums`) }}
@@ -293,7 +278,7 @@
                   </v-list-item>
                 </template>
 
-                <v-list-item to="/unsorted" variant="text" class="nav-unsorted" :ripple="false">
+                <v-list-item to="/unsorted" variant="text" class="nav-unsorted">
                   <v-list-item-title :class="`nav-menu-item menu-item`">
                     {{ $gettext(`Unsorted`) }}
                   </v-list-item-title>
@@ -312,7 +297,7 @@
               <v-icon class="ma-auto">mdi-play-circle</v-icon>
             </v-list-item>
             <div v-else-if="!isMini && $config.feature('videos')">
-              <v-list-item to="/videos" variant="text" class="nav-video activator" :ripple="false" @click.stop="">
+              <v-list-item to="/videos" variant="text" class="nav-video activator" @click.stop="">
                 <v-list-item-title class="nav-menu-item">
                   <p class="nav-item-title">
                     {{ $gettext(`Videos`) }}
@@ -323,12 +308,12 @@
 
               <v-list-group>
                 <template #activator="{ props }">
-                  <v-list-item v-bind="props" variant="text" class="nav-video" :ripple="false" @click.stop="">
+                  <v-list-item v-bind="props" variant="text" class="nav-video" @click.stop="">
                     <v-icon>mdi-play-circle</v-icon>
                   </v-list-item>
                 </template>
 
-                <v-list-item :to="{ name: 'live' }" variant="text" class="nav-live" :ripple="false" @click.stop="">
+                <v-list-item :to="{ name: 'live' }" variant="text" class="nav-live" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item`">
                     {{ $gettext(`Live Photos`) }}
                   </v-list-item-title>
@@ -392,19 +377,14 @@
             </v-list-item>
 
             <v-list-item
-              v-if="isRestricted"
-              v-show="$config.feature('places')"
-              to="/states"
+              v-if="isRestricted && $config.feature('places')"
+              :to="{ name: 'states' }"
               variant="text"
               class="nav-states"
               :ripple="false"
               @click.stop=""
             >
-              <v-list-item-title class="nav-menu-item" @click.stop="">
-                <v-icon>mdi-near-me</v-icon>
-                {{ $gettext(`States`) }}
-              </v-list-item-title>
-              <span v-show="config.count.states > 0" class="nav-count-item">{{ config.count.states }}</span>
+              <v-icon class="ma-auto">mdi-near-me</v-icon>
             </v-list-item>
 
             <template v-if="canSearchPlaces">
@@ -420,7 +400,7 @@
                 <v-icon class="ma-auto">mdi-map-marker</v-icon>
               </v-list-item>
               <div v-else v-show="canSearchPlaces && $config.feature('places')">
-                <v-list-item to="/places" variant="text" class="nav-places activator" :ripple="false" @click.stop="">
+                <v-list-item to="/places" variant="text" class="nav-places activator" @click.stop="">
                   <v-list-item-title class="nav-menu-item">
                     <p class="nav-item-title">
                       {{ $gettext(`Places`) }}
@@ -431,7 +411,7 @@
 
                 <v-list-group>
                   <template #activator="{ props }">
-                    <v-list-item v-bind="props" variant="text" class="nav-places" :ripple="false" @click.stop="">
+                    <v-list-item v-bind="props" variant="text" class="nav-places" @click.stop="">
                       <v-icon>mdi-map-marker</v-icon>
                     </v-list-item>
                   </template>
@@ -581,7 +561,7 @@
 
               <v-list-group>
                 <template #activator="{ props }">
-                  <v-list-item v-bind="props" variant="text" class="nav-library" :ripple="false" @click.stop="">
+                  <v-list-item v-bind="props" variant="text" class="nav-library" @click.stop="">
                     <v-icon>mdi-film</v-icon>
                   </v-list-item>
                 </template>
@@ -591,7 +571,6 @@
                   to="/index/files"
                   variant="text"
                   class="nav-originals"
-                  :ripple="false"
                   @click.stop=""
                 >
                   <v-list-item-title :class="`nav-menu-item menu-item`">
@@ -602,7 +581,7 @@
                   }}</span>
                 </v-list-item>
 
-                <v-list-item :to="{ name: 'hidden' }" variant="text" class="nav-hidden" :ripple="false" @click.stop="">
+                <v-list-item :to="{ name: 'hidden' }" variant="text" class="nav-hidden" @click.stop="">
                   <v-list-item-title :class="`nav-menu-item menu-item`">
                     {{ $gettext(`Hidden`) }}
                   </v-list-item-title>
@@ -630,13 +609,7 @@
                 <v-icon class="ma-auto">mdi-cog</v-icon>
               </v-list-item>
               <div v-else-if="!isMini" v-show="$config.feature('settings')">
-                <v-list-item
-                  :to="{ name: 'settings' }"
-                  variant="text"
-                  class="nav-settings activator"
-                  :ripple="false"
-                  @click.stop=""
-                >
+                <v-list-item :to="{ name: 'settings' }" variant="text" class="nav-settings activator" @click.stop="">
                   <v-list-item-title class="nav-menu-item">
                     <p class="nav-item-title">
                       {{ $gettext(`Settings`) }}
@@ -646,7 +619,7 @@
 
                 <v-list-group>
                   <template #activator="{ props }">
-                    <v-list-item v-bind="props" variant="text" class="nav-settings" :ripple="false" @click.stop="">
+                    <v-list-item v-bind="props" variant="text" class="nav-settings" @click.stop="">
                       <v-icon>mdi-cog</v-icon>
                     </v-list-item>
                   </template>
