@@ -74,9 +74,9 @@ div.v-dialog.v-dialog--fullscreen > div.v-card {
 }
 
 div.v-dialog.v-dialog--large:not(.v-dialog--fullscreen) .v-overlay__content {
-    height: 96vh;
+    height: 93vh;
     width: 92vw;
-    max-width: 1500px;
+    max-width: 1580px;
     margin: auto;
     overflow: hidden;
 }
