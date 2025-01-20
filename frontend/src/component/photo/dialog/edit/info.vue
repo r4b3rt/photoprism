@@ -13,7 +13,9 @@
             <tr v-if="model.DocumentID">
               <td>Document ID</td>
               <td class="text-break">
-                <span class="clickable text-uppercase" @click.stop.prevent="copyText(model.DocumentID)">{{ model.DocumentID }}</span>
+                <span class="clickable text-uppercase" @click.stop.prevent="copyText(model.DocumentID)">{{
+                  model.DocumentID
+                }}</span>
               </td>
             </tr>
             <tr>
@@ -60,7 +62,18 @@
                 {{ $gettext(`Original Name`) }}
               </td>
               <td>
-                <v-text-field v-model="model.OriginalName" flat variant="solo" bg-color="transparent" density="compact" hide-details autocomplete="off" autocorrect="off" autocapitalize="none" @change="save"></v-text-field>
+                <v-text-field
+                  v-model="model.OriginalName"
+                  flat
+                  variant="solo"
+                  bg-color="transparent"
+                  density="compact"
+                  hide-details
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="none"
+                  @change="save"
+                ></v-text-field>
               </td>
             </tr>
             <tr>
@@ -95,7 +108,9 @@
                 {{ $gettext(`Albums`) }}
               </td>
               <td class="text-break">
-                <a v-for="(a, i) in albums" :key="i" :href="a.url" class="text-primary text-link" target="_blank"><span v-if="i > 0">, </span>{{ a.title }}</a>
+                <a v-for="(a, i) in albums" :key="i" :href="a.url" class="text-primary text-link" target="_blank"
+                  ><span v-if="i > 0">, </span>{{ a.title }}</a
+                >
               </td>
             </tr>
             <tr>
@@ -129,7 +144,15 @@
                 {{ $gettext(`Stackable`) }}
               </td>
               <td>
-                <v-switch v-model="model.Stack" hide-details class="input-stackable" :true-value="0" :false-value="-1" :label="model.Stack > -1 ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
+                <v-switch
+                  v-model="model.Stack"
+                  hide-details
+                  class="input-stackable"
+                  :true-value="0"
+                  :false-value="-1"
+                  :label="model.Stack > -1 ? $gettext('Yes') : $gettext('No')"
+                  @update:model-value="save"
+                ></v-switch>
               </td>
             </tr>
             <tr>
@@ -137,7 +160,13 @@
                 {{ $gettext(`Favorite`) }}
               </td>
               <td>
-                <v-switch v-model="model.Favorite" hide-details class="input-favorite ml-2" :label="model.Favorite ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
+                <v-switch
+                  v-model="model.Favorite"
+                  hide-details
+                  class="input-favorite ml-2"
+                  :label="model.Favorite ? $gettext('Yes') : $gettext('No')"
+                  @update:model-value="save"
+                ></v-switch>
               </td>
             </tr>
             <tr v-if="$config.feature('private')">
@@ -145,7 +174,13 @@
                 {{ $gettext(`Private`) }}
               </td>
               <td>
-                <v-switch v-model="model.Private" hide-details class="input-private ml-2" :label="model.Private ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
+                <v-switch
+                  v-model="model.Private"
+                  hide-details
+                  class="input-private ml-2"
+                  :label="model.Private ? $gettext('Yes') : $gettext('No')"
+                  @update:model-value="save"
+                ></v-switch>
               </td>
             </tr>
             <tr>
@@ -153,7 +188,13 @@
                 {{ $gettext(`Scan`) }}
               </td>
               <td>
-                <v-switch v-model="model.Scan" hide-details class="input-scan ml-2" :label="model.Scan ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
+                <v-switch
+                  v-model="model.Scan"
+                  hide-details
+                  class="input-scan ml-2"
+                  :label="model.Scan ? $gettext('Yes') : $gettext('No')"
+                  @update:model-value="save"
+                ></v-switch>
               </td>
             </tr>
             <tr>
@@ -161,7 +202,13 @@
                 {{ $gettext(`Panorama`) }}
               </td>
               <td>
-                <v-switch v-model="model.Panorama" hide-details class="input-panorama ml-2" :label="model.Panorama ? $gettext('Yes') : $gettext('No')" @update:model-value="save"></v-switch>
+                <v-switch
+                  v-model="model.Panorama"
+                  hide-details
+                  class="input-panorama ml-2"
+                  :label="model.Panorama ? $gettext('Yes') : $gettext('No')"
+                  @update:model-value="save"
+                ></v-switch>
               </td>
             </tr>
             <tr>
@@ -204,7 +251,20 @@
                 {{ $gettext(`Accuracy`) }}
               </td>
               <td>
-                <v-text-field v-model="model.CellAccuracy" variant="solo" bg-color="transparent" density="compact" hide-details autocomplete="off" autocorrect="off" autocapitalize="none" type="number" suffix="m" :max-width="100" @change="save"></v-text-field>
+                <v-text-field
+                  v-model="model.CellAccuracy"
+                  variant="solo"
+                  bg-color="transparent"
+                  density="compact"
+                  hide-details
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="none"
+                  type="number"
+                  suffix="m"
+                  :max-width="100"
+                  @change="save"
+                ></v-text-field>
               </td>
             </tr>
             <tr>

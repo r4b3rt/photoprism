@@ -3,7 +3,9 @@
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="54" color="primary">mdi-delete-outline</v-icon>
-        <p v-if="text === ''" class="text-subtitle-1">{{ $gettext(`Are you sure you want to permanently delete these pictures?`) }}</p>
+        <p v-if="text === ''" class="text-subtitle-1">{{
+          $gettext(`Are you sure you want to permanently delete these pictures?`)
+        }}</p>
         <p v-else class="text-subtitle-1">{{ text }}</p>
       </v-card-title>
       <v-card-actions class="action-buttons mt-1">

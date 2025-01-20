@@ -1,5 +1,14 @@
 <template>
-  <v-dialog :model-value="show" fullscreen :scrim="false" scrollable persistent class="p-photo-edit-dialog" @click.stop @keydown.esc="close">
+  <v-dialog
+    :model-value="show"
+    fullscreen
+    :scrim="false"
+    scrollable
+    persistent
+    class="p-photo-edit-dialog"
+    @click.stop
+    @keydown.esc="close"
+  >
     <v-card tile color="background">
       <v-toolbar flat color="navigation" :density="$vuetify.display.smAndDown ? 'compact' : 'comfortable'">
         <v-btn icon class="action-close" @click.stop="close">
@@ -23,7 +32,12 @@
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-      <v-tabs v-model="active" elevation="0" class="form" :density="$vuetify.display.smAndDown ? 'comfortable' : 'default'">
+      <v-tabs
+        v-model="active"
+        elevation="0"
+        class="form"
+        :density="$vuetify.display.smAndDown ? 'comfortable' : 'default'"
+      >
         <v-tab id="tab-details" ripple>
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Details')">mdi-pencil</v-icon>
           <template v-else>
@@ -66,7 +80,14 @@
 
       <v-tabs-window v-model="active" class="overflow-y-auto" style="height: 100%">
         <v-tabs-window-item>
-          <p-tab-photo-details ref="details" :model="model" :uid="uid" @close="close" @prev="prev" @next="next"></p-tab-photo-details>
+          <p-tab-photo-details
+            ref="details"
+            :model="model"
+            :uid="uid"
+            @close="close"
+            @prev="prev"
+            @next="next"
+          ></p-tab-photo-details>
         </v-tabs-window-item>
 
         <v-tabs-window-item>
