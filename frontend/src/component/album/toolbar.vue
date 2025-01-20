@@ -1,6 +1,18 @@
 <template>
-  <v-form ref="form" validate-on="blur" autocomplete="off" class="p-photo-toolbar p-album-toolbar" accept-charset="UTF-8" @submit.prevent="updateQuery()">
-    <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
+  <v-form
+    ref="form"
+    validate-on="blur"
+    autocomplete="off"
+    class="p-photo-toolbar p-album-toolbar"
+    accept-charset="UTF-8"
+    @submit.prevent="updateQuery()"
+  >
+    <v-toolbar
+      flat
+      :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+      class="page-toolbar"
+      color="secondary"
+    >
       <v-toolbar-title :title="album.Title" class="flex-grow-1">
         <span class="hidden-xs">
           <router-link :to="{ name: collectionRoute }">
@@ -11,7 +23,7 @@
         {{ album.Title }}
       </v-toolbar-title>
 
-       <v-btn icon class="hidden-xs action-reload" :title="$gettext('Reload')" @click.stop="refresh()">
+      <v-btn icon class="hidden-xs action-reload" :title="$gettext('Reload')" @click.stop="refresh()">
         <v-icon>mdi-refresh</v-icon>
       </v-btn>
 
@@ -27,20 +39,44 @@
         <v-icon>mdi-download</v-icon>
       </v-btn>
 
-      <v-btn v-if="settings.view === 'list'" icon class="action-view-mosaic" :title="$gettext('Toggle View')" @click.stop="setView('mosaic')">
+      <v-btn
+        v-if="settings.view === 'list'"
+        icon
+        class="action-view-mosaic"
+        :title="$gettext('Toggle View')"
+        @click.stop="setView('mosaic')"
+      >
         <v-icon>mdi-view-comfy</v-icon>
       </v-btn>
-      <v-btn v-else-if="settings.view === 'cards' && listView" icon class="action-view-list" :title="$gettext('Toggle View')" @click.stop="setView('list')">
+      <v-btn
+        v-else-if="settings.view === 'cards' && listView"
+        icon
+        class="action-view-list"
+        :title="$gettext('Toggle View')"
+        @click.stop="setView('list')"
+      >
         <v-icon>mdi-view-list</v-icon>
       </v-btn>
-      <v-btn v-else-if="settings.view === 'cards'" icon class="action-view-mosaic" :title="$gettext('Toggle View')" @click.stop="setView('mosaic')">
+      <v-btn
+        v-else-if="settings.view === 'cards'"
+        icon
+        class="action-view-mosaic"
+        :title="$gettext('Toggle View')"
+        @click.stop="setView('mosaic')"
+      >
         <v-icon>mdi-view-comfy</v-icon>
       </v-btn>
       <v-btn v-else icon class="action-view-cards" :title="$gettext('Toggle View')" @click.stop="setView('cards')">
         <v-icon>mdi-view-column</v-icon>
       </v-btn>
 
-      <v-btn v-if="canUpload" icon class="hidden-sm-and-down action-upload" :title="$gettext('Upload')" @click.stop="showUpload()">
+      <v-btn
+        v-if="canUpload"
+        icon
+        class="hidden-sm-and-down action-upload"
+        :title="$gettext('Upload')"
+        @click.stop="showUpload()"
+      >
         <v-icon>mdi-cloud-upload</v-icon>
       </v-btn>
     </v-toolbar>
@@ -49,8 +85,19 @@
       {{ album.Description }}
     </div>
 
-    <p-share-dialog :show="dialog.share" :model="album" @upload="webdavUpload" @close="dialog.share = false"></p-share-dialog>
-    <p-service-upload-dialog :show="dialog.upload" :items="{ albums: album.getId() }" :model="album" @cancel="dialog.upload = false" @confirm="dialog.upload = false"></p-service-upload-dialog>
+    <p-share-dialog
+      :show="dialog.share"
+      :model="album"
+      @upload="webdavUpload"
+      @close="dialog.share = false"
+    ></p-share-dialog>
+    <p-service-upload-dialog
+      :show="dialog.upload"
+      :items="{ albums: album.getId() }"
+      :model="album"
+      @cancel="dialog.upload = false"
+      @confirm="dialog.upload = false"
+    ></p-service-upload-dialog>
     <p-album-edit-dialog :show="dialog.edit" :album="album" @close="dialog.edit = false"></p-album-edit-dialog>
   </v-form>
 </template>

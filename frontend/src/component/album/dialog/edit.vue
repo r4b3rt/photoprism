@@ -1,24 +1,55 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="500" class="dialog-album-edit" color="background" @keydown.esc="close">
+  <v-dialog
+    :model-value="show"
+    persistent
+    max-width="500"
+    class="dialog-album-edit"
+    color="background"
+    @keydown.esc="close"
+  >
     <v-form ref="form" validate-on="blur" class="form-album-edit" accept-charset="UTF-8" @submit.prevent="confirm">
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon size="28" color="primary">mdi-bookmark</v-icon>
           <h6 class="text-h6">
-            {{ $gettext(`Edit %{name}`,{ name: model.modelName() }) }}
+            {{ $gettext(`Edit %{name}`, { name: model.modelName() }) }}
           </h6>
         </v-card-title>
 
         <v-card-text class="dense">
           <v-row align="center" dense>
             <v-col v-if="album.Type !== 'month'" cols="12">
-              <v-text-field v-model="model.Title" hide-details autofocus :rules="[titleRule]" :label="$gettext('Name')" :disabled="disabled" class="input-title" @keyup.enter="confirm"></v-text-field>
+              <v-text-field
+                v-model="model.Title"
+                hide-details
+                autofocus
+                :rules="[titleRule]"
+                :label="$gettext('Name')"
+                :disabled="disabled"
+                class="input-title"
+                @keyup.enter="confirm"
+              ></v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-text-field v-model="model.Location" hide-details :label="$gettext('Location')" :disabled="disabled" class="input-location"></v-text-field>
+              <v-text-field
+                v-model="model.Location"
+                hide-details
+                :label="$gettext('Location')"
+                :disabled="disabled"
+                class="input-location"
+              ></v-text-field>
             </v-col>
             <v-col cols="12">
-              <v-textarea v-model="model.Description" auto-grow hide-details autocomplete="off" :label="$gettext('Description')" :rows="1" :disabled="disabled" class="input-description"></v-textarea>
+              <v-textarea
+                v-model="model.Description"
+                auto-grow
+                hide-details
+                autocomplete="off"
+                :label="$gettext('Description')"
+                :rows="1"
+                :disabled="disabled"
+                class="input-description"
+              ></v-textarea>
             </v-col>
             <v-col cols="12">
               <v-combobox
@@ -46,10 +77,20 @@
             </v-col>
             <v-col sm="3">
               <!-- TODO: check property flat TEST -->
-              <v-checkbox v-model="model.Favorite" :disabled="disabled" :label="$gettext('Favorite')" hide-details></v-checkbox>
+              <v-checkbox
+                v-model="model.Favorite"
+                :disabled="disabled"
+                :label="$gettext('Favorite')"
+                hide-details
+              ></v-checkbox>
             </v-col>
             <v-col v-if="experimental && featPrivate" sm="3">
-              <v-checkbox v-model="model.Private" :disabled="disabled" :label="$gettext('Private')" hide-details></v-checkbox>
+              <v-checkbox
+                v-model="model.Private"
+                :disabled="disabled"
+                :label="$gettext('Private')"
+                hide-details
+              ></v-checkbox>
             </v-col>
           </v-row>
         </v-card-text>
