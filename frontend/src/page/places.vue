@@ -639,6 +639,8 @@ export default {
             exaggeration: 1,
           })
         );
+
+        this.map.addControl(new maplibregl.GlobeControl());
       }
 
       // Add fullscreen control.
