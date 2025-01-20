@@ -1,5 +1,11 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="500" class="modal-dialog p-account-password-dialog" @keydown.esc="close">
+  <v-dialog
+    :model-value="show"
+    persistent
+    max-width="500"
+    class="modal-dialog p-account-password-dialog"
+    @keydown.esc="close"
+  >
     <v-form ref="form" class="form-password" accept-charset="UTF-8" @submit.prevent>
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
@@ -23,9 +29,9 @@
                 :disabled="busy"
                 :maxlength="maxLength"
                 :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append-inner="showPassword = !showPassword"
                 :label="$gettext('Current Password')"
                 class="input-current-password"
+                @click:append-inner="showPassword = !showPassword"
               ></v-text-field>
             </v-col>
 
@@ -73,7 +79,13 @@
           <v-btn variant="flat" color="button" class="action-cancel" @click.stop="close">
             {{ $gettext(`Cancel`) }}
           </v-btn>
-          <v-btn variant="flat" color="highlight" class="action-confirm" :disabled="isDisabled()" @click.stop="onConfirm">
+          <v-btn
+            variant="flat"
+            color="highlight"
+            class="action-confirm"
+            :disabled="isDisabled()"
+            @click.stop="onConfirm"
+          >
             {{ $gettext(`Save`) }}
           </v-btn>
         </v-card-actions>
@@ -125,7 +137,14 @@ export default {
   },
   methods: {
     isDisabled() {
-      return this.isDemo || this.busy || (this.oldPassword === "" && this.oldRequired) || this.newPassword.length < this.minLength || this.newPassword.length > this.maxLength || this.newPassword !== this.confirmPassword;
+      return (
+        this.isDemo ||
+        this.busy ||
+        (this.oldPassword === "" && this.oldRequired) ||
+        this.newPassword.length < this.minLength ||
+        this.newPassword.length > this.maxLength ||
+        this.newPassword !== this.confirmPassword
+      );
     },
     onConfirm() {
       this.busy = true;
