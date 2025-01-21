@@ -17,7 +17,7 @@
         </div>
       </v-alert>
       <v-row v-else class="search-results face-results cards-view d-flex align-stretch ma-0">
-        <v-col v-for="marker in markers" :key="marker.UID" cols="12" sm="6" md="3" xl="2" class="d-flex">
+        <v-col v-for="marker in markers" :key="marker.UID" cols="12" sm="6" md="4" class="d-flex">
           <v-card
             tile
             :data-id="marker.UID"
