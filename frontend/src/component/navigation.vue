@@ -379,9 +379,9 @@
             <v-list-item
               v-if="isRestricted && $config.feature('places')"
               :to="{ name: 'states' }"
+              :title="$gettext(`Regions`)"
               variant="text"
-              class="nav-states"
-              :ripple="false"
+              class="nav-states nav-regions"
               @click.stop=""
             >
               <v-icon class="ma-auto">mdi-near-me</v-icon>
@@ -416,9 +416,9 @@
                     </v-list-item>
                   </template>
 
-                  <v-list-item to="/states" variant="text" class="nav-states" @click.stop="">
+                  <v-list-item :to="{ name: 'states' }" variant="text" class="nav-states nav-regions" @click.stop="">
                     <v-list-item-title :class="`nav-menu-item menu-item`">
-                      {{ $gettext(`States`) }}
+                      {{ $gettext(`Regions`) }}
                     </v-list-item-title>
                     <span v-show="config.count.states > 0" class="nav-count-item">{{ config.count.states }}</span>
                   </v-list-item>

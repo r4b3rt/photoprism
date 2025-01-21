@@ -294,7 +294,7 @@ export default [
     name: "state",
     path: "/states/:album/:slug",
     component: AlbumPhotos,
-    meta: { collectionTitle: "Places", collectionRoute: "states", requiresAuth: true },
+    meta: { collectionTitle: $gettext("Regions"), collectionRoute: "states", requiresAuth: true },
   },
   {
     name: "files",
