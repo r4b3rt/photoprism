@@ -101,8 +101,8 @@
           {{ $gettext(`Close`) }}
         </v-btn>
         <v-btn :disabled="busy" variant="flat" color="highlight" class="px-3 action-upload" @click.stop="onUploadDialog()">
-          {{ $gettext(`Upload`) }}
-          <v-icon icon="mdi-cloud-upload" end></v-icon>
+          {{ $gettext(`Browse`) }}
+          <v-icon icon="mdi-folder-arrow-up" end></v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>
