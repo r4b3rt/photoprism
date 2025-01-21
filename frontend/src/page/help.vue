@@ -5,14 +5,20 @@
         {{ $gettext(`Help`) }}
       </v-toolbar-title>
 
-      <v-btn icon href="https://docs.photoprism.app/getting-started/troubleshooting/" target="_blank" class="action-info mx-2" :title="$gettext('Learn more')">
+      <v-btn
+        icon
+        href="https://docs.photoprism.app/getting-started/troubleshooting/"
+        target="_blank"
+        class="action-info mx-2"
+        :title="$gettext('Learn more')"
+      >
         <v-icon icon="mdi-book-open-page-variant" size="26" color="surface-variant"></v-icon>
       </v-btn>
     </v-toolbar>
 
-    <v-container fluid class="px-6 py-4">
+    <div class="px-6 py-4">
       <p-help-websockets></p-help-websockets>
-    </v-container>
+    </div>
 
     <p-about-footer></p-about-footer>
   </div>

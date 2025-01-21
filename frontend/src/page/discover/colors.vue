@@ -1,6 +1,6 @@
 <template>
   <div class="p-tab p-tab-discover-colors">
-    <v-container grid-list-xs text-center fluid>
+    <div class="pa-2 text-center">
       <p class="text-subtitle-1 pb-6"> This is a very first draft for a "Discover" area where you can find photos by color, by similarity, by season or just randomly. Feedback and contributions welcome. </p>
 
       <v-row class="p-colors">
@@ -12,7 +12,7 @@
           </v-hover>
         </v-col>
       </v-row>
-    </v-container>
+    </div>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="p-tab p-tab-index">
     <v-form ref="form" class="p-photo-index" validate-on="invalid-input" @submit.prevent="submit">
-      <v-container fluid>
+      <div class="pa-6">
         <p class="text-body-1">
           <span v-if="fileName" class="text-break">{{ action }} {{ fileName }}…</span>
           <span v-else-if="action">{{ action }}…</span>
@@ -68,7 +68,7 @@
           {{ $gettext(`The index currently contains %{n} hidden files.`, { n: config.count.hidden }) }}
           {{ $gettext(`Their format may not be supported, they haven't been converted to JPEG yet or there are duplicates.`) }}
         </v-alert>
-      </v-container>
+      </div>
     </v-form>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="p-tab p-tab-photo-people">
-    <v-container grid-list-xs fluid class="pa-2 p-faces">
+    <div class="pa-2 p-faces">
       <v-alert
         v-if="markers.length === 0"
         color="surface-variant"
@@ -94,7 +94,7 @@
           </v-card>
         </div>
       </div>
-    </v-container>
+    </div>
   </div>
 </template>
 

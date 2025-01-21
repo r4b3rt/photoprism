@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid fill-height class="pa-0 ma-0 p-tab p-tab-logs">
-    <v-row class="pa-0 ma-4 d-flex align-stretch">
+  <div class="p-tab p-tab-logs pa-4 fill-height">
+    <v-row class="d-flex align-stretch">
       <v-col cols="12" class="grow pa-2 bg-terminal elevation-0 p-logs" style="overflow: auto">
         <p v-if="logs.length === 0" class="p-log-empty flex-grow-1">
           {{ $gettext(`Nothing to see here yet.`) }}
@@ -10,7 +10,7 @@
         </p>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>

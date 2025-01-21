@@ -20,8 +20,8 @@
         <v-icon size="26" color="surface-variant">mdi-diamond-stone</v-icon>
       </v-btn>
     </v-toolbar>
-    <v-container fluid class="px-6 pt-6 pb-1">
-      <p class="text-body-1 py-1 pb-2">
+    <div class="pa-6">
+      <p class="text-body-1 pb-2">
         <a href="https://www.photoprism.app/" target="_blank">
           <strong>
             {{
@@ -224,7 +224,7 @@
         >
       </div>
 
-      <p class="text-caption mt-6 text-center text-ltr">
+      <p class="text-caption mt-6 mb-0 text-center text-ltr">
         PhotoPrism® is a
         <a href="https://www.photoprism.app/trademark" target="_blank" class="text-link">registered trademark</a>. By
         using the software and services we provide, you agree to our
@@ -232,7 +232,7 @@
         <a href="https://www.photoprism.app/privacy" target="_blank" class="text-link">Privacy Policy</a>, and
         <a href="https://www.photoprism.app/code-of-conduct" target="_blank" class="text-link">Code of Conduct</a>.
       </p>
-    </v-container>
+    </div>
     <p-about-footer></p-about-footer>
   </div>
 </template>

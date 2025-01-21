@@ -73,7 +73,7 @@
         </tr>
       </template>
     </v-data-table>
-    <v-container fluid>
+    <div class="pa-2">
       <p class="text-caption py-1 clickable" @click.stop.prevent="webdavDialog">
         {{ $gettext(`Note:`) }}
         {{
@@ -116,7 +116,7 @@
           </v-btn>
         </div>
       </v-form>
-    </v-container>
+    </div>
 
     <p-service-add-dialog :show="dialog.add" @cancel="close('add')" @confirm="onAdded"></p-service-add-dialog>
     <p-service-remove-dialog

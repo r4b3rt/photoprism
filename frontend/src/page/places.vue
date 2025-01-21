@@ -1,5 +1,5 @@
 <template>
-  <v-container :class="$config.aclClasses('places')" fluid class="pa-0 p-page p-page-places fill-height">
+  <div :class="$config.aclClasses('places')" class="p-page p-page-places fill-height">
     <div class="places">
       <div v-if="mapError">
         <v-toolbar
@@ -51,7 +51,7 @@
         </v-card>
       </div>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>

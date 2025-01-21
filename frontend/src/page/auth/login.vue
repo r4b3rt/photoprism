@@ -1,5 +1,12 @@
 <template>
-  <v-container id="auth-login" theme="login" fluid fill-height class="auth-login wallpaper background-welcome pa-6" :style="wallpaper()">
+  <v-container
+    id="auth-login"
+    theme="login"
+    fluid
+    fill-height
+    class="auth-login wallpaper background-welcome pa-6"
+    :style="wallpaper()"
+  >
     <v-theme-provider theme="login">
       <v-row id="auth-layout" class="auth-layout">
         <v-col cols="12" sm="9" md="6" lg="5" xl="3">
@@ -99,18 +106,44 @@
                   </template>
                   <v-col cols="12" class="auth-actions">
                     <div class="action-buttons auth-buttons pb-1 d-flex ga-3 align-center justify-center">
-                      <v-btn v-if="enterCode" color="highlight" variant="outlined" :block="$vuetify.display.xs" class="action-cancel opacity-80" @click.stop.prevent="onCancel">
+                      <v-btn
+                        v-if="enterCode"
+                        color="highlight"
+                        variant="outlined"
+                        :block="$vuetify.display.xs"
+                        class="action-cancel opacity-80"
+                        @click.stop.prevent="onCancel"
+                      >
                         {{ $gettext(`Cancel`) }}
                       </v-btn>
-                      <v-btn v-else-if="registerUri" color="highlight" variant="outlined" :block="$vuetify.display.xs" class="action-register opacity-80" @click.stop.prevent="onRegister">
+                      <v-btn
+                        v-else-if="registerUri"
+                        color="highlight"
+                        variant="outlined"
+                        :block="$vuetify.display.xs"
+                        class="action-register opacity-80"
+                        @click.stop.prevent="onRegister"
+                      >
                         {{ $gettext(`Create Account`) }}
                       </v-btn>
-                      <v-btn color="highlight" variant="flat" :disabled="loginDisabled" :block="$vuetify.display.xs" class="action-confirm" @click.stop.prevent="onLogin">
+                      <v-btn
+                        color="highlight"
+                        variant="flat"
+                        :disabled="loginDisabled"
+                        :block="$vuetify.display.xs"
+                        class="action-confirm"
+                        @click.stop.prevent="onLogin"
+                      >
                         {{ $gettext(`Sign in`) }}
                         <v-icon :icon="$config.isRtl() ? 'mdi-chevron-left' : 'mdi-chevron-right'" end></v-icon>
                       </v-btn>
                     </div>
-                    <div v-if="enterCode" :class="{ clickable: !useRecoveryCode }" class="auth-links text-center opacity-80" @click.stop.prevent="onUseRecoveryCode">
+                    <div
+                      v-if="enterCode"
+                      :class="{ clickable: !useRecoveryCode }"
+                      class="auth-links text-center opacity-80"
+                      @click.stop.prevent="onUseRecoveryCode"
+                    >
                       {{ $gettext(`Can't access your authenticator app or device?`) }}
                       {{ $gettext(`Use your recovery code or contact an administrator for help.`) }}
                     </div>
@@ -124,7 +157,14 @@
                     <v-col cols="12" class="oidc-actions">
                       <v-divider />
                       <div class="text-center oidc-buttons mt-6">
-                        <v-btn color="highlight" variant="flat" :disabled="loading" block class="action-oidc-login" @click.stop.prevent="onOidcLogin">
+                        <v-btn
+                          color="highlight"
+                          variant="flat"
+                          :disabled="loading"
+                          block
+                          class="action-oidc-login"
+                          @click.stop.prevent="onOidcLogin"
+                        >
                           <img alt="" class="oidc-icon v-icon--start mx-1" :src="config.ext.oidc.icon" />
                           {{ $gettext(`Continue with %{provider}`, { provider: config.ext.oidc.provider }) }}
                         </v-btn>

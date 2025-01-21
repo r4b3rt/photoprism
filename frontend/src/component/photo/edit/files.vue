@@ -15,7 +15,7 @@
         <v-expansion-panel-text>
           <v-card tile>
             <v-card-text class="pa-0">
-              <v-container fluid class="pa-0">
+              <div class="pa-0">
                 <v-alert v-if="file.Error" type="error" class="my-0 text-capitalize">
                   {{ file.Error }}
                 </v-alert>
@@ -354,7 +354,7 @@
                     </div>
                   </v-col>
                 </v-row>
-              </v-container>
+              </div>
             </v-card-text>
           </v-card>
         </v-expansion-panel-text>

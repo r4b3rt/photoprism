@@ -1,7 +1,7 @@
 <template>
   <div class="p-tab p-tab-import">
     <v-form ref="form" class="p-photo-import" validate-on="invalid-input" @submit.prevent="submit">
-      <v-container fluid>
+      <div class="pa-6">
         <p class="text-body-1">
           <span v-if="fileName" class="text-break">{{ $gettext(`Importing %{name}…`, { name: fileName }) }}</span>
           <span v-else-if="busy">{{ $gettext(`Importing files to originals…`) }}</span>
@@ -78,7 +78,7 @@
             <v-icon end>mdi-sync</v-icon>
           </v-btn>
         </div>
-      </v-container>
+      </div>
     </v-form>
   </div>
 </template>

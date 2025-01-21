@@ -1,6 +1,6 @@
 <template>
   <div class="p-tab p-settings-account">
-    <v-container class="width-lg pa-3">
+    <div class="width-lg pa-3">
       <v-form ref="form" v-model="valid" validate-on="invalid-input" class="p-form-account ma-0 pa-0" accept-charset="UTF-8" @submit.prevent="onChange">
         <input ref="upload" type="file" class="d-none input-upload" accept="image/png, image/jpeg" @change.stop="onUploadAvatar()" />
         <v-card flat tile class="bg-background ma-0 pa-0">
@@ -292,7 +292,7 @@
           </v-card-actions>
         </v-card>
       </v-form>
-    </v-container>
+    </div>
     <p-account-apps-dialog :show="dialog.apps" :model="user" @close="dialog.apps = false"></p-account-apps-dialog>
     <p-account-passcode-dialog :show="dialog.passcode" :model="user" @close="dialog.passcode = false" @updateUser="updateUser()"></p-account-passcode-dialog>
     <p-account-password-dialog :show="dialog.password" :model="user" @close="dialog.password = false"></p-account-password-dialog>

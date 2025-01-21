@@ -1,7 +1,12 @@
 <template>
   <div :class="$config.aclClasses('labels')" class="p-page p-page-labels not-selectable">
     <v-form ref="form" class="p-labels-search" validate-on="invalid-input" @submit.stop.prevent="updateQuery()">
-      <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
+      <v-toolbar
+        flat
+        :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+        class="page-toolbar"
+        color="secondary"
+      >
         <v-text-field
           :model-value="filter.q"
           hide-details
@@ -49,9 +54,19 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else>
-      <p-label-clipboard v-if="canSelect" :refresh="refresh" :selection="selection" :clear-selection="clearSelection"></p-label-clipboard>
+      <p-label-clipboard
+        v-if="canSelect"
+        :refresh="refresh"
+        :selection="selection"
+        :clear-selection="clearSelection"
+      ></p-label-clipboard>
 
-      <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
+      <p-scroll
+        :load-more="loadMore"
+        :load-disabled="scrollDisabled"
+        :load-distance="scrollDistance"
+        :loading="loading"
+      ></p-scroll>
 
       <div v-if="results.length === 0" class="pa-3">
         <v-alert color="primary" icon="mdi-lightbulb-outline" class="no-results opacity-60" variant="outlined">
@@ -60,13 +75,32 @@
           </div>
           <div class="mt-2">
             {{ $gettext(`Try again using other filters or keywords.`) }}
-            {{ $gettext(`In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`) }}
+            {{
+              $gettext(
+                `In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`
+              )
+            }}
           </div>
         </v-alert>
       </div>
-      <div v-else class="v-row search-results label-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-        <div v-for="(label, index) in results" :key="label.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2">
-          <div :data-uid="label.UID" class="result not-selectable" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
+      <div
+        v-else
+        class="v-row search-results label-results cards-view"
+        :class="{ 'select-results': selection.length > 0 }"
+      >
+        <div
+          v-for="(label, index) in results"
+          :key="label.UID"
+          ref="items"
+          class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2"
+        >
+          <div
+            :data-uid="label.UID"
+            class="result not-selectable"
+            :class="label.classes(selection.includes(label.UID))"
+            @click="$router.push(label.route(view))"
+            @contextmenu.stop="onContextMenu($event, index)"
+          >
             <div
               :title="label.Name"
               :style="`background-image: url(${label.thumbnailUrl('tile_500')})`"
@@ -77,11 +111,24 @@
               @click.stop.prevent="onClick($event, index)"
             >
               <div class="preview__overlay"></div>
-              <button v-if="canSelect" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+              <button
+                v-if="canSelect"
+                class="input-select"
+                @touchstart.stop.prevent="input.touchStart($event, index)"
+                @touchend.stop.prevent="onSelect($event, index)"
+                @touchmove.stop.prevent
+                @click.stop.prevent="onSelect($event, index)"
+              >
                 <i class="mdi mdi-check-circle select-on" />
                 <i class="mdi mdi-circle-outline select-off" />
               </button>
-              <button class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+              <button
+                class="input-favorite"
+                @touchstart.stop.prevent="input.touchStart($event, index)"
+                @touchend.stop.prevent="toggleLike($event, index)"
+                @touchmove.stop.prevent
+                @click.stop.prevent="toggleLike($event, index)"
+              >
                 <i v-if="label.Favorite" class="mdi mdi-star text-favorite" />
                 <i v-else class="mdi mdi-star-outline" />
               </button>
@@ -409,7 +456,9 @@ export default {
           if (this.scrollDisabled) {
             this.setOffset(resp.offset);
             if (this.results.length > 1) {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("All %{n} labels loaded"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("All %{n} labels loaded"), { n: this.results.length })
+              );
             }
           } else {
             this.setOffset(resp.offset + resp.limit);
@@ -558,7 +607,9 @@ export default {
             } else if (this.results.length === 1) {
               this.$notify.info(this.$gettext("One label found"));
             } else {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("%{n} labels found"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("%{n} labels found"), { n: this.results.length })
+              );
             }
           } else {
             // this.$notify.info(this.$gettext('More than 20 labels found'));
