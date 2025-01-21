@@ -21,6 +21,7 @@ import (
 //	@Produce	json
 //	@Success	200				{object}	entity.Services
 //	@Failure	401,403,404,429	{object}	i18n.Response
+//	@Param		count			query		int	true	"maximum number of results"	minimum(1)	maximum(100000)
 //	@Router		/api/v1/services [get]
 func SearchServices(router *gin.RouterGroup) {
 	router.GET("/services", func(c *gin.Context) {

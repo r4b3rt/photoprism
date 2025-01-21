@@ -3789,6 +3789,17 @@
                 ],
                 "summary": "finds services and returns them as JSON",
                 "operationId": "SearchServices",
+                "parameters": [
+                    {
+                        "maximum": 100000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "maximum number of results",
+                        "name": "count",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3837,11 +3848,28 @@
                 ],
                 "summary": "creates a new remote service account configuration",
                 "operationId": "AddService",
+                "parameters": [
+                    {
+                        "description": "properties of the service to be created",
+                        "name": "service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.Service"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/entity.Service"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
                         }
                     },
                     "401": {
@@ -3852,12 +3880,6 @@
                     },
                     "403": {
                         "description": "Forbidden",
-                        "schema": {
-                            "$ref": "#/definitions/i18n.Response"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
                         "schema": {
                             "$ref": "#/definitions/i18n.Response"
                         }
@@ -3881,6 +3903,15 @@
                 ],
                 "summary": "returns the specified remote service account configuration as JSON",
                 "operationId": "GetService",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "service id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -3926,11 +3957,35 @@
                 ],
                 "summary": "updates a remote account configuration",
                 "operationId": "UpdateService",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "service id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "properties to be updated (only submit values that should be changed)",
+                        "name": "service",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.Service"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/entity.Service"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
                         }
                     },
                     "401": {
@@ -3956,6 +4011,12 @@
                         "schema": {
                             "$ref": "#/definitions/i18n.Response"
                         }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
                     }
                 }
             },
@@ -3971,6 +4032,15 @@
                 ],
                 "summary": "removes a remote service account configuration",
                 "operationId": "DeleteService",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "service id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -4015,7 +4085,31 @@
                 ],
                 "summary": "returns folders that belong to a remote service account",
                 "operationId": "GetServiceFolders",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "service id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/i18n.Response"
+                        }
+                    },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
@@ -5890,6 +5984,12 @@
                 "Day": {
                     "type": "integer"
                 },
+                "Description": {
+                    "type": "string"
+                },
+                "DescriptionSrc": {
+                    "type": "string"
+                },
                 "Details": {
                     "$ref": "#/definitions/entity.Details"
                 },
@@ -6474,6 +6574,12 @@
                 "Day": {
                     "type": "integer"
                 },
+                "Description": {
+                    "type": "string"
+                },
+                "DescriptionSrc": {
+                    "type": "string"
+                },
                 "Details": {
                     "$ref": "#/definitions/form.Details"
                 },
@@ -6595,6 +6701,78 @@
                     "items": {
                         "type": "string"
                     }
+                }
+            }
+        },
+        "form.Service": {
+            "type": "object",
+            "properties": {
+                "AccError": {
+                    "type": "string"
+                },
+                "AccKey": {
+                    "type": "string"
+                },
+                "AccName": {
+                    "type": "string"
+                },
+                "AccOwner": {
+                    "type": "string"
+                },
+                "AccPass": {
+                    "type": "string"
+                },
+                "AccShare": {
+                    "description": "Manual upload enabled, see SharePath, ShareSize, and ShareExpires.",
+                    "type": "boolean"
+                },
+                "AccSync": {
+                    "description": "Background sync enabled, see SyncDownload and SyncUpload.",
+                    "type": "boolean"
+                },
+                "AccTimeout": {
+                    "description": "Request timeout: default, high, medium, low, none",
+                    "type": "string"
+                },
+                "AccType": {
+                    "type": "string"
+                },
+                "AccURL": {
+                    "type": "string"
+                },
+                "AccUser": {
+                    "type": "string"
+                },
+                "RetryLimit": {
+                    "description": "Maximum number of failed requests.",
+                    "type": "integer"
+                },
+                "ShareExpires": {
+                    "type": "integer"
+                },
+                "SharePath": {
+                    "type": "string"
+                },
+                "ShareSize": {
+                    "type": "string"
+                },
+                "SyncDownload": {
+                    "type": "boolean"
+                },
+                "SyncFilenames": {
+                    "type": "boolean"
+                },
+                "SyncInterval": {
+                    "type": "integer"
+                },
+                "SyncPath": {
+                    "type": "string"
+                },
+                "SyncRaw": {
+                    "type": "boolean"
+                },
+                "SyncUpload": {
+                    "type": "boolean"
                 }
             }
         },
@@ -7201,8 +7379,18 @@
                 1000000000,
                 60000000000,
                 3600000000000,
-                -9223372036854775808,
-                9223372036854775807,
+                1,
+                1000,
+                1000000,
+                1000000000,
+                60000000000,
+                3600000000000,
+                1,
+                1000,
+                1000000,
+                1000000000,
+                60000000000,
+                3600000000000,
                 1,
                 1000,
                 1000000,
@@ -7227,8 +7415,18 @@
                 "Second",
                 "Minute",
                 "Hour",
-                "minDuration",
-                "maxDuration",
+                "Nanosecond",
+                "Microsecond",
+                "Millisecond",
+                "Second",
+                "Minute",
+                "Hour",
+                "Nanosecond",
+                "Microsecond",
+                "Millisecond",
+                "Second",
+                "Minute",
+                "Hour",
                 "Nanosecond",
                 "Microsecond",
                 "Millisecond",
