@@ -1,83 +1,110 @@
 <template>
-  <v-dialog :model-value="show" fullscreen :scrim="false" scrollable persistent class="p-upload-dialog" @keydown.esc="cancel">
-    <v-card color="background">
-      <v-toolbar flat color="navigation" :density="$vuetify.display.smAndDown ? 'compact' : 'default'">
-        <v-btn icon @click.stop="cancel">
+  <v-dialog
+    :model-value="show"
+    :fullscreen="$vuetify.display.mdAndDown"
+    scrim
+    scrollable
+    persistent
+    class="p-upload-dialog v-dialog--upload"
+    @keydown.esc="close"
+  >
+    <v-card :tile="$vuetify.display.mdAndDown">
+      <v-toolbar
+        v-if="$vuetify.display.mdAndDown"
+        flat
+        color="navigation"
+        class="mb-4"
+        :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+      >
+        <v-btn icon @click.stop="close">
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <v-toolbar-title>
           {{ $gettext(`Upload`) }}
         </v-toolbar-title>
       </v-toolbar>
-      <v-container grid-list-xs ext-xs-left fluid>
+      <v-card-title v-else class="d-flex justify-start align-center ga-3">
+        <v-icon size="28" color="primary">mdi-cloud-upload</v-icon>
+        <h6 class="text-h6">{{ $gettext(`Upload`) }}</h6>
+      </v-card-title>
+      <v-card-text class="flex-grow-0">
         <v-form ref="form" class="p-photo-upload" validate-on="invalid-input" @submit.prevent="submit">
           <input ref="upload" type="file" multiple class="d-none input-upload" @change.stop="onUpload()" />
 
-          <v-container fluid>
-            <p class="text-body-2 pb-2">
-              <!-- TODO: check property allow-overflow TEST -->
-              <v-combobox
-                v-if="total === 0"
-                v-model="selectedAlbums"
-                hide-details
-                chips
-                closable-chips
-                multiple
-                class="my-0 input-albums"
-                :items="albums"
-                item-title="Title"
-                item-value="UID"
-                :label="$gettext('Select albums or create a new one')"
-                return-object
-              >
-                <template #no-data>
-                  <v-list-item>
-                    <v-list-item-title>
-                      {{ $gettext(`Press enter to create a new album.`) }}
-                    </v-list-item-title>
-                  </v-list-item>
-                </template>
-                <template #chip="data">
-                  <v-chip :model-value="data.selected" :disabled="data.disabled" class="bg-highlight rounded-xl text-truncate d-block" @click:close="removeSelection(data.index)">
-                    <v-icon class="pr-1">mdi-bookmark</v-icon>
-                    {{ data.item.title ? data.item.title : data.item }}
-                  </v-chip>
-                </template>
-              </v-combobox>
-              <span v-else-if="failed">{{ $gettext(`Upload failed`) }}</span>
-              <span v-else-if="total > 0 && completedTotal < 100">
-                {{ $gettext(`Uploading %{n} of %{t}…`, { n: current, t: total }) }}
-              </span>
-              <span v-else-if="indexing">{{ $gettext(`Upload complete. Indexing…`) }}</span>
-              <span v-else-if="completedTotal === 100">{{ $gettext(`Done.`) }}</span>
-            </p>
-
-            <v-progress-linear v-model="completedTotal" :indeterminate="indexing" class="py-1" :height="21">
+          <div class="text-body-2 pb-2">
+            <!-- TODO: check property allow-overflow TEST -->
+            <v-combobox
+              v-model="selectedAlbums"
+              :disabled="busy || total > 0"
+              hide-details
+              chips
+              closable-chips
+              multiple
+              class="my-0 input-albums"
+              :items="albums"
+              item-title="Title"
+              item-value="UID"
+              :label="$gettext('Select albums or create a new one')"
+              return-object
+            >
+              <template #no-data>
+                <v-list-item>
+                  <v-list-item-title>
+                    {{ $gettext(`Press enter to create a new album.`) }}
+                  </v-list-item-title>
+                </v-list-item>
+              </template>
+              <template #chip="data">
+                <v-chip
+                  :model-value="data.selected"
+                  :disabled="data.disabled"
+                  class="bg-highlight rounded-xl text-truncate d-block"
+                  @click:close="removeSelection(data.index)"
+                >
+                  <v-icon class="pr-1">mdi-bookmark</v-icon>
+                  {{ data.item.title ? data.item.title : data.item }}
+                </v-chip>
+              </template>
+            </v-combobox>
+            <v-progress-linear :model-value="completedTotal" :indeterminate="indexing" :height="21">
               <p class="px-2 ma-0 text-end opacity-85"
                 ><span v-if="eta">{{ eta }}</span></p
               >
             </v-progress-linear>
 
-            <p v-if="isDemo" class="text-body-2 py-2">
-              {{ $gettext(`You can upload up to %{n} files for test purposes.`, { n: fileLimit }) }}
-              {{ $gettext(`Please do not upload any private, unlawful or offensive pictures. `) }}
-            </p>
-            <p v-else-if="rejectNSFW" class="text-body-2 py-2">
-              {{ $gettext(`Please don't upload photos containing offensive content.`) }}
-              {{ $gettext(`Uploads that may contain such images will be rejected automatically.`) }}
-            </p>
+            <span v-if="failed">{{ $gettext(`Upload failed`) }}</span>
+            <span v-else-if="total > 0 && completedTotal < 100">
+              {{ $gettext(`Uploading %{n} of %{t}…`, { n: current, t: total }) }}
+            </span>
+            <span v-else-if="indexing">{{ $gettext(`Upload complete. Indexing…`) }}</span>
+            <span v-else-if="completedTotal === 100">{{ $gettext(`Done.`) }}</span>
+          </div>
 
-            <p v-if="featReview" class="text-body-2 py-2">
-              {{ $gettext(`Non-photographic and low-quality images require a review before they appear in search results.`) }}
-            </p>
+          <p v-if="isDemo" class="text-body-2 py-1">
+            {{ $gettext(`You can upload up to %{n} files for test purposes.`, { n: fileLimit }) }}
+            {{ $gettext(`Please do not upload any private, unlawful or offensive pictures. `) }}
+          </p>
+          <p v-else-if="rejectNSFW" class="text-body-2 py-1">
+            {{ $gettext(`Please don't upload photos containing offensive content.`) }}
+            {{ $gettext(`Uploads that may contain such images will be rejected automatically.`) }}
+          </p>
 
-            <v-btn :disabled="busy" color="highlight" class="text-white ml-0 mt-2 action-upload" variant="flat" @click.stop="onUploadDialog()">
-              {{ $gettext(`Upload`) }}
-              <v-icon icon="mdi-cloud-upload" end></v-icon>
-            </v-btn>
-          </v-container>
+          <p v-if="featReview" class="text-body-2 py-1">
+            {{
+              $gettext(`Non-photographic and low-quality images require a review before they appear in search results.`)
+            }}
+          </p>
         </v-form>
-      </v-container>
+      </v-card-text>
+      <v-card-actions class="action-buttons mt-1">
+        <v-btn :disabled="busy" variant="flat" color="button" class="px-3 action-close" @click.stop="close">
+          {{ $gettext(`Close`) }}
+        </v-btn>
+        <v-btn :disabled="busy" variant="flat" color="highlight" class="px-3 action-upload" @click.stop="onUploadDialog()">
+          {{ $gettext(`Upload`) }}
+          <v-icon icon="mdi-cloud-upload" end></v-icon>
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
@@ -126,22 +153,30 @@ export default {
     };
   },
   watch: {
-    show: function () {
-      this.reset();
-      this.isDemo = this.$config.get("demo");
-      this.fileLimit = this.isDemo ? 3 : 0;
-      this.rejectNSFW = !this.$config.get("uploadNSFW");
-      this.featReview = this.$config.feature("review");
+    show: function (show) {
+      if (show) {
+        // Disable the browser scrollbar.
+        this.$scrollbar.hide();
+        this.reset();
+        this.isDemo = this.$config.get("demo");
+        this.fileLimit = this.isDemo ? 3 : 0;
+        this.rejectNSFW = !this.$config.get("uploadNSFW");
+        this.featReview = this.$config.feature("review");
 
-      // Set currently selected albums.
-      if (this.data && Array.isArray(this.data.albums)) {
-        this.selectedAlbums = this.data.albums;
+        // Set currently selected albums.
+        if (this.data && Array.isArray(this.data.albums)) {
+          this.selectedAlbums = this.data.albums;
+        } else {
+          this.selectedAlbums = [];
+        }
+
+        // Fetch albums from backend.
+        this.findAlbums("");
       } else {
-        this.selectedAlbums = [];
+        this.reset();
+        // Re-enable the browser scrollbar.
+        this.$scrollbar.show();
       }
-
-      // Fetch albums from backend.
-      this.findAlbums("");
     },
   },
   methods: {
@@ -169,13 +204,13 @@ export default {
         })
         .catch(() => (this.loading = false));
     },
-    cancel() {
+    close() {
       if (this.busy) {
         Notify.info(this.$gettext("Uploading photos…"));
         return;
       }
 
-      this.$emit("cancel");
+      this.$emit("close");
     },
     confirm() {
       if (this.busy) {

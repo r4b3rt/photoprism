@@ -901,7 +901,7 @@
     <p-upload-dialog
       :show="upload.dialog"
       :data="upload.data"
-      @cancel="upload.dialog = false"
+      @close="upload.dialog = false"
       @confirm="upload.dialog = false"
     ></p-upload-dialog>
     <p-photo-edit-dialog

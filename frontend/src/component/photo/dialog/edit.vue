@@ -11,7 +11,7 @@
     @click.stop
     @keydown.esc="close"
   >
-    <v-card :tile="$vuetify.display.mdAndDown" color="background">
+    <v-card :tile="$vuetify.display.mdAndDown">
       <v-toolbar flat color="surface" :density="$vuetify.display.mdAndDown ? 'compact' : 'comfortable'">
         <v-btn icon class="action-close" @click.stop="close">
           <v-icon>mdi-close</v-icon>
