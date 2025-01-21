@@ -10,7 +10,7 @@
         rounded
         variant="solo-filled"
         :density="density"
-        validate-on="blur"
+        validate-on="invalid-input"
         autocomplete="off"
         autocorrect="off"
         autocapitalize="none"

@@ -1,7 +1,7 @@
 <template>
   <v-form
     ref="form"
-    validate-on="blur"
+    validate-on="invalid-input"
     autocomplete="off"
     class="p-photo-toolbar p-album-toolbar"
     accept-charset="UTF-8"

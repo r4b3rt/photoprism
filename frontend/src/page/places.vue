@@ -31,7 +31,7 @@
             single-line
             overflow
             rounded
-            validate-on="blur"
+            validate-on="invalid-input"
             class="input-search pa-0"
             :density="$vuetify.display.xs ? 'compact' : 'comfortable'"
             :placeholder="$gettext('Search')"

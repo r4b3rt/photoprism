@@ -2,7 +2,7 @@
   <div class="p-tab p-tab-photo-details pa-2">
     <v-form
       ref="form"
-      validate-on="blur"
+      validate-on="invalid-input"
       class="p-form-photo-details-meta"
       accept-charset="UTF-8"
       @submit.prevent="save"

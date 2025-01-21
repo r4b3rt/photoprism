@@ -1,6 +1,6 @@
 <template>
   <div class="p-page p-page-faces" style="user-select: none">
-    <v-form ref="form" class="p-faces-search" validate-on="blur" @submit.prevent="updateQuery">
+    <v-form ref="form" class="p-faces-search" validate-on="invalid-input" @submit.prevent="updateQuery">
       <v-toolbar dense flat height="48" class="page-toolbar pa-0" color="secondary-light">
         <v-spacer></v-spacer>
         <v-divider vertical></v-divider>

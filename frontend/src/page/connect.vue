@@ -23,7 +23,7 @@
       </v-btn>
     </v-toolbar>
     <div class="pa-6">
-      <v-form ref="form" v-model="valid" autocomplete="off" validate-on="blur" @submit.prevent>
+      <v-form ref="form" v-model="valid" autocomplete="off" validate-on="invalid-input" @submit.prevent>
         <div v-if="busy">
           <v-progress-linear :indeterminate="true"></v-progress-linear>
         </div>

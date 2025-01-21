@@ -1,6 +1,6 @@
 <template>
   <div class="p-page p-page-subjects" style="user-select: none">
-    <v-form ref="form" class="p-people-search" validate-on="blur" @submit.prevent="updateQuery()">
+    <v-form ref="form" class="p-people-search" validate-on="invalid-input" @submit.prevent="updateQuery()">
       <v-toolbar dense flat height="48" class="page-toolbar pa-0" color="secondary-light">
         <v-text-field
           v-if="canSearch"
@@ -8,7 +8,7 @@
           hide-details
           clearable
           single-line
-          validate-on="blur"
+          validate-on="invalid-input"
           variant="plain"
           density="comfortable"
           :placeholder="$gettext('Search')"

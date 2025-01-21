@@ -1,6 +1,6 @@
 <template>
   <div class="p-tab p-tab-import">
-    <v-form ref="form" class="p-photo-import" validate-on="blur" @submit.prevent="submit">
+    <v-form ref="form" class="p-photo-import" validate-on="invalid-input" @submit.prevent="submit">
       <v-container fluid>
         <p class="text-body-1">
           <span v-if="fileName" class="text-break">{{ $gettext(`Importing %{name}…`, { name: fileName }) }}</span>

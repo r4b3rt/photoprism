@@ -1,6 +1,6 @@
 <template>
   <div class="p-tab p-tab-photo-labels">
-    <v-form ref="form" validate-on="blur" accept-charset="UTF-8" @submit.prevent>
+    <v-form ref="form" validate-on="invalid-input" accept-charset="UTF-8" @submit.prevent>
       <v-row class="pa-2-md-and-up d-flex align-stretch" align="start">
         <v-col class="pa-2 hidden-sm-and-down align-stretch" cols="12" md="2" xxl="1">
           <v-card tile color="background" class="pa-0 ma-0 elevation-0 flex-grow-1">

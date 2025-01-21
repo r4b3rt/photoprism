@@ -1,7 +1,7 @@
 <template>
   <v-form
     ref="form"
-    validate-on="blur"
+    validate-on="invalid-input"
     autocomplete="off"
     class="p-photo-toolbar"
     accept-charset="UTF-8"
@@ -25,7 +25,7 @@
           rounded
           variant="solo-filled"
           :density="density"
-          validate-on="blur"
+          validate-on="invalid-input"
           autocorrect="off"
           autocapitalize="none"
           autocomplete="off"

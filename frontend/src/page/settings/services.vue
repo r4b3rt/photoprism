@@ -88,7 +88,7 @@
         }}
       </p>
 
-      <v-form ref="form" validate-on="blur" class="p-form-settings" accept-charset="UTF-8" @submit.prevent="add">
+      <v-form ref="form" validate-on="invalid-input" class="p-form-settings" accept-charset="UTF-8" @submit.prevent="add">
         <div class="action-buttons">
           <v-btn
             v-if="user.hasWebDAV()"

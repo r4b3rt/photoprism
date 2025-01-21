@@ -1,6 +1,6 @@
 <template>
   <div :class="$config.aclClasses('labels')" class="p-page p-page-labels" style="user-select: none">
-    <v-form ref="form" class="p-labels-search" validate-on="blur" @submit.stop.prevent="updateQuery()">
+    <v-form ref="form" class="p-labels-search" validate-on="invalid-input" @submit.stop.prevent="updateQuery()">
       <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
         <v-text-field
           :model-value="filter.q"
@@ -11,7 +11,7 @@
           rounded
           variant="solo-filled"
           :density="density"
-          validate-on="blur"
+          validate-on="invalid-input"
           :placeholder="$gettext('Search')"
           prepend-inner-icon="mdi-magnify"
           autocomplete="off"

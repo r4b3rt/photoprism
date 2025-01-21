@@ -1,6 +1,6 @@
 <template>
   <v-dialog :model-value="show" persistent max-width="390" class="p-photo-album-dialog" @keydown.esc="cancel">
-    <v-form ref="form" validate-on="blur" accept-charset="UTF-8" @submit.prevent="confirm">
+    <v-form ref="form" validate-on="invalid-input" accept-charset="UTF-8" @submit.prevent="confirm">
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon icon="mdi-image-album" size="28" color="primary"></v-icon>

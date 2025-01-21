@@ -1,6 +1,6 @@
 <template>
   <div :class="$config.aclClasses('albums')" class="p-page p-page-albums" style="user-select: none">
-    <v-form ref="form" class="p-albums-search" validate-on="blur" @submit.prevent="updateQuery()">
+    <v-form ref="form" class="p-albums-search" validate-on="invalid-input" @submit.prevent="updateQuery()">
       <v-toolbar
         flat
         :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
@@ -16,7 +16,7 @@
           rounded
           variant="solo-filled"
           :density="density"
-          validate-on="blur"
+          validate-on="invalid-input"
           :placeholder="$gettext('Search')"
           autocomplete="off"
           autocorrect="off"

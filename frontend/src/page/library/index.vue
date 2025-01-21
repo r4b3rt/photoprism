@@ -1,6 +1,6 @@
 <template>
   <div class="p-tab p-tab-index">
-    <v-form ref="form" class="p-photo-index" validate-on="blur" @submit.prevent="submit">
+    <v-form ref="form" class="p-photo-index" validate-on="invalid-input" @submit.prevent="submit">
       <v-container fluid>
         <p class="text-body-1">
           <span v-if="fileName" class="text-break">{{ action }} {{ fileName }}…</span>

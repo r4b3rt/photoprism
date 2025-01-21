@@ -7,7 +7,7 @@
     color="background"
     @keydown.esc="close"
   >
-    <v-form ref="form" validate-on="blur" class="form-album-edit" accept-charset="UTF-8" @submit.prevent="confirm">
+    <v-form ref="form" validate-on="invalid-input" class="form-album-edit" accept-charset="UTF-8" @submit.prevent="confirm">
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon size="28" color="primary">mdi-bookmark</v-icon>
