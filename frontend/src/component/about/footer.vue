@@ -1,11 +1,20 @@
 <template>
   <footer class="p-about-footer text-ltr">
     <p class="flex-fill text-sm-start">
-      <strong><router-link to="/about" class="text-link">{{ about }} {{ getMembership() }}</router-link></strong>
-      <span class="body-link">Build&nbsp;<a href="https://docs.photoprism.app/release-notes/" target="_blank" :title="version" class="body-link">{{ build }}</a></span>
+      <strong>
+        <router-link to="/about" class="text-link text-selectable">{{ about }} {{ getMembership() }}</router-link>
+      </strong>
+      <span class="body-link text-selectable">
+        <span class="cursor-text" @click.stop.prevent="$util.copyText(about, version)">Build</span>
+        <a href="https://docs.photoprism.app/release-notes/" target="_blank" :title="version" class="body-link">{{
+          build
+        }}</a>
+      </span>
     </p>
-    <p class="hidden-xs text-sm-start">
-      <a href="https://raw.githubusercontent.com/photoprism/photoprism/develop/NOTICE" target="_blank" class="text-link">3rd-party software packages</a>
+    <p class="hidden-xs text-sm-end">
+      <a href="https://raw.githubusercontent.com/photoprism/photoprism/develop/NOTICE" target="_blank" class="text-link"
+        >3rd-party software packages</a
+      >
       <a href="https://www.photoprism.app/about/team/" target="_blank" class="body-link">© 2018-2025 PhotoPrism UG</a>
     </p>
   </footer>

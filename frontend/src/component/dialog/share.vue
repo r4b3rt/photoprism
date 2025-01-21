@@ -42,7 +42,7 @@
                         autocapitalize="none"
                         autocomplete="off"
                         class="input-url"
-                        @click:append-inner="copyText(link.url())"
+                        @click:append-inner="$util.copyText(link.url())"
                       >
                       </v-text-field>
                     </v-col>
@@ -183,18 +183,6 @@ export default {
     },
   },
   methods: {
-    async copyText(text) {
-      if (!text) {
-        return;
-      }
-
-      try {
-        await Util.copyToMachineClipboard(text);
-        this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (_) {
-        this.$notify.error(this.$gettext("Failed copying to clipboard"));
-      }
-    },
     expires(link) {
       let result = this.$gettext("Expires");
 

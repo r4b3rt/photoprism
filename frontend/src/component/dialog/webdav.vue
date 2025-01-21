@@ -21,8 +21,8 @@
           single-line
           :model-value="webdavUrl()"
           class="input-url"
-          @click:append-inner="copyText(webdavUrl())"
-          @click.stop="copyText(webdavUrl())"
+          @click:append-inner="$util.copyText(webdavUrl())"
+          @click.stop="$util.copyText(webdavUrl())"
         ></v-text-field>
       </v-card-text>
 
@@ -41,8 +41,8 @@
           single-line
           :model-value="windowsUrl()"
           class="input-url"
-          @click:append-inner="copyText(windowsUrl())"
-          @click.stop="copyText(windowsUrl())"
+          @click:append-inner="$util.copyText(windowsUrl())"
+          @click.stop="$util.copyText(windowsUrl())"
         ></v-text-field>
       </v-card-text>
 
@@ -101,18 +101,6 @@ export default {
     },
   },
   methods: {
-    async copyText(text) {
-      if (!text) {
-        return;
-      }
-
-      try {
-        await Util.copyToMachineClipboard(text);
-        this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (_) {
-        this.$notify.error(this.$gettext("Failed copying to clipboard"));
-      }
-    },
     webdavUrl() {
       let baseUrl = `${window.location.protocol}//${encodeURIComponent(this.user.Name)}@${window.location.host}/originals/`;
 

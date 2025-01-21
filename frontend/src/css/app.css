@@ -118,25 +118,27 @@ main {
     width: 1.33rem;
 }
 
-#photoprism .float-left {
+.float-left {
     float: left;
 }
 
-#photoprism .float-right {
+.float-right {
     float: right;
 }
 
-#photoprism a.float-left,
-#photoprism a.float-right {
+a.float-left,
+a.float-right {
     display: inline-block;
 }
 
-#photoprism .p-page {
+.p-page {
     user-select: none !important;
 }
 
-#photoprism .text-selectable,
-#photoprism .p-page .text-selectable {
+.text-selectable,
+a.text-selectable,
+span.text-selectable,
+.p-page .text-selectable {
     user-select: text !important;
 }
 
@@ -160,6 +162,32 @@ ol, ul {
 
 body #photoprism .v-list__item .v-icon {
     color: inherit;
+}
+
+/* Mouse Cursor */
+
+.cursor-text {
+    cursor: text !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.cursor-help {
+    cursor: help !important;
+}
+
+.cursor-zoom-in {
+    cursor: zoom-in !important;
+}
+
+.cursor-zoom-out {
+    cursor: zoom-out !important;
+}
+
+.cursor-grab {
+    cursor: grab !important;
 }
 
 /* Image Orientation */

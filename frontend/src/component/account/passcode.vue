@@ -84,7 +84,7 @@
                 <v-img :src="key.QRCode" :max-height="340" alt="QR Code" class="my-1"></v-img>
               </v-col>
               <v-col cols="12" class="text-body-2 text-center">
-                <span class="clickable text-monospace" @click.stop.prevent="copyText(key.Secret)">{{
+                <span class="clickable text-monospace" @click.stop.prevent="$util.copyText(key.Secret)">{{
                   key.Secret
                 }}</span>
               </v-col>
@@ -311,18 +311,6 @@ export default {
     }
   },
   methods: {
-    async copyText(text) {
-      if (!text) {
-        return;
-      }
-
-      try {
-        await Util.copyToMachineClipboard(text);
-        this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (_) {
-        this.$notify.error(this.$gettext("Failed copying to clipboard"));
-      }
-    },
     reset() {
       this.code = "";
       this.password = "";
@@ -370,8 +358,9 @@ export default {
         });
     },
     onCopyRecoveryCode() {
-      this.copyText(this.key.RecoveryCode);
-      this.recoveryCodeCopied = true;
+      if (this.$util.copyText(this.key.RecoveryCode)) {
+        this.recoveryCodeCopied = true;
+      }
     },
     onActivate() {
       if (this.busy) {

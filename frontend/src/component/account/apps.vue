@@ -336,21 +336,10 @@ export default {
     }
   },
   methods: {
-    async copyText(text) {
-      if (!text) {
-        return;
-      }
-
-      try {
-        await Util.copyToMachineClipboard(text);
-        this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (_) {
-        this.$notify.error(this.$gettext("Failed copying to clipboard"));
-      }
-    },
     onCopyAppPassword() {
-      this.copyText(this.appPassword);
-      this.appPasswordCopied = true;
+      if (this.$util.copyText(this.appPassword)) {
+        this.appPasswordCopied = true;
+      }
     },
     formatDate(d) {
       if (!d) {

@@ -7,13 +7,13 @@
             <tr>
               <td>UID</td>
               <td class="text-break">
-                <span class="clickable text-uppercase" @click.stop.prevent="copyText(model.UID)">{{ model.UID }}</span>
+                <span class="clickable text-uppercase" @click.stop.prevent="$util.copyText(model.UID)">{{ model.UID }}</span>
               </td>
             </tr>
             <tr v-if="model.DocumentID">
               <td>Document ID</td>
               <td class="text-break">
-                <span class="clickable text-uppercase" @click.stop.prevent="copyText(model.DocumentID)">{{
+                <span class="clickable text-uppercase" @click.stop.prevent="$util.copyText(model.DocumentID)">{{
                   model.DocumentID
                 }}</span>
               </td>
@@ -46,7 +46,7 @@
                 {{ $gettext(`Folder`) }}
               </td>
               <td class="text-break">
-                <span class="clickable" @click.stop.prevent="copyText(model.Path)">{{ model.Path }}</span>
+                <span class="clickable" @click.stop.prevent="$util.copyText(model.Path)">{{ model.Path }}</span>
               </td>
             </tr>
             <tr>
@@ -54,7 +54,7 @@
                 {{ $gettext(`Name`) }}
               </td>
               <td class="text-break">
-                <span class="clickable" @click.stop.prevent="copyText(model.Name)">{{ model.Name }}</span>
+                <span class="clickable" @click.stop.prevent="$util.copyText(model.Name)">{{ model.Name }}</span>
               </td>
             </tr>
             <tr v-if="model.OriginalName">
@@ -82,7 +82,7 @@
               </td>
               <td :title="sourceName(model.TitleSrc)">
                 <div class="text-flex text-break">
-                  <span class="clickable" @click.stop.prevent="copyText(model.Title)">{{ model.Title }}</span>
+                  <span class="clickable" @click.stop.prevent="$util.copyText(model.Title)">{{ model.Title }}</span>
                   <v-icon v-if="model.TitleSrc === 'name'" icon="mdi-file" class="src"></v-icon>
                   <v-icon v-else-if="model.TitleSrc === 'manual'" icon="mdi-check" class="src"></v-icon>
                 </div>
@@ -365,18 +365,6 @@ export default {
     },
   },
   methods: {
-    async copyText(text) {
-      if (!text) {
-        return;
-      }
-
-      try {
-        await Util.copyToMachineClipboard(text);
-        this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (_) {
-        this.$notify.error(this.$gettext("Failed copying to clipboard"));
-      }
-    },
     sourceName(s) {
       switch (s) {
         case "":

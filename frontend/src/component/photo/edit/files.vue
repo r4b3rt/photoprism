@@ -119,7 +119,7 @@
                           <tr>
                             <td title="Unique ID">UID</td>
                             <td class="text-break">
-                              <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.UID)">{{
+                              <span class="clickable text-uppercase" @click.stop.prevent="$util.copyText(file.UID)">{{
                                 file.UID
                               }}</span>
                             </td>
@@ -129,7 +129,7 @@
                               {{ $gettext(`Instance ID`) }}
                             </td>
                             <td class="text-break">
-                              <span class="clickable text-uppercase" @click.stop.prevent="copyText(file.InstanceID)">{{
+                              <span class="clickable text-uppercase" @click.stop.prevent="$util.copyText(file.InstanceID)">{{
                                 file.InstanceID
                               }}</span>
                             </td>
@@ -139,7 +139,7 @@
                               {{ $gettext(`Hash`) }}
                             </td>
                             <td class="text-break">
-                              <span class="clickable text-break" @click.stop.prevent="copyText(file.Hash)">{{
+                              <span class="clickable text-break" @click.stop.prevent="$util.copyText(file.Hash)">{{
                                 file.Hash
                               }}</span>
                             </td>
@@ -149,7 +149,7 @@
                               {{ $gettext(`Filename`) }}
                             </td>
                             <td class="text-break">
-                              <span class="clickable" @click.stop.prevent="copyText(file.Name)">{{ file.Name }}</span>
+                              <span class="clickable" @click.stop.prevent="$util.copyText(file.Name)">{{ file.Name }}</span>
                             </td>
                           </tr>
                           <tr v-if="file.Root">
@@ -163,7 +163,7 @@
                               {{ $gettext(`Original Name`) }}
                             </td>
                             <td class="text-break"
-                              ><span class="clickable" @click.stop.prevent="copyText(file.OriginalName)">{{
+                              ><span class="clickable" @click.stop.prevent="$util.copyText(file.OriginalName)">{{
                                 file.OriginalName
                               }}</span></td
                             >
@@ -435,18 +435,6 @@ export default {
   },
   computed: {},
   methods: {
-    async copyText(text) {
-      if (!text) {
-        return;
-      }
-
-      try {
-        await Util.copyToMachineClipboard(text);
-        this.$notify.success(this.$gettext("Copied to clipboard"));
-      } catch (_) {
-        this.$notify.error(this.$gettext("Failed copying to clipboard"));
-      }
-    },
     orientationClass(file) {
       if (!file) {
         return [];

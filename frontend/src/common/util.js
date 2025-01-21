@@ -41,6 +41,8 @@ import {
 } from "model/photo";
 import sanitizeHtml from "sanitize-html";
 import { DateTime } from "luxon";
+import { $gettext } from "common/gettext";
+import Notify from "common/notify";
 
 const Nanosecond = 1;
 const Microsecond = 1000 * Nanosecond;
@@ -566,6 +568,29 @@ export default class Util {
     }
 
     return `${config.videoUri}/videos/${hash}/${config.previewToken}/${FormatAvc}`;
+  }
+
+  static async copyText(text) {
+    if (!text) {
+      return false;
+    }
+
+    // Join additional text arguments, if any.
+    for (let i = 1; i < arguments.length; i++) {
+      if (typeof arguments[i] === "string" && arguments[i].length > 0) {
+        text += " " + arguments[i];
+      }
+    }
+
+    try {
+      await Util.copyToMachineClipboard(text);
+      Notify.success($gettext("Copied to clipboard"));
+      return true;
+    } catch (_) {
+      Notify.error($gettext("Cannot copy to clipboard"));
+    }
+
+    return false;
   }
 
   static async copyToMachineClipboard(text) {
