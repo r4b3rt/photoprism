@@ -22,6 +22,35 @@
         </v-col>
         <v-col cols="12" sm="8" md="10" class="d-flex pa-0" align-self="stretch">
           <v-row dense>
+            <v-col cols="12">
+              <v-text-field
+                v-model="model.Title"
+                :append-inner-icon="model.TitleSrc === 'manual' ? 'mdi-check' : ''"
+                :disabled="disabled"
+                :rules="[textRule]"
+                hide-details
+                :label="$pgettext('Photo', 'Title')"
+                placeholder=""
+                autocomplete="off"
+                class="input-title"
+              ></v-text-field>
+            </v-col>
+
+            <v-col cols="12">
+              <v-textarea
+                v-model="model.Caption"
+                :append-inner-icon="model.CaptionSrc === 'manual' ? 'mdi-check' : ''"
+                :disabled="disabled"
+                hide-details
+                autocomplete="off"
+                auto-grow
+                :label="$gettext('Caption')"
+                placeholder=""
+                :rows="1"
+                class="input-caption"
+              ></v-textarea>
+            </v-col>
+
             <v-col cols="4" lg="2">
               <v-autocomplete
                 v-model="model.Day"
@@ -261,35 +290,6 @@
                 placeholder=""
                 class="input-focal-length"
               ></v-text-field>
-            </v-col>
-
-            <v-col cols="12">
-              <v-text-field
-                v-model="model.Title"
-                :append-inner-icon="model.TitleSrc === 'manual' ? 'mdi-check' : ''"
-                :disabled="disabled"
-                :rules="[textRule]"
-                hide-details
-                :label="$pgettext('Photo', 'Title')"
-                placeholder=""
-                autocomplete="off"
-                class="input-title"
-              ></v-text-field>
-            </v-col>
-
-            <v-col cols="12">
-              <v-textarea
-                v-model="model.Caption"
-                :append-inner-icon="model.CaptionSrc === 'manual' ? 'mdi-check' : ''"
-                :disabled="disabled"
-                hide-details
-                autocomplete="off"
-                auto-grow
-                :label="$gettext('Caption')"
-                placeholder=""
-                :rows="1"
-                class="input-caption"
-              ></v-textarea>
             </v-col>
 
             <v-col cols="12" md="6">
