@@ -5,14 +5,33 @@
         <v-spacer></v-spacer>
         <v-divider vertical></v-divider>
 
-        <v-btn icon variant="text" color="surface-variant" class="action-reload" :title="$gettext('Reload')" @click.stop="refresh">
+        <v-btn
+          icon
+          variant="text"
+          color="surface-variant"
+          class="action-reload"
+          :title="$gettext('Reload')"
+          @click.stop="refresh"
+        >
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
 
-        <v-btn v-if="!filter.hidden" icon class="action-show-hidden" :title="$gettext('Show hidden')" @click.stop="onShowHidden">
+        <v-btn
+          v-if="!filter.hidden"
+          icon
+          class="action-show-hidden"
+          :title="$gettext('Show hidden')"
+          @click.stop="onShowHidden"
+        >
           <v-icon>mdi-eye</v-icon>
         </v-btn>
-        <v-btn v-else icon class="action-exclude-hidden" :title="$gettext('Exclude hidden')" @click.stop="onExcludeHidden">
+        <v-btn
+          v-else
+          icon
+          class="action-exclude-hidden"
+          :title="$gettext('Exclude hidden')"
+          @click.stop="onExcludeHidden"
+        >
           <v-icon>mdi-eye-off</v-icon>
         </v-btn>
       </v-toolbar>
@@ -22,7 +41,12 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else>
-      <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
+      <p-scroll
+        :load-more="loadMore"
+        :load-disabled="scrollDisabled"
+        :load-distance="scrollDistance"
+        :loading="loading"
+      ></p-scroll>
 
       <div v-if="results.length === 0" class="pa-3">
         <v-alert color="primary" icon="mdi-check-circle-outline" class="no-results opacity-60" variant="outlined">
@@ -37,75 +61,86 @@
       </div>
       <div v-else>
         <div class="v-row search-results face-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="model in results" :key="model.ID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2 v-col-xxl-1">
-            <div :data-id="model.ID" style="user-select: none" :class="model.classes()" class="result">
-              <v-img :src="model.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="preview" @click.stop.prevent="onView(model)">
-                <v-btn :ripple="false" class="input-hidden" icon variant="text" density="comfortable" position="absolute" @click.stop.prevent="toggleHidden(model)">
+          <div
+            v-for="model in results"
+            :key="model.ID"
+            class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2"
+          >
+            <div :data-id="model.ID" style="user-select: none" :class="model.classes()" class="result flex-grow-1">
+              <v-img
+                :src="model.thumbnailUrl('tile_320')"
+                :transition="false"
+                aspect-ratio="1"
+                class="preview"
+                @click.stop.prevent="onView(model)"
+              >
+                <v-btn
+                  :ripple="false"
+                  class="input-hidden"
+                  icon
+                  variant="text"
+                  density="comfortable"
+                  position="absolute"
+                  @click.stop.prevent="toggleHidden(model)"
+                >
                   <v-icon color="white" class="select-on" :title="$gettext('Show')">mdi-eye-off</v-icon>
                   <v-icon color="white" class="select-off" :title="$gettext('Hide')">mdi-close</v-icon>
                 </v-btn>
               </v-img>
 
               <v-card-actions class="meta pa-0">
-                <v-row v-if="model.SubjUID" align="center" class="ma-0">
-                  <v-col cols="12" class="text-start pa-0">
-                    <v-text-field
-                      :model-value="model.Name"
-                      :rules="[textRule]"
-                      :readonly="readonly"
-                      autocomplete="off"
-                      class="input-name pa-0 ma-0"
-                      hide-details
-                      single-line
-                      variant="solo-inverted"
-                      @change="
-                        (newName) => {
-                          onRename(model, newName);
-                        }
-                      "
-                      @keyup.enter="
-                        (event) => {
-                          onRename(model, event.target.value);
-                        }
-                      "
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row v-else align="center" class="ma-0">
-                  <v-col cols="12" class="text-start pa-0">
-                    <!-- TODO: check property allow-overflow TEST -->
-                    <v-combobox
-                      :model-value="model.Name"
-                      style="z-index: 250"
-                      :items="$config.values.people"
-                      item-title="Name"
-                      item-value="Name"
-                      :readonly="readonly"
-                      :return-object="false"
-                      :menu-props="menuProps"
-                      :hint="$gettext('Name')"
-                      hide-details
-                      single-line
-                      variant="solo-inverted"
-                      open-on-clear
-                      hide-no-data
-                      append-icon=""
-                      prepend-inner-icon="mdi-account-plus"
-                      autocomplete="off"
-                      class="input-name pa-0 ma-0"
-                      @keyup.enter.native="
-                        (event) => {
-                          onRename(model, event.target.value);
-                        }
-                      "
-                      @blur="
-                        (event) => {
-                          onRename(model, event.target.value);
-                        }"
-                    >
-                    </v-combobox>
-                  </v-col>
-                </v-row>
+                <v-text-field
+                  v-if="model.SubjUID"
+                  :model-value="model.Name"
+                  :rules="[textRule]"
+                  :readonly="readonly"
+                  autocomplete="off"
+                  class="input-name pa-0 ma-0"
+                  hide-details
+                  single-line
+                  @change="
+                    (newName) => {
+                      onRename(model, newName);
+                    }
+                  "
+                  @keyup.enter="
+                    (event) => {
+                      onRename(model, event.target.value);
+                    }
+                  "
+                ></v-text-field>
+                <!-- TODO: check property allow-overflow TEST -->
+                <v-combobox
+                  v-else
+                  :model-value="model.Name"
+                  style="z-index: 250"
+                  :items="$config.values.people"
+                  item-title="Name"
+                  item-value="Name"
+                  :readonly="readonly"
+                  :return-object="false"
+                  :menu-props="menuProps"
+                  :hint="$gettext('Name')"
+                  hide-details
+                  single-line
+                  open-on-clear
+                  hide-no-data
+                  append-icon=""
+                  prepend-inner-icon="mdi-account-plus"
+                  autocomplete="off"
+                  class="input-name pa-0 ma-0"
+                  @keyup.enter.native="
+                    (event) => {
+                      onRename(model, event.target.value);
+                    }
+                  "
+                  @blur="
+                    (event) => {
+                      onRename(model, event.target.value);
+                    }
+                  "
+                >
+                </v-combobox>
               </v-card-actions>
             </div>
           </div>

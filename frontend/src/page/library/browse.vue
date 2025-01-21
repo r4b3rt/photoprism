@@ -38,7 +38,7 @@
           </div>
         </v-alert>
         <div v-else class="v-row search-results file-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="(m, index) in results" :key="m.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1">
+          <div v-for="(m, index) in results" :key="m.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2">
             <div :data-uid="m.UID" class="result" :class="m.classes(selection.includes(m.UID))" @contextmenu.stop="onContextMenu($event, index)">
               <div
                 :title="m.Name"

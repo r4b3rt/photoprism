@@ -206,7 +206,7 @@
           v-for="(album, index) in results"
           :key="album.UID"
           ref="items"
-          class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2 v-col-xxl-1"
+          class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2"
         >
           <div
             :data-uid="album.UID"

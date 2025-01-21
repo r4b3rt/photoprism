@@ -100,7 +100,7 @@
           <v-col cols="12" sm="6">
             <v-checkbox
               v-model="model.SyncDownload"
-              density="compact"
+              density="comfortable"
               :disabled="!model.AccSync || readonly"
               hide-details
               true-icon="mdi-radiobox-marked"
@@ -112,7 +112,7 @@
           <v-col cols="12" sm="6">
             <v-checkbox
               v-model="model.SyncUpload"
-              density="compact"
+              density="comfortable"
               :disabled="!model.AccSync"
               true-icon="mdi-radiobox-marked"
               false-icon="mdi-radiobox-blank"
@@ -124,7 +124,7 @@
           <v-col cols="12" sm="6">
             <v-checkbox
               v-model="model.SyncFilenames"
-              density="compact"
+              density="comfortable"
               :disabled="!model.AccSync"
               :label="$gettext('Preserve filenames')"
               hide-details
@@ -133,7 +133,7 @@
           <v-col cols="12" sm="6">
             <v-checkbox
               v-model="model.SyncRaw"
-              density="compact"
+              density="comfortable"
               :disabled="!model.AccSync"
               :label="$gettext('Sync raw and video files')"
               hide-details

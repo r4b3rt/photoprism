@@ -81,6 +81,7 @@
                 v-model="model.Favorite"
                 :disabled="disabled"
                 :label="$gettext('Favorite')"
+                density="comfortable"
                 hide-details
               ></v-checkbox>
             </v-col>
@@ -89,6 +90,7 @@
                 v-model="model.Private"
                 :disabled="disabled"
                 :label="$gettext('Private')"
+                density="comfortable"
                 hide-details
               ></v-checkbox>
             </v-col>

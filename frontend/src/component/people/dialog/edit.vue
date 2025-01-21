@@ -7,7 +7,13 @@
     color="background"
     @keydown.esc="close"
   >
-    <v-form ref="form" validate-on="invalid-input" class="form-person-edit" accept-charset="UTF-8" @submit.prevent="confirm">
+    <v-form
+      ref="form"
+      validate-on="invalid-input"
+      class="form-person-edit"
+      accept-charset="UTF-8"
+      @submit.prevent="confirm"
+    >
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon size="28" color="primary">mdi-account</v-icon>
@@ -28,11 +34,23 @@
               ></v-text-field>
             </v-col>
             <v-col sm="4">
-              <v-checkbox v-model="model.Favorite" :disabled="disabled" :label="$gettext('Favorite')" hide-details>
+              <v-checkbox
+                v-model="model.Favorite"
+                :disabled="disabled"
+                :label="$gettext('Favorite')"
+                density="comfortable"
+                hide-details
+              >
               </v-checkbox>
             </v-col>
             <v-col sm="4">
-              <v-checkbox v-model="model.Hidden" :disabled="disabled" :label="$gettext('Hidden')" hide-details>
+              <v-checkbox
+                v-model="model.Hidden"
+                :disabled="disabled"
+                :label="$gettext('Hidden')"
+                density="comfortable"
+                hide-details
+              >
               </v-checkbox>
             </v-col>
           </v-row>

@@ -7,7 +7,13 @@
     color="background"
     @keydown.esc="close"
   >
-    <v-form ref="form" validate-on="invalid-input" class="form-label-edit" accept-charset="UTF-8" @submit.prevent="confirm">
+    <v-form
+      ref="form"
+      validate-on="invalid-input"
+      class="form-label-edit"
+      accept-charset="UTF-8"
+      @submit.prevent="confirm"
+    >
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon size="28" color="primary">mdi-label</v-icon>
@@ -30,7 +36,13 @@
             <v-col sm="4">
               <!-- TODO: check property flat TEST -->
               <!--                TODO: fix Favorite saving-->
-              <v-checkbox v-model="model.Favorite" :disabled="disabled" :label="$gettext('Favorite')" hide-details>
+              <v-checkbox
+                v-model="model.Favorite"
+                :disabled="disabled"
+                :label="$gettext('Favorite')"
+                density="comfortable"
+                hide-details
+              >
               </v-checkbox>
             </v-col>
           </v-row>

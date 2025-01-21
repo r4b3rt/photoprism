@@ -16,16 +16,9 @@
           {{ $gettext(`Recognition starts after indexing has been completed.`) }}
         </div>
       </v-alert>
-      <v-row v-else class="search-results face-results cards-view d-flex align-stretch ma-0">
-        <v-col v-for="marker in markers" :key="marker.UID" cols="12" sm="6" md="4" lg="3" class="d-flex">
-          <v-card
-            tile
-            :data-id="marker.UID"
-            style="user-select: none"
-            :class="marker.classes()"
-            class="result flex-grow-1"
-          >
-            <div class="card-background card"></div>
+      <div v-else class="v-row search-results face-results cards-view d-flex">
+        <div v-for="marker in markers" :key="marker.UID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 d-flex">
+          <v-card :data-id="marker.UID" style="user-select: none" :class="marker.classes()" class="result flex-grow-1">
             <v-img :src="marker.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card">
               <v-btn
                 v-if="!marker.SubjUID && !marker.Invalid"
@@ -38,80 +31,69 @@
                 :title="$gettext('Remove')"
                 @click.stop.prevent="onReject(marker)"
               >
-                <v-icon color="white" class="action-reject">mdi-close</v-icon>
+                <v-icon class="action-reject">mdi-close</v-icon>
               </v-btn>
             </v-img>
-
             <v-card-actions class="meta pa-0">
-              <v-row v-if="marker.Invalid" align="center">
-                <v-col cols="12" class="text-center pa-0">
-                  <v-btn
-                    :disabled="busy"
-                    size="large"
-                    variant="flat"
-                    block
-                    :rounded="false"
-                    class="action-undo text-center"
-                    :title="$gettext('Undo')"
-                    @click.stop="onApprove(marker)"
-                  >
-                    <v-icon>mdi-undo</v-icon>
-                  </v-btn>
-                </v-col>
-              </v-row>
-              <v-row v-else-if="marker.SubjUID" align="center">
-                <v-col cols="12" class="text-start pa-0">
-                  <v-text-field
-                    v-model="marker.Name"
-                    :rules="[textRule]"
-                    :disabled="busy"
-                    :readonly="true"
-                    autocomplete="off"
-                    autocorrect="off"
-                    class="input-name pa-0 ma-0"
-                    hide-details
-                    single-line
-                    variant="solo-inverted"
-                    clearable
-                    clear-icon="mdi-eject"
-                    @click:clear="onClearSubject(marker)"
-                    @change="onRename(marker)"
-                    @keyup.enter="onRename(marker)"
-                  ></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row v-else align="center">
-                <v-col cols="12" class="text-start pa-0">
-                  <!-- TODO: check property allow-overflow TEST -->
-                  <v-combobox
-                    v-model="marker.Name"
-                    style="z-index: 250"
-                    :items="$config.values.people"
-                    item-title="Name"
-                    item-value="Name"
-                    :disabled="busy"
-                    :return-object="false"
-                    :menu-props="menuProps"
-                    :hint="$gettext('Name')"
-                    hide-details
-                    single-line
-                    variant="solo-inverted"
-                    open-on-clear
-                    hide-no-data
-                    append-icon=""
-                    prepend-inner-icon="mdi-account-plus"
-                    autocomplete="off"
-                    class="input-name pa-0 ma-0"
-                    @blur="onRename(marker)"
-                    @keyup.enter.native="onRename(marker)"
-                  >
-                  </v-combobox>
-                </v-col>
-              </v-row>
+              <v-btn
+                v-if="marker.Invalid"
+                :disabled="busy"
+                size="large"
+                variant="flat"
+                block
+                :rounded="false"
+                class="action-undo text-center"
+                :title="$gettext('Undo')"
+                @click.stop="onApprove(marker)"
+              >
+                <v-icon>mdi-undo</v-icon>
+              </v-btn>
+              <v-text-field
+                v-else-if="marker.SubjUID"
+                v-model="marker.Name"
+                :rules="[textRule]"
+                :disabled="busy"
+                :readonly="true"
+                autocomplete="off"
+                autocorrect="off"
+                class="input-name pa-0 ma-0"
+                hide-details
+                single-line
+                clearable
+                persistent-clear
+                clear-icon="mdi-eject"
+                @click:clear="onClearSubject(marker)"
+                @change="onRename(marker)"
+                @keyup.enter="onRename(marker)"
+              ></v-text-field>
+              <!-- TODO: check property allow-overflow TEST -->
+              <v-combobox
+                v-else
+                v-model="marker.Name"
+                style="z-index: 250"
+                :items="$config.values.people"
+                item-title="Name"
+                item-value="Name"
+                :disabled="busy"
+                :return-object="false"
+                :menu-props="menuProps"
+                :hint="$gettext('Name')"
+                hide-details
+                single-line
+                open-on-clear
+                hide-no-data
+                append-icon=""
+                prepend-inner-icon="mdi-account-plus"
+                autocomplete="off"
+                class="input-name pa-0 ma-0"
+                @blur="onRename(marker)"
+                @keyup.enter.native="onRename(marker)"
+              >
+              </v-combobox>
             </v-card-actions>
           </v-card>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
     </v-container>
   </div>
 </template>
