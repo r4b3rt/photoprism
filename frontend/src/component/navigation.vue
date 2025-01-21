@@ -909,6 +909,7 @@
       :selection="edit.selection"
       :index="edit.index"
       :album="edit.album"
+      :tab="edit.tab"
       @close="edit.dialog = false"
     ></p-photo-edit-dialog>
   </div>
@@ -981,6 +982,7 @@ export default {
         album: null,
         selection: [],
         index: 0,
+        tab: "",
       },
       speedDial: false,
       rtl: this.$rtl,
@@ -1035,6 +1037,7 @@ export default {
           this.edit.index = data.index;
           this.edit.selection = data.selection;
           this.edit.album = data.album;
+          this.edit.tab = data?.tab ? data.tab : "";
         }
       })
     );

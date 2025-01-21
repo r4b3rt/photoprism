@@ -1,7 +1,12 @@
 <template>
   <div class="p-photos p-photo-cards">
     <div v-if="photos.length === 0" class="pa-3">
-      <v-alert color="primary" :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'" class="no-results opacity-60" variant="outlined">
+      <v-alert
+        color="primary"
+        :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'"
+        class="no-results opacity-60"
+        variant="outlined"
+      >
         <div v-if="filter.order === 'edited'" class="font-weight-bold">
           {{ $gettext(`No recently edited pictures`) }}
         </div>
@@ -11,17 +16,36 @@
         <div class="mt-2">
           {{ $gettext(`Try again using other filters or keywords.`) }}
           <template v-if="!isSharedView">
-            {{ $gettext(`In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`) }}
+            {{
+              $gettext(
+                `In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`
+              )
+            }}
             <template v-if="$config.feature('review')">
-              {{ $gettext(`Non-photographic and low-quality images require a review before they appear in search results.`) }}
+              {{
+                $gettext(
+                  `Non-photographic and low-quality images require a review before they appear in search results.`
+                )
+              }}
             </template>
           </template>
         </div>
       </v-alert>
     </div>
     <div v-else class="v-row search-results photo-results cards-view" :class="{ 'select-results': selectMode }">
-      <div v-for="(m, index) in photos" :key="m.ID" ref="items" :data-index="index" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2">
-        <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="m.ID" :data-uid="m.UID" class="media result placeholder">
+      <div
+        v-for="(m, index) in photos"
+        :key="m.ID"
+        ref="items"
+        :data-index="index"
+        class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2"
+      >
+        <div
+          v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex"
+          :data-id="m.ID"
+          :data-uid="m.UID"
+          class="media result placeholder"
+        >
           <div class="preview" />
           <div v-if="!isSharedView && m.Quality < 3 && context === 'review'" class="review" />
           <div class="meta">
@@ -73,7 +97,14 @@
             </div>
           </div>
         </div>
-        <div v-else :data-id="m.ID" :data-uid="m.UID" class="media result" :class="m.classes()" @contextmenu.stop="onContextMenu($event, index)">
+        <div
+          v-else
+          :data-id="m.ID"
+          :data-uid="m.UID"
+          class="media result"
+          :class="m.classes()"
+          @contextmenu.stop="onContextMenu($event, index)"
+        >
           <div
             :title="m.Title"
             :style="`background-image: url(${m.thumbnailUrl('tile_500')})`"
@@ -104,11 +135,23 @@
               <i v-if="m.Type === 'live'" class="action-live" :title="$gettext('Live')"><icon-live-photo /></i>
               <i v-if="m.Type === 'video'" class="mdi mdi-play" :title="$gettext('Video')" />
               <i v-if="m.Type === 'animated'" class="mdi mdi-file-gif-box" :title="$gettext('Animated')" />
-              <i v-if="m.Type === 'vector'" class="action-vector mdi mdi-vector-polyline" :title="$gettext('Vector')"></i>
+              <i
+                v-if="m.Type === 'vector'"
+                class="action-vector mdi mdi-vector-polyline"
+                :title="$gettext('Vector')"
+              ></i>
               <i v-if="m.Type === 'image'" class="mdi mdi-camera-burst" :title="$gettext('Stack')" />
             </button>
 
-            <button v-if="m.Type === 'image' && selectMode" class="input-view" :title="$gettext('View')" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onOpen($event, index)" @touchmove.stop.prevent @click.stop.prevent="onOpen($event, index)">
+            <button
+              v-if="m.Type === 'image' && selectMode"
+              class="input-view"
+              :title="$gettext('View')"
+              @touchstart.stop.prevent="input.touchStart($event, index)"
+              @touchend.stop.prevent="onOpen($event, index)"
+              @touchmove.stop.prevent
+              @click.stop.prevent="onOpen($event, index)"
+            >
               <i class="mdi mdi-magnify-plus-outline" />
             </button>
 
@@ -127,31 +170,67 @@
               the v-hover component we instead hide the button by default and
               use css to show it when it is being hovered.
             -->
-            <button class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+            <button
+              class="input-select"
+              @touchstart.stop.prevent="input.touchStart($event, index)"
+              @touchend.stop.prevent="onSelect($event, index)"
+              @touchmove.stop.prevent
+              @click.stop.prevent="onSelect($event, index)"
+            >
               <i class="mdi mdi-check-circle select-on" />
               <i class="mdi mdi-circle-outline select-off" />
             </button>
 
-            <button v-if="!isSharedView" class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+            <button
+              v-if="!isSharedView"
+              class="input-favorite"
+              @touchstart.stop.prevent="input.touchStart($event, index)"
+              @touchend.stop.prevent="toggleLike($event, index)"
+              @touchmove.stop.prevent
+              @click.stop.prevent="toggleLike($event, index)"
+            >
               <i v-if="m.Favorite" class="mdi mdi-star text-favorite favorite-on" />
               <i v-else class="mdi mdi-star-outline favorite-off" />
             </button>
           </div>
 
           <div v-if="!isSharedView && m.Quality < 3 && context === 'review'" class="review">
-            <button type="button" class="v-btn v-btn--flat bg-button v-btn--variant-tonal action-archive text-center" :title="$gettext('Archive')" @click.stop="m.archive()">
+            <button
+              type="button"
+              class="v-btn v-btn--flat bg-button v-btn--variant-tonal action-archive text-center"
+              :title="$gettext('Archive')"
+              @click.stop="m.archive()"
+            >
               <span class="v-btn__overlay"></span>
               <span class="v-btn__underlay"></span>
-              <span class="v-btn__content" data-no-activator=""><i class="mdi-close mdi v-icon notranslate v-theme--default v-icon--size-default" aria-hidden="true"></i></span>
+              <span class="v-btn__content" data-no-activator=""
+                ><i
+                  class="mdi-close mdi v-icon notranslate v-theme--default v-icon--size-default"
+                  aria-hidden="true"
+                ></i
+              ></span>
             </button>
-            <button type="button" class="v-btn v-btn--flat bg-button v-btn--variant-tonal action-approve text-center" :title="$gettext('Approve')" @click.stop="m.approve()">
+            <button
+              type="button"
+              class="v-btn v-btn--flat bg-button v-btn--variant-tonal action-approve text-center"
+              :title="$gettext('Approve')"
+              @click.stop="m.approve()"
+            >
               <span class="v-btn__overlay"></span>
               <span class="v-btn__underlay"></span>
-              <span class="v-btn__content" data-no-activator=""><i class="mdi-check mdi v-icon notranslate v-icon--size-default" aria-hidden="true"></i></span>
+              <span class="v-btn__content" data-no-activator=""
+                ><i class="mdi-check mdi v-icon notranslate v-icon--size-default" aria-hidden="true"></i
+              ></span>
             </button>
           </div>
           <div class="meta">
-            <button v-if="m.Title" :title="m.Title" class="action-title-edit meta-title text-truncate" :data-uid="m.UID" @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)">
+            <button
+              v-if="m.Title"
+              :title="m.Title"
+              class="action-title-edit meta-title text-truncate"
+              :data-uid="m.UID"
+              @click.exact="isSharedView ? openPhoto(index) : editPhoto(index)"
+            >
               {{ m.Title }}
             </button>
             <button v-if="m.Caption" :title="$gettext('Caption')" class="meta-caption" @click.exact="editPhoto(index)">
@@ -170,7 +249,11 @@
                 <i class="mdi mdi-play-circle" />
                 {{ m.getVideoInfo() }}
               </button>
-              <button v-else-if="m.Type === 'animated'" :title="$gettext('Animated') + ' GIF'" @click.exact="editPhoto(index)">
+              <button
+                v-else-if="m.Type === 'animated'"
+                :title="$gettext('Animated') + ' GIF'"
+                @click.exact="editPhoto(index)"
+              >
                 <i class="mdi mdi-file-gif-box" />
                 {{ m.getVideoInfo() }}
               </button>
@@ -178,20 +261,42 @@
                 <i class="mdi mdi-vector-polyline" />
                 {{ m.getVectorInfo() }}
               </button>
-              <button v-else :title="$gettext('Camera')" class="meta-camera action-camera-edit" :data-uid="m.UID" @click.exact="editPhoto(index)">
+              <button
+                v-else
+                :title="$gettext('Camera')"
+                class="meta-camera action-camera-edit"
+                :data-uid="m.UID"
+                @click.exact="editPhoto(index)"
+              >
                 <i class="mdi mdi-camera" />
                 {{ m.getPhotoInfo() }}
               </button>
-              <button v-if="m.LensID > 1 || m.FocalLength" :title="$gettext('Lens')" class="meta-lens action-lens-edit" :data-uid="m.UID" @click.exact="editPhoto(index)">
+              <button
+                v-if="m.LensID > 1 || m.FocalLength"
+                :title="$gettext('Lens')"
+                class="meta-lens action-lens-edit"
+                :data-uid="m.UID"
+                @click.exact="editPhoto(index)"
+              >
                 <i class="mdi mdi-camera-iris" />
                 {{ m.getLensInfo() }}
               </button>
-              <button v-if="featDownload" :title="m.getOriginalName()" class="meta-filename text-truncate" @click.exact="downloadFile(index)">
+              <button
+                v-if="featDownload"
+                :title="m.getOriginalName()"
+                class="meta-filename text-truncate"
+                @click.exact="editPhoto(index, 'files')"
+              >
                 <i class="mdi mdi-film" />
                 {{ m.getOriginalName() }}
               </button>
               <template v-if="featPlaces && m.Country !== 'zz'">
-                <button :title="$gettext('Location')" class="meta-location action-location" :data-uid="m.UID" @click.exact="openLocation(index)">
+                <button
+                  :title="$gettext('Location')"
+                  class="meta-location action-location"
+                  :data-uid="m.UID"
+                  @click.exact="openLocation(index)"
+                >
                   <i class="mdi mdi-map-marker" />
                   {{ m.locationInfo() }}
                 </button>
@@ -316,7 +421,11 @@ export default {
       return parseInt(entry.target.getAttribute("data-index"));
     },
     visibilitiesChanged(entries) {
-      const [smallestIndex, largestIndex] = virtualizationTools.updateVisibleElementIndices(this.visibleElementIndices, entries, this.elementIndexFromIntersectionObserverEntry);
+      const [smallestIndex, largestIndex] = virtualizationTools.updateVisibleElementIndices(
+        this.visibleElementIndices,
+        entries,
+        this.elementIndexFromIntersectionObserverEntry
+      );
 
       // we observe only every 5th item, so we increase the rendered
       // range here by 4 items in every direction just to be safe

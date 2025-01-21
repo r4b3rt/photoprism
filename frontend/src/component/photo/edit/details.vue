@@ -22,7 +22,7 @@
         </v-col>
         <v-col cols="12" sm="8" md="10" class="d-flex pa-0" align-self="stretch">
           <v-row dense>
-            <v-col cols="4" lg="2" xl="1">
+            <v-col cols="4" lg="2">
               <v-autocomplete
                 v-model="model.Day"
                 :append-inner-icon="model.TakenSrc === 'manual' ? 'mdi-check' : ''"
@@ -40,7 +40,7 @@
               >
               </v-autocomplete>
             </v-col>
-            <v-col cols="4" lg="2" xl="1">
+            <v-col cols="4" lg="2">
               <v-autocomplete
                 v-model="model.Month"
                 :append-inner-icon="model.TakenSrc === 'manual' ? 'mdi-check' : ''"
@@ -58,7 +58,7 @@
               >
               </v-autocomplete>
             </v-col>
-            <v-col cols="4" lg="2" xl="1">
+            <v-col cols="4" lg="2">
               <v-autocomplete
                 v-model="model.Year"
                 :append-inner-icon="model.TakenSrc === 'manual' ? 'mdi-check' : ''"
@@ -77,7 +77,7 @@
               </v-autocomplete>
             </v-col>
 
-            <v-col cols="6" lg="2" xl="1">
+            <v-col cols="6" lg="2">
               <!-- TODO: check property return-masked-value TEST -->
               <v-text-field
                 v-model="time"
@@ -94,7 +94,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="6" lg="4" xl="2">
+            <v-col cols="6" lg="4">
               <v-autocomplete
                 v-model="model.TimeZone"
                 :disabled="disabled"
@@ -108,7 +108,7 @@
               ></v-autocomplete>
             </v-col>
 
-            <v-col cols="12" sm="8" md="4" xl="3">
+            <v-col cols="12" sm="8" md="4">
               <v-autocomplete
                 v-model="model.Country"
                 :append-inner-icon="model.PlaceSrc === 'manual' ? 'mdi-check' : ''"
@@ -126,7 +126,7 @@
               </v-autocomplete>
             </v-col>
 
-            <v-col cols="4" md="2" xl="1">
+            <v-col cols="4" md="2">
               <v-text-field
                 v-model="model.Altitude"
                 :disabled="disabled"
@@ -142,7 +142,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="4" sm="6" md="3" xl="1">
+            <v-col cols="4" sm="6" md="3">
               <v-text-field
                 v-model="model.Lat"
                 :append-inner-icon="model.PlaceSrc === 'manual' ? 'mdi-check' : ''"
@@ -158,7 +158,7 @@
               ></v-text-field>
             </v-col>
 
-            <v-col cols="4" sm="6" md="3" xl="1">
+            <v-col cols="4" sm="6" md="3">
               <v-text-field
                 v-model="model.Lng"
                 :append-inner-icon="model.PlaceSrc === 'manual' ? 'mdi-check' : ''"

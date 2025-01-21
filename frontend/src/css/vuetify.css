@@ -69,22 +69,49 @@ body.dark-theme {
     border-radius: 8px;
 }
 
-div.v-dialog.v-dialog--fullscreen > div.v-card {
+.v-overlay.v-dialog.v-dialog--sidepanel:not(.v-dialog--fullscreen) {
+    align-items: center;
+    justify-content: end;
     border-radius: 0;
 }
 
-div.v-dialog.v-dialog--large:not(.v-dialog--fullscreen) .v-overlay__content {
-    height: 93vh;
-    width: 92vw;
-    max-width: 1580px;
-    margin: auto;
+div.v-dialog.v-dialog--sidepanel:not(.v-dialog--fullscreen) .v-overlay__content {
+    height: 100vh;
+    min-width: 900px;
+    width: 48vw;
+    max-width: 1000px;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
+    justify-content: end;
+    max-height: 100%;
+    border-radius: 0;
 }
 
 .v-overlay.v-dialog>.v-overlay__content>.v-card,
 .v-overlay.v-dialog>.v-overlay__content>form>.v-card {
     border-radius: 8px;
     box-shadow: 0 11px 15px -7px var(--v-shadow-key-umbra-opacity, #0003), 0 24px 38px 3px var(--v-shadow-key-penumbra-opacity, #00000024), 0 9px 46px 8px var(--v-shadow-key-ambient-opacity, #0000001f) !important;
+}
+
+div.v-dialog.v-dialog--fullscreen > div.v-card {
+    border-radius: 0;
+}
+
+.v-overlay.v-dialog.v-dialog--sidepanel>.v-overlay__content>.v-card {
+    border-radius: 8px 0 0 8px;
+    /* border-radius: 8px 0 0 8px; */
+    /* border-radius: 0; */
+    border-color: rgba(var(--v-border-color), var(--v-border-opacity));
+    border-left-style: solid;
+    border-left-width: thin;
+}
+
+.is-rtl .v-overlay.v-dialog.v-dialog--sidepanel>.v-overlay__content>.v-card {
+    border-radius: 0 8px 8px 0;
+    border-left-style: none;
+    border-right-style: solid;
+    border-right-width: thin;
 }
 
 .v-dialog>.v-overlay__content>.v-card>.v-card-title,

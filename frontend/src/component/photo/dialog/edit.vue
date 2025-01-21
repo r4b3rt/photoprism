@@ -3,15 +3,16 @@
     ref="dialog"
     :model-value="show"
     :fullscreen="$vuetify.display.mdAndDown"
+    :transition="false"
     scrim
     scrollable
     persistent
-    class="p-photo-edit-dialog v-dialog--large"
+    class="p-photo-edit-dialog v-dialog--sidepanel"
     @click.stop
     @keydown.esc="close"
   >
     <v-card :tile="$vuetify.display.mdAndDown" color="background">
-      <v-toolbar flat color="secondary" :density="$vuetify.display.mdAndDown ? 'compact' : 'comfortable'">
+      <v-toolbar flat color="surface" :density="$vuetify.display.mdAndDown ? 'compact' : 'comfortable'">
         <v-btn icon class="action-close" @click.stop="close">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -34,7 +35,7 @@
         </v-toolbar-items>
       </v-toolbar>
       <v-tabs v-model="active" elevation="0" :density="$vuetify.display.smAndDown ? 'comfortable' : 'default'">
-        <v-tab id="tab-details" ripple>
+        <v-tab id="tab-details" value="details" ripple>
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Details')">mdi-pencil</v-icon>
           <template v-else>
             <v-icon :size="18" start>mdi-pencil</v-icon>
@@ -42,7 +43,7 @@
           </template>
         </v-tab>
 
-        <v-tab id="tab-labels" ripple :disabled="!$config.feature('labels')">
+        <v-tab id="tab-labels" value="labels" ripple :disabled="!$config.feature('labels')">
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Labels')">mdi-label</v-icon>
           <template v-else>
             <v-icon :size="18" start>mdi-label</v-icon>
@@ -51,7 +52,7 @@
           <v-badge v-if="model.Labels.length" color="surface-variant" inline :content="model.Labels.length"></v-badge>
         </v-tab>
 
-        <v-tab id="tab-people" :disabled="!$config.feature('people')" ripple>
+        <v-tab id="tab-people" value="people" :disabled="!$config.feature('people')" ripple>
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('People')">mdi-account-multiple</v-icon>
           <template v-else>
             <v-icon :size="18" start>mdi-account-multiple</v-icon>
@@ -60,7 +61,7 @@
           <v-badge v-if="model.Faces" color="surface-variant" inline :content="model.Faces"></v-badge>
         </v-tab>
 
-        <v-tab id="tab-files" ripple>
+        <v-tab id="tab-files" value="files" ripple>
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Files')">mdi-film</v-icon>
           <template v-else>
             <v-icon :size="18" start>mdi-film</v-icon>
@@ -69,13 +70,13 @@
           <v-badge v-if="model.Files.length" color="surface-variant" inline :content="model.Files.length"></v-badge>
         </v-tab>
 
-        <v-tab v-if="$config.feature('edit')" id="tab-info" ripple>
+        <v-tab v-if="$config.feature('edit')" id="tab-info" value="info" ripple>
           <v-icon>mdi-cog</v-icon>
         </v-tab>
       </v-tabs>
 
       <v-tabs-window v-model="active">
-        <v-tabs-window-item>
+        <v-tabs-window-item value="details">
           <p-tab-photo-details
             ref="details"
             :model="model"
@@ -86,19 +87,19 @@
           ></p-tab-photo-details>
         </v-tabs-window-item>
 
-        <v-tabs-window-item>
+        <v-tabs-window-item value="labels">
           <p-tab-photo-labels :model="model" :uid="uid" @close="close"></p-tab-photo-labels>
         </v-tabs-window-item>
 
-        <v-tabs-window-item>
+        <v-tabs-window-item value="people">
           <p-tab-photo-people :model="model" :uid="uid" @close="close"></p-tab-photo-people>
         </v-tabs-window-item>
 
-        <v-tabs-window-item>
+        <v-tabs-window-item value="files">
           <p-tab-photo-files :model="model" :uid="uid" @close="close"></p-tab-photo-files>
         </v-tabs-window-item>
 
-        <v-tabs-window-item v-if="$config.feature('edit')">
+        <v-tabs-window-item v-if="$config.feature('edit')" value="info">
           <p-tab-photo-info :model="model" :uid="uid" @close="close"></p-tab-photo-info>
         </v-tabs-window-item>
       </v-tabs-window>
@@ -107,11 +108,11 @@
 </template>
 <script>
 import Photo from "model/photo";
-import PhotoDetails from "./edit/details.vue";
-import PhotoLabels from "./edit/labels.vue";
-import PhotoPeople from "./edit/people.vue";
-import PhotoFiles from "./edit/files.vue";
-import PhotoInfo from "./edit/info.vue";
+import PhotoDetails from "../edit/details.vue";
+import PhotoLabels from "../edit/labels.vue";
+import PhotoPeople from "../edit/people.vue";
+import PhotoFiles from "../edit/files.vue";
+import PhotoInfo from "../edit/info.vue";
 import Event from "pubsub-js";
 
 export default {
@@ -136,6 +137,10 @@ export default {
     album: {
       type: Object,
       default: () => {},
+    },
+    tab: {
+      type: String,
+      default: "",
     },
   },
   data() {
@@ -174,6 +179,9 @@ export default {
       if (show) {
         // Disable the browser scrollbar.
         this.$scrollbar.hide();
+        if (this.tab) {
+          this.active = this.tab;
+        }
         this.find(this.index);
       } else {
         // Re-enable the browser scrollbar.

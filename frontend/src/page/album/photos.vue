@@ -248,7 +248,7 @@ export default {
         this.$router.push({ name: "places_view", params: { s: this.uid }, query: { q: photo.CellID } });
       }
     },
-    editPhoto(index) {
+    editPhoto(index, tab) {
       if (!this.canEdit) {
         return this.openPhoto(index);
       }
@@ -258,7 +258,7 @@ export default {
       });
 
       // Open Edit Dialog
-      Event.publish("dialog.edit", { selection: selection, album: this.album, index: index });
+      Event.publish("dialog.edit", { selection, album: this.album, index, tab });
     },
     openPhoto(index, showMerged = false, preferVideo = false) {
       if (this.loading || !this.listen || this.viewer.loading || !this.results[index]) {

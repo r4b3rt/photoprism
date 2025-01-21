@@ -1,7 +1,12 @@
 <template>
   <div class="p-photos p-photo-mosaic">
     <div v-if="photos.length === 0" class="pa-3">
-      <v-alert color="primary" :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'" class="no-results opacity-60" variant="outlined">
+      <v-alert
+        color="primary"
+        :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'"
+        class="no-results opacity-60"
+        variant="outlined"
+      >
         <div v-if="filter.order === 'edited'" class="font-weight-bold">
           {{ $gettext(`No recently edited pictures`) }}
         </div>
@@ -11,22 +16,41 @@
         <div class="mt-2">
           {{ $gettext(`Try again using other filters or keywords.`) }}
           <template v-if="!isSharedView">
-            {{ $gettext(`In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`) }}
+            {{
+              $gettext(
+                `In case pictures you expect are missing, please rescan your library and wait until indexing has been completed.`
+              )
+            }}
             <template v-if="$config.feature('review')">
-              {{ $gettext(`Non-photographic and low-quality images require a review before they appear in search results.`) }}
+              {{
+                $gettext(
+                  `Non-photographic and low-quality images require a review before they appear in search results.`
+                )
+              }}
             </template>
           </template>
         </div>
       </v-alert>
     </div>
     <div v-else class="v-row search-results photo-results mosaic-view" :class="{ 'select-results': selectMode }">
-      <div v-for="(m, index) in photos" :key="m.ID" ref="items" class="v-col-4 v-col-sm-3 v-col-md-2 v-col-lg-1" :data-index="index">
+      <div
+        v-for="(m, index) in photos"
+        :key="m.ID"
+        ref="items"
+        class="v-col-4 v-col-sm-3 v-col-md-2 v-col-lg-1"
+        :data-index="index"
+      >
         <!--
          The following div is the layout + size container. It makes the browser not
          re-layout all elements in the list when the children of one of them changes
         -->
         <div class="result-container">
-          <div v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex" :data-id="m.ID" :data-uid="m.UID" class="media result preview placeholder" />
+          <div
+            v-if="index < firstVisibleElementIndex || index > lastVisibleElementIndex"
+            :data-id="m.ID"
+            :data-uid="m.UID"
+            class="media result preview placeholder"
+          />
           <div
             v-else
             :data-id="m.ID"
@@ -66,7 +90,15 @@
               <i v-if="m.Type === 'image'" class="mdi mdi-camera-burst" :title="$gettext('Stack')" />
             </button>
 
-            <button v-if="m.Type === 'image' && selectMode" class="input-view" :title="$gettext('View')" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onOpen($event, index)" @touchmove.stop.prevent @click.stop.prevent="onOpen($event, index)">
+            <button
+              v-if="m.Type === 'image' && selectMode"
+              class="input-view"
+              :title="$gettext('View')"
+              @touchstart.stop.prevent="input.touchStart($event, index)"
+              @touchend.stop.prevent="onOpen($event, index)"
+              @touchmove.stop.prevent
+              @click.stop.prevent="onOpen($event, index)"
+            >
               <i class="mdi mdi-magnify-plus-outline" />
             </button>
 
@@ -85,12 +117,26 @@
               the v-hover component we instead hide the button by default and
               use css to show it when it is being hovered.
             -->
-            <button class="input-select" @mousedown.stop.prevent="input.mouseDown($event, index)" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+            <button
+              class="input-select"
+              @mousedown.stop.prevent="input.mouseDown($event, index)"
+              @touchstart.stop.prevent="input.touchStart($event, index)"
+              @touchend.stop.prevent="onSelect($event, index)"
+              @touchmove.stop.prevent
+              @click.stop.prevent="onSelect($event, index)"
+            >
               <i class="mdi mdi-check-circle select-on" />
               <i class="mdi mdi-circle-outline select-off" />
             </button>
 
-            <button v-if="!isSharedView" class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+            <button
+              v-if="!isSharedView"
+              class="input-favorite"
+              @touchstart.stop.prevent="input.touchStart($event, index)"
+              @touchend.stop.prevent="toggleLike($event, index)"
+              @touchmove.stop.prevent
+              @click.stop.prevent="toggleLike($event, index)"
+            >
               <i v-if="m.Favorite" class="mdi mdi-star text-favorite favorite-on" />
               <i v-else class="mdi mdi-star-outline favorite-off" />
             </button>
@@ -200,7 +246,11 @@ export default {
       return parseInt(entry.target.getAttribute("data-index"));
     },
     visibilitiesChanged(entries) {
-      const [smallestIndex, largestIndex] = virtualizationTools.updateVisibleElementIndices(this.visibleElementIndices, entries, this.elementIndexFromIntersectionObserverEntry);
+      const [smallestIndex, largestIndex] = virtualizationTools.updateVisibleElementIndices(
+        this.visibleElementIndices,
+        entries,
+        this.elementIndexFromIntersectionObserverEntry
+      );
 
       // we observe only every 5th item, so we increase the rendered
       // range here by 4 items in every directio just to be safe

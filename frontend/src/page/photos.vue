@@ -379,7 +379,7 @@ export default {
         this.$notify.warn("unknown location");
       }
     },
-    editPhoto(index) {
+    editPhoto(index, tab) {
       if (!this.canEdit) {
         return this.openPhoto(index);
       }
@@ -389,7 +389,7 @@ export default {
       });
 
       // Open Edit Dialog
-      Event.publish("dialog.edit", { selection: selection, album: null, index: index });
+      Event.publish("dialog.edit", { selection, album: null, index, tab });
     },
     openPhoto(index, showMerged = false, preferVideo = false) {
       if (this.loading || !this.listen || this.viewer.loading || !this.results[index]) {

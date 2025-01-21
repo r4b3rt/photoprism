@@ -56,7 +56,7 @@ export const variablesDark = {
   "pressed-opacity": 0.16,
   "dragged-opacity": 0.08,
   "overlay-color": "#131313",
-  "overlay-opacity": 0.56,
+  "overlay-opacity": 0.52,
   "theme-kbd": "#212529",
   "theme-on-kbd": "#FFFFFF",
   "theme-code": "#343434",
