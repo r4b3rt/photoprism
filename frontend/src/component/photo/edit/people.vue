@@ -18,7 +18,7 @@
       </v-alert>
       <div v-else class="v-row search-results face-results cards-view d-flex">
         <div v-for="marker in markers" :key="marker.UID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 d-flex">
-          <v-card :data-id="marker.UID" style="user-select: none" :class="marker.classes()" class="result flex-grow-1">
+          <v-card :data-id="marker.UID" :class="marker.classes()" class="result not-selectable flex-grow-1">
             <v-img :src="marker.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card">
               <v-btn
                 v-if="!marker.SubjUID && !marker.Invalid"

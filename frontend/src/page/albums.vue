@@ -1,5 +1,5 @@
 <template>
-  <div :class="$config.aclClasses('albums')" class="p-page p-page-albums" style="user-select: none">
+  <div :class="$config.aclClasses('albums')" class="p-page p-page-albums not-selectable">
     <v-form ref="form" class="p-albums-search" validate-on="invalid-input" @submit.prevent="updateQuery()">
       <v-toolbar
         flat
@@ -210,8 +210,7 @@
         >
           <div
             :data-uid="album.UID"
-            style="user-select: none"
-            class="result"
+            class="result not-selectable"
             :class="album.classes(selection.includes(album.UID))"
             @contextmenu.stop="onContextMenu($event, index)"
           >

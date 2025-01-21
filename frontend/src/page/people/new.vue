@@ -1,5 +1,5 @@
 <template>
-  <div class="p-page p-page-faces" style="user-select: none">
+  <div class="p-page p-page-faces not-selectable">
     <v-form ref="form" class="p-faces-search" validate-on="invalid-input" @submit.prevent="updateQuery">
       <v-toolbar dense flat height="48" class="page-toolbar pa-0" color="secondary-light">
         <v-spacer></v-spacer>
@@ -66,7 +66,7 @@
             :key="model.ID"
             class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2"
           >
-            <div :data-id="model.ID" style="user-select: none" :class="model.classes()" class="result flex-grow-1">
+            <div :data-id="model.ID" :class="model.classes()" class="result flex-grow-1 not-selectable">
               <v-img
                 :src="model.thumbnailUrl('tile_320')"
                 :transition="false"

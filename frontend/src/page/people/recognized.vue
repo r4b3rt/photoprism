@@ -1,5 +1,5 @@
 <template>
-  <div class="p-page p-page-subjects" style="user-select: none">
+  <div class="p-page p-page-subjects not-selectable">
     <v-form ref="form" class="p-people-search" validate-on="invalid-input" @submit.prevent="updateQuery()">
       <v-toolbar dense flat height="48" class="page-toolbar pa-0" color="secondary-light">
         <v-text-field
@@ -70,14 +70,13 @@
       </div>
       <div v-else class="v-row search-results subject-results cards-view" :class="{ 'select-results': selection.length > 0 }">
         <div v-for="(m, index) in results" :key="m.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2">
-          <div :data-uid="m.UID" style="user-select: none" class="result" :class="m.classes(selection.includes(m.UID))" @contextmenu.stop="onContextMenu($event, index)">
+          <div :data-uid="m.UID" class="result not-selectable" :class="m.classes(selection.includes(m.UID))" @contextmenu.stop="onContextMenu($event, index)">
             <v-img
               :src="m.thumbnailUrl('tile_320')"
               :alt="m.Name"
               :transition="false"
               aspect-ratio="1"
-              style="user-select: none"
-              class="preview"
+              class="preview not-selectable"
               @touchstart.passive="input.touchStart($event, index)"
               @touchend.stop.prevent="onClick($event, index)"
               @mousedown.stop.prevent="input.mouseDown($event, index)"

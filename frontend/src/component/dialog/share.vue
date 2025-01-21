@@ -18,8 +18,7 @@
             <v-expansion-panel-title class="d-flex justify-start align-center ga-3 text-body-2 px-4">
               <v-icon icon="mdi-link"></v-icon>
               <div
-                class="text-start action-url d-inline-flex"
-                style="user-select: none"
+                class="text-start not-selectable action-url d-inline-flex"
               >
                 /s/<strong v-if="link.Token" style="font-weight: 500">{{ link.getToken() }}</strong
                 ><span v-else>…</span>

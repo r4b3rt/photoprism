@@ -1,5 +1,5 @@
 <template>
-  <div style="user-select: none" :class="$config.aclClasses('photos')" class="p-page p-page-photos">
+  <div :class="$config.aclClasses('photos')" class="p-page p-page-photos not-selectable">
     <p-photo-toolbar
       ref="toolbar"
       :context="context"

@@ -135,6 +135,10 @@ a.float-right {
     user-select: none !important;
 }
 
+.not-selectable {
+    user-select: none !important;
+}
+
 .text-selectable,
 a.text-selectable,
 span.text-selectable,

@@ -1,5 +1,5 @@
 <template>
-  <div :class="$config.aclClasses('labels')" class="p-page p-page-labels" style="user-select: none">
+  <div :class="$config.aclClasses('labels')" class="p-page p-page-labels not-selectable">
     <v-form ref="form" class="p-labels-search" validate-on="invalid-input" @submit.stop.prevent="updateQuery()">
       <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
         <v-text-field
@@ -66,7 +66,7 @@
       </div>
       <div v-else class="v-row search-results label-results cards-view" :class="{ 'select-results': selection.length > 0 }">
         <div v-for="(label, index) in results" :key="label.UID" ref="items" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2">
-          <div :data-uid="label.UID" style="user-select: none" class="result" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
+          <div :data-uid="label.UID" class="result not-selectable" :class="label.classes(selection.includes(label.UID))" @click="$router.push(label.route(view))" @contextmenu.stop="onContextMenu($event, index)">
             <div
               :title="label.Name"
               :style="`background-image: url(${label.thumbnailUrl('tile_500')})`"
