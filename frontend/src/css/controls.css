@@ -31,11 +31,17 @@
     min-width: 68px;
 }
 
+.auth-login .action-buttons {
+    margin: 20px auto 16px auto;
+}
+
 table td>.action-buttons {
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
     margin: 8px 0;
     padding: 0;
     gap: 8px;
-    flex-wrap: wrap;
 }
 
 @media (max-width: 599px) {
@@ -43,10 +49,12 @@ table td>.action-buttons {
     .action-buttons>button {
         flex-grow: 1;
     }
-}
 
-.auth-login .action-buttons {
-    margin: 20px auto 16px auto;
+    table td>.action-buttons>.v-btn,
+    table td>.action-buttons>button {
+        flex-grow: 0;
+        min-width: 120px;
+    }
 }
 
 table .table-actions {

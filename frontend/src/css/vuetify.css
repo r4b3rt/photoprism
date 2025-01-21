@@ -202,6 +202,10 @@ div.v-dialog.v-dialog--fullscreen > div.v-card {
 
 /* Form Inputs */
 
+.v-field__field {
+    align-items: center;
+}
+
 .v-input--density-compact {
     --v-input-control-height: 32x;
     --v-input-padding-top: 8px;
@@ -295,14 +299,17 @@ div.v-dialog.v-dialog--fullscreen > div.v-card {
     line-height: inherit;
 }
 
+.v-table thead tr td,
+.v-table thead tr th,
 .v-table tfoot tr td,
 .v-table tbody tr td,
 .v-table tr td .v-label,
 .v-table tr td .v-field__input {
-    font-weight: 400;
     font-size: 0.825rem;
 }
 
+.v-table.v-table--density-compact thead td,
+.v-table.v-table--density-compact thead th,
 .v-table.v-table--density-compact tfoot td,
 .v-table.v-table--density-compact tbody td,
 .v-table.v-table--density-compact tr td .v-label,

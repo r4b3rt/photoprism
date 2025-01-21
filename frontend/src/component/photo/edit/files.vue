@@ -50,7 +50,7 @@
                               {{ $gettext(`Actions`) }}
                             </td>
                             <td>
-                              <div class="action-buttons justify-start">
+                              <div class="action-buttons">
                                 <v-btn
                                   v-if="features.download"
                                   density="comfortable"

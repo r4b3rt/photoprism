@@ -34,7 +34,7 @@
           </v-btn>
         </v-toolbar-items>
       </v-toolbar>
-      <v-tabs v-model="active" elevation="0" :density="$vuetify.display.smAndDown ? 'comfortable' : 'default'">
+      <v-tabs v-model="active" class="elevation-3" :density="$vuetify.display.smAndDown ? 'comfortable' : 'default'">
         <v-tab id="tab-details" value="details" ripple>
           <v-icon v-if="$vuetify.display.smAndDown" :title="$gettext('Details')">mdi-pencil</v-icon>
           <template v-else>
