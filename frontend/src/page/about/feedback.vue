@@ -126,7 +126,7 @@ export default {
       valid: false,
       options: options,
       form: {
-        Category: "",
+        Category: "feedback",
         Message: "",
         UserName: "",
         UserEmail: "",
