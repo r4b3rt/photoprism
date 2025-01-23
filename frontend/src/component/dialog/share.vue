@@ -68,7 +68,6 @@
                         density="comfortable"
                         variant="solo"
                         flat
-                        required
                         autocomplete="off"
                         autocorrect="off"
                         autocapitalize="none"

@@ -33,7 +33,6 @@
                   :type="showPassword ? 'text' : 'password'"
                   :placeholder="$gettext('Password')"
                   hide-details
-                  required
                   autofocus
                   autocorrect="off"
                   autocapitalize="none"
@@ -203,7 +202,6 @@
                   name="password"
                   :type="showPassword ? 'text' : 'password'"
                   hide-details
-                  required
                   autocorrect="off"
                   autocapitalize="none"
                   autocomplete="current-password"

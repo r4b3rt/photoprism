@@ -43,7 +43,6 @@
             :label="$gettext('Category')"
             color="surface-variant"
             hide-details
-            required
             autocomplete="off"
             class="input-category"
             :rules="[(v) => !!v || $gettext('Required')]"
@@ -54,7 +53,6 @@
           <v-textarea
             v-model="form.Message"
             validate-on="invalid-input"
-            required
             auto-grow
             hide-details
             autocomplete="off"
@@ -81,7 +79,6 @@
           <v-text-field
             v-model="form.UserEmail"
             hide-details
-            required
             autocapitalize="none"
             color="surface-variant"
             :rules="[(v) => !!v || $gettext('Required')]"

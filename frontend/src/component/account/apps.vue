@@ -29,7 +29,6 @@
                   :type="showPassword ? 'text' : 'password'"
                   :label="$gettext('Password')"
                   hide-details
-                  required
                   autofocus
                   autocorrect="off"
                   autocapitalize="none"
@@ -123,7 +122,6 @@
                   name="client_name"
                   type="text"
                   :label="$gettext('Name')"
-                  required
                   autofocus
                   hide-details
                   autocorrect="off"

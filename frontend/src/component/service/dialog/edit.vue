@@ -148,7 +148,6 @@
               autocomplete="off"
               :label="$gettext('Name')"
               placeholder=""
-              required
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -183,7 +182,6 @@
               :label="$gettext('API Key')"
               placeholder="********"
               color="surface-variant"
-              required
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="6" class="input-account-type">

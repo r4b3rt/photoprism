@@ -34,7 +34,6 @@
                         :placeholder="$gettext('Recovery Code')"
                         inputmode="text"
                         hide-details
-                        required
                         autofocus
                         autocorrect="off"
                         autocapitalize="none"
@@ -72,7 +71,6 @@
                         type="text"
                         :placeholder="$gettext('Name')"
                         hide-details
-                        required
                         autocorrect="off"
                         autocapitalize="none"
                         autocomplete="username"
@@ -92,7 +90,6 @@
                         :type="showPassword ? 'text' : 'password'"
                         :placeholder="$gettext('Password')"
                         hide-details
-                        required
                         autocorrect="off"
                         autocapitalize="none"
                         autocomplete="current-password"

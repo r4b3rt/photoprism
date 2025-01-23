@@ -21,7 +21,6 @@
               <v-text-field
                 v-model="oldPassword"
                 hide-details
-                required
                 type="password"
                 autocorrect="off"
                 autocapitalize="none"
@@ -38,7 +37,6 @@
             <v-col cols="12">
               <v-text-field
                 v-model="newPassword"
-                required
                 counter
                 persistent-hint
                 type="password"
@@ -57,7 +55,6 @@
             <v-col cols="12">
               <v-text-field
                 v-model="confirmPassword"
-                required
                 counter
                 persistent-hint
                 type="password"
