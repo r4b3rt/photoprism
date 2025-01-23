@@ -379,7 +379,6 @@
             <v-list-item
               v-if="isRestricted && $config.feature('places')"
               :to="{ name: 'states' }"
-              :title="$gettext(`Regions`)"
               variant="text"
               class="nav-states nav-regions"
               @click.stop=""
