@@ -394,19 +394,19 @@ div.v-dialog.v-dialog--fullscreen > div.v-card {
 
 /* Badges */
 
+.v-badge.v-badge--inline {
+    position: relative;
+    margin-inline-start: -4px;
+    top: -8px;
+}
+
 .v-badge .v-badge__badge {
     font-size: 0.75rem;
     text-align: center;
     height: 1.05rem;
     min-width: 1.05rem;
     margin: 0;
-    padding: 0;
-}
-
-.v-tabs .v-badge.v-badge--inline {
-    position: relative;
-    margin-inline-start: -4px;
-    top: -8px;
+    padding: 2px;
 }
 
 /* Tables */

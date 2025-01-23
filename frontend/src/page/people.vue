@@ -21,8 +21,8 @@
         <template v-else>
           <v-icon :size="18" start>{{ t.icon }}</v-icon>
           {{ t.label }}
-          <v-badge v-if="t.count" color="surface-variant" inline :content="t.count"> </v-badge>
         </template>
+        <v-badge v-if="t.count" color="surface-variant" inline :content="t.count"></v-badge>
       </v-tab>
     </v-tabs>
 
