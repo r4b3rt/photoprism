@@ -98,7 +98,7 @@ module.exports = {
         singleQuote: false,
         bracketSpacing: true,
         trailingComma: "es5",
-        htmlWhitespaceSensitivity: "strict",
+        htmlWhitespaceSensitivity: "css",
         quoteProps: "consistent",
         proseWrap: "never",
       },
