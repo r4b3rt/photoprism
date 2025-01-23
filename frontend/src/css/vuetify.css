@@ -81,9 +81,9 @@ body.dark-theme {
 
 .v-overlay.v-dialog.v-dialog--sidepanel:not(.v-dialog--fullscreen) .v-overlay__content {
     height: 100vh;
-    min-width: 900px;
-    width: 48vw;
-    max-width: 1000px;
+    min-width: 990px;
+    width: 45vw;
+    max-width: 1080px;
     margin: 0;
     padding: 0;
     justify-content: end;
@@ -266,6 +266,14 @@ div.v-dialog.v-dialog--fullscreen > div.v-card {
 .v-field--variant-plain.v-field--focused .v-field__prepend-inner .v-icon {
     color: rgb(var(--v-theme-surface-variant));
     caret-color: rgb(var(--v-theme-surface-variant));
+}
+
+.v-input.v-input--density-comfortable .v-field .v-icon.v-icon--size-default {
+    font-size: 1.25em;
+    height: 1em;
+    line-height: 1;
+    min-width: 1em;
+    width: 1em;
 }
 
 .v-field--variant-solo-filled .v-field__overlay {

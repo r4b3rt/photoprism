@@ -2,12 +2,14 @@
   <div class="p-tab p-tab-photo-advanced">
     <v-form ref="form" validate-on="invalid-input" accept-charset="UTF-8" @submit.prevent>
       <div class="v-table__overflow">
-        <v-table tile hover density="compact" class="bg-transparent">
+        <v-table tile hover density="compact" class="bg-table">
           <tbody>
             <tr>
               <td>UID</td>
               <td class="text-break">
-                <span class="clickable text-uppercase" @click.stop.prevent="$util.copyText(model.UID)">{{ model.UID }}</span>
+                <span class="clickable text-uppercase" @click.stop.prevent="$util.copyText(model.UID)">{{
+                  model.UID
+                }}</span>
               </td>
             </tr>
             <tr v-if="model.DocumentID">
@@ -137,7 +139,7 @@
               <td>
                 {{ $gettext(`Camera Serial`) }}
               </td>
-              <td class="text-break">{{ model.CameraSerial }} </td>
+              <td class="text-break">{{ model.CameraSerial }}</td>
             </tr>
             <tr v-if="model.Stack < 1">
               <td>
@@ -244,7 +246,7 @@
               <td>
                 {{ $gettext(`Altitude`) }}
               </td>
-              <td> {{ model.Altitude }} m </td>
+              <td>{{ model.Altitude }} m</td>
             </tr>
             <tr v-if="model.Lat">
               <td>

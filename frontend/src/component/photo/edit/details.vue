@@ -1,28 +1,26 @@
 <template>
-  <div class="p-tab p-tab-photo-details pa-2">
+  <div class="p-tab p-tab-photo-details">
     <v-form
       ref="form"
       validate-on="invalid-input"
-      class="p-form-photo-details-meta"
+      class="p-form p-form-photo-details-meta"
       accept-charset="UTF-8"
       @submit.prevent="save"
     >
-      <v-row class="d-flex align-stretch" align="start" dense>
-        <v-col class="p-photo d-flex align-stretch" cols="12" sm="4" md="2">
-          <v-card tile color="background" class="pa-0 ma-0 elevation-0 flex-grow-1">
-            <v-img
-              v-touch="{ left, right }"
-              :src="model.thumbnailUrl('tile_500')"
-              aspect-ratio="1"
-              rounded="6"
-              class="card elevation-0 clickable"
-              @click.exact="openPhoto()"
-            ></v-img>
-          </v-card>
-        </v-col>
-        <v-col cols="12" sm="8" md="10" class="d-flex pa-0" align-self="stretch">
-          <v-row dense>
-            <v-col cols="12">
+      <div class="form-body">
+        <div class="form-controls">
+          <v-row dense align="start">
+            <v-col cols="4" sm="3" md="2" class="form-thumb">
+              <div>
+                <img
+                  :alt="model.Title"
+                  :src="model.thumbnailUrl('tile_500')"
+                  class="clickable"
+                  @click.stop.prevent.exact="openPhoto()"
+                />
+              </div>
+            </v-col>
+            <v-col cols="8" sm="9" md="10" class="d-flex flex-column ga-4">
               <v-text-field
                 v-model="model.Title"
                 :append-inner-icon="model.TitleSrc === 'manual' ? 'mdi-check' : ''"
@@ -34,9 +32,6 @@
                 autocomplete="off"
                 class="input-title"
               ></v-text-field>
-            </v-col>
-
-            <v-col cols="12">
               <v-textarea
                 v-model="model.Caption"
                 :append-inner-icon="model.CaptionSrc === 'manual' ? 'mdi-check' : ''"
@@ -50,11 +45,11 @@
                 class="input-caption"
               ></v-textarea>
             </v-col>
-
+          </v-row>
+          <v-row dense>
             <v-col cols="4" lg="2">
               <v-autocomplete
                 v-model="model.Day"
-                :append-inner-icon="model.TakenSrc === 'manual' ? 'mdi-check' : ''"
                 :disabled="disabled"
                 :error="invalidDate"
                 :label="$gettext('Day')"
@@ -64,6 +59,7 @@
                 :items="options.Days()"
                 item-title="text"
                 item-value="value"
+                density="comfortable"
                 class="input-day"
                 @update:model-value="updateTime"
               >
@@ -72,7 +68,6 @@
             <v-col cols="4" lg="2">
               <v-autocomplete
                 v-model="model.Month"
-                :append-inner-icon="model.TakenSrc === 'manual' ? 'mdi-check' : ''"
                 :disabled="disabled"
                 :error="invalidDate"
                 :label="$gettext('Month')"
@@ -82,6 +77,7 @@
                 :items="options.MonthsShort()"
                 item-title="text"
                 item-value="value"
+                density="comfortable"
                 class="input-month"
                 @update:model-value="updateTime"
               >
@@ -90,7 +86,6 @@
             <v-col cols="4" lg="2">
               <v-autocomplete
                 v-model="model.Year"
-                :append-inner-icon="model.TakenSrc === 'manual' ? 'mdi-check' : ''"
                 :disabled="disabled"
                 :error="invalidDate"
                 :label="$gettext('Year')"
@@ -100,12 +95,12 @@
                 :items="options.Years()"
                 item-title="text"
                 item-value="value"
+                density="comfortable"
                 class="input-year"
                 @update:model-value="updateTime"
               >
               </v-autocomplete>
             </v-col>
-
             <v-col cols="6" lg="2">
               <!-- TODO: check property return-masked-value TEST -->
               <v-text-field
@@ -119,10 +114,10 @@
                 hide-details
                 return-masked-value
                 mask="##:##:##"
+                density="comfortable"
                 class="input-local-time"
               ></v-text-field>
             </v-col>
-
             <v-col cols="6" lg="4">
               <v-autocomplete
                 v-model="model.TimeZone"
@@ -132,11 +127,11 @@
                 item-value="ID"
                 item-title="Name"
                 :items="options.TimeZones()"
+                density="comfortable"
                 class="input-timezone"
                 @update:model-value="updateTime"
               ></v-autocomplete>
             </v-col>
-
             <v-col cols="12" sm="8" md="4">
               <v-autocomplete
                 v-model="model.Country"
@@ -150,11 +145,11 @@
                 item-value="Code"
                 item-title="Name"
                 :items="countries"
+                density="comfortable"
                 class="input-country"
               >
               </v-autocomplete>
             </v-col>
-
             <v-col cols="4" md="2">
               <v-text-field
                 v-model="model.Altitude"
@@ -167,10 +162,10 @@
                 :label="$gettext('Altitude (m)')"
                 placeholder=""
                 color="surface-variant"
+                density="comfortable"
                 class="input-altitude"
               ></v-text-field>
             </v-col>
-
             <v-col cols="4" sm="6" md="3">
               <v-text-field
                 v-model="model.Lat"
@@ -182,11 +177,11 @@
                 autocapitalize="none"
                 :label="$gettext('Latitude')"
                 placeholder=""
+                density="comfortable"
                 class="input-latitude"
                 @paste="pastePosition"
               ></v-text-field>
             </v-col>
-
             <v-col cols="4" sm="6" md="3">
               <v-text-field
                 v-model="model.Lng"
@@ -198,11 +193,11 @@
                 autocapitalize="none"
                 :label="$gettext('Longitude')"
                 placeholder=""
+                density="comfortable"
                 class="input-longitude"
                 @paste="pastePosition"
               ></v-text-field>
             </v-col>
-
             <v-col cols="12" md="6" class="p-camera-select">
               <v-select
                 v-model="model.CameraID"
@@ -215,11 +210,11 @@
                 item-value="ID"
                 item-title="Name"
                 :items="cameraOptions"
+                density="comfortable"
                 class="input-camera"
               >
               </v-select>
             </v-col>
-
             <v-col cols="6" md="3">
               <v-text-field
                 v-model="model.Iso"
@@ -230,10 +225,10 @@
                 autocapitalize="none"
                 label="ISO"
                 placeholder=""
+                density="comfortable"
                 class="input-iso"
               ></v-text-field>
             </v-col>
-
             <v-col cols="6" md="3">
               <v-text-field
                 v-model="model.Exposure"
@@ -244,10 +239,10 @@
                 autocapitalize="none"
                 :label="$gettext('Exposure')"
                 placeholder=""
+                density="comfortable"
                 class="input-exposure"
               ></v-text-field>
             </v-col>
-
             <v-col cols="12" md="6" class="p-lens-select">
               <v-select
                 v-model="model.LensID"
@@ -260,11 +255,11 @@
                 item-value="ID"
                 item-title="Name"
                 :items="lensOptions"
+                density="comfortable"
                 class="input-lens"
               >
               </v-select>
             </v-col>
-
             <v-col cols="6" md="3">
               <v-text-field
                 v-model="model.FNumber"
@@ -276,10 +271,10 @@
                 autocapitalize="none"
                 :label="$gettext('F Number')"
                 placeholder=""
+                density="comfortable"
                 class="input-fnumber"
               ></v-text-field>
             </v-col>
-
             <v-col cols="6" md="3">
               <v-text-field
                 v-model="model.FocalLength"
@@ -288,10 +283,12 @@
                 autocomplete="off"
                 :label="$gettext('Focal Length')"
                 placeholder=""
+                density="comfortable"
                 class="input-focal-length"
               ></v-text-field>
             </v-col>
-
+          </v-row>
+          <v-row dense>
             <v-col cols="12" md="6">
               <v-textarea
                 v-model="model.Details.Subject"
@@ -307,7 +304,6 @@
                 class="input-subject"
               ></v-textarea>
             </v-col>
-
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="model.Details.Copyright"
@@ -321,7 +317,6 @@
                 class="input-copyright"
               ></v-text-field>
             </v-col>
-
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="model.Details.Artist"
@@ -335,7 +330,6 @@
                 class="input-artist"
               ></v-text-field>
             </v-col>
-
             <v-col cols="12" md="6">
               <v-textarea
                 v-model="model.Details.License"
@@ -351,7 +345,6 @@
                 class="input-license"
               ></v-textarea>
             </v-col>
-
             <v-col cols="12" md="8">
               <v-textarea
                 v-model="model.Details.Keywords"
@@ -366,7 +359,6 @@
                 class="input-keywords"
               ></v-textarea>
             </v-col>
-
             <v-col cols="12" md="4">
               <v-textarea
                 v-model="model.Details.Notes"
@@ -381,24 +373,23 @@
                 class="input-notes"
               ></v-textarea>
             </v-col>
-
-            <v-col v-if="!disabled" cols="12">
-              <div class="action-buttons">
-                <v-btn color="button" variant="flat" class="action-close" @click.stop="close">
-                  {{ $gettext(`Close`) }}
-                </v-btn>
-                <v-btn color="highlight" variant="flat" class="action-apply action-approve" @click.stop="save(false)">
-                  <span v-if="$config.feature('review') && model.Quality < 3">{{ $gettext(`Approve`) }}</span>
-                  <span v-else>{{ $gettext(`Apply`) }}</span>
-                </v-btn>
-                <v-btn color="highlight" variant="flat" class="action-done hidden-xs" @click.stop="save(true)">
-                  {{ $gettext(`Done`) }}
-                </v-btn>
-              </div>
-            </v-col>
           </v-row>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
+      <div v-if="!disabled" class="form-actions">
+        <div class="action-buttons">
+          <v-btn color="button" variant="flat" class="action-close" @click.stop="close">
+            {{ $gettext(`Close`) }}
+          </v-btn>
+          <v-btn color="highlight" variant="flat" class="action-apply action-approve" @click.stop="save(false)">
+            <span v-if="$config.feature('review') && model.Quality < 3">{{ $gettext(`Approve`) }}</span>
+            <span v-else>{{ $gettext(`Apply`) }}</span>
+          </v-btn>
+          <v-btn color="highlight" variant="flat" class="action-done hidden-xs" @click.stop="save(true)">
+            {{ $gettext(`Done`) }}
+          </v-btn>
+        </div>
+      </div>
       <div class="mt-1 clear"></div>
     </v-form>
   </div>

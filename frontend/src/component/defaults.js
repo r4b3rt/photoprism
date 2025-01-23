@@ -108,7 +108,7 @@ export default {
     tile: true,
     static: true,
     variant: "accordion",
-    bgColor: "secondary-light",
+    bgColor: "secondary",
     ripple: false,
   },
   VProgressLinear: {

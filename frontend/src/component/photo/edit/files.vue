@@ -22,12 +22,7 @@
                 <v-row class="d-flex align-stretch" align="center" justify="center">
                   <v-col cols="12" class="pa-0 flex-grow-1">
                     <div class="v-table__overflow">
-                      <v-table
-                        tile
-                        hover
-                        density="compact"
-                        class="photo-files d-flex bg-transparent"
-                      >
+                      <v-table tile hover density="compact" class="photo-files d-flex bg-table">
                         <tbody>
                           <tr v-if="file.FileType === 'jpg' || file.FileType === 'png'">
                             <td>
@@ -129,9 +124,11 @@
                               {{ $gettext(`Instance ID`) }}
                             </td>
                             <td class="text-break">
-                              <span class="clickable text-uppercase" @click.stop.prevent="$util.copyText(file.InstanceID)">{{
-                                file.InstanceID
-                              }}</span>
+                              <span
+                                class="clickable text-uppercase"
+                                @click.stop.prevent="$util.copyText(file.InstanceID)"
+                                >{{ file.InstanceID }}</span
+                              >
                             </td>
                           </tr>
                           <tr>
@@ -149,7 +146,9 @@
                               {{ $gettext(`Filename`) }}
                             </td>
                             <td class="text-break">
-                              <span class="clickable" @click.stop.prevent="$util.copyText(file.Name)">{{ file.Name }}</span>
+                              <span class="clickable" @click.stop.prevent="$util.copyText(file.Name)">{{
+                                file.Name
+                              }}</span>
                             </td>
                           </tr>
                           <tr v-if="file.Root">
@@ -162,11 +161,11 @@
                             <td>
                               {{ $gettext(`Original Name`) }}
                             </td>
-                            <td class="text-break"
-                              ><span class="clickable" @click.stop.prevent="$util.copyText(file.OriginalName)">{{
+                            <td class="text-break">
+                              <span class="clickable" @click.stop.prevent="$util.copyText(file.OriginalName)">{{
                                 file.OriginalName
-                              }}</span></td
-                            >
+                              }}</span>
+                            </td>
                           </tr>
                           <tr>
                             <td>
@@ -313,13 +312,13 @@
                             <td>
                               {{ $gettext(`Chroma`) }}
                             </td>
-                            <td
-                              ><v-progress-linear
+                            <td>
+                              <v-progress-linear
                                 :model-value="file.Chroma"
                                 style="max-width: 300px"
                                 :title="`${file.Chroma}%`"
-                              ></v-progress-linear
-                            ></td>
+                              ></v-progress-linear>
+                            </td>
                           </tr>
                           <tr v-if="file.Missing">
                             <td>
@@ -333,8 +332,8 @@
                             <td>
                               {{ $gettext(`Added`) }}
                             </td>
-                            <td class="text-break"
-                              >{{ formatTime(file.CreatedAt) }}
+                            <td class="text-break">
+                              {{ formatTime(file.CreatedAt) }}
                               {{ $gettext(`in`) }}
                               {{ $util.formatNs(file.CreatedIn) }}
                             </td>
@@ -343,8 +342,8 @@
                             <td>
                               {{ $gettext(`Updated`) }}
                             </td>
-                            <td class="text-break"
-                              >{{ formatTime(file.UpdatedAt) }}
+                            <td class="text-break">
+                              {{ formatTime(file.UpdatedAt) }}
                               {{ $gettext(`in`) }}
                               {{ $util.formatNs(file.UpdatedIn) }}
                             </td>
