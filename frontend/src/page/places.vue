@@ -13,7 +13,7 @@
           </v-toolbar-title>
         </v-toolbar>
         <div class="pa-3">
-          <v-alert color="primary" icon="mdi-alert-circle-outline" class="places-error opacity-60" variant="outlined">
+          <v-alert color="primary" icon="mdi-alert-circle-outline" class="v-alert--default" variant="outlined">
             <div class="font-weight-bold">
               {{ mapError }}
             </div>

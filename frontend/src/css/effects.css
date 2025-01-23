@@ -43,7 +43,7 @@
 }
 
 .animate-rainbow {
-    background: repeating-linear-gradient(127deg,#5a2a97, #564dad, #006caa, #34bbc1, #5cba50, #ebdd08, #f49d08, #f03933, #ed1b36);
+    background: repeating-linear-gradient(127deg, #5a2a97, #564dad, #006caa, #34bbc1, #5cba50, #ebdd08, #f49d08, #f03933, #ed1b36);
     background-size: 110% 110%;
     -webkit-animation: rainbow 10s ease infinite;
     -moz-animation: rainbow 10s ease infinite;
@@ -102,7 +102,7 @@
 
 @keyframes slide-left {
     0% {
-        transform:  translateX(105%);;
+        transform: translateX(105%);;
     }
     100% {
         transform: translateX(0%);
@@ -169,24 +169,31 @@
 .blur-1 {
     backdrop-filter: blur(2px);
 }
+
 .blur-2 {
     backdrop-filter: blur(3px);
 }
+
 .blur-3 {
     backdrop-filter: blur(4px);
 }
+
 .blur-4 {
     backdrop-filter: blur(6px);
 }
+
 .blur-5 {
     backdrop-filter: blur(8px);
 }
+
 .blur-6 {
     backdrop-filter: blur(10px);
 }
+
 .blur-7 {
     backdrop-filter: blur(12px);
 }
+
 .blur-8 {
     backdrop-filter: blur(14px);
 }
@@ -260,13 +267,13 @@
 /* Beating Heart Animation */
 
 @keyframes heart {
-     0%, 40%, 80%, 100% {
-         transform: scale(1);
-     }
-     20%, 60% {
-         transform: scale(1.15);
-     }
- }
+    0%, 40%, 80%, 100% {
+        transform: scale(1);
+    }
+    20%, 60% {
+        transform: scale(1.15);
+    }
+}
 
 .animate-heart {
     animation: heart 1000ms infinite;
@@ -275,17 +282,33 @@
 /* Loading Dots Animation */
 
 @keyframes dots {
-    0% { opacity: 0; }
-    50% { opacity: 1; }
-    60% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .dots-animation {
     animation: dots 2.5s ease-in-out infinite;
 }
 
-.dots-animation.one { animation-delay: 0.2s; }
-.dots-animation.two { animation-delay: 0.4s; }
-.dots-animation.three { animation-delay: 0.6s; }
+.dots-animation.one {
+    animation-delay: 0.2s;
+}
+
+.dots-animation.two {
+    animation-delay: 0.4s;
+}
+
+.dots-animation.three {
+    animation-delay: 0.6s;
+}
 

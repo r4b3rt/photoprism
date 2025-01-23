@@ -65,7 +65,7 @@ body {
     padding: 0;
 }
 
-#photoprism div.fullscreen {
+div.fullscreen {
     position: fixed;
     top: 0;
     left: 0;
@@ -73,8 +73,8 @@ body {
     bottom: 0;
 }
 
-#photoprism a.logo-large,
-#photoprism div.logo-large {
+a.logo-large,
+div.logo-large {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -87,7 +87,7 @@ body {
 
 /* Error Screen */
 
-#photoprism a.logo-large {
+a.logo-large {
     display: block;
     text-decoration: none;
     color: #efefef;
@@ -102,13 +102,13 @@ body {
 }
 
 #loading-info,
-#photoprism .splash-info {
+.splash-info {
     position: fixed;
     padding: 24px;
     height: auto;
 }
 
-#photoprism .splash-info {
+.splash-info {
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     bottom: 0;
@@ -116,11 +116,11 @@ body {
     right: 0;
 }
 
-#photoprism .days > span {
+.days > span {
     display: none;
 }
 
-#splash-info > .legal-info{
+#splash-info > .legal-info {
     display: inline-block;
 }
 
@@ -187,7 +187,7 @@ body {
 }
 
 
-#photoprism .splash-center,
+.splash-center,
 #busy-overlay .splash-center {
     position: fixed;
     top: 50%;
@@ -199,7 +199,7 @@ body {
     text-align: center !important;
 }
 
-#photoprism .splash-center .splash-logo,
+.splash-center .splash-logo,
 #busy-overlay .splash-center .splash-logo {
     width: 125px;
     height: 125px;
@@ -215,7 +215,7 @@ body {
     animation: hue 4s infinite linear;
 }
 
-#photoprism .splash-center progress,
+.splash-center progress,
 #busy-overlay .splash-center progress {
     width: 180px;
     accent-color: #c8c2e8;
@@ -223,23 +223,23 @@ body {
 }
 
 @media (min-width: 900px) {
-    #photoprism .splash-center .splash-logo {
+    .splash-center .splash-logo {
         width: 140px;
         height: 140px;
     }
 
-    #photoprism .splash-center progress,
+    .splash-center progress,
     #busy-overlay .splash-center progress {
         width: 230px;
     }
 }
 
-#photoprism div.logo-large {
+div.logo-large {
     width: 300px;
     height: 300px;
 }
 
-#photoprism div.loading-bar {
+div.loading-bar {
     position: fixed;
     bottom: 15%;
     right: 10%;

@@ -349,7 +349,7 @@
       :model="user"
       @close="dialog.password = false"
     ></p-account-password-dialog>
-    <p-webdav-dialog :show="dialog.webdav" @close="dialog.webdav = false"></p-webdav-dialog>
+    <p-dialog-webdav :show="dialog.webdav" @close="dialog.webdav = false"></p-dialog-webdav>
   </div>
 </template>
 

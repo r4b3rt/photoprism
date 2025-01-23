@@ -233,12 +233,12 @@
         </template>
       </v-card>
     </v-form>
-    <p-confirm-dialog
+    <p-dialog-confirm
       :show="revoke.dialog"
       icon="mdi-delete-outline"
       @cancel="revoke.dialog = false"
       @confirm="onRevoked"
-    ></p-confirm-dialog>
+    ></p-dialog-confirm>
   </v-dialog>
 </template>
 <script>

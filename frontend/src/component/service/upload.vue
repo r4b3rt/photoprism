@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="400" class="p-service-upload-dialog" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="400" class="p-service-upload" @keydown.esc="cancel">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="28" color="primary">mdi-cloud</v-icon>
@@ -74,7 +74,7 @@ import Service from "model/service";
 import Selection from "common/selection";
 
 export default {
-  name: "PServiceUploadDialog",
+  name: "PServiceUpload",
   props: {
     show: Boolean,
     items: {

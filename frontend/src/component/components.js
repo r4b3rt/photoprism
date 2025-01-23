@@ -1,69 +1,69 @@
 // Global site components.
-import PNotify from "notify.vue";
-import PScroll from "scroll.vue";
-import PNavigation from "navigation.vue";
-import PLoadingBar from "loading-bar.vue";
-import PViewer from "viewer.vue";
+import PNotify from "component/notify.vue";
+import PScroll from "component/scroll.vue";
+import PNavigation from "component/navigation.vue";
+import PLoadingBar from "component/loading-bar.vue";
+import PViewer from "component/viewer.vue";
 
 // Icons.
-import IconLivePhoto from "icon/live-photo.vue";
-import IconSponsor from "icon/sponsor.vue";
-import IconPrism from "icon/prism.vue";
+import IconLivePhoto from "component/icon/live-photo.vue";
+import IconSponsor from "component/icon/sponsor.vue";
+import IconPrism from "component/icon/prism.vue";
 
 // User account management.
-import PAccountAppsDialog from "account/apps.vue";
-import PAccountPasscodeDialog from "account/passcode.vue";
-import PAccountPasswordDialog from "account/password.vue";
+import PAccountAppsDialog from "component/account/apps.vue";
+import PAccountPasscodeDialog from "component/account/passcode.vue";
+import PAccountPasswordDialog from "component/account/password.vue";
 
 // Albums.
-import PAlbumClipboard from "album/clipboard.vue";
-import PAlbumToolbar from "album/toolbar.vue";
-import PAlbumEditDialog from "album/dialog/edit.vue";
-import PAlbumDeleteDialog from "album/dialog/delete.vue";
+import PAlbumClipboard from "component/album/clipboard.vue";
+import PAlbumToolbar from "component/album/toolbar.vue";
+import PAlbumEditDialog from "component/album/dialog/edit.vue";
+import PAlbumDeleteDialog from "component/album/dialog/delete.vue";
 
 // Login.
-import PAuthHeader from "auth/header.vue";
-import PAuthFooter from "auth/footer.vue";
+import PAuthHeader from "component/auth/header.vue";
+import PAuthFooter from "component/auth/footer.vue";
 
 // Dialogs.
-import PUploadDialog from "dialog/upload.vue";
-import PShareDialog from "dialog/share.vue";
-import PWebdavDialog from "dialog/webdav.vue";
-import PReloadDialog from "dialog/reload.vue";
-import PSponsorDialog from "dialog/sponsor.vue";
-import PConfirmDialog from "dialog/confirm.vue";
+import PDialogUpload from "component/dialog/upload.vue";
+import PDialogShare from "component/dialog/share.vue";
+import PDialogWebdav from "component/dialog/webdav.vue";
+import PDialogReload from "component/dialog/reload.vue";
+import PDialogSponsor from "component/dialog/sponsor.vue";
+import PDialogConfirm from "component/dialog/confirm.vue";
 
 // Originals.
-import PFileClipboard from "file/clipboard.vue";
-import PFileDeleteDialog from "file/dialog/delete.vue";
+import PFileClipboard from "component/file/clipboard.vue";
+import PFileDeleteDialog from "component/file/dialog/delete.vue";
 
 // Labels.
-import PLabelClipboard from "label/clipboard.vue";
-import PLabelDeleteDialog from "label/dialog/delete.vue";
-import PLabelEditDialog from "label/dialog/edit.vue";
+import PLabelClipboard from "component/label/clipboard.vue";
+import PLabelDeleteDialog from "component/label/dialog/delete.vue";
+import PLabelEditDialog from "component/label/dialog/edit.vue";
 
 // People.
-import PPeopleMergeDialog from "people/dialog/merge.vue";
-import PPeopleEditDialog from "people/dialog/edit.vue";
+import PPeopleMergeDialog from "component/people/dialog/merge.vue";
+import PPeopleEditDialog from "component/people/dialog/edit.vue";
 import PPeopleClipboard from "component/people/clipboard.vue";
 
 // Photos.
-import PPhotoCards from "photo/view/cards.vue";
-import PPhotoMosaic from "photo/view/mosaic.vue";
-import PPhotoList from "photo/view/list.vue";
-import PPhotoClipboard from "photo/clipboard.vue";
-import PPhotoToolbar from "photo/toolbar.vue";
-import PPhotoPreview from "photo/preview.vue";
-import PPhotoArchiveDialog from "photo/dialog/archive.vue";
-import PPhotoAlbumDialog from "photo/dialog/album.vue";
-import PPhotoEditDialog from "photo/dialog/edit.vue";
-import PPhotoDeleteDialog from "photo/dialog/delete.vue";
+import PPhotoCards from "component/photo/view/cards.vue";
+import PPhotoMosaic from "component/photo/view/mosaic.vue";
+import PPhotoList from "component/photo/view/list.vue";
+import PPhotoClipboard from "component/photo/clipboard.vue";
+import PPhotoToolbar from "component/photo/toolbar.vue";
+import PPhotoPreview from "component/photo/preview.vue";
+import PPhotoArchiveDialog from "component/photo/archive/dialog.vue";
+import PPhotoAlbumDialog from "component/photo/album/dialog.vue";
+import PPhotoEditDialog from "component/photo/edit/dialog.vue";
+import PPhotoDeleteDialog from "component/photo/delete/dialog.vue";
 
 // Settings > Services.
-import PServiceAddDialog from "service/dialog/add.vue";
-import PServiceRemoveDialog from "service/dialog/remove.vue";
-import PServiceEditDialog from "service/dialog/edit.vue";
-import PServiceUploadDialog from "service/dialog/upload.vue";
+import PServiceAddDialog from "component/service/add.vue";
+import PServiceRemoveDialog from "component/service/remove.vue";
+import PServiceEditDialog from "component/service/edit.vue";
+import PServiceUploadDialog from "component/service/upload.vue";
 
 // Installs the components imported above.
 export function install(app) {
@@ -89,12 +89,12 @@ export function install(app) {
   app.component("PAuthHeader", PAuthHeader);
   app.component("PAuthFooter", PAuthFooter);
 
-  app.component("PUploadDialog", PUploadDialog);
-  app.component("PShareDialog", PShareDialog);
-  app.component("PWebdavDialog", PWebdavDialog);
-  app.component("PReloadDialog", PReloadDialog);
-  app.component("PSponsorDialog", PSponsorDialog);
-  app.component("PConfirmDialog", PConfirmDialog);
+  app.component("PDialogUpload", PDialogUpload);
+  app.component("PDialogShare", PDialogShare);
+  app.component("PDialogWebdav", PDialogWebdav);
+  app.component("PDialogReload", PDialogReload);
+  app.component("PDialogSponsor", PDialogSponsor);
+  app.component("PDialogConfirm", PDialogConfirm);
 
   app.component("PFileClipboard", PFileClipboard);
   app.component("PFileDeleteDialog", PFileDeleteDialog);

@@ -9,6 +9,26 @@
     padding: 8px;
 }
 
+.p-page .p-form {
+    padding: 24px;
+}
+
+.v-dialog .p-tab .p-form {
+    padding: 8px;
+}
+
+.form-info {
+    gap: 0;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: stretch;
+    display: flex;
+}
+
+.form-disclaimer {
+    margin-top: 12px;
+}
+
 .form-body {
     gap: 0;
     flex-wrap: nowrap;
@@ -40,15 +60,29 @@
 }
 
 .form-actions {
-    padding: 8px;
-    position: sticky;
-    bottom: 0;
-    background: linear-gradient(0deg, rgba(var(--v-theme-background), 1), rgba(var(--v-theme-background), 0.9), rgba(var(--v-theme-background), 0.8), rgba(var(--v-theme-background), 0));
-    background-size: 100%;
+    padding: 0;
 }
 
-.form-actions .action-buttons {
+.form-actions {
+    padding-top: 8px;
+    padding-bottom: 16px;
+}
+
+.form-actions.form-actions--sticky {
+    padding: 8px;
+    background: linear-gradient(0deg, rgba(var(--v-theme-background), 1), rgba(var(--v-theme-background), 0.9), rgba(var(--v-theme-background), 0.8), rgba(var(--v-theme-background), 0));
+    background-size: 100%;
+    position: sticky;
+    bottom: 0;
+}
+
+.form-actions.form-actions--sticky .action-buttons {
     margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+.form-footer {
+    margin-top: 16px;
     margin-bottom: 16px;
 }
 

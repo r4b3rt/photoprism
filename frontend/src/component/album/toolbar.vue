@@ -85,12 +85,12 @@
       {{ album.Description }}
     </div>
 
-    <p-share-dialog
+    <p-dialog-share
       :show="dialog.share"
       :model="album"
       @upload="webdavUpload"
       @close="dialog.share = false"
-    ></p-share-dialog>
+    ></p-dialog-share>
     <p-service-upload-dialog
       :show="dialog.upload"
       :items="{ albums: album.getId() }"

@@ -133,7 +133,7 @@
       @cancel="close('edit')"
       @confirm="onEdited"
     ></p-service-edit-dialog>
-    <p-webdav-dialog :show="dialog.webdav" @close="dialog.webdav = false"></p-webdav-dialog>
+    <p-dialog-webdav :show="dialog.webdav" @close="dialog.webdav = false"></p-dialog-webdav>
   </div>
 </template>
 

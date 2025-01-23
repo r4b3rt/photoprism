@@ -897,13 +897,13 @@
         </div>
       </div>
     </div>
-    <p-reload-dialog :show="reload.dialog" @close="reload.dialog = false"></p-reload-dialog>
-    <p-upload-dialog
+    <p-dialog-reload :show="reload.dialog" @close="reload.dialog = false"></p-dialog-reload>
+    <p-dialog-upload
       :show="upload.dialog"
       :data="upload.data"
       @close="upload.dialog = false"
       @confirm="upload.dialog = false"
-    ></p-upload-dialog>
+    ></p-dialog-upload>
     <p-photo-edit-dialog
       :show="edit.dialog"
       :selection="edit.selection"

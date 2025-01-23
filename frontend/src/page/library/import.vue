@@ -1,79 +1,94 @@
 <template>
   <div class="p-tab p-tab-import">
-    <v-form ref="form" class="p-photo-import" validate-on="invalid-input" @submit.prevent="submit">
-      <div class="pa-6">
-        <p class="text-body-1">
+    <v-form ref="form" class="p-form p-photo-import" validate-on="invalid-input" @submit.prevent="submit">
+      <div class="form-info">
+        <div class="text-body-1">
           <span v-if="fileName" class="text-break">{{ $gettext(`Importing %{name}…`, { name: fileName }) }}</span>
           <span v-else-if="busy">{{ $gettext(`Importing files to originals…`) }}</span>
           <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
-          <span v-else>{{ $gettext(`Press button to start importing…`) }}</span>
-        </p>
-
-        <v-autocomplete
-          v-model="settings.import.path"
-          color="surface-variant"
-          class="mt-6 input-import-folder"
-          hide-details
-          hide-no-data
-          flat
-          variant="solo-filled"
-          autocomplete="off"
-          :items="dirs"
-          item-title="name"
-          item-value="path"
-          :loading="loading"
-          :disabled="busy || !ready"
-          @update:model-value="onChange"
-          @focus="onFocus"
-        >
-        </v-autocomplete>
-        <v-progress-linear :model-value="completed" :indeterminate="busy"></v-progress-linear>
-
+          <span v-else>{{ $gettext(`Select a source folder to import files from…`) }}</span>
+        </div>
+      </div>
+      <div class="form-body mt-3">
+        <div class="form-controls">
+          <v-autocomplete
+            v-model="settings.import.path"
+            color="surface-variant"
+            class="input-import-folder"
+            hide-details
+            hide-no-data
+            flat
+            variant="solo-filled"
+            autocomplete="off"
+            :items="dirs"
+            item-title="name"
+            item-value="path"
+            :loading="loading"
+            :disabled="busy || !ready"
+            @update:model-value="onChange"
+            @focus="onFocus"
+          >
+          </v-autocomplete>
+          <v-progress-linear :model-value="completed" :indeterminate="busy"></v-progress-linear>
+        </div>
+      </div>
+      <div class="form-controls">
         <div class="action-controls">
           <v-checkbox
             v-model="settings.import.move"
             :disabled="busy || !ready"
-            class="ma-0 pa-0"
             color="surface-variant"
             density="compact"
             :label="$gettext('Move Files')"
-            :hint="$gettext('Remove imported files to save storage. Unsupported file types will never be deleted, they remain in their current location.')"
+            :hint="
+              $gettext(
+                'Remove imported files to save storage. Unsupported file types will never be deleted, they remain in their current location.'
+              )
+            "
             prepend-icon="mdi-delete"
             persistent-hint
             @update:model-value="onChange"
           >
           </v-checkbox>
-          <p>
-            {{ $gettext(`Imported files will be sorted by date and given a unique name to avoid duplicates.`) }}
-            {{ $gettext(`JPEGs and thumbnails are automatically rendered as needed.`) }}
-            {{ $gettext(`Original file names will be stored and indexed.`) }}
-            {{ $gettext(`Note you may manually manage your originals folder and importing is optional.`) }}
-          </p>
         </div>
-        <!-- v-row align="start" class="my-3 mx-0" no-gutters>
-          <v-col cols="12">
-          </v-col>
-          <v-col cols="12">
-            <p class="text-body-2 py-3">
-              {{ $gettext(`Imported files will be sorted by date and given a unique name to avoid duplicates.`) }}
-              {{ $gettext(`JPEGs and thumbnails are automatically rendered as needed.`) }}
-              {{ $gettext(`Original file names will be stored and indexed.`) }}
-              {{ $gettext(`Note you may manually manage your originals folder and importing is optional.`) }}
-            </p>
-          </v-col>
-        </v-row -->
-
+      </div>
+      <div class="form-info">
+        <p class="text-body-2">
+          {{ $gettext(`Imported files will be sorted by date and given a unique name to avoid duplicates.`) }}
+          {{ $gettext(`JPEGs and thumbnails are automatically rendered as needed.`) }}
+          {{ $gettext(`Original file names will be stored and indexed.`) }}
+          {{ $gettext(`Note you may manually manage your originals folder and importing is optional.`) }}
+        </p>
+      </div>
+      <div class="form-actions">
         <div class="action-buttons">
-          <v-btn :disabled="!busy || !ready" variant="flat" color="button" class="action-cancel" @click.stop="cancelImport()">
+          <v-btn
+            :disabled="!busy || !ready"
+            variant="flat"
+            color="button"
+            class="action-cancel"
+            @click.stop="cancelImport()"
+          >
             {{ $gettext(`Cancel`) }}
           </v-btn>
-
-          <v-btn v-if="!$config.values.readonly && $config.feature('upload')" :disabled="busy || !ready" variant="flat" color="highlight" class="hidden-xs action-upload" @click.stop="showUpload()">
+          <v-btn
+            v-if="!$config.values.readonly && $config.feature('upload')"
+            :disabled="busy || !ready"
+            variant="flat"
+            color="highlight"
+            class="hidden-xs action-upload"
+            @click.stop="showUpload()"
+          >
             {{ $gettext(`Upload`) }}
             <v-icon end>mdi-cloud-upload</v-icon>
           </v-btn>
-
-          <v-btn :disabled="busy || !ready" variant="flat" color="highlight" class="action-import" @click.stop="startImport()">
+          <v-btn
+            :disabled="busy || !ready"
+            variant="flat"
+            color="highlight"
+            class="action-import"
+            @click.stop="startImport()"
+          >
             {{ $gettext(`Import`) }}
             <v-icon end>mdi-sync</v-icon>
           </v-btn>

@@ -7,6 +7,7 @@
         flex-grow: 0;
         max-width: 16.666666666666664%;
     }
+
     .flex.xlg10 {
         flex-basis: 83.333333333333332%;
         flex-grow: 0;
@@ -21,6 +22,7 @@
         flex-grow: 0;
         max-width: 8.333333333333332%;
     }
+
     .flex.xxl11 {
         flex-basis: 91.66666666666667%;
         flex-grow: 0;
@@ -35,6 +37,7 @@
         flex-grow: 0;
         max-width: 8.333333333333332%;
     }
+
     .flex.ul11 {
         flex-basis: 91.66666666666667%;
         flex-grow: 0;
@@ -91,33 +94,27 @@
 
 /* Rounded Elements */
 
-.v-progress-linear,
-.v-progress-linear .v-progress-linear__bar__determinate,
-.v-progress-linear .v-progress-linear__bar__indeterminate--active {
-    border-radius: 3px;
-}
-
 .v-menu__content,
 .v-btn.v-btn--depressed:not(.v-btn--round):not(.v-btn--icon),
 .v-text-field.v-text-field--box > .v-input__control > .v-input__slot,
 .v-text-field.v-text-field--solo > .v-input__control > .v-input__slot,
-#photoprism .v-dialog .v-responsive.v-image,
-#photoprism .mosaic-view .result.preview,
-#photoprism .list-view .result .preview {
+.v-dialog .v-responsive.v-image,
+.mosaic-view .result.preview,
+.list-view .result .preview {
     border-radius: 4px;
 }
 
 .v-alert,
-#photoprism .cards-view .result,
-#photoprism div.v-dialog > div.v-card,
-#photoprism div.v-dialog > div.v-card > .v-card__text .v-expansion-panels__container,
-#photoprism div.v-dialog > form > div.v-card,
-#photoprism div.v-dialog > form > div.v-card > .v-card__text .v-expansion-panels__container {
+.cards-view .result,
+div.v-dialog > div.v-card,
+div.v-dialog > div.v-card > .v-card__text .v-expansion-panels__container,
+div.v-dialog > form > div.v-card,
+div.v-dialog > form > div.v-card > .v-card__text .v-expansion-panels__container {
     border-radius: 6px !important;
 }
 
-#photoprism .cards-view .result {
-    height:100%;
+.cards-view .result {
+    height: 100%;
 }
 
 .ra-2,
@@ -189,19 +186,19 @@
 
 @media only screen and (min-width: 960px) {
     .pa-1-md-and-up {
-        padding: 4px!important;
+        padding: 4px !important;
     }
 
     .pa-2-md-and-up {
-        padding: 8px!important;
+        padding: 8px !important;
     }
 
     .pa-3-md-and-up {
-        padding: 16px!important;
+        padding: 16px !important;
     }
 
     .pa-3-md-and-up {
-        padding: 24px!important;
+        padding: 24px !important;
     }
 
     .ra-4-table-md-and-up table.v-table {
@@ -247,17 +244,16 @@ footer.p-about-footer p > * {
     footer.p-about-footer div > * {
         display: inline-block;
     } */
-
-    /* #photoprism .footer .text-link {
+    /* .footer .text-link {
         float: left;
     }
 
-    #photoprism .footer .body-link {
+    .footer .body-link {
         float: right;
     } */
 }
 
-/* #photoprism .footer .footer-actions {
+/* .footer .footer-actions {
     padding: 0;
     margin: 0;
 } */

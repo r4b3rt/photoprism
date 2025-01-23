@@ -398,7 +398,7 @@
 
     <p-about-footer></p-about-footer>
 
-    <p-sponsor-dialog :show="dialog.sponsor" @close="dialog.sponsor = false"></p-sponsor-dialog>
+    <p-dialog-sponsor :show="dialog.sponsor" @close="dialog.sponsor = false"></p-dialog-sponsor>
   </div>
 </template>
 
@@ -408,13 +408,13 @@ import * as options from "options/options";
 import * as themes from "options/themes";
 import Event from "pubsub-js";
 import PAboutFooter from "component/about/footer.vue";
-import PSponsorDialog from "component/dialog/sponsor.vue";
+import PDialogSponsor from "component/dialog/sponsor.vue";
 
 export default {
   name: "PSettingsGeneral",
   components: {
     PAboutFooter,
-    PSponsorDialog,
+    PDialogSponsor,
   },
   data() {
     return {

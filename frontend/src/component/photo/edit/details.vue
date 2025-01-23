@@ -376,7 +376,7 @@
           </v-row>
         </div>
       </div>
-      <div v-if="!disabled" class="form-actions">
+      <div v-if="!disabled" class="form-actions form-actions--sticky">
         <div class="action-buttons">
           <v-btn color="button" variant="flat" class="action-close" @click.stop="close">
             {{ $gettext(`Close`) }}

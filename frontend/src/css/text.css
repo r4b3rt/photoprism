@@ -64,12 +64,12 @@ body #app,
     justify-content: flex-start;
 }
 
-.text-flex>* {
+.text-flex > * {
     display: inline-flex;
 }
 
-.text-flex>i,
-.text-flex>.v-icon {
+.text-flex > i,
+.text-flex > .v-icon {
     font-size: 1.25em;
 }
 
@@ -191,7 +191,7 @@ p a.text-link {
 
 /* Footers */
 
-#photoprism .footer p {
+.footer p {
     margin: 0;
     padding: 0;
 }

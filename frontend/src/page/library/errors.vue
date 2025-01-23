@@ -58,7 +58,7 @@
       </v-list>
     </div>
     <div v-else class="pa-3">
-      <v-alert color="primary" icon="mdi-check-circle-outline" class="no-results opacity-60" variant="outlined">
+      <v-alert color="primary" icon="mdi-check-circle-outline" class="no-results" variant="outlined">
         <div v-if="filter.q">
           {{ $gettext(`No warnings or error containing this keyword. Note that search is case-sensitive.`) }}
         </div>
@@ -67,7 +67,7 @@
         </div>
       </v-alert>
     </div>
-    <p-confirm-dialog :show="dialog.delete" icon="mdi-delete-outline" @cancel="dialog.delete = false" @confirm="onConfirmDelete"></p-confirm-dialog>
+    <p-dialog-confirm :show="dialog.delete" icon="mdi-delete-outline" @cancel="dialog.delete = false" @confirm="onConfirmDelete"></p-dialog-confirm>
     <v-dialog v-model="details.show" max-width="550">
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">

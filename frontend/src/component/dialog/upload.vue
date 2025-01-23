@@ -5,107 +5,122 @@
     scrim
     scrollable
     persistent
-    class="p-upload-dialog v-dialog--upload"
+    class="p-dialog-upload v-dialog--upload"
     @keydown.esc="close"
   >
-    <v-card :tile="$vuetify.display.mdAndDown">
-      <v-toolbar
-        v-if="$vuetify.display.mdAndDown"
-        flat
-        color="navigation"
-        class="mb-4"
-        :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
-      >
-        <v-btn icon @click.stop="close">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-        <v-toolbar-title>
-          {{ $gettext(`Upload`) }}
-        </v-toolbar-title>
-      </v-toolbar>
-      <v-card-title v-else class="d-flex justify-start align-center ga-3">
-        <v-icon size="28" color="primary">mdi-cloud-upload</v-icon>
-        <h6 class="text-h6">{{ $gettext(`Upload`) }}</h6>
-      </v-card-title>
-      <v-card-text class="flex-grow-0">
-        <v-form ref="form" class="p-photo-upload" validate-on="invalid-input" @submit.prevent="submit">
-          <input ref="upload" type="file" multiple class="d-none input-upload" @change.stop="onUpload()" />
-
-          <div class="text-body-2 pb-2">
-            <!-- TODO: check property allow-overflow TEST -->
-            <v-combobox
-              v-model="selectedAlbums"
-              :disabled="busy || total > 0"
-              hide-details
-              chips
-              closable-chips
-              multiple
-              class="my-0 input-albums"
-              :items="albums"
-              item-title="Title"
-              item-value="UID"
-              :label="$gettext('Select albums or create a new one')"
-              return-object
-            >
-              <template #no-data>
-                <v-list-item>
-                  <v-list-item-title>
-                    {{ $gettext(`Press enter to create a new album.`) }}
-                  </v-list-item-title>
-                </v-list-item>
-              </template>
-              <template #chip="data">
-                <v-chip
-                  :model-value="data.selected"
-                  :disabled="data.disabled"
-                  class="bg-highlight rounded-xl text-truncate d-block"
-                  @click:close="removeSelection(data.index)"
-                >
-                  <v-icon class="pr-1">mdi-bookmark</v-icon>
-                  {{ data.item.title ? data.item.title : data.item }}
-                </v-chip>
-              </template>
-            </v-combobox>
-            <v-progress-linear :model-value="completedTotal" :indeterminate="indexing" :height="21">
-              <p class="px-2 ma-0 text-end opacity-85"
-                ><span v-if="eta">{{ eta }}</span></p
-              >
-            </v-progress-linear>
-
-            <span v-if="failed">{{ $gettext(`Upload failed`) }}</span>
-            <span v-else-if="total > 0 && completedTotal < 100">
-              {{ $gettext(`Uploading %{n} of %{t}…`, { n: current, t: total }) }}
-            </span>
-            <span v-else-if="indexing">{{ $gettext(`Upload complete. Indexing…`) }}</span>
-            <span v-else-if="completedTotal === 100">{{ $gettext(`Done.`) }}</span>
+    <v-form ref="form" class="p-photo-upload" validate-on="invalid-input" @submit.prevent="submit">
+      <input ref="upload" type="file" multiple class="d-none input-upload" @change.stop="onUpload()" />
+      <v-card :tile="$vuetify.display.mdAndDown">
+        <v-toolbar
+          v-if="$vuetify.display.mdAndDown"
+          flat
+          color="navigation"
+          class="mb-4"
+          :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+        >
+          <v-btn icon @click.stop="close">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-toolbar-title>
+            {{ title }}
+          </v-toolbar-title>
+        </v-toolbar>
+        <v-card-title v-else class="d-flex justify-start align-center ga-3">
+          <v-icon size="28" color="primary">mdi-cloud-upload</v-icon>
+          <h6 class="text-h6">{{ title }}</h6>
+        </v-card-title>
+        <v-card-text class="flex-grow-0">
+          <div class="form-info">
+            <div class="text-body-1">
+              <span v-if="failed">{{ $gettext(`Upload failed`) }}</span>
+              <span v-else-if="total > 0 && completedTotal < 100">
+                {{ $gettext(`Uploading %{n} of %{t}…`, { n: current, t: total }) }}
+              </span>
+              <span v-else-if="indexing">{{ $gettext(`Upload complete. Indexing…`) }}</span>
+              <span v-else-if="completedTotal === 100">{{ $gettext(`Done.`) }}</span>
+              <span v-else>{{ $gettext(`Press "Browse" to select the files to upload…`) }}</span>
+            </div>
           </div>
-
-          <p v-if="isDemo" class="text-body-2 py-1">
-            {{ $gettext(`You can upload up to %{n} files for test purposes.`, { n: fileLimit }) }}
-            {{ $gettext(`Please do not upload any private, unlawful or offensive pictures. `) }}
-          </p>
-          <p v-else-if="rejectNSFW" class="text-body-2 py-1">
-            {{ $gettext(`Please don't upload photos containing offensive content.`) }}
-            {{ $gettext(`Uploads that may contain such images will be rejected automatically.`) }}
-          </p>
-
-          <p v-if="featReview" class="text-body-2 py-1">
-            {{
-              $gettext(`Non-photographic and low-quality images require a review before they appear in search results.`)
-            }}
-          </p>
-        </v-form>
-      </v-card-text>
-      <v-card-actions class="action-buttons mt-1">
-        <v-btn :disabled="busy" variant="flat" color="button" class="px-3 action-close" @click.stop="close">
-          {{ $gettext(`Close`) }}
-        </v-btn>
-        <v-btn :disabled="busy" variant="flat" color="highlight" class="px-3 action-upload" @click.stop="onUploadDialog()">
-          {{ $gettext(`Browse`) }}
-          <v-icon icon="mdi-folder-arrow-up" end></v-icon>
-        </v-btn>
-      </v-card-actions>
-    </v-card>
+          <div class="form-body mt-5">
+            <div class="form-controls">
+              <!-- TODO: check property allow-overflow TEST -->
+              <v-combobox
+                v-model="selectedAlbums"
+                :disabled="busy || total > 0"
+                hide-details
+                chips
+                closable-chips
+                multiple
+                class="input-albums"
+                :items="albums"
+                item-title="Title"
+                item-value="UID"
+                :label="$gettext('Choose an album or create a new one')"
+                return-object
+              >
+                <template #no-data>
+                  <v-list-item>
+                    <v-list-item-title>
+                      {{ $gettext(`Press enter to create a new album.`) }}
+                    </v-list-item-title>
+                  </v-list-item>
+                </template>
+                <template #chip="data">
+                  <v-chip
+                    :model-value="data.selected"
+                    :disabled="data.disabled"
+                    class="bg-highlight rounded-xl text-truncate d-block"
+                    @click:close="removeSelection(data.index)"
+                  >
+                    <v-icon class="pr-1">mdi-bookmark</v-icon>
+                    {{ data.item.title ? data.item.title : data.item }}
+                  </v-chip>
+                </template>
+              </v-combobox>
+              <v-progress-linear
+                :model-value="completedTotal"
+                :indeterminate="indexing"
+                :height="21"
+                class="v-progress-linear--upload"
+              >
+                <span v-if="eta" class="eta">{{ eta }}</span>
+              </v-progress-linear>
+            </div>
+          </div>
+          <div class="form-disclaimer">
+            <p v-if="isDemo" class="text-body-2 py-1">
+              {{ $gettext(`You can upload up to %{n} files for test purposes.`, { n: fileLimit }) }}
+              {{ $gettext(`Please do not upload any private, unlawful or offensive pictures. `) }}
+            </p>
+            <p v-else-if="rejectNSFW" class="text-body-2 py-1">
+              {{ $gettext(`Please don't upload photos containing offensive content.`) }}
+              {{ $gettext(`Uploads that may contain such images will be rejected automatically.`) }}
+            </p>
+            <p v-if="featReview" class="text-body-2 py-1">
+              {{
+                $gettext(
+                  `Non-photographic and low-quality images require a review before they appear in search results.`
+                )
+              }}
+            </p>
+          </div>
+        </v-card-text>
+        <v-card-actions class="action-buttons mt-1">
+          <v-btn :disabled="busy" variant="flat" color="button" class="action-close" @click.stop="close">
+            {{ $gettext(`Close`) }}
+          </v-btn>
+          <v-btn
+            :disabled="busy"
+            variant="flat"
+            color="highlight"
+            class="action-select action-upload"
+            @click.stop="onUploadDialog()"
+          >
+            {{ $gettext(`Browse`) }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-form>
   </v-dialog>
 </template>
 <script>
@@ -116,7 +131,7 @@ import Util from "common/util";
 import { Duration } from "luxon";
 
 export default {
-  name: "PUploadDialog",
+  name: "PDialogUpload",
   props: {
     show: Boolean,
     data: {
@@ -151,6 +166,11 @@ export default {
       featReview: this.$config.feature("review"),
       rtl: this.$rtl,
     };
+  },
+  computed: {
+    title() {
+      return this.$gettext(`Upload`);
+    },
   },
   watch: {
     show: function (show) {
@@ -266,7 +286,7 @@ export default {
               minutes: Math.floor(this.remainingTime / 60),
               seconds: this.remainingTime % 60,
             });
-            this.eta = dur.toHuman();
+            this.eta = dur.toHuman({ unitDisplay: "short" });
           } else {
             this.eta = "";
           }

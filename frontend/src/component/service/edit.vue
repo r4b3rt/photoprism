@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="500" class="p-account-edit-dialog" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="500" class="p-service-edit" @keydown.esc="cancel">
     <v-card>
       <v-card-title v-if="scope === 'sharing'" class="d-flex justify-space-between align-center ga-3">
         <h6 class="text-h6">
@@ -243,7 +243,7 @@
 import * as options from "options/options";
 
 export default {
-  name: "PAccountEditDialog",
+  name: "PServiceEdit",
   props: {
     show: Boolean,
     scope: {

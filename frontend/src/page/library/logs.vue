@@ -2,12 +2,17 @@
   <div class="p-tab p-tab-logs pa-4 fill-height">
     <v-row class="d-flex align-stretch">
       <v-col cols="12" class="grow pa-2 bg-terminal elevation-0 p-logs" style="overflow: auto">
-        <p v-if="logs.length === 0" class="p-log-empty flex-grow-1">
+        <div v-if="logs.length === 0" class="p-log-empty flex-grow-1">
           {{ $gettext(`Nothing to see here yet.`) }}
-        </p>
-        <p v-for="log in logs" :key="log.id" class="p-log-message text-selectable flex-grow-1" :class="'p-log-' + log.level">
+        </div>
+        <div
+          v-for="log in logs"
+          :key="log.id"
+          class="p-log-message text-selectable flex-grow-1"
+          :class="'p-log-' + log.level"
+        >
           {{ formatTime(log.time) }} {{ level(log) }} <span>{{ log.message }}</span>
-        </p>
+        </div>
       </v-col>
     </v-row>
   </div>

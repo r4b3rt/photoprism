@@ -4,7 +4,7 @@
       <v-alert
         color="primary"
         :icon="isSharedView ? 'mdi-image-off' : 'mdi-lightbulb-outline'"
-        class="no-results opacity-60"
+        class="no-results"
         variant="outlined"
       >
         <div v-if="filter.order === 'edited'" class="font-weight-bold">

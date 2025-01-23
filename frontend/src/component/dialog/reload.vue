@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "PReloadDialog",
+  name: "PDialogReload",
   props: {
     show: {
       type: Boolean,

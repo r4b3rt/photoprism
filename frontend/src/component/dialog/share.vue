@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="540" class="p-share-dialog" @keydown.esc="close">
+  <v-dialog :model-value="show" persistent max-width="540" class="p-dialog-share" @keydown.esc="close">
     <v-card>
       <v-card-title class="d-flex justify-space-between align-center ga-3">
         <h6 class="text-h6">{{ $gettext(`Share %{name}`, { name: model.modelName() }) }}</h6>
@@ -136,7 +136,7 @@ import * as options from "options/options";
 import Util from "common/util";
 
 export default {
-  name: "PShareDialog",
+  name: "PDialogShare",
   props: {
     show: Boolean,
     model: {

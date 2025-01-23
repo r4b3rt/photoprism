@@ -96,7 +96,7 @@ main {
     color: rgb(var(--v-theme-on-button, #333333));
     background-color: rgb(var(--v-theme-button, #ffffff));
     box-shadow: 0 0.2rem 0.5rem #0000001a, 0 0 0.05rem #00000040;
-    transition: color 125ms, background-color 125ms, transform 125ms cubic-bezier(.4,0,.2,1), opacity 125ms;
+    transition: color 125ms, background-color 125ms, transform 125ms cubic-bezier(.4, 0, .2, 1), opacity 125ms;
     -webkit-tap-highlight-color: transparent;
     border: 0;
     border-radius: 1.6rem;
@@ -160,11 +160,11 @@ ol, ul {
     padding-right: 24px;
 }
 
-#photoprism .search-results.list-view .result {
+.search-results.list-view .result {
     padding: 1px 0 1px 8px !important;
 }
 
-body #photoprism .v-list__item .v-icon {
+body .v-list__item .v-icon {
     color: inherit;
 }
 

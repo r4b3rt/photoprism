@@ -165,7 +165,7 @@
       ></p-album-clipboard>
 
       <div v-if="results.length === 0" class="pa-3">
-        <v-alert color="primary" icon="mdi-lightbulb-outline" class="no-results opacity-60" variant="outlined">
+        <v-alert color="primary" icon="mdi-lightbulb-outline" class="no-results" variant="outlined">
           <div class="font-weight-bold">
             {{ $gettext(`No albums found`) }}
           </div>
@@ -343,12 +343,12 @@
         </div>
       </div>
     </div>
-    <p-share-dialog
+    <p-dialog-share
       :show="dialog.share"
       :model="model"
       @upload="webdavUpload"
       @close="dialog.share = false"
-    ></p-share-dialog>
+    ></p-dialog-share>
     <p-service-upload-dialog
       :show="dialog.upload"
       :items="{ albums: selection }"

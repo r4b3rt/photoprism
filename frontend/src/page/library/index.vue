@@ -1,35 +1,39 @@
 <template>
   <div class="p-tab p-tab-index">
-    <v-form ref="form" class="p-photo-index" validate-on="invalid-input" @submit.prevent="submit">
-      <div class="pa-6">
-        <p class="text-body-1">
+    <v-form ref="form" class="p-form p-photo-index" validate-on="invalid-input" @submit.prevent="submit">
+      <div class="form-info">
+        <div class="text-body-1">
           <span v-if="fileName" class="text-break">{{ action }} {{ fileName }}…</span>
           <span v-else-if="action">{{ action }}…</span>
           <span v-else-if="busy">{{ $gettext(`Indexing media and sidecar files…`) }}</span>
           <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
-          <span v-else>{{ $gettext(`Press button to start indexing…`) }}</span>
-        </p>
-
-        <v-autocomplete
-          v-model="settings.index.path"
-          color="surface-variant"
-          class="mt-6 input-index-folder"
-          hide-details
-          hide-no-data
-          flat
-          variant="solo-filled"
-          autocomplete="off"
-          :items="dirs"
-          item-title="name"
-          item-value="path"
-          :loading="loading"
-          :disabled="busy || !ready"
-          @update:model-value="onChange"
-          @focus="onFocus"
-        >
-        </v-autocomplete>
-        <v-progress-linear :model-value="completed" :indeterminate="busy"></v-progress-linear>
-
+          <span v-else>{{ $gettext(`Select a folder to scan for changes…`) }}</span>
+        </div>
+      </div>
+      <div class="form-body mt-3">
+        <div class="form-controls">
+          <v-autocomplete
+            v-model="settings.index.path"
+            color="surface-variant"
+            class="input-index-folder"
+            hide-details
+            hide-no-data
+            flat
+            variant="solo-filled"
+            autocomplete="off"
+            :items="dirs"
+            item-title="name"
+            item-value="path"
+            :loading="loading"
+            :disabled="busy || !ready"
+            @update:model-value="onChange"
+            @focus="onFocus"
+          >
+          </v-autocomplete>
+          <v-progress-linear :model-value="completed" :indeterminate="busy"></v-progress-linear>
+        </div>
+      </div>
+      <div class="form-controls">
         <div class="action-controls">
           <v-checkbox
             v-model="settings.index.rescan"
@@ -52,21 +56,40 @@
           >
           </v-checkbox>
         </div>
-
+      </div>
+      <div class="form-actions">
         <div class="action-buttons">
-          <v-btn :disabled="!busy || !ready" variant="flat" color="button" class="action-cancel" @click.stop="cancelIndexing()">
+          <v-btn
+            :disabled="!busy || !ready"
+            variant="flat"
+            color="button"
+            class="action-cancel"
+            @click.stop="cancelIndexing()"
+          >
             {{ $gettext(`Cancel`) }}
           </v-btn>
-
-          <v-btn :disabled="busy || !ready" variant="flat" color="highlight" class="action-index" @click.stop="startIndexing()">
+          <v-btn
+            :disabled="busy || !ready"
+            variant="flat"
+            color="highlight"
+            class="action-index"
+            @click.stop="startIndexing()"
+          >
             {{ $gettext(`Start`) }}
             <v-icon end>mdi-update</v-icon>
           </v-btn>
         </div>
-
-        <v-alert v-if="ready && !busy && config.count.hidden > 1" color="error" icon="mdi-exclamation" class="mt-6" variant="outlined">
-          {{ $gettext(`The index currently contains %{n} hidden files.`, { n: config.count.hidden }) }}
-          {{ $gettext(`Their format may not be supported, they haven't been converted to JPEG yet or there are duplicates.`) }}
+      </div>
+      <div v-if="ready && !busy && config.count.hidden > 1" class="form-footer">
+        <v-alert color="primary" icon="mdi-alert-circle-outline" class="v-alert--default" variant="outlined">
+          <div>
+            {{ $gettext(`The index currently contains %{n} hidden files.`, { n: config.count.hidden }) }}
+            {{
+              $gettext(
+                `Their format may not be supported, they haven't been converted to JPEG yet or there are duplicates.`
+              )
+            }}
+          </div>
         </v-alert>
       </div>
     </v-form>
