@@ -20,7 +20,7 @@
                 />
               </div>
             </v-col>
-            <v-col cols="8" sm="9" md="10" class="d-flex flex-column ga-4">
+            <v-col cols="8" sm="9" md="10" class="d-flex align-self-stretch flex-column ga-4">
               <v-text-field
                 v-model="model.Title"
                 :append-inner-icon="model.TitleSrc === 'manual' ? 'mdi-check' : ''"
