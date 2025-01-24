@@ -54,7 +54,7 @@
                   :items="albums"
                   item-title="Title"
                   item-value="UID"
-                  :label="$gettext('Choose an album or create a new one')"
+                  :placeholder="$gettext('Choose an album or create a new one')"
                   return-object
                 >
                   <template #no-data>
@@ -64,15 +64,15 @@
                       </v-list-item-title>
                     </v-list-item>
                   </template>
-                  <template #chip="data">
+                  <template #chip="chip">
                     <v-chip
-                      :model-value="data.selected"
-                      :disabled="data.disabled"
-                      class="bg-highlight rounded-xl text-truncate d-block"
-                      @click:close="removeSelection(data.index)"
+                      :model-value="chip.selected"
+                      :disabled="chip.disabled"
+                      prepend-icon="mdi-bookmark"
+                      class="text-truncate"
+                      @click:close="removeSelection(chip.index)"
                     >
-                      <v-icon class="pr-1">mdi-bookmark</v-icon>
-                      {{ data.item.title ? data.item.title : data.item }}
+                      {{ chip.item.title ? chip.item.title : chip.item }}
                     </v-chip>
                   </template>
                 </v-combobox>

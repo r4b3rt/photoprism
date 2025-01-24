@@ -61,6 +61,15 @@ export default {
     itemValue: "value",
     hideDetails: "auto",
   },
+  VChip: {
+    closable: true,
+    rounded: true,
+    flat: true,
+    ripple: false,
+    variant: "flat",
+    color: "highlight",
+    density: "default",
+  },
   VSelect: {
     flat: true,
     variant: "solo-filled",
