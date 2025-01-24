@@ -30,6 +30,7 @@
                 :label="$pgettext('Photo', 'Title')"
                 placeholder=""
                 autocomplete="off"
+                density="comfortable"
                 class="input-title"
               ></v-text-field>
               <v-textarea
@@ -42,6 +43,7 @@
                 :label="$gettext('Caption')"
                 placeholder=""
                 :rows="1"
+                density="comfortable"
                 class="input-caption"
               ></v-textarea>
             </v-col>
@@ -301,6 +303,7 @@
                 :label="$gettext('Subject')"
                 placeholder=""
                 :rows="1"
+                density="comfortable"
                 class="input-subject"
               ></v-textarea>
             </v-col>
@@ -314,6 +317,7 @@
                 autocomplete="off"
                 :label="$gettext('Copyright')"
                 placeholder=""
+                density="comfortable"
                 class="input-copyright"
               ></v-text-field>
             </v-col>
@@ -327,6 +331,7 @@
                 autocomplete="off"
                 :label="$gettext('Artist')"
                 placeholder=""
+                density="comfortable"
                 class="input-artist"
               ></v-text-field>
             </v-col>
@@ -342,6 +347,7 @@
                 :label="$gettext('License')"
                 placeholder=""
                 :rows="1"
+                density="comfortable"
                 class="input-license"
               ></v-textarea>
             </v-col>
@@ -356,6 +362,7 @@
                 :label="$gettext('Keywords')"
                 placeholder=""
                 :rows="1"
+                density="comfortable"
                 class="input-keywords"
               ></v-textarea>
             </v-col>
@@ -370,6 +377,7 @@
                 :label="$gettext('Notes')"
                 placeholder=""
                 :rows="1"
+                density="comfortable"
                 class="input-notes"
               ></v-textarea>
             </v-col>

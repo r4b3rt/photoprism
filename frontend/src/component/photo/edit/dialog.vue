@@ -2,7 +2,7 @@
   <v-dialog
     ref="dialog"
     :model-value="show"
-    :fullscreen="$vuetify.display.mdAndDown"
+    :fullscreen="$vuetify.display.smAndDown"
     :transition="false"
     scrim
     scrollable
@@ -11,8 +11,8 @@
     @click.stop
     @keydown.esc="close"
   >
-    <v-card :tile="$vuetify.display.mdAndDown">
-      <v-toolbar flat color="surface" :density="$vuetify.display.mdAndDown ? 'compact' : 'comfortable'">
+    <v-card :tile="$vuetify.display.smAndDown">
+      <v-toolbar flat color="surface" :density="$vuetify.display.smAndDown ? 'compact' : 'comfortable'">
         <v-btn icon class="action-close" @click.stop="close">
           <v-icon>mdi-close</v-icon>
         </v-btn>
