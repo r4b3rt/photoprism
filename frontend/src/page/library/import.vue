@@ -90,7 +90,7 @@
             @click.stop="startImport()"
           >
             {{ $gettext(`Import`) }}
-            <v-icon end>mdi-sync</v-icon>
+            <v-icon end>mdi-plus</v-icon>
           </v-btn>
         </div>
       </div>
