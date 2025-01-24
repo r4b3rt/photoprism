@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-23 18:02+0000\n"
+"PO-Revision-Date: 2025-01-24 16:44+0000\n"
 "Last-Translator: Google Cloud Translation Basic <noreply-mt-google-translate@weblate.org>\n"
 "Language-Team: \n"
 "Language: ca\n"
@@ -99,7 +99,7 @@ msgstr "Hi ha disponible una versió nova de %{s}:"
 
 #: src/dialog/admin/users/edit.vue:243 src/page/about/about.vue:39
 #: src/page/settings/account.vue:256 src/app/routes.js:60
-#: src/component/navigation.vue:1423 src/page/people/recognized.vue:323
+#: src/component/navigation.vue:1422 src/page/people/recognized.vue:323
 msgid "About"
 msgstr "Quant a"
 
@@ -107,7 +107,7 @@ msgstr "Quant a"
 msgid "Access Token"
 msgstr "Fitxa d'accés"
 
-#: src/component/navigation.vue:98 src/component/navigation.vue:1667
+#: src/component/navigation.vue:98 src/component/navigation.vue:1666
 #: src/component/service/upload.vue:60 src/model/service.js:94
 #: src/model/user.js:169 src/page/settings.vue:85
 #: src/page/settings/general.vue:490
@@ -254,7 +254,7 @@ msgid "Album created"
 msgstr "Àlbum creat"
 
 #: src/app/routes.js:175 src/component/album/toolbar.vue:57
-#: src/component/navigation.vue:600 src/component/navigation.vue:1761
+#: src/component/navigation.vue:600 src/component/navigation.vue:1760
 #: src/component/photo/edit/info.vue:223
 msgid "Albums"
 msgstr "Àlbums"
@@ -328,7 +328,7 @@ msgstr "Alternativament, podeu carregar fitxers directament als servidors WebDAV
 msgid "Altitude"
 msgstr "Altitud"
 
-#: src/component/photo/edit/details.vue:262
+#: src/component/photo/edit/details.vue:264
 msgid "Altitude (m)"
 msgstr "Altitud (m)"
 
@@ -359,12 +359,12 @@ msgstr "Clau API"
 msgid "Application"
 msgstr "Aplicació"
 
-#: src/component/photo/edit/details.vue:609
+#: src/component/photo/edit/details.vue:617
 msgid "Apply"
 msgstr "Aplicar"
 
 #: src/component/photo/clipboard.vue:64
-#: src/component/photo/edit/details.vue:608
+#: src/component/photo/edit/details.vue:616
 #: src/component/photo/view/cards.vue:401
 msgid "Approve"
 msgstr "Aprovar"
@@ -415,7 +415,7 @@ msgstr "Esteu segur que voleu suprimir permanentment aquest fitxer?"
 msgid "Are you sure?"
 msgstr "N'esteu segur?"
 
-#: src/component/photo/edit/details.vue:510
+#: src/component/photo/edit/details.vue:514
 msgid "Artist"
 msgstr "Artista"
 
@@ -481,7 +481,7 @@ msgstr "Blau"
 msgid "Brown"
 msgstr "Marró"
 
-#: src/component/dialog/upload.vue:244 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Navega"
 
@@ -509,11 +509,11 @@ msgstr "Ocupat, si us plau, espera..."
 msgid "By using the software and services we provide, you agree to our terms of service, privacy policy, and code of conduct."
 msgstr "En utilitzar el programari i els serveis que oferim, accepteu les nostres condicions de servei, política de privadesa i codi de conducta."
 
-#: src/app/routes.js:188 src/component/navigation.vue:983
+#: src/app/routes.js:188 src/component/navigation.vue:982
 msgid "Calendar"
 msgstr "Calendari"
 
-#: src/component/photo/edit/details.vue:330 src/component/photo/toolbar.vue:314
+#: src/component/photo/edit/details.vue:332 src/component/photo/toolbar.vue:314
 #: src/component/photo/view/cards.vue:486 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "Càmera"
@@ -556,7 +556,7 @@ msgstr "No es poden seleccionar més elements"
 #: src/component/service/edit.vue:442 src/component/service/remove.vue:47
 #: src/component/service/upload.vue:105 src/locales.js:26
 #: src/page/auth/login.vue:204 src/page/connect.vue:116
-#: src/page/library/import.vue:112 src/page/library/index.vue:121
+#: src/page/library/import.vue:103 src/page/library/index.vue:115
 msgid "Cancel"
 msgstr "Cancel·lar"
 
@@ -564,7 +564,7 @@ msgstr "Cancel·lar"
 msgid "Cannot copy to clipboard"
 msgstr "No es pot copiar al porta-retalls"
 
-#: src/component/photo/edit/details.vue:86
+#: src/component/photo/edit/details.vue:87
 #: src/component/photo/edit/labels.vue:46
 #: src/component/photo/view/cards.vue:431
 msgid "Caption"
@@ -621,7 +621,7 @@ msgstr "Els canvis a la configuració avançada requereixen un reinici perquè t
 msgid "Checked"
 msgstr "Seleccionat"
 
-#: src/component/dialog/upload.vue:155 src/component/photo/album/dialog.vue:51
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
 msgid "Choose an album or create a new one"
 msgstr "Tria un àlbum o crea'n un de nou"
 
@@ -633,7 +633,7 @@ msgstr "Croma"
 msgid "Cleaning index and cache"
 msgstr "Neteja d'índex i memòria cau"
 
-#: src/page/library/index.vue:103
+#: src/page/library/index.vue:97
 msgid "Cleanup"
 msgstr "Netejar"
 
@@ -653,8 +653,8 @@ msgstr "Credencials del client"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:232
-#: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:596
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
 msgid "Close"
@@ -680,7 +680,7 @@ msgstr "Colors"
 msgid "Compare Editions"
 msgstr "Compara Edicions"
 
-#: src/page/library/index.vue:92
+#: src/page/library/index.vue:86
 msgid "Complete Rescan"
 msgstr "Rescaneig complet"
 
@@ -750,7 +750,7 @@ msgstr "S'ha copiat al porta-retalls"
 msgid "Copy"
 msgstr "Còpia"
 
-#: src/component/photo/edit/details.vue:490
+#: src/component/photo/edit/details.vue:493
 msgid "Copyright"
 msgstr "Copyright"
 
@@ -758,7 +758,7 @@ msgstr "Copyright"
 msgid "Couldn't find anything."
 msgstr "No he pogut trobar res."
 
-#: src/page/settings/account.vue:697 src/component/photo/edit/details.vue:235
+#: src/page/settings/account.vue:697 src/component/photo/edit/details.vue:237
 #: src/component/photo/toolbar.vue:286 src/page/settings/account.vue:588
 msgid "Country"
 msgstr "País"
@@ -815,7 +815,7 @@ msgstr "Diari"
 msgid "Database Backups"
 msgstr "Còpies de seguretat de bases de dades"
 
-#: src/page/settings/account.vue:462 src/component/photo/edit/details.vue:112
+#: src/page/settings/account.vue:462 src/component/photo/edit/details.vue:114
 msgid "Day"
 msgstr "Dia"
 
@@ -855,7 +855,7 @@ msgstr "Esborrar"
 msgid "Delete All"
 msgstr "Eliminar tots"
 
-#: src/page/library/index.vue:104
+#: src/page/library/index.vue:98
 msgid "Delete orphaned index entries, sidecar files and thumbnails."
 msgstr "Suprimeix les entrades d'índex orfes, els fitxers de sidecar i les miniatures."
 
@@ -963,12 +963,12 @@ msgid "Donations"
 msgstr "Donacions"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:620
+#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Fet"
 
-#: src/component/dialog/upload.vue:137 src/page/library/import.vue:45
-#: src/page/library/index.vue:51
+#: src/component/dialog/upload.vue:128 src/page/library/import.vue:41
+#: src/page/library/index.vue:48
 msgid "Done."
 msgstr "Fet."
 
@@ -1103,7 +1103,7 @@ msgstr "Introduïu la vostra contrasenya per confirmar l'acció i continueu:"
 msgid "Error"
 msgstr "Error"
 
-#: src/app/routes.js:316 src/component/navigation.vue:1250
+#: src/app/routes.js:316 src/component/navigation.vue:1249
 msgid "Errors"
 msgstr "Errors"
 
@@ -1149,7 +1149,7 @@ msgstr "Característiques experimentals"
 msgid "Expires"
 msgstr "Caduca"
 
-#: src/component/photo/edit/details.vue:377
+#: src/component/photo/edit/details.vue:379
 msgid "Exposure"
 msgstr "Exposició"
 
@@ -1157,7 +1157,7 @@ msgstr "Exposició"
 msgid "Extract still images and generate thumbnails while indexing."
 msgstr "Extraieu imatges fixes i genereu miniatures mentre indexeu."
 
-#: src/component/photo/edit/details.vue:423
+#: src/component/photo/edit/details.vue:425
 msgid "F Number"
 msgstr "Número F"
 
@@ -1205,7 +1205,7 @@ msgstr "Favorits"
 msgid "Feature Request"
 msgstr "Sol·licitud de funció"
 
-#: src/component/navigation.vue:1358
+#: src/component/navigation.vue:1357
 msgid "Feedback"
 msgstr "Opinions"
 
@@ -1239,7 +1239,7 @@ msgstr "Tamany arxiu"
 msgid "Filename"
 msgstr "Nom del fitxer"
 
-#: src/component/navigation.vue:1809 src/component/photo/edit/dialog.vue:260
+#: src/component/navigation.vue:1808 src/component/photo/edit/dialog.vue:260
 #: src/component/photo/edit/dialog.vue:277
 msgid "Files"
 msgstr "Arxius"
@@ -1252,7 +1252,7 @@ msgstr "Els fitxers amb noms seqüencials com \"IMG_1234 (2)\" i \"IMG_1234 (3)\
 msgid "First page"
 msgstr "Primera pàgina"
 
-#: src/component/photo/edit/details.vue:442
+#: src/component/photo/edit/details.vue:444
 msgid "Focal Length"
 msgstr "Longitud focal"
 
@@ -1271,7 +1271,7 @@ msgstr "La carpeta conté %{n} fitxers"
 msgid "Folder is empty"
 msgstr "La carpeta està buida"
 
-#: src/app/routes.js:201 src/component/navigation.vue:1127
+#: src/app/routes.js:201 src/component/navigation.vue:1126
 msgid "Folders"
 msgstr "Carpetes"
 
@@ -1351,7 +1351,7 @@ msgstr "Ajuda"
 msgid "Help & Support"
 msgstr "Ajuda & Suport"
 
-#: src/component/navigation.vue:1229 src/component/people/dialog/edit.vue:95
+#: src/component/navigation.vue:1228 src/component/people/dialog/edit.vue:95
 msgid "Hidden"
 msgstr "Ocult"
 
@@ -1392,7 +1392,7 @@ msgstr "Imatge"
 msgid "Image Quality"
 msgstr "Qualitat d'imatge"
 
-#: src/page/library.vue:46 src/page/library/import.vue:145
+#: src/page/library.vue:46 src/page/library/import.vue:136
 #: src/page/settings/general.vue:274
 msgid "Import"
 msgstr "Importa"
@@ -1401,7 +1401,7 @@ msgstr "Importa"
 msgid "Import failed"
 msgstr "La importació ha fallat"
 
-#: src/page/library/import.vue:100
+#: src/page/library/import.vue:91
 msgid "Imported files will be sorted by date and given a unique name to avoid duplicates."
 msgstr "Els fitxers importats s'ordenaran per data i se'ls donarà un nom únic per evitar duplicats."
 
@@ -1409,11 +1409,11 @@ msgstr "Els fitxers importats s'ordenaran per data i se'ls donarà un nom únic 
 msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Els fitxers importats s'ordenaran per data i se'ls donarà un nom únic."
 
-#: src/page/library/import.vue:41
+#: src/page/library/import.vue:37
 msgid "Importing %{name}…"
 msgstr "S'està important %{name}..."
 
-#: src/page/library/import.vue:43
+#: src/page/library/import.vue:39
 msgid "Importing files to originals…"
 msgstr "S'estan important fitxers als originals..."
 
@@ -1436,7 +1436,7 @@ msgstr "Incloeu fitxers d'imatge RAW quan baixeu piles i arxius."
 msgid "Include sidecar files when downloading stacks and archives."
 msgstr "Incloeu fitxers sidecar quan baixeu piles i arxius."
 
-#: src/component/navigation.vue:1825 src/page/library.vue:36
+#: src/component/navigation.vue:1824 src/page/library.vue:36
 #: src/page/settings/library.vue:32
 msgid "Index"
 msgstr "Índex"
@@ -1453,7 +1453,7 @@ msgstr "S'està indexant"
 msgid "Indexing failed"
 msgstr "S'ha produït un error en la indexació"
 
-#: src/page/library/index.vue:49
+#: src/page/library/index.vue:46
 msgid "Indexing media and sidecar files…"
 msgstr "S'estan indexant fitxers multimèdia i sidecar..."
 
@@ -1518,11 +1518,11 @@ msgstr "Qualitat JPEG: %{n}"
 msgid "JPEG Size Limit: %{n}px"
 msgstr "Límit de mida JPEG: %{n}px"
 
-#: src/page/library/import.vue:100
+#: src/page/library/import.vue:91
 msgid "JPEGs and thumbnails are automatically rendered as needed."
 msgstr "Els JPEG i les miniatures es representen automàticament segons sigui necessari."
 
-#: src/component/photo/edit/details.vue:552
+#: src/component/photo/edit/details.vue:558
 msgid "Keywords"
 msgstr "Paraules clau"
 
@@ -1531,7 +1531,7 @@ msgstr "Paraules clau"
 msgid "Label"
 msgstr "Etiqueta"
 
-#: src/app/routes.js:322 src/component/navigation.vue:1079
+#: src/app/routes.js:322 src/component/navigation.vue:1078
 #: src/component/photo/edit/dialog.vue:181
 #: src/component/photo/edit/dialog.vue:198 src/page/settings/general.vue:178
 msgid "Labels"
@@ -1569,7 +1569,7 @@ msgstr "Última sincronització"
 msgid "Last Used"
 msgstr "Últim utilitzat"
 
-#: src/component/photo/edit/details.vue:286
+#: src/component/photo/edit/details.vue:288
 #: src/component/photo/edit/info.vue:378
 msgid "Latitude"
 msgstr "Latitud"
@@ -1584,23 +1584,23 @@ msgstr "LDAP/AD"
 msgid "Learn more"
 msgstr "Saber-ne més"
 
-#: src/component/navigation.vue:1899
+#: src/component/navigation.vue:1898
 msgid "Legal Information"
 msgstr "Informació legal"
 
-#: src/component/photo/edit/details.vue:396
+#: src/component/photo/edit/details.vue:398
 #: src/component/photo/view/cards.vue:497
 msgid "Lens"
 msgstr "Lent"
 
 #: src/app/routes.js:358 src/app/routes.js:365 src/app/routes.js:372
-#: src/component/navigation.vue:1169 src/page/settings.vue:49
+#: src/component/navigation.vue:1168 src/page/settings.vue:49
 #: src/page/settings/general.vue:418
 msgid "Library"
 msgstr "Biblioteca"
 
 #: src/page/connect.vue:40 src/app/routes.js:66
-#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:531
+#: src/component/navigation.vue:1379 src/component/photo/edit/details.vue:536
 #: src/page/about/license.vue:25
 msgid "License"
 msgstr "Llicència"
@@ -1655,7 +1655,7 @@ msgstr "Carregant..."
 msgid "Local"
 msgstr "Local"
 
-#: src/component/photo/edit/details.vue:187 src/options/options.js:37
+#: src/component/photo/edit/details.vue:189 src/options/options.js:37
 msgid "Local Time"
 msgstr "Hora local"
 
@@ -1670,20 +1670,20 @@ msgstr "Ubicació"
 msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
 msgstr "Els missatges de registre apareixen aquí sempre que PhotoPrism troba fitxers trencats o hi ha altres problemes potencials."
 
-#: src/component/navigation.vue:1454 src/component/navigation.vue:1719
+#: src/component/navigation.vue:1453 src/component/navigation.vue:1718
 msgid "Login"
 msgstr "Iniciar sessió"
 
-#: src/component/navigation.vue:1638
+#: src/component/navigation.vue:1637
 msgid "Logout"
 msgstr "Tancar sessió"
 
-#: src/component/navigation.vue:1841 src/page/library.vue:59
+#: src/component/navigation.vue:1840 src/page/library.vue:59
 #: src/page/settings/general.vue:466
 msgid "Logs"
 msgstr "Logs"
 
-#: src/component/photo/edit/details.vue:310
+#: src/component/photo/edit/details.vue:312
 #: src/component/photo/edit/info.vue:384
 msgid "Longitude"
 msgstr "Longitut"
@@ -1766,7 +1766,7 @@ msgstr "Falta la pàgina d'enviament"
 msgid "Missing or invalid configuration"
 msgstr "Falta la configuració o no és vàlida"
 
-#: src/app/routes.js:162 src/component/navigation.vue:1031
+#: src/app/routes.js:162 src/component/navigation.vue:1030
 #: src/page/settings/general.vue:154
 msgid "Moments"
 msgstr "Moments"
@@ -1775,7 +1775,7 @@ msgstr "Moments"
 msgid "Monochrome"
 msgstr "Monocrom"
 
-#: src/page/settings/account.vue:487 src/component/photo/edit/details.vue:138
+#: src/page/settings/account.vue:487 src/component/photo/edit/details.vue:140
 #: src/component/photo/toolbar.vue:420 src/page/settings/account.vue:488
 msgid "Month"
 msgstr "Mes"
@@ -1788,7 +1788,7 @@ msgstr "Mosaic"
 msgid "Most Relevant"
 msgstr "El més rellevant"
 
-#: src/page/library/import.vue:88
+#: src/page/library/import.vue:81
 msgid "Move Files"
 msgstr "Mou arxius"
 
@@ -1899,7 +1899,7 @@ msgstr "No s'han trobat imatges"
 msgid "No recently edited pictures"
 msgstr "No hi ha imatges editades recentment"
 
-#: src/component/navigation.vue:1561
+#: src/component/navigation.vue:1560
 msgid "No server connection"
 msgstr "No hi ha connexió amb el servidor"
 
@@ -1919,7 +1919,7 @@ msgstr "No gràcies"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "No hi ha cap advertiment ni error que contingui aquesta paraula clau. Tingueu en compte que la cerca distingeix entre majúscules i minúscules."
 
-#: src/component/dialog/upload.vue:214 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -1934,7 +1934,7 @@ msgstr "Cap"
 msgid "Not sorted."
 msgstr "No ordenat."
 
-#: src/page/library/import.vue:100
+#: src/page/library/import.vue:91
 msgid "Note you may manually manage your originals folder and importing is optional."
 msgstr "Tingueu en compte que podeu gestionar manualment la vostra carpeta d'originals i la importació és opcional."
 
@@ -1946,7 +1946,7 @@ msgstr "Nota:"
 msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
 msgstr "Nota: només els servidors WebDAV, com Nextcloud o PhotoPrism, es poden configurar com a servei remot per a la còpia de seguretat i la càrrega de fitxers."
 
-#: src/component/photo/edit/details.vue:573
+#: src/component/photo/edit/details.vue:580
 msgid "Notes"
 msgstr "Notes"
 
@@ -2042,7 +2042,7 @@ msgstr "Organització"
 msgid "Orientation"
 msgstr "Orientació"
 
-#: src/page/library/import.vue:100
+#: src/page/library/import.vue:91
 msgid "Original file names will be stored and indexed."
 msgstr "Els noms dels fitxers originals s'emmagatzemaran i s'indexaran."
 
@@ -2050,7 +2050,7 @@ msgstr "Els noms dels fitxers originals s'emmagatzemaran i s'indexaran."
 msgid "Original Name"
 msgstr "Nom original"
 
-#: src/component/navigation.vue:1206 src/model/file.js:195
+#: src/component/navigation.vue:1205 src/model/file.js:195
 #: src/options/options.js:482 src/page/library/browse.vue:58
 #: src/page/settings/general.vue:442 src/page/settings/general.vue:648
 msgid "Originals"
@@ -2097,7 +2097,7 @@ msgid "Password changed"
 msgstr "S’ha canviat la contrasenya"
 
 #: src/app/routes.js:328 src/app/routes.js:352 src/component/navigation.vue:776
-#: src/component/navigation.vue:1777 src/component/photo/edit/dialog.vue:221
+#: src/component/navigation.vue:1776 src/component/photo/edit/dialog.vue:221
 #: src/component/photo/edit/dialog.vue:238 src/page/settings/general.vue:130
 msgid "People"
 msgstr "Gent"
@@ -2156,8 +2156,8 @@ msgid "Place & Time"
 msgstr "Lloc i hora"
 
 #: src/app/routes.js:263 src/app/routes.js:269 src/app/routes.js:275
-#: src/app/routes.js:290 src/component/navigation.vue:888
-#: src/component/navigation.vue:1793 src/page/places.vue:40
+#: src/app/routes.js:290 src/component/navigation.vue:887
+#: src/component/navigation.vue:1792 src/page/places.vue:40
 #: src/page/settings/general.vue:516 src/page/settings/general.vue:545
 msgid "Places"
 msgstr "Llocs"
@@ -2170,11 +2170,11 @@ msgstr "Si us plau, confirmeu la vostra nova contrasenya."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Copieu la següent contrasenya de l'aplicació generada aleatòriament i guardeu-la en un lloc segur, ja que no la podreu tornar a veure:"
 
-#: src/component/dialog/upload.vue:209
+#: src/component/dialog/upload.vue:198
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Si us plau, no carregueu cap imatge privada, il·legal o ofensiva."
 
-#: src/component/dialog/upload.vue:211
+#: src/component/dialog/upload.vue:200
 msgid "Please don't upload photos containing offensive content."
 msgstr "Si us plau, no carregueu fotos que continguin contingut ofensiu."
 
@@ -2210,11 +2210,7 @@ msgstr "Retrat"
 msgid "Preserve filenames"
 msgstr "Conserva els noms de fitxers"
 
-#: src/component/dialog/upload.vue:138
-msgid "Press \"Browse\" to select the files to upload…"
-msgstr "Premeu \"Navega\" per seleccionar els fitxers a penjar…"
-
-#: src/component/dialog/upload.vue:163
+#: src/component/dialog/upload.vue:153
 msgid "Press enter to create a new album."
 msgstr "Premeu Intro per crear un àlbum nou."
 
@@ -2298,7 +2294,7 @@ msgstr "Crua"
 msgid "RAW"
 msgstr "RAW"
 
-#: src/page/library/index.vue:93
+#: src/page/library/index.vue:87
 msgid "Re-index all originals, including already indexed and unchanged files."
 msgstr "Torneu a indexar tots els originals, inclosos els fitxers ja indexats i sense canvis."
 
@@ -2341,8 +2337,7 @@ msgstr "Codi de recuperació"
 msgid "Red"
 msgstr "Vermell"
 
-#: src/app/routes.js:297 src/component/navigation.vue:839
-#: src/component/navigation.vue:928
+#: src/app/routes.js:297 src/component/navigation.vue:927
 msgid "Regions"
 msgstr "Regions"
 
@@ -2351,7 +2346,7 @@ msgid "Register"
 msgstr "Registra't"
 
 #: src/component/album/toolbar.vue:64 src/component/dialog/reload.vue:63
-#: src/component/navigation.vue:1652 src/component/photo/toolbar.vue:90
+#: src/component/navigation.vue:1651 src/component/photo/toolbar.vue:90
 #: src/page/albums.vue:111 src/page/labels.vue:93
 #: src/page/library/browse.vue:84 src/page/library/errors.vue:81
 #: src/page/people/new.vue:57 src/page/people/recognized.vue:93
@@ -2379,7 +2374,7 @@ msgstr "ha fallat l'eliminació: àlbum desconegut"
 msgid "Remove from album"
 msgstr "Elimina de l'àlbum"
 
-#: src/page/library/import.vue:90
+#: src/page/library/import.vue:83
 msgid "Remove imported files to save storage. Unsupported file types will never be deleted, they remain in their current location."
 msgstr "Elimina els fitxers importats per estalviar emmagatzematge. Els tipus de fitxers no compatibles no se suprimiran mai, es mantenen a la seva ubicació actual."
 
@@ -2464,7 +2459,7 @@ msgstr "Escaneigs"
 msgid "Scope"
 msgstr "Àmbit"
 
-#: src/component/navigation.vue:343 src/component/navigation.vue:1745
+#: src/component/navigation.vue:343 src/component/navigation.vue:1744
 #: src/component/photo/toolbar.vue:52 src/page/albums.vue:89
 #: src/page/labels.vue:71 src/page/library/errors.vue:62
 #: src/page/people/recognized.vue:67 src/page/places.vue:78
@@ -2491,11 +2486,11 @@ msgstr "Seguretat i Accés"
 msgid "Select"
 msgstr "Selecciona"
 
-#: src/page/library/index.vue:52
+#: src/page/library/index.vue:49
 msgid "Select a folder to scan for changes…"
 msgstr "Seleccioneu una carpeta per buscar canvis…"
 
-#: src/page/library/import.vue:46
+#: src/page/library/import.vue:42
 msgid "Select a source folder to import files from…"
 msgstr "Seleccioneu una carpeta d'origen per importar fitxers de…"
 
@@ -2506,6 +2501,10 @@ msgstr "Seleccioneu la data"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Seleccioneu dates"
+
+#: src/component/dialog/upload.vue:129
+msgid "Select the files to upload…"
+msgstr "Seleccioneu els fitxers per carregar…"
 
 #: src/locales.js:98
 msgid "Select Time"
@@ -2554,7 +2553,7 @@ msgstr "Sessions"
 
 #: src/app/routes.js:100 src/app/routes.js:380 src/app/routes.js:392
 #: src/app/routes.js:405 src/app/routes.js:418 src/app/routes.js:430
-#: src/component/navigation.vue:1296 src/component/navigation.vue:1685
+#: src/component/navigation.vue:1295 src/component/navigation.vue:1684
 msgid "Settings"
 msgstr "Configuració"
 
@@ -2688,7 +2687,7 @@ msgstr "Piles"
 msgid "Stacks group files with a similar frame of reference, but differences of quality, format, size or color."
 msgstr "Agrupa fitxers amb un marc de referència similar, però amb diferències de qualitat, format, mida o color."
 
-#: src/page/library/index.vue:133
+#: src/page/library/index.vue:127
 msgid "Start"
 msgstr "Inici"
 
@@ -2712,7 +2711,7 @@ msgstr "Emmagatzematge"
 msgid "Streets"
 msgstr "Carrers"
 
-#: src/component/photo/edit/details.vue:469
+#: src/component/photo/edit/details.vue:471
 #: src/component/photo/edit/labels.vue:48
 msgid "Subject"
 msgstr "Assumpte"
@@ -2741,7 +2740,7 @@ msgstr "Super Administrador"
 msgid "Support for additional services, like Google Drive, will be added over time."
 msgstr "Amb el temps s'afegirà suport per a serveis addicionals, com ara Google Drive."
 
-#: src/component/dialog/sponsor.vue:35 src/component/navigation.vue:1531
+#: src/component/dialog/sponsor.vue:35 src/component/navigation.vue:1530
 msgid "Support Our Mission"
 msgstr "Donar suport a la nostra missió"
 
@@ -2778,11 +2777,11 @@ msgstr "Gràcies pel teu recolzament!"
 msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
 msgstr "És per això que PhotoPrism es va crear des de zero per funcionar allà on ho necessitis, sense comprometre la llibertat, la privadesa o la funcionalitat."
 
-#: src/page/library/index.vue:154
+#: src/page/library/index.vue:148
 msgid "The index currently contains %{n} hidden files."
 msgstr "Actualment, l'índex conté %{n} fitxers ocults."
 
-#: src/page/library/index.vue:154
+#: src/page/library/index.vue:148
 msgid "Their format may not be supported, they haven't been converted to JPEG yet or there are duplicates."
 msgstr "És possible que el seu format no sigui compatible, que encara no s'han convertit a JPEG o que hi hagi duplicats."
 
@@ -2794,11 +2793,11 @@ msgstr "Tema"
 msgid "This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local."
 msgstr "Això munta la carpeta originals com a unitat de xarxa i us permet obrir, editar i suprimir fitxers del vostre ordinador o telèfon intel·ligent com si fossin locals."
 
-#: src/component/photo/edit/details.vue:187
+#: src/component/photo/edit/details.vue:189
 msgid "Time UTC"
 msgstr "Hora UTC"
 
-#: src/component/photo/edit/details.vue:212
+#: src/component/photo/edit/details.vue:214
 msgid "Time Zone"
 msgstr "Zona horària"
 
@@ -2915,7 +2914,7 @@ msgstr "ID únic"
 #: src/model/user.js:155 src/options/options.js:50 src/options/options.js:64
 #: src/options/options.js:81 src/options/options.js:95
 #: src/options/options.js:107 src/page/library/errors.vue:183
-#: src/page/library/errors.vue:200 src/page/library/logs.vue:19
+#: src/page/library/errors.vue:200
 msgid "Unknown"
 msgstr "Desconegut"
 
@@ -2960,8 +2959,8 @@ msgstr "S'estan actualitzant les previsualitzacions"
 msgid "Updating stacks"
 msgstr "Actualització de les piles"
 
-#: src/page/connect.vue:52 src/component/navigation.vue:1402
-#: src/component/navigation.vue:1516 src/component/navigation.vue:1880
+#: src/page/connect.vue:52 src/component/navigation.vue:1401
+#: src/component/navigation.vue:1515 src/component/navigation.vue:1879
 #: src/page/connect.vue:54
 msgid "Upgrade"
 msgstr "Actualitza"
@@ -2973,9 +2972,9 @@ msgid "Upgrade Now"
 msgstr "Actualitza ara"
 
 #: src/component/album/toolbar.vue:210 src/component/dialog/upload.vue:46
-#: src/component/navigation.vue:1703 src/component/photo/toolbar.vue:197
+#: src/component/navigation.vue:1702 src/component/photo/toolbar.vue:197
 #: src/component/service/upload.vue:132 src/page/albums.vue:129
-#: src/page/library/import.vue:126 src/page/settings/general.vue:226
+#: src/page/library/import.vue:117 src/page/settings/general.vue:226
 #: src/page/settings/services.vue:27
 msgid "Upload"
 msgstr "Pujar"
@@ -2984,12 +2983,12 @@ msgstr "Pujar"
 msgid "Upload complete"
 msgstr "Càrrega completa"
 
-#: src/component/dialog/upload.vue:135
+#: src/component/dialog/upload.vue:126
 msgid "Upload complete. Indexing…"
 msgstr "Càrrega completa. S'està indexant..."
 
 #: src/component/dialog/upload.vue:267 src/component/dialog/upload.vue:285
-#: src/component/dialog/upload.vue:131
+#: src/component/dialog/upload.vue:122
 msgid "Upload failed"
 msgstr "La càrrega ha fallat"
 
@@ -3005,7 +3004,7 @@ msgstr "Carregueu fitxers locals"
 msgid "Upload to WebDAV and share links with friends."
 msgstr "Penja a WebDAV i comparteix enllaços amb amics."
 
-#: src/component/dialog/upload.vue:133
+#: src/component/dialog/upload.vue:124
 msgid "Uploading %{n} of %{t}…"
 msgstr "S'està penjant %{n} de %{t}..."
 
@@ -3018,7 +3017,7 @@ msgstr "S'estan penjant fotos..."
 msgid "Uploading…"
 msgstr "S'està carregant…"
 
-#: src/component/dialog/upload.vue:211
+#: src/component/dialog/upload.vue:200
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Les càrregues que puguin contenir aquestes imatges seran rebutjades automàticament."
 
@@ -3043,7 +3042,7 @@ msgstr "Utilitzeu el vostre codi de recuperació o poseu-vos en contacte amb un 
 msgid "User"
 msgstr "Usuari"
 
-#: src/component/navigation.vue:1855
+#: src/component/navigation.vue:1854
 msgid "User Guide"
 msgstr "Guia de l'usuari"
 
@@ -3057,7 +3056,7 @@ msgstr "Interfície d'usuari"
 msgid "Username"
 msgstr "Usuari"
 
-#: src/component/navigation.vue:1337
+#: src/component/navigation.vue:1336
 msgid "Users"
 msgstr "Usuaris"
 
@@ -3162,7 +3161,7 @@ msgstr "Blanc"
 msgid "Work Details"
 msgstr "Detalls del treball"
 
-#: src/page/settings/account.vue:512 src/component/photo/edit/details.vue:164
+#: src/page/settings/account.vue:512 src/component/photo/edit/details.vue:166
 #: src/component/photo/toolbar.vue:394 src/page/albums.vue:194
 #: src/page/settings/account.vue:514
 msgid "Year"
@@ -3197,7 +3196,7 @@ msgstr "Només pots baixar un àlbum"
 msgid "You can only download one label"
 msgstr "Només podeu baixar una etiqueta"
 
-#: src/component/dialog/upload.vue:209
+#: src/component/dialog/upload.vue:198
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Podeu penjar fins a %{n} fitxers amb finalitats de prova."
 
@@ -3230,6 +3229,9 @@ msgstr "La vostra biblioteca s'analitza contínuament per crear automàticament 
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Apropa o redueix"
+
+#~ msgid "Press \"Browse\" to select the files to upload…"
+#~ msgstr "Premeu \"Navega\" per seleccionar els fitxers a penjar…"
 
 #~ msgid "Failed copying to clipboard"
 #~ msgstr "No s'ha pogut copiar al porta-retalls"

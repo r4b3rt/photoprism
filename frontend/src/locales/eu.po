@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
-"PO-Revision-Date: 2025-01-23 18:02+0000\n"
+"PO-Revision-Date: 2025-01-24 16:44+0000\n"
 "Last-Translator: Google Cloud Translation Basic <noreply-mt-google-translate@weblate.org>\n"
 "Language: eu\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,7 +96,7 @@ msgstr "%{s} bertsio berri bat dago eskuragarri:"
 
 #: src/dialog/admin/users/edit.vue:243 src/page/about/about.vue:39
 #: src/page/settings/account.vue:256 src/app/routes.js:60
-#: src/component/navigation.vue:1423 src/page/people/recognized.vue:323
+#: src/component/navigation.vue:1422 src/page/people/recognized.vue:323
 msgid "About"
 msgstr "Buruz"
 
@@ -104,7 +104,7 @@ msgstr "Buruz"
 msgid "Access Token"
 msgstr "Sarbide-tokena"
 
-#: src/component/navigation.vue:98 src/component/navigation.vue:1667
+#: src/component/navigation.vue:98 src/component/navigation.vue:1666
 #: src/component/service/upload.vue:60 src/model/service.js:94
 #: src/model/user.js:169 src/page/settings.vue:85
 #: src/page/settings/general.vue:490
@@ -251,7 +251,7 @@ msgid "Album created"
 msgstr "Sortu da albuma"
 
 #: src/app/routes.js:175 src/component/album/toolbar.vue:57
-#: src/component/navigation.vue:600 src/component/navigation.vue:1761
+#: src/component/navigation.vue:600 src/component/navigation.vue:1760
 #: src/component/photo/edit/info.vue:223
 msgid "Albums"
 msgstr "Albumak"
@@ -325,7 +325,7 @@ msgstr "Bestela, fitxategiak zuzenean igo ditzakezu Nextcloud bezalako WebDAV ze
 msgid "Altitude"
 msgstr "Altuera"
 
-#: src/component/photo/edit/details.vue:262
+#: src/component/photo/edit/details.vue:264
 msgid "Altitude (m)"
 msgstr "Altuera (m)"
 
@@ -356,12 +356,12 @@ msgstr "API gakoa"
 msgid "Application"
 msgstr "Aplikazio"
 
-#: src/component/photo/edit/details.vue:609
+#: src/component/photo/edit/details.vue:617
 msgid "Apply"
 msgstr "Aplikatu"
 
 #: src/component/photo/clipboard.vue:64
-#: src/component/photo/edit/details.vue:608
+#: src/component/photo/edit/details.vue:616
 #: src/component/photo/view/cards.vue:401
 msgid "Approve"
 msgstr "Onartu"
@@ -412,7 +412,7 @@ msgstr "Ziur fitxategi hau betiko ezabatu nahi duzula?"
 msgid "Are you sure?"
 msgstr "Ziur zaude?"
 
-#: src/component/photo/edit/details.vue:510
+#: src/component/photo/edit/details.vue:514
 msgid "Artist"
 msgstr "Artista"
 
@@ -478,7 +478,7 @@ msgstr "Urdina"
 msgid "Brown"
 msgstr "Marroia"
 
-#: src/component/dialog/upload.vue:244 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Arakatu"
 
@@ -506,11 +506,11 @@ msgstr "Lanpetuta, itxaron mesedez…"
 msgid "By using the software and services we provide, you agree to our terms of service, privacy policy, and code of conduct."
 msgstr "Eskaintzen ditugun softwarea eta zerbitzuak erabiliz gero, gure zerbitzu-baldintzak, pribatutasun-politika eta jokabide-kodea onartzen dituzu."
 
-#: src/app/routes.js:188 src/component/navigation.vue:983
+#: src/app/routes.js:188 src/component/navigation.vue:982
 msgid "Calendar"
 msgstr "Egutegia"
 
-#: src/component/photo/edit/details.vue:330 src/component/photo/toolbar.vue:314
+#: src/component/photo/edit/details.vue:332 src/component/photo/toolbar.vue:314
 #: src/component/photo/view/cards.vue:486 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "Kamera"
@@ -553,7 +553,7 @@ msgstr "Ezin dira elementu gehiago hautatu"
 #: src/component/service/edit.vue:442 src/component/service/remove.vue:47
 #: src/component/service/upload.vue:105 src/locales.js:26
 #: src/page/auth/login.vue:204 src/page/connect.vue:116
-#: src/page/library/import.vue:112 src/page/library/index.vue:121
+#: src/page/library/import.vue:103 src/page/library/index.vue:115
 msgid "Cancel"
 msgstr "Utzi"
 
@@ -561,7 +561,7 @@ msgstr "Utzi"
 msgid "Cannot copy to clipboard"
 msgstr "Ezin da kopiatu arbelean"
 
-#: src/component/photo/edit/details.vue:86
+#: src/component/photo/edit/details.vue:87
 #: src/component/photo/edit/labels.vue:46
 #: src/component/photo/view/cards.vue:431
 msgid "Caption"
@@ -618,7 +618,7 @@ msgstr "Ezarpen aurreratuen aldaketek berrabiarazi behar dute eragina izateko."
 msgid "Checked"
 msgstr "Egiaztatuta"
 
-#: src/component/dialog/upload.vue:155 src/component/photo/album/dialog.vue:51
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
 msgid "Choose an album or create a new one"
 msgstr "Aukeratu album bat edo sortu berri bat"
 
@@ -630,7 +630,7 @@ msgstr "Kroma"
 msgid "Cleaning index and cache"
 msgstr "Indizea eta cachea garbitzea"
 
-#: src/page/library/index.vue:103
+#: src/page/library/index.vue:97
 msgid "Cleanup"
 msgstr "Garbitu"
 
@@ -650,8 +650,8 @@ msgstr "Bezeroaren kredentzialak"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:232
-#: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:596
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
 msgid "Close"
@@ -677,7 +677,7 @@ msgstr "Koloreak"
 msgid "Compare Editions"
 msgstr "Edizioak alderatu"
 
-#: src/page/library/index.vue:92
+#: src/page/library/index.vue:86
 msgid "Complete Rescan"
 msgstr "Berriro eskaneatu osoa"
 
@@ -747,7 +747,7 @@ msgstr "Arbelean kopiatu da"
 msgid "Copy"
 msgstr "Kopiatu"
 
-#: src/component/photo/edit/details.vue:490
+#: src/component/photo/edit/details.vue:493
 msgid "Copyright"
 msgstr "Copyright"
 
@@ -755,7 +755,7 @@ msgstr "Copyright"
 msgid "Couldn't find anything."
 msgstr "Ezin izan da ezer aurkitu."
 
-#: src/page/settings/account.vue:697 src/component/photo/edit/details.vue:235
+#: src/page/settings/account.vue:697 src/component/photo/edit/details.vue:237
 #: src/component/photo/toolbar.vue:286 src/page/settings/account.vue:588
 msgid "Country"
 msgstr "Herrialdea"
@@ -812,7 +812,7 @@ msgstr "Egunero"
 msgid "Database Backups"
 msgstr "Datu-basearen babeskopiak"
 
-#: src/page/settings/account.vue:462 src/component/photo/edit/details.vue:112
+#: src/page/settings/account.vue:462 src/component/photo/edit/details.vue:114
 msgid "Day"
 msgstr "Eguna"
 
@@ -852,7 +852,7 @@ msgstr "Ezabatu"
 msgid "Delete All"
 msgstr "Ezabatu guztiak"
 
-#: src/page/library/index.vue:104
+#: src/page/library/index.vue:98
 msgid "Delete orphaned index entries, sidecar files and thumbnails."
 msgstr "Ezabatu umezurtz indize-sarrerak, sidecar fitxategiak eta miniaturak."
 
@@ -960,12 +960,12 @@ msgid "Donations"
 msgstr "Dohaintzak"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:620
+#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Eginda"
 
-#: src/component/dialog/upload.vue:137 src/page/library/import.vue:45
-#: src/page/library/index.vue:51
+#: src/component/dialog/upload.vue:128 src/page/library/import.vue:41
+#: src/page/library/index.vue:48
 msgid "Done."
 msgstr "Eginda."
 
@@ -1100,7 +1100,7 @@ msgstr "Sartu pasahitza ekintza berresteko eta jarraitu:"
 msgid "Error"
 msgstr "Errorea"
 
-#: src/app/routes.js:316 src/component/navigation.vue:1250
+#: src/app/routes.js:316 src/component/navigation.vue:1249
 msgid "Errors"
 msgstr "Akatsak"
 
@@ -1146,7 +1146,7 @@ msgstr "Ezaugarri esperimentalak"
 msgid "Expires"
 msgstr "Iraungitzen da"
 
-#: src/component/photo/edit/details.vue:377
+#: src/component/photo/edit/details.vue:379
 msgid "Exposure"
 msgstr "Esposizio"
 
@@ -1154,7 +1154,7 @@ msgstr "Esposizio"
 msgid "Extract still images and generate thumbnails while indexing."
 msgstr "Atera irudi finkoak eta sortu miniaturak indexatzen dituzun bitartean."
 
-#: src/component/photo/edit/details.vue:423
+#: src/component/photo/edit/details.vue:425
 msgid "F Number"
 msgstr "F Zenbakia"
 
@@ -1202,7 +1202,7 @@ msgstr "Gogokoak"
 msgid "Feature Request"
 msgstr "Ezaugarrien eskaera"
 
-#: src/component/navigation.vue:1358
+#: src/component/navigation.vue:1357
 msgid "Feedback"
 msgstr "Iritzia"
 
@@ -1236,7 +1236,7 @@ msgstr "Fitxategiaren Tamaina"
 msgid "Filename"
 msgstr "Fitxategi izena"
 
-#: src/component/navigation.vue:1809 src/component/photo/edit/dialog.vue:260
+#: src/component/navigation.vue:1808 src/component/photo/edit/dialog.vue:260
 #: src/component/photo/edit/dialog.vue:277
 msgid "Files"
 msgstr "Fitxategiak"
@@ -1249,7 +1249,7 @@ msgstr "'IMG_1234 (2)' eta 'IMG_1234 (3)' bezalako izen sekuentzialak dituzten f
 msgid "First page"
 msgstr "Lehen orrialdea"
 
-#: src/component/photo/edit/details.vue:442
+#: src/component/photo/edit/details.vue:444
 msgid "Focal Length"
 msgstr "Fokua"
 
@@ -1268,7 +1268,7 @@ msgstr "Karpetak %{n} fitxategi ditu"
 msgid "Folder is empty"
 msgstr "Karpeta hutsik dago"
 
-#: src/app/routes.js:201 src/component/navigation.vue:1127
+#: src/app/routes.js:201 src/component/navigation.vue:1126
 msgid "Folders"
 msgstr "Karpetak"
 
@@ -1348,7 +1348,7 @@ msgstr "Laguntza"
 msgid "Help & Support"
 msgstr "Laguntza eta laguntza"
 
-#: src/component/navigation.vue:1229 src/component/people/dialog/edit.vue:95
+#: src/component/navigation.vue:1228 src/component/people/dialog/edit.vue:95
 msgid "Hidden"
 msgstr "Ezkutuan"
 
@@ -1389,7 +1389,7 @@ msgstr "Irudia"
 msgid "Image Quality"
 msgstr "Irudiaren Kalitatea"
 
-#: src/page/library.vue:46 src/page/library/import.vue:145
+#: src/page/library.vue:46 src/page/library/import.vue:136
 #: src/page/settings/general.vue:274
 msgid "Import"
 msgstr "Inportatu"
@@ -1398,7 +1398,7 @@ msgstr "Inportatu"
 msgid "Import failed"
 msgstr "Ezin izan da inportatu"
 
-#: src/page/library/import.vue:100
+#: src/page/library/import.vue:91
 msgid "Imported files will be sorted by date and given a unique name to avoid duplicates."
 msgstr "Inportatutako fitxategiak dataren arabera ordenatuko dira eta izen esklusibo bat emango zaie bikoiztuak saihesteko."
 
@@ -1406,11 +1406,11 @@ msgstr "Inportatutako fitxategiak dataren arabera ordenatuko dira eta izen esklu
 msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Inportatutako fitxategiak dataren arabera ordenatuko dira eta izen esklusibo bat emango zaie."
 
-#: src/page/library/import.vue:41
+#: src/page/library/import.vue:37
 msgid "Importing %{name}…"
 msgstr "%{name} inportatzen…"
 
-#: src/page/library/import.vue:43
+#: src/page/library/import.vue:39
 msgid "Importing files to originals…"
 msgstr "Fitxategiak jatorrizkoetara inportatzen…"
 
@@ -1433,7 +1433,7 @@ msgstr "Sartu RAW irudi-fitxategiak pila eta artxiboak deskargatzean."
 msgid "Include sidecar files when downloading stacks and archives."
 msgstr "Sartu sidecar fitxategiak pilak eta artxiboak deskargatzean."
 
-#: src/component/navigation.vue:1825 src/page/library.vue:36
+#: src/component/navigation.vue:1824 src/page/library.vue:36
 #: src/page/settings/library.vue:32
 msgid "Index"
 msgstr "Aurkibidea"
@@ -1450,7 +1450,7 @@ msgstr "Indexatzea"
 msgid "Indexing failed"
 msgstr "Ezin izan da indexatu"
 
-#: src/page/library/index.vue:49
+#: src/page/library/index.vue:46
 msgid "Indexing media and sidecar files…"
 msgstr "Multimedia eta sidecar fitxategiak indexatzen…"
 
@@ -1515,11 +1515,11 @@ msgstr "JPEG kalitatea: %{n}"
 msgid "JPEG Size Limit: %{n}px"
 msgstr "JPEG tamaina muga: %{n}px"
 
-#: src/page/library/import.vue:100
+#: src/page/library/import.vue:91
 msgid "JPEGs and thumbnails are automatically rendered as needed."
 msgstr "JPEG eta miniaturak automatikoki errendatzen dira behar bezala."
 
-#: src/component/photo/edit/details.vue:552
+#: src/component/photo/edit/details.vue:558
 msgid "Keywords"
 msgstr "Gako-hitzak"
 
@@ -1528,7 +1528,7 @@ msgstr "Gako-hitzak"
 msgid "Label"
 msgstr "Etiketa"
 
-#: src/app/routes.js:322 src/component/navigation.vue:1079
+#: src/app/routes.js:322 src/component/navigation.vue:1078
 #: src/component/photo/edit/dialog.vue:181
 #: src/component/photo/edit/dialog.vue:198 src/page/settings/general.vue:178
 msgid "Labels"
@@ -1566,7 +1566,7 @@ msgstr "Azken sinkronizazioa"
 msgid "Last Used"
 msgstr "Azken erabilia"
 
-#: src/component/photo/edit/details.vue:286
+#: src/component/photo/edit/details.vue:288
 #: src/component/photo/edit/info.vue:378
 msgid "Latitude"
 msgstr "Latitudea"
@@ -1581,23 +1581,23 @@ msgstr "LDAP/AD"
 msgid "Learn more"
 msgstr "Gehiago ikasi"
 
-#: src/component/navigation.vue:1899
+#: src/component/navigation.vue:1898
 msgid "Legal Information"
 msgstr "Informazio juridikoa"
 
-#: src/component/photo/edit/details.vue:396
+#: src/component/photo/edit/details.vue:398
 #: src/component/photo/view/cards.vue:497
 msgid "Lens"
 msgstr "Lentea"
 
 #: src/app/routes.js:358 src/app/routes.js:365 src/app/routes.js:372
-#: src/component/navigation.vue:1169 src/page/settings.vue:49
+#: src/component/navigation.vue:1168 src/page/settings.vue:49
 #: src/page/settings/general.vue:418
 msgid "Library"
 msgstr "Liburutegia"
 
 #: src/page/connect.vue:40 src/app/routes.js:66
-#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:531
+#: src/component/navigation.vue:1379 src/component/photo/edit/details.vue:536
 #: src/page/about/license.vue:25
 msgid "License"
 msgstr "Lizentzia"
@@ -1652,7 +1652,7 @@ msgstr "Kargatzen..."
 msgid "Local"
 msgstr "Tokikoa"
 
-#: src/component/photo/edit/details.vue:187 src/options/options.js:37
+#: src/component/photo/edit/details.vue:189 src/options/options.js:37
 msgid "Local Time"
 msgstr "Tokiko Ordua"
 
@@ -1667,20 +1667,20 @@ msgstr "Kokapena"
 msgid "Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues."
 msgstr "Erregistro-mezuak hemen agertzen dira PhotoPrism-ek hautsitako fitxategiak aurkitzen dituen bakoitzean edo beste arazo potentzial batzuk daudenean."
 
-#: src/component/navigation.vue:1454 src/component/navigation.vue:1719
+#: src/component/navigation.vue:1453 src/component/navigation.vue:1718
 msgid "Login"
 msgstr "Saioa hasi"
 
-#: src/component/navigation.vue:1638
+#: src/component/navigation.vue:1637
 msgid "Logout"
 msgstr "Saioa amaitu"
 
-#: src/component/navigation.vue:1841 src/page/library.vue:59
+#: src/component/navigation.vue:1840 src/page/library.vue:59
 #: src/page/settings/general.vue:466
 msgid "Logs"
 msgstr "Erregistroak"
 
-#: src/component/photo/edit/details.vue:310
+#: src/component/photo/edit/details.vue:312
 #: src/component/photo/edit/info.vue:384
 msgid "Longitude"
 msgstr "Luzera"
@@ -1763,7 +1763,7 @@ msgstr "Falta"
 msgid "Missing or invalid configuration"
 msgstr "Konfigurazioa falta edo baliogabea"
 
-#: src/app/routes.js:162 src/component/navigation.vue:1031
+#: src/app/routes.js:162 src/component/navigation.vue:1030
 #: src/page/settings/general.vue:154
 msgid "Moments"
 msgstr "Momentuak"
@@ -1772,7 +1772,7 @@ msgstr "Momentuak"
 msgid "Monochrome"
 msgstr "Monokromoa"
 
-#: src/page/settings/account.vue:487 src/component/photo/edit/details.vue:138
+#: src/page/settings/account.vue:487 src/component/photo/edit/details.vue:140
 #: src/component/photo/toolbar.vue:420 src/page/settings/account.vue:488
 msgid "Month"
 msgstr "Hilabetea"
@@ -1785,7 +1785,7 @@ msgstr "Mosaikoa"
 msgid "Most Relevant"
 msgstr "Garrantzitsuena"
 
-#: src/page/library/import.vue:88
+#: src/page/library/import.vue:81
 msgid "Move Files"
 msgstr "Mugitu fitxategiak"
 
@@ -1896,7 +1896,7 @@ msgstr "Ez da argazkirik aurkitu"
 msgid "No recently edited pictures"
 msgstr "Ez dago duela gutxi editatutako argazkirik"
 
-#: src/component/navigation.vue:1561
+#: src/component/navigation.vue:1560
 msgid "No server connection"
 msgstr "Ez dago zerbitzari konexiorik"
 
@@ -1916,7 +1916,7 @@ msgstr "Ez eskerrik asko"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Ez dago gako-hitz hau duen abisurik edo errorerik. Kontuan izan bilaketak maiuskulak eta minuskulak bereizten dituela."
 
-#: src/component/dialog/upload.vue:214 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -1931,7 +1931,7 @@ msgstr "Bat ere ez"
 msgid "Not sorted."
 msgstr "Ez dago sailkatuta."
 
-#: src/page/library/import.vue:100
+#: src/page/library/import.vue:91
 msgid "Note you may manually manage your originals folder and importing is optional."
 msgstr "Kontuan izan jatorrizkoen karpeta eskuz kudea dezakezula eta inportatzea aukerakoa da."
 
@@ -1943,7 +1943,7 @@ msgstr "Ohar:"
 msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
 msgstr "Oharra: WebDAV zerbitzariak soilik, Nextcloud edo PhotoPrism bezalakoak, urruneko zerbitzu gisa konfigura daitezke babeskopia egiteko eta fitxategiak kargatzeko."
 
-#: src/component/photo/edit/details.vue:573
+#: src/component/photo/edit/details.vue:580
 msgid "Notes"
 msgstr "Oharrak"
 
@@ -2039,7 +2039,7 @@ msgstr "Antolaketa"
 msgid "Orientation"
 msgstr "Orientazio"
 
-#: src/page/library/import.vue:100
+#: src/page/library/import.vue:91
 msgid "Original file names will be stored and indexed."
 msgstr "Jatorrizko fitxategi-izenak gorde eta indexatuko dira."
 
@@ -2047,7 +2047,7 @@ msgstr "Jatorrizko fitxategi-izenak gorde eta indexatuko dira."
 msgid "Original Name"
 msgstr "Jatorrizko izena"
 
-#: src/component/navigation.vue:1206 src/model/file.js:195
+#: src/component/navigation.vue:1205 src/model/file.js:195
 #: src/options/options.js:482 src/page/library/browse.vue:58
 #: src/page/settings/general.vue:442 src/page/settings/general.vue:648
 msgid "Originals"
@@ -2094,7 +2094,7 @@ msgid "Password changed"
 msgstr "Pasahitza aldatu da"
 
 #: src/app/routes.js:328 src/app/routes.js:352 src/component/navigation.vue:776
-#: src/component/navigation.vue:1777 src/component/photo/edit/dialog.vue:221
+#: src/component/navigation.vue:1776 src/component/photo/edit/dialog.vue:221
 #: src/component/photo/edit/dialog.vue:238 src/page/settings/general.vue:130
 msgid "People"
 msgstr "Jendea"
@@ -2153,8 +2153,8 @@ msgid "Place & Time"
 msgstr "Lekua eta Ordua"
 
 #: src/app/routes.js:263 src/app/routes.js:269 src/app/routes.js:275
-#: src/app/routes.js:290 src/component/navigation.vue:888
-#: src/component/navigation.vue:1793 src/page/places.vue:40
+#: src/app/routes.js:290 src/component/navigation.vue:887
+#: src/component/navigation.vue:1792 src/page/places.vue:40
 #: src/page/settings/general.vue:516 src/page/settings/general.vue:545
 msgid "Places"
 msgstr "Lekuak"
@@ -2167,11 +2167,11 @@ msgstr "Mesedez, berretsi pasahitz berria."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Mesedez, kopiatu ausaz sortutako aplikazioaren pasahitza eta gorde leku seguru batean, ezingo baituzu berriro ikusi:"
 
-#: src/component/dialog/upload.vue:209
+#: src/component/dialog/upload.vue:198
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Mesedez, ez igo argazki pribatu, legez kanpoko edo iraingarririk."
 
-#: src/component/dialog/upload.vue:211
+#: src/component/dialog/upload.vue:200
 msgid "Please don't upload photos containing offensive content."
 msgstr "Mesedez, ez kargatu eduki iraingarria duten argazkirik."
 
@@ -2207,11 +2207,7 @@ msgstr "Erretratua"
 msgid "Preserve filenames"
 msgstr "Gorde fitxategi-izenak"
 
-#: src/component/dialog/upload.vue:138
-msgid "Press \"Browse\" to select the files to upload…"
-msgstr "Sakatu \"Arakatu\" kargatu beharreko fitxategiak hautatzeko…"
-
-#: src/component/dialog/upload.vue:163
+#: src/component/dialog/upload.vue:153
 msgid "Press enter to create a new album."
 msgstr "Sakatu Sartu album berri bat sortzeko."
 
@@ -2295,7 +2291,7 @@ msgstr "Gordinik"
 msgid "RAW"
 msgstr "GORDINA"
 
-#: src/page/library/index.vue:93
+#: src/page/library/index.vue:87
 msgid "Re-index all originals, including already indexed and unchanged files."
 msgstr "Berriro indexatu jatorrizko guztiak, dagoeneko indexatutako eta aldatu gabeko fitxategiak barne."
 
@@ -2338,8 +2334,7 @@ msgstr "Berreskuratzeko Kodea"
 msgid "Red"
 msgstr "Gorria"
 
-#: src/app/routes.js:297 src/component/navigation.vue:839
-#: src/component/navigation.vue:928
+#: src/app/routes.js:297 src/component/navigation.vue:927
 msgid "Regions"
 msgstr "Eskualdeak"
 
@@ -2348,7 +2343,7 @@ msgid "Register"
 msgstr "Izena eman"
 
 #: src/component/album/toolbar.vue:64 src/component/dialog/reload.vue:63
-#: src/component/navigation.vue:1652 src/component/photo/toolbar.vue:90
+#: src/component/navigation.vue:1651 src/component/photo/toolbar.vue:90
 #: src/page/albums.vue:111 src/page/labels.vue:93
 #: src/page/library/browse.vue:84 src/page/library/errors.vue:81
 #: src/page/people/new.vue:57 src/page/people/recognized.vue:93
@@ -2376,7 +2371,7 @@ msgstr "kendu huts egin du: album ezezaguna"
 msgid "Remove from album"
 msgstr "Kendu albumetik"
 
-#: src/page/library/import.vue:90
+#: src/page/library/import.vue:83
 msgid "Remove imported files to save storage. Unsupported file types will never be deleted, they remain in their current location."
 msgstr "Kendu inportatutako fitxategiak biltegia gordetzeko. Onartu gabeko fitxategi motak ez dira inoiz ezabatuko, uneko kokapenan geratzen dira."
 
@@ -2461,7 +2456,7 @@ msgstr "Eskaneatzea"
 msgid "Scope"
 msgstr "Eremua"
 
-#: src/component/navigation.vue:343 src/component/navigation.vue:1745
+#: src/component/navigation.vue:343 src/component/navigation.vue:1744
 #: src/component/photo/toolbar.vue:52 src/page/albums.vue:89
 #: src/page/labels.vue:71 src/page/library/errors.vue:62
 #: src/page/people/recognized.vue:67 src/page/places.vue:78
@@ -2488,11 +2483,11 @@ msgstr "Segurtasuna eta Sarbidea"
 msgid "Select"
 msgstr "Hautatu"
 
-#: src/page/library/index.vue:52
+#: src/page/library/index.vue:49
 msgid "Select a folder to scan for changes…"
 msgstr "Hautatu karpeta bat aldaketak bilatzeko…"
 
-#: src/page/library/import.vue:46
+#: src/page/library/import.vue:42
 msgid "Select a source folder to import files from…"
 msgstr "Hautatu iturburu karpeta bat fitxategiak inportatzeko…"
 
@@ -2503,6 +2498,10 @@ msgstr "Hautatu data"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Aukeratu datak"
+
+#: src/component/dialog/upload.vue:129
+msgid "Select the files to upload…"
+msgstr "Hautatu kargatu beharreko fitxategiak…"
 
 #: src/locales.js:98
 msgid "Select Time"
@@ -2551,7 +2550,7 @@ msgstr "Saioak"
 
 #: src/app/routes.js:100 src/app/routes.js:380 src/app/routes.js:392
 #: src/app/routes.js:405 src/app/routes.js:418 src/app/routes.js:430
-#: src/component/navigation.vue:1296 src/component/navigation.vue:1685
+#: src/component/navigation.vue:1295 src/component/navigation.vue:1684
 msgid "Settings"
 msgstr "Ezarpenak"
 
@@ -2685,7 +2684,7 @@ msgstr "Pilak"
 msgid "Stacks group files with a similar frame of reference, but differences of quality, format, size or color."
 msgstr "Fitxategiak multzokatzen ditu erreferentzia-marko antzeko batekin, baina kalitate, formatu, tamaina edo kolore ezberdintasunak dituztenak."
 
-#: src/page/library/index.vue:133
+#: src/page/library/index.vue:127
 msgid "Start"
 msgstr "Hasi"
 
@@ -2709,7 +2708,7 @@ msgstr "Biltegiratzea"
 msgid "Streets"
 msgstr "Kaleak"
 
-#: src/component/photo/edit/details.vue:469
+#: src/component/photo/edit/details.vue:471
 #: src/component/photo/edit/labels.vue:48
 msgid "Subject"
 msgstr "Gaia"
@@ -2738,7 +2737,7 @@ msgstr "Super Administratzailea"
 msgid "Support for additional services, like Google Drive, will be added over time."
 msgstr "Zerbitzu gehigarrietarako laguntza gehituko da denborarekin, Google Drive adibidez."
 
-#: src/component/dialog/sponsor.vue:35 src/component/navigation.vue:1531
+#: src/component/dialog/sponsor.vue:35 src/component/navigation.vue:1530
 msgid "Support Our Mission"
 msgstr "Lagundu Gure Misioa"
 
@@ -2775,11 +2774,11 @@ msgstr "Eskerrik asko zure laguntzagatik!"
 msgid "That's why PhotoPrism was built from the ground up to run wherever you need it, without compromising freedom, privacy, or functionality."
 msgstr "Horregatik, PhotoPrism oinarritik sortu zen behar duzun tokian exekutatzeko, askatasuna, pribatutasuna edo funtzionaltasuna arriskuan jarri gabe."
 
-#: src/page/library/index.vue:154
+#: src/page/library/index.vue:148
 msgid "The index currently contains %{n} hidden files."
 msgstr "Une honetan indizeak ezkutuko %{n} fitxategi ditu."
 
-#: src/page/library/index.vue:154
+#: src/page/library/index.vue:148
 msgid "Their format may not be supported, they haven't been converted to JPEG yet or there are duplicates."
 msgstr "Baliteke haien formatua ez onartzea, oraindik ez dira JPEG bihurtu edo bikoiztuak daude."
 
@@ -2791,11 +2790,11 @@ msgstr "Gaia"
 msgid "This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local."
 msgstr "Honek jatorrizko karpeta sareko unitate gisa muntatzen du eta ordenagailutik edo telefonotik fitxategiak ireki, editatu eta ezaba ditzakezu lokalak balira bezala."
 
-#: src/component/photo/edit/details.vue:187
+#: src/component/photo/edit/details.vue:189
 msgid "Time UTC"
 msgstr "Ordua UTC"
 
-#: src/component/photo/edit/details.vue:212
+#: src/component/photo/edit/details.vue:214
 msgid "Time Zone"
 msgstr "Ordu eremu"
 
@@ -2912,7 +2911,7 @@ msgstr "ID bakarra"
 #: src/model/user.js:155 src/options/options.js:50 src/options/options.js:64
 #: src/options/options.js:81 src/options/options.js:95
 #: src/options/options.js:107 src/page/library/errors.vue:183
-#: src/page/library/errors.vue:200 src/page/library/logs.vue:19
+#: src/page/library/errors.vue:200
 msgid "Unknown"
 msgstr "Ezezaguna"
 
@@ -2957,8 +2956,8 @@ msgstr "Aurrebistak eguneratzen"
 msgid "Updating stacks"
 msgstr "Pilak eguneratzen"
 
-#: src/page/connect.vue:52 src/component/navigation.vue:1402
-#: src/component/navigation.vue:1516 src/component/navigation.vue:1880
+#: src/page/connect.vue:52 src/component/navigation.vue:1401
+#: src/component/navigation.vue:1515 src/component/navigation.vue:1879
 #: src/page/connect.vue:54
 msgid "Upgrade"
 msgstr "Berritu"
@@ -2970,9 +2969,9 @@ msgid "Upgrade Now"
 msgstr "Berritu orain"
 
 #: src/component/album/toolbar.vue:210 src/component/dialog/upload.vue:46
-#: src/component/navigation.vue:1703 src/component/photo/toolbar.vue:197
+#: src/component/navigation.vue:1702 src/component/photo/toolbar.vue:197
 #: src/component/service/upload.vue:132 src/page/albums.vue:129
-#: src/page/library/import.vue:126 src/page/settings/general.vue:226
+#: src/page/library/import.vue:117 src/page/settings/general.vue:226
 #: src/page/settings/services.vue:27
 msgid "Upload"
 msgstr "Kargatu"
@@ -2981,12 +2980,12 @@ msgstr "Kargatu"
 msgid "Upload complete"
 msgstr "Kargatzea osatuta"
 
-#: src/component/dialog/upload.vue:135
+#: src/component/dialog/upload.vue:126
 msgid "Upload complete. Indexing…"
 msgstr "Kargatzea osatuta. Indexatzen…"
 
 #: src/component/dialog/upload.vue:267 src/component/dialog/upload.vue:285
-#: src/component/dialog/upload.vue:131
+#: src/component/dialog/upload.vue:122
 msgid "Upload failed"
 msgstr "Ezin izan da kargatu"
 
@@ -3002,7 +3001,7 @@ msgstr "Kargatu tokiko fitxategiak"
 msgid "Upload to WebDAV and share links with friends."
 msgstr "Kargatu WebDAV-era eta partekatu estekak lagunekin."
 
-#: src/component/dialog/upload.vue:133
+#: src/component/dialog/upload.vue:124
 msgid "Uploading %{n} of %{t}…"
 msgstr "%{t}-tik %{n} kargatzen…"
 
@@ -3015,7 +3014,7 @@ msgstr "Argazkiak kargatzen…"
 msgid "Uploading…"
 msgstr "Kargatzen…"
 
-#: src/component/dialog/upload.vue:211
+#: src/component/dialog/upload.vue:200
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Horrelako irudiak izan ditzaketen kargak automatikoki baztertuko dira."
 
@@ -3040,7 +3039,7 @@ msgstr "Erabili zure berreskuratzeko kodea edo jarri harremanetan administratzai
 msgid "User"
 msgstr "Erabiltzailea"
 
-#: src/component/navigation.vue:1855
+#: src/component/navigation.vue:1854
 msgid "User Guide"
 msgstr "Erabiltzailearen Gida"
 
@@ -3054,7 +3053,7 @@ msgstr "Erabiltzaile Interfazea"
 msgid "Username"
 msgstr "Erabiltzaile izena"
 
-#: src/component/navigation.vue:1337
+#: src/component/navigation.vue:1336
 msgid "Users"
 msgstr "Erabiltzaileak"
 
@@ -3157,7 +3156,7 @@ msgstr "Zuria"
 msgid "Work Details"
 msgstr "Lanaren xehetasunak"
 
-#: src/page/settings/account.vue:512 src/component/photo/edit/details.vue:164
+#: src/page/settings/account.vue:512 src/component/photo/edit/details.vue:166
 #: src/component/photo/toolbar.vue:394 src/page/albums.vue:194
 #: src/page/settings/account.vue:514
 msgid "Year"
@@ -3192,7 +3191,7 @@ msgstr "Album bakarra deskarga dezakezu"
 msgid "You can only download one label"
 msgstr "Etiketa bakarra deskarga dezakezu"
 
-#: src/component/dialog/upload.vue:209
+#: src/component/dialog/upload.vue:198
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "%{n} fitxategi karga ditzakezu proba helburuetarako."
 
@@ -3225,6 +3224,9 @@ msgstr "Zure liburutegia etengabe aztertzen da momentu, bidai eta leku berezien 
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Handitu/txikiagotu"
+
+#~ msgid "Press \"Browse\" to select the files to upload…"
+#~ msgstr "Sakatu \"Arakatu\" kargatu beharreko fitxategiak hautatzeko…"
 
 #~ msgid "Failed copying to clipboard"
 #~ msgstr "Ezin izan da kopiatu arbelean"
