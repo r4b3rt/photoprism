@@ -38,7 +38,7 @@
               </span>
               <span v-else-if="indexing">{{ $gettext(`Upload complete. Indexing…`) }}</span>
               <span v-else-if="completedTotal === 100">{{ $gettext(`Done.`) }}</span>
-              <span v-else>{{ $gettext(`Press "Browse" to select the files to upload…`) }}</span>
+              <span v-else>{{ $gettext(`Select the files to upload…`) }}</span>
             </div>
             <div class="form-body">
               <div class="form-controls">
