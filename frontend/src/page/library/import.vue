@@ -1,15 +1,13 @@
 <template>
   <div class="p-tab p-tab-import">
     <v-form ref="form" class="p-form p-photo-import" validate-on="invalid-input" @submit.prevent="submit">
-      <div class="form-info">
-        <div class="text-body-1">
-          <span v-if="fileName" class="text-break">{{ $gettext(`Importing %{name}…`, { name: fileName }) }}</span>
-          <span v-else-if="busy">{{ $gettext(`Importing files to originals…`) }}</span>
-          <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
-          <span v-else>{{ $gettext(`Select a source folder to import files from…`) }}</span>
-        </div>
+      <div class="form-header">
+        <span v-if="fileName" class="text-break">{{ $gettext(`Importing %{name}…`, { name: fileName }) }}</span>
+        <span v-else-if="busy">{{ $gettext(`Importing files to originals…`) }}</span>
+        <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
+        <span v-else>{{ $gettext(`Select a source folder to import files from…`) }}</span>
       </div>
-      <div class="form-body mt-3">
+      <div class="form-body">
         <div class="form-controls">
           <v-autocomplete
             v-model="settings.import.path"
@@ -31,9 +29,7 @@
           </v-autocomplete>
           <v-progress-linear :model-value="completed" :indeterminate="busy"></v-progress-linear>
         </div>
-      </div>
-      <div class="form-controls">
-        <div class="action-controls">
+        <div class="form-options">
           <v-checkbox
             v-model="settings.import.move"
             :disabled="busy || !ready"
@@ -51,14 +47,12 @@
           >
           </v-checkbox>
         </div>
-      </div>
-      <div class="form-info">
-        <p class="text-body-2">
+        <div class="form-text">
           {{ $gettext(`Imported files will be sorted by date and given a unique name to avoid duplicates.`) }}
           {{ $gettext(`JPEGs and thumbnails are automatically rendered as needed.`) }}
           {{ $gettext(`Original file names will be stored and indexed.`) }}
           {{ $gettext(`Note you may manually manage your originals folder and importing is optional.`) }}
-        </p>
+        </div>
       </div>
       <div class="form-actions">
         <div class="action-buttons">

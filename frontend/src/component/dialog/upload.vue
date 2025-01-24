@@ -30,8 +30,8 @@
           <h6 class="text-h6">{{ title }}</h6>
         </v-card-title>
         <v-card-text class="flex-grow-0">
-          <div class="form-info">
-            <div class="text-body-1">
+          <div class="form-container">
+            <div class="form-header">
               <span v-if="failed">{{ $gettext(`Upload failed`) }}</span>
               <span v-else-if="total > 0 && completedTotal < 100">
                 {{ $gettext(`Uploading %{n} of %{t}…`, { n: current, t: total }) }}
@@ -40,69 +40,69 @@
               <span v-else-if="completedTotal === 100">{{ $gettext(`Done.`) }}</span>
               <span v-else>{{ $gettext(`Press "Browse" to select the files to upload…`) }}</span>
             </div>
-          </div>
-          <div class="form-body mt-5">
-            <div class="form-controls">
-              <!-- TODO: check property allow-overflow TEST -->
-              <v-combobox
-                v-model="selectedAlbums"
-                :disabled="busy || total > 0"
-                hide-details
-                chips
-                closable-chips
-                multiple
-                class="input-albums"
-                :items="albums"
-                item-title="Title"
-                item-value="UID"
-                :label="$gettext('Choose an album or create a new one')"
-                return-object
-              >
-                <template #no-data>
-                  <v-list-item>
-                    <v-list-item-title>
-                      {{ $gettext(`Press enter to create a new album.`) }}
-                    </v-list-item-title>
-                  </v-list-item>
-                </template>
-                <template #chip="data">
-                  <v-chip
-                    :model-value="data.selected"
-                    :disabled="data.disabled"
-                    class="bg-highlight rounded-xl text-truncate d-block"
-                    @click:close="removeSelection(data.index)"
-                  >
-                    <v-icon class="pr-1">mdi-bookmark</v-icon>
-                    {{ data.item.title ? data.item.title : data.item }}
-                  </v-chip>
-                </template>
-              </v-combobox>
-              <v-progress-linear
-                :model-value="completedTotal"
-                :indeterminate="indexing"
-                :height="21"
-                class="v-progress-linear--upload"
-              >
-                <span v-if="eta" class="eta">{{ eta }}</span>
-              </v-progress-linear>
+            <div class="form-body">
+              <div class="form-controls">
+                <!-- TODO: check property allow-overflow TEST -->
+                <v-combobox
+                  v-model="selectedAlbums"
+                  :disabled="busy || total > 0"
+                  hide-details
+                  chips
+                  closable-chips
+                  multiple
+                  class="input-albums"
+                  :items="albums"
+                  item-title="Title"
+                  item-value="UID"
+                  :label="$gettext('Choose an album or create a new one')"
+                  return-object
+                >
+                  <template #no-data>
+                    <v-list-item>
+                      <v-list-item-title>
+                        {{ $gettext(`Press enter to create a new album.`) }}
+                      </v-list-item-title>
+                    </v-list-item>
+                  </template>
+                  <template #chip="data">
+                    <v-chip
+                      :model-value="data.selected"
+                      :disabled="data.disabled"
+                      class="bg-highlight rounded-xl text-truncate d-block"
+                      @click:close="removeSelection(data.index)"
+                    >
+                      <v-icon class="pr-1">mdi-bookmark</v-icon>
+                      {{ data.item.title ? data.item.title : data.item }}
+                    </v-chip>
+                  </template>
+                </v-combobox>
+                <v-progress-linear
+                  :model-value="completedTotal"
+                  :indeterminate="indexing"
+                  :height="21"
+                  class="v-progress-linear--upload"
+                >
+                  <span v-if="eta" class="eta">{{ eta }}</span>
+                </v-progress-linear>
+              </div>
+              <div class="form-text">
+                <p v-if="isDemo">
+                  {{ $gettext(`You can upload up to %{n} files for test purposes.`, { n: fileLimit }) }}
+                  {{ $gettext(`Please do not upload any private, unlawful or offensive pictures. `) }}
+                </p>
+                <p v-else-if="rejectNSFW">
+                  {{ $gettext(`Please don't upload photos containing offensive content.`) }}
+                  {{ $gettext(`Uploads that may contain such images will be rejected automatically.`) }}
+                </p>
+                <p v-if="featReview">
+                  {{
+                    $gettext(
+                      `Non-photographic and low-quality images require a review before they appear in search results.`
+                    )
+                  }}
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="form-disclaimer">
-            <p v-if="isDemo" class="text-body-2 py-1">
-              {{ $gettext(`You can upload up to %{n} files for test purposes.`, { n: fileLimit }) }}
-              {{ $gettext(`Please do not upload any private, unlawful or offensive pictures. `) }}
-            </p>
-            <p v-else-if="rejectNSFW" class="text-body-2 py-1">
-              {{ $gettext(`Please don't upload photos containing offensive content.`) }}
-              {{ $gettext(`Uploads that may contain such images will be rejected automatically.`) }}
-            </p>
-            <p v-if="featReview" class="text-body-2 py-1">
-              {{
-                $gettext(
-                  `Non-photographic and low-quality images require a review before they appear in search results.`
-                )
-              }}
-            </p>
           </div>
         </v-card-text>
         <v-card-actions class="action-buttons mt-1">

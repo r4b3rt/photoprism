@@ -1,16 +1,14 @@
 <template>
   <div class="p-tab p-tab-index">
     <v-form ref="form" class="p-form p-photo-index" validate-on="invalid-input" @submit.prevent="submit">
-      <div class="form-info">
-        <div class="text-body-1">
-          <span v-if="fileName" class="text-break">{{ action }} {{ fileName }}…</span>
-          <span v-else-if="action">{{ action }}…</span>
-          <span v-else-if="busy">{{ $gettext(`Indexing media and sidecar files…`) }}</span>
-          <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
-          <span v-else>{{ $gettext(`Select a folder to scan for changes…`) }}</span>
-        </div>
+      <div class="form-header">
+        <span v-if="fileName" class="text-break">{{ action }} {{ fileName }}…</span>
+        <span v-else-if="action">{{ action }}…</span>
+        <span v-else-if="busy">{{ $gettext(`Indexing media and sidecar files…`) }}</span>
+        <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
+        <span v-else>{{ $gettext(`Select a folder to scan for changes…`) }}</span>
       </div>
-      <div class="form-body mt-3">
+      <div class="form-body">
         <div class="form-controls">
           <v-autocomplete
             v-model="settings.index.path"
@@ -32,9 +30,7 @@
           </v-autocomplete>
           <v-progress-linear :model-value="completed" :indeterminate="busy"></v-progress-linear>
         </div>
-      </div>
-      <div class="form-controls">
-        <div class="action-controls">
+        <div class="form-options">
           <v-checkbox
             v-model="settings.index.rescan"
             :disabled="busy || !ready"
