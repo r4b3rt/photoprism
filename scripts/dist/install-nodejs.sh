@@ -41,6 +41,8 @@ fi
 # Upgrade NPM and install development dependencies.
 echo "Configuring NPM..."
 sudo npm config set cache ~/.cache/npm
+echo "Updating NPM..."
+sudo npm update --unsafe-perm=true --allow-root -g npm
 echo "Installing TestCafe..."
 sudo npm install --unsafe-perm=true --allow-root -g \
   npm@latest npm-check-updates@latest license-report@latest n@latest testcafe@3.7.1
@@ -52,6 +54,4 @@ sudo npm install --unsafe-perm=true --allow-root -g \
 echo "Installing Vue Language Tools..."
 sudo npm install --unsafe-perm=true --allow-root -g \
   @vue/language-server @vue/typescript-plugin
-echo "Updating NPM dependencies..."
-sudo npm update --unsafe-perm=true --allow-root -g
 echo "Done."
