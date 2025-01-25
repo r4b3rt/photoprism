@@ -11,7 +11,7 @@
             ref="input"
             v-model="album"
             autocomplete="off"
-            :placeholder="$gettext('Choose an album or create a new one')"
+            :placeholder="$gettext('Select or create an album')"
             :items="items"
             :loading="loading"
             hide-no-data

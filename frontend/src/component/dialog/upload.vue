@@ -54,7 +54,7 @@
                   :items="albums"
                   item-title="Title"
                   item-value="UID"
-                  :placeholder="$gettext('Choose an album or create a new one')"
+                  :placeholder="$gettext('Select or create an album')"
                   return-object
                 >
                   <template #no-data>
