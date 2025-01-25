@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-24 16:44+0000\n"
+"PO-Revision-Date: 2025-01-25 09:10+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
 "Language-Team: Portuguese <https://translate.photoprism.app/projects/photoprism/frontend/pt/>\n"
 "Language: pt\n"
@@ -481,7 +481,7 @@ msgstr "Azul"
 msgid "Brown"
 msgstr "Castanho"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Navegar"
 
@@ -621,10 +621,6 @@ msgstr "As alterações às definições avançadas requerem um reinício para t
 msgid "Checked"
 msgstr "Verificado"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Escolhe um álbum ou cria um novo"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Croma"
@@ -653,7 +649,7 @@ msgstr "Credenciais do cliente"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "Donativos"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Concluído"
 
@@ -1919,7 +1914,7 @@ msgstr "Não, obrigado(a)"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Nenhum alerta ou erro contendo esta palavra-chave. Note que a pesquisa diferencia maiúsculas de minúsculas."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "Por favor, confirme a nova senha."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Copie a seguinte senha de aplicativo gerada aleatoriamente e guarde-a em um local seguro, pois você não poderá vê-la novamente:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Não carregue imagens privadas, ilegais ou ofensivas."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Por favor, não envie fotos com conteúdo ofensivo."
 
@@ -2501,6 +2496,10 @@ msgstr "Selecionar data"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Selecionar datas"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr "Selecionar ou criar um álbum"
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "Enviando fotos…"
 msgid "Uploading…"
 msgstr "A carregar."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Envios que possam conter tais imagens serão rejeitados automaticamente."
 
@@ -3194,7 +3193,7 @@ msgstr "Pode descarregar apenas um álbum"
 msgid "You can only download one label"
 msgstr "Pode descarregar apenas uma etiqueta"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Pode carregar até %{n} ficheiros para fins de teste."
 
@@ -3227,6 +3226,9 @@ msgstr "Sua biblioteca é continuamente analisada para criar automaticamente ál
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Aproximar/Afastar"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Escolhe um álbum ou cria um novo"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Carrega em \"Procurar\" para selecionar os ficheiros a carregar…"

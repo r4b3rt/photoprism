@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-24 16:44+0000\n"
+"PO-Revision-Date: 2025-01-25 09:10+0000\n"
 "Last-Translator: Google Cloud Translation Basic <noreply-mt-google-translate@weblate.org>\n"
 "Language-Team: Kurdish <https://translate.photoprism.app/projects/photoprism/frontend/ku/>\n"
 "Language: ku\n"
@@ -481,7 +481,7 @@ msgstr "شین"
 msgid "Brown"
 msgstr "قاوەیی"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Browse"
 
@@ -621,10 +621,6 @@ msgstr "Guhertinên mîhengên pêşkeftî ji nû ve destpêkirinê hewce dike k
 msgid "Checked"
 msgstr "پشکنرا"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Albumek hilbijêrin an yek nû çêbikin"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "کرۆم"
@@ -653,7 +649,7 @@ msgstr "Bawernameyên Client"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "بەخشینەکان"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "تەواوبوو"
 
@@ -1919,7 +1914,7 @@ msgstr "نەخێر سوپاس"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "هیچ ئاگادارییەک یان هەڵەیەک نیە کە ئەم وشی لەخۆ گرتبێت. تێبینی بکە کە گەڕان هەستیارە (جیاکەرەوەی پیتە گەورە و چکۆلەکان)."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "تکایە وشە نهێنیە تازکەت پشتڕاستکەرەوە."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Ji kerema xwe şîfreya sepanê ya ku bi korfelaqî hatî çêkirin kopî bikin û wê li cîhek ewle bihêlin, ji ber ku hûn ê nikaribin wê dîsa bibînin:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Ji kerema xwe re tu wêneyên taybet, neqanûnî an êrîşkar bar nekin."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "تکایە ئەو وێنانە بار مەکە کە ناوەڕۆکی سووکایەتی لەخۆ دەگرن."
 
@@ -2501,6 +2496,10 @@ msgstr "Dîrokê hilbijêre"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Dîrokan hilbijêrin"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr "Hilbijêre an albûmek çêbikin"
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "فۆتۆکان بار دەبن…"
 msgid "Uploading…"
 msgstr "دووبارە بارکردن…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "بارکردنەکان کە لەوانەیە ئەم جۆرە وێنانە لەخۆە بگرێ بە شێوەیەکی خۆکار ڕەت دەکرێنەوە."
 
@@ -3194,7 +3193,7 @@ msgstr "تۆ تەنها دەتوانی یەك ئەلبوم داگریت"
 msgid "You can only download one label"
 msgstr "تۆ تەنها دەتوانی یەك پێناس داگریت"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Hûn dikarin heta %{n} pelan ji bo armancên ceribandinê bar bikin."
 
@@ -3227,6 +3226,9 @@ msgstr "Pirtûkxaneya we bi domdarî tê analîz kirin ku bixweber albumên dem�
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "گەورەکردن/بچووکردن"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Albumek hilbijêrin an yek nû çêbikin"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Bikirtînin \"Browse\" da ku pelên ji bo barkirinê hilbijêrin…"

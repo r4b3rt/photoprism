@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
-"PO-Revision-Date: 2025-01-24 16:44+0000\n"
+"PO-Revision-Date: 2025-01-25 09:10+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -478,7 +478,7 @@ msgstr "Μπλε"
 msgid "Brown"
 msgstr "Καφέ"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Περιήγηση στο"
 
@@ -618,10 +618,6 @@ msgstr "Οι αλλαγές στις ρυθμίσεις για προχωρημ�
 msgid "Checked"
 msgstr "Σημειωμένο"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Επιλέξτε ένα άλμπουμ ή δημιουργήστε ένα νέο"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Χρώμα"
@@ -650,7 +646,7 @@ msgstr "Διαπιστευτήρια πελάτη"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -960,7 +956,6 @@ msgid "Donations"
 msgstr "Δωρεές"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Έγινε"
 
@@ -1916,7 +1911,7 @@ msgstr "Όχι ευχαριστώ"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Δεν υπάρχουν προειδοποιήσεις ή σφάλματα που περιέχουν αυτή τη λέξη-κλειδί. Σημειώστε ότι η αναζήτηση είναι ευαίσθητη σε κεφαλαία-πεζά."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2167,11 +2162,11 @@ msgstr "Επιβεβαιώστε τον νέο σας κωδικό πρόσβα�
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Αντιγράψτε τον ακόλουθο τυχαία δημιουργημένο κωδικό πρόσβασης εφαρμογής και διατηρήστε τον σε ασφαλές μέρος, καθώς δεν θα μπορείτε να τον δείτε ξανά:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Παρακαλούμε μην ανεβάζετε προσωπικές, παράνομες ή προσβλητικές φωτογραφίες."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Παρακαλούμε μην ανεβάζετε φωτογραφίες που περιέχουν προσβλητικό περιεχόμενο."
 
@@ -2498,6 +2493,10 @@ msgstr "Επιλέξτε ημερομηνία"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Επιλέξτε ημερομηνίες"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr "Επιλέξτε ή δημιουργήστε ένα άλμπουμ"
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3014,7 +3013,7 @@ msgstr "Ανέβασμα φωτογραφιών…"
 msgid "Uploading…"
 msgstr "Επαναγέμισμα…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Οι μεταφορτώσεις που ενδέχεται να περιέχουν τέτοιες εικόνες θα απορρίπτονται αυτόματα."
 
@@ -3191,7 +3190,7 @@ msgstr "Μπορείτε να κατεβάσετε μόνο μια συλλογ�
 msgid "You can only download one label"
 msgstr "Μπορείτε να κατεβάσετε μόνο μία ετικέτα"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Μπορείτε να ανεβάσετε έως και %{n} αρχεία για δοκιμαστικούς σκοπούς."
 
@@ -3224,6 +3223,9 @@ msgstr "Η βιβλιοθήκη σας αναλύεται συνεχώς για 
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Μεγέθυνση/ σμίκρυνση"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Επιλέξτε ένα άλμπουμ ή δημιουργήστε ένα νέο"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Πατήστε \"Αναζήτηση\" για να επιλέξετε τα αρχεία προς μεταφόρτωση…"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-24 16:44+0000\n"
+"PO-Revision-Date: 2025-01-25 09:10+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
 "Language-Team: Russian <https://translate.photoprism.app/projects/photoprism/frontend/ru/>\n"
 "Language: ru\n"
@@ -481,7 +481,7 @@ msgstr "Синий"
 msgid "Brown"
 msgstr "Коричневый"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Просмотреть"
 
@@ -621,10 +621,6 @@ msgstr "Изменения в расширенных настройках тре
 msgid "Checked"
 msgstr "Проверено"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Выбери альбом или создай новый"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Цветовая гамма"
@@ -653,7 +649,7 @@ msgstr "Учетные данные клиента"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "Пожертвования"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Готово"
 
@@ -1919,7 +1914,7 @@ msgstr "Нет, спасибо"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Нет предупреждений или ошибок содержащих эти слова. Имейте в виду, что поиск регистрозависимый."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "Пожалуйста, подтвердите ваш новый паро�
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Скопируйте следующий случайно сгенерированный пароль приложения и сохраните его в надежном месте, так как вы больше не сможете его увидеть:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Пожалуйста, не загружайте частные, незаконные или оскорбительные фотографии."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Пожалуйста, не загружайте фотографии, содержащие недопустимый контент."
 
@@ -2501,6 +2496,10 @@ msgstr "Выберите дату"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Выберите даты"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr "Выберите или создайте альбом"
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "Загрузка фотографий…"
 msgid "Uploading…"
 msgstr "Загрузка…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Загрузки, которые могут содержать такие изображение будут автоматически отменены."
 
@@ -3194,7 +3193,7 @@ msgstr "Вы можете загрузить только один альбом"
 msgid "You can only download one label"
 msgstr "Вы можете загрузить только одну метку"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Для тестирования можно загрузить до %{n} файлов."
 
@@ -3227,6 +3226,9 @@ msgstr "Ваша библиотека постоянно анализирует�
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Увеличение/уменьшение масштаба"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Выбери альбом или создай новый"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Нажми \"Обзор\", чтобы выбрать файлы для загрузки…"

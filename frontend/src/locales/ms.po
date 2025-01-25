@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-24 16:44+0000\n"
+"PO-Revision-Date: 2025-01-25 09:10+0000\n"
 "Last-Translator: Google Cloud Translation Basic <noreply-mt-google-translate@weblate.org>\n"
 "Language-Team: \n"
 "Language: ms\n"
@@ -481,7 +481,7 @@ msgstr "Biru"
 msgid "Brown"
 msgstr "Coklat"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Semak imbas"
 
@@ -621,10 +621,6 @@ msgstr "Perubahan pada tetapan lanjutan memerlukan mulakan semula untuk berkuat 
 msgid "Checked"
 msgstr "Disemak"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Pilih album atau buat album baharu"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Chroma"
@@ -653,7 +649,7 @@ msgstr "Tauliah Pelanggan"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "Derma"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Selesai"
 
@@ -1919,7 +1914,7 @@ msgstr "Tidak, Terima kasih"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Tiada amaran atau ralat yang mengandungi kata kunci ini. Ambil perhatian bahawa carian adalah sensitif huruf besar-besaran."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "Sila sahkan kata laluan baharu anda."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Sila salin kata laluan apl yang dijana secara rawak berikut dan simpan di tempat yang selamat, kerana anda tidak akan dapat melihatnya lagi:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Tolong jangan muat naik sebarang gambar peribadi, menyalahi undang-undang atau menyinggung perasaan."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Tolong jangan muat naik foto yang mengandungi kandungan yang menyinggung perasaan."
 
@@ -2501,6 +2496,10 @@ msgstr "Pilih tarikh"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Pilih tarikh"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr "Pilih atau buat album"
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "Memuat naik foto…"
 msgid "Uploading…"
 msgstr "Memuatkan semula…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Muat naik yang mungkin mengandungi imej sedemikian akan ditolak secara automatik."
 
@@ -3194,7 +3193,7 @@ msgstr "Anda hanya boleh memuat turun satu album"
 msgid "You can only download one label"
 msgstr "Anda hanya boleh memuat turun satu label"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Anda boleh memuat naik sehingga %{n} fail untuk tujuan ujian."
 
@@ -3227,6 +3226,9 @@ msgstr "Pustaka anda dianalisis secara berterusan untuk mencipta album detik, pe
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Zum masuk/keluar"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Pilih album atau buat album baharu"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Tekan \"Semak imbas\" untuk memilih fail untuk dimuat naik…"

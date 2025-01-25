@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
-"PO-Revision-Date: 2025-01-24 16:44+0000\n"
+"PO-Revision-Date: 2025-01-25 09:10+0000\n"
 "Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
 "Language: sl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -478,7 +478,7 @@ msgstr "Modra"
 msgid "Brown"
 msgstr "Rjava"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Brskanje po"
 
@@ -618,10 +618,6 @@ msgstr "Spremembe naprednih nastavitev je treba znova zagnati, da začnejo velja
 msgid "Checked"
 msgstr "Izbrano"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Izberite album ali ustvarite novega"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Chroma"
@@ -650,7 +646,7 @@ msgstr "Pooblastila stranke"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -960,7 +956,6 @@ msgid "Donations"
 msgstr "Donacije"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Končano"
 
@@ -1916,7 +1911,7 @@ msgstr "Ne, hvala."
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Ni opozoril ali napak, ki bi vsebovale to ključno besedo. Upoštevajte, da je iskanje občutljivo na velike in male črke."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2167,11 +2162,11 @@ msgstr "Potrdite novo geslo."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Kopirajte naslednje naključno ustvarjeno geslo za aplikacijo in ga shranite na varno mesto, saj ga ne boste mogli več videti:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Ne nalagajte zasebnih, nezakonitih ali žaljivih slik."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Ne nalagajte fotografij z žaljivo vsebino."
 
@@ -2498,6 +2493,10 @@ msgstr "Izberite datum"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Izberite datume"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr "Izberite ali ustvarite album"
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3014,7 +3013,7 @@ msgstr "Nalaganje fotografij…"
 msgid "Uploading…"
 msgstr "Polnjenje…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Prenosi, ki bi lahko vsebovali takšne slike, bodo samodejno zavrnjeni."
 
@@ -3191,7 +3190,7 @@ msgstr "Prenesete lahko samo en album"
 msgid "You can only download one label"
 msgstr "Prenesete lahko samo eno nalepko"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "V testne namene lahko naložite do %{n} datotek."
 
@@ -3224,6 +3223,9 @@ msgstr "Vaša knjižnica se nenehno analizira in samodejno ustvarja albume poseb
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Povečanje/pomanjšanje"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Izberite album ali ustvarite novega"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Pritisnite \"Brskanje\", da izberete datoteke, ki jih želite naložiti…"
