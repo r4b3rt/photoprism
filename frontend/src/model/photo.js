@@ -538,7 +538,7 @@ export class Photo extends RestModel {
   }
 
   videoUrl() {
-    let file = this.videoFile();
+    const file = this.videoFile();
 
     if (file) {
       let videoFormat = FormatAvc;
@@ -562,6 +562,11 @@ export class Photo extends RestModel {
     }
 
     return `${config.videoUri}/videos/${this.Hash}/${config.previewToken}/${FormatAvc}`;
+  }
+
+  videoType() {
+    const file = this.videoFile();
+    return Util.videoType(file?.Codec);
   }
 
   mainFile() {
