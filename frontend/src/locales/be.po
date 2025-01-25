@@ -478,7 +478,7 @@ msgstr "Сіні"
 msgid "Brown"
 msgstr "Карычневы"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Праглядзіце"
 
@@ -618,10 +618,6 @@ msgstr "Каб змены ў дадатковых наладах уступіл�
 msgid "Checked"
 msgstr "Праверана"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Выберыце альбом або стварыце новы"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Каляровасць"
@@ -650,7 +646,7 @@ msgstr "Уліковыя даныя кліента"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -960,7 +956,6 @@ msgid "Donations"
 msgstr "Ахвяраванні"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Гатова"
 
@@ -1916,7 +1911,7 @@ msgstr "Не, дзякуй"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Няма папярэджанняў або памылак з гэтым ключавым словам. Звярніце ўвагу, што пошук адчувальны да рэгістра."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2167,11 +2162,11 @@ msgstr "Калі ласка, пацвердзіце свой новы парол
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Калі ласка, скапіруйце наступны выпадкова згенераваны пароль праграмы і захавайце яго ў надзейным месцы, бо вы не зможаце ўбачыць яго зноў:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Калі ласка, не запампоўвайце прыватныя, незаконныя або абразлівыя фатаграфіі."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Калі ласка, не запампоўвайце фатаграфіі з абразлівым зместам."
 
@@ -2498,6 +2493,10 @@ msgstr "Выберыце дату"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Выберыце даты"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3014,7 +3013,7 @@ msgstr "Загрузка фатаграфій…"
 msgid "Uploading…"
 msgstr "Загрузка…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Загрузкі, якія могуць утрымліваць такія выявы, будуць адхіляцца аўтаматычна."
 
@@ -3191,7 +3190,7 @@ msgstr "Вы можаце спампаваць толькі адзін альб�
 msgid "You can only download one label"
 msgstr "Вы можаце спампаваць толькі адну метку"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Вы можаце загрузіць да %{n} файлаў для тэставых мэт."
 
@@ -3224,6 +3223,9 @@ msgstr "Ваша бібліятэка пастаянна аналізуецца 
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Павелічэнне/памяншэнне"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Выберыце альбом або стварыце новы"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Націсніце \"Агляд\", каб выбраць файлы для загрузкі…"

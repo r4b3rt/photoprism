@@ -481,7 +481,7 @@ msgstr "Mėlyna"
 msgid "Brown"
 msgstr "Ruda"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Naršykite"
 
@@ -621,10 +621,6 @@ msgstr "Norint, kad išplėstinių nustatymų pakeitimai įsigaliotų, juos reik
 msgid "Checked"
 msgstr "Patikrinta"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Pasirinkite albumą arba sukurkite naują"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Chroma"
@@ -653,7 +649,7 @@ msgstr "Kliento įgaliojimai"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "Dovanos"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Atlikta"
 
@@ -1919,7 +1914,7 @@ msgstr "Ne, ačiū"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Jokių įspėjimų ar klaidų su šiuo raktažodžiu nėra. Atkreipkite dėmesį, kad paieška priklauso nuo mažųjų ir didžiųjų raidžių."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "Patvirtinkite naująjį slaptažodį."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Nukopijuokite šį atsitiktinai sugeneruotą programos slaptažodį ir laikykite jį saugioje vietoje, nes nebegalėsite jo matyti:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Neįkelkite jokių privačių, neteisėtų ar įžeidžiančių nuotraukų."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Neįkelkite nuotraukų, kuriose yra įžeidžiančio turinio."
 
@@ -2501,6 +2496,10 @@ msgstr "Pasirinkite datą"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Pasirinkite datas"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "Nuotraukų įkėlimas…"
 msgid "Uploading…"
 msgstr "Perkrovimas…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Siunčiami vaizdai, kuriuose gali būti tokių vaizdų, bus automatiškai atmesti."
 
@@ -3194,7 +3193,7 @@ msgstr "Galite atsisiųsti tik vieną albumą"
 msgid "You can only download one label"
 msgstr "Galite atsisiųsti tik vieną etiketę"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Bandymo tikslais galite įkelti iki %{n} failų."
 
@@ -3227,6 +3226,9 @@ msgstr "Jūsų biblioteka nuolat analizuojama, kad būtų galima automatiškai k
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Priartinimas / atitolinimas"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Pasirinkite albumą arba sukurkite naują"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Paspauskite \"Naršyti\", kad pasirinktumėte failus, kuriuos norite įkelti…"

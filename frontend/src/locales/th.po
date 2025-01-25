@@ -481,7 +481,7 @@ msgstr "สีฟ้า"
 msgid "Brown"
 msgstr "สีน้ำตาล"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "เรียกดู"
 
@@ -621,10 +621,6 @@ msgstr "การเปลี่ยนแปลงการตั้งค่า
 msgid "Checked"
 msgstr "ตรวจสอบแล้ว"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "เลือกอัลบั้มหรือสร้างใหม่"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "โครมา"
@@ -653,7 +649,7 @@ msgstr "ข้อมูลรับรองลูกค้า"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "บริจาค"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "เสร็จแล้ว"
 
@@ -1919,7 +1914,7 @@ msgstr "ไม่เป็นไรขอบคุณ"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "ไม่มีคำเตือนหรือข้อผิดพลาดที่มีคีย์เวิร์ดนี้ โปรดทราบว่าการค้นหาคำนึงถึงตัวพิมพ์เล็กและตัวพิมพ์ใหญ่"
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "กรุณายืนยันรหัสผ่านใหม่ข
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "โปรดคัดลอกรหัสผ่านสำหรับแอปที่สร้างขึ้นแบบสุ่มต่อไปนี้และเก็บไว้ในที่ปลอดภัย เนื่องจากคุณจะไม่สามารถดูได้อีก:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "กรุณาอย่าอัพโหลดภาพส่วนตัว ผิดกฎหมาย หรือไม่เหมาะสม"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "กรุณาอย่าอัปโหลดรูปภาพที่มีเนื้อหาที่ไม่เหมาะสม"
 
@@ -2501,6 +2496,10 @@ msgstr "เลือกวันที่"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "เลือกวันที่"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "กำลังอัปโหลดรูปภาพ…"
 msgid "Uploading…"
 msgstr "กำลังโหลดซ้ำ…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "การอัปโหลดที่อาจมีภาพดังกล่าวจะถูกปฏิเสธโดยอัตโนมัติ"
 
@@ -3194,7 +3193,7 @@ msgstr "ดาวน์โหลดได้เพียงอัลบั้ม
 msgid "You can only download one label"
 msgstr "คุณสามารถดาวน์โหลดป้ายกำกับได้เพียงป้ายเดียว"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "คุณสามารถอัปโหลดไฟล์ได้มากถึง %{n} ไฟล์เพื่อการทดสอบ"
 
@@ -3227,6 +3226,9 @@ msgstr "คลังของคุณได้รับการวิเคร
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "ซูมเข้า/ออก"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "เลือกอัลบั้มหรือสร้างใหม่"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "กด \"Browse\" เพื่อเลือกไฟล์ที่จะอัพโหลด…"

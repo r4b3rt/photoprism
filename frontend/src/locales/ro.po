@@ -481,7 +481,7 @@ msgstr "Albastru"
 msgid "Brown"
 msgstr "Maro"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Răsfoiți"
 
@@ -621,10 +621,6 @@ msgstr "Modificările aduse la setările avansate necesită o repornire pentru a
 msgid "Checked"
 msgstr "Verificat"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Alegeți un album sau creați unul nou"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Chroma"
@@ -653,7 +649,7 @@ msgstr "Acreditarea clienților"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "Donații"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Realizat"
 
@@ -1919,7 +1914,7 @@ msgstr "Nu, mulțumesc"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Nu există avertismente sau erori care să conțină acest cuvânt cheie. Rețineți că căutarea este sensibilă la majuscule și minuscule."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "Vă rugăm să confirmați noua parolă."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Vă rugăm să copiați următoarea parolă a aplicației generată aleatoriu și să o păstrați într-un loc sigur, deoarece nu o veți putea vedea din nou:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Vă rugăm să nu încărcați imagini private, ilegale sau ofensatoare."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Vă rugăm să nu încărcați fotografii cu conținut ofensator."
 
@@ -2501,6 +2496,10 @@ msgstr "Selectați data"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Selectați datele"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "Se încarcă fotografii…"
 msgid "Uploading…"
 msgstr "Se încarcă…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Încărcările care pot conține astfel de imagini vor fi respinse automat."
 
@@ -3194,7 +3193,7 @@ msgstr "Poți descărca doar un singur album"
 msgid "You can only download one label"
 msgstr "Puteți descărca doar o singură etichetă"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Puteți încărca până la %{n} fișiere în scopuri de testare."
 
@@ -3227,6 +3226,9 @@ msgstr "Biblioteca dvs. este analizată în permanență pentru a crea automat a
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Măriți/micșorați"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Alegeți un album sau creați unul nou"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Apăsați \"Răsfoire\" pentru a selecta fișierele de încărcat…"

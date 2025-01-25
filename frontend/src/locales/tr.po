@@ -481,7 +481,7 @@ msgstr "Mavi"
 msgid "Brown"
 msgstr "Kahverengi"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Gözat"
 
@@ -621,10 +621,6 @@ msgstr "Gelişmiş ayarlarda yapılan değişikliklerin etkili olması için yen
 msgid "Checked"
 msgstr "Seçildi"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Bir albüm seçin veya yeni bir albüm oluşturun"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Renk"
@@ -653,7 +649,7 @@ msgstr "Müşteri Kimlik Bilgileri"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "Bağışlar"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Tamamlandı"
 
@@ -1919,7 +1914,7 @@ msgstr "Hayır teşekkürler"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Bu anahtar kelimeyi içeren uyarı veya hata yok. Aramanın büyük/küçük harfe duyarlı olduğunu unutmayın."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "Lütfen yeni şifrenizi onaylayın."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Lütfen aşağıda verilen rastgele oluşturulmuş uygulama şifresini kopyalayın ve güvenli bir yerde saklayın, çünkü bunu bir daha göremeyeceksiniz:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Lütfen özel, yasa dışı veya saldırgan resimler yüklemeyin."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Lütfen saldırgan içerik barındıran fotoğraflar yüklemeyin."
 
@@ -2501,6 +2496,10 @@ msgstr "Tarih seçiniz"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Tarihleri seçin"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "Fotoğraf yükleniyor.."
 msgid "Uploading…"
 msgstr "Yükleniyor…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Bu tür görüntüler içerebilecek yüklemeler otomatik olarak reddedilecektir."
 
@@ -3194,7 +3193,7 @@ msgstr "Yalnızca bir albüm indirebilirsiniz"
 msgid "You can only download one label"
 msgstr "Yalnızca bir etiket indirebilirsiniz"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Test amacıyla %{n} adede kadar dosya yükleyebilirsiniz."
 
@@ -3227,6 +3226,9 @@ msgstr "Özel anların, gezilerin ve yerlerin albümlerini otomatik olarak oluş
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Yakınlaştır / uzaklaştır"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Bir albüm seçin veya yeni bir albüm oluşturun"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Yüklenecek dosyaları seçmek için \"Gözat \"a basın…"

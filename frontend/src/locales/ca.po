@@ -481,7 +481,7 @@ msgstr "Blau"
 msgid "Brown"
 msgstr "Marró"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "Navega"
 
@@ -621,10 +621,6 @@ msgstr "Els canvis a la configuració avançada requereixen un reinici perquè t
 msgid "Checked"
 msgstr "Seleccionat"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Tria un àlbum o crea'n un de nou"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Croma"
@@ -653,7 +649,7 @@ msgstr "Credencials del client"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "Donacions"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Fet"
 
@@ -1919,7 +1914,7 @@ msgstr "No gràcies"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "No hi ha cap advertiment ni error que contingui aquesta paraula clau. Tingueu en compte que la cerca distingeix entre majúscules i minúscules."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "Si us plau, confirmeu la vostra nova contrasenya."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Copieu la següent contrasenya de l'aplicació generada aleatòriament i guardeu-la en un lloc segur, ja que no la podreu tornar a veure:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Si us plau, no carregueu cap imatge privada, il·legal o ofensiva."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Si us plau, no carregueu fotos que continguin contingut ofensiu."
 
@@ -2501,6 +2496,10 @@ msgstr "Seleccioneu la data"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Seleccioneu dates"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "S'estan penjant fotos..."
 msgid "Uploading…"
 msgstr "S'està carregant…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Les càrregues que puguin contenir aquestes imatges seran rebutjades automàticament."
 
@@ -3196,7 +3195,7 @@ msgstr "Només pots baixar un àlbum"
 msgid "You can only download one label"
 msgstr "Només podeu baixar una etiqueta"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Podeu penjar fins a %{n} fitxers amb finalitats de prova."
 
@@ -3229,6 +3228,9 @@ msgstr "La vostra biblioteca s'analitza contínuament per crear automàticament 
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Apropa o redueix"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Tria un àlbum o crea'n un de nou"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Premeu \"Navega\" per seleccionar els fitxers a penjar…"

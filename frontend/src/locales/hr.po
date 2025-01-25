@@ -481,7 +481,7 @@ msgstr "Plava"
 msgid "Brown"
 msgstr "Smeđa"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "pretraživati"
 
@@ -621,10 +621,6 @@ msgstr "Promjene naprednih postavki zahtijevaju ponovno pokretanje kako bi stupi
 msgid "Checked"
 msgstr "Provjereno"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "Odaberite album ili izradite novi"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "Chroma"
@@ -653,7 +649,7 @@ msgstr "vjerodajnice klijenta"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "Donacije"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "Gotovo"
 
@@ -1919,7 +1914,7 @@ msgstr "Ne hvala"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Nema upozorenja ili pogreške koje sadrže ovu ključnu riječ. Imajte na umu da je pretraživanje osjetljivo na velika i mala slova."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "Molimo potvrdite svoju novu lozinku."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Kopirajte sljedeću nasumično generiranu lozinku aplikacije i čuvajte je na sigurnom mjestu jer je više nećete moći vidjeti:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Molimo nemojte postavljati nikakve privatne, nezakonite ili uvredljive slike."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "Nemojte učitavati fotografije koje sadrže uvredljiv sadržaj."
 
@@ -2501,6 +2496,10 @@ msgstr "Odaberite datum"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "Odaberite datume"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "Prijenos fotografija…"
 msgid "Uploading…"
 msgstr "Pretovar…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Prijenosi koji mogu sadržavati takve slike bit će automatski odbijeni."
 
@@ -3194,7 +3193,7 @@ msgstr "Možete preuzeti samo jedan album"
 msgid "You can only download one label"
 msgstr "Možete preuzeti samo jednu naljepnicu"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Možete prenijeti do %{n} datoteka u testne svrhe."
 
@@ -3227,6 +3226,9 @@ msgstr "Vaša se knjižnica kontinuirano analizira kako bi se automatski izradil
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "Povećavanje/smanjivanje"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "Odaberite album ili izradite novi"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Pritisnite \"Pregledaj\" za odabir datoteka za prijenos…"

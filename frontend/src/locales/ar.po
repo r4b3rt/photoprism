@@ -481,7 +481,7 @@ msgstr "أزرق"
 msgid "Brown"
 msgstr "بني"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "تصفح"
 
@@ -621,10 +621,6 @@ msgstr "تتطلب التغييرات في الإعدادات المتقدمة �
 msgid "Checked"
 msgstr "التحقق"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "اختر ألبومًا أو قم بإنشاء ألبوم جديد"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "كروما"
@@ -653,7 +649,7 @@ msgstr "بيانات اعتماد العميل"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "التبرعات"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "فعله"
 
@@ -1919,7 +1914,7 @@ msgstr "لا شكرا"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "لا تحذيرات أو خطأ يحتوي على هذه الكلمة الأساسية. لاحظ أن البحث حساس لحالة الأحرف."
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "يرجى تأكيد كلمة المرور الجديدة الخاصة ب
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "يرجى نسخ كلمة مرور التطبيق التالية التي تم إنشاؤها عشوائيًا والاحتفاظ بها في مكان آمن، حيث لن تتمكن من رؤيتها مرة أخرى:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "يرجى عدم تحميل أي صور خاصة أو غير قانونية أو مسيئة."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "الرجاء عدم تحميل الصور التي تحتوي على محتوى مسيء."
 
@@ -2501,6 +2496,10 @@ msgstr "حدد التاريخ"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "حدد التواريخ"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "جارٍ تحميل الصور …"
 msgid "Uploading…"
 msgstr "جارٍ الرفع..."
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "سيتم رفض التحميلات التي قد تحتوي على مثل هذه الصور تلقائيًا."
 
@@ -3194,7 +3193,7 @@ msgstr "يمكنك تنزيل ألبوم واحد فقط"
 msgid "You can only download one label"
 msgstr "يمكنك فقط تحميل تسمية واحدة"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "يمكنك تحميل ما يصل إلى %{n} من الملفات لأغراض الاختبار."
 
@@ -3227,6 +3226,9 @@ msgstr "يتم تحليل مكتبتك باستمرار لإنشاء ألبوم�
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "التكبير / التصغير"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "اختر ألبومًا أو قم بإنشاء ألبوم جديد"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "اضغط على \"استعراض\" لتحديد الملفات التي تريد تحميلها…"

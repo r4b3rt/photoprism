@@ -481,7 +481,7 @@ msgstr "青"
 msgid "Brown"
 msgstr "茶"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "ブラウズ"
 
@@ -621,10 +621,6 @@ msgstr "詳細設定の変更を有効にするには再起動が必要です。
 msgid "Checked"
 msgstr "選択済み"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "アルバムを選択するか、新しいアルバムを作成する"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "彩度"
@@ -653,7 +649,7 @@ msgstr "クライアント資格情報"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "寄付"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "完了"
 
@@ -1919,7 +1914,7 @@ msgstr "いいえ、結構です"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "このキーワードを含む警告やエラーが見つかりませんでした。この検索では大文字と小文字を区別することに気をつけてください。"
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2170,11 +2165,11 @@ msgstr "新しいパスワードを再入力してください。"
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "ランダムに生成された次のアプリパスワードをコピーして安全な場所に保存してください。このパスワードは再表示されません:"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "私的、違法、不快な写真はアップロードしないでください。"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "過激な内容を含む写真はアップロードしないでください。"
 
@@ -2501,6 +2496,10 @@ msgstr "日付を選択する"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "日付を選択する"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3017,7 +3016,7 @@ msgstr "写真をアップロードしています…"
 msgid "Uploading…"
 msgstr "アップロード中…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "そのような画像を含むアップロードは自動的に拒否されます。"
 
@@ -3194,7 +3193,7 @@ msgstr "1 件のアルバムのみダウンロードできます"
 msgid "You can only download one label"
 msgstr "1 件のラベルのみダウンロードできます"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "テスト用に最大 %{n} 個のファイルをアップロードできます。"
 
@@ -3227,6 +3226,9 @@ msgstr "あなたのライブラリは継続的に分析され、特別な瞬間
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "ズーム イン/アウト"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "アルバムを選択するか、新しいアルバムを作成する"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "Browse \"を押してアップロードするファイルを選択する。"

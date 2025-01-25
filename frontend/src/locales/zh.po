@@ -481,7 +481,7 @@ msgstr "蓝"
 msgid "Brown"
 msgstr "棕"
 
-#: src/component/dialog/upload.vue:235 src/component/photo/toolbar.vue:224
+#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
 msgid "Browse"
 msgstr "浏览"
 
@@ -621,10 +621,6 @@ msgstr "对高级设置的更改需要重新启动才能生效。"
 msgid "Checked"
 msgstr "已确认"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
-msgid "Choose an album or create a new one"
-msgstr "选择相册或创建新相册"
-
 #: src/component/photo/edit/files.vue:450
 msgid "Chroma"
 msgstr "色度"
@@ -653,7 +649,7 @@ msgstr "客户证书"
 #: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
 #: src/component/account/passcode.vue:452
 #: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:223
+#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
 #: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
 #: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
 #: src/locales.js:22 src/page/library/errors.vue:260
@@ -963,7 +959,6 @@ msgid "Donations"
 msgstr "捐赠"
 
 #: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
-#: src/component/photo/edit/details.vue:628
 msgid "Done"
 msgstr "完成"
 
@@ -1919,7 +1914,7 @@ msgstr "不用了，谢谢"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "没有包含此关键字的警告或错误，请注意，搜索区分大小写。"
 
-#: src/component/dialog/upload.vue:203 src/component/photo/view/cards.vue:125
+#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
 #: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
 #: src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2171,11 +2166,11 @@ msgstr "请确认新密码。"
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "请复制以下随机生成的应用程序密码并将其保存在安全的地方，因为您将无法再次看到它："
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "请勿上传任何私人、非法或攻击性图片。"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "请不要上传包含令人反感的内容的照片。"
 
@@ -2503,6 +2498,10 @@ msgstr "选择日期"
 #: src/locales.js:59
 msgid "Select dates"
 msgstr "选择日期"
+
+#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+msgid "Select or create an album"
+msgstr ""
 
 #: src/component/dialog/upload.vue:129
 msgid "Select the files to upload…"
@@ -3019,7 +3018,7 @@ msgstr "上传照片…"
 msgid "Uploading…"
 msgstr "上传中…"
 
-#: src/component/dialog/upload.vue:200
+#: src/component/dialog/upload.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "可能包含此类图像的上传将被自动拒绝。"
 
@@ -3196,7 +3195,7 @@ msgstr "你只能下载一个相册"
 msgid "You can only download one label"
 msgstr "你只能下载一个标签"
 
-#: src/component/dialog/upload.vue:198
+#: src/component/dialog/upload.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "您最多可以上传 %{n} 个文件用于测试。"
 
@@ -3229,6 +3228,9 @@ msgstr "你的库被不断分析，以自动创建特殊时刻、旅行和地点
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "缩放"
+
+#~ msgid "Choose an album or create a new one"
+#~ msgstr "选择相册或创建新相册"
 
 #~ msgid "Press \"Browse\" to select the files to upload…"
 #~ msgstr "按 \"浏览 \"选择要上传的文件…"
