@@ -13,13 +13,11 @@
         ></v-btn>
       </v-card-title>
       <v-card-text>
-        <v-expansion-panels variant="accordion" density="compact" rounded="6" class="elevation-0">
+        <v-expansion-panels v-model="expanded" variant="accordion" density="compact" rounded="6" class="elevation-0">
           <v-expansion-panel v-for="(link, index) in links" :key="link.UID" color="secondary" class="pa-0 elevation-0">
             <v-expansion-panel-title class="d-flex justify-start align-center ga-3 text-body-2 px-4">
               <v-icon icon="mdi-link"></v-icon>
-              <div
-                class="text-start not-selectable action-url d-inline-flex"
-              >
+              <div class="text-start not-selectable action-url d-inline-flex">
                 /s/<strong v-if="link.Token" style="font-weight: 500">{{ link.getToken() }}</strong
                 ><span v-else>…</span>
               </div>
@@ -133,7 +131,6 @@
 </template>
 <script>
 import * as options from "options/options";
-import Util from "common/util";
 
 export default {
   name: "PDialogShare",
@@ -146,6 +143,7 @@ export default {
   },
   data() {
     return {
+      expanded: [0],
       host: window.location.host,
       showPassword: false,
       loading: false,
@@ -167,6 +165,7 @@ export default {
       if (show) {
         this.links = [];
         this.loading = true;
+        this.expanded = [];
         this.model
           .links()
           .then((resp) => {
@@ -174,6 +173,7 @@ export default {
               this.add();
             } else {
               this.links = resp.models;
+              this.expanded = [0];
             }
           })
           .finally(() => (this.loading = false));
@@ -197,6 +197,7 @@ export default {
         .createLink()
         .then((r) => {
           this.links.push(r);
+          this.expanded = [this.links.length - 1];
         })
         .finally(() => (this.loading = false));
     },

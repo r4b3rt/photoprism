@@ -250,8 +250,6 @@
   </v-dialog>
 </template>
 <script>
-import Util from "common/util";
-
 export default {
   name: "PAccountPasscodeDialog",
   props: {

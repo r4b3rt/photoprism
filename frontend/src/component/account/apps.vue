@@ -243,7 +243,6 @@
 </template>
 <script>
 import User from "model/user";
-import Util from "common/util";
 import * as auth from "options/auth";
 import * as options from "options/options";
 import { DateTime } from "luxon";
