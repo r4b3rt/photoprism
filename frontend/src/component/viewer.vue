@@ -581,8 +581,8 @@ export default {
       video.controls = true;
 
       // Disable download control is downloads are not allowed.
-      if (!this.canDownload) {
-        video.controlsList.add("nodownload");
+      if (!this.canDownload && video.controlsList) {
+        video.controlsList?.add("nodownload");
       }
 
       // Create and append video source element.
