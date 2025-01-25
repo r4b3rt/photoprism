@@ -545,29 +545,49 @@ export default class Util {
 
     return "fit_7680";
   }
-
-  static videoUrl(hash, codec) {
-    if (codec) {
-      let videoFormat = FormatAvc;
-
-      if (canUseHevc && (codec === CodecHvc1 || codec === CodecHev1)) {
-        videoFormat = FormatHevc;
-      } else if (canUseOGV && codec === CodecOGV) {
-        videoFormat = CodecOGV;
-      } else if (canUseVP8 && codec === CodecVP8) {
-        videoFormat = CodecVP8;
-      } else if (canUseVP9 && codec === CodecVP9) {
-        videoFormat = CodecVP9;
-      } else if (canUseAv1 && (codec === CodecAv01 || codec === CodecAv1C)) {
-        videoFormat = FormatAv1;
-      } else if (canUseWebM && codec === FormatWebM) {
-        videoFormat = FormatWebM;
-      }
-
-      return `${config.videoUri}/videos/${hash}/${config.previewToken}/${videoFormat}`;
+  static videoFormat(codec) {
+    if (!codec) {
+      return FormatAvc;
+    } else if (canUseHevc && (codec === CodecHvc1 || codec === CodecHev1)) {
+      return FormatHevc;
+    } else if (canUseOGV && codec === CodecOGV) {
+      return CodecOGV;
+    } else if (canUseVP8 && codec === CodecVP8) {
+      return CodecVP8;
+    } else if (canUseVP9 && codec === CodecVP9) {
+      return CodecVP9;
+    } else if (canUseAv1 && (codec === CodecAv01 || codec === CodecAv1C)) {
+      return FormatAv1;
+    } else if (canUseWebM && codec === FormatWebM) {
+      return FormatWebM;
     }
 
-    return `${config.videoUri}/videos/${hash}/${config.previewToken}/${FormatAvc}`;
+    return FormatAvc;
+  }
+
+  static videoUrl(hash, codec) {
+    return `${config.videoUri}/videos/${hash}/${config.previewToken}/${this.videoFormat(codec)}`;
+  }
+
+  static videoType(codec) {
+    switch (this.videoFormat(codec)) {
+      case FormatAvc:
+        return 'video/mp4; codecs="avc1"';
+      case CodecOGV:
+        return "video/ogg";
+      case CodecVP8:
+        return 'video/webm; codecs="vp8"';
+      case CodecVP9:
+        return 'video/webm; codecs="vp9"';
+      case FormatAv1:
+        return 'video/webm; codecs="av01.0.08M.08"';
+      case FormatWebM:
+        return "video/webm";
+      case FormatHevc:
+        return 'video/mp4; codecs="hvc1.1.6.L93.90"';
+      default:
+        return "video/mp4";
+    }
   }
 
   static async copyText(text) {

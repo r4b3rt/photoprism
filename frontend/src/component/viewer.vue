@@ -24,7 +24,7 @@ import PhotoSwipeDynamicCaption from "photoswipe-dynamic-caption-plugin";
 import Util from "common/util";
 import Api from "common/api";
 import Thumb from "model/thumb";
-import { Photo, MediaAnimated, MediaLive } from "model/photo";
+import { MediaAnimated, MediaLive, Photo } from "model/photo";
 
 /*
   TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
@@ -332,7 +332,8 @@ export default {
             html: `<div class="pswp__error-msg">Loading video...</div>`, // Replaced with the <video> element.
             model: model, // Thumbnail model.
             loop: isShort || model?.Type === MediaAnimated || model?.Type === MediaLive, // If possible, loop these types.
-            url: Util.videoUrl(model.Hash, model?.Codec), // Video URL.
+            videoUrl: Util.videoUrl(model.Hash, model?.Codec), // Video URL.
+            videoType: Util.videoType(model?.Codec), // Media Type.
             msrc: img.src, // Image URL.
           };
         }
@@ -352,11 +353,18 @@ export default {
 
           try {
             // Create video element.
-            content.element = this.createVideoElement(content.data.url, content.data.msrc, false, false, false);
+            content.element = this.createVideoElement(
+              content.data.videoUrl,
+              content.data.videoType,
+              content.data.msrc,
+              false,
+              false,
+              false
+            );
             content.state = "loading";
             content.onLoaded();
           } catch (err) {
-            content.element.innerHTML = '<div class="pswp__error-msg">Failed to load video</div>';
+            console.warn("failed to load video", err);
           }
         }
       });
@@ -555,7 +563,7 @@ export default {
       });
     },
     // Creates an HTMLMediaElement for playing videos, animations, and live photos.
-    createVideoElement(videoSrc, posterSrc, autoplay = false, loop = false, mute = false) {
+    createVideoElement(videoSrc, videoType, posterSrc, autoplay = false, loop = false, mute = false) {
       // See https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement.
       const video = document.createElement("video");
 
@@ -584,6 +592,7 @@ export default {
               of concept to see if/how it works).
        */
       const source = document.createElement("source");
+      source.type = videoType;
       source.src = videoSrc;
       video.appendChild(source);
 
