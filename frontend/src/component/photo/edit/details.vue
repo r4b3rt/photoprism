@@ -362,7 +362,7 @@
                 :label="$gettext('Keywords')"
                 placeholder=""
                 :rows="1"
-                density="comfortable"
+                density="default"
                 class="input-keywords"
               ></v-textarea>
             </v-col>
@@ -377,7 +377,7 @@
                 :label="$gettext('Notes')"
                 placeholder=""
                 :rows="1"
-                density="comfortable"
+                density="default"
                 class="input-notes"
               ></v-textarea>
             </v-col>
@@ -393,12 +393,8 @@
             <span v-if="$config.feature('review') && model.Quality < 3">{{ $gettext(`Approve`) }}</span>
             <span v-else>{{ $gettext(`Apply`) }}</span>
           </v-btn>
-          <v-btn color="highlight" variant="flat" class="action-done hidden-xs" @click.stop="save(true)">
-            {{ $gettext(`Done`) }}
-          </v-btn>
         </div>
       </div>
-      <div class="mt-1 clear"></div>
     </v-form>
   </div>
 </template>

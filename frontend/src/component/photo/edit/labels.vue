@@ -175,7 +175,6 @@
               </div>
             </v-col>
           </v-row>
-          <!-- div class="mt-1 clear"></div -->
         </div>
       </div>
     </v-form>
