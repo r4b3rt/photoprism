@@ -140,13 +140,14 @@
                 :append-inner-icon="model.PlaceSrc === 'manual' ? 'mdi-check' : ''"
                 :disabled="disabled"
                 :readonly="!!(model.Lat || model.Lng)"
-                :label="$gettext('Country')"
+                :placeholder="$gettext('Country')"
                 hide-details
                 hide-no-data
                 autocomplete="off"
                 item-value="Code"
                 item-title="Name"
                 :items="countries"
+                prepend-inner-icon="mdi-map-marker"
                 density="comfortable"
                 class="input-country"
               >
@@ -205,13 +206,14 @@
                 v-model="model.CameraID"
                 :append-inner-icon="model.CameraSrc === 'manual' ? 'mdi-check' : ''"
                 :disabled="disabled"
-                :label="$gettext('Camera')"
+                :placeholder="$gettext('Camera')"
                 :menu-props="{ maxHeight: 346 }"
                 autocomplete="off"
                 hide-details
                 item-value="ID"
                 item-title="Name"
                 :items="cameraOptions"
+                prepend-inner-icon="mdi-camera"
                 density="comfortable"
                 class="input-camera"
               >
@@ -250,13 +252,14 @@
                 v-model="model.LensID"
                 :append-inner-icon="model.CameraSrc === 'manual' ? 'mdi-check' : ''"
                 :disabled="disabled"
-                :label="$gettext('Lens')"
+                :placeholder="$gettext('Lens')"
                 :menu-props="{ maxHeight: 346 }"
                 autocomplete="off"
                 hide-details
                 item-value="ID"
                 item-title="Name"
                 :items="lensOptions"
+                prepend-inner-icon="mdi-camera-iris"
                 density="comfortable"
                 class="input-lens"
               >
