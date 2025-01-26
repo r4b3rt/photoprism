@@ -56,36 +56,36 @@
                 :readonly="true"
                 autocomplete="off"
                 autocorrect="off"
-                class="input-name pa-0 ma-0"
                 hide-details
                 single-line
                 clearable
                 persistent-clear
                 clear-icon="mdi-eject"
+                density="comfortable"
+                class="input-name pa-0 ma-0"
                 @click:clear="onClearSubject(marker)"
-                @change="onRename(marker)"
-                @keyup.enter="onRename(marker)"
               ></v-text-field>
               <!-- TODO: check property allow-overflow TEST -->
               <v-combobox
                 v-else
-                v-model="marker.Name"
+                v-model:search="marker.Name"
                 :items="$config.values.people"
                 item-title="Name"
                 item-value="Name"
                 :disabled="busy"
-                :return-object="false"
+                return-object
+                hide-no-data
                 :menu-props="menuProps"
-                :placeholder="$gettext('Name')"
                 hide-details
                 single-line
                 open-on-clear
-                hide-no-data
                 focused
                 append-icon=""
                 prepend-inner-icon="mdi-account-plus"
+                density="comfortable"
                 class="input-name pa-0 ma-0"
                 @blur="onRename(marker)"
+                @update:model-value="(person) => onUpdate(marker, person)"
                 @keyup.enter.native="onRename(marker)"
               >
               </v-combobox>
@@ -94,12 +94,25 @@
         </div>
       </div>
     </div>
+    <p-confirm-action
+      :show="confirm.show"
+      icon="mdi-account-plus"
+      :icon-size="42"
+      :text="confirm.marker?.Name ? $gettext('Add %{name}?', { name: confirm.marker.Name }) : $gettext('Add person?')"
+      @close="onRenameCancelled"
+      @confirm="onRenameConfirmed"
+    ></p-confirm-action>
   </div>
 </template>
 
 <script>
+import Marker from "model/marker";
+import PConfirmAction from "component/confirm/action.vue";
+import { reactive } from "vue";
+
 export default {
   name: "PTabPhotoPeople",
+  components: { PConfirmAction },
   props: {
     model: {
       type: Object,
@@ -118,10 +131,16 @@ export default {
       disabled: !this.$config.feature("edit"),
       config: this.$config.values,
       readonly: this.$config.get("readonly"),
+      confirm: {
+        show: false,
+        marker: new Marker(),
+        text: this.$gettext("Add person?"),
+      },
       menuProps: {
         closeOnClick: false,
         closeOnContentClick: true,
         openOnClick: false,
+        density: "compact",
         maxHeight: 300,
       },
       textRule: (v) => {
@@ -172,7 +191,64 @@ export default {
         this.busy = false;
       });
     },
+    onUpdate(marker, person) {
+      if (typeof person === "object" && marker?.UID && person?.UID && person?.Name) {
+        marker.Name = person.Name;
+        marker.SubjUID = person.UID;
+        this.rename(marker);
+      }
+
+      return true;
+    },
     onRename(marker) {
+      if (this.busy || !marker) {
+        return;
+      }
+
+      const name = marker?.Name;
+
+      if (!name) {
+        this.onRenameCancelled();
+        return;
+      }
+
+      this.confirm.marker = marker;
+
+      const people = this.$config.values?.people;
+
+      if (people) {
+        const found = people.find((person) => person.Name.localeCompare(name, "en", { sensitivity: "base" }) === 0);
+        if (found) {
+          marker.Name = found.Name;
+          marker.SubjUID = found.UID;
+          this.rename(marker);
+          return;
+        }
+      }
+
+      marker.Name = name;
+      marker.SubjUID = "";
+      this.confirm.show = true;
+    },
+    onRenameConfirmed() {
+      if (!this.confirm?.marker?.Name) {
+        return;
+      }
+
+      this.rename(this.confirm.marker);
+    },
+    onRenameCancelled() {
+      if (this.confirm?.marker?.Name && this.confirm?.marker?.originalValue) {
+        // Revert name change.
+        this.confirm.marker.Name = this.confirm.marker.originalValue("Name");
+      }
+
+      this.$nextTick(() => {
+        this.confirm.marker = reactive(new Marker());
+        this.confirm.show = false;
+      });
+    },
+    rename(marker) {
       if (this.busy || !marker) return;
 
       this.busy = true;
@@ -181,6 +257,8 @@ export default {
       marker.rename().finally(() => {
         this.$notify.unblockUI();
         this.busy = false;
+        this.confirm.marker = reactive(new Marker());
+        this.confirm.show = false;
       });
     },
   },

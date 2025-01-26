@@ -74,6 +74,7 @@ export default {
     closeOnBack: true,
     closeOnContentClick: true,
     locationStrategy: "connected",
+    density: "compact",
   },
   VSpeedDial: {
     attach: true,
@@ -111,6 +112,9 @@ export default {
   },
   VTable: {
     density: "comfortable",
+  },
+  VToolbar: {
+    flat: true,
   },
   VListItem: {
     ripple: false,

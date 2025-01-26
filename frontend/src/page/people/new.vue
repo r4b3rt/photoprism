@@ -1,9 +1,10 @@
 <template>
   <div class="p-page p-page-faces not-selectable">
     <v-form ref="form" class="p-faces-search" validate-on="invalid-input" @submit.prevent="updateQuery">
-      <v-toolbar dense flat height="48" class="page-toolbar pa-0" color="secondary-light">
+      <v-toolbar density="compact" class="page-toolbar" color="secondary-light">
         <v-spacer></v-spacer>
-        <v-divider vertical></v-divider>
+
+        <v-divider vertical class="px-1"></v-divider>
 
         <v-btn
           icon
@@ -61,11 +62,7 @@
       </div>
       <div v-else>
         <div class="v-row search-results face-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div
-            v-for="model in results"
-            :key="model.ID"
-            class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2"
-          >
+          <div v-for="model in results" :key="model.ID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2">
             <div :data-id="model.ID" :class="model.classes()" class="result flex-grow-1 not-selectable">
               <v-img
                 :src="model.thumbnailUrl('tile_320')"
@@ -95,9 +92,10 @@
                   :rules="[textRule]"
                   :readonly="readonly"
                   autocomplete="off"
-                  class="input-name pa-0 ma-0"
                   hide-details
                   single-line
+                  density="comfortable"
+                  class="input-name pa-0 ma-0"
                   @change="
                     (newName) => {
                       onRename(model, newName);
@@ -120,7 +118,7 @@
                   :readonly="readonly"
                   :return-object="false"
                   :menu-props="menuProps"
-                  :hint="$gettext('Name')"
+                  :placeholder="$gettext('Name')"
                   hide-details
                   single-line
                   open-on-clear
@@ -128,13 +126,9 @@
                   append-icon=""
                   prepend-inner-icon="mdi-account-plus"
                   autocomplete="off"
+                  density="comfortable"
                   class="input-name pa-0 ma-0"
                   @keyup.enter.native="
-                    (event) => {
-                      onRename(model, event.target.value);
-                    }
-                  "
-                  @blur="
                     (event) => {
                       onRename(model, event.target.value);
                     }
@@ -162,9 +156,13 @@ import RestModel from "model/rest";
 import { MaxItems } from "common/clipboard";
 import Notify from "common/notify";
 import { ClickLong, ClickShort, Input, InputInvalid } from "common/input";
+import PConfirmAction from "component/confirm/action.vue";
 
 export default {
   name: "PPageFaces",
+  components: {
+    PConfirmAction,
+  },
   props: {
     staticFilter: {
       type: Object,
@@ -204,7 +202,13 @@ export default {
       titleRule: (v) => v.length <= this.$config.get("clip") || this.$gettext("Name too long"),
       input: new Input(),
       lastId: "",
-      menuProps: { closeOnClick: false, closeOnContentClick: true, openOnClick: false, maxHeight: 300 },
+      menuProps: {
+        closeOnClick: false,
+        closeOnContentClick: true,
+        openOnClick: false,
+        density: "compact",
+        maxHeight: 300,
+      },
       textRule: (v) => {
         if (!v || !v.length) {
           return this.$gettext("Name");

@@ -98,7 +98,7 @@
     <p-confirm-action
       :show="dialog.delete"
       icon="mdi-delete-outline"
-      @cancel="dialog.delete = false"
+      @close="dialog.delete = false"
       @confirm="onConfirmDelete"
     ></p-confirm-action>
     <v-dialog v-model="details.show" max-width="550" class="p-dialog">
@@ -130,9 +130,13 @@
 <script>
 import { DateTime } from "luxon";
 import Api from "common/api";
+import PConfirmAction from "component/confirm/action.vue";
 
 export default {
   name: "PPageErrors",
+  components: {
+    PConfirmAction,
+  },
   data() {
     const query = this.$route.query;
     const q = query["q"] ? query["q"] : "";

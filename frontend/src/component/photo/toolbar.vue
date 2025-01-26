@@ -9,7 +9,6 @@
     @submit.prevent="updateQuery()"
   >
     <v-toolbar
-      flat
       :density="$vuetify.display.smAndDown && !embedded ? 'compact' : 'default'"
       :height="embedded ? 45 : undefined"
       class="page-toolbar"

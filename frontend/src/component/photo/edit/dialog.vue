@@ -9,7 +9,6 @@
     scrollable
     class="p-dialog p-photo-edit-dialog v-dialog--sidepanel"
     @click.stop="onClick"
-    @keydown.esc="onClose"
   >
     <v-card :tile="$vuetify.display.smAndDown">
       <v-toolbar flat color="surface" :density="$vuetify.display.smAndDown ? 'compact' : 'comfortable'">

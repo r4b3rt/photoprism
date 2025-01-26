@@ -236,7 +236,7 @@
     <p-confirm-action
       :show="revoke.dialog"
       icon="mdi-delete-outline"
-      @cancel="revoke.dialog = false"
+      @close="revoke.dialog = false"
       @confirm="onRevoked"
     ></p-confirm-action>
   </v-dialog>
@@ -247,9 +247,13 @@ import * as auth from "options/auth";
 import * as options from "options/options";
 import { DateTime } from "luxon";
 import memoizeOne from "memoize-one";
+import PConfirmAction from "component/confirm/action.vue";
 
 export default {
   name: "PSettingsApps",
+  components: {
+    PConfirmAction,
+  },
   props: {
     show: Boolean,
     model: {

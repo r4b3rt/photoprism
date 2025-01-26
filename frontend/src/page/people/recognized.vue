@@ -1,23 +1,24 @@
 <template>
   <div class="p-page p-page-subjects not-selectable">
     <v-form ref="form" class="p-people-search" validate-on="invalid-input" @submit.prevent="updateQuery()">
-      <v-toolbar dense flat height="48" class="page-toolbar pa-0" color="secondary-light">
+      <v-toolbar density="compact" class="page-toolbar" color="secondary-light">
         <v-text-field
           v-if="canSearch"
           :model-value="filter.q"
           hide-details
           clearable
           single-line
+          overflow
+          rounded
           validate-on="invalid-input"
-          variant="plain"
-          density="comfortable"
           :placeholder="$gettext('Search')"
           prepend-inner-icon="mdi-magnify"
           autocomplete="off"
           autocorrect="off"
           autocapitalize="none"
           color="surface-variant"
-          class="input-search background-inherit elevation-0 mb-3"
+          density="compact"
+          class="input-search background-inherit elevation-0"
           @update:modelValue="
             (v) => {
               updateFilter({ q: v });
@@ -31,17 +32,36 @@
           "
         ></v-text-field>
 
-        <v-divider vertical></v-divider>
+        <v-divider vertical class="px-1"></v-divider>
 
-        <v-btn icon variant="text" color="surface-variant" class="action-reload" :title="$gettext('Reload')" @click.stop="refresh()">
+        <v-btn
+          icon
+          variant="text"
+          color="surface-variant"
+          class="action-reload"
+          :title="$gettext('Reload')"
+          @click.stop="refresh()"
+        >
           <v-icon>mdi-refresh</v-icon>
         </v-btn>
 
         <template v-if="canManage">
-          <v-btn v-if="!filter.hidden" icon class="action-show-hidden" :title="$gettext('Show hidden')" @click.stop="onShowHidden()">
+          <v-btn
+            v-if="!filter.hidden"
+            icon
+            class="action-show-hidden"
+            :title="$gettext('Show hidden')"
+            @click.stop="onShowHidden()"
+          >
             <v-icon>mdi-eye</v-icon>
           </v-btn>
-          <v-btn v-else icon class="action-exclude-hidden" :title="$gettext('Exclude hidden')" @click.stop="onExcludeHidden()">
+          <v-btn
+            v-else
+            icon
+            class="action-exclude-hidden"
+            :title="$gettext('Exclude hidden')"
+            @click.stop="onExcludeHidden()"
+          >
             <v-icon>mdi-eye-off</v-icon>
           </v-btn>
         </template>
@@ -52,9 +72,18 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else style="min-height: 100vh">
-      <p-people-clipboard :refresh="refresh" :selection="selection" :clear-selection="clearSelection"></p-people-clipboard>
+      <p-people-clipboard
+        :refresh="refresh"
+        :selection="selection"
+        :clear-selection="clearSelection"
+      ></p-people-clipboard>
 
-      <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
+      <p-scroll
+        :load-more="loadMore"
+        :load-disabled="scrollDisabled"
+        :load-distance="scrollDistance"
+        :loading="loading"
+      ></p-scroll>
 
       <div v-if="results.length === 0" class="pa-3">
         <v-alert color="primary" icon="mdi-lightbulb-outline" class="no-results" variant="outlined">
@@ -68,9 +97,18 @@
           </div>
         </v-alert>
       </div>
-      <div v-else class="v-row search-results subject-results cards-view" :class="{ 'select-results': selection.length > 0 }">
+      <div
+        v-else
+        class="v-row search-results subject-results cards-view"
+        :class="{ 'select-results': selection.length > 0 }"
+      >
         <div v-for="(m, index) in results" :key="m.UID" class="v-col-6 v-col-sm-4 v-col-md-3 v-col-xl-2">
-          <div :data-uid="m.UID" class="result not-selectable" :class="m.classes(selection.includes(m.UID))" @contextmenu.stop="onContextMenu($event, index)">
+          <div
+            :data-uid="m.UID"
+            class="result not-selectable"
+            :class="m.classes(selection.includes(m.UID))"
+            @contextmenu.stop="onContextMenu($event, index)"
+          >
             <v-img
               :src="m.thumbnailUrl('tile_320')"
               :alt="m.Name"
@@ -98,12 +136,32 @@
                 <v-icon color="white" class="select-on" :title="$gettext('Show')">mdi-eye-off</v-icon>
                 <v-icon color="white" class="select-off" :title="$gettext('Hide')">mdi-close</v-icon>
               </v-btn>
-              <v-btn :ripple="false" icon variant="text" position="absolute" class="input-select" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="onSelect($event, index)" @touchmove.stop.prevent @click.stop.prevent="onSelect($event, index)">
+              <v-btn
+                :ripple="false"
+                icon
+                variant="text"
+                position="absolute"
+                class="input-select"
+                @touchstart.stop.prevent="input.touchStart($event, index)"
+                @touchend.stop.prevent="onSelect($event, index)"
+                @touchmove.stop.prevent
+                @click.stop.prevent="onSelect($event, index)"
+              >
                 <v-icon color="white" class="select-on">mdi-check-circle</v-icon>
                 <v-icon color="white" class="select-off">mdi-radiobox-blank</v-icon>
               </v-btn>
 
-              <v-btn :ripple="false" icon variant="text" position="absolute" class="input-favorite" @touchstart.stop.prevent="input.touchStart($event, index)" @touchend.stop.prevent="toggleLike($event, index)" @touchmove.stop.prevent @click.stop.prevent="toggleLike($event, index)">
+              <v-btn
+                :ripple="false"
+                icon
+                variant="text"
+                position="absolute"
+                class="input-favorite"
+                @touchstart.stop.prevent="input.touchStart($event, index)"
+                @touchend.stop.prevent="toggleLike($event, index)"
+                @touchmove.stop.prevent
+                @click.stop.prevent="toggleLike($event, index)"
+              >
                 <v-icon icon="mdi-star" color="favorite" class="select-on"></v-icon>
                 <v-icon icon="mdi-star-outline" color="white" class="select-off"></v-icon>
               </v-btn>
@@ -133,8 +191,19 @@
       </div>
     </div>
 
-    <p-people-edit-dialog :show="dialog.edit" :person="model" @close="dialog.edit = false" @confirm="onSave"></p-people-edit-dialog>
-    <p-people-merge-dialog :show="merge.show" :subj1="merge.subj1" :subj2="merge.subj2" @close="onCancelMerge" @confirm="onMerge"></p-people-merge-dialog>
+    <p-people-edit-dialog
+      :show="dialog.edit"
+      :person="model"
+      @close="dialog.edit = false"
+      @confirm="onSave"
+    ></p-people-edit-dialog>
+    <p-people-merge-dialog
+      :show="merge.show"
+      :subj1="merge.subj1"
+      :subj2="merge.subj2"
+      @close="onCancelMerge"
+      @confirm="onMerge"
+    ></p-people-merge-dialog>
   </div>
 </template>
 
@@ -509,7 +578,9 @@ export default {
           if (this.scrollDisabled) {
             this.setOffset(resp.offset);
             if (this.results.length > 1) {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("All %{n} people loaded"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("All %{n} people loaded"), { n: this.results.length })
+              );
             }
           } else {
             this.setOffset(resp.offset + resp.limit);
@@ -660,7 +731,9 @@ export default {
             } else if (this.results.length === 1) {
               this.$notify.info(this.$gettext("One person found"));
             } else {
-              this.$notify.info(this.$gettextInterpolate(this.$gettext("%{n} people found"), { n: this.results.length }));
+              this.$notify.info(
+                this.$gettextInterpolate(this.$gettext("%{n} people found"), { n: this.results.length })
+              );
             }
           } else {
             // this.$notify.info(this.$gettext('More than 20 people found'));
