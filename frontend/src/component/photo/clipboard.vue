@@ -172,13 +172,13 @@
       @cancel="dialog.album = false"
       @confirm="addToAlbum"
     ></p-photo-album-dialog>
-    <p-service-upload-dialog
+    <p-service-upload
       :show="dialog.share"
       :items="{ photos: selection }"
       :model="album"
       @cancel="dialog.share = false"
       @confirm="onShared"
-    ></p-service-upload-dialog>
+    ></p-service-upload>
   </div>
 </template>
 <script>

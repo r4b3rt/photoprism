@@ -28,7 +28,7 @@
 
       <p-photo-clipboard :context="context" :refresh="refresh"></p-photo-clipboard>
 
-      <p-photo-mosaic
+      <p-photo-view-mosaic
         v-if="settings.view === 'mosaic'"
         :context="context"
         :photos="results"
@@ -37,8 +37,8 @@
         :edit-photo="editPhoto"
         :open-photo="openPhoto"
         :is-shared-view="isShared"
-      ></p-photo-mosaic>
-      <p-photo-list
+      ></p-photo-view-mosaic>
+      <p-photo-view-list
         v-else-if="settings.view === 'list'"
         :context="context"
         :photos="results"
@@ -49,8 +49,8 @@
         :open-date="openDate"
         :open-location="openLocation"
         :is-shared-view="isShared"
-      ></p-photo-list>
-      <p-photo-cards
+      ></p-photo-view-list>
+      <p-photo-view-cards
         v-else
         :context="context"
         :photos="results"
@@ -61,7 +61,7 @@
         :open-date="openDate"
         :open-location="openLocation"
         :is-shared-view="isShared"
-      ></p-photo-cards>
+      ></p-photo-view-cards>
     </div>
   </div>
 </template>
@@ -70,9 +70,23 @@
 import { Photo } from "model/photo";
 import Thumb from "model/thumb";
 import Event from "pubsub-js";
+import PPhotoToolbar from "component/photo/toolbar.vue";
+import PPhotoClipboard from "component/photo/clipboard.vue";
+import PPhotoViewCards from "component/photo/view/cards.vue";
+import PPhotoViewMosaic from "component/photo/view/mosaic.vue";
+import PPhotoViewList from "component/photo/view/list.vue";
+import PScroll from "component/scroll.vue";
 
 export default {
   name: "PPagePhotos",
+  components: {
+    PPhotoToolbar,
+    PPhotoClipboard,
+    PPhotoViewCards,
+    PPhotoViewMosaic,
+    PPhotoViewList,
+    PScroll,
+  },
   props: {
     staticFilter: {
       type: Object,

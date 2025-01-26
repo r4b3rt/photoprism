@@ -101,7 +101,6 @@
         </v-col>
       </v-row>
     </v-form>
-
     <p-about-footer></p-about-footer>
   </div>
 </template>

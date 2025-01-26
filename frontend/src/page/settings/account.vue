@@ -337,24 +337,23 @@
         </v-card>
       </v-form>
     </div>
-    <p-account-apps-dialog :show="dialog.apps" :model="user" @close="dialog.apps = false"></p-account-apps-dialog>
-    <p-account-passcode-dialog
+    <p-settings-apps :show="dialog.apps" :model="user" @close="dialog.apps = false"></p-settings-apps>
+    <p-settings-passcode
       :show="dialog.passcode"
       :model="user"
       @close="dialog.passcode = false"
       @updateUser="updateUser()"
-    ></p-account-passcode-dialog>
-    <p-account-password-dialog
-      :show="dialog.password"
-      :model="user"
-      @close="dialog.password = false"
-    ></p-account-password-dialog>
-    <p-dialog-webdav :show="dialog.webdav" @close="dialog.webdav = false"></p-dialog-webdav>
+    ></p-settings-passcode>
+    <p-settings-password :show="dialog.password" :model="user" @close="dialog.password = false"></p-settings-password>
+    <p-settings-webdav :show="dialog.webdav" @close="dialog.webdav = false"></p-settings-webdav>
   </div>
 </template>
 
 <script>
-import PAccountPasswordDialog from "component/account/password.vue";
+import PSettingsApps from "component/settings/apps.vue";
+import PSettingsPasscode from "component/settings/passcode.vue";
+import PSettingsPassword from "component/settings/password.vue";
+import PSettingsWebdav from "component/settings/webdav.vue";
 import countries from "options/countries.json";
 import Notify from "common/notify";
 import User from "model/user";
@@ -362,7 +361,12 @@ import * as options from "options/options";
 
 export default {
   name: "PSettingsAccount",
-  components: { PAccountPasswordDialog },
+  components: {
+    PSettingsApps,
+    PSettingsPasscode,
+    PSettingsPassword,
+    PSettingsWebdav,
+  },
   data() {
     const isDemo = this.$config.isDemo();
     const isPublic = this.$config.isPublic();

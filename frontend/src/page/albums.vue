@@ -343,19 +343,19 @@
         </div>
       </div>
     </div>
-    <p-dialog-share
+    <p-share-dialog
       :show="dialog.share"
       :model="model"
       @upload="webdavUpload"
       @close="dialog.share = false"
-    ></p-dialog-share>
-    <p-service-upload-dialog
+    ></p-share-dialog>
+    <p-service-upload
       :show="dialog.upload"
       :items="{ albums: selection }"
       :model="model"
       @cancel="dialog.upload = false"
       @confirm="dialog.upload = false"
-    ></p-service-upload-dialog>
+    ></p-service-upload>
     <p-album-edit-dialog :show="dialog.edit" :album="model" @close="dialog.edit = false"></p-album-edit-dialog>
   </div>
 </template>

@@ -3,7 +3,7 @@
     :model-value="show"
     persistent
     max-width="500"
-    class="dialog-label-edit"
+    class="p-dialog dialog-label-edit"
     color="background"
     @keydown.esc="close"
   >

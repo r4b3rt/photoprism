@@ -77,7 +77,6 @@ export default {
   },
   VSpeedDial: {
     attach: true,
-    openOnHover: true,
     closeOnBack: true,
     closeOnContentClick: true,
     location: "top",

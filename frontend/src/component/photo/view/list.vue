@@ -167,7 +167,7 @@ import { virtualizationTools } from "common/virtualization-tools";
 import IconLivePhoto from "component/icon/live-photo.vue";
 
 export default {
-  name: "PPhotoList",
+  name: "PPhotoViewList",
   components: {
     IconLivePhoto,
   },

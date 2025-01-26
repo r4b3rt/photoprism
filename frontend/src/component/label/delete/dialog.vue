@@ -1,16 +1,16 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="350" class="p-dialog-confirm" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="350" class="p-dialog p-label-delete-dialog" @keydown.esc="cancel">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
-        <v-icon size="54" color="primary">{{ icon }}</v-icon>
-        <p class="text-subtitle-1">{{ $gettext(`Are you sure?`) }}</p>
+        <v-icon size="54" color="primary">mdi-delete-outline</v-icon>
+        <p class="text-subtitle-1">{{ $gettext(`Are you sure you want to delete these labels?`) }}</p>
       </v-card-title>
-      <v-card-actions class="action-buttons">
+      <v-card-actions class="action-buttons mt-1">
         <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
           {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
-          {{ $gettext(`Yes`) }}
+          {{ $gettext(`Delete`) }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -18,16 +18,9 @@
 </template>
 <script>
 export default {
-  name: "PDialogConfirm",
+  name: "PLabelDeleteDialog",
   props: {
-    show: {
-      type: Boolean,
-      default: false,
-    },
-    icon: {
-      type: String,
-      default: "mdi-delete-outline",
-    },
+    show: Boolean,
   },
   data() {
     return {};

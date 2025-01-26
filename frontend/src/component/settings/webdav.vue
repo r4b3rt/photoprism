@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="visible" max-width="580">
+  <v-dialog v-model="visible" max-width="580" class="p-dialog p-settings-webdav">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="28" color="primary">mdi-swap-horizontal</v-icon>
@@ -78,7 +78,7 @@
 
 <script>
 export default {
-  name: "PDialogWebdav",
+  name: "PSettingsWebdav",
   props: {
     show: Boolean,
   },

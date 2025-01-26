@@ -5,7 +5,7 @@
     scrim
     scrollable
     persistent
-    class="p-dialog-upload v-dialog--upload"
+    class="p-photo-upload-dialog v-dialog--upload"
     @keydown.esc="close"
   >
     <v-form ref="form" class="p-photo-upload" validate-on="invalid-input" @submit.prevent="submit">
@@ -131,7 +131,7 @@ import Util from "common/util";
 import { Duration } from "luxon";
 
 export default {
-  name: "PDialogUpload",
+  name: "PPhotoUploadDialog",
   props: {
     show: Boolean,
     data: {

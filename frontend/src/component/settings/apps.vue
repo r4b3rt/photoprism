@@ -3,7 +3,7 @@
     :model-value="show"
     persistent
     max-width="610"
-    class="modal-dialog p-account-apps-dialog"
+    class="p-dialog modal-dialog p-settings-apps"
     @keydown.esc="close"
   >
     <v-form ref="form" validate-on="invalid-input" class="form-password" accept-charset="UTF-8" @submit.prevent>
@@ -233,12 +233,12 @@
         </template>
       </v-card>
     </v-form>
-    <p-dialog-confirm
+    <p-confirm-action
       :show="revoke.dialog"
       icon="mdi-delete-outline"
       @cancel="revoke.dialog = false"
       @confirm="onRevoked"
-    ></p-dialog-confirm>
+    ></p-confirm-action>
   </v-dialog>
 </template>
 <script>
@@ -249,7 +249,7 @@ import { DateTime } from "luxon";
 import memoizeOne from "memoize-one";
 
 export default {
-  name: "PAccountAppsDialog",
+  name: "PSettingsApps",
   props: {
     show: Boolean,
     model: {

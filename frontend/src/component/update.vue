@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" max-width="400">
+  <v-dialog :model-value="show" max-width="400" class="p-dialog p-update">
     <v-card>
       <v-card-title class="d-flex justify-start align-center flex-nowrap ga-3">
         <v-icon icon="mdi-alert-decagram-outline" size="28" color="primary"></v-icon>
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "PDialogReload",
+  name: "PUpdate",
   props: {
     show: {
       type: Boolean,

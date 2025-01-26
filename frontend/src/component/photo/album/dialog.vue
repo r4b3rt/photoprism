@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="390" class="p-photo-album-dialog" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="390" class="p-dialog p-photo-album-dialog" @keydown.esc="cancel">
     <v-form ref="form" validate-on="invalid-input" accept-charset="UTF-8" @submit.prevent="confirm">
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
@@ -100,6 +100,9 @@ export default {
             this.loading = false;
           });
       }
+    },
+    onLoaded() {
+      this.$refs.input.focus();
     },
     queryServer(q) {
       if (this.loading) {

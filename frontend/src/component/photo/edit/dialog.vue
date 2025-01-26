@@ -7,7 +7,7 @@
     persistent
     scrim
     scrollable
-    class="p-photo-edit-dialog v-dialog--sidepanel"
+    class="p-dialog p-photo-edit-dialog v-dialog--sidepanel"
     @click.stop="onClick"
     @keydown.esc="onClose"
   >

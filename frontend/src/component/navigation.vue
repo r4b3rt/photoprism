@@ -896,13 +896,13 @@
         </div>
       </div>
     </div>
-    <p-dialog-reload :show="reload.dialog" @close="reload.dialog = false"></p-dialog-reload>
-    <p-dialog-upload
+    <p-update :show="reload.dialog" @close="reload.dialog = false"></p-update>
+    <p-photo-upload-dialog
       :show="upload.dialog"
       :data="upload.data"
       @close="upload.dialog = false"
       @confirm="upload.dialog = false"
-    ></p-dialog-upload>
+    ></p-photo-upload-dialog>
     <p-photo-edit-dialog
       :show="edit.dialog"
       :selection="edit.selection"
@@ -917,9 +917,17 @@
 <script>
 import Event from "pubsub-js";
 import Album from "model/album";
+import PUpdate from "component/update.vue";
+import PPhotoEditDialog from "component/photo/edit/dialog.vue";
+import PPhotoUploadDialog from "component/photo/upload/dialog.vue";
 
 export default {
   name: "PNavigation",
+  components: {
+    PUpdate,
+    PPhotoEditDialog,
+    PPhotoUploadDialog,
+  },
   data() {
     const appName = this.$config.getName();
 

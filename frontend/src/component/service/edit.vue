@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="500" class="p-service-edit" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="500" class="p-dialog p-service-edit" @keydown.esc="cancel">
     <v-card>
       <v-card-title v-if="scope === 'sharing'" class="d-flex justify-space-between align-center ga-3">
         <h6 class="text-h6">

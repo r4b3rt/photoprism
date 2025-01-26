@@ -85,19 +85,19 @@
       {{ album.Description }}
     </div>
 
-    <p-dialog-share
+    <p-share-dialog
       :show="dialog.share"
       :model="album"
       @upload="webdavUpload"
       @close="dialog.share = false"
-    ></p-dialog-share>
-    <p-service-upload-dialog
+    ></p-share-dialog>
+    <p-service-upload
       :show="dialog.upload"
       :items="{ albums: album.getId() }"
       :model="album"
       @cancel="dialog.upload = false"
       @confirm="dialog.upload = false"
-    ></p-service-upload-dialog>
+    ></p-service-upload>
     <p-album-edit-dialog :show="dialog.edit" :album="album" @close="dialog.edit = false"></p-album-edit-dialog>
   </v-form>
 </template>

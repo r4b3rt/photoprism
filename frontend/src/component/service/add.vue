@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="500" class="p-service-add" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="500" class="p-dialog p-service-add" @keydown.esc="cancel">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="28" color="primary">mdi-swap-horizontal</v-icon>

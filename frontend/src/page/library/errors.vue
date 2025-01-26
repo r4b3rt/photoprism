@@ -1,6 +1,11 @@
 <template>
   <div class="p-page p-page-errors">
-    <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'" class="page-toolbar" color="secondary">
+    <v-toolbar
+      flat
+      :density="$vuetify.display.smAndDown ? 'compact' : 'default'"
+      class="page-toolbar"
+      color="secondary"
+    >
       <v-text-field
         :model-value="filter.q"
         hide-details
@@ -37,7 +42,13 @@
       <v-btn v-if="!isPublic" icon class="action-delete" :title="$gettext('Delete')" @click.stop="onDelete()">
         <v-icon>mdi-delete</v-icon>
       </v-btn>
-      <v-btn icon href="https://docs.photoprism.app/getting-started/troubleshooting/" target="_blank" class="action-bug-report" :title="$gettext('Troubleshooting Checklists')">
+      <v-btn
+        icon
+        href="https://docs.photoprism.app/getting-started/troubleshooting/"
+        target="_blank"
+        class="action-bug-report"
+        :title="$gettext('Troubleshooting Checklists')"
+      >
         <v-icon>mdi-bug</v-icon>
       </v-btn>
     </v-toolbar>
@@ -45,10 +56,23 @@
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
     <div v-else-if="errors.length > 0" fluid class="pa-0">
-      <p-scroll :load-more="loadMore" :load-disabled="scrollDisabled" :load-distance="scrollDistance" :loading="loading"></p-scroll>
+      <p-scroll
+        :load-more="loadMore"
+        :load-disabled="scrollDisabled"
+        :load-distance="scrollDistance"
+        :loading="loading"
+      ></p-scroll>
 
       <v-list lines="one" bg-color="table" density="compact">
-        <v-list-item v-for="err in errors" :key="err.ID" :prepend-icon="err.Level === 'error' ? 'mdi-alert-circle-outline' : 'mdi-alert'" density="compact" :title="err.Message" :subtitle="formatTime(err.Time)" @click="showDetails(err)">
+        <v-list-item
+          v-for="err in errors"
+          :key="err.ID"
+          :prepend-icon="err.Level === 'error' ? 'mdi-alert-circle-outline' : 'mdi-alert'"
+          density="compact"
+          :title="err.Message"
+          :subtitle="formatTime(err.Time)"
+          @click="showDetails(err)"
+        >
           <template #prepend>
             <v-icon v-if="err.Level === 'error'" icon="mdi-alert-circle-outline" color="error"></v-icon>
             <v-icon v-else-if="err.Level === 'warning'" icon="mdi-alert" color="warning"></v-icon>
@@ -63,12 +87,21 @@
           {{ $gettext(`No warnings or error containing this keyword. Note that search is case-sensitive.`) }}
         </div>
         <div v-else>
-          {{ $gettext(`Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues.`) }}
+          {{
+            $gettext(
+              `Log messages appear here whenever PhotoPrism comes across broken files, or there are other potential issues.`
+            )
+          }}
         </div>
       </v-alert>
     </div>
-    <p-dialog-confirm :show="dialog.delete" icon="mdi-delete-outline" @cancel="dialog.delete = false" @confirm="onConfirmDelete"></p-dialog-confirm>
-    <v-dialog v-model="details.show" max-width="550">
+    <p-confirm-action
+      :show="dialog.delete"
+      icon="mdi-delete-outline"
+      @cancel="dialog.delete = false"
+      @confirm="onConfirmDelete"
+    ></p-confirm-action>
+    <v-dialog v-model="details.show" max-width="550" class="p-dialog">
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon v-if="details.err.Level === 'error'" icon="mdi-alert-circle-outline" color="error"></v-icon>

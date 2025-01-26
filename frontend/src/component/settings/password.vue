@@ -3,7 +3,7 @@
     :model-value="show"
     persistent
     max-width="500"
-    class="modal-dialog p-account-password-dialog"
+    class="p-dialog modal-dialog p-settings-password"
     @keydown.esc="close"
   >
     <v-form ref="form" class="form-password" accept-charset="UTF-8" @submit.prevent>
@@ -94,7 +94,7 @@
 import User from "model/user";
 
 export default {
-  name: "PAccountPasswordDialog",
+  name: "PSettingsPassword",
   props: {
     show: Boolean,
     model: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-photos p-photo-mosaic">
+  <div class="p-photos p-photo-view-mosaic">
     <div v-if="photos.length === 0" class="pa-3">
       <v-alert
         color="primary"
@@ -152,7 +152,7 @@ import { virtualizationTools } from "common/virtualization-tools";
 import IconLivePhoto from "component/icon/live-photo.vue";
 
 export default {
-  name: "PPhotoMosaic",
+  name: "PPhotoViewMosaic",
   components: {
     IconLivePhoto,
   },

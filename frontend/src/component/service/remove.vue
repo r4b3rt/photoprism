@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="350" class="p-service-delete" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="350" class="p-dialog p-service-delete" @keydown.esc="cancel">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="54" color="primary">mdi-delete-outline</v-icon>

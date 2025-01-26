@@ -1,5 +1,5 @@
 <template>
-  <div class="p-photos p-photo-cards">
+  <div class="p-photos p-photo-view-cards">
     <div v-if="photos.length === 0" class="pa-3">
       <v-alert
         color="primary"
@@ -316,7 +316,7 @@ import { virtualizationTools } from "common/virtualization-tools";
 import IconLivePhoto from "component/icon/live-photo.vue";
 
 export default {
-  name: "PPhotoCards",
+  name: "PPhotoViewCards",
   components: {
     IconLivePhoto,
   },
