@@ -84,9 +84,9 @@
                 prepend-inner-icon="mdi-account-plus"
                 density="comfortable"
                 class="input-name pa-0 ma-0"
-                @blur="onRename(marker)"
-                @update:model-value="(person) => onUpdate(marker, person)"
-                @keyup.enter.native="onRename(marker)"
+                @blur="onSetName(marker)"
+                @update:model-value="(person) => onSetPerson(marker, person)"
+                @keyup.enter.native="onSetName(marker)"
               >
               </v-combobox>
             </v-card-actions>
@@ -99,8 +99,8 @@
       icon="mdi-account-plus"
       :icon-size="42"
       :text="confirm.marker?.Name ? $gettext('Add %{name}?', { name: confirm.marker.Name }) : $gettext('Add person?')"
-      @close="onRenameCancelled"
-      @confirm="onRenameConfirmed"
+      @close="onCancelRename"
+      @confirm="onConfirmRename"
     ></p-confirm-action>
   </div>
 </template>
@@ -191,7 +191,7 @@ export default {
         this.busy = false;
       });
     },
-    onUpdate(marker, person) {
+    onSetPerson(marker, person) {
       if (typeof person === "object" && marker?.UID && person?.UID && person?.Name) {
         marker.Name = person.Name;
         marker.SubjUID = person.UID;
@@ -200,7 +200,7 @@ export default {
 
       return true;
     },
-    onRename(marker) {
+    onSetName(marker) {
       if (this.busy || !marker) {
         return;
       }
@@ -208,7 +208,7 @@ export default {
       const name = marker?.Name;
 
       if (!name) {
-        this.onRenameCancelled();
+        this.onCancelRename();
         return;
       }
 
@@ -230,14 +230,14 @@ export default {
       marker.SubjUID = "";
       this.confirm.show = true;
     },
-    onRenameConfirmed() {
+    onConfirmRename() {
       if (!this.confirm?.marker?.Name) {
         return;
       }
 
       this.rename(this.confirm.marker);
     },
-    onRenameCancelled() {
+    onCancelRename() {
       if (this.confirm?.marker?.Name && this.confirm?.marker?.originalValue) {
         // Revert name change.
         this.confirm.marker.Name = this.confirm.marker.originalValue("Name");
