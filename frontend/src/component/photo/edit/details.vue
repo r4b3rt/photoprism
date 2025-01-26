@@ -392,7 +392,7 @@
           <v-btn color="button" variant="flat" class="action-close" @click.stop="close">
             {{ $gettext(`Close`) }}
           </v-btn>
-          <v-btn color="highlight" variant="flat" class="action-apply action-approve" @click.stop="save(false)">
+          <v-btn color="highlight" variant="flat" :disabled="!model?.wasChanged()" class="action-apply action-approve" @click.stop="save(false)">
             <span v-if="$config.feature('review') && model.Quality < 3">{{ $gettext(`Approve`) }}</span>
             <span v-else>{{ $gettext(`Apply`) }}</span>
           </v-btn>

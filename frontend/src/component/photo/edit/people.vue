@@ -70,21 +70,20 @@
               <v-combobox
                 v-else
                 v-model="marker.Name"
-                style="z-index: 250"
                 :items="$config.values.people"
                 item-title="Name"
                 item-value="Name"
                 :disabled="busy"
                 :return-object="false"
                 :menu-props="menuProps"
-                :hint="$gettext('Name')"
+                :placeholder="$gettext('Name')"
                 hide-details
                 single-line
                 open-on-clear
                 hide-no-data
+                focused
                 append-icon=""
                 prepend-inner-icon="mdi-account-plus"
-                autocomplete="off"
                 class="input-name pa-0 ma-0"
                 @blur="onRename(marker)"
                 @keyup.enter.native="onRename(marker)"

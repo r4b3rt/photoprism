@@ -719,6 +719,10 @@ body.chrome .search-results .result {
     text-align: center;
 }
 
+.face-results.cards-view {
+    padding-bottom: 120px;
+}
+
 .face-results .is-face.is-hidden,
 .face-results .is-marker.is-invalid {
     opacity: 0.6;

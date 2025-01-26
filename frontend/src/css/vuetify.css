@@ -109,7 +109,7 @@ div.v-dialog.v-dialog--fullscreen > div.v-card {
     border-radius: 0;
 }
 
-.v-overlay.v-dialog.v-dialog--sidepanel > .v-overlay__content > .v-card {
+.v-overlay.v-dialog.v-dialog--sidepanel:not(.v-dialog--fullscreen) > .v-overlay__content > .v-card {
     border-radius: 8px 0 0 8px;
     /* border-radius: 8px 0 0 8px; */
     /* border-radius: 0; */
@@ -118,7 +118,7 @@ div.v-dialog.v-dialog--fullscreen > div.v-card {
     border-left-width: thin;
 }
 
-.is-rtl .v-overlay.v-dialog.v-dialog--sidepanel > .v-overlay__content > .v-card {
+.is-rtl .v-overlay.v-dialog.v-dialog--sidepanel:not(.v-dialog--fullscreen) > .v-overlay__content > .v-card {
     border-radius: 0 8px 8px 0;
     border-left-style: none;
     border-right-style: solid;

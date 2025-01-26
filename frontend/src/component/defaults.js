@@ -70,6 +70,19 @@ export default {
     color: "highlight",
     density: "default",
   },
+  VMenu: {
+    closeOnBack: true,
+    closeOnContentClick: true,
+    locationStrategy: "connected",
+  },
+  VSpeedDial: {
+    attach: true,
+    openOnHover: true,
+    closeOnBack: true,
+    closeOnContentClick: true,
+    location: "top",
+    transition: "slide-y-reverse-transition",
+  },
   VSelect: {
     flat: true,
     variant: "solo-filled",
@@ -107,6 +120,12 @@ export default {
     color: "background",
     itemsPerPage: -1,
     hover: true,
+  },
+  VDialog: {
+    retainFocus: true,
+    transition: false,
+    scrim: true,
+    scrollable: true,
   },
   VExpansionPanel: {
     tile: true,

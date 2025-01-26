@@ -4,16 +4,16 @@
     :model-value="show"
     :fullscreen="$vuetify.display.smAndDown"
     :transition="false"
+    persistent
     scrim
     scrollable
-    persistent
     class="p-photo-edit-dialog v-dialog--sidepanel"
-    @click.stop
-    @keydown.esc="close"
+    @click.stop="onClick"
+    @keydown.esc="onClose"
   >
     <v-card :tile="$vuetify.display.smAndDown">
       <v-toolbar flat color="surface" :density="$vuetify.display.smAndDown ? 'compact' : 'comfortable'">
-        <v-btn icon class="action-close" @click.stop="close">
+        <v-btn icon class="action-close" @click.stop="onClose">
           <v-icon>mdi-close</v-icon>
         </v-btn>
 
@@ -216,7 +216,24 @@ export default {
           break;
       }
     },
+    onClick(ev) {
+      // Closes dialog when user clicks on background and model data is unchanged.
+      if (!ev || !ev?.target?.classList?.contains("v-overlay__scrim")) {
+        return;
+      }
+      ev.preventDefault();
+      this.onClose();
+    },
+    onClose() {
+      // Closes the dialog only if model data is unchanged.
+      if (this.model?.hasId() && this.model?.wasChanged()) {
+        this.$refs?.dialog?.animateClick();
+      } else {
+        this.close();
+      }
+    },
     close() {
+      // Closes the dialog.
       this.$emit("close");
     },
     prev() {
