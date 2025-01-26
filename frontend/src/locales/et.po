@@ -55,8 +55,8 @@ msgstr "%{n} kausta leitud"
 msgid "%{n} labels found"
 msgstr "%{n} silti leitud"
 
-#: src/page/people/new.vue:287 src/page/people/new.vue:376
-#: src/page/people/recognized.vue:522
+#: src/page/people/new.vue:347 src/page/people/new.vue:436
+#: src/page/people/recognized.vue:525
 msgid "%{n} people found"
 msgstr "%{n} inimest leitud"
 
@@ -96,7 +96,7 @@ msgstr "Rakenduse %{s} uus versioon on saadaval:"
 
 #: src/component/user/edit/dialog.vue:243 src/page/about/about.vue:39
 #: src/page/settings/account.vue:256 src/app/routes.js:60
-#: src/component/navigation.vue:1422 src/page/people/recognized.vue:323
+#: src/component/navigation.vue:1422 src/page/people/recognized.vue:322
 msgid "About"
 msgstr "Teave"
 
@@ -162,6 +162,10 @@ msgstr "Aktiveerimiskood"
 msgid "Add"
 msgstr "Lisa"
 
+#: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
+msgid "Add %{name}?"
+msgstr ""
+
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
 msgstr "Lisa konto"
@@ -177,6 +181,12 @@ msgstr "Lisa faile oma fototeeki üleslaadimise teel."
 #: src/component/share/dialog.vue:46
 msgid "Add Link"
 msgstr "Lisa link"
+
+#: src/component/photo/edit/people.vue:28
+#: src/component/photo/edit/people.vue:163 src/page/people/new.vue:56
+#: src/page/people/new.vue:259
+msgid "Add person?"
+msgstr ""
 
 #: src/page/albums.vue:452
 msgid "Add pictures from search results by selecting them."
@@ -272,7 +282,7 @@ msgstr "Kõik %{n} albumit laaditud"
 msgid "All %{n} labels loaded"
 msgstr "Kõik %{n} silti laaditud"
 
-#: src/page/people/recognized.vue:371
+#: src/page/people/recognized.vue:372
 msgid "All %{n} people loaded"
 msgstr "Kõik %{n} inimest laaditud"
 
@@ -384,7 +394,7 @@ msgstr "Arhiveeritud"
 msgid "Are you sure you want to archive the selection?"
 msgstr "Kas oled kindel, et soovid valiku arhiveerida?"
 
-#: src/component/photo/toolbar.vue:508
+#: src/component/photo/toolbar.vue:507
 msgid "Are you sure you want to delete all archived pictures?"
 msgstr "Kas olete kindel, et soovite kõik arhiveeritud pildid kustutada?"
 
@@ -409,7 +419,7 @@ msgid "Are you sure you want to permanently delete this file?"
 msgstr "Kas oled kindel, et soovid selle faili lõplikult kustutada?"
 
 #: src/component/session/remove/dialog.vue:30
-#: src/component/confirm/action.vue:34
+#: src/component/confirm/action.vue:30
 msgid "Are you sure?"
 msgstr "Kas sa oled kindel?"
 
@@ -479,8 +489,8 @@ msgstr "Sinine"
 msgid "Brown"
 msgstr "Pruun"
 
-#: src/component/photo/toolbar.vue:224
-#: src/component/photo/upload/dialog.vue:230
+#: src/component/photo/toolbar.vue:223
+#: src/component/photo/upload/dialog.vue:231
 msgid "Browse"
 msgstr "Sirvi"
 
@@ -512,7 +522,7 @@ msgstr "Meie poolt pakutavat tarkvara ja teenuseid kasutades nõustud kasutustin
 msgid "Calendar"
 msgstr "Kalender"
 
-#: src/component/photo/edit/details.vue:333 src/component/photo/toolbar.vue:314
+#: src/component/photo/edit/details.vue:333 src/component/photo/toolbar.vue:313
 #: src/component/photo/view/cards.vue:487 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "Kaamera"
@@ -532,8 +542,8 @@ msgstr "Rohkem ei saa laadida, limiit on saavutatud"
 #: src/common/clipboard.js:102 src/common/clipboard.js:139
 #: src/page/albums.vue:590 src/page/albums.vue:606 src/page/labels.vue:225
 #: src/page/labels.vue:245 src/page/library/browse.vue:207
-#: src/page/library/browse.vue:223 src/page/people/new.vue:215
-#: src/page/people/new.vue:231 src/page/people/recognized.vue:304
+#: src/page/library/browse.vue:223 src/page/people/new.vue:275
+#: src/page/people/new.vue:291 src/page/people/recognized.vue:304
 #: src/page/people/recognized.vue:320
 msgid "Can't select more items"
 msgstr "Rohkem objekte ei saa valida"
@@ -542,12 +552,12 @@ msgstr "Rohkem objekte ei saa valida"
 #: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
 #: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
-#: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:47
+#: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
 #: src/component/file/delete/dialog.vue:47
 #: src/component/label/delete/dialog.vue:47
 #: src/component/label/edit/dialog.vue:104
 #: src/component/people/edit/dialog.vue:117
-#: src/component/photo/album/dialog.vue:74
+#: src/component/photo/album/dialog.vue:75
 #: src/component/photo/delete/dialog.vue:56 src/component/service/add.vue:17
 #: src/component/service/edit.vue:442 src/component/service/remove.vue:47
 #: src/component/service/upload.vue:105 src/component/settings/apps.vue:349
@@ -578,7 +588,7 @@ msgid "Carousel slide {0} of {1}"
 msgstr "Karussell slaid {0} of {1}"
 
 #: src/page/about/feedback.vue:91 src/component/album/edit/dialog.vue:125
-#: src/component/photo/toolbar.vue:473 src/page/albums.vue:221
+#: src/component/photo/toolbar.vue:472 src/page/albums.vue:221
 msgid "Category"
 msgstr "Kategooria"
 
@@ -646,8 +656,8 @@ msgid "Client Credentials"
 msgstr "Kliendi volitused"
 
 #: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:607
-#: src/component/photo/toolbar.vue:243
-#: src/component/photo/upload/dialog.vue:218
+#: src/component/photo/toolbar.vue:242
+#: src/component/photo/upload/dialog.vue:219
 #: src/component/settings/apps.vue:221 src/component/settings/apps.vue:434
 #: src/component/settings/passcode.vue:145
 #: src/component/settings/passcode.vue:452
@@ -662,7 +672,7 @@ msgstr "Sulge"
 msgid "Codec"
 msgstr "Koodek"
 
-#: src/component/photo/toolbar.vue:446
+#: src/component/photo/toolbar.vue:445
 msgid "Color"
 msgstr "Värv"
 
@@ -687,7 +697,7 @@ msgstr "Täielik taasskannimine"
 msgid "Confidence"
 msgstr "Kindlus"
 
-#: src/component/photo/album/dialog.vue:86
+#: src/component/photo/album/dialog.vue:87
 #: src/component/settings/passcode.vue:257
 msgid "Confirm"
 msgstr "Kinnita"
@@ -715,12 +725,12 @@ msgid "Contact Us"
 msgstr "Võta meiega ühendust"
 
 #: src/page/albums.vue:465 src/page/labels.vue:257
-#: src/page/people/recognized.vue:337
+#: src/page/people/recognized.vue:336
 msgid "Contains %{n} pictures."
 msgstr "Sisaldab %{n} pilti."
 
 #: src/page/albums.vue:459 src/page/labels.vue:251
-#: src/page/people/recognized.vue:331
+#: src/page/people/recognized.vue:330
 msgid "Contains one picture."
 msgstr "Sisaldab ühte pilti."
 
@@ -757,7 +767,7 @@ msgid "Couldn't find anything."
 msgstr "Midagi ei leitud."
 
 #: src/page/settings/account.vue:697 src/component/photo/edit/details.vue:237
-#: src/component/photo/toolbar.vue:286 src/page/settings/account.vue:588
+#: src/component/photo/toolbar.vue:285 src/page/settings/account.vue:588
 msgid "Country"
 msgstr "Riik"
 
@@ -850,7 +860,7 @@ msgstr "Vaikimisi kaust"
 msgid "Delete"
 msgstr "Kustuta"
 
-#: src/component/photo/toolbar.vue:179 src/component/photo/toolbar.vue:509
+#: src/component/photo/toolbar.vue:178 src/component/photo/toolbar.vue:508
 msgid "Delete All"
 msgstr "Kustuta kõik"
 
@@ -866,8 +876,8 @@ msgstr "Kirjeldus"
 msgid "Detailed instructions can be found in our User Guide."
 msgstr "Üksikasjalikud juhised leiad meie kasutajajuhendist."
 
-#: src/component/photo/edit/dialog.vue:149
-#: src/component/photo/edit/dialog.vue:166
+#: src/component/photo/edit/dialog.vue:148
+#: src/component/photo/edit/dialog.vue:165
 msgid "Details"
 msgstr "Üksikasjad"
 
@@ -1097,7 +1107,7 @@ msgid "Enter your password to confirm the action and continue:"
 msgstr "Toimingu kinnitamiseks ja jätkamiseks sisestage oma parool:"
 
 #: src/page/connect.vue:49 src/component/viewer.vue:106 src/page/connect.vue:53
-#: src/page/library/errors.vue:191
+#: src/page/library/errors.vue:195
 msgid "Error"
 msgstr "Viga"
 
@@ -1125,7 +1135,7 @@ msgstr "Iga kahe päeva tagant"
 msgid "Exclude content marked as private from search results, shared albums, labels, and places."
 msgstr "Välista otsingutulemustest, jagatud albumitest, siltidest ja kohtadest isiklikuks märgitud sisu."
 
-#: src/page/people/new.vue:92 src/page/people/recognized.vue:130
+#: src/page/people/new.vue:91 src/page/people/recognized.vue:129
 msgid "Exclude hidden"
 msgstr "Välista peidetud"
 
@@ -1133,7 +1143,7 @@ msgstr "Välista peidetud"
 msgid "ExifTool is required for full support of XMP metadata, videos and Live Photos."
 msgstr "Metaandmete ekstraheerimine ExifTooliga on vajalik täieliku video-, live-foto- ja XMP-toe saamiseks."
 
-#: src/component/photo/toolbar.vue:213 src/page/albums.vue:166
+#: src/component/photo/toolbar.vue:212 src/page/albums.vue:166
 msgid "Expand Search"
 msgstr "Laienda otsingut"
 
@@ -1142,7 +1152,7 @@ msgid "Experimental Features"
 msgstr "Eksperimentaalsed funktsioonid"
 
 #: src/page/admin/sessions.vue:32 src/page/admin/sessions.vue:378
-#: src/component/service/edit.vue:145 src/component/settings/apps.vue:65
+#: src/component/service/edit.vue:145 src/component/settings/apps.vue:69
 #: src/component/settings/apps.vue:323 src/component/share/dialog.vue:53
 msgid "Expires"
 msgstr "Aegub"
@@ -1237,8 +1247,8 @@ msgstr "Faili suurus"
 msgid "Filename"
 msgstr "Failinimi"
 
-#: src/component/navigation.vue:1808 src/component/photo/edit/dialog.vue:260
-#: src/component/photo/edit/dialog.vue:277
+#: src/component/navigation.vue:1808 src/component/photo/edit/dialog.vue:259
+#: src/component/photo/edit/dialog.vue:276
 msgid "Files"
 msgstr "Failid"
 
@@ -1357,7 +1367,7 @@ msgstr "Peidetud"
 msgid "Hidden Files"
 msgstr "Peidetud failid"
 
-#: src/page/people/new.vue:181 src/page/people/recognized.vue:236
+#: src/page/people/new.vue:180 src/page/people/recognized.vue:235
 msgid "Hide"
 msgstr "Peida"
 
@@ -1532,8 +1542,8 @@ msgid "Label"
 msgstr "Silt"
 
 #: src/app/routes.js:322 src/component/navigation.vue:1078
-#: src/component/photo/edit/dialog.vue:181
-#: src/component/photo/edit/dialog.vue:198 src/page/settings/general.vue:178
+#: src/component/photo/edit/dialog.vue:180
+#: src/component/photo/edit/dialog.vue:197 src/page/settings/general.vue:178
 msgid "Labels"
 msgstr "Sildid"
 
@@ -1565,7 +1575,7 @@ msgstr "Viimane lehekülg"
 msgid "Last Sync"
 msgstr "Viimane sünkroonimine"
 
-#: src/component/settings/apps.vue:56
+#: src/component/settings/apps.vue:60
 msgid "Last Used"
 msgstr "Viimati kasutatud"
 
@@ -1776,7 +1786,7 @@ msgid "Monochrome"
 msgstr "Mustvalge"
 
 #: src/page/settings/account.vue:487 src/component/photo/edit/details.vue:140
-#: src/component/photo/toolbar.vue:420 src/page/settings/account.vue:488
+#: src/component/photo/toolbar.vue:419 src/page/settings/account.vue:488
 msgid "Month"
 msgstr "Kuu"
 
@@ -1802,13 +1812,11 @@ msgstr "Peab olema vähemalt %{n} tähemärki."
 #: src/component/photo/edit/files.vue:43 src/component/photo/edit/info.vue:64
 #: src/component/photo/edit/info.vue:128
 #: src/component/photo/edit/labels.vue:227
-#: src/component/photo/edit/people.vue:29
-#: src/component/photo/edit/people.vue:136
-#: src/component/photo/view/list.vue:116 src/component/photo/view/list.vue:215
-#: src/component/service/edit.vue:297 src/component/settings/apps.vue:45
-#: src/component/settings/apps.vue:283 src/page/albums.vue:89
-#: src/page/auth/login.vue:147 src/page/people/new.vue:52
-#: src/page/people/new.vue:227 src/page/settings/services.vue:26
+#: src/component/photo/edit/people.vue:39 src/component/photo/view/list.vue:116
+#: src/component/photo/view/list.vue:215 src/component/service/edit.vue:297
+#: src/component/settings/apps.vue:49 src/component/settings/apps.vue:283
+#: src/page/albums.vue:89 src/page/auth/login.vue:147
+#: src/page/people/new.vue:67 src/page/settings/services.vue:26
 msgid "Name"
 msgstr "Nimi"
 
@@ -1816,8 +1824,8 @@ msgstr "Nimi"
 #: src/component/label/edit/dialog.vue:16
 #: src/component/people/edit/dialog.vue:16
 #: src/component/photo/edit/labels.vue:33
-#: src/component/photo/edit/people.vue:32 src/page/labels.vue:45
-#: src/page/library/browse.vue:44 src/page/people/new.vue:46
+#: src/component/photo/edit/people.vue:42 src/page/labels.vue:45
+#: src/page/library/browse.vue:44 src/page/people/new.vue:50
 #: src/page/people/recognized.vue:45
 msgid "Name too long"
 msgstr "Nimi on liiga pikk"
@@ -1881,9 +1889,9 @@ msgstr "Sobivaid kirjeid ei leitud"
 msgid "No more"
 msgstr "Enam ei ole"
 
-#: src/component/photo/edit/people.vue:33 src/page/people/new.vue:283
-#: src/page/people/new.vue:372 src/page/people/new.vue:131
-#: src/page/people/recognized.vue:518 src/page/people/recognized.vue:176
+#: src/component/photo/edit/people.vue:34 src/page/people/new.vue:343
+#: src/page/people/new.vue:432 src/page/people/new.vue:130
+#: src/page/people/recognized.vue:520 src/page/people/recognized.vue:175
 msgid "No people found"
 msgstr "Inimesi ei leitud"
 
@@ -1919,7 +1927,7 @@ msgstr "Ei aitäh"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "Seda märksõna sisaldavaid hoiatusi või vigu ei ole. Pane tähele, et otsing on tõusutundlik."
 
-#: src/component/photo/upload/dialog.vue:198
+#: src/component/photo/upload/dialog.vue:199
 #: src/component/photo/view/cards.vue:125 src/component/photo/view/list.vue:58
 #: src/component/photo/view/list.vue:92 src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
@@ -2005,8 +2013,8 @@ msgstr "Üks kaust leitud"
 msgid "One label found"
 msgstr "Üks silt leitud"
 
-#: src/page/people/new.vue:285 src/page/people/new.vue:374
-#: src/page/people/recognized.vue:520
+#: src/page/people/new.vue:345 src/page/people/new.vue:434
+#: src/page/people/recognized.vue:522
 msgid "One person found"
 msgstr "Üks inimene leitud"
 
@@ -2097,8 +2105,8 @@ msgid "Password changed"
 msgstr "Parool muudetud"
 
 #: src/app/routes.js:328 src/app/routes.js:352 src/component/navigation.vue:776
-#: src/component/navigation.vue:1776 src/component/photo/edit/dialog.vue:221
-#: src/component/photo/edit/dialog.vue:238 src/page/settings/general.vue:130
+#: src/component/navigation.vue:1776 src/component/photo/edit/dialog.vue:220
+#: src/component/photo/edit/dialog.vue:237 src/page/settings/general.vue:130
 msgid "People"
 msgstr "Inimesed"
 
@@ -2170,11 +2178,11 @@ msgstr "Palun kinnita oma uus parool."
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "Kopeerige järgmine juhuslikult loodud rakenduse parool ja hoidke seda kindlas kohas, kuna te ei saa seda enam näha."
 
-#: src/component/photo/upload/dialog.vue:193
+#: src/component/photo/upload/dialog.vue:194
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "Palun ärge laadige üles privaatseid, ebaseaduslikke või solvavaid pilte."
 
-#: src/component/photo/upload/dialog.vue:195
+#: src/component/photo/upload/dialog.vue:196
 msgid "Please don't upload photos containing offensive content."
 msgstr "Palun ära laadi üles solvava sisuga fotosid."
 
@@ -2210,7 +2218,7 @@ msgstr "Püstformaat"
 msgid "Preserve filenames"
 msgstr "Säilita failinimed"
 
-#: src/component/photo/upload/dialog.vue:153
+#: src/component/photo/upload/dialog.vue:154
 msgid "Press enter to create a new album."
 msgstr "Uue albumi lisamiseks vajuta Enter."
 
@@ -2316,8 +2324,8 @@ msgstr "Hiljuti arhiveeritud"
 msgid "Recently Edited"
 msgstr "Hiljuti muudetud"
 
-#: src/component/photo/edit/people.vue:34 src/page/people/new.vue:132
-#: src/page/people/recognized.vue:177
+#: src/component/photo/edit/people.vue:35 src/page/people/new.vue:131
+#: src/page/people/recognized.vue:176
 msgid "Recognition starts after indexing has been completed."
 msgstr "Tuvastamine algab pärast indekseerimise lõppemist."
 
@@ -2346,10 +2354,10 @@ msgid "Register"
 msgstr "Registreeri"
 
 #: src/component/album/toolbar.vue:64 src/component/navigation.vue:1651
-#: src/component/photo/toolbar.vue:90 src/component/update.vue:64
+#: src/component/photo/toolbar.vue:89 src/component/update.vue:64
 #: src/page/albums.vue:111 src/page/labels.vue:93
 #: src/page/library/browse.vue:84 src/page/library/errors.vue:81
-#: src/page/people/new.vue:57 src/page/people/recognized.vue:93
+#: src/page/people/new.vue:56 src/page/people/recognized.vue:92
 msgid "Reload"
 msgstr "Laadi uuesti"
 
@@ -2362,7 +2370,7 @@ msgstr "Uuesti laadimine…"
 msgid "Remote Sync"
 msgstr "Kaugsünkroonimine"
 
-#: src/component/photo/edit/people.vue:65
+#: src/component/photo/edit/people.vue:66
 msgid "Remove"
 msgstr "Eemalda"
 
@@ -2456,14 +2464,14 @@ msgid "Scans"
 msgstr "Skannid"
 
 #: src/page/admin/sessions.vue:29 src/page/admin/sessions.vue:302
-#: src/component/settings/apps.vue:47 src/component/settings/apps.vue:307
+#: src/component/settings/apps.vue:51 src/component/settings/apps.vue:307
 msgid "Scope"
 msgstr "Reguleerimisala"
 
 #: src/component/navigation.vue:343 src/component/navigation.vue:1744
-#: src/component/photo/toolbar.vue:52 src/page/albums.vue:89
+#: src/component/photo/toolbar.vue:51 src/page/albums.vue:89
 #: src/page/labels.vue:71 src/page/library/errors.vue:62
-#: src/page/people/recognized.vue:67 src/page/places.vue:78
+#: src/page/people/recognized.vue:65 src/page/places.vue:78
 msgid "Search"
 msgstr "Otsi"
 
@@ -2500,7 +2508,7 @@ msgid "Select dates"
 msgstr "Valige kuupäevad"
 
 #: src/component/photo/album/dialog.vue:51
-#: src/component/photo/upload/dialog.vue:145
+#: src/component/photo/upload/dialog.vue:146
 msgid "Select or create an album"
 msgstr "Valige või looge album"
 
@@ -2585,15 +2593,15 @@ msgstr "Jaga %{nimi}"
 msgid "Share your pictures with other apps and services."
 msgstr "Jaga oma pilte teiste rakenduste ja teenustega."
 
-#: src/page/people/new.vue:171 src/page/people/recognized.vue:226
+#: src/page/people/new.vue:170 src/page/people/recognized.vue:225
 msgid "Show"
 msgstr "Näita"
 
-#: src/page/people/new.vue:262
+#: src/page/people/new.vue:248
 msgid "Show all new faces"
 msgstr "Näita kõiki uusi nägusid"
 
-#: src/page/people/new.vue:75 src/page/people/recognized.vue:113
+#: src/page/people/new.vue:74 src/page/people/recognized.vue:112
 msgid "Show hidden"
 msgstr "Näita peidetud"
 
@@ -2601,7 +2609,7 @@ msgstr "Näita peidetud"
 msgid "Show less"
 msgstr "Näita vähem"
 
-#: src/component/photo/toolbar.vue:72 src/page/labels.vue:111
+#: src/component/photo/toolbar.vue:71 src/page/labels.vue:111
 msgid "Show more"
 msgstr "Näita rohkem"
 
@@ -2650,7 +2658,7 @@ msgstr "Tarkvara värskendus"
 msgid "Sort by"
 msgstr "Sorteerimine"
 
-#: src/component/album/edit/dialog.vue:139 src/component/photo/toolbar.vue:368
+#: src/component/album/edit/dialog.vue:139 src/component/photo/toolbar.vue:367
 #: src/page/albums.vue:247
 msgid "Sort Order"
 msgstr "Järjekord"
@@ -2731,7 +2739,7 @@ msgid "Successfully Connected"
 msgstr "Edukalt ühendatud"
 
 #: src/component/session/remove/dialog.vue:23
-#: src/component/settings/apps.vue:205
+#: src/component/settings/apps.vue:209
 msgid "Successfully deleted"
 msgstr "Edukalt kustutatud"
 
@@ -2772,7 +2780,7 @@ msgstr "Sinakasroheline"
 msgid "TensorFlow is required for image classification, facial recognition, and detecting unsafe content."
 msgstr "TensorFlow on vajalik piltide klassifitseerimiseks, näotuvastuseks ja ohtliku sisu tuvastamiseks."
 
-#: src/component/photo/edit/details.vue:32 src/page/people/new.vue:55
+#: src/component/photo/edit/details.vue:32 src/page/people/new.vue:70
 msgid "Text too long"
 msgstr "Tekst on liiga pikk"
 
@@ -2861,8 +2869,8 @@ msgstr "Täna"
 
 #: src/component/album/toolbar.vue:139 src/component/album/toolbar.vue:157
 #: src/component/album/toolbar.vue:175 src/component/album/toolbar.vue:192
-#: src/component/photo/toolbar.vue:108 src/component/photo/toolbar.vue:126
-#: src/component/photo/toolbar.vue:144 src/component/photo/toolbar.vue:161
+#: src/component/photo/toolbar.vue:107 src/component/photo/toolbar.vue:125
+#: src/component/photo/toolbar.vue:143 src/component/photo/toolbar.vue:160
 msgid "Toggle View"
 msgstr "Muuda vaadet"
 
@@ -2870,7 +2878,7 @@ msgstr "Muuda vaadet"
 msgid "Token"
 msgstr "Token"
 
-#: src/component/photo/upload/dialog.vue:189
+#: src/component/photo/upload/dialog.vue:196
 msgid "Too many files selected"
 msgstr "Liiga palju valitud faile"
 
@@ -2889,7 +2897,7 @@ msgstr "Tõrkeotsingu meelespead"
 #: src/component/photo/view/cards.vue:117 src/component/photo/view/list.vue:53
 #: src/component/photo/view/list.vue:84 src/component/photo/view/mosaic.vue:73
 #: src/page/albums.vue:316 src/page/labels.vue:176
-#: src/page/people/recognized.vue:177
+#: src/page/people/recognized.vue:176
 msgid "Try again using other filters or keywords."
 msgstr "Proovi uuesti, kasutades teisi filtreid või märksõnu."
 
@@ -2906,7 +2914,7 @@ msgstr "Tüüp"
 msgid "Unauthorized"
 msgstr "Autoriseerimata"
 
-#: src/component/photo/edit/people.vue:93
+#: src/component/photo/edit/people.vue:94
 msgid "Undo"
 msgstr "Võta tagasi"
 
@@ -2920,8 +2928,8 @@ msgstr "Unikaalne ID"
 #: src/model/photo.js:1005 src/model/photo.js:1050 src/model/photo.js:1063
 #: src/model/user.js:155 src/options/options.js:50 src/options/options.js:64
 #: src/options/options.js:81 src/options/options.js:95
-#: src/options/options.js:107 src/page/library/errors.vue:183
-#: src/page/library/errors.vue:200
+#: src/options/options.js:107 src/page/library/errors.vue:187
+#: src/page/library/errors.vue:204
 msgid "Unknown"
 msgstr "Teadmata"
 
@@ -2979,14 +2987,14 @@ msgid "Upgrade Now"
 msgstr "Uuenda nüüd"
 
 #: src/component/album/toolbar.vue:210 src/component/navigation.vue:1702
-#: src/component/photo/toolbar.vue:197 src/component/photo/upload/dialog.vue:46
+#: src/component/photo/toolbar.vue:196 src/component/photo/upload/dialog.vue:46
 #: src/component/service/upload.vue:132 src/page/albums.vue:129
 #: src/page/library/import.vue:117 src/page/settings/general.vue:226
 #: src/page/settings/services.vue:27
 msgid "Upload"
 msgstr "Üleslaadimine"
 
-#: src/component/photo/upload/dialog.vue:280
+#: src/component/photo/upload/dialog.vue:287
 msgid "Upload complete"
 msgstr "Üleslaadimine lõpetatud"
 
@@ -2994,8 +3002,8 @@ msgstr "Üleslaadimine lõpetatud"
 msgid "Upload complete. Indexing…"
 msgstr "Üleslaadimine lõpetatud. Indekseerimine…"
 
-#: src/component/photo/upload/dialog.vue:267
-#: src/component/photo/upload/dialog.vue:285
+#: src/component/photo/upload/dialog.vue:274
+#: src/component/photo/upload/dialog.vue:292
 #: src/component/photo/upload/dialog.vue:122
 msgid "Upload failed"
 msgstr "Üleslaadimine ebaõnnestus"
@@ -3016,9 +3024,9 @@ msgstr "Laadi üles WebDAV-i ja jaga linke sõpradega."
 msgid "Uploading %{n} of %{t}…"
 msgstr "Üleslaadimine %{n}/%{t}…"
 
-#: src/component/photo/upload/dialog.vue:103
-#: src/component/photo/upload/dialog.vue:111
-#: src/component/photo/upload/dialog.vue:225
+#: src/component/photo/upload/dialog.vue:110
+#: src/component/photo/upload/dialog.vue:118
+#: src/component/photo/upload/dialog.vue:232
 msgid "Uploading photos…"
 msgstr "Fotode üleslaadimine…"
 
@@ -3026,7 +3034,7 @@ msgstr "Fotode üleslaadimine…"
 msgid "Uploading…"
 msgstr "Üleslaadimine…"
 
-#: src/component/photo/upload/dialog.vue:195
+#: src/component/photo/upload/dialog.vue:196
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "Selliseid pilte sisaldavad üleslaadimised lükatakse automaatselt tagasi."
 
@@ -3100,7 +3108,7 @@ msgstr "Video kestus"
 msgid "Videos"
 msgstr "Videod"
 
-#: src/component/photo/toolbar.vue:342 src/component/photo/view/cards.vue:335
+#: src/component/photo/toolbar.vue:341 src/component/photo/view/cards.vue:335
 #: src/component/photo/view/mosaic.vue:206
 msgid "View"
 msgstr "Vaade"
@@ -3117,7 +3125,7 @@ msgstr "Külastaja"
 msgid "Visual Similarity"
 msgstr "Visuaalne sarnasus"
 
-#: src/page/library/errors.vue:193
+#: src/page/library/errors.vue:197
 msgid "Warning"
 msgstr "Hoiatus"
 
@@ -3171,7 +3179,7 @@ msgid "Work Details"
 msgstr "Töö üksikasjad"
 
 #: src/page/settings/account.vue:512 src/component/photo/edit/details.vue:166
-#: src/component/photo/toolbar.vue:394 src/page/albums.vue:194
+#: src/component/photo/toolbar.vue:393 src/page/albums.vue:194
 #: src/page/settings/account.vue:514
 msgid "Year"
 msgstr "Aasta"
@@ -3180,7 +3188,7 @@ msgstr "Aasta"
 msgid "Yellow"
 msgstr "Kollane"
 
-#: src/component/confirm/action.vue:58 src/component/people/merge/dialog.vue:58
+#: src/component/confirm/action.vue:54 src/component/people/merge/dialog.vue:58
 #: src/component/photo/archive/dialog.vue:58
 #: src/component/photo/edit/files.vue:320
 #: src/component/photo/edit/files.vue:350
@@ -3205,7 +3213,7 @@ msgstr "Võid alla laadida ainult ühe albumi"
 msgid "You can only download one label"
 msgstr "Võid alla laadida ainult ühe sildi"
 
-#: src/component/photo/upload/dialog.vue:193
+#: src/component/photo/upload/dialog.vue:194
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "Saate testimiseks üles laadida kuni %{n} faili."
 
@@ -3213,8 +3221,8 @@ msgstr "Saate testimiseks üles laadida kuni %{n} faili."
 msgid "You may only select one item"
 msgstr "Võid valida ainult ühe objekti"
 
-#: src/component/photo/edit/people.vue:34 src/page/people/new.vue:132
-#: src/page/people/recognized.vue:177
+#: src/component/photo/edit/people.vue:35 src/page/people/new.vue:131
+#: src/page/people/recognized.vue:176
 msgid "You may rescan your library to find additional faces."
 msgstr "Võid oma fototeeki uuesti skaneerida, et veel nägusid leida."
 
