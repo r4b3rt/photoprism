@@ -167,7 +167,7 @@ msgstr "Menambahkan"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
 msgid "Add %{name}?"
-msgstr "Tambahkan %{nama}?"
+msgstr "Tambahkan %{name}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1054,7 +1054,7 @@ msgstr "Sunting"
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
 msgid "Edit %{name}"
-msgstr "Sunting %{nama}"
+msgstr "Sunting %{name}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"

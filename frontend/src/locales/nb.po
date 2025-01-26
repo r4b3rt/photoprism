@@ -167,7 +167,7 @@ msgstr "Legg til"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
 msgid "Add %{name}?"
-msgstr "Legg til %{navn}?"
+msgstr "Legg til %{name}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"

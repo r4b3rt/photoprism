@@ -167,7 +167,7 @@ msgstr "Добавяне на"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
 msgid "Add %{name}?"
-msgstr "Добавяне на %{име}?"
+msgstr "Добавяне на %{name}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1054,7 +1054,7 @@ msgstr "Редактиране на"
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
 msgid "Edit %{name}"
-msgstr "Редактиране на %{име}"
+msgstr "Редактиране на %{name}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1422,7 +1422,7 @@ msgstr "Внесените файлове ще бъдат сортирани п�
 
 #: src/page/library/import.vue:37
 msgid "Importing %{name}…"
-msgstr "Импортиране на %{име}…"
+msgstr "Импортиране на %{name}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2590,7 +2590,7 @@ msgstr "Споделете"
 
 #: src/component/share/dialog.vue:41
 msgid "Share %{name}"
-msgstr "Споделяне на %{име}"
+msgstr "Споделяне на %{name}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

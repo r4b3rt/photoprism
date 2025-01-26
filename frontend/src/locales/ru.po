@@ -167,7 +167,7 @@ msgstr "Добавить"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
 msgid "Add %{name}?"
-msgstr "Добавь %{имя}?"
+msgstr "Добавь %{name}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1422,7 +1422,7 @@ msgstr "Импортированные файлы будут отсортиро�
 
 #: src/page/library/import.vue:37
 msgid "Importing %{name}…"
-msgstr "Импорт %{имя}…"
+msgstr "Импорт %{name}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
