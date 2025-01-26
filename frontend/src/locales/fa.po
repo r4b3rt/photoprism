@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-25 09:10+0000\n"
+"PO-Revision-Date: 2025-01-26 15:44+0000\n"
 "Last-Translator: Google Cloud Translation Basic <noreply-mt-google-translate@weblate.org>\n"
 "Language-Team: \n"
 "Language: fa\n"
@@ -63,8 +63,8 @@ msgstr "%{n} برچسب پیدا شد"
 msgid "%{n} people found"
 msgstr "%{n} نفر پیدا شد"
 
-#: src/page/album/photos.vue:266 src/page/album/photos.vue:429
-#: src/page/photos.vue:395 src/page/photos.vue:570
+#: src/page/album/photos.vue:280 src/page/album/photos.vue:443
+#: src/page/photos.vue:409 src/page/photos.vue:584
 msgid "%{n} pictures found"
 msgstr "%{n} عکس پیدا شد"
 
@@ -76,12 +76,12 @@ msgstr "1 ساعت"
 msgid "12 hours"
 msgstr "12 ساعت"
 
-#: src/dialog/admin/users/edit.vue:466 src/page/settings/account.vue:332
-#: src/component/account/passcode.vue:72
+#: src/component/user/edit/dialog.vue:466 src/page/settings/account.vue:332
+#: src/component/settings/passcode.vue:72
 msgid "2-Factor Authentication"
 msgstr "احراز هویت 2-عاملی"
 
-#: src/dialog/admin/users/edit.vue:465 src/options/auth.js:46
+#: src/component/user/edit/dialog.vue:465 src/options/auth.js:46
 msgid "2FA"
 msgstr "2FA"
 
@@ -89,15 +89,15 @@ msgstr "2FA"
 msgid "4 hours"
 msgstr "4 ساعت"
 
-#: src/component/dialog/share.vue:202
+#: src/component/share/dialog.vue:204
 msgid "A click will copy it to your clipboard."
 msgstr "یک کلیک آن را در کلیپ بورد شما کپی می کند."
 
-#: src/component/dialog/reload.vue:26
+#: src/component/update.vue:26
 msgid "A new version of %{s} is available:"
 msgstr "نسخه جدیدی از %{s} موجود است:"
 
-#: src/dialog/admin/users/edit.vue:243 src/page/about/about.vue:39
+#: src/component/user/edit/dialog.vue:243 src/page/about/about.vue:39
 #: src/page/settings/account.vue:256 src/app/routes.js:60
 #: src/component/navigation.vue:1422 src/page/people/recognized.vue:323
 msgid "About"
@@ -107,18 +107,18 @@ msgstr "درباره"
 msgid "Access Token"
 msgstr "نشانه دسترسی"
 
-#: src/component/navigation.vue:98 src/component/navigation.vue:1666
+#: src/component/navigation.vue:106 src/component/navigation.vue:1666
 #: src/component/service/upload.vue:60 src/model/service.js:94
 #: src/model/user.js:169 src/page/settings.vue:85
 #: src/page/settings/general.vue:490
 msgid "Account"
 msgstr "حساب کاربری"
 
-#: src/dialog/admin/users/add.vue:89 src/component/service/add.vue:34
+#: src/component/user/add/dialog.vue:89 src/component/service/add.vue:34
 msgid "Account created"
 msgstr "حساب کاربری ایجاد شد"
 
-#: src/dialog/admin/users/remove.vue:24 src/component/service/remove.vue:24
+#: src/component/user/remove/dialog.vue:24 src/component/service/remove.vue:24
 msgid "Account deleted"
 msgstr "حساب کاربری حذف شد"
 
@@ -139,7 +139,7 @@ msgstr "عمل"
 msgid "Actions"
 msgstr "اقدامات"
 
-#: src/page/connect.vue:291 src/component/account/passcode.vue:343
+#: src/page/connect.vue:291 src/component/settings/passcode.vue:343
 #: src/page/connect.vue:298
 msgid "Activate"
 msgstr "فعال کنید"
@@ -160,12 +160,12 @@ msgstr "برای مرتب سازی نزولی فعال کنید."
 msgid "Activation Code"
 msgstr "کد فعال سازی"
 
-#: src/dialog/admin/users/add.vue:23 src/page/admin/users.vue:151
-#: src/component/account/apps.vue:445
+#: src/component/user/add/dialog.vue:23 src/page/admin/users.vue:151
+#: src/component/settings/apps.vue:445
 msgid "Add"
 msgstr "اضافه کردن"
 
-#: src/dialog/admin/users/add.vue:50 src/component/service/add.vue:38
+#: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
 msgstr "ویرایش حساب کاربری"
 
@@ -177,7 +177,7 @@ msgstr "افزودن آلبوم"
 msgid "Add files to your library via Web Upload."
 msgstr "از طریق بارگذاری وب فایلها را به کتابخانه خود اضافه کنید."
 
-#: src/component/dialog/share.vue:46
+#: src/component/share/dialog.vue:46
 msgid "Add Link"
 msgstr "اضافه کردن لینک"
 
@@ -217,7 +217,7 @@ msgstr "بعد از 3 روز"
 msgid "After 7 days"
 msgstr "بعد از 7 روز"
 
-#: src/component/account/passcode.vue:90
+#: src/component/settings/passcode.vue:90
 msgid "After entering your password for confirmation, you can set up two-factor authentication with a compatible authenticator app or device:"
 msgstr "پس از وارد کردن رمز عبور خود برای تأیید، می توانید احراز هویت دو مرحله ای را با یک برنامه یا دستگاه تأیید کننده سازگار تنظیم کنید:"
 
@@ -320,7 +320,7 @@ msgstr "همه اصل"
 msgid "All Years"
 msgstr "همه سالها"
 
-#: src/component/dialog/share.vue:202
+#: src/component/share/dialog.vue:204
 msgid "Alternatively, you can upload files directly to WebDAV servers like Nextcloud."
 msgstr "از طرف دیگر، می‌توانید فایل‌ها را مستقیماً در سرورهای WebDAV مانند Nextcloud آپلود کنید."
 
@@ -328,7 +328,7 @@ msgstr "از طرف دیگر، می‌توانید فایل‌ها را مستق
 msgid "Altitude"
 msgstr "ارتفاع"
 
-#: src/component/photo/edit/details.vue:264
+#: src/component/photo/edit/details.vue:265
 msgid "Altitude (m)"
 msgstr "ارتفاع (M)"
 
@@ -337,9 +337,9 @@ msgid "AM"
 msgstr "AM"
 
 #: src/component/navigation.vue:422 src/component/photo/edit/files.vue:319
-#: src/component/photo/view/cards.vue:311
-#: src/component/photo/view/cards.vue:469 src/component/photo/view/list.vue:172
-#: src/component/photo/view/mosaic.vue:182 src/options/options.js:364
+#: src/component/photo/view/cards.vue:312
+#: src/component/photo/view/cards.vue:470 src/component/photo/view/list.vue:172
+#: src/component/photo/view/mosaic.vue:183 src/options/options.js:364
 msgid "Animated"
 msgstr "متحرک"
 
@@ -347,7 +347,7 @@ msgstr "متحرک"
 msgid "Animation"
 msgstr "انیمیشن"
 
-#: src/component/dialog/share.vue:202
+#: src/component/share/dialog.vue:204
 msgid "Any private photos and videos remain private and won't be shared."
 msgstr "هر عکس و فیلم خصوصی خصوصی باقی می ماند و به اشتراک گذاشته نمی شود."
 
@@ -359,22 +359,22 @@ msgstr "کلید API"
 msgid "Application"
 msgstr "کاربرد"
 
-#: src/component/photo/edit/details.vue:617
+#: src/component/photo/edit/details.vue:621
 msgid "Apply"
 msgstr "درخواست"
 
 #: src/component/photo/clipboard.vue:64
-#: src/component/photo/edit/details.vue:616
-#: src/component/photo/view/cards.vue:401
+#: src/component/photo/edit/details.vue:620
+#: src/component/photo/view/cards.vue:402
 msgid "Approve"
 msgstr "تأیید"
 
-#: src/page/settings/account.vue:382 src/component/account/apps.vue:88
+#: src/page/settings/account.vue:382 src/component/settings/apps.vue:88
 msgid "Apps and Devices"
 msgstr "برنامه ها و دستگاه ها"
 
 #: src/app/routes.js:256 src/component/navigation.vue:551
-#: src/component/photo/clipboard.vue:142 src/component/photo/view/cards.vue:383
+#: src/component/photo/clipboard.vue:142 src/component/photo/view/cards.vue:384
 #: src/page/settings/general.vue:346
 msgid "Archive"
 msgstr "بایگانی"
@@ -391,15 +391,15 @@ msgstr "آیا مطمئن هستید که می خواهید انتخاب را ب
 msgid "Are you sure you want to delete all archived pictures?"
 msgstr "آیا مطمئن هستید که می خواهید همه تصاویر بایگانی شده را حذف کنید؟"
 
-#: src/component/album/dialog/delete.vue:30
+#: src/component/album/delete/dialog.vue:30
 msgid "Are you sure you want to delete these albums?"
 msgstr "آیا مطمئن هستید که می خواهید این آلبوم ها را حذف کنید؟"
 
-#: src/component/label/dialog/delete.vue:34
+#: src/component/label/delete/dialog.vue:34
 msgid "Are you sure you want to delete these labels?"
 msgstr "آیا مطمئن هستید که می خواهید این برچسب ها را حذف کنید؟"
 
-#: src/dialog/admin/users/remove.vue:30 src/component/service/remove.vue:34
+#: src/component/user/remove/dialog.vue:30 src/component/service/remove.vue:34
 msgid "Are you sure you want to delete this account?"
 msgstr "آیا مطمئن هستید که می خواهید این حساب را حذف کنید؟"
 
@@ -407,15 +407,16 @@ msgstr "آیا مطمئن هستید که می خواهید این حساب را
 msgid "Are you sure you want to permanently delete these pictures?"
 msgstr "آیا مطمئن هستید که می خواهید این تصاویر را به طور دائم حذف کنید؟"
 
-#: src/component/file/dialog/delete.vue:34
+#: src/component/file/delete/dialog.vue:34
 msgid "Are you sure you want to permanently delete this file?"
 msgstr "آیا مطمئن هستید که می خواهید این پرونده را به طور دائم حذف کنید؟"
 
-#: src/dialog/admin/sessions/remove.vue:30 src/component/dialog/confirm.vue:34
+#: src/component/session/remove/dialog.vue:30
+#: src/component/confirm/action.vue:34
 msgid "Are you sure?"
 msgstr "مطمئن هستی؟"
 
-#: src/component/photo/edit/details.vue:514
+#: src/component/photo/edit/details.vue:517
 msgid "Artist"
 msgstr "هنرمند"
 
@@ -423,13 +424,13 @@ msgstr "هنرمند"
 msgid "Aspect Ratio"
 msgstr "نسبت ابعاد"
 
-#: src/dialog/admin/users/add.vue:171 src/dialog/admin/users/edit.vue:320
+#: src/component/user/add/dialog.vue:171 src/component/user/edit/dialog.vue:320
 #: src/page/admin/sessions.vue:28 src/page/admin/sessions.vue:206
-#: src/page/admin/users.vue:38
+#: src/page/admin/users.vue:44
 msgid "Authentication"
 msgstr "احراز هویت"
 
-#: src/component/account/apps.vue:148
+#: src/component/settings/apps.vue:148
 msgid "Back"
 msgstr "بازگشت"
 
@@ -445,7 +446,7 @@ msgstr "پشتیبان گیری"
 msgid "Badge"
 msgstr "نشان"
 
-#: src/dialog/admin/users/edit.vue:372
+#: src/component/user/edit/dialog.vue:372
 msgid "Base Folder"
 msgstr "پوشه پایه"
 
@@ -453,11 +454,11 @@ msgstr "پوشه پایه"
 msgid "Become a member today, support our mission and enjoy our member benefits!"
 msgstr "همین امروز عضو شوید، از ماموریت ما حمایت کنید و از مزایای عضویت ما لذت ببرید!"
 
-#: src/component/dialog/sponsor.vue:47 src/page/about/about.vue:87
+#: src/component/confirm/sponsor.vue:49 src/page/about/about.vue:87
 msgid "Being 100% self-funded and independent, we can promise you that we will never sell your data and that we will always be transparent about our software and services."
 msgstr "ما با تامین مالی مستقل و 100% خود، می توانیم به شما قول بدهیم که هرگز داده های شما را نمی فروشیم و همیشه در مورد نرم افزار و خدمات خود شفاف خواهیم بود."
 
-#: src/dialog/admin/users/edit.vue:270 src/page/settings/account.vue:234
+#: src/component/user/edit/dialog.vue:270 src/page/settings/account.vue:234
 msgid "Bio"
 msgstr "بود"
 
@@ -481,7 +482,8 @@ msgstr "آبی"
 msgid "Brown"
 msgstr "قهوه ای"
 
-#: src/component/dialog/upload.vue:230 src/component/photo/toolbar.vue:224
+#: src/component/photo/toolbar.vue:224
+#: src/component/photo/upload/dialog.vue:230
 msgid "Browse"
 msgstr "مرور کردن"
 
@@ -513,8 +515,8 @@ msgstr "با استفاده از نرم‌افزار و خدماتی که ما �
 msgid "Calendar"
 msgstr "تقویم"
 
-#: src/component/photo/edit/details.vue:332 src/component/photo/toolbar.vue:314
-#: src/component/photo/view/cards.vue:486 src/component/photo/view/list.vue:115
+#: src/component/photo/edit/details.vue:333 src/component/photo/toolbar.vue:314
+#: src/component/photo/view/cards.vue:487 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "دوربین"
 
@@ -526,7 +528,7 @@ msgstr "سریال دوربین"
 msgid "Can't access your authenticator app or device?"
 msgstr "نمی توانید به برنامه یا دستگاه احراز هویت خود دسترسی پیدا کنید؟"
 
-#: src/page/album/photos.vue:273 src/page/photos.vue:402
+#: src/page/album/photos.vue:287 src/page/photos.vue:416
 msgid "Can't load more, limit reached"
 msgstr "نمی تواند بار بیشتری بارگیری کند ، محدود شود"
 
@@ -539,34 +541,34 @@ msgstr "نمی تواند بار بیشتری بارگیری کند ، محدو�
 msgid "Can't select more items"
 msgstr "موارد بیشتری را انتخاب نمی کند"
 
-#: src/dialog/admin/sessions/remove.vue:43 src/dialog/admin/users/add.vue:22
-#: src/dialog/admin/users/edit.vue:487 src/dialog/admin/users/remove.vue:43
-#: src/page/connect.vue:114 src/component/account/apps.vue:349
-#: src/component/account/passcode.vue:245
-#: src/component/account/passcode.vue:330
-#: src/component/account/password.vue:152
-#: src/component/album/dialog/delete.vue:43
-#: src/component/album/dialog/edit.vue:196 src/component/dialog/confirm.vue:47
-#: src/component/dialog/share.vue:25 src/component/file/dialog/delete.vue:47
-#: src/component/label/dialog/delete.vue:47
-#: src/component/label/dialog/edit.vue:104
-#: src/component/people/dialog/edit.vue:117
+#: src/component/session/remove/dialog.vue:43
+#: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
+#: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
+#: src/component/album/delete/dialog.vue:43
+#: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:47
+#: src/component/file/delete/dialog.vue:47
+#: src/component/label/delete/dialog.vue:47
+#: src/component/label/edit/dialog.vue:104
+#: src/component/people/edit/dialog.vue:117
 #: src/component/photo/album/dialog.vue:74
 #: src/component/photo/delete/dialog.vue:56 src/component/service/add.vue:17
 #: src/component/service/edit.vue:442 src/component/service/remove.vue:47
-#: src/component/service/upload.vue:105 src/locales.js:26
-#: src/page/auth/login.vue:204 src/page/connect.vue:116
+#: src/component/service/upload.vue:105 src/component/settings/apps.vue:349
+#: src/component/settings/passcode.vue:245
+#: src/component/settings/passcode.vue:330
+#: src/component/settings/password.vue:152 src/component/share/dialog.vue:25
+#: src/locales.js:26 src/page/auth/login.vue:204 src/page/connect.vue:116
 #: src/page/library/import.vue:103 src/page/library/index.vue:115
 msgid "Cancel"
 msgstr "لغو"
 
-#: src/common/util.js:590
+#: src/common/util.js:610
 msgid "Cannot copy to clipboard"
 msgstr "نمی توان در کلیپ بورد کپی کرد"
 
 #: src/component/photo/edit/details.vue:87
 #: src/component/photo/edit/labels.vue:46
-#: src/component/photo/view/cards.vue:431
+#: src/component/photo/view/cards.vue:432
 msgid "Caption"
 msgstr "عنوان"
 
@@ -578,16 +580,16 @@ msgstr "کارت ها"
 msgid "Carousel slide {0} of {1}"
 msgstr "اسلاید چرخ فلک {0} از {1}"
 
-#: src/page/about/feedback.vue:91 src/component/album/dialog/edit.vue:125
+#: src/page/about/feedback.vue:91 src/component/album/edit/dialog.vue:125
 #: src/component/photo/toolbar.vue:473 src/page/albums.vue:221
 msgid "Category"
 msgstr "دسته"
 
-#: src/dialog/admin/users/edit.vue:193 src/page/settings/account.vue:207
+#: src/component/user/edit/dialog.vue:193 src/page/settings/account.vue:207
 msgid "Change Avatar"
 msgstr "تغییر پرچم خصوصی"
 
-#: src/page/settings/account.vue:305 src/component/account/password.vue:46
+#: src/page/settings/account.vue:305 src/component/settings/password.vue:46
 msgid "Change Password"
 msgstr "رمزعبور جدید"
 
@@ -603,10 +605,11 @@ msgstr "تغییر عناوین عکس ، مکان ها و سایر ابرداد
 msgid "Change private flag"
 msgstr "تغییر پرچم خصوصی"
 
-#: src/dialog/admin/users/edit.vue:69 src/dialog/admin/users/edit.vue:166
-#: src/component/album/dialog/edit.vue:64 src/component/dialog/share.vue:80
-#: src/component/dialog/share.vue:99 src/component/label/dialog/edit.vue:37
+#: src/component/user/edit/dialog.vue:69 src/component/user/edit/dialog.vue:166
+#: src/component/album/edit/dialog.vue:64
+#: src/component/label/edit/dialog.vue:37
 #: src/component/photo/edit/files.vue:145 src/component/service/edit.vue:79
+#: src/component/share/dialog.vue:83 src/component/share/dialog.vue:102
 #: src/page/albums.vue:583 src/page/people/recognized.vue:118
 #: src/page/settings/advanced.vue:58 src/page/settings/general.vue:106
 #: src/page/settings/library.vue:56
@@ -645,14 +648,16 @@ msgstr "مشتری"
 msgid "Client Credentials"
 msgstr "اعتبار مشتری"
 
-#: src/page/admin/sessions.vue:454 src/component/account/apps.vue:221
-#: src/component/account/apps.vue:434 src/component/account/passcode.vue:145
-#: src/component/account/passcode.vue:452
-#: src/component/account/passcode.vue:493 src/component/dialog/reload.vue:52
-#: src/component/dialog/share.vue:226 src/component/dialog/upload.vue:218
-#: src/component/dialog/webdav.vue:129 src/component/photo/edit/details.vue:604
-#: src/component/photo/toolbar.vue:243 src/component/viewer.vue:102
-#: src/locales.js:22 src/page/library/errors.vue:260
+#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:607
+#: src/component/photo/toolbar.vue:243
+#: src/component/photo/upload/dialog.vue:218
+#: src/component/settings/apps.vue:221 src/component/settings/apps.vue:434
+#: src/component/settings/passcode.vue:145
+#: src/component/settings/passcode.vue:452
+#: src/component/settings/passcode.vue:493
+#: src/component/settings/webdav.vue:130 src/component/share/dialog.vue:228
+#: src/component/update.vue:53 src/component/viewer.vue:102 src/locales.js:22
+#: src/page/library/errors.vue:263
 msgid "Close"
 msgstr "نزدیک"
 
@@ -685,8 +690,8 @@ msgstr "اسکن کامل"
 msgid "Confidence"
 msgstr "اعتماد"
 
-#: src/component/account/passcode.vue:257
 #: src/component/photo/album/dialog.vue:86
+#: src/component/settings/passcode.vue:257
 msgid "Confirm"
 msgstr "تایید"
 
@@ -694,7 +699,7 @@ msgstr "تایید"
 msgid "Connect"
 msgstr "اتصال"
 
-#: src/page/settings/account.vue:409 src/component/dialog/webdav.vue:41
+#: src/page/settings/account.vue:409 src/component/settings/webdav.vue:42
 #: src/page/settings/services.vue:167
 msgid "Connect via WebDAV"
 msgstr "از طریق WebDav وصل کنید"
@@ -722,7 +727,7 @@ msgstr "حاوی %{n} عکس است."
 msgid "Contains one picture."
 msgstr "حاوی یک تصویر است."
 
-#: src/component/account/apps.vue:160
+#: src/component/settings/apps.vue:160
 msgid "Continue"
 msgstr "ادامه هید"
 
@@ -738,15 +743,15 @@ msgstr "مشارکت کننده"
 msgid "Converting"
 msgstr "تبدیل"
 
-#: src/common/util.js:587
+#: src/common/util.js:607
 msgid "Copied to clipboard"
 msgstr "کپی شده در کلیپ بورد"
 
-#: src/component/account/apps.vue:247 src/component/account/passcode.vue:355
+#: src/component/settings/apps.vue:247 src/component/settings/passcode.vue:355
 msgid "Copy"
 msgstr "کپی 🀄"
 
-#: src/component/photo/edit/details.vue:493
+#: src/component/photo/edit/details.vue:496
 msgid "Copyright"
 msgstr "حق چاپ"
 
@@ -791,7 +796,7 @@ msgstr "ایجاد تصاویر کوچک برای"
 msgid "Cubic: Moderate Quality, Good Performance"
 msgstr "مکعب: کیفیت متوسط ، عملکرد خوب"
 
-#: src/component/account/password.vue:86
+#: src/component/settings/password.vue:86
 msgid "Current Password"
 msgstr "رمز عبور فعلی"
 
@@ -815,7 +820,7 @@ msgstr "پشتیبان گیری از پایگاه داده"
 msgid "Day"
 msgstr "روز"
 
-#: src/component/account/passcode.vue:441
+#: src/component/settings/passcode.vue:441
 msgid "Deactivate"
 msgstr "از کار انداختن"
 
@@ -824,7 +829,7 @@ msgid "Debug Logs"
 msgstr "گزارش‌های اشکال زدایی"
 
 #: src/options/admin.js:31 src/page/admin/sessions.vue:62
-#: src/page/admin/users.vue:93 src/model/session.js:64 src/model/user.js:238
+#: src/page/admin/users.vue:99 src/model/session.js:64 src/model/user.js:238
 #: src/options/auth.js:20 src/options/auth.js:21 src/options/auth.js:39
 #: src/options/auth.js:40 src/options/options.js:319 src/options/options.js:383
 #: src/options/themes.js:701 src/page/places.vue:197
@@ -835,15 +840,16 @@ msgstr "پیشفرض"
 msgid "Default Folder"
 msgstr "پوشه پیشفرض"
 
-#: src/dialog/admin/sessions/remove.vue:54 src/dialog/admin/users/remove.vue:54
-#: src/component/album/clipboard.vue:95
-#: src/component/album/dialog/delete.vue:54 src/component/dialog/share.vue:165
-#: src/component/file/dialog/delete.vue:58 src/component/label/clipboard.vue:58
-#: src/component/label/dialog/delete.vue:58
+#: src/component/session/remove/dialog.vue:54
+#: src/component/user/remove/dialog.vue:54 src/component/album/clipboard.vue:95
+#: src/component/album/delete/dialog.vue:54
+#: src/component/file/delete/dialog.vue:58 src/component/label/clipboard.vue:58
+#: src/component/label/delete/dialog.vue:58
 #: src/component/photo/clipboard.vue:168
 #: src/component/photo/delete/dialog.vue:69
 #: src/component/photo/edit/files.vue:220 src/component/service/remove.vue:58
-#: src/page/library/errors.vue:99 src/page/settings/general.vue:370
+#: src/component/share/dialog.vue:167 src/page/library/errors.vue:99
+#: src/page/settings/general.vue:370
 msgid "Delete"
 msgstr "حذف"
 
@@ -855,11 +861,11 @@ msgstr "حذف همه"
 msgid "Delete orphaned index entries, sidecar files and thumbnails."
 msgstr "ورودی های فهرست یتیم، فایل های کناری و تصاویر کوچک را حذف کنید."
 
-#: src/component/album/dialog/edit.vue:105 src/page/albums.vue:443
+#: src/component/album/edit/dialog.vue:105 src/page/albums.vue:443
 msgid "Description"
 msgstr "توضیحات"
 
-#: src/component/dialog/webdav.vue:113
+#: src/component/settings/webdav.vue:114
 msgid "Detailed instructions can be found in our User Guide."
 msgstr "دستورالعمل های دقیق را می توانید در راهنمای کاربر پیدا کنید."
 
@@ -937,8 +943,8 @@ msgstr "کشف"
 msgid "Dismiss"
 msgstr "رد کردن"
 
-#: src/dialog/admin/users/add.vue:115 src/dialog/admin/users/edit.vue:165
-#: src/page/admin/users.vue:35 src/page/settings/account.vue:152
+#: src/component/user/add/dialog.vue:115 src/component/user/edit/dialog.vue:165
+#: src/page/admin/users.vue:41 src/page/settings/account.vue:152
 msgid "Display Name"
 msgstr "نام نمایشی"
 
@@ -958,11 +964,11 @@ msgstr "از rawtherapee برای تبدیل پرونده های خام استف
 msgid "Donations"
 msgstr "کمکهای مالی"
 
-#: src/component/account/apps.vue:235 src/component/dialog/share.vue:26
+#: src/component/settings/apps.vue:235 src/component/share/dialog.vue:26
 msgid "Done"
 msgstr "انجام شده"
 
-#: src/component/dialog/upload.vue:128 src/page/library/import.vue:41
+#: src/component/photo/upload/dialog.vue:128 src/page/library/import.vue:41
 #: src/page/library/index.vue:48
 msgid "Done."
 msgstr "انجام شده است."
@@ -970,7 +976,7 @@ msgstr "انجام شده است."
 #: src/component/album/clipboard.vue:72 src/component/album/toolbar.vue:120
 #: src/component/file/clipboard.vue:48 src/component/people/clipboard.vue:47
 #: src/component/photo/clipboard.vue:116 src/component/photo/edit/files.vue:165
-#: src/component/viewer.vue:521 src/page/settings/general.vue:250
+#: src/component/viewer.vue:529 src/page/settings/general.vue:250
 #: src/page/settings/general.vue:622
 msgid "Download"
 msgstr "بارگیری"
@@ -992,7 +998,7 @@ msgstr "بارگیری پرونده های تک و بایگانی زیپ."
 #: src/component/people/clipboard.vue:55 src/component/photo/clipboard.vue:208
 #: src/component/photo/edit/files.vue:110
 #: src/component/photo/view/cards.vue:163 src/component/photo/view/list.vue:133
-#: src/component/viewer.vue:905 src/page/library/browse.vue:113
+#: src/component/viewer.vue:914 src/page/library/browse.vue:113
 msgid "Downloading…"
 msgstr "درحال دانلود…"
 
@@ -1029,18 +1035,18 @@ msgid "E-Mail"
 msgstr "ایمیل"
 
 #: src/component/album/clipboard.vue:61 src/component/album/toolbar.vue:82
-#: src/component/photo/clipboard.vue:90 src/component/viewer.vue:500
+#: src/component/photo/clipboard.vue:90 src/component/viewer.vue:508
 #: src/page/settings/general.vue:322
 msgid "Edit"
 msgstr "ویرایش"
 
-#: src/component/album/dialog/edit.vue:52
-#: src/component/label/dialog/edit.vue:49
-#: src/component/people/dialog/edit.vue:49
+#: src/component/album/edit/dialog.vue:52
+#: src/component/label/edit/dialog.vue:49
+#: src/component/people/edit/dialog.vue:49
 msgid "Edit %{name}"
 msgstr "ویرایش %{name}"
 
-#: src/dialog/admin/users/edit.vue:60 src/component/service/edit.vue:68
+#: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
 msgstr "ویرایش حساب کاربری"
 
@@ -1052,7 +1058,7 @@ msgstr "ویرایش تصویر"
 msgid "Edited"
 msgstr "ویرایش شده"
 
-#: src/dialog/admin/users/add.vue:134 src/dialog/admin/users/edit.vue:217
+#: src/component/user/add/dialog.vue:134 src/component/user/edit/dialog.vue:217
 #: src/page/settings/account.vue:176 src/page/settings/account.vue:602
 msgid "Email"
 msgstr "پست الکترونیک"
@@ -1069,7 +1075,7 @@ msgstr "فعال کردن ویژگی های جدید در حال توسعه."
 msgid "Enables RAW converter presets. May reduce performance."
 msgstr "فعال کردن RAW converter presets  . ممکن است عملکرد را کاهش دهد."
 
-#: src/component/account/passcode.vue:124
+#: src/component/settings/passcode.vue:124
 msgid "Enabling two-factor authentication means that you will need a randomly generated verification code to log in, so even if someone gains access to your password, they will not be able to access your account."
 msgstr "فعال کردن احراز هویت دو مرحله‌ای به این معنی است که برای ورود به سیستم به یک کد تأیید تصادفی تولید شده نیاز دارید، بنابراین حتی اگر شخصی به رمز عبور شما دسترسی پیدا کند، نمی‌تواند به حساب شما دسترسی پیدا کند."
 
@@ -1081,7 +1087,7 @@ msgstr "تاریخ را وارد کنید"
 msgid "Enter dates"
 msgstr "تاریخ ها را وارد کنید"
 
-#: src/component/account/passcode.vue:210 src/page/auth/login.vue:81
+#: src/component/settings/passcode.vue:210 src/page/auth/login.vue:81
 msgid "Enter the code generated by your authenticator app:"
 msgstr "کد ایجاد شده توسط برنامه احراز هویت خود را وارد کنید:"
 
@@ -1089,7 +1095,7 @@ msgstr "کد ایجاد شده توسط برنامه احراز هویت خود 
 msgid "Enter verification code"
 msgstr "کد تایید را وارد کنید"
 
-#: src/component/account/apps.vue:106
+#: src/component/settings/apps.vue:106
 msgid "Enter your password to confirm the action and continue:"
 msgstr "رمز عبور خود را برای تایید عمل وارد کنید و ادامه دهید:"
 
@@ -1139,12 +1145,12 @@ msgid "Experimental Features"
 msgstr "ویژگی های تجربی"
 
 #: src/page/admin/sessions.vue:32 src/page/admin/sessions.vue:378
-#: src/component/account/apps.vue:66 src/component/account/apps.vue:323
-#: src/component/dialog/share.vue:51 src/component/service/edit.vue:145
+#: src/component/service/edit.vue:145 src/component/settings/apps.vue:65
+#: src/component/settings/apps.vue:323 src/component/share/dialog.vue:53
 msgid "Expires"
 msgstr "منقضی می شود"
 
-#: src/component/photo/edit/details.vue:379
+#: src/component/photo/edit/details.vue:381
 msgid "Exposure"
 msgstr "قرارگیری در معرض"
 
@@ -1152,7 +1158,7 @@ msgstr "قرارگیری در معرض"
 msgid "Extract still images and generate thumbnails while indexing."
 msgstr "در حین نمایه سازی، تصاویر ثابت را استخراج کنید و تصاویر کوچک تولید کنید."
 
-#: src/component/photo/edit/details.vue:425
+#: src/component/photo/edit/details.vue:428
 msgid "F Number"
 msgstr "شماره F"
 
@@ -1164,7 +1170,7 @@ msgstr "صورت"
 msgid "Faces"
 msgstr "صورت ها"
 
-#: src/component/dialog/share.vue:90
+#: src/component/share/dialog.vue:93
 msgid "Failed removing link"
 msgstr "پیوند حذف نشد"
 
@@ -1172,11 +1178,11 @@ msgstr "پیوند حذف نشد"
 msgid "Failed to connect account."
 msgstr "اتصال حساب انجام نشد."
 
-#: src/component/dialog/share.vue:71
+#: src/component/share/dialog.vue:74
 msgid "Failed updating link"
 msgstr "پیوند به روز نشد"
 
-#: src/dialog/admin/users/edit.vue:144 src/page/settings/account.vue:130
+#: src/component/user/edit/dialog.vue:144 src/page/settings/account.vue:130
 msgid "Family Name"
 msgstr "خانواده"
 
@@ -1184,9 +1190,9 @@ msgstr "خانواده"
 msgid "Fast"
 msgstr "سریع"
 
-#: src/component/album/dialog/edit.vue:156
-#: src/component/label/dialog/edit.vue:82
-#: src/component/people/dialog/edit.vue:82
+#: src/component/album/edit/dialog.vue:156
+#: src/component/label/edit/dialog.vue:82
+#: src/component/people/edit/dialog.vue:82
 #: src/component/photo/edit/info.vue:290
 msgid "Favorite"
 msgstr "موردعلاقه"
@@ -1220,12 +1226,12 @@ msgstr "مرورگر فایل"
 msgid "File Conversion"
 msgstr "تبدیل فایل"
 
-#: src/component/album/dialog/edit.vue:25 src/component/photo/toolbar.vue:110
+#: src/component/album/edit/dialog.vue:25 src/component/photo/toolbar.vue:110
 #: src/component/photo/toolbar.vue:121 src/component/photo/toolbar.vue:132
 msgid "File Name"
 msgstr "نام فایل"
 
-#: src/component/album/dialog/edit.vue:26 src/component/photo/toolbar.vue:111
+#: src/component/album/edit/dialog.vue:26 src/component/photo/toolbar.vue:111
 #: src/component/photo/toolbar.vue:122 src/component/photo/toolbar.vue:133
 msgid "File Size"
 msgstr "فایل"
@@ -1247,7 +1253,7 @@ msgstr "فایل‌هایی با نام‌های متوالی مانند «IMG_1
 msgid "First page"
 msgstr "صفحه اول"
 
-#: src/component/photo/edit/details.vue:444
+#: src/component/photo/edit/details.vue:447
 msgid "Focal Length"
 msgstr "فاصله کانونی"
 
@@ -1286,7 +1292,7 @@ msgstr "قاب‌ها"
 msgid "Full Access"
 msgstr "دسترسی کامل"
 
-#: src/component/viewer.vue:442
+#: src/component/viewer.vue:450
 msgid "Fullscreen"
 msgstr "تمام صفحه"
 
@@ -1294,7 +1300,7 @@ msgstr "تمام صفحه"
 msgid "General"
 msgstr "عمومی"
 
-#: src/component/account/apps.vue:361
+#: src/component/settings/apps.vue:361
 msgid "Generate"
 msgstr "تولید می کنند"
 
@@ -1306,7 +1312,7 @@ msgstr "به طور خودکار آلبوم هایی از لحظات، سفره�
 msgid "Generate Previews"
 msgstr "ایجاد پیش نمایش"
 
-#: src/dialog/admin/users/edit.vue:120 src/page/settings/account.vue:107
+#: src/component/user/edit/dialog.vue:120 src/page/settings/account.vue:107
 msgid "Given Name"
 msgstr "اسم اصلی"
 
@@ -1346,7 +1352,7 @@ msgstr "راهنما"
 msgid "Help & Support"
 msgstr "راهنما و پشتیبانی"
 
-#: src/component/navigation.vue:1228 src/component/people/dialog/edit.vue:95
+#: src/component/navigation.vue:1228 src/component/people/edit/dialog.vue:95
 msgid "Hidden"
 msgstr "مخفی"
 
@@ -1374,7 +1380,7 @@ msgstr "محدوده دینامیکی بالا (HDR)"
 msgid "How can we help?"
 msgstr "چطور میتوانیم کمک کنیم؟"
 
-#: src/component/account/passcode.vue:386
+#: src/component/settings/passcode.vue:386
 msgid "If you lose access to your authenticator app or device, you can use your recovery code to regain access to your account."
 msgstr "اگر دسترسی به برنامه یا دستگاه احراز هویت خود را از دست دادید، می‌توانید از کد بازیابی برای دسترسی مجدد به حساب خود استفاده کنید."
 
@@ -1460,22 +1466,24 @@ msgstr "ID نمونه"
 msgid "Interval"
 msgstr "وقفه"
 
-#: src/dialog/admin/users/add.vue:117 src/dialog/admin/users/add.vue:136
-#: src/dialog/admin/users/add.vue:198 src/dialog/admin/users/edit.vue:100
-#: src/dialog/admin/users/edit.vue:123 src/dialog/admin/users/edit.vue:147
-#: src/dialog/admin/users/edit.vue:220 src/dialog/admin/users/edit.vue:242
-#: src/dialog/admin/users/edit.vue:269 src/dialog/admin/users/edit.vue:351
-#: src/page/settings/account.vue:86 src/page/settings/account.vue:109
-#: src/page/settings/account.vue:132 src/page/settings/account.vue:178
-#: src/page/settings/account.vue:233 src/page/settings/account.vue:255
-#: src/page/settings/account.vue:468 src/page/settings/account.vue:493
-#: src/page/settings/account.vue:515 src/page/settings/account.vue:562
-#: src/page/settings/account.vue:581 src/page/settings/account.vue:604
-#: src/page/settings/account.vue:627 src/page/settings/account.vue:678
-#: src/page/settings/account.vue:704 src/page/settings/account.vue:723
-#: src/page/settings/account.vue:494 src/page/settings/account.vue:517
-#: src/page/settings/account.vue:569 src/page/settings/account.vue:595
-#: src/page/settings/account.vue:615
+#: src/component/user/add/dialog.vue:117 src/component/user/add/dialog.vue:136
+#: src/component/user/add/dialog.vue:198 src/component/user/edit/dialog.vue:100
+#: src/component/user/edit/dialog.vue:123
+#: src/component/user/edit/dialog.vue:147
+#: src/component/user/edit/dialog.vue:220
+#: src/component/user/edit/dialog.vue:242
+#: src/component/user/edit/dialog.vue:269
+#: src/component/user/edit/dialog.vue:351 src/page/settings/account.vue:86
+#: src/page/settings/account.vue:109 src/page/settings/account.vue:132
+#: src/page/settings/account.vue:178 src/page/settings/account.vue:233
+#: src/page/settings/account.vue:255 src/page/settings/account.vue:468
+#: src/page/settings/account.vue:493 src/page/settings/account.vue:515
+#: src/page/settings/account.vue:562 src/page/settings/account.vue:581
+#: src/page/settings/account.vue:604 src/page/settings/account.vue:627
+#: src/page/settings/account.vue:678 src/page/settings/account.vue:704
+#: src/page/settings/account.vue:723 src/page/settings/account.vue:494
+#: src/page/settings/account.vue:517 src/page/settings/account.vue:569
+#: src/page/settings/account.vue:595 src/page/settings/account.vue:615
 msgid "Invalid"
 msgstr "تاریخ نامعتبر است"
 
@@ -1488,12 +1496,12 @@ msgstr "تاریخ نامعتبر است"
 msgid "Invalid parameters"
 msgstr "پارامترهای نامعتبر"
 
-#: src/component/photo/edit/dialog.vue:131 src/model/thumb.js:75
+#: src/component/photo/edit/dialog.vue:148 src/model/thumb.js:75
 msgid "Invalid photo selected"
 msgstr "عکس نامعتبر انتخاب شد"
 
-#: src/component/account/passcode.vue:311
-#: src/component/account/passcode.vue:388
+#: src/component/settings/passcode.vue:311
+#: src/component/settings/passcode.vue:388
 msgid "It is a one-time use code that will disable 2FA for your account when you use it."
 msgstr "این یک کد یکبار مصرف است که هنگام استفاده از آن، 2FA را برای حساب شما غیرفعال می کند."
 
@@ -1517,7 +1525,7 @@ msgstr "محدودیت اندازه JPEG: %{n}px"
 msgid "JPEGs and thumbnails are automatically rendered as needed."
 msgstr "JPEG ها و  تامبنیل ها به صورت خودکار در صورت نیاز ارائه می شوند."
 
-#: src/component/photo/edit/details.vue:558
+#: src/component/photo/edit/details.vue:561
 msgid "Keywords"
 msgstr "کلید واژه ها"
 
@@ -1548,7 +1556,7 @@ msgstr "زبان"
 msgid "Last Active"
 msgstr "آخرین فعالیت"
 
-#: src/page/admin/users.vue:44
+#: src/page/admin/users.vue:50
 msgid "Last Login"
 msgstr "آخرین ورود"
 
@@ -1560,11 +1568,11 @@ msgstr "صفحه آخر"
 msgid "Last Sync"
 msgstr "آخرین همگام سازی"
 
-#: src/component/account/apps.vue:57
+#: src/component/settings/apps.vue:56
 msgid "Last Used"
 msgstr "آخرین استفاده"
 
-#: src/component/photo/edit/details.vue:288
+#: src/component/photo/edit/details.vue:289
 #: src/component/photo/edit/info.vue:378
 msgid "Latitude"
 msgstr "عرض جغرافیایی"
@@ -1573,7 +1581,7 @@ msgstr "عرض جغرافیایی"
 msgid "LDAP/AD"
 msgstr "LDAP/AD"
 
-#: src/page/connect.vue:61 src/component/dialog/sponsor.vue:80
+#: src/page/connect.vue:61 src/component/confirm/sponsor.vue:84
 #: src/page/about/about.vue:50 src/page/about/about.vue:120
 #: src/page/connect.vue:63 src/page/help.vue:32
 msgid "Learn more"
@@ -1583,8 +1591,8 @@ msgstr "بیشتر بدانید"
 msgid "Legal Information"
 msgstr "اطلاعات حقوقی"
 
-#: src/component/photo/edit/details.vue:398
-#: src/component/photo/view/cards.vue:497
+#: src/component/photo/edit/details.vue:400
+#: src/component/photo/view/cards.vue:498
 msgid "Lens"
 msgstr "لنز"
 
@@ -1595,12 +1603,12 @@ msgid "Library"
 msgstr "کتابخانه"
 
 #: src/page/connect.vue:40 src/app/routes.js:66
-#: src/component/navigation.vue:1379 src/component/photo/edit/details.vue:536
+#: src/component/navigation.vue:1379 src/component/photo/edit/details.vue:539
 #: src/page/about/license.vue:25
 msgid "License"
 msgstr "مجوز"
 
-#: src/component/viewer.vue:462
+#: src/component/viewer.vue:470
 msgid "Like"
 msgstr "پسندیدن"
 
@@ -1624,9 +1632,9 @@ msgstr "لینک"
 msgid "List"
 msgstr "لیست"
 
-#: src/app/routes.js:228 src/component/photo/view/cards.vue:295
-#: src/component/photo/view/cards.vue:460 src/component/photo/view/list.vue:163
-#: src/component/photo/view/mosaic.vue:166 src/options/options.js:368
+#: src/app/routes.js:228 src/component/photo/view/cards.vue:296
+#: src/component/photo/view/cards.vue:461 src/component/photo/view/list.vue:163
+#: src/component/photo/view/mosaic.vue:167 src/options/options.js:368
 msgid "Live"
 msgstr "زنده"
 
@@ -1654,9 +1662,9 @@ msgstr "محلی"
 msgid "Local Time"
 msgstr "زمان محلی"
 
-#: src/page/settings/account.vue:676 src/component/album/dialog/edit.vue:90
+#: src/page/settings/account.vue:676 src/component/album/edit/dialog.vue:90
 #: src/component/photo/edit/info.vue:68 src/component/photo/edit/labels.vue:52
-#: src/component/photo/view/cards.vue:520 src/component/photo/view/list.vue:116
+#: src/component/photo/view/cards.vue:521 src/component/photo/view/list.vue:116
 #: src/page/albums.vue:90 src/page/settings/account.vue:567
 msgid "Location"
 msgstr "محل"
@@ -1678,7 +1686,7 @@ msgstr "خارج شدن"
 msgid "Logs"
 msgstr "گزارش ها"
 
-#: src/component/photo/edit/details.vue:312
+#: src/component/photo/edit/details.vue:313
 #: src/component/photo/edit/info.vue:384
 msgid "Longitude"
 msgstr "طول جغرافیایی"
@@ -1733,7 +1741,7 @@ msgstr "متوسط"
 msgid "Membership"
 msgstr "عضویت"
 
-#: src/component/people/dialog/merge.vue:25
+#: src/component/people/merge/dialog.vue:25
 msgid "Merge %{a} with %{b}?"
 msgstr "%{a} با %{b} ادغام شود؟"
 
@@ -1779,7 +1787,7 @@ msgstr "ماه"
 msgid "Mosaic"
 msgstr "موزائیک"
 
-#: src/component/album/dialog/edit.vue:28 src/component/photo/toolbar.vue:136
+#: src/component/album/edit/dialog.vue:28 src/component/photo/toolbar.vue:136
 msgid "Most Relevant"
 msgstr "بسیار مرتبط"
 
@@ -1787,29 +1795,29 @@ msgstr "بسیار مرتبط"
 msgid "Move Files"
 msgstr "جابجایی فایل ها"
 
-#: src/component/account/password.vue:110
+#: src/component/settings/password.vue:110
 msgid "Must have at least %{n} characters."
 msgstr "باید حداقل %{n} حرف داشته باشد."
 
-#: src/page/about/feedback.vue:129 src/component/account/apps.vue:46
-#: src/component/account/apps.vue:283 src/component/album/dialog/edit.vue:75
-#: src/component/label/dialog/edit.vue:68
-#: src/component/people/dialog/edit.vue:68
+#: src/page/about/feedback.vue:129 src/component/album/edit/dialog.vue:75
+#: src/component/label/edit/dialog.vue:68
+#: src/component/people/edit/dialog.vue:68
 #: src/component/photo/edit/files.vue:43 src/component/photo/edit/info.vue:64
 #: src/component/photo/edit/info.vue:128
 #: src/component/photo/edit/labels.vue:227
 #: src/component/photo/edit/people.vue:29
-#: src/component/photo/edit/people.vue:137
+#: src/component/photo/edit/people.vue:136
 #: src/component/photo/view/list.vue:116 src/component/photo/view/list.vue:215
-#: src/component/service/edit.vue:297 src/page/albums.vue:89
+#: src/component/service/edit.vue:297 src/component/settings/apps.vue:45
+#: src/component/settings/apps.vue:283 src/page/albums.vue:89
 #: src/page/auth/login.vue:147 src/page/people/new.vue:52
 #: src/page/people/new.vue:227 src/page/settings/services.vue:26
 msgid "Name"
 msgstr "نام"
 
-#: src/component/album/dialog/edit.vue:32 src/component/album/toolbar.vue:66
-#: src/component/label/dialog/edit.vue:16
-#: src/component/people/dialog/edit.vue:16
+#: src/component/album/edit/dialog.vue:32 src/component/album/toolbar.vue:66
+#: src/component/label/edit/dialog.vue:16
+#: src/component/people/edit/dialog.vue:16
 #: src/component/photo/edit/labels.vue:33
 #: src/component/photo/edit/people.vue:32 src/page/labels.vue:45
 #: src/page/library/browse.vue:44 src/page/people/new.vue:46
@@ -1817,7 +1825,7 @@ msgstr "نام"
 msgid "Name too long"
 msgstr "نام خیلی طولانی است"
 
-#: src/page/admin/users.vue:121 src/options/options.js:428
+#: src/page/admin/users.vue:127 src/options/options.js:428
 #: src/options/options.js:438 src/page/settings/services.vue:64
 msgid "Never"
 msgstr "هرگز"
@@ -1826,11 +1834,11 @@ msgstr "هرگز"
 msgid "New"
 msgstr "جدید"
 
-#: src/component/account/password.vue:108
+#: src/component/settings/password.vue:108
 msgid "New Password"
 msgstr "رمزعبور جدید"
 
-#: src/component/album/dialog/edit.vue:21 src/component/photo/toolbar.vue:105
+#: src/component/album/edit/dialog.vue:21 src/component/photo/toolbar.vue:105
 #: src/component/photo/toolbar.vue:117 src/component/photo/toolbar.vue:127
 #: src/page/albums.vue:91
 msgid "Newest First"
@@ -1848,7 +1856,7 @@ msgstr "صفحه بعدی"
 msgid "Next visual"
 msgstr "تصویری بعدی"
 
-#: src/component/people/dialog/merge.vue:47
+#: src/component/people/merge/dialog.vue:47
 #: src/component/photo/archive/dialog.vue:47
 #: src/component/photo/edit/info.vue:284 src/component/photo/edit/info.vue:300
 #: src/component/photo/edit/info.vue:316 src/component/photo/edit/info.vue:332
@@ -1884,8 +1892,8 @@ msgstr "هیچ فردی پیدا نشد"
 
 #: src/component/photo/view/cards.vue:115 src/component/photo/view/list.vue:82
 #: src/component/photo/view/mosaic.vue:71 src/component/viewer.vue:163
-#: src/page/album/photos.vue:424 src/page/library/browse.vue:125
-#: src/page/photos.vue:565 src/page/places.vue:447 src/page/places.vue:533
+#: src/page/album/photos.vue:438 src/page/library/browse.vue:125
+#: src/page/photos.vue:579 src/page/places.vue:447 src/page/places.vue:533
 msgid "No pictures found"
 msgstr "هیچ تصویری پیدا نشد"
 
@@ -1906,7 +1914,7 @@ msgstr "هیچ سروری پیکربندی نشده است."
 msgid "No services configured."
 msgstr "هیچ سروری پیکربندی نشده است."
 
-#: src/component/dialog/sponsor.vue:66
+#: src/component/confirm/sponsor.vue:70
 msgid "No thanks"
 msgstr "نه، ممنون"
 
@@ -1914,9 +1922,9 @@ msgstr "نه، ممنون"
 msgid "No warnings or error containing this keyword. Note that search is case-sensitive."
 msgstr "هیچ هشدار یا خطایی حاوی این کلمه کلیدی نیست. توجه داشته باشید که جستجو به حروف کوچک و بزرگ حساس است."
 
-#: src/component/dialog/upload.vue:198 src/component/photo/view/cards.vue:125
-#: src/component/photo/view/list.vue:58 src/component/photo/view/list.vue:92
-#: src/component/photo/view/mosaic.vue:81
+#: src/component/photo/upload/dialog.vue:198
+#: src/component/photo/view/cards.vue:125 src/component/photo/view/list.vue:58
+#: src/component/photo/view/list.vue:92 src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
 msgstr "تصاویر غیرعکاسی و با کیفیت پایین قبل از اینکه در نتایج جستجو ظاهر شوند نیاز به بررسی دارند."
 
@@ -1941,7 +1949,7 @@ msgstr "یادداشت:"
 msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
 msgstr "توجه: فقط سرورهای WebDAV، مانند Nextcloud یا PhotoPrism، می توانند به عنوان سرویس راه دور برای پشتیبان گیری و آپلود فایل پیکربندی شوند."
 
-#: src/component/photo/edit/details.vue:580
+#: src/component/photo/edit/details.vue:583
 msgid "Notes"
 msgstr "یادداشت"
 
@@ -1950,7 +1958,7 @@ msgid "Nothing to see here yet."
 msgstr "هنوز چیزی برای دیدن اینجا وجود ندارد."
 
 #: src/page/admin/sessions.vue:45 src/page/admin/users.vue:40
-#: src/component/account/apps.vue:387
+#: src/component/settings/apps.vue:387
 msgid "Nothing was found."
 msgstr "چیزی پیدا نشد."
 
@@ -1962,13 +1970,13 @@ msgstr "OIDC"
 msgid "OK"
 msgstr "باشه"
 
-#: src/component/album/dialog/edit.vue:22 src/component/photo/toolbar.vue:106
+#: src/component/album/edit/dialog.vue:22 src/component/photo/toolbar.vue:106
 #: src/component/photo/toolbar.vue:118 src/component/photo/toolbar.vue:128
 #: src/page/albums.vue:92
 msgid "Oldest First"
 msgstr "اول قدیمی‌تر ها"
 
-#: src/component/dialog/webdav.vue:74
+#: src/component/settings/webdav.vue:75
 msgid "On Windows, enter the following resource in the connection dialog:"
 msgstr "در ویندوز، منبع زیر را در گفتگوی اتصال وارد کنید:"
 
@@ -2005,11 +2013,11 @@ msgstr "یک برچسب پیدا شد"
 msgid "One person found"
 msgstr "یک شخص پیدا شد"
 
-#: src/page/album/photos.vue:426 src/page/photos.vue:567
+#: src/page/album/photos.vue:440 src/page/photos.vue:581
 msgid "One picture found"
 msgstr "یک تصویر پیدا شد"
 
-#: src/component/account/passcode.vue:474
+#: src/component/settings/passcode.vue:474
 msgid "Only locally managed accounts can be set up for authentication with 2FA."
 msgstr "فقط حساب های مدیریت شده محلی را می توان برای احراز هویت با 2FA تنظیم کرد."
 
@@ -2079,15 +2087,15 @@ msgstr "پانوراما"
 msgid "Panoramas"
 msgstr "پانوراما"
 
-#: src/dialog/admin/users/add.vue:92 src/component/account/apps.vue:118
-#: src/component/account/passcode.vue:104
-#: src/component/account/passcode.vue:415 src/component/dialog/share.vue:24
-#: src/component/service/add.vue:92 src/component/service/edit.vue:339
+#: src/component/user/add/dialog.vue:92 src/component/service/add.vue:92
+#: src/component/service/edit.vue:339 src/component/settings/apps.vue:118
+#: src/component/settings/passcode.vue:104
+#: src/component/settings/passcode.vue:415 src/component/share/dialog.vue:24
 #: src/options/auth.js:91 src/page/auth/login.vue:173
 msgid "Password"
 msgstr "رمزعبور"
 
-#: src/component/account/password.vue:58
+#: src/component/settings/password.vue:58
 msgid "Password changed"
 msgstr "رمز عبور تغییر کرد"
 
@@ -2097,7 +2105,7 @@ msgstr "رمز عبور تغییر کرد"
 msgid "People"
 msgstr "مردم"
 
-#: src/component/dialog/share.vue:202
+#: src/component/share/dialog.vue:204
 msgid "People you share a link with will be able to view public contents."
 msgstr "افرادی که لینکی را با آنها به اشتراک می گذارید می توانند محتوای عمومی را مشاهده کنند."
 
@@ -2117,7 +2125,7 @@ msgstr "شخص"
 msgid "Personal"
 msgstr "شخصی"
 
-#: src/model/photo.js:1243
+#: src/model/photo.js:1248
 msgid "Photo"
 msgstr "تصویر"
 
@@ -2133,7 +2141,7 @@ msgstr "عضویت PhotoPrism+"
 msgid "Photos"
 msgstr "تصاویر"
 
-#: src/component/album/dialog/edit.vue:24 src/component/photo/toolbar.vue:109
+#: src/component/album/edit/dialog.vue:24 src/component/photo/toolbar.vue:109
 #: src/component/photo/toolbar.vue:120 src/component/photo/toolbar.vue:131
 msgid "Picture Title"
 msgstr "عنوان تصویر"
@@ -2157,19 +2165,19 @@ msgstr "مکان و زمان"
 msgid "Places"
 msgstr "مکان ها"
 
-#: src/component/account/password.vue:131
+#: src/component/settings/password.vue:131
 msgid "Please confirm your new password."
 msgstr "لطفا رمز عبور جدید خود را تایید کنید."
 
-#: src/component/account/apps.vue:182
+#: src/component/settings/apps.vue:182
 msgid "Please copy the following randomly generated app password and keep it in a safe place, as you will not be able to see it again:"
 msgstr "لطفاً رمز عبور برنامه زیر را که به‌طور تصادفی تولید شده است کپی کنید و آن را در مکانی امن نگه دارید، زیرا دیگر نمی‌توانید آن را ببینید:"
 
-#: src/component/dialog/upload.vue:193
+#: src/component/photo/upload/dialog.vue:193
 msgid "Please do not upload any private, unlawful or offensive pictures."
 msgstr "لطفا هیچ عکس خصوصی، غیرقانونی یا توهین آمیزی را آپلود نکنید."
 
-#: src/component/dialog/upload.vue:195
+#: src/component/photo/upload/dialog.vue:195
 msgid "Please don't upload photos containing offensive content."
 msgstr "لطفا عکس های حاوی محتوای توهین آمیز آپلود نکنید."
 
@@ -2177,7 +2185,7 @@ msgstr "لطفا عکس های حاوی محتوای توهین آمیز آپل�
 msgid "Please enter OTP character {0}"
 msgstr "لطفاً نویسه OTP {0} را وارد کنید"
 
-#: src/component/account/password.vue:64
+#: src/component/settings/password.vue:64
 msgid "Please note that changing your password will log you out on other devices and browsers."
 msgstr "لطفاً توجه داشته باشید که تغییر رمز عبور شما را از سایر دستگاه ها و مرورگرها خارج می کند."
 
@@ -2205,7 +2213,7 @@ msgstr "پرتره"
 msgid "Preserve filenames"
 msgstr "حفظ نام فایل ها"
 
-#: src/component/dialog/upload.vue:153
+#: src/component/photo/upload/dialog.vue:153
 msgid "Press enter to create a new album."
 msgstr "برای ایجاد یک آلبوم جدید، اینتر را فشار دهید."
 
@@ -2242,7 +2250,7 @@ msgstr "تصویری قبلی"
 msgid "Primary"
 msgstr "اولیه"
 
-#: src/app/routes.js:249 src/component/album/dialog/edit.vue:173
+#: src/app/routes.js:249 src/component/album/edit/dialog.vue:173
 #: src/component/navigation.vue:527 src/component/photo/edit/info.vue:306
 #: src/page/settings/general.vue:202
 msgid "Private"
@@ -2268,7 +2276,7 @@ msgstr "فیلتر کیفیت"
 msgid "Quality Score"
 msgstr "امتیاز کیفیت"
 
-#: src/page/admin/users.vue:86
+#: src/page/admin/users.vue:92
 msgid "r"
 msgstr "r"
 
@@ -2284,8 +2292,8 @@ msgstr "رتبه بندی {0} از {1}"
 msgid "Raw"
 msgstr "خام"
 
-#: src/component/photo/view/cards.vue:288
-#: src/component/photo/view/mosaic.vue:159 src/page/settings/general.vue:671
+#: src/component/photo/view/cards.vue:289
+#: src/component/photo/view/mosaic.vue:160 src/page/settings/general.vue:671
 msgid "RAW"
 msgstr "خام"
 
@@ -2297,7 +2305,7 @@ msgstr "نمایه سازی مجدد همه نسخه های اصلی، از جم
 msgid "Read-Only Mode"
 msgstr "حالت فقط خواندنی"
 
-#: src/component/album/dialog/edit.vue:23 src/component/photo/toolbar.vue:107
+#: src/component/album/edit/dialog.vue:23 src/component/photo/toolbar.vue:107
 #: src/component/photo/toolbar.vue:119 src/component/photo/toolbar.vue:129
 #: src/page/albums.vue:93
 msgid "Recently Added"
@@ -2340,15 +2348,15 @@ msgstr "مناطق"
 msgid "Register"
 msgstr "ثبت نام"
 
-#: src/component/album/toolbar.vue:64 src/component/dialog/reload.vue:63
-#: src/component/navigation.vue:1651 src/component/photo/toolbar.vue:90
+#: src/component/album/toolbar.vue:64 src/component/navigation.vue:1651
+#: src/component/photo/toolbar.vue:90 src/component/update.vue:64
 #: src/page/albums.vue:111 src/page/labels.vue:93
 #: src/page/library/browse.vue:84 src/page/library/errors.vue:81
 #: src/page/people/new.vue:57 src/page/people/recognized.vue:93
 msgid "Reload"
 msgstr "بارگذاری مجدد"
 
-#: src/component/dialog/reload.vue:35 src/component/navigation.vue:141
+#: src/component/navigation.vue:149 src/component/update.vue:35
 #: src/page/settings/general.vue:102 src/page/settings/library.vue:52
 msgid "Reloading…"
 msgstr "در حال بارگیری مجدد…"
@@ -2385,8 +2393,8 @@ msgstr "درخواست ناموفق - پاسخ نامعتبر است"
 msgid "Require non-photographic and low-quality images to be reviewed before they appear in search results."
 msgstr "لازم است تصاویر غیرعکاسی و با کیفیت پایین قبل از نمایش در نتایج جستجو بررسی شوند."
 
-#: src/dialog/admin/users/add.vue:71 src/dialog/admin/users/add.vue:96
-#: src/dialog/admin/users/edit.vue:167 src/page/about/feedback.vue:96
+#: src/component/user/add/dialog.vue:71 src/component/user/add/dialog.vue:96
+#: src/component/user/edit/dialog.vue:167 src/page/about/feedback.vue:96
 #: src/page/about/feedback.vue:111 src/page/about/feedback.vue:147
 #: src/page/settings/account.vue:154 src/page/about/feedback.vue:146
 msgid "Required"
@@ -2409,7 +2417,7 @@ msgstr "بازگرداندن"
 msgid "Retry Limit"
 msgstr "محدودیت تلاش"
 
-#: src/component/account/password.vue:129
+#: src/component/settings/password.vue:129
 msgid "Retype Password"
 msgstr "رمز عبور را دوباره تایپ کنید"
 
@@ -2417,8 +2425,8 @@ msgstr "رمز عبور را دوباره تایپ کنید"
 msgid "Review"
 msgstr "بازبینی"
 
-#: src/dialog/admin/users/add.vue:152 src/dialog/admin/users/edit.vue:294
-#: src/page/admin/sessions.vue:187 src/page/admin/users.vue:36
+#: src/component/user/add/dialog.vue:152 src/component/user/edit/dialog.vue:294
+#: src/page/admin/sessions.vue:187 src/page/admin/users.vue:42
 msgid "Role"
 msgstr "نقش"
 
@@ -2430,10 +2438,11 @@ msgstr "ردیف در هر صفحه:"
 msgid "Satellite"
 msgstr "ماهواره"
 
-#: src/dialog/admin/users/edit.vue:499 src/component/account/password.vue:164
-#: src/component/album/dialog/edit.vue:208 src/component/dialog/share.vue:176
-#: src/component/label/dialog/edit.vue:116
-#: src/component/people/dialog/edit.vue:129 src/component/service/edit.vue:453
+#: src/component/user/edit/dialog.vue:499
+#: src/component/album/edit/dialog.vue:208
+#: src/component/label/edit/dialog.vue:116
+#: src/component/people/edit/dialog.vue:129 src/component/service/edit.vue:453
+#: src/component/settings/password.vue:164 src/component/share/dialog.vue:178
 msgid "Save"
 msgstr "ذخیره"
 
@@ -2441,7 +2450,7 @@ msgstr "ذخیره"
 msgid "Scan"
 msgstr "اسکن"
 
-#: src/component/account/passcode.vue:176
+#: src/component/settings/passcode.vue:176
 msgid "Scan the QR code with your authenticator app or use the setup key shown below and then enter the generated verification code:"
 msgstr "کد QR را با برنامه احراز هویت خود اسکن کنید یا از کلید راه اندازی نشان داده شده در زیر استفاده کنید و سپس کد تأیید تولید شده را وارد کنید:"
 
@@ -2450,7 +2459,7 @@ msgid "Scans"
 msgstr "اسکن ها"
 
 #: src/page/admin/sessions.vue:29 src/page/admin/sessions.vue:302
-#: src/component/account/apps.vue:48 src/component/account/apps.vue:307
+#: src/component/settings/apps.vue:47 src/component/settings/apps.vue:307
 msgid "Scope"
 msgstr "محدوده"
 
@@ -2469,7 +2478,7 @@ msgstr "جستجو و نمایش عکس ها روی نقشه."
 msgid "Season"
 msgstr "فصل"
 
-#: src/component/dialog/share.vue:148
+#: src/component/share/dialog.vue:150
 msgid "Secret"
 msgstr "محرمانه"
 
@@ -2477,17 +2486,13 @@ msgstr "محرمانه"
 msgid "Security and Access"
 msgstr "امنیت و دسترسی"
 
-#: src/component/viewer.vue:481
+#: src/component/viewer.vue:489
 msgid "Select"
 msgstr "انتخاب"
 
-#: src/page/library/index.vue:49
-msgid "Select a folder to scan for changes…"
-msgstr "پوشه ای را برای اسکن تغییرات انتخاب کنید…"
-
 #: src/page/library/import.vue:42
-msgid "Select a source folder to import files from…"
-msgstr "یک پوشه منبع را برای وارد کردن فایل‌ها از…"
+msgid "Select a source folder to import files…"
+msgstr "یک پوشه منبع را برای وارد کردن فایل‌ها انتخاب کنید…"
 
 #: src/locales.js:62
 msgid "Select date"
@@ -2497,13 +2502,18 @@ msgstr "تاریخ را انتخاب کنید"
 msgid "Select dates"
 msgstr "تاریخ ها را انتخاب کنید"
 
-#: src/component/dialog/upload.vue:145 src/component/photo/album/dialog.vue:51
+#: src/component/photo/album/dialog.vue:51
+#: src/component/photo/upload/dialog.vue:145
 msgid "Select or create an album"
 msgstr "آلبومی را انتخاب یا ایجاد کنید"
 
-#: src/component/dialog/upload.vue:129
+#: src/component/photo/upload/dialog.vue:129
 msgid "Select the files to upload…"
 msgstr "انتخاب فایل برای آپلود…"
+
+#: src/page/library/index.vue:49
+msgid "Select the folder to be indexed…"
+msgstr "پوشه مورد نظر برای ایندکس شدن را انتخاب کنید…"
 
 #: src/locales.js:98
 msgid "Select Time"
@@ -2529,8 +2539,8 @@ msgstr "ارسال"
 msgid "Sequential Name"
 msgstr "نام ترتیبی"
 
-#: src/component/dialog/share.vue:22 src/component/service/add.vue:56
-#: src/component/service/edit.vue:309
+#: src/component/service/add.vue:56 src/component/service/edit.vue:309
+#: src/component/share/dialog.vue:22
 msgid "Service URL"
 msgstr "URL سرویس"
 
@@ -2556,12 +2566,12 @@ msgstr "جلسات"
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: src/page/settings/account.vue:132 src/page/settings/account.vue:150
-#: src/component/account/passcode.vue:136
+#: src/page/settings/account.vue:140 src/page/settings/account.vue:158
+#: src/component/settings/passcode.vue:134
 msgid "Settings saved"
 msgstr "تنظیمات ذخیره شد"
 
-#: src/component/account/passcode.vue:157 src/component/service/upload.vue:119
+#: src/component/service/upload.vue:119 src/component/settings/passcode.vue:157
 msgid "Setup"
 msgstr "راه اندازی"
 
@@ -2570,7 +2580,7 @@ msgstr "راه اندازی"
 msgid "Share"
 msgstr "اشتراک گذاری"
 
-#: src/component/dialog/share.vue:41
+#: src/component/share/dialog.vue:41
 msgid "Share %{name}"
 msgstr "اشتراک گذاری %{name}"
 
@@ -2602,7 +2612,7 @@ msgstr "نمایش بیشتر"
 msgid "Show server logs in Library."
 msgstr "نمایش گزارش‌های سرور در کتابخانه."
 
-#: src/component/viewer.vue:402
+#: src/component/viewer.vue:410
 msgid "Show/Hide Sidebar"
 msgstr "نمایش/پنهان کردن نوار کناری"
 
@@ -2635,7 +2645,7 @@ msgstr "آهسته"
 msgid "Software"
 msgstr "نرم افزار"
 
-#: src/component/dialog/reload.vue:33
+#: src/component/update.vue:34
 msgid "Software Update"
 msgstr "به روز رسانی نرم افزار"
 
@@ -2643,7 +2653,7 @@ msgstr "به روز رسانی نرم افزار"
 msgid "Sort by"
 msgstr "مرتب سازی بر اساس"
 
-#: src/component/album/dialog/edit.vue:139 src/component/photo/toolbar.vue:368
+#: src/component/album/edit/dialog.vue:139 src/component/photo/toolbar.vue:368
 #: src/page/albums.vue:247
 msgid "Sort Order"
 msgstr "ترتیب مرتب سازی"
@@ -2661,8 +2671,8 @@ msgstr "به صورت نزولی مرتب شد."
 msgid "Source"
 msgstr "منبع"
 
-#: src/component/photo/view/cards.vue:325
-#: src/component/photo/view/mosaic.vue:196
+#: src/component/photo/view/cards.vue:326
+#: src/component/photo/view/mosaic.vue:197
 msgid "Stack"
 msgstr "پشته"
 
@@ -2690,7 +2700,7 @@ msgstr "دسته بندی فایل ها با قاب یا مرجع مشابه، �
 msgid "Start"
 msgstr "شروع"
 
-#: src/component/viewer.vue:423
+#: src/component/viewer.vue:431
 msgid "Start/Stop Slideshow"
 msgstr "شروع/پایان اسلایدشو"
 
@@ -2710,12 +2720,12 @@ msgstr "ذخیره سازی"
 msgid "Streets"
 msgstr "خیابان ها"
 
-#: src/component/photo/edit/details.vue:471
+#: src/component/photo/edit/details.vue:474
 #: src/component/photo/edit/labels.vue:48
 msgid "Subject"
 msgstr "موضوع"
 
-#: src/component/account/passcode.vue:121
+#: src/component/settings/passcode.vue:119
 msgid "Successfully activated"
 msgstr "با موفقیت فعال شد"
 
@@ -2723,15 +2733,16 @@ msgstr "با موفقیت فعال شد"
 msgid "Successfully Connected"
 msgstr "با موفقیت وصل شد"
 
-#: src/dialog/admin/sessions/remove.vue:23 src/component/account/apps.vue:206
+#: src/component/session/remove/dialog.vue:23
+#: src/component/settings/apps.vue:205
 msgid "Successfully deleted"
 msgstr "با موفقیت حذف شد"
 
-#: src/component/account/passcode.vue:96
+#: src/component/settings/passcode.vue:94
 msgid "Successfully verified"
 msgstr "با موفقیت تأیید شد"
 
-#: src/dialog/admin/users/edit.vue:412 src/page/admin/users.vue:80
+#: src/component/user/edit/dialog.vue:412 src/page/admin/users.vue:86
 msgid "Super Admin"
 msgstr "سوپر ادمین"
 
@@ -2739,7 +2750,7 @@ msgstr "سوپر ادمین"
 msgid "Support for additional services, like Google Drive, will be added over time."
 msgstr "پشتیبانی از خدمات اضافی، مانند Google Drive، به مرور اضافه خواهد شد."
 
-#: src/component/dialog/sponsor.vue:35 src/component/navigation.vue:1530
+#: src/component/confirm/sponsor.vue:35 src/component/navigation.vue:1530
 msgid "Support Our Mission"
 msgstr "از ماموریت ما حمایت کنید"
 
@@ -2752,7 +2763,7 @@ msgid "Sync raw and video files"
 msgstr "همگام سازی فایل های خام و ویدیویی"
 
 #: src/component/photo/edit/info.vue:187 src/component/photo/view/cards.vue:177
-#: src/component/photo/view/cards.vue:443 src/component/photo/view/list.vue:114
+#: src/component/photo/view/cards.vue:444 src/component/photo/view/list.vue:114
 msgid "Taken"
 msgstr "گرفته شده"
 
@@ -2788,7 +2799,7 @@ msgstr "ممکن است فرمت آنها پشتیبانی نشود، هنوز �
 msgid "Theme"
 msgstr "قالب"
 
-#: src/component/dialog/webdav.vue:98 src/page/settings/services.vue:144
+#: src/component/settings/webdav.vue:99 src/page/settings/services.vue:144
 msgid "This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local."
 msgstr "این پوشه اصلی را به عنوان درایو شبکه نصب می کند و به شما امکان می دهد فایل ها را از رایانه یا تلفن هوشمند خود باز، ویرایش و حذف کنید، گویی محلی هستند."
 
@@ -2804,7 +2815,7 @@ msgstr "منطقه زمانی"
 msgid "Timeout"
 msgstr "تایم اوت"
 
-#: src/dialog/admin/users/edit.vue:97
+#: src/component/user/edit/dialog.vue:97
 msgctxt "Account"
 msgid "Title"
 msgstr "عنوان"
@@ -2831,15 +2842,15 @@ msgstr "عنوان خیلی طولانی است"
 msgid "to"
 msgstr "به"
 
-#: src/component/account/passcode.vue:309
+#: src/component/settings/passcode.vue:309
 msgid "To avoid being locked out of your account, please download, print or copy this recovery code now and keep it in a safe place."
 msgstr "برای جلوگیری از قفل شدن حساب خود، لطفاً این کد بازیابی را دانلود، چاپ یا کپی کنید و آن را در مکانی امن نگهداری کنید."
 
-#: src/component/account/apps.vue:269
+#: src/component/settings/apps.vue:269
 msgid "To generate a new app-specific password, please enter the name and authorization scope of the application and select an expiration date:"
 msgstr "برای ایجاد یک رمز عبور جدید خاص، لطفاً نام و محدوده مجوز برنامه را وارد کنید و تاریخ انقضا را انتخاب کنید:"
 
-#: src/component/account/passcode.vue:397
+#: src/component/settings/passcode.vue:397
 msgid "To switch to a new authenticator app or device, first deactivate two-factor authentication and then reactivate it:"
 msgstr "برای جابه‌جایی به یک برنامه یا دستگاه احراز هویت جدید، ابتدا احراز هویت دو مرحله‌ای را غیرفعال کنید و سپس دوباره فعال کنید:"
 
@@ -2858,11 +2869,11 @@ msgstr "امروز"
 msgid "Toggle View"
 msgstr "تغییر حالت نمایش"
 
-#: src/component/dialog/share.vue:149
+#: src/component/share/dialog.vue:151
 msgid "Token"
 msgstr "توکن"
 
-#: src/component/dialog/upload.vue:189
+#: src/component/photo/upload/dialog.vue:189
 msgid "Too many files selected"
 msgstr "تعداد زیادی فایل انتخاب شده است"
 
@@ -2885,7 +2896,7 @@ msgstr "چک لیست های عیب یابی"
 msgid "Try again using other filters or keywords."
 msgstr "دوباره با استفاده از فیلترها یا کلمات کلیدی دیگر امتحان کنید."
 
-#: src/component/account/passcode.vue:377
+#: src/component/settings/passcode.vue:377
 msgid "Two-factor authentication has been enabled for your account."
 msgstr "احراز هویت دو مرحله ای برای حساب شما فعال شده است."
 
@@ -2907,9 +2918,9 @@ msgid "Unique ID"
 msgstr "شناسه منحصربفرد"
 
 #: src/component/photo/edit/details.vue:23 src/component/photo/edit/info.vue:28
-#: src/model/album.js:179 src/model/photo.js:362 src/model/photo.js:801
-#: src/model/photo.js:822 src/model/photo.js:845 src/model/photo.js:863
-#: src/model/photo.js:1000 src/model/photo.js:1045 src/model/photo.js:1058
+#: src/model/album.js:179 src/model/photo.js:362 src/model/photo.js:806
+#: src/model/photo.js:827 src/model/photo.js:850 src/model/photo.js:868
+#: src/model/photo.js:1005 src/model/photo.js:1050 src/model/photo.js:1063
 #: src/model/user.js:155 src/options/options.js:50 src/options/options.js:64
 #: src/options/options.js:81 src/options/options.js:95
 #: src/options/options.js:107 src/page/library/errors.vue:183
@@ -2917,8 +2928,8 @@ msgstr "شناسه منحصربفرد"
 msgid "Unknown"
 msgstr "ناشناس"
 
-#: src/page/settings/account.vue:40 src/page/settings/account.vue:48
-#: src/component/navigation.vue:87
+#: src/page/settings/account.vue:48 src/page/settings/account.vue:56
+#: src/component/navigation.vue:95
 msgid "Unregistered"
 msgstr "ثبت نشده"
 
@@ -2946,7 +2957,7 @@ msgstr "به روزرسانی نمایه ها"
 msgid "Updating moments"
 msgstr "به روزرسانی لحظه ها"
 
-#: src/dialog/admin/users/edit.vue:161
+#: src/component/user/edit/dialog.vue:161
 msgid "Updating picture…"
 msgstr "به روزرسانی پیش نمایش ها"
 
@@ -2965,33 +2976,34 @@ msgid "Upgrade"
 msgstr "ارتقا دهید"
 
 #: src/page/about/about.vue:79 src/page/connect.vue:197
-#: src/component/dialog/sponsor.vue:92 src/page/about/about.vue:101
+#: src/component/confirm/sponsor.vue:96 src/page/about/about.vue:101
 #: src/page/connect.vue:199
 msgid "Upgrade Now"
 msgstr "اکنون ارتقا دهید"
 
-#: src/component/album/toolbar.vue:210 src/component/dialog/upload.vue:46
-#: src/component/navigation.vue:1702 src/component/photo/toolbar.vue:197
+#: src/component/album/toolbar.vue:210 src/component/navigation.vue:1702
+#: src/component/photo/toolbar.vue:197 src/component/photo/upload/dialog.vue:46
 #: src/component/service/upload.vue:132 src/page/albums.vue:129
 #: src/page/library/import.vue:117 src/page/settings/general.vue:226
 #: src/page/settings/services.vue:27
 msgid "Upload"
 msgstr "آپلود"
 
-#: src/component/dialog/upload.vue:280
+#: src/component/photo/upload/dialog.vue:280
 msgid "Upload complete"
 msgstr "آپلود کامل شد"
 
-#: src/component/dialog/upload.vue:126
+#: src/component/photo/upload/dialog.vue:126
 msgid "Upload complete. Indexing…"
 msgstr "آپلود کامل شد. در حال نمایه سازی…"
 
-#: src/component/dialog/upload.vue:267 src/component/dialog/upload.vue:285
-#: src/component/dialog/upload.vue:122
+#: src/component/photo/upload/dialog.vue:267
+#: src/component/photo/upload/dialog.vue:285
+#: src/component/photo/upload/dialog.vue:122
 msgid "Upload failed"
 msgstr "آپلود انجام نشد"
 
-#: src/dialog/admin/users/edit.vue:394
+#: src/component/user/edit/dialog.vue:394
 msgid "Upload Folder"
 msgstr "پوشه آپلود"
 
@@ -3003,20 +3015,21 @@ msgstr "فایل های محلی را آپلود کنید"
 msgid "Upload to WebDAV and share links with friends."
 msgstr "در WebDAV آپلود کنید و پیوندها را با دوستان خود به اشتراک بگذارید."
 
-#: src/component/dialog/upload.vue:124
+#: src/component/photo/upload/dialog.vue:124
 msgid "Uploading %{n} of %{t}…"
 msgstr "در حال آپلود %{n} از %{t}…"
 
-#: src/component/dialog/upload.vue:103 src/component/dialog/upload.vue:111
-#: src/component/dialog/upload.vue:225
+#: src/component/photo/upload/dialog.vue:103
+#: src/component/photo/upload/dialog.vue:111
+#: src/component/photo/upload/dialog.vue:225
 msgid "Uploading photos…"
 msgstr "در حال آپلود تصاویر…"
 
-#: src/page/settings/account.vue:143
+#: src/page/settings/account.vue:151
 msgid "Uploading…"
 msgstr "در حال بارگیری مجدد…"
 
-#: src/component/dialog/upload.vue:195
+#: src/component/photo/upload/dialog.vue:195
 msgid "Uploads that may contain such images will be rejected automatically."
 msgstr "آپلودهایی که ممکن است حاوی چنین تصاویری باشند به طور خودکار رد می شوند."
 
@@ -3028,7 +3041,7 @@ msgstr "URL"
 msgid "Use Presets"
 msgstr "از Presets استفاده کنید"
 
-#: src/component/account/passcode.vue:279
+#: src/component/settings/passcode.vue:279
 msgid "Use the following recovery code to access your account when you are unable to generate a valid verification code with your authenticator app:"
 msgstr "وقتی نمی‌توانید یک کد تأیید معتبر با برنامه احراز هویت خود ایجاد کنید، از کد بازیابی زیر برای دسترسی به حساب خود استفاده کنید:"
 
@@ -3049,9 +3062,9 @@ msgstr "راهنمای کاربر"
 msgid "User Interface"
 msgstr "رابط کاربری"
 
-#: src/dialog/admin/users/add.vue:65 src/page/admin/sessions.vue:145
-#: src/page/admin/users.vue:34 src/component/dialog/share.vue:23
-#: src/component/service/add.vue:73 src/component/service/edit.vue:324
+#: src/component/user/add/dialog.vue:65 src/page/admin/sessions.vue:145
+#: src/page/admin/users.vue:40 src/component/service/add.vue:73
+#: src/component/service/edit.vue:324 src/component/share/dialog.vue:23
 msgid "Username"
 msgstr "نام کاربری"
 
@@ -3059,10 +3072,10 @@ msgstr "نام کاربری"
 msgid "Users"
 msgstr "کاربران"
 
-#: src/component/photo/view/cards.vue:318
-#: src/component/photo/view/cards.vue:478 src/component/photo/view/list.vue:179
-#: src/component/photo/view/mosaic.vue:189 src/model/photo.js:908
-#: src/model/photo.js:916 src/options/options.js:376
+#: src/component/photo/view/cards.vue:319
+#: src/component/photo/view/cards.vue:479 src/component/photo/view/list.vue:179
+#: src/component/photo/view/mosaic.vue:190 src/model/photo.js:913
+#: src/model/photo.js:921 src/options/options.js:376
 msgid "Vector"
 msgstr "بردار"
 
@@ -3070,18 +3083,18 @@ msgstr "بردار"
 msgid "Vectors"
 msgstr "بردارها"
 
-#: src/component/account/passcode.vue:223 src/page/auth/login.vue:124
+#: src/component/settings/passcode.vue:223 src/page/auth/login.vue:124
 msgid "Verification Code"
 msgstr "کد تایید"
 
-#: src/component/photo/view/cards.vue:304
-#: src/component/photo/view/cards.vue:451 src/component/photo/view/list.vue:186
-#: src/component/photo/view/mosaic.vue:175 src/model/file.js:216
-#: src/model/photo.js:932 src/model/photo.js:956 src/options/options.js:372
+#: src/component/photo/view/cards.vue:305
+#: src/component/photo/view/cards.vue:452 src/component/photo/view/list.vue:186
+#: src/component/photo/view/mosaic.vue:176 src/model/file.js:216
+#: src/model/photo.js:937 src/model/photo.js:961 src/options/options.js:372
 msgid "Video"
 msgstr "ویدیو"
 
-#: src/component/album/dialog/edit.vue:27 src/component/photo/toolbar.vue:112
+#: src/component/album/edit/dialog.vue:27 src/component/photo/toolbar.vue:112
 #: src/component/photo/toolbar.vue:123 src/component/photo/toolbar.vue:134
 msgid "Video Duration"
 msgstr "مدت"
@@ -3090,8 +3103,8 @@ msgstr "مدت"
 msgid "Videos"
 msgstr "ویدیو ها"
 
-#: src/component/photo/toolbar.vue:342 src/component/photo/view/cards.vue:334
-#: src/component/photo/view/mosaic.vue:205
+#: src/component/photo/toolbar.vue:342 src/component/photo/view/cards.vue:335
+#: src/component/photo/view/mosaic.vue:206
 msgid "View"
 msgstr "نمایش"
 
@@ -3119,18 +3132,18 @@ msgstr "ما از بازخورد شما قدردانی می کنیم!"
 msgid "We do our best to respond within five business days or less."
 msgstr "ما تمام تلاش خود را می کنیم تا ظرف پنج روز کاری یا کمتر پاسخ دهیم."
 
-#: src/dialog/admin/users/add.vue:212 src/dialog/admin/users/edit.vue:429
-#: src/page/admin/users.vue:43
+#: src/component/user/add/dialog.vue:212 src/component/user/edit/dialog.vue:429
+#: src/page/admin/users.vue:49
 msgid "Web Login"
 msgstr "ورود به وب"
 
-#: src/dialog/admin/users/add.vue:225 src/dialog/admin/users/edit.vue:446
-#: src/page/admin/users.vue:45 src/options/auth.js:55 src/options/auth.js:68
+#: src/component/user/add/dialog.vue:225 src/component/user/edit/dialog.vue:446
+#: src/page/admin/users.vue:51 src/options/auth.js:55 src/options/auth.js:68
 #: src/options/options.js:513
 msgid "WebDAV"
 msgstr "WebDAV"
 
-#: src/component/dialog/webdav.vue:47
+#: src/component/settings/webdav.vue:48
 msgid "WebDAV clients can connect to PhotoPrism using the following URL:"
 msgstr "کلاینت های WebDAV می توانند با استفاده از URL زیر به PhotoPrism متصل شوند:"
 
@@ -3140,7 +3153,7 @@ msgstr ""
 "کلاینت های WebDAV، مانند Windows Explorer مایکروسافت یا Apple's Finder، می توانند مستقیماً به آن متصل شوند\n"
 "           PhotoPrism."
 
-#: src/component/dialog/share.vue:215 src/component/service/upload.vue:39
+#: src/component/service/upload.vue:39 src/component/share/dialog.vue:217
 msgid "WebDAV Upload"
 msgstr "آپلود WebDAV"
 
@@ -3170,7 +3183,7 @@ msgstr "سال"
 msgid "Yellow"
 msgstr "زرد"
 
-#: src/component/dialog/confirm.vue:58 src/component/people/dialog/merge.vue:58
+#: src/component/confirm/action.vue:58 src/component/people/merge/dialog.vue:58
 #: src/component/photo/archive/dialog.vue:58
 #: src/component/photo/edit/files.vue:320
 #: src/component/photo/edit/files.vue:350
@@ -3182,7 +3195,7 @@ msgstr "زرد"
 msgid "Yes"
 msgstr "بله"
 
-#: src/component/dialog/sponsor.vue:53 src/page/about/about.vue:146
+#: src/component/confirm/sponsor.vue:57 src/page/about/about.vue:146
 #: src/page/connect.vue:310
 msgid "You are welcome to contact us at membership@photoprism.app for questions regarding your membership."
 msgstr "می توانید برای سؤالات در مورد عضویت خود با ما به آدرس Member@photoprism.app تماس بگیرید."
@@ -3195,7 +3208,7 @@ msgstr "شما فقط می توانید یک آلبوم را دانلود کنی
 msgid "You can only download one label"
 msgstr "شما فقط می توانید یک برچسب را دانلود کنید"
 
-#: src/component/dialog/upload.vue:193
+#: src/component/photo/upload/dialog.vue:193
 msgid "You can upload up to %{n} files for test purposes."
 msgstr "می توانید حداکثر %{n} فایل را برای اهداف آزمایشی آپلود کنید."
 
@@ -3216,7 +3229,7 @@ msgstr "حساب شما با موفقیت متصل شد."
 msgid "Your browser does not support WebGL"
 msgstr "مرورگر شما از WebGL پشتیبانی نمی کند"
 
-#: src/component/dialog/sponsor.vue:41 src/page/about/about.vue:85
+#: src/component/confirm/sponsor.vue:41 src/page/about/about.vue:85
 #: src/page/about/about.vue:144 src/page/connect.vue:213
 msgid "Your continued support helps us provide regular updates and remain independent, so we can fulfill our mission and protect your privacy."
 msgstr "پشتیبانی مستمر شما به ما کمک می‌کند تا به‌روزرسانی‌های منظم را ارائه کنیم و مستقل بمانیم، بنابراین می‌توانیم مأموریت خود را انجام دهیم و از حریم خصوصی شما محافظت کنیم."
@@ -3228,6 +3241,12 @@ msgstr "کتابخانه شما به طور مداوم تجزیه و تحلیل 
 #: src/component/viewer.vue:103
 msgid "Zoom in/out"
 msgstr "بزرگنمایی/کوچک کردن"
+
+#~ msgid "Select a folder to scan for changes…"
+#~ msgstr "پوشه ای را برای اسکن تغییرات انتخاب کنید…"
+
+#~ msgid "Select a source folder to import files from…"
+#~ msgstr "یک پوشه منبع را برای وارد کردن فایل‌ها از…"
 
 #~ msgid "Choose an album or create a new one"
 #~ msgstr "آلبومی را انتخاب کنید یا آلبوم جدیدی بسازید"
