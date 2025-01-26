@@ -45,7 +45,8 @@
                 <!-- TODO: check property allow-overflow TEST -->
                 <v-combobox
                   v-model="selectedAlbums"
-                  :disabled="busy || total > 0"
+                  :disabled="busy || loading || total > 0"
+                  :loading="loading"
                   hide-details
                   chips
                   closable-chips
@@ -145,9 +146,9 @@ export default {
       albums: [],
       selectedAlbums: [],
       selected: [],
-      loading: false,
       uploads: [],
       busy: false,
+      loading: false,
       indexing: false,
       failed: false,
       current: 0,
@@ -191,7 +192,7 @@ export default {
         }
 
         // Fetch albums from backend.
-        this.findAlbums("");
+        this.load("");
       } else {
         this.reset();
         // Re-enable the browser scrollbar.
@@ -203,12 +204,18 @@ export default {
     removeSelection(index) {
       this.selectedAlbums.splice(index, 1);
     },
-    findAlbums(q) {
+    onLoad() {
+      this.loading = true;
+    },
+    onLoaded() {
+      this.loading = false;
+    },
+    load(q) {
       if (this.loading) {
         return;
       }
 
-      this.loading = true;
+      this.onLoad();
 
       const params = {
         q: q,
@@ -219,10 +226,11 @@ export default {
 
       Album.search(params)
         .then((response) => {
-          this.loading = false;
           this.albums = response.models;
         })
-        .catch(() => (this.loading = false));
+        .finally(() => {
+          this.onLoaded();
+        });
     },
     close() {
       if (this.busy) {

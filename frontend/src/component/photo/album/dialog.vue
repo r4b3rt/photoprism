@@ -13,6 +13,7 @@
             autocomplete="off"
             :placeholder="$gettext('Select or create an album')"
             :items="items"
+            :disabled="loading"
             :loading="loading"
             hide-no-data
             hide-details
@@ -69,7 +70,7 @@ export default {
   watch: {
     show: function (show) {
       if (show) {
-        this.queryServer("");
+        this.load("");
       }
     },
   },
@@ -101,15 +102,24 @@ export default {
           });
       }
     },
-    onLoaded() {
-      this.$refs.input.focus();
+    onLoad() {
+      this.loading = true;
+      this.$nextTick(() => {
+        this.$refs.input.focus();
+      });
     },
-    queryServer(q) {
+    onLoaded() {
+      this.loading = false;
+      this.$nextTick(() => {
+        this.$refs.input.focus();
+      });
+    },
+    load(q) {
       if (this.loading) {
         return;
       }
 
-      this.loading = true;
+      this.onLoad();
 
       const params = {
         q: q,
@@ -122,13 +132,9 @@ export default {
         .then((response) => {
           this.albums = response.models;
           this.items = [...this.albums];
-          this.$nextTick(() => this.$refs.input.focus());
-        })
-        .catch(() => {
-          this.$nextTick(() => this.$refs.input.focus());
         })
         .finally(() => {
-          this.loading = false;
+          this.onLoaded();
         });
     },
   },
