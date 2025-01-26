@@ -121,10 +121,10 @@ export default {
     hover: true,
   },
   VDialog: {
-    retainFocus: true,
-    transition: false,
     scrim: true,
     scrollable: true,
+    retainFocus: true,
+    transition: false,
   },
   VExpansionPanel: {
     tile: true,
