@@ -4,7 +4,7 @@
       <v-toolbar density="compact" class="page-toolbar" color="secondary-light">
         <v-spacer></v-spacer>
 
-        <v-divider vertical class="px-1"></v-divider>
+        <v-divider vertical></v-divider>
 
         <v-btn
           icon
@@ -62,14 +62,14 @@
       </div>
       <div v-else>
         <div class="v-row search-results face-results cards-view" :class="{ 'select-results': selection.length > 0 }">
-          <div v-for="model in results" :key="model.ID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2">
-            <div :data-id="model.ID" :class="model.classes()" class="result flex-grow-1 not-selectable">
+          <div v-for="m in results" :key="m.ID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 v-col-xl-2">
+            <div :data-id="m.ID" :class="m.classes()" class="result flex-grow-1 not-selectable">
               <v-img
-                :src="model.thumbnailUrl('tile_320')"
+                :src="m.thumbnailUrl('tile_320')"
                 :transition="false"
                 aspect-ratio="1"
                 class="preview"
-                @click.stop.prevent="onView(model)"
+                @click.stop.prevent="onView(m)"
               >
                 <v-btn
                   :ripple="false"
@@ -78,7 +78,7 @@
                   variant="text"
                   density="comfortable"
                   position="absolute"
-                  @click.stop.prevent="toggleHidden(model)"
+                  @click.stop.prevent="toggleHidden(m)"
                 >
                   <v-icon color="white" class="select-on" :title="$gettext('Show')">mdi-eye-off</v-icon>
                   <v-icon color="white" class="select-off" :title="$gettext('Hide')">mdi-close</v-icon>
@@ -87,8 +87,8 @@
 
               <v-card-actions class="meta pa-0">
                 <v-text-field
-                  v-if="model.SubjUID"
-                  :model-value="model.Name"
+                  v-if="m.SubjUID"
+                  v-model="m.Name"
                   :rules="[textRule]"
                   :readonly="readonly"
                   autocomplete="off"
@@ -96,43 +96,31 @@
                   single-line
                   density="comfortable"
                   class="input-name pa-0 ma-0"
-                  @change="
-                    (newName) => {
-                      onRename(model, newName);
-                    }
-                  "
-                  @keyup.enter="
-                    (event) => {
-                      onRename(model, event.target.value);
-                    }
-                  "
+                  @blur="onSetName(m, false)"
+                  @keyup.enter="onSetName(m, false)"
                 ></v-text-field>
                 <!-- TODO: check property allow-overflow TEST -->
                 <v-combobox
                   v-else
-                  :model-value="model.Name"
-                  style="z-index: 250"
+                  v-model:search="m.Name"
                   :items="$config.values.people"
                   item-title="Name"
                   item-value="Name"
                   :readonly="readonly"
-                  :return-object="false"
+                  return-object
+                  hide-no-data
                   :menu-props="menuProps"
-                  :placeholder="$gettext('Name')"
                   hide-details
                   single-line
                   open-on-clear
-                  hide-no-data
                   append-icon=""
                   prepend-inner-icon="mdi-account-plus"
                   autocomplete="off"
                   density="comfortable"
                   class="input-name pa-0 ma-0"
-                  @keyup.enter.native="
-                    (event) => {
-                      onRename(model, event.target.value);
-                    }
-                  "
+                  @blur="onSetName(m, true)"
+                  @update:model-value="(person) => onSetPerson(m, person)"
+                  @keyup.enter.native="onSetName(m, false)"
                 >
                 </v-combobox>
               </v-card-actions>
@@ -146,6 +134,14 @@
         </div>
       </div>
     </div>
+    <p-confirm-action
+      :show="confirm.show"
+      icon="mdi-account-plus"
+      :icon-size="42"
+      :text="confirm?.model?.Name ? $gettext('Add %{name}?', { name: confirm.model.Name }) : $gettext('Add person?')"
+      @close="onCancelRename"
+      @confirm="onConfirmRename"
+    ></p-confirm-action>
   </div>
 </template>
 
@@ -202,6 +198,11 @@ export default {
       titleRule: (v) => v.length <= this.$config.get("clip") || this.$gettext("Name too long"),
       input: new Input(),
       lastId: "",
+      confirm: {
+        show: false,
+        model: new Face(),
+        text: this.$gettext("Add person?"),
+      },
       menuProps: {
         closeOnClick: false,
         closeOnContentClick: true,
@@ -245,7 +246,6 @@ export default {
     this.search();
 
     this.subscriptions.push(Event.subscribe("faces", (ev, data) => this.onUpdate(ev, data)));
-
     this.subscriptions.push(Event.subscribe("touchmove.top", () => this.refresh()));
   },
   unmounted() {
@@ -351,6 +351,52 @@ export default {
       }
 
       this.$router.push(model.route(this.view));
+    },
+    onUpdate(ev, data) {
+      if (!this.listen) return;
+
+      if (!data || !data.entities || !Array.isArray(data.entities)) {
+        return;
+      }
+
+      const type = ev.split(".")[1];
+
+      switch (type) {
+        case "updated":
+          for (let i = 0; i < data.entities.length; i++) {
+            const values = data.entities[i];
+            const model = this.results.find((m) => m.UID === values.UID);
+
+            if (model) {
+              for (let key in values) {
+                if (values.hasOwnProperty(key) && values[key] != null && typeof values[key] !== "object") {
+                  model[key] = values[key];
+                }
+              }
+            }
+          }
+          break;
+        case "deleted":
+          this.dirty = true;
+
+          for (let i = 0; i < data.entities.length; i++) {
+            const uid = data.entities[i];
+            const index = this.results.findIndex((m) => m.UID === uid);
+
+            if (index >= 0) {
+              this.results.splice(index, 1);
+            }
+
+            this.removeSelection(uid);
+          }
+
+          break;
+        case "created":
+          this.dirty = true;
+          break;
+        default:
+          console.warn("unexpected event type", ev);
+      }
     },
     onSave(m) {
       m.update();
@@ -508,7 +554,7 @@ export default {
     search() {
       this.scrollDisabled = true;
 
-      // Don't query the same data more than once
+      // Don't query the same data more than once.
       if (JSON.stringify(this.lastFilter) === JSON.stringify(this.filter)) {
         this.refresh();
         return;
@@ -577,7 +623,68 @@ export default {
         }
       });
     },
-    onRename(model, newName) {
+    onSetPerson(model, person) {
+      if (typeof person === "object" && model?.ID && person?.UID && person?.Name) {
+        model.Name = person.Name;
+        model.SubjUID = person.UID;
+        this.setName(model, person.Name);
+      }
+
+      return true;
+    },
+    onSetName(model, confirm) {
+      if (this.busy || !model) {
+        return;
+      }
+
+      const name = model?.Name;
+
+      if (!name) {
+        this.onCancelRename();
+        return;
+      }
+
+      this.confirm.model = model;
+
+      const people = this.$config.values?.people;
+
+      if (people) {
+        const found = people.find((person) => person.Name.localeCompare(name, "en", { sensitivity: "base" }) === 0);
+        if (found) {
+          model.Name = found.Name;
+          model.SubjUID = found.UID;
+          if (model.wasChanged()) {
+            this.setName(model, model.Name);
+          }
+          return;
+        }
+      }
+
+      model.Name = name;
+      model.SubjUID = "";
+
+      if (confirm && model.wasChanged()) {
+        this.confirm.show = true;
+      } else {
+        this.onConfirmRename();
+      }
+    },
+    onConfirmRename() {
+      if (!this.confirm?.model?.Name) {
+        return;
+      }
+
+      if (this.confirm.model.wasChanged()) {
+        this.setName(this.confirm.model, this.confirm?.model?.Name);
+      } else {
+        this.confirm.model = null;
+        this.confirm.show = false;
+      }
+    },
+    onCancelRename() {
+      this.confirm.show = false;
+    },
+    setName(model, newName) {
       if (this.busy || !model || !newName || newName.trim() === "") {
         // Ignore if busy, refuse to save empty name.
         return;
@@ -586,9 +693,11 @@ export default {
       this.busy = true;
       this.$notify.blockUI();
 
-      model.setName(newName).finally(() => {
+      return model.setName(newName).finally(() => {
         this.$notify.unblockUI();
         this.busy = false;
+        this.confirm.model = null;
+        this.confirm.show = false;
         this.changeFaceCount(-1);
       });
     },
@@ -599,52 +708,6 @@ export default {
     setFaceCount(count) {
       this.faceCount = count;
       this.$emit("updateFaceCount", this.faceCount);
-    },
-    onUpdate(ev, data) {
-      if (!this.listen) return;
-
-      if (!data || !data.entities || !Array.isArray(data.entities)) {
-        return;
-      }
-
-      const type = ev.split(".")[1];
-
-      switch (type) {
-        case "updated":
-          for (let i = 0; i < data.entities.length; i++) {
-            const values = data.entities[i];
-            const model = this.results.find((m) => m.UID === values.UID);
-
-            if (model) {
-              for (let key in values) {
-                if (values.hasOwnProperty(key) && values[key] != null && typeof values[key] !== "object") {
-                  model[key] = values[key];
-                }
-              }
-            }
-          }
-          break;
-        case "deleted":
-          this.dirty = true;
-
-          for (let i = 0; i < data.entities.length; i++) {
-            const uid = data.entities[i];
-            const index = this.results.findIndex((m) => m.UID === uid);
-
-            if (index >= 0) {
-              this.results.splice(index, 1);
-            }
-
-            this.removeSelection(uid);
-          }
-
-          break;
-        case "created":
-          this.dirty = true;
-          break;
-        default:
-          console.warn("unexpected event type", ev);
-      }
     },
   },
 };

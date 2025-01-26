@@ -17,11 +17,11 @@
         </div>
       </v-alert>
       <div v-else class="v-row search-results face-results cards-view d-flex">
-        <div v-for="marker in markers" :key="marker.UID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 d-flex">
-          <v-card :data-id="marker.UID" :class="marker.classes()" class="result not-selectable flex-grow-1">
-            <v-img :src="marker.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card">
+        <div v-for="m in markers" :key="m.UID" class="v-col-12 v-col-sm-6 v-col-md-4 v-col-lg-3 d-flex">
+          <v-card :data-id="m.UID" :class="m.classes()" class="result not-selectable flex-grow-1">
+            <v-img :src="m.thumbnailUrl('tile_320')" :transition="false" aspect-ratio="1" class="card">
               <v-btn
-                v-if="!marker.SubjUID && !marker.Invalid"
+                v-if="!m.SubjUID && !m.Invalid"
                 :ripple="false"
                 class="input-reject"
                 icon
@@ -29,14 +29,14 @@
                 density="comfortable"
                 position="absolute"
                 :title="$gettext('Remove')"
-                @click.stop.prevent="onReject(marker)"
+                @click.stop.prevent="onReject(m)"
               >
                 <v-icon class="action-reject">mdi-close</v-icon>
               </v-btn>
             </v-img>
             <v-card-actions class="meta pa-0">
               <v-btn
-                v-if="marker.Invalid"
+                v-if="m.Invalid"
                 :disabled="busy"
                 size="large"
                 variant="flat"
@@ -44,13 +44,13 @@
                 :rounded="false"
                 class="action-undo text-center"
                 :title="$gettext('Undo')"
-                @click.stop="onApprove(marker)"
+                @click.stop="onApprove(m)"
               >
                 <v-icon>mdi-undo</v-icon>
               </v-btn>
               <v-text-field
-                v-else-if="marker.SubjUID"
-                v-model="marker.Name"
+                v-else-if="m.SubjUID"
+                v-model="m.Name"
                 :rules="[textRule]"
                 :disabled="busy"
                 :readonly="true"
@@ -63,12 +63,12 @@
                 clear-icon="mdi-eject"
                 density="comfortable"
                 class="input-name pa-0 ma-0"
-                @click:clear="onClearSubject(marker)"
+                @click:clear="onClearSubject(m)"
               ></v-text-field>
               <!-- TODO: check property allow-overflow TEST -->
               <v-combobox
                 v-else
-                v-model:search="marker.Name"
+                v-model:search="m.Name"
                 :items="$config.values.people"
                 item-title="Name"
                 item-value="Name"
@@ -84,9 +84,9 @@
                 prepend-inner-icon="mdi-account-plus"
                 density="comfortable"
                 class="input-name pa-0 ma-0"
-                @blur="onSetName(marker)"
-                @update:model-value="(person) => onSetPerson(marker, person)"
-                @keyup.enter.native="onSetName(marker)"
+                @blur="onSetName(m)"
+                @update:model-value="(person) => onSetPerson(m, person)"
+                @keyup.enter.native="onSetName(m)"
               >
               </v-combobox>
             </v-card-actions>
@@ -98,9 +98,9 @@
       :show="confirm.show"
       icon="mdi-account-plus"
       :icon-size="42"
-      :text="confirm.marker?.Name ? $gettext('Add %{name}?', { name: confirm.marker.Name }) : $gettext('Add person?')"
-      @close="onCancelRename"
-      @confirm="onConfirmRename"
+      :text="confirm?.model?.Name ? $gettext('Add %{name}?', { name: confirm.model.Name }) : $gettext('Add person?')"
+      @close="onCancelSetName"
+      @confirm="onConfirmSetName"
     ></p-confirm-action>
   </div>
 </template>
@@ -108,7 +108,6 @@
 <script>
 import Marker from "model/marker";
 import PConfirmAction from "component/confirm/action.vue";
-import { reactive } from "vue";
 
 export default {
   name: "PTabPhotoPeople",
@@ -133,7 +132,7 @@ export default {
       readonly: this.$config.get("readonly"),
       confirm: {
         show: false,
-        marker: new Marker(),
+        model: new Marker(),
         text: this.$gettext("Add person?"),
       },
       menuProps: {
@@ -162,102 +161,96 @@ export default {
       this.markers = this.model.getMarkers(true);
       this.imageUrl = this.model.thumbnailUrl("fit_720");
     },
-    onReject(marker) {
-      if (this.busy || !marker) return;
+    onReject(model) {
+      if (this.busy || !model) return;
 
       this.busy = true;
       this.$notify.blockUI();
 
-      marker.reject().finally(() => {
+      model.reject().finally(() => {
         this.$notify.unblockUI();
         this.busy = false;
       });
     },
-    onApprove(marker) {
-      if (this.busy || !marker) return;
+    onApprove(model) {
+      if (this.busy || !model) return;
 
       this.busy = true;
 
-      marker.approve().finally(() => (this.busy = false));
+      model.approve().finally(() => (this.busy = false));
     },
-    onClearSubject(marker) {
-      if (this.busy || !marker) return;
+    onClearSubject(model) {
+      if (this.busy || !model) return;
 
       this.busy = true;
       this.$notify.blockUI();
 
-      marker.clearSubject(marker).finally(() => {
+      model.clearSubject(model).finally(() => {
         this.$notify.unblockUI();
         this.busy = false;
       });
     },
-    onSetPerson(marker, person) {
-      if (typeof person === "object" && marker?.UID && person?.UID && person?.Name) {
-        marker.Name = person.Name;
-        marker.SubjUID = person.UID;
-        this.rename(marker);
+    onSetPerson(model, person) {
+      if (typeof person === "object" && model?.UID && person?.UID && person?.Name) {
+        model.Name = person.Name;
+        model.SubjUID = person.UID;
+        this.setName(model);
       }
 
       return true;
     },
-    onSetName(marker) {
-      if (this.busy || !marker) {
+    onSetName(model) {
+      if (this.busy || !model) {
         return;
       }
 
-      const name = marker?.Name;
+      const name = model?.Name;
 
       if (!name) {
-        this.onCancelRename();
+        this.onCancelSetName();
         return;
       }
 
-      this.confirm.marker = marker;
+      this.confirm.model = model;
 
       const people = this.$config.values?.people;
 
       if (people) {
         const found = people.find((person) => person.Name.localeCompare(name, "en", { sensitivity: "base" }) === 0);
         if (found) {
-          marker.Name = found.Name;
-          marker.SubjUID = found.UID;
-          this.rename(marker);
+          model.Name = found.Name;
+          model.SubjUID = found.UID;
+          this.setName(model);
           return;
         }
       }
 
-      marker.Name = name;
-      marker.SubjUID = "";
+      model.Name = name;
+      model.SubjUID = "";
       this.confirm.show = true;
     },
-    onConfirmRename() {
-      if (!this.confirm?.marker?.Name) {
+    onConfirmSetName() {
+      if (!this.confirm?.model?.Name) {
         return;
       }
 
-      this.rename(this.confirm.marker);
+      this.setName(this.confirm.model);
     },
-    onCancelRename() {
-      if (this.confirm?.marker?.Name && this.confirm?.marker?.originalValue) {
-        // Revert name change.
-        this.confirm.marker.Name = this.confirm.marker.originalValue("Name");
+    onCancelSetName() {
+      this.confirm.show = false;
+    },
+    setName(model) {
+      if (this.busy || !model) {
+        return;
       }
-
-      this.$nextTick(() => {
-        this.confirm.marker = reactive(new Marker());
-        this.confirm.show = false;
-      });
-    },
-    rename(marker) {
-      if (this.busy || !marker) return;
 
       this.busy = true;
       this.$notify.blockUI();
 
-      marker.rename().finally(() => {
+      return model.setName().finally(() => {
         this.$notify.unblockUI();
         this.busy = false;
-        this.confirm.marker = reactive(new Marker());
+        this.confirm.model = null;
         this.confirm.show = false;
       });
     },

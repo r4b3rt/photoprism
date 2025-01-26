@@ -106,7 +106,7 @@ export class Marker extends RestModel {
     return this.update();
   }
 
-  rename() {
+  setName() {
     if (!this.Name || this.Name.trim() === "") {
       // Can't save an empty name.
       return Promise.resolve(this);

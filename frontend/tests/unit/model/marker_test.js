@@ -156,7 +156,7 @@ describe("model/marker", () => {
     };
     const marker = new Marker(values);
     assert.equal(marker.Name, "");
-    marker.rename();
+    marker.setName();
     assert.equal(marker.Name, "");
     const values2 = {
       UID: "mDC123ghytr",
@@ -170,7 +170,7 @@ describe("model/marker", () => {
     const marker2 = new Marker(values2);
     assert.equal(marker2.Name, "testname");
     marker2
-      .rename()
+      .setName()
       .then((response) => {
         assert.equal(response.success, "ok");
         done();

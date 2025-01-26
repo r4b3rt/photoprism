@@ -483,3 +483,8 @@ form > .v-card > .v-card-text.dense {
 .v-toolbar.v-toolbar--density-default .v-toolbar__content > .v-toolbar-title {
     margin-inline-start: 12px;
 }
+
+.v-divider.v-divider--vertical {
+    margin-left: 4px;
+    margin-right: 4px;
+}

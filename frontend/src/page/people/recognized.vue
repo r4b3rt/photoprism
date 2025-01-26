@@ -32,7 +32,7 @@
           "
         ></v-text-field>
 
-        <v-divider vertical class="px-1"></v-divider>
+        <v-divider vertical></v-divider>
 
         <v-btn
           icon
