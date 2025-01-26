@@ -6,7 +6,7 @@
         <span v-else-if="action">{{ action }}…</span>
         <span v-else-if="busy">{{ $gettext(`Indexing media and sidecar files…`) }}</span>
         <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
-        <span v-else>{{ $gettext(`Select a folder to scan for changes…`) }}</span>
+        <span v-else>{{ $gettext(`Select the folder to be indexed…`) }}</span>
       </div>
       <div class="form-body">
         <div class="form-controls">

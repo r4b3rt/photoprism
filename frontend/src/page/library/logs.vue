@@ -26,9 +26,6 @@ export default {
       logs: this.$log.logs,
     };
   },
-  created() {
-    console.log("LOGS", this.logs);
-  },
   methods: {
     formatLevel(s) {
       if (!s) {

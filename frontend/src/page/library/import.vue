@@ -5,7 +5,7 @@
         <span v-if="fileName" class="text-break">{{ $gettext(`Importing %{name}…`, { name: fileName }) }}</span>
         <span v-else-if="busy">{{ $gettext(`Importing files to originals…`) }}</span>
         <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
-        <span v-else>{{ $gettext(`Select a source folder to import files from…`) }}</span>
+        <span v-else>{{ $gettext(`Select a source folder to import files…`) }}</span>
       </div>
       <div class="form-body">
         <div class="form-controls">
