@@ -2,6 +2,10 @@ package txt
 
 var SpecialWords = map[string]string{
 	"av":                 "AV",
+	"av1":                "AV1",
+	"vp":                 "VP",
+	"vp8":                "VP8",
+	"vp9":                "VP9",
 	"xxs":                "XXS",
 	"xs":                 "XS",
 	"s":                  "S",
