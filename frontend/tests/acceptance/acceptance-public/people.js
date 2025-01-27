@@ -7,7 +7,7 @@ import Photo from "../page-model/photo";
 import Subject from "../page-model/subject";
 import PhotoEdit from "../page-model/photo-edit";
 
-fixture`Test people`.only.page`${testcafeconfig.url}`;
+fixture`Test people`.page`${testcafeconfig.url}`;
 
 const menu = new Menu();
 const toolbar = new Toolbar();

@@ -87,7 +87,7 @@ test.meta("testID", "library-index-001").meta({ type: "short", mode: "public" })
     await t
       .expect(MomentCountAfterIndex)
       .gt(MomentCount)
-      .click(Selector("a").withText("South Africa 2013"))
+      .click(Selector('div[title="South Africa 2013"]'))
       .expect(Selector(".is-photo").visible)
       .ok();
 

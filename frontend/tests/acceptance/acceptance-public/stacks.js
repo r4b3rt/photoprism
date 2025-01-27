@@ -27,10 +27,10 @@ test.meta("testID", "stacks-001").meta({ type: "short", mode: "public" })(
     if (t.browser.platform === "desktop") {
       console.log(t.browser.platform);
       await photo.triggerHoverAction("nth", 0, "open");
-      await photoviewer.triggerPhotoViewerAction("next");
-      await photoviewer.triggerPhotoViewerAction("previous");
+      await photoviewer.triggerPhotoViewerAction("arrow--next");
+      await photoviewer.triggerPhotoViewerAction("arrow--prev");
       await photoviewer.triggerPhotoViewerAction("close");
-      await t.expect(Selector("#photo-viewer").visible).notOk();
+      await t.expect(Selector("div.media-viewer-lightbox").visible).notOk();
     }
     await photo.checkHoverActionAvailability("uid", SequentialPhotoUid, "open", true);
   }

@@ -30,7 +30,6 @@ test.meta("testID", "sharing-001").meta({ mode: "auth" })("Common: Create, view,
   await album.triggerHoverAction("uid", FirstAlbumUid, "select");
   await contextmenu.checkContextMenuCount("1");
   await contextmenu.triggerContextMenuAction("share", "");
-  await t.click(sharedialog.expandLink.nth(0));
   await t.typeText(sharedialog.linkSecretInput, "secretForTesting", { replace: true }).click(sharedialog.linkExpireInput).click(Selector("div").withText("After 1 day").parent('div[role="option"]')).click(sharedialog.dialogSave);
   const Url = await sharedialog.linkUrl.value;
   const Expire = await Selector(".input-expires .v-select__selection-text").innerText;
@@ -47,7 +46,6 @@ test.meta("testID", "sharing-001").meta({ mode: "auth" })("Common: Create, view,
   await album.triggerHoverAction("uid", FirstFolderUid, "select");
   await contextmenu.checkContextMenuCount("1");
   await contextmenu.triggerContextMenuAction("share", "");
-  await t.click(sharedialog.expandLink.nth(0));
   await t.typeText(sharedialog.linkSecretInput, "secretForTesting", { replace: true }).click(sharedialog.linkExpireInput).click(Selector("div").withText("After 1 day").parent('div[role="option"]')).click(sharedialog.dialogSave).click(sharedialog.dialogSave);
   await contextmenu.clearSelection();
   await t.navigateTo(url);
@@ -98,7 +96,7 @@ test.meta("testID", "sharing-001").meta({ mode: "auth" })("Common: Create, view,
   await album.openAlbumWithUid(FirstAlbumUid);
   await toolbar.triggerToolbarAction("share");
 
-  await t.click(sharedialog.expandLink.nth(0)).click(sharedialog.deleteLink).useRole(Role.anonymous());
+  await t.click(sharedialog.deleteLink).useRole(Role.anonymous());
 
   await t.navigateTo("http://localhost:2343/s/secretfortesting");
 
@@ -116,7 +114,7 @@ test.meta("testID", "sharing-001").meta({ mode: "auth" })("Common: Create, view,
   await menu.openPage("folders");
   await album.openAlbumWithUid(FirstFolderUid);
   await toolbar.triggerToolbarAction("share");
-  await t.click(sharedialog.expandLink.nth(0)).click(sharedialog.deleteLink).useRole(Role.anonymous());
+  await t.click(sharedialog.deleteLink).useRole(Role.anonymous());
 
   await t.navigateTo("http://localhost:2343/s/secretfortesting");
 
@@ -146,15 +144,15 @@ test.meta("testID", "sharing-002").meta({ type: "short", mode: "auth" })("Common
 
   await photoviewer.openPhotoViewer("nth", 0);
 
-  await photoviewer.checkPhotoViewerActionAvailability("download", true);
-  await photoviewer.checkPhotoViewerActionAvailability("select", true);
-  await photoviewer.checkPhotoViewerActionAvailability("toggle-fullscreen", true);
-  await photoviewer.checkPhotoViewerActionAvailability("slideshow", true);
-  await photoviewer.checkPhotoViewerActionAvailability("like", false);
-  await photoviewer.checkPhotoViewerActionAvailability("edit", false);
+  await photoviewer.checkPhotoViewerActionAvailability("download-button", true);
+  await photoviewer.checkPhotoViewerActionAvailability("select-toggle", true);
+  await photoviewer.checkPhotoViewerActionAvailability("fullscreen-toggle", true);
+  await photoviewer.checkPhotoViewerActionAvailability("slideshow-toggle", true);
+  await photoviewer.checkPhotoViewerActionAvailability("favorite-toggle", false);
+  await photoviewer.checkPhotoViewerActionAvailability("edit-button", false);
 
   await photoviewer.triggerPhotoViewerAction("close");
-  await t.expect(Selector("#photo-viewer").visible).notOk();
+  await t.expect(Selector("div.media-viewer-lightbox").visible).notOk();
 
   await photo.checkHoverActionAvailability("nth", 0, "favorite", false);
   await photo.checkHoverActionAvailability("nth", 0, "select", true);

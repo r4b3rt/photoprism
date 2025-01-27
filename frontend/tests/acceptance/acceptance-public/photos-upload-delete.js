@@ -45,6 +45,7 @@ test.meta("testID", "photos-upload-delete-001").meta({ type: "short", mode: "pub
           "../../upload-files/digikam.json",
         ])
         .wait(15000);
+      await toolbar.triggerToolbarAction("reload");
       const PhotoCountAfterUpload = await photo.getPhotoCount("all");
 
       await t.expect(PhotoCountAfterUpload).eql(1);
@@ -118,6 +119,7 @@ test.meta("testID", "photos-upload-delete-002").meta({ mode: "public" })(
       await t
         .setFilesToUpload(Selector(".input-upload"), ["../../upload-files/korn.mp4"])
         .wait(15000);
+      await toolbar.triggerToolbarAction("reload");
       const PhotoCountAfterUpload = await photo.getPhotoCount("all");
 
       await t.expect(PhotoCountAfterUpload).eql(1);
@@ -190,6 +192,7 @@ test.meta("testID", "photos-upload-delete-003").meta({ mode: "public" })(
       await t
         .setFilesToUpload(Selector(".input-upload"), ["../../upload-files/ladybug.jpg"])
         .wait(15000);
+      await toolbar.triggerToolbarAction("reload");
       const PhotoCountAfterUpload = await photo.getPhotoCount("all");
 
       await t.expect(PhotoCountAfterUpload).eql(PhotoCount + 1);
@@ -283,13 +286,13 @@ test.meta("testID", "photos-upload-delete-005").meta({ type: "short", mode: "pub
       await t
         .setFilesToUpload(Selector(".input-upload"), ["../../upload-files/hentai_2.jpg"])
         .wait(15000);
-      await t.click(Selector("header.v-toolbar i.mdi-close")).wait(8000);
+      await t.click(Selector("button.action-close")).wait(8000);
 
 
       await menu.openPage("library");
       await t.click(library.logsTab);
 
-      await t.expect(Selector("p").withText("hentai_2.jpg might be offensive").visible).ok();
+      await t.expect(Selector("div.p-log-message").withText("hentai_2.jpg might be offensive").visible).ok();
     }
   }
 );
