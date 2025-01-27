@@ -392,8 +392,14 @@
           <v-btn color="button" variant="flat" class="action-close" @click.stop="close">
             {{ $gettext(`Close`) }}
           </v-btn>
-          <v-btn color="highlight" variant="flat" :disabled="!model?.wasChanged()" class="action-apply action-approve" @click.stop="save(false)">
-            <span v-if="$config.feature('review') && model.Quality < 3">{{ $gettext(`Approve`) }}</span>
+          <v-btn
+            color="highlight"
+            variant="flat"
+            :disabled="!model?.wasChanged() && !inReview"
+            class="action-apply action-approve"
+            @click.stop="save(false)"
+          >
+            <span v-if="inReview">{{ $gettext(`Approve`) }}</span>
             <span v-else>{{ $gettext(`Apply`) }}</span>
           </v-btn>
         </div>
@@ -430,6 +436,7 @@ export default {
       readonly: this.$config.get("readonly"),
       options: options,
       countries: countries,
+      featReview: this.$config.feature("review"),
       showDatePicker: false,
       showTimePicker: false,
       invalidDate: false,
@@ -444,6 +451,9 @@ export default {
     },
     lensOptions() {
       return this.config.lenses;
+    },
+    inReview() {
+      return this.featReview && this.model.Quality < 3;
     },
   },
   watch: {
