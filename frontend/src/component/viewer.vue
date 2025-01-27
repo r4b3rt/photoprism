@@ -2,14 +2,17 @@
   <div v-if="visible" ref="container" class="p-viewer" tabindex="-1" role="dialog">
     <div
       ref="lightbox"
+      tabindex="0"
       class="p-viewer__lightbox"
       :class="{
         'sidebar-visible': sidebarVisible,
         'slideshow-active': slideshow.active,
         'is-fullscreen': isFullscreen,
         'is-favorite': model.Favorite,
+        'is-playable': model.Playable,
         'is-selected': $clipboard.has(model),
       }"
+      @keydown.space.prevent="toggleVideo"
     ></div>
     <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar">
       <!-- TODO: Create a reusable sidebar component that allows users to view/edit metadata. -->
@@ -106,13 +109,14 @@ export default {
         zoom: true,
         close: true,
         counter: false,
-        trapFocus: false,
+        trapFocus: true,
         returnFocus: false,
+        allowPanToNext: false,
         initialZoomLevel: "fit",
         secondaryZoomLevel: "fill",
-        maxZoomLevel: 3,
+        maxZoomLevel: 5,
         bgOpacity: 1,
-        preload: [1, 1],
+        preload: [1, 2],
         showHideAnimationType: "none",
         tapAction: (point, ev) => this.toggleControls(ev),
         imageClickAction: "zoom",
@@ -360,7 +364,7 @@ export default {
 
       // Use dynamic caption plugin,
       // see https://github.com/dimsemenov/photoswipe-dynamic-caption-plugin.
-      this.captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
+      this.captionPlugin = new PhotoSwipeDynamicCaption(this.lightbox, {
         type: "auto",
         captionContent: (slide) => {
           if (!slide || !this.models || slide?.index < 0) {
@@ -379,18 +383,18 @@ export default {
 
       // Add a close event handler to destroy the viewer after use,
       // see https://photoswipe.com/events/#closing-events.
-      lightbox.on("close", () => {
+      this.lightbox.on("close", () => {
         this.$event.publish("viewer.pause");
         this.$event.publish("viewer.close");
       });
 
       // Add PhotoSwipe lightbox controls,
       // see https://photoswipe.com/adding-ui-elements/.
-      this.addLightboxControls(lightbox);
+      this.addLightboxControls();
 
       // Handle zoom level changes to load higher quality thumbnails
       // when image size changes
-      lightbox.on("imageSizeChange", ({ content, width, height, slide }) => {
+      this.lightbox.on("imageSizeChange", ({ content, width, height, slide }) => {
         if (slide === lightbox.pswp.currSlide) {
           this.handleZoomLevelChange();
         }
@@ -404,15 +408,15 @@ export default {
 
       // Processes model data for rendering slides with PhotoSwipe,
       // see https://photoswipe.com/filters/#itemdata.
-      lightbox.addFilter("itemData", this.getItemData);
+      this.lightbox.addFilter("itemData", this.getItemData);
 
       // Renders content when a slide starts to load (can be default prevented),
       // see https://photoswipe.com/events/#slide-content-events.
-      lightbox.on("contentLoad", this.onContentLoad);
+      this.lightbox.on("contentLoad", this.onContentLoad);
 
       // Pauses videos, animations, and live photos when slide content becomes active (can be default prevented),
       // see https://photoswipe.com/events/#slide-content-events.
-      lightbox.on("contentActivate", (ev) => {
+      this.lightbox.on("contentActivate", (ev) => {
         const { content } = ev;
 
         // Automatically play video on this slide if it's the first item,
@@ -437,7 +441,7 @@ export default {
 
       // Pauses videos, animations, and live photos when content becomes active (can be default prevented),
       // see https://photoswipe.com/events/#slide-content-events.
-      lightbox.on("contentDeactivate", (ev) => {
+      this.lightbox.on("contentDeactivate", (ev) => {
         const { content } = ev;
 
         // Stop any video currently playing on this slide.
@@ -447,16 +451,17 @@ export default {
       });
 
       // Init PhotoSwipe.
-      lightbox.init();
+      this.lightbox.init();
 
       // Show first image.
-      lightbox.loadAndOpen(index);
+      this.lightbox.loadAndOpen(index);
 
       // Publish event to be consumed by other components.
       this.$event.publish("viewer.opened");
     },
     // Adds PhotoSwipe lightbox controls, see https://photoswipe.com/adding-ui-elements/.
-    addLightboxControls(lightbox) {
+    addLightboxControls() {
+      const lightbox = this.lightbox;
       // TODO: The same controls as with PhotoSwipe 4 should be usable/available!
       lightbox.on("uiRegister", () => {
         // Add a sidebar toggle button only if the window is large enough.
@@ -847,6 +852,28 @@ export default {
         } catch (_) {
           // Ignore.
         }
+      }
+    },
+    // Toggles video playback on the current video element, if any.
+    toggleVideo() {
+      // Get active content.
+      const content = this.pswp().currSlide?.content;
+
+      if (!content) {
+        return;
+      }
+
+      // Get video element, if any.
+      const el = content?.element;
+      if (!el || (!el) instanceof HTMLMediaElement) {
+        return;
+      }
+
+      // Play video if it is currently paused and pause it otherwise.
+      if (el.paused) {
+        this.playVideo(el, content?.data?.loop);
+      } else {
+        this.pauseVideo(el);
       }
     },
     // Stops playback on the specified video element, if any.

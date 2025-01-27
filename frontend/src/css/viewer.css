@@ -108,13 +108,23 @@
 }
 
 .pswp__dynamic-caption--mobile {
-    padding: 16px 16px 48px 16px;
+    padding: 16px 16px 72px 16px;
     background: rgba(0, 0, 0, 0.5);
     left: 0 !important;
     right: 0;
     top: auto !important;
-    pointer-events: none !important;
     bottom: 0;
+}
+
+.p-viewer__lightbox.is-playable .pswp__dynamic-caption--mobile {
+    background: transparent;
+    padding: 0;
+    width: auto;
+    margin: auto;
+    top: auto !important;
+    left: 16px !important;
+    right: 16px !important;
+    bottom: 72px !important;
 }
 
 .pswp__dynamic-caption--mobile h4,
@@ -198,6 +208,13 @@
 .pswp__top-bar .pswp__button--sidebar-button .pswp__icn {
     width: 20px;
     height: 20px;
+}
+
+/* Zoom Button */
+
+.p-viewer__lightbox.is-playable .pswp__button.pswp__button--zoom,
+.p-viewer__lightbox.slideshow-active .pswp__button.pswp__button--zoom {
+    display: none;
 }
 
 /* Slideshow Toggle Icon and Animation */
