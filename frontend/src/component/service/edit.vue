@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="500" class="p-dialog p-service-edit" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="500" class="p-dialog p-service-edit" @keydown.esc="close">
     <v-card>
       <v-card-title v-if="scope === 'sharing'" class="d-flex justify-space-between align-center ga-3">
         <h6 class="text-h6">
@@ -229,7 +229,7 @@
         </v-row>
       </v-card-text>
       <v-card-actions class="action-buttons mt-4">
-        <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
+        <v-btn variant="flat" color="button" class="action-cancel action-close" @click.stop="close">
           {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn variant="flat" color="highlight" class="action-save" @click.stop="save">
@@ -290,8 +290,8 @@ export default {
     },
   },
   methods: {
-    cancel() {
-      this.$emit("cancel");
+    close() {
+      this.$emit("close");
     },
     remove() {
       this.$emit("remove");

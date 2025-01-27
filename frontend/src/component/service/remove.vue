@@ -1,12 +1,12 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="350" class="p-dialog p-service-delete" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="350" class="p-dialog p-service-delete" @keydown.esc="close">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="54" color="primary">mdi-delete-outline</v-icon>
         <p class="text-subtitle-1">{{ $gettext(`Are you sure you want to delete this account?`) }}</p>
       </v-card-title>
       <v-card-actions class="action-buttons mt-1">
-        <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
+        <v-btn variant="flat" color="button" class="action-cancel action-close" @click.stop="close">
           {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn variant="flat" color="highlight" class="action-confirm" @click.stop="confirm">
@@ -32,8 +32,8 @@ export default {
     };
   },
   methods: {
-    cancel() {
-      this.$emit("cancel");
+    close() {
+      this.$emit("close");
     },
     confirm() {
       this.loading = true;

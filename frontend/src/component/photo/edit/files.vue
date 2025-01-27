@@ -361,7 +361,7 @@
     </v-expansion-panels>
     <p-file-delete-dialog
       :show="deleteFile.dialog"
-      @cancel="closeDeleteDialog"
+      @close="closeDeleteDialog"
       @confirm="confirmDeleteFile"
     ></p-file-delete-dialog>
   </div>

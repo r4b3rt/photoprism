@@ -312,7 +312,7 @@
       :show="dialog.delete"
       :text="$gettext('Are you sure you want to delete all archived pictures?')"
       :action="$gettext('Delete All')"
-      @cancel="dialog.delete = false"
+      @close="dialog.delete = false"
       @confirm="batchDelete"
     >
     </p-photo-delete-dialog>

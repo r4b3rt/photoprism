@@ -88,7 +88,13 @@
         }}
       </p>
 
-      <v-form ref="form" validate-on="invalid-input" class="p-form-settings" accept-charset="UTF-8" @submit.prevent="add">
+      <v-form
+        ref="form"
+        validate-on="invalid-input"
+        class="p-form-settings"
+        accept-charset="UTF-8"
+        @submit.prevent="add"
+      >
         <div class="action-buttons">
           <v-btn
             v-if="user.hasWebDAV()"
@@ -118,11 +124,11 @@
       </v-form>
     </div>
 
-    <p-service-add :show="dialog.add" @cancel="close('add')" @confirm="onAdded"></p-service-add>
+    <p-service-add :show="dialog.add" @close="close('add')" @confirm="onAdded"></p-service-add>
     <p-service-remove
       :show="dialog.remove"
       :model="model"
-      @cancel="close('remove')"
+      @close="close('remove')"
       @confirm="onRemoved"
     ></p-service-remove>
     <p-service-edit
@@ -130,7 +136,7 @@
       :model="model"
       :scope="editScope"
       @remove="remove(model)"
-      @cancel="close('edit')"
+      @close="close('edit')"
       @confirm="onEdited"
     ></p-service-edit>
     <p-settings-webdav :show="dialog.webdav" @close="dialog.webdav = false"></p-settings-webdav>
@@ -141,9 +147,19 @@
 import Settings from "model/settings";
 import Service from "model/service";
 import { DateTime } from "luxon";
+import PServiceAdd from "component/service/add.vue";
+import PServiceEdit from "component/service/edit.vue";
+import PServiceRemove from "component/service/remove.vue";
+import PSettingsWebdav from "component/settings/webdav.vue";
 
 export default {
   name: "PSettingsServices",
+  components: {
+    PServiceAdd,
+    PServiceEdit,
+    PServiceRemove,
+    PSettingsWebdav,
+  },
   data() {
     return {
       isDemo: this.$config.get("demo"),

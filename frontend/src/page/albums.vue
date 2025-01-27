@@ -353,7 +353,7 @@
       :show="dialog.upload"
       :items="{ albums: selection }"
       :model="model"
-      @cancel="dialog.upload = false"
+      @close="dialog.upload = false"
       @confirm="dialog.upload = false"
     ></p-service-upload>
     <p-album-edit-dialog :show="dialog.edit" :album="model" @close="dialog.edit = false"></p-album-edit-dialog>

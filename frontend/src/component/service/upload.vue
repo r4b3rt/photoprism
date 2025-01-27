@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="400" class="p-dialog p-service-upload" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="400" class="p-dialog p-service-upload" @keydown.esc="close">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="28" color="primary">mdi-cloud</v-icon>
@@ -42,7 +42,7 @@
         </v-row>
       </v-card-text>
       <v-card-actions class="action-buttons">
-        <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
+        <v-btn variant="flat" color="button" class="action-cancel action-close" @click.stop="close">
           {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn
@@ -125,8 +125,8 @@ export default {
     },
   },
   methods: {
-    cancel() {
-      this.$emit("cancel");
+    close() {
+      this.$emit("close");
     },
     setup() {
       this.$router.push({ name: "settings_services" });
@@ -183,7 +183,7 @@ export default {
 
       if (this.selection.isEmpty()) {
         this.loading = false;
-        this.$emit("cancel");
+        this.$emit("close");
         return;
       }
 

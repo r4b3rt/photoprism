@@ -95,7 +95,7 @@
       :show="dialog.upload"
       :items="{ albums: album.getId() }"
       :model="album"
-      @cancel="dialog.upload = false"
+      @close="dialog.upload = false"
       @confirm="dialog.upload = false"
     ></p-service-upload>
     <p-album-edit-dialog :show="dialog.edit" :album="album" @close="dialog.edit = false"></p-album-edit-dialog>

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="500" class="p-dialog p-service-add" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="500" class="p-dialog p-service-add" @keydown.esc="close">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="28" color="primary">mdi-swap-horizontal</v-icon>
@@ -54,7 +54,7 @@
         </v-row>
       </v-card-text>
       <v-card-actions class="action-buttons">
-        <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
+        <v-btn variant="flat" color="button" class="action-cancel action-close" @click.stop="close">
           <span>{{ label.cancel }}</span>
         </v-btn>
         <v-btn variant="flat" color="highlight" class="action-confirm" @click.stop="confirm">
@@ -90,8 +90,8 @@ export default {
     show: function () {},
   },
   methods: {
-    cancel() {
-      this.$emit("cancel");
+    close() {
+      this.$emit("close");
     },
     confirm() {
       this.loading = true;

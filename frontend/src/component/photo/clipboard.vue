@@ -159,24 +159,24 @@
     </div>
     <p-photo-archive-dialog
       :show="dialog.archive"
-      @cancel="dialog.archive = false"
+      @close="dialog.archive = false"
       @confirm="batchArchive"
     ></p-photo-archive-dialog>
     <p-photo-delete-dialog
       :show="dialog.delete"
-      @cancel="dialog.delete = false"
+      @close="dialog.delete = false"
       @confirm="batchDelete"
     ></p-photo-delete-dialog>
     <p-photo-album-dialog
       :show="dialog.album"
-      @cancel="dialog.album = false"
+      @close="dialog.album = false"
       @confirm="addToAlbum"
     ></p-photo-album-dialog>
     <p-service-upload
       :show="dialog.share"
       :items="{ photos: selection }"
       :model="album"
-      @cancel="dialog.share = false"
+      @close="dialog.share = false"
       @confirm="onShared"
     ></p-service-upload>
   </div>
@@ -187,9 +187,13 @@ import Notify from "common/notify";
 import Event from "pubsub-js";
 import download from "common/download";
 import Photo from "model/photo";
+import PPhotoAlbumDialog from "component/photo/album/dialog.vue";
 
 export default {
   name: "PPhotoClipboard",
+  components: {
+    PPhotoAlbumDialog,
+  },
   props: {
     context: {
       type: String,

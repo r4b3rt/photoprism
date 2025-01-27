@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="360" class="p-dialog p-photo-delete-dialog" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="360" class="p-dialog p-photo-delete-dialog" @keydown.esc="close">
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
         <v-icon size="54" color="primary">mdi-delete-outline</v-icon>
@@ -9,7 +9,7 @@
         <p v-else class="text-subtitle-1">{{ text }}</p>
       </v-card-title>
       <v-card-actions class="action-buttons mt-1">
-        <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
+        <v-btn variant="flat" color="button" class="action-cancel action-close" @click.stop="close">
           {{ $gettext(`Cancel`) }}
         </v-btn>
         <v-btn v-if="action === ''" color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
@@ -40,8 +40,8 @@ export default {
     return {};
   },
   methods: {
-    cancel() {
-      this.$emit("cancel");
+    close() {
+      this.$emit("close");
     },
     confirm() {
       this.$emit("confirm");

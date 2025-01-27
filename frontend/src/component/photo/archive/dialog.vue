@@ -4,7 +4,7 @@
     persistent
     max-width="350"
     class="p-dialog p-photo-archive-dialog"
-    @keydown.esc="cancel"
+    @keydown.esc="close"
   >
     <v-card>
       <v-card-title class="d-flex justify-start align-center ga-3">
@@ -12,7 +12,7 @@
         <p class="text-subtitle-1">{{ $gettext(`Are you sure you want to archive the selection?`) }}</p>
       </v-card-title>
       <v-card-actions class="action-buttons">
-        <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
+        <v-btn variant="flat" color="button" class="action-cancel action-close" @click.stop="close">
           {{ $gettext(`No`) }}
         </v-btn>
         <v-btn color="highlight" variant="flat" class="action-confirm" @click.stop="confirm">
@@ -32,8 +32,8 @@ export default {
     return {};
   },
   methods: {
-    cancel() {
-      this.$emit("cancel");
+    close() {
+      this.$emit("close");
     },
     confirm() {
       this.$emit("confirm");

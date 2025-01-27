@@ -92,12 +92,12 @@
     </div>
     <p-photo-album-dialog
       :show="dialog.album"
-      @cancel="dialog.album = false"
+      @close="dialog.album = false"
       @confirm="cloneAlbums"
     ></p-photo-album-dialog>
     <p-album-delete-dialog
       :show="dialog.delete"
-      @cancel="dialog.delete = false"
+      @close="dialog.delete = false"
       @confirm="batchDelete"
     ></p-album-delete-dialog>
   </div>

@@ -59,12 +59,12 @@
     </div>
     <p-photo-album-dialog
       :show="dialog.album"
-      @cancel="dialog.album = false"
+      @close="dialog.album = false"
       @confirm="addToAlbum"
     ></p-photo-album-dialog>
     <p-label-delete-dialog
       :show="dialog.delete"
-      @cancel="dialog.delete = false"
+      @close="dialog.delete = false"
       @confirm="batchDelete"
     ></p-label-delete-dialog>
   </div>
@@ -73,9 +73,15 @@
 import Api from "common/api";
 import Notify from "common/notify";
 import download from "common/download";
+import PPhotoAlbumDialog from "component/photo/album/dialog.vue";
+import PLabelDeleteDialog from "component/label/delete/dialog.vue";
 
 export default {
   name: "PLabelClipboard",
+  components: {
+    PPhotoAlbumDialog,
+    PLabelDeleteDialog,
+  },
   props: {
     selection: {
       type: Array,

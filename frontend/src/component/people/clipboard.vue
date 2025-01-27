@@ -59,7 +59,7 @@
     </div>
     <p-photo-album-dialog
       :show="dialog.album"
-      @cancel="dialog.album = false"
+      @close="dialog.album = false"
       @confirm="addToAlbum"
     ></p-photo-album-dialog>
   </div>
@@ -68,9 +68,13 @@
 import Api from "common/api";
 import Notify from "common/notify";
 import download from "common/download";
+import PPhotoAlbumDialog from "component/photo/album/dialog.vue";
 
 export default {
   name: "PPeopleClipboard",
+  components: {
+    PPhotoAlbumDialog,
+  },
   props: {
     selection: {
       type: Array,
