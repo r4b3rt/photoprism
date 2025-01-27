@@ -70,7 +70,7 @@
             <div class="preview__overlay"></div>
             <div v-if="m.Type === 'live' || m.Type === 'animated'" class="live-player">
               <video :id="'live-player-' + m.ID" width="224" height="224" preload="none" loop muted playsinline>
-                <source :type="m.videoType()" :src="m.videoUrl()" />
+                <source :type="m.videoContentType()" :src="m.videoUrl()" />
               </video>
             </div>
 

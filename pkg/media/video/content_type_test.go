@@ -13,7 +13,7 @@ func TestContentType(t *testing.T) {
 		assert.Equal(t, fs.MimeTypeMOV, ContentType(fs.MimeTypeMOV, ""))
 	})
 	t.Run("QuickTime_HVC", func(t *testing.T) {
-		assert.Equal(t, `video/quicktime; codecs="hvc1"`, ContentType(fs.MimeTypeMOV, CodecHVC))
+		assert.Equal(t, `video/quicktime; codecs="hvc1"`, ContentType(fs.MimeTypeMOV, CodecHEVC))
 	})
 	t.Run("MP4", func(t *testing.T) {
 		assert.Equal(t, fs.MimeTypeMP4, ContentType(fs.MimeTypeMP4, ""))
@@ -22,6 +22,6 @@ func TestContentType(t *testing.T) {
 		assert.Equal(t, ContentTypeAVC, ContentType(fs.MimeTypeMP4, CodecAVC))
 	})
 	t.Run("MP4_HVC", func(t *testing.T) {
-		assert.Equal(t, `video/mp4; codecs="hvc1"`, ContentType(fs.MimeTypeMP4, CodecHVC))
+		assert.Equal(t, `video/mp4; codecs="hvc1"`, ContentType(fs.MimeTypeMP4, CodecHEVC))
 	})
 }

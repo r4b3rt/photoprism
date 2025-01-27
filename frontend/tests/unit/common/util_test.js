@@ -1,5 +1,6 @@
 import "../fixtures";
 import Util from "common/util";
+import {canUseHevc, canUseWebM} from "common/caniuse";
 
 let chai = require("chai/chai");
 let assert = chai.assert;
@@ -45,6 +46,24 @@ describe("common/util", () => {
     const iPhone13 = Util.formatCamera(null, 21, "Apple", "iPhone 13");
     assert.equal(iPhone13, "iPhone 13");
   });
+  it("should return matching video format name", () => {
+    const avc = Util.videoFormat("avc1", "video/mp4");
+    assert.equal(avc, "avc");
+
+    const hvc = Util.videoFormat("hvc1", "video/mp4");
+    if (canUseHevc) {
+      assert.equal(hvc, "hvc");
+    } else {
+      assert.equal(hvc, "avc");
+    }
+
+    const webm = Util.videoFormat("", "video/webm");
+    if (canUseWebM) {
+      assert.equal(webm, "webm");
+    } else {
+      assert.equal(webm, "avc");
+    }
+  });
   it("should convert -1 to roman", () => {
     const roman = Util.arabicToRoman(-1);
     assert.equal(roman, "");
@@ -75,6 +94,9 @@ describe("common/util", () => {
   });
   it("should encode link", () => {
     const result = Util.encodeHTML("Try this: https://photoswipe.com/options/?foo=bar&bar=baz. It's a link!");
-    assert.equal(result, `Try this: <a href="https://photoswipe.com/options/" target="_blank">https://photoswipe.com/options/</a> It&apos;s a link!`);
+    assert.equal(
+      result,
+      `Try this: <a href="https://photoswipe.com/options/" target="_blank">https://photoswipe.com/options/</a> It&apos;s a link!`
+    );
   });
 });

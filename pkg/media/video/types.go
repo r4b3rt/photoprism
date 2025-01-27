@@ -39,7 +39,7 @@ var AVC = Type{
 
 // HEVC aka High Efficiency Video Coding (H.265).
 var HEVC = Type{
-	Codec:       CodecHVC,
+	Codec:       CodecHEVC,
 	FileType:    fs.VideoHEVC,
 	WidthLimit:  0,
 	HeightLimit: 0,

@@ -1,18 +1,13 @@
 package video
 
-type Codec string
+type Codec = string
 
-// String returns the codec name as string.
-func (c Codec) String() string {
-	return string(c)
-}
-
-// Check browser support: https://cconcolato.github.io/media-mime-support/
-
+// Video codecs supported by web browsers:
+// https://cconcolato.github.io/media-mime-support/
 const (
 	CodecUnknown Codec = ""
 	CodecAVC     Codec = "avc1"
-	CodecHVC     Codec = "hvc1"
+	CodecHEVC    Codec = "hvc1"
 	CodecVVC     Codec = "vvc"
 	CodecEVC     Codec = "evc"
 	CodecAV1     Codec = "av01"
@@ -34,11 +29,14 @@ var Codecs = StandardCodecs{
 	"iso/avc":         CodecAVC,
 	"v_mpeg4/avc":     CodecAVC,
 	"v_mpeg4/iso/avc": CodecAVC,
-	"hevc":            CodecHVC,
-	"hvc":             CodecHVC,
-	"hvc1":            CodecHVC,
-	"v_hvc":           CodecHVC,
-	"v_hvc1":          CodecHVC,
+	"hevc":            CodecHEVC,
+	"hevC":            CodecHEVC,
+	"hvc":             CodecHEVC,
+	"hvc1":            CodecHEVC,
+	"v_hvc":           CodecHEVC,
+	"v_hvc1":          CodecHEVC,
+	"hev":             CodecHEVC,
+	"hev1":            CodecHEVC,
 	"evc":             CodecEVC,
 	"evc1":            CodecEVC,
 	"evcC":            CodecEVC,

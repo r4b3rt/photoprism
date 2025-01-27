@@ -29,11 +29,16 @@ const (
 	MimeTypeAI      = "application/vnd.adobe.illustrator"
 	MimeTypePS      = "application/postscript"
 	MimeTypeEPS     = "image/eps"
+	MimeTypeText    = "text/plain"
 	MimeTypeXML     = "text/xml"
 	MimeTypeJSON    = "application/json"
 )
 
-// MimeType returns the mime type of a file, or an empty string if it could not be detected.
+// MimeType returns the mimetype of a file, or an empty string if it could not be determined.
+//
+// The IANA and IETF use the term "media type", and consider the term "MIME type" to be obsolete,
+// since media types have become used in contexts unrelated to email, such as HTTP:
+// https://en.wikipedia.org/wiki/Media_type#Structure
 func MimeType(filename string) (mimeType string) {
 	if filename == "" {
 		return MimeTypeUnknown
@@ -69,7 +74,7 @@ func MimeType(filename string) (mimeType string) {
 	detectedType, err := mimetype.DetectFile(filename)
 
 	if detectedType != nil && err == nil {
-		mimeType, _, _ = strings.Cut(detectedType.String(), ";")
+		mimeType = detectedType.String()
 	}
 
 	// Treat "application/octet-stream" as unknown.
@@ -99,4 +104,24 @@ func MimeType(filename string) (mimeType string) {
 	}
 
 	return mimeType
+}
+
+// BaseType returns the media type string without any optional parameters.
+func BaseType(mimeType string) string {
+	if mimeType == "" {
+		return ""
+	}
+
+	mimeType, _, _ = strings.Cut(mimeType, ";")
+
+	return strings.ToLower(mimeType)
+}
+
+// IsType tests if the specified mime types are matching, except for any optional parameters.
+func IsType(mime1, mime2 string) bool {
+	if mime1 == mime2 {
+		return true
+	}
+
+	return BaseType(mime1) == BaseType(mime2)
 }

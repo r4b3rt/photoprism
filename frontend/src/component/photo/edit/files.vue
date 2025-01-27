@@ -183,7 +183,7 @@
                             <td>
                               {{ $gettext(`Type`) }}
                             </td>
-                            <td class="text-break">{{ file.typeInfo() }}</td>
+                            <td class="text-break" :title="file?.Mime">{{ file.typeInfo() }}</td>
                           </tr>
                           <tr v-if="file.isAnimated()">
                             <td>

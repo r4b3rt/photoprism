@@ -23,25 +23,33 @@ Additional information can be found in our Developer Guide:
 
 */
 
+export const ContentTypeAVC = 'video/mp4; codecs="avc1"';
+export const ContentTypeHEVC = 'video/mp4; codecs="hvc1.1.6.L93.90"';
+export const ContentTypeOGG = "video/ogg";
+export const ContentTypeWebM = "video/webm";
+export const ContentTypeVP8 = 'video/webm; codecs="vp8"';
+export const ContentTypeVP9 = 'video/webm; codecs="vp9"';
+export const ContentTypeAV1 = 'video/webm; codecs="av01.0.08M.08"';
+
 export const canUseVideo = !!document.createElement("video").canPlayType;
 export const canUseAvc = canUseVideo // AVC
-  ? !!document.createElement("video").canPlayType('video/mp4; codecs="avc1"')
+  ? !!document.createElement("video").canPlayType(ContentTypeAVC)
+  : false;
+export const canUseHevc = canUseVideo // HEVC, Basic Support
+  ? !!document.createElement("video").canPlayType(ContentTypeHEVC)
   : false;
 export const canUseOGV = canUseVideo // Ogg Theora
-  ? !!document.createElement("video").canPlayType("video/ogg")
+  ? !!document.createElement("video").canPlayType(ContentTypeOGG)
   : false;
 export const canUseVP8 = canUseVideo // Google WebM, VP8
-  ? !!document.createElement("video").canPlayType('video/webm; codecs="vp8"')
+  ? !!document.createElement("video").canPlayType(ContentTypeVP8)
   : false;
 export const canUseVP9 = canUseVideo // Google WebM, VP9
-  ? !!document.createElement("video").canPlayType('video/webm; codecs="vp9"')
+  ? !!document.createElement("video").canPlayType(ContentTypeVP9)
   : false;
 export const canUseAv1 = canUseVideo // AV1, Main Profile
-  ? !!document.createElement("video").canPlayType('video/webm; codecs="av01.0.08M.08"')
+  ? !!document.createElement("video").canPlayType(ContentTypeAV1)
   : false;
 export const canUseWebM = canUseVideo // Google WebM
-  ? !!document.createElement("video").canPlayType("video/webm")
-  : false;
-export const canUseHevc = canUseVideo // HVC, Basic Support
-  ? !!document.createElement("video").canPlayType('video/mp4; codecs="hvc1.1.6.L93.90"')
+  ? !!document.createElement("video").canPlayType(ContentTypeWebM)
   : false;

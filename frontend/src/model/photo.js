@@ -37,9 +37,10 @@ import { $gettext } from "common/gettext";
 import { PhotoClipboard } from "common/clipboard";
 import download from "common/download";
 import * as src from "common/src";
-import { canUseOGV, canUseVP8, canUseVP9, canUseAv1, canUseWebM, canUseHevc } from "common/caniuse";
+import { ContentTypeAVC } from "common/caniuse";
 
 export const CodecOGV = "ogv";
+export const CodecOGG = "ogg";
 export const CodecVP8 = "vp8";
 export const CodecVP9 = "vp9";
 export const CodecAv01 = "av01";
@@ -47,15 +48,15 @@ export const CodecAv1C = "av1c";
 export const CodecAvc1 = "avc1";
 export const CodecHvc1 = "hvc1";
 export const CodecHev1 = "hev1";
-export const FormatMp4 = "mp4";
-export const FormatAv1 = "av01";
-export const FormatAvc = "avc";
-export const FormatHevc = "hevc";
+export const FormatMP4 = "mp4";
+export const FormatAV1 = "av01";
+export const FormatAVC = "avc";
+export const FormatHEVC = "hevc";
 export const FormatWebM = "webm";
-export const FormatJpeg = "jpg";
-export const FormatPng = "png";
-export const FormatSvg = "svg";
-export const FormatGif = "gif";
+export const FormatJPEG = "jpg";
+export const FormatPNG = "png";
+export const FormatSVG = "svg";
+export const FormatGIF = "gif";
 export const MediaImage = "image";
 export const MediaRaw = "raw";
 export const MediaAnimated = "animated";
@@ -200,7 +201,14 @@ export class Photo extends RestModel {
   }
 
   classes() {
-    return this.generateClasses(this.isPlayable(), PhotoClipboard.has(this), this.Portrait, this.Favorite, this.Private, this.isStack());
+    return this.generateClasses(
+      this.isPlayable(),
+      PhotoClipboard.has(this),
+      this.Portrait,
+      this.Favorite,
+      this.Private,
+      this.isStack()
+    );
   }
 
   generateClasses = memoizeOne((isPlayable, isInClipboard, portrait, favorite, isPrivate, isStack) => {
@@ -441,7 +449,7 @@ export class Photo extends RestModel {
     let jpegs = 0;
 
     this.Files.forEach((f) => {
-      if (f && f.FileType === FormatJpeg) {
+      if (f && f.FileType === FormatJPEG) {
         jpegs++;
       }
     });
@@ -515,7 +523,7 @@ export class Photo extends RestModel {
     let file = files.find((f) => f.Codec === CodecAvc1);
 
     if (!file) {
-      file = files.find((f) => f.FileType === FormatMp4);
+      file = files.find((f) => f.FileType === FormatMP4);
     }
 
     if (!file) {
@@ -534,39 +542,23 @@ export class Photo extends RestModel {
       return false;
     }
 
-    return this.Files.find((f) => f.FileType === FormatGif || !!f.Frames || !!f.Duration);
+    return this.Files.find((f) => f.FileType === FormatGIF || !!f.Frames || !!f.Duration);
+  }
+
+  videoContentType() {
+    const file = this.videoFile();
+
+    if (file) {
+      return Util.videoContentType(file?.Codec, file?.Mime);
+    } else {
+      return ContentTypeAVC;
+    }
   }
 
   videoUrl() {
     const file = this.videoFile();
 
-    if (file) {
-      let videoFormat = FormatAvc;
-      const fileCodec = file.Codec ? file.Codec : "";
-
-      if (canUseHevc && (fileCodec === CodecHvc1 || fileCodec === CodecHev1)) {
-        videoFormat = FormatHevc;
-      } else if (canUseOGV && fileCodec === CodecOGV) {
-        videoFormat = CodecOGV;
-      } else if (canUseVP8 && fileCodec === CodecVP8) {
-        videoFormat = CodecVP8;
-      } else if (canUseVP9 && fileCodec === CodecVP9) {
-        videoFormat = CodecVP9;
-      } else if (canUseAv1 && (fileCodec === CodecAv01 || fileCodec === CodecAv1C)) {
-        videoFormat = FormatAv1;
-      } else if (canUseWebM && file.FileType === FormatWebM) {
-        videoFormat = FormatWebM;
-      }
-
-      return `${config.videoUri}/videos/${file.Hash}/${config.previewToken}/${videoFormat}`;
-    }
-
-    return `${config.videoUri}/videos/${this.Hash}/${config.previewToken}/${FormatAvc}`;
-  }
-
-  videoType() {
-    const file = this.videoFile();
-    return Util.videoType(file?.Codec);
+    return Util.videoUrl(file ? file.Hash : this.Hash, file?.Codec, file?.Mime);
   }
 
   mainFile() {
@@ -587,7 +579,7 @@ export class Photo extends RestModel {
     }
 
     // Find and return the first JPEG or PNG image otherwise.
-    file = files.find((f) => f.FileType === FormatJpeg || f.FileType === FormatPng);
+    file = files.find((f) => f.FileType === FormatJPEG || f.FileType === FormatPNG);
 
     // Found?
     if (file) {
@@ -636,7 +628,7 @@ export class Photo extends RestModel {
     }
 
     // Find first original media file with a format other than JPEG.
-    file = files.find((f) => !f.Sidecar && f.FileType !== FormatJpeg && f.Root === "/");
+    file = files.find((f) => !f.Sidecar && f.FileType !== FormatJPEG && f.Root === "/");
 
     // Found?
     if (file) {
@@ -652,7 +644,7 @@ export class Photo extends RestModel {
       return [this];
     }
 
-    return this.Files.filter((f) => f.FileType === FormatJpeg || f.FileType === FormatPng);
+    return this.Files.filter((f) => f.FileType === FormatJPEG || f.FileType === FormatPNG);
   }
 
   mainFileHash() {
@@ -696,7 +688,14 @@ export class Photo extends RestModel {
   }
 
   thumbnailUrl(size) {
-    return this.generateThumbnailUrl(this.mainFileHash(), this.videoFile(), config.staticUri, config.contentUri, config.previewToken, size);
+    return this.generateThumbnailUrl(
+      this.mainFileHash(),
+      this.videoFile(),
+      config.staticUri,
+      config.contentUri,
+      config.previewToken,
+      size
+    );
   }
 
   generateThumbnailUrl = memoizeOne((mainFileHash, videoFile, staticUri, contentUri, previewToken, size) => {
@@ -900,7 +899,7 @@ export class Photo extends RestModel {
       return this;
     }
 
-    return this.Files.find((f) => f.MediaType === MediaVector || f.FileType === FormatSvg);
+    return this.Files.find((f) => f.MediaType === MediaVector || f.FileType === FormatSVG);
   }
 
   getVectorInfo = () => {
@@ -1010,48 +1009,60 @@ export class Photo extends RestModel {
 
   // Example: iPhone 12 Pro Max 5.1mm ƒ/1.6, 26mm, ISO32, 1/4525
   getLensInfo = () => {
-    return this.generateLensInfo(this.Lens, this.LensID, this.LensMake, this.LensModel, this.CameraModel, this.FNumber, this.Iso, this.Exposure, this.FocalLength);
+    return this.generateLensInfo(
+      this.Lens,
+      this.LensID,
+      this.LensMake,
+      this.LensModel,
+      this.CameraModel,
+      this.FNumber,
+      this.Iso,
+      this.Exposure,
+      this.FocalLength
+    );
   };
 
-  generateLensInfo = memoizeOne((lens, lensId, lensMake, lensModel, cameraModel, fNumber, iso, exposure, focalLength) => {
-    let info = [];
-    const id = lensId ? lensId : lens && lens.ID ? lens.ID : 1;
-    const make = lensMake ? lensMake : lens && lens.Make ? lens.Make : "";
-    const model = (lensModel ? lensModel : lens && lens.Model ? lens.Model : "").replace("f/", "ƒ/");
+  generateLensInfo = memoizeOne(
+    (lens, lensId, lensMake, lensModel, cameraModel, fNumber, iso, exposure, focalLength) => {
+      let info = [];
+      const id = lensId ? lensId : lens && lens.ID ? lens.ID : 1;
+      const make = lensMake ? lensMake : lens && lens.Make ? lens.Make : "";
+      const model = (lensModel ? lensModel : lens && lens.Model ? lens.Model : "").replace("f/", "ƒ/");
 
-    // Example: EF-S18-55mm f/3.5-5.6 IS STM
-    if (id > 1) {
-      if (!model && !!make) {
-        info.push(make);
-      } else if (model.length > 45) {
-        return model;
-      } else if (model) {
-        info.push(model);
+      // Example: EF-S18-55mm f/3.5-5.6 IS STM
+      if (id > 1) {
+        if (!model && !!make) {
+          info.push(make);
+        } else if (model.length > 45) {
+          return model;
+        } else if (model) {
+          info.push(model);
+        }
       }
-    }
 
-    if (focalLength) {
-      info.push(focalLength + "mm");
-    }
+      if (focalLength) {
+        info.push(focalLength + "mm");
+      }
 
-    if (fNumber && (!model || !model.endsWith(fNumber.toString()))) {
-      info.push("ƒ/" + fNumber);
-    }
+      if (fNumber && (!model || !model.endsWith(fNumber.toString()))) {
+        info.push("ƒ/" + fNumber);
+      }
 
-    if (iso && model.length < 27) {
-      info.push("ISO " + iso);
-    }
+      if (iso && model.length < 27) {
+        info.push("ISO " + iso);
+      }
 
-    if (exposure) {
-      info.push(exposure);
-    }
+      if (exposure) {
+        info.push(exposure);
+      }
 
-    if (!info.length) {
-      return $gettext("Unknown");
-    }
+      if (!info.length) {
+        return $gettext("Unknown");
+      }
 
-    return info.join(", ");
-  });
+      return info.join(", ");
+    }
+  );
 
   getCamera() {
     if (this.Camera) {
@@ -1091,15 +1102,21 @@ export class Photo extends RestModel {
   }
 
   primaryFile(fileUID) {
-    return Api.post(`${this.getEntityResource()}/files/${fileUID}/primary`).then((r) => Promise.resolve(this.setValues(r.data)));
+    return Api.post(`${this.getEntityResource()}/files/${fileUID}/primary`).then((r) =>
+      Promise.resolve(this.setValues(r.data))
+    );
   }
 
   unstackFile(fileUID) {
-    return Api.post(`${this.getEntityResource()}/files/${fileUID}/unstack`).then((r) => Promise.resolve(this.setValues(r.data)));
+    return Api.post(`${this.getEntityResource()}/files/${fileUID}/unstack`).then((r) =>
+      Promise.resolve(this.setValues(r.data))
+    );
   }
 
   deleteFile(fileUID) {
-    return Api.delete(`${this.getEntityResource()}/files/${fileUID}`).then((r) => Promise.resolve(this.setValues(r.data)));
+    return Api.delete(`${this.getEntityResource()}/files/${fileUID}`).then((r) =>
+      Promise.resolve(this.setValues(r.data))
+    );
   }
 
   changeFileOrientation(file) {
@@ -1117,7 +1134,9 @@ export class Photo extends RestModel {
     }
 
     // Change file orientation.
-    return Api.put(`${this.getEntityResource()}/files/${file.UID}/orientation`, values).then((r) => Promise.resolve(this.setValues(r.data)));
+    return Api.put(`${this.getEntityResource()}/files/${file.UID}/orientation`, values).then((r) =>
+      Promise.resolve(this.setValues(r.data))
+    );
   }
 
   like() {
@@ -1131,15 +1150,21 @@ export class Photo extends RestModel {
   }
 
   addLabel(name) {
-    return Api.post(this.getEntityResource() + "/label", { Name: name, Priority: 10 }).then((r) => Promise.resolve(this.setValues(r.data)));
+    return Api.post(this.getEntityResource() + "/label", { Name: name, Priority: 10 }).then((r) =>
+      Promise.resolve(this.setValues(r.data))
+    );
   }
 
   activateLabel(id) {
-    return Api.put(this.getEntityResource() + "/label/" + id, { Uncertainty: 0 }).then((r) => Promise.resolve(this.setValues(r.data)));
+    return Api.put(this.getEntityResource() + "/label/" + id, { Uncertainty: 0 }).then((r) =>
+      Promise.resolve(this.setValues(r.data))
+    );
   }
 
   renameLabel(id, name) {
-    return Api.put(this.getEntityResource() + "/label/" + id, { Label: { Name: name } }).then((r) => Promise.resolve(this.setValues(r.data)));
+    return Api.put(this.getEntityResource() + "/label/" + id, { Label: { Name: name } }).then((r) =>
+      Promise.resolve(this.setValues(r.data))
+    );
   }
 
   removeLabel(id) {

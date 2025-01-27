@@ -23,7 +23,21 @@ Additional information can be found in our Developer Guide:
 
 */
 
-import { canUseAv1, canUseHevc, canUseOGV, canUseVP8, canUseVP9, canUseWebM } from "./caniuse";
+import {
+  canUseAv1,
+  canUseHevc,
+  canUseOGV,
+  canUseVP8,
+  canUseVP9,
+  canUseWebM,
+  ContentTypeAVC,
+  ContentTypeHEVC,
+  ContentTypeOGG,
+  ContentTypeWebM,
+  ContentTypeVP8,
+  ContentTypeVP9,
+  ContentTypeAV1,
+} from "./caniuse";
 import { config } from "app/session";
 import {
   DATE_FULL,
@@ -34,10 +48,11 @@ import {
   CodecOGV,
   CodecVP8,
   CodecVP9,
-  FormatAv1,
-  FormatAvc,
-  FormatHevc,
+  FormatAV1,
+  FormatAVC,
+  FormatHEVC,
   FormatWebM,
+  CodecOGG,
 } from "model/photo";
 import sanitizeHtml from "sanitize-html";
 import { DateTime } from "luxon";
@@ -545,46 +560,59 @@ export default class Util {
 
     return "fit_7680";
   }
-  static videoFormat(codec) {
-    if (!codec) {
-      return FormatAvc;
-    } else if (canUseHevc && (codec === CodecHvc1 || codec === CodecHev1)) {
-      return FormatHevc;
-    } else if (canUseOGV && codec === CodecOGV) {
+
+  static videoFormat(codec, mime) {
+    if (!codec && !mime) {
+      return FormatAVC;
+    } else if (canUseHevc && (codec === CodecHvc1 || codec === CodecHev1 || mime === ContentTypeHEVC)) {
+      return FormatHEVC;
+    } else if (canUseOGV && (codec === CodecOGV || codec === CodecOGG || mime === ContentTypeOGG)) {
       return CodecOGV;
-    } else if (canUseVP8 && codec === CodecVP8) {
+    } else if (canUseVP8 && (codec === CodecVP8 || mime === ContentTypeVP8)) {
       return CodecVP8;
-    } else if (canUseVP9 && codec === CodecVP9) {
+    } else if (canUseVP9 && (codec === CodecVP9 || mime === ContentTypeVP9)) {
       return CodecVP9;
-    } else if (canUseAv1 && (codec === CodecAv01 || codec === CodecAv1C)) {
-      return FormatAv1;
-    } else if (canUseWebM && codec === FormatWebM) {
+    } else if (canUseAv1 && (codec === CodecAv01 || codec === CodecAv1C || mime === ContentTypeAV1)) {
+      return FormatAV1;
+    } else if (canUseWebM && (codec === FormatWebM || mime === ContentTypeWebM)) {
       return FormatWebM;
     }
 
-    return FormatAvc;
+    return FormatAVC;
   }
 
-  static videoUrl(hash, codec) {
-    return `${config.videoUri}/videos/${hash}/${config.previewToken}/${this.videoFormat(codec)}`;
+  static videoFormatUrl(hash, format) {
+    if (!hash) {
+      return "";
+    }
+
+    if (!format) {
+      format = FormatAVC;
+    }
+
+    return `${config.videoUri}/videos/${hash}/${config.previewToken}/${format}`;
   }
 
-  static videoType(codec) {
-    switch (this.videoFormat(codec)) {
-      case FormatAvc:
-        return 'video/mp4; codecs="avc1"';
+  static videoUrl(hash, codec, mime) {
+    return this.videoFormatUrl(hash, this.videoFormat(codec, mime));
+  }
+
+  static videoContentType(codec, mime) {
+    switch (this.videoFormat(codec, mime)) {
+      case FormatAVC:
+        return ContentTypeAVC;
       case CodecOGV:
-        return "video/ogg";
+        return ContentTypeOGG;
       case CodecVP8:
-        return 'video/webm; codecs="vp8"';
+        return ContentTypeVP8;
       case CodecVP9:
-        return 'video/webm; codecs="vp9"';
-      case FormatAv1:
-        return 'video/webm; codecs="av01.0.08M.08"';
+        return ContentTypeVP9;
+      case FormatAV1:
+        return ContentTypeAV1;
       case FormatWebM:
-        return "video/webm";
-      case FormatHevc:
-        return 'video/mp4; codecs="hvc1.1.6.L93.90"';
+        return ContentTypeWebM;
+      case FormatHEVC:
+        return ContentTypeHEVC;
       default:
         return "video/mp4";
     }

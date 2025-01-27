@@ -147,7 +147,7 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 	// Detect codec by searching for matching chunks.
 	if info.VideoCodec == "" {
 		if found, _ := ChunkHVC1.DataOffset(file); found > 0 {
-			info.VideoCodec = CodecHVC
+			info.VideoCodec = CodecHEVC
 		}
 	}
 

@@ -6,8 +6,13 @@ import (
 	"math"
 	"path/filepath"
 	"sort"
+	"strings"
 	"sync"
 	"time"
+
+	"github.com/photoprism/photoprism/pkg/media/video"
+
+	"github.com/photoprism/photoprism/pkg/header"
 
 	"github.com/dustin/go-humanize/english"
 	"github.com/gosimple/slug"
@@ -879,4 +884,50 @@ func (m *File) SetOrientation(val int, src string) *File {
 	}
 
 	return m
+}
+
+// ContentType returns the file content type including codec if known.
+func (m *File) ContentType() (contentType string) {
+	contentType = m.FileMime
+
+	if m.FileVideo {
+		if contentType == "" {
+			var codec string
+
+			if m.FileCodec != "" {
+				codec = m.FileCodec
+			} else {
+				codec = m.FileType
+			}
+
+			switch codec {
+			case "mov", "mp4", "avc", video.CodecAVC:
+				contentType = header.ContentTypeAVC
+			case video.CodecHEVC:
+				contentType = header.ContentTypeHEVC
+			case video.CodecVP8, "vp08":
+				contentType = header.ContentTypeVP8
+			case video.CodecVP9, "vp09":
+				contentType = header.ContentTypeVP9
+			case "av1", "av01":
+				contentType = header.ContentTypeAV1
+			case "ogg":
+				contentType = header.ContentTypeOGG
+			case "webm":
+				contentType = header.ContentTypeWebM
+			}
+		}
+
+		if contentType != "" && !strings.Contains(contentType, ";") {
+			if codec := clean.Codec(m.FileCodec); codec != "" {
+				contentType = fmt.Sprintf("%s; codecs=\"%s\"", contentType, codec)
+			}
+		}
+	}
+
+	contentType = clean.ContentType(contentType)
+
+	log.Debugf("file: %s has content type %s", clean.Log(m.FileName), clean.LogQuote(contentType))
+
+	return contentType
 }

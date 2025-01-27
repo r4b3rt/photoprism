@@ -811,7 +811,7 @@ func (ind *Index) UserMediaFile(m *MediaFile, o IndexOptions, originalName, phot
 	// Update file properties.
 	file.FileSidecar = m.IsSidecar()
 	file.FileType = m.FileType().String()
-	file.FileMime = m.MimeType()
+	file.FileMime = m.ContentType()
 	file.SetOrientation(m.Orientation(), entity.SrcMeta)
 	file.ModTime = modTime.UTC().Truncate(time.Second).Unix()
 

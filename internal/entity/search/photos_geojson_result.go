@@ -27,6 +27,7 @@ type GeoResult struct {
 	FileHeight    int           `json:"Height" select:"files.file_height"`
 	FileHash      string        `json:"Hash" select:"files.file_hash"`
 	FileCodec     string        `json:"-" select:"files.file_codec"`
+	FileMime      string        `json:"-" select:"files.file_mime"`
 	FileVideo     bool          `json:"-" select:"files.file_video"`
 	MediaType     string        `json:"-" select:"files.media_type"`
 }

@@ -43,6 +43,8 @@ export class Thumb extends Model {
       Width: 0,
       Height: 0,
       Hash: "",
+      Codec: "",
+      Mime: "",
       Thumbs: {},
     };
   }

@@ -1,5 +1,6 @@
 import "../fixtures";
-import { Photo, BatchSize, FormatJpeg } from "model/photo";
+import { Photo, BatchSize, FormatJPEG } from "model/photo";
+import { ContentTypeAVC } from "common/caniuse";
 
 let chai = require("chai/chai");
 let assert = chai.assert;
@@ -505,7 +506,7 @@ describe("model/photo", () => {
           FileType: "TypeJpeg",
           Width: 500,
           Height: 600,
-          Hash: "1xxbgdt53",
+          Hash: "ca3e60b9825bd61ee6369fcefe22f4eb92631bb5",
         },
       ],
     };
@@ -536,7 +537,7 @@ describe("model/photo", () => {
           FileType: "TypeJpeg",
           Width: 500,
           Height: 600,
-          Hash: "1xxbgdt53",
+          Hash: "ca3e60b9825bd61ee6369fcefe22f4eb92631bb5",
         },
       ],
     };
@@ -547,7 +548,7 @@ describe("model/photo", () => {
     photo.refreshFileAttr();
     assert.equal(photo.Width, 500);
     assert.equal(photo.Height, 600);
-    assert.equal(photo.Hash, "1xxbgdt53");
+    assert.equal(photo.Hash, "ca3e60b9825bd61ee6369fcefe22f4eb92631bb5");
   });
 
   it("should return is playable", () => {
@@ -564,7 +565,7 @@ describe("model/photo", () => {
           FileType: "TypeJpeg",
           Width: 500,
           Height: 600,
-          Hash: "1xxbgdt53",
+          Hash: "ca3e60b9825bd61ee6369fcefe22f4eb92631bb5",
         },
       ],
     };
@@ -587,7 +588,7 @@ describe("model/photo", () => {
           FileType: "mp4",
           Width: 500,
           Height: 600,
-          Hash: "1xxbgdt55",
+          Hash: "c1e30d265eab968155082c8e86d85815a8389479",
         },
       ],
     };
@@ -607,7 +608,7 @@ describe("model/photo", () => {
           FileType: "jpg",
           Width: 500,
           Height: 600,
-          Hash: "1xxbgdt53",
+          Hash: "ca3e60b9825bd61ee6369fcefe22f4eb92631bb5",
           Codec: "avc1",
         },
       ],
@@ -631,7 +632,7 @@ describe("model/photo", () => {
           FileType: "mp4",
           Width: 900,
           Height: 600,
-          Hash: "1xxbgdt55",
+          Hash: "c1e30d265eab968155082c8e86d85815a8389479",
         },
       ],
     };
@@ -640,7 +641,7 @@ describe("model/photo", () => {
     assert.isAbove(result.height, 340);
     assert.isAbove(result.width, 510);
     assert.equal(result.loop, false);
-    assert.equal(result.uri, "/api/v1/videos/1xxbgdt55/public/avc");
+    assert.equal(result.uri, "/api/v1/videos/c1e30d265eab968155082c8e86d85815a8389479/public/avc");
     const values = {
       ID: 11,
       UID: "ABC127",
@@ -655,7 +656,7 @@ describe("model/photo", () => {
           FileType: "mp4",
           Width: 0,
           Height: 0,
-          Hash: "1xxbgdt55",
+          Hash: "c1e30d265eab968155082c8e86d85815a8389479",
         },
         {
           UID: "123fpp",
@@ -663,7 +664,7 @@ describe("model/photo", () => {
           Primary: true,
           Width: 5000,
           Height: 5000,
-          Hash: "1xxbgdt544",
+          Hash: "ca3e60b9825bd61ee6369fcefe22f4eb92631bb5",
         },
       ],
     };
@@ -672,7 +673,7 @@ describe("model/photo", () => {
     assert.isAbove(result2.height, 340);
     assert.isAbove(result2.width, 340);
     assert.equal(result2.loop, false);
-    assert.equal(result2.uri, "/api/v1/videos/1xxbgdt55/public/avc");
+    assert.equal(result2.uri, "/api/v1/videos/c1e30d265eab968155082c8e86d85815a8389479/public/avc");
   });
 
   it("should return videofile", () => {
@@ -689,7 +690,7 @@ describe("model/photo", () => {
           FileType: "jpg",
           Width: 500,
           Height: 600,
-          Hash: "1xxbgdt53",
+          Hash: "c1e30d265eab968155082c8e86d85815a8389479",
         },
       ],
     };
@@ -711,7 +712,7 @@ describe("model/photo", () => {
           FileType: "mp4",
           Width: 500,
           Height: 600,
-          Hash: "1xxbgdt55",
+          Hash: "c1e30d265eab968155082c8e86d85815a8389479",
         },
       ],
     };
@@ -761,13 +762,11 @@ describe("model/photo", () => {
       ],
     };
     const photo = new Photo(values);
+    assert.equal(photo.videoContentType(), ContentTypeAVC);
     assert.equal(photo.videoUrl(), "/api/v1/videos/703cf8f274fbb265d49c6262825780e1/public/avc");
     const values2 = { ID: 9, UID: "ABC163", Hash: "2305e512e3b183ec982d60a8b608a8ca501973ba" };
     const photo2 = new Photo(values2);
-    assert.equal(
-      photo2.videoUrl(),
-      "/api/v1/videos/2305e512e3b183ec982d60a8b608a8ca501973ba/public/avc"
-    );
+    assert.equal(photo2.videoUrl(), "/api/v1/videos/2305e512e3b183ec982d60a8b608a8ca501973ba/public/avc");
     const values3 = {
       ID: 10,
       UID: "ABC127",
@@ -886,7 +885,7 @@ describe("model/photo", () => {
           UID: "123fgb",
           Name: "1980/01/superCuteKitten.jpg",
           Primary: false,
-          FileType: FormatJpeg,
+          FileType: FormatJPEG,
           Width: 500,
           Height: 600,
           Hash: "1xxbgdt55",

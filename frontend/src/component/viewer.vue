@@ -24,7 +24,8 @@ import PhotoSwipeDynamicCaption from "photoswipe-dynamic-caption-plugin";
 import Util from "common/util";
 import Api from "common/api";
 import Thumb from "model/thumb";
-import { MediaAnimated, MediaLive, Photo } from "model/photo";
+import { FormatAVC, MediaAnimated, MediaLive, Photo } from "model/photo";
+import { ContentTypeAVC } from "common/caniuse";
 
 /*
   TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
@@ -218,6 +219,116 @@ export default {
           ctx.viewer.loading = false;
         });
     },
+    getItemData(el, i) {
+      /*
+        TODO: Rendering of slides needs to be improved to allow dynamic zooming (loading higher resolution thumbs
+              depending on zoom level and screen resolution).
+       */
+
+      // Get the current slide model data.
+      const model = this.models[i];
+
+      // Get the screen (window) resolution in real pixels
+      const pixels = this.getWindowPixels();
+
+      // Get the right thumbnail size based on the screen resolution in pixels.
+      const thumbSize = Util.thumbSize(pixels.width, pixels.height);
+
+      // Get thumbnail image URL, width, and height.
+      const img = {
+        src: model.Thumbs[thumbSize].src,
+        width: model.Thumbs[thumbSize].w,
+        height: model.Thumbs[thumbSize].h,
+        alt: model?.Title,
+      };
+
+      // Check if content is playable and return the data needed to render it in "contentLoad".
+      if (model?.Playable && model?.Hash) {
+        /*
+          TODO: The server should (additionally) provide a video/animation still from time index 0 that can be used as
+                poster (the current thumbnail is taken later for longer videos, since the first frame is often black).
+         */
+
+        // Check if the video duration is known and 5 seconds or less.
+        const isShort = model?.Duration ? model.Duration > 0 && model.Duration <= 5000000000 : false;
+
+        // Set the slide data needed to render and play the video.
+        return {
+          type: "html", // Render custom HTML.
+          html: `<div class="pswp__error-msg">Loading video...</div>`, // Replaced with the <video> element.
+          model: model, // Content model.
+          format: Util.videoFormat(model?.Codec, model?.Mime), // Content format.
+          loop: isShort || model?.Type === MediaAnimated || model?.Type === MediaLive, // If possible, loop these types.
+          msrc: img.src, // Image URL.
+        };
+      }
+
+      // Return the image data so that PhotoSwipe can render it in the viewer,
+      // see https://photoswipe.com/data-sources/#dynamically-generated-data.
+      return img;
+    },
+    onContentLoad(ev) {
+      const { content } = ev;
+      if (content.data?.type === "html") {
+        // Prevent default loading behavior.
+        ev.preventDefault();
+
+        try {
+          // Create video element.
+          content.element = this.createVideoElement(
+            content.data.model,
+            content.data.format,
+            content.data.msrc,
+            false,
+            false,
+            false
+          );
+          content.state = "loading";
+          content.onLoaded();
+        } catch (err) {
+          console.warn("failed to load video", err);
+        }
+      }
+    },
+    // Creates an HTMLMediaElement for playing videos, animations, and live photos.
+    createVideoElement(model, format, posterSrc, autoplay = false, loop = false, mute = false) {
+      // See https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement.
+      const video = document.createElement("video");
+
+      // Check if a slideshow is running.
+      const slideshow = this.slideshow.active;
+
+      // Set HTMLMediaElement properties.
+      video.className = "pswp__video";
+      video.poster = posterSrc;
+      video.autoplay = autoplay;
+      video.loop = loop && !slideshow;
+      video.mute = mute;
+      video.preload = autoplay ? "auto" : "metadata";
+      video.playsInline = true;
+      video.controls = true;
+
+      // Disable download control is downloads are not allowed.
+      if (!this.canDownload && video.controlsList) {
+        video.controlsList?.add("nodownload");
+      }
+
+      // Create and append video source elements, depending on file format support.
+      if (format !== FormatAVC && model?.Mime && model.Mime !== ContentTypeAVC && video.canPlayType(model.Mime)) {
+        const nativeSource = document.createElement("source");
+        nativeSource.type = model.Mime;
+        nativeSource.src = Util.videoFormatUrl(model.Hash, format);
+        video.appendChild(nativeSource);
+      }
+
+      const avcSource = document.createElement("source");
+      avcSource.type = ContentTypeAVC;
+      avcSource.src = Util.videoFormatUrl(model.Hash, FormatAVC);
+      video.appendChild(avcSource);
+
+      // Return HTMLMediaElement.
+      return video;
+    },
     // Initializes and opens the PhotoSwipe lightbox with the
     // images and/or videos that belong to the specified models.
     renderLightbox(models, index = 0) {
@@ -293,81 +404,11 @@ export default {
 
       // Processes model data for rendering slides with PhotoSwipe,
       // see https://photoswipe.com/filters/#itemdata.
-      lightbox.addFilter("itemData", (el, i) => {
-        /*
-          TODO: Rendering of slides needs to be improved to allow dynamic zooming (loading higher resolution thumbs
-                depending on zoom level and screen resolution).
-         */
-
-        // Get the current slide model data.
-        const model = this.models[i];
-
-        // Get the screen (window) resolution in real pixels
-        const pixels = this.getWindowPixels();
-
-        // Get the right thumbnail size based on the screen resolution in pixels.
-        const thumbSize = Util.thumbSize(pixels.width, pixels.height);
-
-        // Get thumbnail image URL, width, and height.
-        const img = {
-          src: model.Thumbs[thumbSize].src,
-          width: model.Thumbs[thumbSize].w,
-          height: model.Thumbs[thumbSize].h,
-          alt: model?.Title,
-        };
-
-        // Check if content is playable and return the data needed to render it in "contentLoad".
-        if (model?.Playable && model?.Hash) {
-          /*
-            TODO: The server should (additionally) provide a video/animation still from time index 0 that can be used as
-                  poster (the current thumbnail is taken later for longer videos, since the first frame is often black).
-           */
-
-          // Check if the video duration is known and 5 seconds or less.
-          const isShort = model?.Duration ? model.Duration > 0 && model.Duration <= 5000000000 : false;
-
-          // Set the slide data needed to render and play the video.
-          return {
-            type: "html", // Render custom HTML.
-            html: `<div class="pswp__error-msg">Loading video...</div>`, // Replaced with the <video> element.
-            model: model, // Thumbnail model.
-            loop: isShort || model?.Type === MediaAnimated || model?.Type === MediaLive, // If possible, loop these types.
-            videoUrl: Util.videoUrl(model.Hash, model?.Codec), // Video URL.
-            videoType: Util.videoType(model?.Codec), // Media Type.
-            msrc: img.src, // Image URL.
-          };
-        }
-
-        // Return the image data so that PhotoSwipe can render it in the viewer,
-        // see https://photoswipe.com/data-sources/#dynamically-generated-data.
-        return img;
-      });
+      lightbox.addFilter("itemData", this.getItemData);
 
       // Renders content when a slide starts to load (can be default prevented),
       // see https://photoswipe.com/events/#slide-content-events.
-      lightbox.on("contentLoad", (ev) => {
-        const { content } = ev;
-        if (content.data?.type === "html") {
-          // Prevent default loading behavior.
-          ev.preventDefault();
-
-          try {
-            // Create video element.
-            content.element = this.createVideoElement(
-              content.data.videoUrl,
-              content.data.videoType,
-              content.data.msrc,
-              false,
-              false,
-              false
-            );
-            content.state = "loading";
-            content.onLoaded();
-          } catch (err) {
-            console.warn("failed to load video", err);
-          }
-        }
-      });
+      lightbox.on("contentLoad", this.onContentLoad);
 
       // Pauses videos, animations, and live photos when slide content becomes active (can be default prevented),
       // see https://photoswipe.com/events/#slide-content-events.
@@ -561,43 +602,6 @@ export default {
           });
         }
       });
-    },
-    // Creates an HTMLMediaElement for playing videos, animations, and live photos.
-    createVideoElement(videoSrc, videoType, posterSrc, autoplay = false, loop = false, mute = false) {
-      // See https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement.
-      const video = document.createElement("video");
-
-      // Check if a slideshow is running.
-      const slideshow = this.slideshow.active;
-
-      // Set HTMLMediaElement properties.
-      video.className = "pswp__video";
-      video.poster = posterSrc;
-      video.autoplay = autoplay;
-      video.loop = loop && !slideshow;
-      video.mute = mute;
-      video.preload = autoplay ? "auto" : "metadata";
-      video.playsInline = true;
-      video.controls = true;
-
-      // Disable download control is downloads are not allowed.
-      if (!this.canDownload && video.controlsList) {
-        video.controlsList?.add("nodownload");
-      }
-
-      // Create and append video source element.
-      /*
-        TODO: Provide alternative sources and/or an m3u8 playlist to let the browser choose the best format (first check
-              best practices on Google and in the code of other open source software, then develop a simple/static proof
-              of concept to see if/how it works).
-       */
-      const source = document.createElement("source");
-      source.type = videoType;
-      source.src = videoSrc;
-      video.appendChild(source);
-
-      // Return HTMLMediaElement.
-      return video;
     },
     // Destroys the PhotoSwipe lightbox instance after use, see onClose().
     destroyLightbox() {

@@ -91,7 +91,7 @@ func TestProbeFile(t *testing.T) {
 		assert.Equal(t, int64(0), info.VideoOffset)
 		assert.Equal(t, int64(-1), info.ThumbOffset)
 		assert.Equal(t, media.Video, info.MediaType)
-		assert.Equal(t, CodecHVC, info.VideoCodec)
+		assert.Equal(t, CodecHEVC, info.VideoCodec)
 		assert.Equal(t, fs.MimeTypeMOV, info.VideoMimeType)
 		assert.Equal(t, ContentTypeMOV+`; codecs="hvc1"`, info.VideoContentType())
 		assert.Equal(t, "1.166666666s", info.Duration.String())

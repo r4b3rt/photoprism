@@ -25,7 +25,7 @@ func UserPhotosViewerResults(frm form.SearchPhotos, sess *entity.Session, conten
 
 // ViewerResult returns a new photo viewer result.
 func (m *Photo) ViewerResult(contentUri, apiUri, previewToken, downloadToken string) viewer.Result {
-	mediaHash, mediaCodec := m.MediaInfo()
+	mediaHash, mediaCodec, mediaMime := m.MediaInfo()
 	return viewer.Result{
 		UID:          m.PhotoUID,
 		Type:         m.PhotoType,
@@ -41,6 +41,7 @@ func (m *Photo) ViewerResult(contentUri, apiUri, previewToken, downloadToken str
 		Height:       m.FileHeight,
 		Hash:         mediaHash,
 		Codec:        mediaCodec,
+		Mime:         mediaMime,
 		Thumbs:       thumb.ViewerThumbs(m.FileWidth, m.FileHeight, m.FileHash, contentUri, previewToken),
 		DownloadUrl:  viewer.DownloadUrl(m.FileHash, apiUri, downloadToken),
 	}
@@ -79,6 +80,7 @@ func (m GeoResult) ViewerResult(contentUri, apiUri, previewToken, downloadToken 
 		Height:       m.FileHeight,
 		Hash:         m.FileHash,
 		Codec:        m.FileCodec,
+		Mime:         m.FileMime,
 		Thumbs:       thumb.ViewerThumbs(m.FileWidth, m.FileHeight, m.FileHash, contentUri, previewToken),
 		DownloadUrl:  viewer.DownloadUrl(m.FileHash, apiUri, downloadToken),
 	}

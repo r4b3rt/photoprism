@@ -4,6 +4,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/photoprism/photoprism/pkg/header"
+
 	"github.com/stretchr/testify/assert"
 
 	"github.com/photoprism/photoprism/internal/ai/face"
@@ -873,5 +875,21 @@ func TestFile_SetOrientation(t *testing.T) {
 		m.SetOrientation(-1, SrcManual)
 		assert.Equal(t, 8, m.Orientation())
 		assert.Equal(t, "", m.FileOrientationSrc)
+	})
+}
+
+func TestFile_ContentType(t *testing.T) {
+	t.Run("Image", func(t *testing.T) {
+		m := FileFixtures.Get("exampleFileName.jpg")
+		assert.Equal(t, false, m.FileVideo)
+		assert.Equal(t, header.ContentTypeJPEG, m.ContentType())
+	})
+	t.Run("Video", func(t *testing.T) {
+		avc := FileFixtures.Get("Video.mp4")
+		assert.Equal(t, true, avc.FileVideo)
+		assert.Equal(t, header.ContentTypeAVC, avc.ContentType())
+		hevc := FileFixtures.Get("Photo21.mp4")
+		assert.Equal(t, true, hevc.FileVideo)
+		assert.Equal(t, header.ContentTypeHEVC, hevc.ContentType())
 	})
 }

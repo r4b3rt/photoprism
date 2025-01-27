@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/photoprism/photoprism/pkg/clean"
+
 	"github.com/gosimple/slug"
 	"github.com/jinzhu/gorm"
 	"github.com/ulule/deepcopier"
@@ -194,28 +196,28 @@ func (m *Photo) IsPlayable() bool {
 }
 
 // MediaInfo returns the media file hash and codec depending on the media type.
-func (m *Photo) MediaInfo() (mediaHash, mediaCodec string) {
+func (m *Photo) MediaInfo() (mediaHash, mediaCodec, mediaMime string) {
 	if m.PhotoType == entity.MediaVideo || m.PhotoType == entity.MediaLive {
 		for _, f := range m.Files {
 			if f.FileVideo && f.FileHash != "" {
-				return f.FileHash, f.FileCodec
+				return f.FileHash, f.FileCodec, clean.ContentType(f.FileMime)
 			}
 		}
 	} else if m.PhotoType == entity.MediaVector {
 		for _, f := range m.Files {
 			if f.MediaType == entity.MediaVector && f.FileHash != "" {
-				return f.FileHash, f.FileCodec
+				return f.FileHash, f.FileCodec, clean.ContentType(f.FileMime)
 			}
 		}
 	} else if m.PhotoType == entity.MediaDocument {
 		for _, f := range m.Files {
 			if f.MediaType == entity.MediaDocument && f.FileHash != "" {
-				return f.FileHash, f.FileCodec
+				return f.FileHash, f.FileCodec, clean.ContentType(f.FileMime)
 			}
 		}
 	}
 
-	return m.FileHash, ""
+	return m.FileHash, "", m.FileMime
 }
 
 // ShareBase returns a meaningful file name for sharing.

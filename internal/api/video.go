@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 	"path/filepath"
 	"strings"
@@ -111,7 +110,7 @@ func GetVideo(router *gin.RouterGroup) {
 			} else {
 				// Serve embedded videos from cache to allow streaming and transcoding.
 				videoBitrate = info.VideoBitrate()
-				videoCodec = info.VideoCodec.String()
+				videoCodec = info.VideoCodec
 				videoFileType = info.VideoFileType().String()
 				videoFileName = cacheName
 				log.Debugf("video: streaming %s encoded %s in %s from cache", strings.ToUpper(videoCodec), strings.ToUpper(videoFileType), clean.Log(f.FileName))
@@ -119,7 +118,7 @@ func GetVideo(router *gin.RouterGroup) {
 		}
 
 		// Check video format support.
-		supported := videoCodec != "" && videoCodec == format.Codec.String() || format.Codec == video.CodecUnknown && videoFileType == format.FileType.String()
+		supported := videoCodec != "" && videoCodec == format.Codec || format.Codec == video.CodecUnknown && videoFileType == format.FileType.String()
 
 		// Check video bitrate against the configured limit.
 		transcode := !supported || conf.FFmpegEnabled() && conf.FFmpegBitrateExceeded(videoBitrate)
@@ -153,10 +152,10 @@ func GetVideo(router *gin.RouterGroup) {
 		} else {
 			if videoCodec != "" && videoCodec != videoFileType {
 				log.Debugf("video: %s is %s encoded and requires no transcoding, average bitrate %.1f MBit/s", clean.Log(f.FileName), strings.ToUpper(videoCodec), videoBitrate)
-				AddContentTypeHeader(c, fmt.Sprintf("%s; codecs=\"%s\"", f.FileMime, clean.Codec(videoCodec)))
+				AddContentTypeHeader(c, f.ContentType())
 			} else {
 				log.Debugf("video: %s is streamed directly, average bitrate %.1f MBit/s", clean.Log(f.FileName), videoBitrate)
-				AddContentTypeHeader(c, f.FileMime)
+				AddContentTypeHeader(c, f.ContentType())
 			}
 		}
 
