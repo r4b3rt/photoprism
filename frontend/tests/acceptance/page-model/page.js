@@ -21,7 +21,7 @@ export default class Page {
   constructor() {
     this.selectOption = Selector('div[role="option"]', { timeout: 15000 });
     this.cardTitle = Selector("button.action-title-edit", { timeout: 7000 });
-    this.cardDescription = Selector('div[title="Description"]', { timeout: 7000 });
+    this.cardDescription = Selector("button.meta-description", { timeout: 7000 });
     this.cardLocation = Selector("button.action-location", { timeout: 7000 });
     this.cardTaken = Selector("button.action-open-date", { timeout: 7000 });
     this.usernameInput = Selector(".input-username input", { timeout: 7000 });
@@ -49,7 +49,6 @@ export default class Page {
     await album.triggerHoverAction("uid", FirstAlbum, "select");
     await contextmenu.checkContextMenuCount("1");
     await contextmenu.triggerContextMenuAction("share", "", "");
-    await t.click(sharedialog.expandLink.nth(0));
     const InitialUrl = await sharedialog.linkUrl.value;
     const InitialSecret = await sharedialog.linkSecretInput.value;
     const InitialExpire = await Selector(".input-expires .v-select__selection-text").innerText;
@@ -66,7 +65,6 @@ export default class Page {
     await contextmenu.clearSelection();
     await album.openAlbumWithUid(FirstAlbum);
     await toolbar.triggerToolbarAction("share", "");
-    await t.click(sharedialog.expandLink.nth(0));
     const ExpireAfterChange = await Selector(".input-expires .v-select__selection-text").innerText;
     const UrlAfterChange = await sharedialog.linkUrl.value;
     await t
@@ -99,7 +97,8 @@ export default class Page {
       await toolbar.triggerToolbarAction("reload");
     }
     await album.triggerHoverAction("uid", FirstAlbum, "share");
-    await t.click(sharedialog.expandLink).click(sharedialog.deleteLink);
+    await t
+        .click(sharedialog.deleteLink);
   }
 
   async validateDownloadRequest(request, filename, extension) {
