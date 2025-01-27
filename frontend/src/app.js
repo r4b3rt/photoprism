@@ -69,7 +69,7 @@ config.update().finally(() => {
   config.progress(66);
   const isPublic = config.isPublic();
   const isMobile =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|Mobile|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
     (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
 
   let app = createApp(PhotoPrism);
