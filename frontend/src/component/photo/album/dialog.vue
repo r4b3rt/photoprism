@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" persistent max-width="390" class="p-dialog p-photo-album-dialog" @keydown.esc="cancel">
+  <v-dialog :model-value="show" persistent max-width="390" class="p-dialog p-photo-album-dialog" @keydown.esc="close">
     <v-form ref="form" validate-on="invalid-input" accept-charset="UTF-8" @submit.prevent="confirm">
       <v-card>
         <v-card-title class="d-flex justify-start align-center ga-3">
@@ -26,7 +26,7 @@
           </v-combobox>
         </v-card-text>
         <v-card-actions class="action-buttons">
-          <v-btn variant="flat" color="button" class="action-cancel" @click.stop="cancel">
+          <v-btn variant="flat" color="button" class="action-cancel action-close" @click.stop="close">
             {{ $gettext(`Cancel`) }}
           </v-btn>
           <v-btn
@@ -70,13 +70,14 @@ export default {
   watch: {
     show: function (show) {
       if (show) {
+        this.reset();
         this.load("");
       }
     },
   },
   methods: {
-    cancel() {
-      this.$emit("cancel");
+    close() {
+      this.$emit("close");
     },
     confirm() {
       if (this.loading) {
@@ -84,16 +85,15 @@ export default {
       }
 
       if (typeof this.album === "object" && this.album?.UID) {
+        this.loading = true;
         this.$emit("confirm", this.album?.UID);
       } else if (typeof this.album === "string" && this.album.length > 0) {
         this.loading = true;
-
         let newAlbum = new Album({ Title: this.album, UID: "", Favorite: false });
 
         newAlbum
           .save()
           .then((a) => {
-            this.loading = false;
             this.album = a;
             this.$emit("confirm", a.UID);
           })
@@ -113,6 +113,12 @@ export default {
       this.$nextTick(() => {
         this.$refs.input.focus();
       });
+    },
+    reset() {
+      this.loading = false;
+      this.newAlbum = null;
+      this.albums = [];
+      this.items = [];
     },
     load(q) {
       if (this.loading) {
