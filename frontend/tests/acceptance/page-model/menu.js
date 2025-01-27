@@ -70,19 +70,22 @@ export default class Page {
       (page === "archive")
     ) {
       if (
-        !(await Selector("div.v-list-group--open div.nav-browse", { timeout: 15000 }).visible)
+          (!(await Selector("div.v-list-group--open div.nav-browse", { timeout: 15000 }).visible)) &
+          ((await Selector("div.nav-browse .mdi-chevron-down", { timeout: 15000 }).visible))
       ) {
         await t.click(Selector("div.nav-browse .mdi-chevron-down", { timeout: 15000 }));
       }
     } else if (page === "live") {
       if (await Selector(".nav-video").visible) {
-        if (!(await Selector("div.v-list-group--open div.nav-video").visible)) {
+        if ((!(await Selector("div.v-list-group--open div.nav-video").visible))  &
+            ((await Selector("div.nav-video .mdi-chevron-down", { timeout: 15000 }).visible))) {
           await t.click(Selector("div.nav-video .mdi-chevron-down"));
         }
       }
     } else if (page === "states") {
       if (await Selector(".nav-places").visible) {
-        if (!(await Selector("div.v-list-group--open div.nav-places").visible)) {
+        if ((!(await Selector("div.v-list-group--open div.nav-places").visible))  &
+            ((await Selector("div.nav-places .mdi-chevron-down", { timeout: 15000 }).visible))) {
           await t.click(Selector("div.nav-places .mdi-chevron-down"));
         }
       }
@@ -96,8 +99,9 @@ export default class Page {
       }
     } else if ((page === "abouts") | (page === "feedback") | (page === "license")) {
       if (await Selector(".nav-settings").visible) {
-        if (!(await Selector("div.v-list-group--open div.nav-settings").visible)) {
-          await t.click(Selector("div.nav-settings.mdi-chevron-down"));
+        if ((!(await Selector("div.v-list-group--open div.nav-settings").visible))  &
+            ((await Selector("div.nav-settings .mdi-chevron-down", { timeout: 15000 }).visible))) {
+          await t.click(Selector("div.nav-settings .mdi-chevron-down"));
         }
       }
     }

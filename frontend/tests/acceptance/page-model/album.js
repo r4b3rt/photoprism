@@ -8,7 +8,7 @@ export default class Page {
       const NthAlbum = await Selector("div.result.is-album").nth(nth).getAttribute("data-uid");
       return NthAlbum;
     } else {
-      const NthAlbum = await Selector("a.type-" + type)
+      const NthAlbum = await Selector("div.type-" + type)
         .nth(nth)
         .getAttribute("data-uid");
       return NthAlbum;
@@ -26,10 +26,10 @@ export default class Page {
       }
     } else {
       if (t.browser.platform === "mobile") {
-        const AlbumCount = await Selector("a.type-" + type, { timeout: 8000 }).count;
+        const AlbumCount = await Selector("div.type-" + type, { timeout: 8000 }).count;
         return AlbumCount;
       } else {
-        const AlbumCount = await Selector("a.type-" + type, { timeout: 5000 }).count;
+        const AlbumCount = await Selector("div.type-" + type, { timeout: 5000 }).count;
         return AlbumCount;
       }
     }
@@ -48,8 +48,8 @@ export default class Page {
         .click(Selector("div.result.is-album .input-select").nth(nth));
     } else {
       await t
-        .hover(Selector("a.type-" + type, { timeout: 4000 }).nth(nth))
-        .click(Selector("a.type-" + type + " .input-select").nth(nth));
+        .hover(Selector("div.type-" + type, { timeout: 4000 }).nth(nth))
+        .click(Selector("div.type-" + type + " .input-select").nth(nth));
     }
   }
 
@@ -59,8 +59,8 @@ export default class Page {
         await t.click(Selector("div.result.is-album").nth(nth));
       }
     } else {
-      if (await Selector("a.type-" + type).nth(nth).visible) {
-        await t.click(Selector("a.type-" + type).nth(nth));
+      if (await Selector("div.type-" + type).nth(nth).visible) {
+        await t.click(Selector("div.type-" + type).nth(nth));
       }
     }
   }
@@ -122,11 +122,11 @@ export default class Page {
 
   async checkHoverActionState(mode, uidOrNth, action, set) {
     if (mode === "uid") {
-      await t.hover(Selector("a").withAttribute("data-uid", uidOrNth));
+      await t.hover(Selector("div").withAttribute("data-uid", uidOrNth));
       if (set) {
-        await t.expect(Selector(`a.uid-${uidOrNth}`).hasClass("is-" + action)).ok();
+        await t.expect(Selector(`div.uid-${uidOrNth}`).hasClass("is-" + action)).ok();
       } else {
-        await t.expect(Selector(`a.uid-${uidOrNth}`).hasClass("is-" + action)).notOk();
+        await t.expect(Selector(`div.uid-${uidOrNth}`).hasClass("is-" + action)).notOk();
       }
     }
     if (mode === "nth") {

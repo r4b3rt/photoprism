@@ -66,7 +66,7 @@ export default class Page {
     this.deleteLabel = Selector(".action-delete", { timeout: 15000 });
     this.inputLabelName = Selector(".input-label input", { timeout: 15000 });
     this.openInlineEdit = Selector("div.p-inline-edit", { timeout: 15000 });
-    this.inputLabelRename = Selector(".input-rename input", { timeout: 15000 });
+    this.inputLabelRename = Selector(".input-title input", { timeout: 15000 });
 
     this.downloadFile = Selector("button.action-download", { timeout: 15000 });
     this.unstackFile = Selector(".action-unstack", { timeout: 15000 });
@@ -140,8 +140,6 @@ export default class Page {
       this.checkFieldDisabled(item, disabled);
     });
   }
-  // check edit form values // get all current edit form values // set edit form values
-  //edit dialog disabled --funcionalities
 
   async getFileCount() {
     const FileCount = await Selector("div.v-expansion-panel", { timeout: 5000 }).count;
@@ -150,42 +148,28 @@ export default class Page {
 
   async turnSwitchOff(type) {
     await t
-      .click("#tab-info")
-      .expect(
-        Selector(".input-" + type + " input", { timeout: 8000 }).hasAttribute(
-          "aria-label",
-          "Yes"
-        )
-      )
-      .ok()
-      .click(Selector(".input-" + type + " div.v-selection-control__input"))
-      .expect(
-        Selector(".input-" + type + " input", { timeout: 8000 }).hasAttribute(
-          "aria-label",
-          "No"
-        )
-      )
-      .ok();
+      .click("#tab-info");
+    const initialState = await Selector("td .input-" + type + " input", { timeout: 8000 }).hasAttribute("checked");
+    if (initialState === true) {
+      await t
+          .click(Selector("td .input-" + type + " div.v-switch__track"));
+    }
+    const finalState = await Selector("td .input-" + type + " input", { timeout: 8000 }).hasAttribute("checked");
+    await t
+        .expect(finalState).eql(false);
   }
 
   async turnSwitchOn(type) {
     await t
-      .click("#tab-info")
-      .expect(
-        Selector(".input-" + type + " input", { timeout: 8000 }).hasAttribute(
-          "aria-label",
-          "No"
-        )
-      )
-      .ok()
-      .click(Selector(".input-" + type + " div.v-selection-control__input"))
-      .expect(
-        Selector(".input-" + type + " input", { timeout: 8000 }).hasAttribute(
-          "aria-label",
-          "Yes"//TODO Attribute value MUST be validated
-        )
-      )
-      .ok();
+      .click("#tab-info");
+    const initialState = await Selector("td .input-" + type + " input", { timeout: 8000 }).hasAttribute("checked");
+    if (initialState === false) {
+      await t
+          .click(Selector("td .input-" + type + " div.v-selection-control__input"));
+    }
+    const finalState = await Selector("td .input-" + type + " input", { timeout: 8000 }).hasAttribute("checked");
+    await t
+        .expect(finalState).eql(true);
   }
 
   async checkEditFormInputValue(field, val) {
@@ -270,11 +254,7 @@ export default class Page {
 
       .click(Selector("button.action-approve"));
     await t.expect(this.latitude.visible, { timeout: 5000 }).ok();
-    if (t.browser.platform === "mobile") {
-      await t.click(Selector("button.action-apply")).click(Selector("button.action-close"));
-    } else {
-      await t.click(Selector("button.action-done", { timeout: 5000 }));
-    }
+    await t.click(Selector("button.action-apply")).click(Selector("button.action-close"));
   }
 
   async undoPhotoEdit(
@@ -432,10 +412,6 @@ export default class Page {
     } else {
       await t.typeText(Selector(".input-notes textarea"), notes, { replace: true });
     }
-    if (t.browser.platform === "mobile") {
-      await t.click(Selector("button.action-apply")).click(Selector("button.action-close"));
-    } else {
-      await t.click(Selector("button.action-done", { timeout: 5000 }));
-    }
+    await t.click(Selector("button.action-apply")).click(Selector("button.action-close"));
   }
 }

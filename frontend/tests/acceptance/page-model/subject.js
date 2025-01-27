@@ -76,13 +76,13 @@ export default class Page {
       if (mode === "uid") {
         await t.expect(Selector("div").withAttribute("data-uid", uidOrName).visible).ok();
       } else {
-        await t.expect(Selector("a div.meta-title").withText(uidOrName).visible).ok();
+        await t.expect(Selector("div div.meta-title").withText(uidOrName).visible).ok();
       }
     } else if (!visible) {
       if (mode === "uid") {
         await t.expect(Selector("div").withAttribute("data-uid", uidOrName).visible).notOk();
       } else {
-        await t.expect(Selector("a div.meta-title").withText(uidOrName).visible).notOk();
+        await t.expect(Selector("div div.meta-title").withText(uidOrName).visible).notOk();
       }
     }
   }
@@ -129,7 +129,7 @@ export default class Page {
       }
     }
     if (mode === "nth") {
-      await t.hover(Selector("div.result.is-subject div.meta-title").nth(uidOrNth));
+      await t.hover(Selector("div.result.is-subject").nth(uidOrNth));
       if (visible) {
         await t.expect(Selector(`.input-` + action).visible).ok();
       } else {

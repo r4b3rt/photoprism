@@ -74,11 +74,11 @@ export default class Page {
 
   async checkHoverActionState(mode, uidOrNth, action, set) {
     if (mode === "uid") {
-      await t.hover(Selector("a").withAttribute("data-uid", uidOrNth));
+      await t.hover(Selector("div").withAttribute("data-uid", uidOrNth));
       if (set) {
-        await t.expect(Selector(`a.uid-${uidOrNth}`).hasClass("is-" + action)).ok();
+        await t.expect(Selector(`div.uid-${uidOrNth}`).hasClass("is-" + action)).ok();
       } else {
-        await t.expect(Selector(`a.uid-${uidOrNth}`).hasClass("is-" + action)).notOk();
+        await t.expect(Selector(`div.uid-${uidOrNth}`).hasClass("is-" + action)).notOk();
       }
     }
     if (mode === "nth") {

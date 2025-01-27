@@ -7,7 +7,7 @@ export default class Page {
     this.countries = Selector("div.p-countries-select");
     this.time = Selector("div.p-time-select");
     this.search1 = Selector("div.input-search input");
-    this.toolbarDescription = Selector(".v-card-text").nth(0);
+    this.toolbarDescription = Selector(".toolbar-details-panel");
     this.toolbarTitle = Selector("#p-navigation div.v-toolbar-title");
     this.toolbarSecondTitle = Selector("header.v-toolbar div.v-toolbar-title");
     this.openMobileToolbar = Selector("button.mobile-menu-trigger");

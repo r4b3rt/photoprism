@@ -43,14 +43,14 @@ export default class Page {
     }
     if ((action === "album") | (action === "clone")) {
       await t
-        .typeText(Selector(".input-album input"), albumName, { replace: true });
+        .typeText(Selector(".input-album input"), albumName, { replace: true })
       if (await Selector("div").withText(albumName).parent('div[role="option"]').visible) {
         await t.click(Selector("div").withText(albumName).parent('div[role="option"]'))
       }
       await t.click(Selector("button.action-confirm"));
       //TODO MUST work with enter as well!
 
-      //.pressKey("enter");
+      //await t.pressKey("enter");
     }
   }
 
