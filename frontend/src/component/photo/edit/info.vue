@@ -21,10 +21,10 @@
               </td>
             </tr>
             <tr>
-              <td :title="model.TypeSrc">
-                {{ $gettext(`Type`) }}
-              </td>
               <td>
+                <span>{{ $gettext(`Type`) }}</span>
+              </td>
+              <td v-tooltip="formatSource(model?.TypeSrc, $gettext('Default'))">
                 <v-select
                   v-model="model.Type"
                   :append-icon="model.TypeSrc === 'manual' ? 'mdi-check' : ''"
@@ -79,23 +79,23 @@
               </td>
             </tr>
             <tr>
-              <td :title="sourceName(model.TitleSrc)">
-                {{ $gettext(`Title`) }}
+              <td>
+                <span>{{ $gettext(`Title`) }}</span>
               </td>
-              <td :title="sourceName(model.TitleSrc)">
-                <div class="text-flex text-break">
-                  <span class="clickable" @click.stop.prevent="$util.copyText(model.Title)">{{ model.Title }}</span>
+              <td>
+                <div v-tooltip="formatSource(model?.TitleSrc, $gettext('Generated'))" class="text-flex text-break">
+                  <span class="clickable text-break" @click.stop.prevent="$util.copyText(model.Title)">{{ model.Title }}</span>
                   <v-icon v-if="model.TitleSrc === 'name'" icon="mdi-file" class="src"></v-icon>
                   <v-icon v-else-if="model.TitleSrc === 'manual'" icon="mdi-check" class="src"></v-icon>
                 </div>
               </td>
             </tr>
             <tr>
-              <td :title="sourceName(model.TakenSrc)">
-                {{ $gettext(`Taken`) }}
+              <td>
+                <span>{{ $gettext(`Taken`) }}</span>
               </td>
-              <td :title="sourceName(model.TakenSrc)">
-                <div class="text-flex text-break">
+              <td>
+                <div v-tooltip="formatSource(model?.TakenSrc, $gettext('File'))" class="text-flex text-break">
                   <div>{{ model.getDateString() }}</div>
                   <v-icon v-if="model.TakenSrc === ''" icon="mdi-file-clock-outline" class="src"></v-icon>
                   <!-- v-icon v-else-if="model.TakenSrc === 'meta'" icon="mdi-camera" class="src"></v-icon -->
@@ -214,11 +214,11 @@
               </td>
             </tr>
             <tr>
-              <td :title="sourceName(model.PlaceSrc)">
+              <td>
                 {{ $gettext(`Place`) }}
               </td>
-              <td :title="sourceName(model.PlaceSrc)">
-                <div class="text-flex">
+              <td>
+                <div v-tooltip="formatSource(model.PlaceSrc, $gettext('Missing'))" class="text-flex">
                   <div>{{ model.locationInfo() }}</div>
                   <v-icon v-if="model.PlaceSrc === 'estimate'" icon="mdi-map-clock-outline" class="src"></v-icon>
                   <!-- v-icon v-else-if="model.PlaceSrc === 'meta'" icon="mdi-camera" class="src"></v-icon -->
@@ -320,7 +320,7 @@
 import Thumb from "model/thumb";
 import { DateTime, Info } from "luxon";
 import * as options from "options/options";
-import { T } from "common/gettext";
+import {$gettext, T} from "common/gettext";
 import Util from "common/util";
 
 export default {
@@ -367,12 +367,19 @@ export default {
     },
   },
   methods: {
-    sourceName(s) {
+    $gettext,
+    formatSource(s, defaultValue) {
       switch (s) {
+        case null:
+        case false:
+        case undefined:
         case "":
         case "auto":
+          return defaultValue ? defaultValue : this.$gettext("Auto");
+        case "default":
+          return this.$gettext("Default");
         case "manual":
-          return "";
+          return this.$gettext("Manual");
         case "meta":
           return this.$gettext("Metadata");
         case "xmp":
@@ -381,6 +388,10 @@ export default {
           return this.$gettext("Estimate");
         case "name":
           return this.$gettext("Name");
+        case "title":
+          return this.$gettext("Title");
+        case "caption":
+          return this.$gettext("Caption");
         case "image":
           return this.$gettext("Image");
         case "location":

@@ -265,7 +265,7 @@ export default {
           html: `<div class="pswp__error-msg">Loading video...</div>`, // Replaced with the <video> element.
           model: model, // Content model.
           format: Util.videoFormat(model?.Codec, model?.Mime), // Content format.
-          loop: isShort || model?.Type === media.MediaAnimated || model?.Type === media.MediaLive, // If possible, loop these types.
+          loop: isShort || model?.Type === media.Animated || model?.Type === media.Live, // If possible, loop these types.
           msrc: img.src, // Image URL.
         };
       }
@@ -454,8 +454,8 @@ export default {
         if (content.data?.type === "html" && content?.element) {
           const data = content.data;
           if (
-            data.model?.Type === media.MediaAnimated ||
-            data.model?.Type === media.MediaLive ||
+            data.model?.Type === media.Animated ||
+            data.model?.Type === media.Live ||
             this.slideshow.active ||
             firstPicture
           ) {

@@ -78,7 +78,7 @@ export class Photo extends RestModel {
       ID: "",
       UID: "",
       DocumentID: "",
-      Type: media.MediaImage,
+      Type: media.Image,
       TypeSrc: "",
       Stack: 0,
       Favorite: false,
@@ -398,7 +398,7 @@ export class Photo extends RestModel {
   }
 
   generateIsPlayable = memoizeOne((type, files) => {
-    if (type === media.MediaAnimated) {
+    if (type === media.Animated) {
       return true;
     } else if (!files) {
       return false;
@@ -412,7 +412,7 @@ export class Photo extends RestModel {
   }
 
   generateIsStack = memoizeOne((type, files) => {
-    if (type !== media.MediaImage) {
+    if (type !== media.Image) {
       return false;
     } else if (!files) {
       return false;
@@ -478,7 +478,7 @@ export class Photo extends RestModel {
       height = newHeight;
     }
 
-    const loop = this.Type === media.MediaAnimated || (file.Duration >= 0 && file.Duration <= 5000000000);
+    const loop = this.Type === media.Animated || (file.Duration >= 0 && file.Duration <= 5000000000);
     const poster = this.thumbnailUrl("fit_720");
     const error = false;
 
@@ -583,17 +583,17 @@ export class Photo extends RestModel {
 
     // Find file with matching media type.
     switch (this.Type) {
-      case media.MediaAnimated:
-        file = files.find((f) => f.MediaType === media.MediaImage && f.Root === "/");
+      case media.Animated:
+        file = files.find((f) => f.MediaType === media.Image && f.Root === "/");
         break;
-      case media.MediaLive:
+      case media.Live:
         file = files.find(
-          (f) => (f.MediaType === media.MediaVideo || f.MediaType === media.MediaLive) && f.Root === "/"
+          (f) => (f.MediaType === media.Video || f.MediaType === media.Live) && f.Root === "/"
         );
         break;
-      case media.MediaRaw:
-      case media.MediaVideo:
-      case media.MediaVector:
+      case media.Raw:
+      case media.Video:
+      case media.Vector:
         file = files.find((f) => f.MediaType === this.Type && f.Root === "/");
         break;
     }
@@ -727,21 +727,21 @@ export class Photo extends RestModel {
       }
 
       // Skip metadata sidecar files?
-      if (!s.download.mediaSidecar && (file.MediaType === media.MediaSidecar || file.Sidecar)) {
+      if (!s.download.mediaSidecar && (file.MediaType === media.Sidecar || file.Sidecar)) {
         // Don't download broken files and sidecars.
         if (config.debug) console.log(`download: skipped sidecar file ${file.Name}`);
         return;
       }
 
       // Skip RAW images?
-      if (!s.download.mediaRaw && (file.MediaType === media.MediaRaw || file.FileType === media.MediaRaw)) {
+      if (!s.download.mediaRaw && (file.MediaType === media.Raw || file.FileType === media.Raw)) {
         if (config.debug) console.log(`download: skipped raw file ${file.Name}`);
         return;
       }
 
       // If this is a video, always skip stacked images...
       // see https://github.com/photoprism/photoprism/issues/1436
-      if (this.Type === media.MediaVideo && !(file.MediaType === media.MediaVideo || file.Video)) {
+      if (this.Type === media.Video && !(file.MediaType === media.Video || file.Video)) {
         if (config.debug) console.log(`download: skipped video sidecar ${file.Name}`);
         return;
       }
@@ -875,7 +875,7 @@ export class Photo extends RestModel {
       return this;
     }
 
-    return this.Files.find((f) => f.MediaType === media.MediaVector || f.FileType === media.FormatSVG);
+    return this.Files.find((f) => f.MediaType === media.Vector || f.FileType === media.FormatSVG);
   }
 
   getVectorInfo = () => {
@@ -890,7 +890,7 @@ export class Photo extends RestModel {
 
     const info = [];
 
-    if (file.MediaType === media.MediaVector) {
+    if (file.MediaType === media.Vector) {
       info.push(Util.fileType(file.FileType));
     } else {
       info.push($gettext("Vector"));

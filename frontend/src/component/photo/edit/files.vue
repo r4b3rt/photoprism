@@ -183,7 +183,9 @@
                             <td>
                               {{ $gettext(`Type`) }}
                             </td>
-                            <td class="text-break" :title="file?.Mime">{{ file.typeInfo() }}</td>
+                            <td class="text-break">
+                              <span v-tooltip="file?.Mime">{{ file.typeInfo() }}</span>
+                            </td>
                           </tr>
                           <tr v-if="file.isAnimated()">
                             <td>
@@ -314,9 +316,9 @@
                             </td>
                             <td>
                               <v-progress-linear
+                                v-tooltip="`${file.Chroma}%`"
                                 :model-value="file.Chroma"
                                 style="max-width: 300px"
-                                :title="`${file.Chroma}%`"
                               ></v-progress-linear>
                             </td>
                           </tr>

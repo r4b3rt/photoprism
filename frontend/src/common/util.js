@@ -31,7 +31,6 @@ import sanitizeHtml from "sanitize-html";
 import { DateTime } from "luxon";
 import { $gettext } from "common/gettext";
 import Notify from "common/notify";
-import { FormatOGG, FormatVP8, FormatWebP } from "common/media";
 
 const Nanosecond = 1;
 const Microsecond = 1000 * Nanosecond;
@@ -298,10 +297,10 @@ export default class Util {
         return "Google WebP";
       case media.FormatWebM:
         return "Google WebM";
-      case media.CodecVP08:
+      case media.CodecVP8:
       case media.FormatVP8:
         return "Google VP8";
-      case media.CodecVP09:
+      case media.CodecVP9:
       case media.FormatVP9:
         return "Google VP9";
       case "flv":
@@ -360,16 +359,27 @@ export default class Util {
       case media.CodecAV1:
         return "AV1";
       case media.CodecAVC:
+      case media.FormatAVC:
         return "AVC";
       case "hvc":
       case media.CodecHEV1:
       case media.CodecHEVC:
+      case media.FormatHEVC:
         return "HEVC";
+      case media.CodecVVC:
+      case media.FormatVVC:
+        return "VVC";
+      case media.CodecEVC:
+      case media.FormatEVC:
+        return "EVC";
       case media.FormatWebM:
         return "WebM";
-      case media.CodecVP08:
+      case media.CodecVP8:
       case media.FormatVP8:
         return "VP8";
+      case media.CodecVP9:
+      case media.FormatVP9:
+        return "VP9";
       case "extended webp":
       case media.FormatWebP:
         return "WebP";
@@ -569,14 +579,14 @@ export default class Util {
       return media.CodecOGV;
     } else if (
       can.useVp8 &&
-      (codec === media.CodecVP08 || codec === media.FormatVP8 || mime?.startsWith('video/mp4; codecs="vp08'))
+      (codec === media.CodecVP8 || codec === media.FormatVP8 || mime?.startsWith('video/mp4; codecs="vp08'))
     ) {
-      return media.CodecVP08;
+      return media.CodecVP8;
     } else if (
       can.useVp9 &&
-      (codec === media.CodecVP09 || codec === media.FormatVP9 || mime?.startsWith('video/mp4; codecs="vp09'))
+      (codec === media.CodecVP9 || codec === media.FormatVP9 || mime?.startsWith('video/mp4; codecs="vp09'))
     ) {
-      return media.CodecVP09;
+      return media.CodecVP9;
     } else if (
       can.useAv1 &&
       (codec === media.CodecAV1 ||
@@ -614,10 +624,10 @@ export default class Util {
         return media.ContentTypeAVC;
       case media.CodecOGV:
         return media.ContentTypeOGV;
-      case media.CodecVP08:
+      case media.CodecVP8:
       case media.FormatVP8:
         return media.ContentTypeVP8;
-      case media.CodecVP09:
+      case media.CodecVP9:
       case media.FormatVP9:
         return media.ContentTypeVP9;
       case media.CodecAV1C:

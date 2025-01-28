@@ -354,27 +354,27 @@ export const MapsStyle = (experimental) => {
 export const PhotoTypes = () => [
   {
     text: $gettext("Image"),
-    value: media.MediaImage,
+    value: media.Image,
   },
   {
     text: $gettext("Raw"),
-    value: media.MediaRaw,
+    value: media.Raw,
   },
   {
     text: $gettext("Animated"),
-    value: media.MediaAnimated,
+    value: media.Animated,
   },
   {
     text: $gettext("Live"),
-    value: media.MediaLive,
+    value: media.Live,
   },
   {
     text: $gettext("Video"),
-    value: media.MediaVideo,
+    value: media.Video,
   },
   {
     text: $gettext("Vector"),
-    value: media.MediaVector,
+    value: media.Vector,
   },
 ];
 

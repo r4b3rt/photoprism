@@ -1,14 +1,27 @@
+// Media types.
+export const Animated = "animated";
+export const Audio = "audio";
+export const Document = "document";
+export const Image = "image";
+export const Raw = "raw";
+export const Sidecar = "sidecar";
+export const Live = "live";
+export const Vector = "vector";
+export const Video = "video";
+
+// File codecs.
 export const CodecAVC = "avc1";
 export const CodecHEV1 = "hev1";
 export const CodecHEVC = "hvc1";
 export const CodecVVC = "vvc1";
 export const CodecEVC = "evc1";
 export const CodecOGV = "ogv";
-export const CodecVP08 = "vp08";
-export const CodecVP09 = "vp09";
+export const CodecVP8 = "vp08";
+export const CodecVP9 = "vp09";
 export const CodecAV1 = "av01";
 export const CodecAV1C = "av1c";
 
+// File formats.
 export const FormatMP4 = "mp4";
 export const FormatAVC = "avc";
 export const FormatHEVC = "hevc";
@@ -25,14 +38,7 @@ export const FormatPNG = "png";
 export const FormatSVG = "svg";
 export const FormatGIF = "gif";
 
-export const MediaImage = "image";
-export const MediaRaw = "raw";
-export const MediaAnimated = "animated";
-export const MediaLive = "live";
-export const MediaVideo = "video";
-export const MediaVector = "vector";
-export const MediaSidecar = "sidecar";
-
+// Content types (MIME).
 export const ContentTypeAVC = 'video/mp4; codecs="avc1"';
 export const ContentTypeHEVC = 'video/mp4; codecs="hev1.2.4.L120.B0"';
 export const ContentTypeVVC = 'video/mp4; codecs="vvc1"';
