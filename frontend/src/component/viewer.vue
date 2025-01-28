@@ -50,6 +50,7 @@ export default {
       lightbox: null, // Current PhotoSwipe lightbox instance.
       captionPlugin: null, // Current PhotoSwipe caption plugin instance.
       hasTouch: false,
+      shortVideoDuration: 5, // 5 Seconds.
       idleTime: 6000, // Automatically hide viewer controls after 6 seconds until user settings are implemented.
       idleTimer: false,
       controlsShown: -1, // -1 or a positive Date.now() timestamp indicates that the PhotoSwipe controls are shown.
@@ -114,7 +115,7 @@ export default {
         allowPanToNext: false,
         initialZoomLevel: "fit",
         secondaryZoomLevel: "fill",
-        maxZoomLevel: 5,
+        maxZoomLevel: 6,
         bgOpacity: 1,
         preload: [1, 2],
         showHideAnimationType: "none",
@@ -253,8 +254,10 @@ export default {
                 poster (the current thumbnail is taken later for longer videos, since the first frame is often black).
          */
 
-        // Check if the video duration is known and 5 seconds or less.
-        const isShort = model?.Duration ? model.Duration > 0 && model.Duration <= 5000000000 : false;
+        // Check the duration so that short videos can be looped, unless a slideshow is playing.
+        const isShort = model?.Duration
+          ? model.Duration > 0 && model.Duration <= this.shortVideoDuration * 1000000000
+          : false;
 
         // Set the slide data needed to render and play the video.
         return {
@@ -312,10 +315,32 @@ export default {
       video.playsInline = true;
       video.controls = true;
 
-      // Disable download control is downloads are not allowed.
-      if (!this.canDownload && video.controlsList) {
-        video.controlsList?.add("nodownload");
+      // Disable the remote playback button on mobile devices to save space.
+      video.disableRemotePlayback = this.$isMobile;
+
+      // Specify which controls should be visible (not supported on all browsers):
+      // - https://wicg.github.io/controls-list/explainer.html
+      // - https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/controlsList
+      if (video?.controlsList instanceof DOMTokenList) {
+        // Disable the download button if downloads are not allowed.
+        if (!this.canDownload) {
+          video.controlsList.add("nodownload");
+        }
+
+        // Disable the remote playback and playback rate buttons on mobile devices to save space.
+        if (this.$isMobile) {
+          video.controlsList.add("noremoteplayback");
+          video.controlsList.add("noplaybackrate");
+        }
       }
+
+      // Add an event listener to loop short videos of 5 seconds or less,
+      // even if the server does not know the duration.
+      video.addEventListener("loadedmetadata", () => {
+        if (video.duration && video.duration <= this.shortVideoDuration && !this.slideshow.active) {
+          video.loop = true;
+        }
+      });
 
       // Create and append video source elements, depending on file format support.
       if (format !== FormatAVC && model?.Mime && model.Mime !== ContentTypeAVC && video.canPlayType(model.Mime)) {
@@ -781,10 +806,7 @@ export default {
           .then(() => {
             this.isFullscreen = false;
             this.$nextTick(() => {
-              const pswp = this.pswp();
-              if (pswp) {
-                pswp.updateSize(true);
-              }
+              this.updateSize(true);
             });
           })
           .catch((err) => console.error(err));
@@ -792,10 +814,7 @@ export default {
         document.documentElement.requestFullscreen({ navigationUI: "hide" }).then(() => {
           this.isFullscreen = true;
           this.$nextTick(() => {
-            const pswp = this.pswp();
-            if (pswp) {
-              pswp.updateSize(true);
-            }
+            this.updateSize(true);
           });
         });
       }
@@ -807,6 +826,31 @@ export default {
     // Toggles the selection of the current picture in the global photo clipboard.
     onSelect() {
       this.$clipboard.toggle(this.model);
+    },
+    // Returns the active HTMLMediaElement element in the lightbox, if any.
+    getContent() {
+      const pswp = this.pswp();
+
+      if (!pswp) {
+        return null;
+      }
+
+      const content = pswp?.currSlide?.content;
+
+      if (!content) {
+        return null;
+      }
+
+      const data = typeof content?.data === "object" ? content?.data : {};
+
+      let video;
+
+      // Get <video> element, if any.
+      if (content?.element && content?.element instanceof HTMLMediaElement) {
+        video = content?.element;
+      }
+
+      return { content, data, video };
     },
     // Returns the <video> elements in the lightbox container as an HTMLCollection.
     getVideos() {
@@ -868,25 +912,41 @@ export default {
     },
     // Toggles video playback on the current video element, if any.
     toggleVideo() {
-      // Get active content.
-      const content = this.pswp().currSlide?.content;
+      // Get active video element, if any.
+      const { data, video } = this.getContent();
 
-      if (!content) {
-        return;
-      }
-
-      // Get video element, if any.
-      const el = content?.element;
-      if (!el || (!el) instanceof HTMLMediaElement) {
+      if (!video) {
         return;
       }
 
       // Play video if it is currently paused and pause it otherwise.
-      if (el.paused) {
-        this.playVideo(el, content?.data?.loop);
+      if (video.paused) {
+        this.playVideo(video, data.loop);
       } else {
-        this.pauseVideo(el);
+        this.pauseVideo(video);
       }
+    },
+    // Shows the controls on the current video element, if any.
+    showVideoControls() {
+      // Get active video element, if any.
+      const { video } = this.getContent();
+
+      if (!video) {
+        return;
+      }
+
+      video.controls = true;
+    },
+    // Hides the controls on the current video element, if any.
+    hideVideoControls() {
+      // Get active video element, if any.
+      const { video } = this.getContent();
+
+      if (!video) {
+        return;
+      }
+
+      video.controls = false;
     },
     // Stops playback on the specified video element, if any.
     pauseVideo(el) {
@@ -1003,14 +1063,17 @@ export default {
 
       this.$event.publish("dialog.edit", { selection, album, index }); // Open Edit Dialog
     },
+    updateSize(force) {
+      const pswp = this.pswp();
+      if (typeof pswp?.updateSize === "function") {
+        pswp.updateSize(force);
+      }
+    },
     toggleSidebar(ev) {
       this.sidebarVisible = !this.sidebarVisible;
 
       this.$nextTick(() => {
-        const pswp = this.pswp();
-        if (pswp) {
-          pswp.updateSize(true);
-        }
+        this.updateSize(true);
       });
 
       if (ev && typeof ev.stopPropagation === "function") {
@@ -1028,11 +1091,9 @@ export default {
       if (this.pswp() && this.pswp().element) {
         const el = this.pswp().element;
         if (el.classList.contains("pswp--ui-visible")) {
-          this.controlsShown = 0;
-          el.classList.remove("pswp--ui-visible");
+          this.hideControls();
         } else {
-          this.controlsShown = Date.now();
-          el.classList.add("pswp--ui-visible");
+          this.showControls();
         }
       }
 
@@ -1044,12 +1105,14 @@ export default {
       if (this.pswp() && this.pswp().element) {
         this.controlsShown = Date.now();
         this.pswp().element.classList.add("pswp--ui-visible");
+        this.showVideoControls();
       }
     },
     hideControls() {
       if (this.pswp() && this.pswp().element) {
         this.controlsShown = 0;
         this.pswp().element.classList.remove("pswp--ui-visible");
+        this.hideVideoControls();
       }
     },
     controlsVisible() {
