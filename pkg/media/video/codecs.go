@@ -6,15 +6,15 @@ type Codec = string
 // https://cconcolato.github.io/media-mime-support/
 const (
 	CodecUnknown Codec = ""
-	CodecAVC     Codec = "avc1"
-	CodecHEVC    Codec = "hvc1"
-	CodecVVC     Codec = "vvc"
-	CodecEVC     Codec = "evc"
-	CodecAV1     Codec = "av01"
-	CodecVP8     Codec = "vp8"
-	CodecVP9     Codec = "vp9"
-	CodecOGV     Codec = "ogv"
-	CodecWebM    Codec = "webm"
+	CodecAVC     Codec = "avc1" // Advanced Video Coding (AVC), also known as H.264
+	CodecHEVC    Codec = "hvc1" // High Efficiency Video Coding (HEVC), also known as H.265
+	CodecVVC     Codec = "vvc1" // Versatile Video Coding (VVC), also known as H.266
+	CodecEVC     Codec = "evc1" // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
+	CodecAV1     Codec = "av01" // AOMedia Video 1 (AV1)
+	CodecVP8     Codec = "vp08" // Google VP8
+	CodecVP9     Codec = "vp09" // Google VP9
+	CodecOGV     Codec = "ogv"  // Ogg Vorbis Video
+	CodecWebM    Codec = "webm" // Google WebM
 )
 
 // Codecs maps identifiers to codecs.
@@ -52,6 +52,7 @@ var Codecs = StandardCodecs{
 	"v_av1":           CodecAV1,
 	"v_av01":          CodecAV1,
 	"vp8":             CodecVP8,
+	"vp08":            CodecVP8,
 	"vp80":            CodecVP8,
 	"v_vp8":           CodecVP8,
 	"vp9":             CodecVP9,

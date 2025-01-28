@@ -27,8 +27,8 @@ import PhotoSwipeDynamicCaption from "photoswipe-dynamic-caption-plugin";
 import Util from "common/util";
 import Api from "common/api";
 import Thumb from "model/thumb";
-import { FormatAVC, MediaAnimated, MediaLive, Photo } from "model/photo";
-import { ContentTypeAVC } from "common/caniuse";
+import { Photo } from "model/photo";
+import * as media from "common/media";
 
 /*
   TODO: All previously available features and controls must be preserved in the new hybrid photo/video viewer:
@@ -265,7 +265,7 @@ export default {
           html: `<div class="pswp__error-msg">Loading video...</div>`, // Replaced with the <video> element.
           model: model, // Content model.
           format: Util.videoFormat(model?.Codec, model?.Mime), // Content format.
-          loop: isShort || model?.Type === MediaAnimated || model?.Type === MediaLive, // If possible, loop these types.
+          loop: isShort || model?.Type === media.MediaAnimated || model?.Type === media.MediaLive, // If possible, loop these types.
           msrc: img.src, // Image URL.
         };
       }
@@ -343,7 +343,12 @@ export default {
       });
 
       // Create and append video source elements, depending on file format support.
-      if (format !== FormatAVC && model?.Mime && model.Mime !== ContentTypeAVC && video.canPlayType(model.Mime)) {
+      if (
+        format !== media.FormatAVC &&
+        model?.Mime &&
+        model.Mime !== media.ContentTypeAVC &&
+        video.canPlayType(model.Mime)
+      ) {
         const nativeSource = document.createElement("source");
         nativeSource.type = model.Mime;
         nativeSource.src = Util.videoFormatUrl(model.Hash, format);
@@ -351,8 +356,8 @@ export default {
       }
 
       const avcSource = document.createElement("source");
-      avcSource.type = ContentTypeAVC;
-      avcSource.src = Util.videoFormatUrl(model.Hash, FormatAVC);
+      avcSource.type = media.ContentTypeAVC;
+      avcSource.src = Util.videoFormatUrl(model.Hash, media.FormatAVC);
       video.appendChild(avcSource);
 
       // Return HTMLMediaElement.
@@ -449,8 +454,8 @@ export default {
         if (content.data?.type === "html" && content?.element) {
           const data = content.data;
           if (
-            data.model?.Type === MediaAnimated ||
-            data.model?.Type === MediaLive ||
+            data.model?.Type === media.MediaAnimated ||
+            data.model?.Type === media.MediaLive ||
             this.slideshow.active ||
             firstPicture
           ) {

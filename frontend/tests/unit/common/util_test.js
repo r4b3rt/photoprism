@@ -1,6 +1,6 @@
 import "../fixtures";
 import Util from "common/util";
-import {canUseHevc, canUseWebM} from "common/caniuse";
+import * as can from "common/can";
 
 let chai = require("chai/chai");
 let assert = chai.assert;
@@ -51,14 +51,14 @@ describe("common/util", () => {
     assert.equal(avc, "avc");
 
     const hvc = Util.videoFormat("hvc1", "video/mp4");
-    if (canUseHevc) {
+    if (can.useHevc) {
       assert.equal(hvc, "hvc");
     } else {
       assert.equal(hvc, "avc");
     }
 
     const webm = Util.videoFormat("", "video/webm");
-    if (canUseWebM) {
+    if (can.useWebM) {
       assert.equal(webm, "webm");
     } else {
       assert.equal(webm, "avc");

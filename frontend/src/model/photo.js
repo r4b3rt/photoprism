@@ -24,7 +24,6 @@ Additional information can be found in our Developer Guide:
 */
 
 import memoizeOne from "memoize-one";
-
 import RestModel from "model/rest";
 import File from "model/file";
 import Marker from "model/marker";
@@ -37,33 +36,8 @@ import { $gettext } from "common/gettext";
 import { PhotoClipboard } from "common/clipboard";
 import download from "common/download";
 import * as src from "common/src";
-import { ContentTypeAVC } from "common/caniuse";
+import * as media from "common/media";
 
-export const CodecOGV = "ogv";
-export const CodecOGG = "ogg";
-export const CodecVP8 = "vp8";
-export const CodecVP9 = "vp9";
-export const CodecAv01 = "av01";
-export const CodecAv1C = "av1c";
-export const CodecAvc1 = "avc1";
-export const CodecHvc1 = "hvc1";
-export const CodecHev1 = "hev1";
-export const FormatMP4 = "mp4";
-export const FormatAV1 = "av01";
-export const FormatAVC = "avc";
-export const FormatHEVC = "hevc";
-export const FormatWebM = "webm";
-export const FormatJPEG = "jpg";
-export const FormatPNG = "png";
-export const FormatSVG = "svg";
-export const FormatGIF = "gif";
-export const MediaImage = "image";
-export const MediaRaw = "raw";
-export const MediaAnimated = "animated";
-export const MediaLive = "live";
-export const MediaVideo = "video";
-export const MediaVector = "vector";
-export const MediaSidecar = "sidecar";
 export const YearUnknown = -1;
 export const MonthUnknown = -1;
 export const DayUnknown = -1;
@@ -104,7 +78,7 @@ export class Photo extends RestModel {
       ID: "",
       UID: "",
       DocumentID: "",
-      Type: MediaImage,
+      Type: media.MediaImage,
       TypeSrc: "",
       Stack: 0,
       Favorite: false,
@@ -424,7 +398,7 @@ export class Photo extends RestModel {
   }
 
   generateIsPlayable = memoizeOne((type, files) => {
-    if (type === MediaAnimated) {
+    if (type === media.MediaAnimated) {
       return true;
     } else if (!files) {
       return false;
@@ -438,7 +412,7 @@ export class Photo extends RestModel {
   }
 
   generateIsStack = memoizeOne((type, files) => {
-    if (type !== MediaImage) {
+    if (type !== media.MediaImage) {
       return false;
     } else if (!files) {
       return false;
@@ -449,7 +423,7 @@ export class Photo extends RestModel {
     let jpegs = 0;
 
     this.Files.forEach((f) => {
-      if (f && f.FileType === FormatJPEG) {
+      if (f && f.FileType === media.FormatJPEG) {
         jpegs++;
       }
     });
@@ -504,7 +478,7 @@ export class Photo extends RestModel {
       height = newHeight;
     }
 
-    const loop = this.Type === MediaAnimated || (file.Duration >= 0 && file.Duration <= 5000000000);
+    const loop = this.Type === media.MediaAnimated || (file.Duration >= 0 && file.Duration <= 5000000000);
     const poster = this.thumbnailUrl("fit_720");
     const error = false;
 
@@ -520,10 +494,10 @@ export class Photo extends RestModel {
       return false;
     }
 
-    let file = files.find((f) => f.Codec === CodecAvc1);
+    let file = files.find((f) => f.Codec === media.CodecAVC);
 
     if (!file) {
-      file = files.find((f) => f.FileType === FormatMP4);
+      file = files.find((f) => f.FileType === media.FormatMP4);
     }
 
     if (!file) {
@@ -542,7 +516,7 @@ export class Photo extends RestModel {
       return false;
     }
 
-    return this.Files.find((f) => f.FileType === FormatGIF || !!f.Frames || !!f.Duration);
+    return this.Files.find((f) => f.FileType === media.FormatGIF || !!f.Frames || !!f.Duration);
   }
 
   videoContentType() {
@@ -551,7 +525,7 @@ export class Photo extends RestModel {
     if (file) {
       return Util.videoContentType(file?.Codec, file?.Mime);
     } else {
-      return ContentTypeAVC;
+      return media.ContentTypeAVC;
     }
   }
 
@@ -579,7 +553,7 @@ export class Photo extends RestModel {
     }
 
     // Find and return the first JPEG or PNG image otherwise.
-    file = files.find((f) => f.FileType === FormatJPEG || f.FileType === FormatPNG);
+    file = files.find((f) => f.FileType === media.FormatJPEG || f.FileType === media.FormatPNG);
 
     // Found?
     if (file) {
@@ -609,15 +583,17 @@ export class Photo extends RestModel {
 
     // Find file with matching media type.
     switch (this.Type) {
-      case MediaAnimated:
-        file = files.find((f) => f.MediaType === MediaImage && f.Root === "/");
+      case media.MediaAnimated:
+        file = files.find((f) => f.MediaType === media.MediaImage && f.Root === "/");
         break;
-      case MediaLive:
-        file = files.find((f) => (f.MediaType === MediaVideo || f.MediaType === MediaLive) && f.Root === "/");
+      case media.MediaLive:
+        file = files.find(
+          (f) => (f.MediaType === media.MediaVideo || f.MediaType === media.MediaLive) && f.Root === "/"
+        );
         break;
-      case MediaRaw:
-      case MediaVideo:
-      case MediaVector:
+      case media.MediaRaw:
+      case media.MediaVideo:
+      case media.MediaVector:
         file = files.find((f) => f.MediaType === this.Type && f.Root === "/");
         break;
     }
@@ -628,7 +604,7 @@ export class Photo extends RestModel {
     }
 
     // Find first original media file with a format other than JPEG.
-    file = files.find((f) => !f.Sidecar && f.FileType !== FormatJPEG && f.Root === "/");
+    file = files.find((f) => !f.Sidecar && f.FileType !== media.FormatJPEG && f.Root === "/");
 
     // Found?
     if (file) {
@@ -644,7 +620,7 @@ export class Photo extends RestModel {
       return [this];
     }
 
-    return this.Files.filter((f) => f.FileType === FormatJPEG || f.FileType === FormatPNG);
+    return this.Files.filter((f) => f.FileType === media.FormatJPEG || f.FileType === media.FormatPNG);
   }
 
   mainFileHash() {
@@ -751,21 +727,21 @@ export class Photo extends RestModel {
       }
 
       // Skip metadata sidecar files?
-      if (!s.download.mediaSidecar && (file.MediaType === MediaSidecar || file.Sidecar)) {
+      if (!s.download.mediaSidecar && (file.MediaType === media.MediaSidecar || file.Sidecar)) {
         // Don't download broken files and sidecars.
         if (config.debug) console.log(`download: skipped sidecar file ${file.Name}`);
         return;
       }
 
       // Skip RAW images?
-      if (!s.download.mediaRaw && (file.MediaType === MediaRaw || file.FileType === MediaRaw)) {
+      if (!s.download.mediaRaw && (file.MediaType === media.MediaRaw || file.FileType === media.MediaRaw)) {
         if (config.debug) console.log(`download: skipped raw file ${file.Name}`);
         return;
       }
 
       // If this is a video, always skip stacked images...
       // see https://github.com/photoprism/photoprism/issues/1436
-      if (this.Type === MediaVideo && !(file.MediaType === MediaVideo || file.Video)) {
+      if (this.Type === media.MediaVideo && !(file.MediaType === media.MediaVideo || file.Video)) {
         if (config.debug) console.log(`download: skipped video sidecar ${file.Name}`);
         return;
       }
@@ -899,7 +875,7 @@ export class Photo extends RestModel {
       return this;
     }
 
-    return this.Files.find((f) => f.MediaType === MediaVector || f.FileType === FormatSVG);
+    return this.Files.find((f) => f.MediaType === media.MediaVector || f.FileType === media.FormatSVG);
   }
 
   getVectorInfo = () => {
@@ -914,7 +890,7 @@ export class Photo extends RestModel {
 
     const info = [];
 
-    if (file.MediaType === MediaVector) {
+    if (file.MediaType === media.MediaVector) {
       info.push(Util.fileType(file.FileType));
     } else {
       info.push($gettext("Vector"));

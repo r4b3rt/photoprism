@@ -17,11 +17,25 @@ func TestGetVideo(t *testing.T) {
 		assert.Equal(t, video.ContentTypeAVC, fmt.Sprintf("%s; codecs=\"%s\"", "video/mp4", clean.Codec("avc1")))
 	})
 
+	t.Run("NoHash", func(t *testing.T) {
+		app, router, conf := NewApiTest()
+		GetVideo(router)
+		r := PerformRequest(app, "GET", "/api/v1/videos//"+conf.PreviewToken()+"/mp4")
+		assert.Equal(t, http.StatusOK, r.Code)
+	})
+
 	t.Run("InvalidHash", func(t *testing.T) {
 		app, router, conf := NewApiTest()
 		GetVideo(router)
-		r := PerformRequest(app, "GET", "/api/v1/videos/xxx/"+conf.PreviewToken()+"/mp4")
+		r := PerformRequest(app, "GET", "/api/v1/videos/acad9168fa6/"+conf.PreviewToken()+"/mp4")
 		assert.Equal(t, http.StatusOK, r.Code)
+	})
+
+	t.Run("NoType", func(t *testing.T) {
+		app, router, conf := NewApiTest()
+		GetVideo(router)
+		r := PerformRequest(app, "GET", "/api/v1/videos/acad9168fa6acc5c5c2965ddf6ec465ca42fd831/"+conf.PreviewToken()+"/")
+		assert.Equal(t, http.StatusMovedPermanently, r.Code)
 	})
 
 	t.Run("InvalidType", func(t *testing.T) {

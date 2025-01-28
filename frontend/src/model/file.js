@@ -30,7 +30,7 @@ import Util from "common/util";
 import { config } from "app/session";
 import { $gettext } from "common/gettext";
 import download from "common/download";
-import { MediaImage } from "./photo";
+import * as media from "common/media";
 
 export class File extends RestModel {
   getDefaults() {
@@ -199,7 +199,11 @@ export class File extends RestModel {
   }
 
   isAnimated() {
-    return this.MediaType && this.MediaType === MediaImage && ((this.Frames && this.Frames > 1) || (this.Duration && this.Duration > 1));
+    return (
+      this.MediaType &&
+      this.MediaType === media.MediaImage &&
+      ((this.Frames && this.Frames > 1) || (this.Duration && this.Duration > 1))
+    );
   }
 
   typeInfo() {

@@ -1,0 +1,43 @@
+export const CodecAVC = "avc1";
+export const CodecHEV1 = "hev1";
+export const CodecHEVC = "hvc1";
+export const CodecVVC = "vvc1";
+export const CodecEVC = "evc1";
+export const CodecOGV = "ogv";
+export const CodecVP08 = "vp08";
+export const CodecVP09 = "vp09";
+export const CodecAV1 = "av01";
+export const CodecAV1C = "av1c";
+
+export const FormatMP4 = "mp4";
+export const FormatAVC = "avc";
+export const FormatHEVC = "hevc";
+export const FormatVVC = "vvc";
+export const FormatEVC = "evc";
+export const FormatOGG = "ogg";
+export const FormatWebM = "webm";
+export const FormatVP8 = "vp8";
+export const FormatVP9 = "vp9";
+export const FormatAV1 = "av1";
+export const FormatWebP = "webp";
+export const FormatJPEG = "jpg";
+export const FormatPNG = "png";
+export const FormatSVG = "svg";
+export const FormatGIF = "gif";
+
+export const MediaImage = "image";
+export const MediaRaw = "raw";
+export const MediaAnimated = "animated";
+export const MediaLive = "live";
+export const MediaVideo = "video";
+export const MediaVector = "vector";
+export const MediaSidecar = "sidecar";
+
+export const ContentTypeAVC = 'video/mp4; codecs="avc1"';
+export const ContentTypeHEVC = 'video/mp4; codecs="hev1.2.4.L120.B0"';
+export const ContentTypeVVC = 'video/mp4; codecs="vvc1"';
+export const ContentTypeOGV = "video/ogg";
+export const ContentTypeWebM = "video/webm";
+export const ContentTypeVP8 = 'video/webm; codecs="vp08.02.41.10"';
+export const ContentTypeVP9 = 'video/webm; codecs="vp09.00.50.08"';
+export const ContentTypeAV1 = 'video/webm; codecs="av01.2.10M.10"';

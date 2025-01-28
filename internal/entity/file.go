@@ -902,17 +902,21 @@ func (m *File) ContentType() (contentType string) {
 
 			switch codec {
 			case "mov", "mp4", "avc", video.CodecAVC:
-				contentType = header.ContentTypeAVC
-			case video.CodecHEVC:
-				contentType = header.ContentTypeHEVC
-			case video.CodecVP8, "vp08":
+				contentType = header.ContentTypeAVC // Advanced Video Coding (AVC), also known as H.264
+			case "hev", "hev1", "hevc", video.CodecHEVC:
+				contentType = header.ContentTypeHEVC // High Efficiency Video Coding (HEVC), also known as H.265
+			case "vvc", video.CodecVVC:
+				contentType = header.ContentTypeVVC // Versatile Video Coding (VVC), also known as H.266
+			case "evc", video.CodecEVC:
+				contentType = header.ContentTypeEVC // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
+			case "vp8", video.CodecVP8:
 				contentType = header.ContentTypeVP8
-			case video.CodecVP9, "vp09":
+			case "vp9", video.CodecVP9:
 				contentType = header.ContentTypeVP9
-			case "av1", "av01":
+			case "av1", video.CodecAV1:
 				contentType = header.ContentTypeAV1
-			case "ogg":
-				contentType = header.ContentTypeOGG
+			case "ogg", video.CodecOGV:
+				contentType = header.ContentTypeOGV
 			case "webm":
 				contentType = header.ContentTypeWebM
 			}

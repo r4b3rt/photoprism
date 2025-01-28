@@ -1,6 +1,6 @@
 import "../fixtures";
-import { Photo, BatchSize, FormatJPEG } from "model/photo";
-import { ContentTypeAVC } from "common/caniuse";
+import * as media from "common/media";
+import { Photo, BatchSize } from "model/photo";
 
 let chai = require("chai/chai");
 let assert = chai.assert;
@@ -762,7 +762,7 @@ describe("model/photo", () => {
       ],
     };
     const photo = new Photo(values);
-    assert.equal(photo.videoContentType(), ContentTypeAVC);
+    assert.equal(photo.videoContentType(), media.ContentTypeAVC);
     assert.equal(photo.videoUrl(), "/api/v1/videos/703cf8f274fbb265d49c6262825780e1/public/avc");
     const values2 = { ID: 9, UID: "ABC163", Hash: "2305e512e3b183ec982d60a8b608a8ca501973ba" };
     const photo2 = new Photo(values2);
@@ -885,7 +885,7 @@ describe("model/photo", () => {
           UID: "123fgb",
           Name: "1980/01/superCuteKitten.jpg",
           Primary: false,
-          FileType: FormatJPEG,
+          FileType: media.FormatJPEG,
           Width: 500,
           Height: 600,
           Hash: "1xxbgdt55",
