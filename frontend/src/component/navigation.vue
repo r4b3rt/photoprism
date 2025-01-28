@@ -57,6 +57,7 @@
         :mobile-breakpoint="960"
         class="nav-sidebar navigation"
         location="start"
+        touchless
       >
         <div class="nav-container">
           <v-toolbar flat :density="$vuetify.display.smAndDown ? 'compact' : 'default'">

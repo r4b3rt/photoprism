@@ -62,20 +62,26 @@ import "css/app.css";
 // see https://www.npmjs.com/package/passive-events-support
 passiveSupport({ events: ["touchstart", "touchmove", "wheel", "mousewheel"] });
 
+// Check if running on a mobile device.
+const $isMobile =
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|Mobile|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+  (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
+
 config.progress(50);
 
 config.update().finally(() => {
   // Initialize libs and framework.
   config.progress(66);
-  const isPublic = config.isPublic();
-  const isMobile =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|Mobile|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-    (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
+
+  // Check if running in public mode.
+  const $isPublic = config.isPublic();
 
   let app = createApp(PhotoPrism);
-  // Initialize language and detect alignment.
+
+  // Initialize language and detect its alignment.
   app.config.globalProperties.$language = config.getLanguageLocale();
   Luxon.defaultLocale = config.getLanguageCode();
+
   // Detect right-to-left languages such as Arabic and Hebrew
   const rtl = config.isRtl();
 
@@ -92,7 +98,7 @@ config.update().finally(() => {
   app.config.globalProperties.$socket = Socket;
   app.config.globalProperties.$config = config;
   app.config.globalProperties.$clipboard = PhotoClipboard;
-  app.config.globalProperties.$isMobile = isMobile;
+  app.config.globalProperties.$isMobile = $isMobile;
   app.config.globalProperties.$rtl = rtl;
   app.config.globalProperties.$util = Util;
   app.config.globalProperties.$sponsorFeatures = () => {
@@ -200,34 +206,33 @@ config.update().finally(() => {
       }
     },
   });
-  app.use(router);
 
-  router.beforeEach((to, from, next) => {
-    if (document.querySelector(".v-dialog--active.v-dialog--fullscreen")) {
-      // Disable back button in full-screen viewers and editors.
-      next(false);
+  router.beforeEach((to) => {
+    if (document.querySelector(".pswp--open")) {
+      // Don't navigate back when a dialog or the photo/video viewer is open.
+      return false;
     } else if (to.matched.some((record) => record.meta.settings) && config.values.disable.settings) {
-      next({ name: "home" });
+      return { name: "home" };
     } else if (to.matched.some((record) => record.meta.admin)) {
-      if (isPublic || session.isAdmin()) {
-        next();
+      if ($isPublic || session.isAdmin()) {
+        return true;
       } else {
-        next({
+        return {
           name: "login",
           params: { nextUrl: to.fullPath },
-        });
+        };
       }
     } else if (to.matched.some((record) => record.meta.requiresAuth)) {
-      if (isPublic || session.isUser()) {
-        next();
+      if ($isPublic || session.isUser()) {
+        return true;
       } else {
-        next({
+        return {
           name: "login",
           params: { nextUrl: to.fullPath },
-        });
+        };
       }
     } else {
-      next();
+      return true;
     }
   });
 
@@ -255,7 +260,10 @@ config.update().finally(() => {
     }
   });
 
-  if (isMobile) {
+  // Attach router.
+  app.use(router);
+
+  if ($isMobile) {
     // Add "mobile" class to body if running on a mobile device.
     document.body.classList.add("mobile");
   } else {

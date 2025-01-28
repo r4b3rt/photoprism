@@ -110,7 +110,7 @@ export default {
         zoom: true,
         close: true,
         counter: false,
-        trapFocus: false,
+        trapFocus: true,
         returnFocus: false,
         allowPanToNext: false,
         initialZoomLevel: "fit",

@@ -28,20 +28,16 @@
   {{if .config.SiteDescription}}<meta name="description" content="{{ .config.SiteDescription }}"/>{{end}}
 
 {{template "favicons.gohtml" .}}
-
-  <link rel="stylesheet" href="{{ .config.CssUri }}">
-  <link rel="manifest" href="{{ .config.ManifestUri }}" crossorigin="use-credentials">
-
+{{template "styles.gohtml" .}}
+{{template "manifest.gohtml" .}}
   <script>
     window.__CONFIG__ = {{ .config }};
   </script>
-
   <script async defer data-domain="{{ .config.SiteDomain }}" src="https://a.photoprism.app/js/s.js"></script>
 </head>
 <body class="{{ .config.Flags }} nojs">
 
 {{template "app.gohtml" .}}
-
 <script src="{{ .config.JsUri }}"></script>
 </body>
 </html>

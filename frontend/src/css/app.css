@@ -50,7 +50,8 @@ Additional information can be found in our Developer Guide:
 
 html,
 body {
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
     min-height: 100vh;
     margin: 0;
     padding: 0;

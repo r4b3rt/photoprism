@@ -501,9 +501,16 @@ export default {
     },
     onBrowse() {
       const route = { name: "places_browse", query: this.staticFilter };
-      const routeUrl = this.$router.resolve(route).href;
-      if (routeUrl) {
-        window.open(routeUrl, "_blank");
+
+      if (this.$isMobile) {
+        this.$router.push(route);
+      } else {
+        // Open in a new tab on desktop browsers.
+        const routeUrl = this.$router.resolve(route).href;
+
+        if (routeUrl) {
+          window.open(routeUrl, "_blank");
+        }
       }
     },
     onUpdate(v) {
