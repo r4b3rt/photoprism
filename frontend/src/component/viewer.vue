@@ -12,7 +12,7 @@
         'is-playable': model.Playable,
         'is-selected': $clipboard.has(model),
       }"
-      @keydown.space.prevent="toggleVideo"
+      @keydown.space.prevent="onSpace"
     ></div>
     <div v-if="sidebarVisible" ref="sidebar" class="p-viewer__sidebar">
       <!-- TODO: Create a reusable sidebar component that allows users to view/edit metadata. -->
@@ -110,7 +110,7 @@ export default {
         zoom: true,
         close: true,
         counter: false,
-        trapFocus: true,
+        trapFocus: false,
         returnFocus: false,
         allowPanToNext: false,
         initialZoomLevel: "fit",
@@ -908,6 +908,21 @@ export default {
         } catch (_) {
           // Ignore.
         }
+      }
+    },
+    // Handles the space keyboard press event.
+    onSpace(ev) {
+      if (!this.visible || this.sidebarVisible) {
+        return;
+      }
+
+      // Get active video element, if any.
+      const { video } = this.getContent();
+
+      if (video) {
+        this.toggleVideo();
+      } else {
+        this.toggleControls(ev);
       }
     },
     // Toggles video playback on the current video element, if any.
