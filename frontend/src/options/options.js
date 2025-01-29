@@ -234,7 +234,7 @@ export const Languages = () => [
     value: "ro",
   },
   {
-    text: "Türk", // Turkish
+    text: "Türkçe", // Turkish
     value: "tr",
   },
   {
