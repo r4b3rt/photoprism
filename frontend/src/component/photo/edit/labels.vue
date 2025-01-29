@@ -10,7 +10,7 @@
       <div class="form-body">
         <div class="form-controls">
           <v-row dense align="start">
-            <v-col cols="0" sm="3" md="2" class="form-thumb">
+            <v-col cols="0" sm="2" class="form-thumb">
               <div>
                 <img
                   :alt="model.Title"
@@ -20,7 +20,7 @@
                 />
               </div>
             </v-col>
-            <v-col cols="12" sm="9" md="10" class="d-flex flex-column ga-4">
+            <v-col cols="12" sm="10" class="d-flex flex-column ga-4">
               <div
                 :class="$vuetify.display.smAndDown ? 'v-table--density-compact' : 'v-table--density-comfortable'"
                 class="v-table v-table--has-top v-table--hover v-data-table elevation-0 edit-table list-view"
@@ -141,7 +141,6 @@
                             :rules="[nameRule]"
                             color="surface-variant"
                             autocomplete="off"
-                            :label="$gettext('Name')"
                             single-line
                             flat
                             variant="plain"
