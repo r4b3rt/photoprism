@@ -18,7 +18,7 @@
         <v-card-title class="d-flex justify-start align-center ga-3">
           <v-icon size="28" color="primary">mdi-bookmark</v-icon>
           <h6 class="text-h6">
-            {{ $gettext(`Edit %{name}`, { name: model.modelName() }) }}
+            {{ $gettext(`Edit %{s}`, { s: model.modelName() }) }}
           </h6>
         </v-card-title>
 

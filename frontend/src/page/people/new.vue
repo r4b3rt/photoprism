@@ -138,7 +138,7 @@
       :show="confirm.show"
       icon="mdi-account-plus"
       :icon-size="42"
-      :text="confirm?.model?.Name ? $gettext('Add %{name}?', { name: confirm.model.Name }) : $gettext('Add person?')"
+      :text="confirm?.model?.Name ? $gettext('Add %{s}?', { s: confirm.model.Name }) : $gettext('Add person?')"
       @close="onCancelRename"
       @confirm="onConfirmRename"
     ></p-confirm-action>

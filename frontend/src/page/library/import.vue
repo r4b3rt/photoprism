@@ -2,7 +2,7 @@
   <div class="p-tab p-tab-import">
     <v-form ref="form" class="p-form p-photo-import" validate-on="invalid-input" @submit.prevent="submit">
       <div class="form-header">
-        <span v-if="fileName" class="text-break">{{ $gettext(`Importing %{name}…`, { name: fileName }) }}</span>
+        <span v-if="fileName" class="text-break">{{ $gettext(`Importing %{s}…`, { s: fileName }) }}</span>
         <span v-else-if="busy">{{ $gettext(`Importing files to originals…`) }}</span>
         <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
         <span v-else>{{ $gettext(`Select a source folder to import files…`) }}</span>
