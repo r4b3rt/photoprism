@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018 - 2023 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -25,7 +25,7 @@ Additional information can be found in our Developer Guide:
 
 import RestModel from "model/rest";
 import Api from "common/api";
-import { $gettext } from "common/vm";
+import { $gettext } from "common/gettext";
 import { config } from "app/session";
 
 export class Service extends RestModel {
@@ -71,9 +71,7 @@ export class Service extends RestModel {
   }
 
   Folders() {
-    return Api.get(this.getEntityResource() + "/folders").then((response) =>
-      Promise.resolve(response.data)
-    );
+    return Api.get(this.getEntityResource() + "/folders").then((response) => Promise.resolve(response.data));
   }
 
   Upload(selection, folder) {
@@ -85,9 +83,7 @@ export class Service extends RestModel {
       selection = { Photos: selection };
     }
 
-    return Api.post(this.getEntityResource() + "/upload", { selection, folder }).then((response) =>
-      Promise.resolve(response.data)
-    );
+    return Api.post(this.getEntityResource() + "/upload", { selection, folder }).then((response) => Promise.resolve(response.data));
   }
 
   static getCollectionResource() {

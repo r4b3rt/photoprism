@@ -24,11 +24,11 @@ test.meta("testID", "folders-001").meta({ type: "short", mode: "public" })(
     await menu.openPage("folders");
 
     await t
-      .expect(Selector("a").withText("BotanicalGarden").visible)
+      .expect(Selector("button").withText("BotanicalGarden").visible)
       .ok()
-      .expect(Selector("a").withText("Kanada").visible)
+      .expect(Selector("button").withText("Kanada").visible)
       .ok()
-      .expect(Selector("a").withText("KorsikaAdventure").visible)
+      .expect(Selector("button").withText("KorsikaAdventure").visible)
       .ok();
   }
 );
@@ -55,7 +55,7 @@ test.meta("testID", "folders-002").meta({ mode: "public" })(
 
     await t
       .typeText(albumdialog.title, "MyFolder", { replace: true })
-      .typeText(albumdialog.location, "USA", { replace: true })
+      .typeText(albumdialog.location, "United States", { replace: true })
       .typeText(albumdialog.description, "Last holiday")
       .typeText(albumdialog.category, "Mountains")
       .pressKey("enter")
@@ -66,10 +66,10 @@ test.meta("testID", "folders-002").meta({ mode: "public" })(
       .contains("MyFolder")
       .expect(page.cardDescription.nth(0).innerText)
       .contains("Last holiday")
-      .expect(Selector("div.caption").nth(1).innerText)
+      .expect(Selector("button.meta-category").innerText)
       .contains("Mountains")
-      .expect(Selector("div.caption").nth(2).innerText)
-      .contains("USA");
+      .expect(Selector("button.meta-location").innerText)
+      .contains("United States");
 
     await album.openNthAlbum(0);
 
@@ -97,7 +97,7 @@ test.meta("testID", "folders-002").meta({ mode: "public" })(
       .expect(albumdialog.category.value)
       .eql("Mountains")
       .expect(albumdialog.location.value)
-      .eql("USA");
+      .eql("United States");
 
     await t
       .typeText(albumdialog.title, "Kanada", { replace: true })
@@ -119,8 +119,8 @@ test.meta("testID", "folders-002").meta({ mode: "public" })(
       .contains("Kanada")
       .expect(page.cardDescription.nth(0).innerText)
       .notContains("We went to ski")
-      .expect(Selector("div.caption").nth(0).innerText)
-      .notContains("USA");
+      .expect(Selector("button.meta-location").nth(0).innerText)
+      .notContains("United States");
   }
 );
 
@@ -167,5 +167,13 @@ test.meta("testID", "folders-004").meta({ mode: "public" })(
     await menu.openPage("folders");
     await album.openAlbumWithUid(ThirdFolderUid);
     await photo.checkPhotoVisibility(FirstPhotoUid, true);
+  }
+);
+
+test.meta("testID", "folders-005").meta({ type: "short", mode: "public" })(
+  "Common: Verify folder sort options",
+  async (t) => {
+    await menu.openPage("folders");
+    await album.checkSortOptions("folder");
   }
 );

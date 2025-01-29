@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018 - 2023 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -26,7 +26,7 @@ Additional information can be found in our Developer Guide:
 import Model from "model.js";
 import Api from "common/api";
 import { config } from "app/session.js";
-import { $gettext } from "common/vm";
+import { $gettext } from "common/gettext";
 
 const thumbs = window.__CONFIG__.thumbs;
 
@@ -36,12 +36,15 @@ export class Thumb extends Model {
       UID: "",
       Title: "",
       TakenAtLocal: "",
-      Description: "",
+      Caption: "",
       Favorite: false,
       Playable: false,
       DownloadUrl: "",
       Width: 0,
       Height: 0,
+      Hash: "",
+      Codec: "",
+      Mime: "",
       Thumbs: {},
     };
   }
@@ -68,25 +71,26 @@ export class Thumb extends Model {
     }
   }
 
-  static thumbNotFound() {
+  static notFound() {
     const result = {
       UID: "",
-      Title: $gettext("Not Found"),
+      Title: $gettext("Invalid photo selected"),
       TakenAtLocal: "",
-      Description: "",
+      Caption: "",
       Favorite: false,
       Playable: false,
       DownloadUrl: "",
       Width: 0,
       Height: 0,
+      Hash: "",
       Thumbs: {},
     };
 
     for (let i = 0; i < thumbs.length; i++) {
       let t = thumbs[i];
 
-      result[t.size] = {
-        src: `${config.contentUri}/svg/photo`,
+      result.Thumbs[t.size] = {
+        src: `${config.staticUri}/img/404.jpg`,
         w: t.w,
         h: t.h,
       };
@@ -112,19 +116,20 @@ export class Thumb extends Model {
     }
 
     if (!photo || !photo.Hash) {
-      return this.thumbNotFound();
+      return this.notFound();
     }
 
     const result = {
       UID: photo.UID,
       Title: photo.Title,
       TakenAtLocal: photo.getDateString(),
-      Description: photo.Description,
+      Caption: photo.Caption,
       Favorite: photo.Favorite,
       Playable: photo.isPlayable(),
       DownloadUrl: this.downloadUrl(photo),
       Width: photo.Width,
       Height: photo.Height,
+      Hash: photo.Hash,
       Thumbs: {},
     };
 
@@ -144,19 +149,20 @@ export class Thumb extends Model {
 
   static fromFile(photo, file) {
     if (!photo || !file || !file.Hash) {
-      return this.thumbNotFound();
+      return this.notFound();
     }
 
     const result = {
       UID: photo.UID,
       Title: photo.Title,
       TakenAtLocal: photo.getDateString(),
-      Description: photo.Description,
+      Caption: photo.Caption,
       Favorite: photo.Favorite,
       Playable: photo.isPlayable(),
       DownloadUrl: this.downloadUrl(file),
       Width: file.Width,
       Height: file.Height,
+      Hash: file.Hash,
       Thumbs: {},
     };
 
@@ -236,7 +242,7 @@ export class Thumb extends Model {
 
   static thumbnailUrl(file, size) {
     if (!file.Hash) {
-      return `${config.contentUri}/svg/photo`;
+      return `${config.staticUri}/img/404.jpg`;
     }
 
     return `${config.contentUri}/t/${file.Hash}/${config.previewToken}/${size}`;

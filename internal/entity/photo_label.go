@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"github.com/photoprism/photoprism/internal/classify"
+	"github.com/photoprism/photoprism/internal/ai/classify"
 )
 
 type PhotoLabels []PhotoLabel
@@ -69,14 +69,20 @@ func (m *PhotoLabel) Delete() error {
 
 // FirstOrCreatePhotoLabel returns the existing row, inserts a new row or nil in case of errors.
 func FirstOrCreatePhotoLabel(m *PhotoLabel) *PhotoLabel {
-	result := PhotoLabel{}
+	if m == nil {
+		return nil
+	} else if m.PhotoID < 1 || m.LabelID < 1 {
+		return nil
+	}
 
-	if err := Db().Where("photo_id = ? AND label_id = ?", m.PhotoID, m.LabelID).First(&result).Error; err == nil {
-		return &result
+	result := &PhotoLabel{}
+
+	if err := Db().Where("photo_id = ? AND label_id = ?", m.PhotoID, m.LabelID).First(result).Error; err == nil {
+		return result
 	} else if createErr := m.Create(); createErr == nil {
 		return m
-	} else if err := Db().Where("photo_id = ? AND label_id = ?", m.PhotoID, m.LabelID).First(&result).Error; err == nil {
-		return &result
+	} else if err = Db().Where("photo_id = ? AND label_id = ?", m.PhotoID, m.LabelID).First(result).Error; err == nil {
+		return result
 	} else {
 		log.Errorf("photo-label: %s (find or create)", createErr)
 	}
@@ -87,7 +93,7 @@ func FirstOrCreatePhotoLabel(m *PhotoLabel) *PhotoLabel {
 // ClassifyLabel returns the label as classify.Label
 func (m *PhotoLabel) ClassifyLabel() classify.Label {
 	if m.Label == nil {
-		log.Errorf("photo-label: classify label is nil (photo id %d, label id %d) - possible bug", m.PhotoID, m.LabelID)
+		log.Errorf("photo-label: classify label is nil (photo id %d, label id %d) - you may have found a bug", m.PhotoID, m.LabelID)
 		return classify.Label{}
 	}
 

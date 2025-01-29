@@ -9,8 +9,8 @@ import (
 	"github.com/ulule/deepcopier"
 
 	"github.com/photoprism/photoprism/internal/form"
-	"github.com/photoprism/photoprism/internal/remote"
-	"github.com/photoprism/photoprism/internal/remote/webdav"
+	"github.com/photoprism/photoprism/internal/service"
+	"github.com/photoprism/photoprism/internal/service/webdav"
 	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/txt"
 )
@@ -33,34 +33,34 @@ type Services []Service
 // - AccSync enables automatic file synchronization, see SyncDownload and SyncUpload.
 // - RetryLimit specifies the number of retry attempts, a negative value disables the limit.
 type Service struct {
-	ID            uint   `gorm:"primary_key"`
-	AccName       string `gorm:"type:VARCHAR(160);"`
-	AccOwner      string `gorm:"type:VARCHAR(160);"`
-	AccURL        string `gorm:"type:VARCHAR(255);"`
-	AccType       string `gorm:"type:VARBINARY(255);"`
-	AccKey        string `gorm:"type:VARBINARY(255);"`
-	AccUser       string `gorm:"type:VARBINARY(255);"`
-	AccPass       string `gorm:"type:VARBINARY(255);"`
-	AccTimeout    string `gorm:"type:VARBINARY(16);"`
-	AccError      string `gorm:"type:VARBINARY(512);"`
-	AccErrors     int
-	AccShare      bool
-	AccSync       bool
-	RetryLimit    int
-	SharePath     string `gorm:"type:VARBINARY(1024);"`
-	ShareSize     string `gorm:"type:VARBINARY(16);"`
-	ShareExpires  int
-	SyncPath      string `gorm:"type:VARBINARY(1024);"`
-	SyncStatus    string `gorm:"type:VARBINARY(16);"`
-	SyncInterval  int
-	SyncDate      sql.NullTime `deepcopier:"skip"`
-	SyncUpload    bool
-	SyncDownload  bool
-	SyncFilenames bool
-	SyncRaw       bool
-	CreatedAt     time.Time  `deepcopier:"skip"`
-	UpdatedAt     time.Time  `deepcopier:"skip"`
-	DeletedAt     *time.Time `deepcopier:"skip" sql:"index"`
+	ID            uint         `gorm:"primary_key" json:"ID"`
+	AccName       string       `gorm:"type:VARCHAR(160);" json:"AccName"`
+	AccOwner      string       `gorm:"type:VARCHAR(160);" json:"AccOwner"`
+	AccURL        string       `gorm:"type:VARCHAR(255);" json:"AccURL"`
+	AccType       string       `gorm:"type:VARBINARY(255);" json:"AccType"`
+	AccKey        string       `gorm:"type:VARBINARY(255);" json:"-"`
+	AccUser       string       `gorm:"type:VARBINARY(255);" json:"AccUser"`
+	AccPass       string       `gorm:"type:VARBINARY(255);" json:"-"`
+	AccTimeout    string       `gorm:"type:VARBINARY(16);" json:"AccTimeout"`
+	AccError      string       `gorm:"type:VARBINARY(512);" json:"AccError"`
+	AccErrors     int          `json:"AccErrors"`
+	AccShare      bool         `json:"AccShare"`
+	AccSync       bool         `json:"AccSync"`
+	RetryLimit    int          `json:"RetryLimit"`
+	SharePath     string       `gorm:"type:VARBINARY(1024);" json:"SharePath"`
+	ShareSize     string       `gorm:"type:VARBINARY(16);" json:"ShareSize"`
+	ShareExpires  int          `json:"ShareExpires"`
+	SyncPath      string       `gorm:"type:VARBINARY(1024);" json:"SyncPath"`
+	SyncStatus    string       `gorm:"type:VARBINARY(16);" json:"SyncStatus"`
+	SyncInterval  int          `json:"SyncInterval"`
+	SyncDate      sql.NullTime `deepcopier:"skip" json:"SyncDate"`
+	SyncUpload    bool         `json:"SyncUpload"`
+	SyncDownload  bool         `json:"SyncDownload"`
+	SyncFilenames bool         `json:"SyncFilenames"`
+	SyncRaw       bool         `json:"SyncRaw"`
+	CreatedAt     time.Time    `deepcopier:"skip" json:"CreatedAt"`
+	UpdatedAt     time.Time    `deepcopier:"skip" json:"UpdatedAt"`
+	DeletedAt     *time.Time   `deepcopier:"skip" sql:"index" json:"DeletedAt"`
 }
 
 // TableName returns the entity table name.
@@ -83,8 +83,8 @@ func AddService(form form.Service) (model *Service, err error) {
 	return model, err
 }
 
-// LogError updates the service error count and message.
-func (m *Service) LogError(err error) error {
+// LogErr updates the service error count and message.
+func (m *Service) LogErr(err error) error {
 	if err == nil {
 		return m.ResetErrors(true, true)
 	}
@@ -113,13 +113,13 @@ func (m *Service) ResetErrors(share, sync bool) error {
 	}
 
 	if share {
-		if err := Db().Model(FileShare{}).Where("service_id = ?", m.ID).Updates(Values{"error": "", "errors": 0}).Error; err != nil {
+		if err := Db().Model(FileShare{}).Where("service_id = ?", m.ID).Updates(Map{"error": "", "errors": 0}).Error; err != nil {
 			return err
 		}
 	}
 
 	if sync {
-		if err := Db().Model(FileSync{}).Where("service_id = ?", m.ID).Updates(Values{"error": "", "errors": 0}).Error; err != nil {
+		if err := Db().Model(FileSync{}).Where("service_id = ?", m.ID).Updates(Map{"error": "", "errors": 0}).Error; err != nil {
 			return err
 		}
 	}
@@ -127,7 +127,7 @@ func (m *Service) ResetErrors(share, sync bool) error {
 	m.AccError = ""
 	m.AccErrors = 0
 
-	return m.Updates(Values{"acc_error": m.AccError, "acc_errors": m.AccErrors})
+	return m.Updates(Map{"acc_error": m.AccError, "acc_errors": m.AccErrors})
 }
 
 // SaveForm saves the entity using form data and stores it in the database.
@@ -140,7 +140,7 @@ func (m *Service) SaveForm(form form.Service) error {
 	}
 
 	// TODO: Support for other remote services in addition to WebDAV.
-	if m.AccType != remote.ServiceWebDAV {
+	if m.AccType != service.WebDAV {
 		m.AccShare = false // Disable manual upload.
 		m.AccSync = false  // Disable background sync.
 	}
@@ -192,7 +192,7 @@ func (m *Service) Delete() error {
 
 // Directories returns a list of directories or albums in an account.
 func (m *Service) Directories() (result fs.FileInfos, err error) {
-	if m.AccType == remote.ServiceWebDAV {
+	if m.AccType == service.WebDAV {
 		var client *webdav.Client
 		if client, err = webdav.NewClient(m.AccURL, m.AccUser, m.AccPass, webdav.Timeout(m.AccTimeout)); err != nil {
 			return result, err
@@ -205,8 +205,8 @@ func (m *Service) Directories() (result fs.FileInfos, err error) {
 	sort.Sort(result)
 
 	// Update error count and message.
-	if err := m.LogError(err); err != nil {
-		log.Warnf("service: %s", err)
+	if logErr := m.LogErr(err); logErr != nil {
+		log.Warnf("service: %s", logErr)
 	}
 
 	return result, err

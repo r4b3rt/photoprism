@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018 - 2023 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -25,7 +25,7 @@ Additional information can be found in our Developer Guide:
 
 import Model from "model.js";
 import { DateTime } from "luxon";
-import { $gettext } from "common/vm";
+import { $gettext } from "common/gettext";
 
 const c = window.__CONFIG__;
 
@@ -106,9 +106,7 @@ export default class Link extends Model {
   }
 
   expires() {
-    return DateTime.fromISO(this.ModifiedAt)
-      .plus({ seconds: this.Expires })
-      .toLocaleString(DateTime.DATE_MED);
+    return DateTime.fromISO(this.ModifiedAt).plus({ seconds: this.Expires }).toLocaleString(DateTime.DATE_MED);
   }
 
   static getCollectionResource() {

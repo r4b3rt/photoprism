@@ -5,12 +5,13 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/photoprism/photoprism/internal/i18n"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/photoprism/photoprism/pkg/i18n"
 )
 
 func TestCancelIndex(t *testing.T) {
-	t.Run("successful request", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		app, router, _ := NewApiTest()
 		CancelIndexing(router)
 		r := PerformRequest(app, "DELETE", "/api/v1/index")

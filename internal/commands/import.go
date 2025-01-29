@@ -7,24 +7,25 @@ import (
 	"strings"
 	"time"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 
 	"github.com/photoprism/photoprism/internal/config"
-	"github.com/photoprism/photoprism/internal/get"
 	"github.com/photoprism/photoprism/internal/photoprism"
+	"github.com/photoprism/photoprism/internal/photoprism/get"
 	"github.com/photoprism/photoprism/pkg/clean"
 )
 
 // ImportCommand configures the command name, flags, and action.
-var ImportCommand = cli.Command{
+var ImportCommand = &cli.Command{
 	Name:      "mv",
 	Aliases:   []string{"import"},
 	Usage:     "Moves media files to originals",
 	ArgsUsage: "[source]",
 	Flags: []cli.Flag{
-		cli.BoolFlag{
-			Name:  "dest, d",
-			Usage: "relative originals `PATH` to which the files should be imported",
+		&cli.StringFlag{
+			Name:    "dest",
+			Aliases: []string{"d"},
+			Usage:   "relative originals `PATH` to which the files should be imported",
 		},
 	},
 	Action: importAction,

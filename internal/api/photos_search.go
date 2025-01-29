@@ -6,51 +6,68 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 
-	"github.com/photoprism/photoprism/internal/acl"
+	"github.com/photoprism/photoprism/internal/auth/acl"
 	"github.com/photoprism/photoprism/internal/entity"
+	"github.com/photoprism/photoprism/internal/entity/search"
 	"github.com/photoprism/photoprism/internal/event"
 	"github.com/photoprism/photoprism/internal/form"
-	"github.com/photoprism/photoprism/internal/get"
-	"github.com/photoprism/photoprism/internal/i18n"
-	"github.com/photoprism/photoprism/internal/search"
+	"github.com/photoprism/photoprism/internal/photoprism/get"
+	"github.com/photoprism/photoprism/pkg/i18n"
 )
 
-// SearchPhotos searches the pictures index and returns the result as JSON.
-// See form.SearchPhotos for supported search params and data types.
+// SearchPhotos finds pictures and returns them as JSON.
 //
-// GET /api/v1/photos
+//	@Summary		finds pictures and returns them as JSON
+//	@Description	Fore more information see:
+//	@Description	- https://docs.photoprism.app/developer-guide/api/search/#get-apiv1photos
+//	@Id				SearchPhotos
+//	@Tags			Photos
+//	@Produce		json
+//	@Success		200				{object}	search.PhotoResults
+//	@Failure		400,401,403,404	{object}	i18n.Response
+//	@Param			count			query		int		true	"maximum number of files"	minimum(1)	maximum(100000)
+//	@Param			offset			query		int		false	"file offset"				minimum(0)	maximum(100000)
+//	@Param			order			query		string	false	"sort order"				Enums(favorites, name, title, added, edited)
+//	@Param			merged			query		bool	false	"groups consecutive files that belong to the same photo"
+//	@Param			public			query		bool	false	"excludes private pictures"
+//	@Param			quality			query		int		true	"minimum quality score (1-7)"	Enums(0, 1, 2, 3, 4, 5, 6, 7)
+//	@Param			q				query		string	false	"search query"
+//	@Param			s				query		string	false	"album uid"
+//	@Param			path			query		string	false	"photo path"
+//	@Param			video			query		bool	false	"is type video"
+//	@Router			/api/v1/photos [get]
 func SearchPhotos(router *gin.RouterGroup) {
 	// searchPhotos checking authorization and parses the search request.
-	searchForm := func(c *gin.Context) (f form.SearchPhotos, s *entity.Session, err error) {
+	searchForm := func(c *gin.Context) (frm form.SearchPhotos, s *entity.Session, err error) {
 		s = AuthAny(c, acl.ResourcePhotos, acl.Permissions{acl.ActionSearch, acl.ActionView, acl.AccessShared})
 
 		// Abort if permission was not granted.
 		if s.Abort(c) {
-			return f, s, i18n.Error(i18n.ErrForbidden)
+			return frm, s, i18n.Error(i18n.ErrForbidden)
 		}
 
 		// Abort if request params are invalid.
-		if err = c.MustBindWith(&f, binding.Form); err != nil {
+		if err = c.MustBindWith(&frm, binding.Form); err != nil {
 			event.AuditWarn([]string{ClientIP(c), "session %s", string(acl.ResourcePhotos), "form invalid", "%s"}, s.RefID, err)
 			AbortBadRequest(c)
-			return f, s, err
+			return frm, s, err
 		}
 
 		settings := get.Config().Settings()
 
 		// Ignore private flag if feature is disabled.
 		if !settings.Features.Private {
-			f.Public = false
+			frm.Public = false
 		}
 
 		// Ignore private flag if feature is disabled.
-		if f.Scope == "" &&
+		if frm.Scope == "" &&
 			settings.Features.Review &&
-			acl.Resources.Deny(acl.ResourcePhotos, s.User().AclRole(), acl.ActionManage) {
-			f.Quality = 3
+			acl.Rules.Deny(acl.ResourcePhotos, s.UserRole(), acl.ActionManage) {
+			frm.Quality = 3
 		}
 
-		return f, s, nil
+		return frm, s, nil
 	}
 
 	// defaultHandler a standard JSON result with all fields.

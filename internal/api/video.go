@@ -1,123 +1,183 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
+	"path/filepath"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/photoprism/photoprism/internal/get"
+	"github.com/photoprism/photoprism/internal/entity"
+	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/photoprism"
-	"github.com/photoprism/photoprism/internal/query"
+	"github.com/photoprism/photoprism/internal/photoprism/get"
 	"github.com/photoprism/photoprism/pkg/clean"
-	"github.com/photoprism/photoprism/pkg/video"
+	"github.com/photoprism/photoprism/pkg/fs"
+	"github.com/photoprism/photoprism/pkg/header"
+	"github.com/photoprism/photoprism/pkg/media/video"
+	"github.com/photoprism/photoprism/pkg/rnd"
 )
 
-// GetVideo streams videos.
+// GetVideo returns a video, optionally limited to a byte range for streaming.
 //
-// GET /api/v1/videos/:hash/:token/:type
-//
-// Parameters:
-//
-//	hash: string The photo or video file hash as returned by the search API
-//	type: string Video format
+//	@Summary		returns a video, optionally limited to a byte range for streaming
+//	@Description	Fore more information see:
+//	@Description	- https://docs.photoprism.app/developer-guide/api/thumbnails/#video-endpoint-uri
+//	@Id				GetVideo
+//	@Produce		video/mp4
+//	@Tags			Files, Videos
+//	@Failure		403		{object}	i18n.Response
+//	@Param			thumb	path		string	true	"SHA1 video file hash"
+//	@Param			token	path		string	true	"user-specific security token provided with session"
+//	@Param			format	path		string	true	"video format, e.g. mp4"
+//	@Router			/api/v1/videos/{hash}/{token}/{format} [get]
 func GetVideo(router *gin.RouterGroup) {
 	router.GET("/videos/:hash/:token/:format", func(c *gin.Context) {
+		fileHash := clean.Token(c.Param("hash"))
+
+		// Check if a valid security token was provided.
 		if InvalidPreviewToken(c) {
-			c.Data(http.StatusForbidden, "image/svg+xml", brokenIconSvg)
+			c.Data(http.StatusForbidden, "image/svg+xml", videoIconSvg)
 			return
 		}
 
-		fileHash := clean.Token(c.Param("hash"))
-		formatName := clean.Token(c.Param("format"))
+		// Check if a valid file hash was provided.
+		if !rnd.IsSHA(fileHash) {
+			log.Debugf("video: invalid file hash %s", clean.Log(fileHash))
+			AbortVideo(c)
+			return
+		}
 
+		// Check if a supported video format was provided.
+		formatName := clean.Token(c.Param("format"))
 		format, ok := video.Types[formatName]
 
 		if !ok {
 			log.Errorf("video: invalid format %s", clean.Log(formatName))
-			c.Data(http.StatusOK, "image/svg+xml", videoIconSvg)
+			c.Data(http.StatusBadRequest, "image/svg+xml", videoIconSvg)
 			return
 		}
 
+		// Find media file by SHA hash.
 		f, err := query.FileByHash(fileHash)
 
 		if err != nil {
 			log.Errorf("video: requested file not found (%s)", err)
-			c.Data(http.StatusOK, "image/svg+xml", videoIconSvg)
+			AbortVideo(c)
 			return
 		}
 
+		// If file is not a video, try to find the realted video file.
 		if !f.FileVideo {
 			f, err = query.VideoByPhotoUID(f.PhotoUID)
 
 			if err != nil {
 				log.Errorf("video: no playable file found (%s)", err)
-				c.Data(http.StatusOK, "image/svg+xml", videoIconSvg)
+				AbortVideo(c)
 				return
 			}
 		}
 
+		// Return a broken video if the file could not be found.
 		if f.FileError != "" {
 			log.Errorf("video: file has error %s", f.FileError)
-			c.Data(http.StatusOK, "image/svg+xml", videoIconSvg)
+			AbortVideo(c)
+			return
+		} else if f.FileHash == "" {
+			log.Errorf("video: file hash missing in index")
+			AbortVideo(c)
 			return
 		}
 
-		fileName := photoprism.FileName(f.FileRoot, f.FileName)
-		fileBitrate := f.Bitrate()
-
-		// File format supported by the client/browser?
-		supported := f.FileCodec != "" && f.FileCodec == string(format.Codec) || format.Codec == video.UnknownCodec && f.FileType == string(format.File)
-
-		// File bitrate too high (for streaming)?
+		// Get app config.
 		conf := get.Config()
-		transcode := !supported || conf.FFmpegEnabled() && conf.FFmpegBitrateExceeded(fileBitrate)
 
-		if mf, err := photoprism.NewMediaFile(fileName); err != nil {
+		// Get video bitrate, codec, and file type.
+		videoBitrate := f.Bitrate()
+		videoCodec := f.FileCodec
+		videoFileType := f.FileType
+		videoFileName := photoprism.FileName(f.FileRoot, f.FileName)
+
+		// If the file has a hybrid photo/video format, try to find and send the embedded video data.
+		if f.MediaType == entity.MediaLive {
+			if info, videoErr := video.ProbeFile(videoFileName); info.VideoOffset < 0 || !info.Compatible || videoErr != nil {
+				logErr("video", videoErr)
+				log.Warnf("video: no embedded media found in %s", clean.Log(f.FileName))
+				AbortVideo(c)
+				return
+			} else if reader, readErr := video.NewReader(videoFileName, info.VideoOffset); readErr != nil {
+				log.Errorf("video: failed to read media embedded in %s (%s)", clean.Log(f.FileName), readErr)
+				AbortVideo(c)
+				return
+			} else if c.Request.Header.Get("Range") == "" && info.VideoCodec == format.Codec {
+				defer reader.Close()
+				AddVideoCacheHeader(c, conf.CdnVideo())
+				c.DataFromReader(http.StatusOK, info.VideoSize(), info.VideoContentType(), reader, nil)
+				return
+			} else if cacheName, cacheErr := fs.CacheFileFromReader(filepath.Join(conf.MediaFileCachePath(f.FileHash), f.FileHash+info.VideoFileExt()), reader); cacheErr != nil {
+				log.Errorf("video: failed to cache %s embedded in %s (%s)", strings.ToUpper(videoFileType), clean.Log(f.FileName), cacheErr)
+				AbortVideo(c)
+				return
+			} else {
+				// Serve embedded videos from cache to allow streaming and transcoding.
+				videoBitrate = info.VideoBitrate()
+				videoCodec = info.VideoCodec
+				videoFileType = info.VideoFileType().String()
+				videoFileName = cacheName
+				log.Debugf("video: streaming %s encoded %s in %s from cache", strings.ToUpper(videoCodec), strings.ToUpper(videoFileType), clean.Log(f.FileName))
+			}
+		}
+
+		// Check video format support.
+		supported := videoCodec != "" && videoCodec == format.Codec || format.Codec == video.CodecUnknown && videoFileType == format.FileType.String()
+
+		// Check video bitrate against the configured limit.
+		transcode := !supported || conf.FFmpegEnabled() && conf.FFmpegBitrateExceeded(videoBitrate)
+
+		if mediaFile, mediaErr := photoprism.NewMediaFile(videoFileName); mediaErr != nil {
 			// Set missing flag so that the file doesn't show up in search results anymore.
-			logError("video", f.Update("FileMissing", true))
+			logErr("video", f.Update("FileMissing", true))
 
 			// Log error and default to 404.mp4
 			log.Errorf("video: file %s is missing", clean.Log(f.FileName))
-			fileName = get.Config().StaticFile("video/404.mp4")
-			AddContentTypeHeader(c, ContentTypeAvc)
+			AbortVideo(c)
+			return
 		} else if transcode {
-			if f.FileCodec != "" {
-				log.Debugf("video: %s is %s compressed and cannot be streamed directly, average bitrate %.1f MBit/s", clean.Log(f.FileName), clean.Log(strings.ToUpper(f.FileCodec)), fileBitrate)
+			if videoCodec != "" {
+				log.Debugf("video: %s is %s encoded and cannot be streamed directly, average bitrate %.1f MBit/s", clean.Log(f.FileName), strings.ToUpper(videoCodec), videoBitrate)
 			} else {
-				log.Debugf("video: %s cannot be streamed directly, average bitrate %.1f MBit/s", clean.Log(f.FileName), fileBitrate)
+				log.Debugf("video: %s cannot be streamed directly, average bitrate %.1f MBit/s", clean.Log(f.FileName), videoBitrate)
 			}
 
 			conv := get.Convert()
 
-			if avcFile, err := conv.ToAvc(mf, get.Config().FFmpegEncoder(), false, false); err != nil {
+			if avcFile, avcErr := conv.ToAvc(mediaFile, get.Config().FFmpegEncoder(), false, false); avcFile != nil && avcErr == nil {
+				videoFileName = avcFile.FileName()
+				AddContentTypeHeader(c, header.ContentTypeAVC)
+			} else {
 				// Log error and default to 404.mp4
-				log.Errorf("video: transcoding %s failed", clean.Log(f.FileName))
-				fileName = get.Config().StaticFile("video/404.mp4")
-			} else {
-				fileName = avcFile.FileName()
+				log.Errorf("video: failed to transcode %s", clean.Log(f.FileName))
+				AbortVideo(c)
+				return
 			}
-
-			AddContentTypeHeader(c, ContentTypeAvc)
 		} else {
-			if f.FileCodec != "" && f.FileCodec != f.FileType {
-				log.Debugf("video: %s is %s compressed and requires no transcoding, average bitrate %.1f MBit/s", clean.Log(f.FileName), clean.Log(strings.ToUpper(f.FileCodec)), fileBitrate)
-				AddContentTypeHeader(c, fmt.Sprintf("%s; codecs=\"%s\"", f.FileMime, clean.Codec(f.FileCodec)))
+			if videoCodec != "" && videoCodec != videoFileType {
+				log.Debugf("video: %s is %s encoded and requires no transcoding, average bitrate %.1f MBit/s", clean.Log(f.FileName), strings.ToUpper(videoCodec), videoBitrate)
+				AddContentTypeHeader(c, video.ContentType(mediaFile.MimeType(), videoFileType, videoCodec))
 			} else {
-				log.Debugf("video: %s is streamed directly, average bitrate %.1f MBit/s", clean.Log(f.FileName), fileBitrate)
-				AddContentTypeHeader(c, f.FileMime)
+				log.Debugf("video: %s is streamed directly, average bitrate %.1f MBit/s", clean.Log(f.FileName), videoBitrate)
+				AddContentTypeHeader(c, f.ContentType())
 			}
 		}
 
 		// Add HTTP cache header.
-		AddImmutableCacheHeader(c)
+		AddVideoCacheHeader(c, conf.CdnVideo())
 
 		// Return requested content.
 		if c.Query("download") != "" {
-			c.FileAttachment(fileName, f.DownloadName(DownloadName(c), 0))
+			c.FileAttachment(videoFileName, f.DownloadName(DownloadName(c), 0))
 		} else {
-			c.File(fileName)
+			c.File(videoFileName)
 		}
 
 		return

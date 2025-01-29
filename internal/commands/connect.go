@@ -1,13 +1,13 @@
 package commands
 
 import (
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 
 	"github.com/photoprism/photoprism/internal/config"
 )
 
 // ConnectCommand configures the command name, flags, and action.
-var ConnectCommand = cli.Command{
+var ConnectCommand = &cli.Command{
 	Name:      "connect",
 	Usage:     "Connects your membership account",
 	ArgsUsage: "[activation code]",
@@ -24,8 +24,8 @@ func connectAction(ctx *cli.Context) error {
 			return cli.ShowSubcommandHelp(ctx)
 		}
 
-		// Connect to hub.
-		if err := conf.ResyncHub(token); err != nil {
+		// Renew API keys with token.
+		if err := conf.RenewApiKeysWithToken(token); err != nil {
 			return err
 		}
 

@@ -1,87 +1,93 @@
 <template>
   <div class="p-tab p-tab-index">
-    <v-form ref="form" class="p-photo-index" lazy-validation dense @submit.prevent="submit">
-      <v-container fluid>
-        <p class="subheading">
-          <span v-if="fileName" class="break-word">{{ action }} {{ fileName }}…</span>
-          <span v-else-if="action">{{ action }}…</span>
-          <span v-else-if="busy"><translate>Indexing media and sidecar files…</translate></span>
-          <span v-else-if="completed"><translate>Done.</translate></span>
-          <span v-else><translate>Press button to start indexing…</translate></span>
-        </p>
-
-        <v-autocomplete
+    <v-form ref="form" class="p-form p-photo-index" validate-on="invalid-input" @submit.prevent="submit">
+      <div class="form-header">
+        <span v-if="fileName" class="text-break">{{ action }} {{ fileName }}…</span>
+        <span v-else-if="action">{{ action }}…</span>
+        <span v-else-if="busy">{{ $gettext(`Indexing media and sidecar files…`) }}</span>
+        <span v-else-if="completed">{{ $gettext(`Done.`) }}</span>
+        <span v-else>{{ $gettext(`Select the folder to be indexed…`) }}</span>
+      </div>
+      <div class="form-body">
+        <div class="form-controls">
+          <v-autocomplete
             v-model="settings.index.path"
-            color="secondary-dark"
-            class="my-3 input-index-folder"
+            color="surface-variant"
+            class="input-index-folder"
             hide-details
-            hide-no-data flat solo browser-autocomplete="off"
+            hide-no-data
+            flat
+            variant="solo-filled"
+            autocomplete="off"
             :items="dirs"
+            item-title="name"
+            item-value="path"
             :loading="loading"
             :disabled="busy || !ready"
-            item-text="name"
-            item-value="path"
-            @change="onChange"
+            @update:model-value="onChange"
             @focus="onFocus"
-        >
-        </v-autocomplete>
-
-        <p class="options">
-          <v-progress-linear color="secondary-dark" height="1.5em" :value="completed"
-                             :indeterminate="busy"></v-progress-linear>
-        </p>
-
-        <v-layout wrap align-top class="pb-3">
-          <v-flex xs12 sm6 lg4 class="px-2 pb-2 pt-2">
-            <v-checkbox
-                v-model="settings.index.rescan"
-                :disabled="busy || !ready"
-                class="ma-0 pa-0"
-                color="secondary-dark"
-                :label="$gettext('Complete Rescan')"
-                :hint="$gettext('Re-index all originals, including already indexed and unchanged files.')"
-                prepend-icon="cached"
-                persistent-hint
-                @change="onChange"
-            >
-            </v-checkbox>
-          </v-flex>
-        </v-layout>
-
-        <v-btn
-            :disabled="!busy || !ready"
-            color="primary-button"
-            class="white--text ml-0 mt-2 action-cancel"
-            depressed
-            @click.stop="cancelIndexing()"
-        >
-          <translate>Cancel</translate>
-        </v-btn>
-
-        <v-btn
+          >
+          </v-autocomplete>
+          <v-progress-linear :model-value="completed" :indeterminate="busy"></v-progress-linear>
+        </div>
+        <div class="form-options">
+          <v-checkbox
+            v-model="settings.index.rescan"
             :disabled="busy || !ready"
-            color="primary-button"
-            class="white--text ml-0 mt-2 action-index"
-            depressed
+            :label="$gettext('Complete Rescan')"
+            :hint="$gettext('Re-index all originals, including already indexed and unchanged files.')"
+            prepend-icon="mdi-cached"
+            persistent-hint
+            @update:model-value="onChange"
+          >
+          </v-checkbox>
+          <v-checkbox
+            v-if="isAdmin"
+            v-model="cleanup"
+            :disabled="busy || !ready"
+            :label="$gettext('Cleanup')"
+            :hint="$gettext('Delete orphaned index entries, sidecar files and thumbnails.')"
+            prepend-icon="mdi-delete-sweep"
+            persistent-hint
+          >
+          </v-checkbox>
+        </div>
+      </div>
+      <div class="form-actions">
+        <div class="action-buttons">
+          <v-btn
+            :disabled="!busy || !ready"
+            variant="flat"
+            color="button"
+            class="action-cancel"
+            @click.stop="cancelIndexing()"
+          >
+            {{ $gettext(`Cancel`) }}
+          </v-btn>
+          <v-btn
+            :disabled="busy || !ready"
+            variant="flat"
+            color="highlight"
+            class="action-index"
             @click.stop="startIndexing()"
-        >
-          <translate>Start</translate>
-          <v-icon :right="!rtl" :left="rtl" dark>update</v-icon>
-        </v-btn>
-
-        <v-alert
-            v-if="ready && !busy && config.count.hidden > 1"
-            :value="true"
-            color="error"
-            icon="priority_high"
-            class="mt-3"
-            outline
-        >
-          <translate
-              :translate-params="{n: config.count.hidden}">The index currently contains %{n} hidden files.</translate>
-          <translate>Their format may not be supported, they haven't been converted to JPEG yet or there are duplicates.</translate>
+          >
+            {{ $gettext(`Start`) }}
+            <v-icon end>mdi-update</v-icon>
+          </v-btn>
+        </div>
+      </div>
+      <div v-if="ready && !busy && config.count.hidden > 1" class="form-footer">
+        <v-alert color="primary" icon="mdi-alert-circle-outline" class="v-alert--default" variant="outlined">
+          <div>
+            {{ $gettext(`The index currently contains %{n} hidden files.`, { n: config.count.hidden }) }}
+            {{
+              $gettext(
+                `Their format may not be supported, they haven't been converted to JPEG yet or there are duplicates.`
+              )
+            }}
+          </div>
         </v-alert>
-      </v-container>
+      </div>
     </v-form>
   </div>
 </template>
@@ -93,18 +99,19 @@ import Notify from "common/notify";
 import Event from "pubsub-js";
 import Settings from "model/settings";
 import Util from "common/util";
-import {Folder, RootOriginals} from "model/folder";
+import { Folder, RootOriginals } from "model/folder";
 
 export default {
-  name: 'PTabIndex',
+  name: "PTabIndex",
   data() {
-    const root = {"path": "/", "name": this.$gettext("All originals")};
+    const root = { path: "/", name: this.$gettext("All originals") };
 
     return {
       ready: !this.$config.loading(),
-      settings: new Settings(this.$config.settings()),
+      settings: new Settings(this.$config.getSettings()),
       readonly: this.$config.get("readonly"),
       config: this.$config.values,
+      isAdmin: this.$session.isAdmin(),
       started: false,
       busy: false,
       loading: false,
@@ -112,6 +119,7 @@ export default {
       subscriptionId: "",
       action: "",
       fileName: "",
+      cleanup: false,
       source: null,
       root: root,
       dirs: [root],
@@ -119,22 +127,22 @@ export default {
     };
   },
   created() {
-    this.subscriptionId = Event.subscribe('index', this.handleEvent);
+    this.subscriptionId = Event.subscribe("index", this.handleEvent);
     this.load();
   },
-  destroyed() {
+  unmounted() {
     Event.unsubscribe(this.subscriptionId);
   },
   methods: {
     load() {
       this.$config.load().then(() => {
-        this.settings.setValues(this.$config.settings());
+        this.settings.setValues(this.$config.getSettings());
         this.dirs = [this.root];
 
         if (this.settings.index.path !== this.root.path) {
           this.dirs.push({
             path: this.settings.index.path,
-            name: "/" + Util.truncate(this.settings.index.path, 100, "…")
+            name: "/" + Util.truncate(this.settings.index.path, 100, "…"),
           });
         }
 
@@ -153,70 +161,82 @@ export default {
 
       this.loading = true;
 
-      Folder.findAll(RootOriginals).then((r) => {
-        const folders = r.models ? r.models : [];
-        const currentPath = this.settings.index.path;
-        let found = currentPath === this.root.path;
+      Folder.findAll(RootOriginals)
+        .then((r) => {
+          const folders = r.models ? r.models : [];
+          const currentPath = this.settings.index.path;
+          let found = currentPath === this.root.path;
 
-        this.dirs = [this.root];
+          this.dirs = [this.root];
 
-        for (let i = 0; i < folders.length; i++) {
-          if (currentPath === folders[i].Path) {
-            found = true;
+          for (let i = 0; i < folders.length; i++) {
+            if (currentPath === folders[i].Path) {
+              found = true;
+            }
+
+            this.dirs.push({ path: folders[i].Path, name: "/" + Util.truncate(folders[i].Path, 100, "…") });
           }
 
-          this.dirs.push({path: folders[i].Path, name: "/" + Util.truncate(folders[i].Path, 100, "…")});
-        }
-
-        if (!found) {
-          this.settings.index.path = this.root.path;
-        }
-      }).finally(() => this.loading = false);
+          if (!found) {
+            this.settings.index.path = this.root.path;
+          }
+        })
+        .finally(() => (this.loading = false));
     },
     submit() {
       // DO NOTHING
     },
     cancelIndexing() {
-      Api.delete('index');
+      Api.delete("index");
     },
     startIndexing() {
       this.source = Axios.CancelToken.source();
       this.started = Date.now();
       this.busy = true;
       this.completed = 0;
-      this.fileName = '';
+      this.fileName = "";
 
       const ctx = this;
       Notify.blockUI();
 
-      Api.post('index', this.settings.index, {cancelToken: this.source.token}).then(function () {
-        Notify.unblockUI();
-        ctx.busy = false;
-        ctx.completed = 100;
-        ctx.fileName = '';
-      }).catch(function (e) {
-        Notify.unblockUI();
+      // Request parameters.
+      const params = {
+        path: this.settings.index.path,
+        rescan: this.settings.index.rescan,
+        cleanup: this.cleanup,
+      };
 
-        if (Axios.isCancel(e)) {
-          // run in background
-          return;
-        }
+      // Submit POST request.
+      Api.post("index", params, { cancelToken: this.source.token })
+        .then(function () {
+          Notify.unblockUI();
+          ctx.busy = false;
+          ctx.completed = 100;
+          ctx.fileName = "";
+        })
+        .catch(function (e) {
+          Notify.unblockUI();
 
-        Notify.error(ctx.$gettext("Indexing failed"));
+          if (Axios.isCancel(e)) {
+            // Run in background.
+            return;
+          }
 
-        ctx.busy = false;
-        ctx.completed = 0;
-        ctx.fileName = '';
-      });
+          Notify.error(ctx.$gettext("Indexing failed"));
+
+          ctx.busy = false;
+          ctx.completed = 0;
+          ctx.fileName = "";
+        });
     },
     handleEvent(ev, data) {
       if (this.source) {
-        this.source.cancel('run in background');
+        this.source.cancel("run in background");
         this.source = null;
         Notify.unblockUI();
       }
 
-      const type = ev.split('.')[1];
+      const type = ev.split(".")[1];
 
       switch (type) {
         case "folder":
@@ -240,6 +260,8 @@ export default {
             this.action = this.$gettext("Updating faces");
           } else if (data.step === "previews") {
             this.action = this.$gettext("Updating previews");
+          } else if (data.step === "cleanup") {
+            this.action = this.$gettext("Cleaning index and cache");
           } else {
             this.action = this.$gettext("Updating index");
           }
@@ -260,11 +282,11 @@ export default {
           this.completed = 0;
           this.fileName = data.fileName;
           break;
-        case 'completed':
+        case "completed":
           this.action = "";
           this.busy = false;
           this.completed = 100;
-          this.fileName = '';
+          this.fileName = "";
           break;
         default:
           console.log(data);

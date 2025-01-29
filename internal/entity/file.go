@@ -14,13 +14,14 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/ulule/deepcopier"
 
-	"github.com/photoprism/photoprism/internal/customize"
-	"github.com/photoprism/photoprism/internal/face"
+	"github.com/photoprism/photoprism/internal/ai/face"
+	"github.com/photoprism/photoprism/internal/config/customize"
 	"github.com/photoprism/photoprism/pkg/clean"
-	"github.com/photoprism/photoprism/pkg/colors"
 	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/media"
-	"github.com/photoprism/photoprism/pkg/projection"
+	"github.com/photoprism/photoprism/pkg/media/colors"
+	"github.com/photoprism/photoprism/pkg/media/projection"
+	"github.com/photoprism/photoprism/pkg/media/video"
 	"github.com/photoprism/photoprism/pkg/rnd"
 	"github.com/photoprism/photoprism/pkg/txt"
 )
@@ -64,23 +65,23 @@ type File struct {
 	FileVideo          bool          `json:"Video" yaml:"Video,omitempty"`
 	FileDuration       time.Duration `json:"Duration" yaml:"Duration,omitempty"`
 	FileFPS            float64       `gorm:"column:file_fps;" json:"FPS" yaml:"FPS,omitempty"`
-	FileFrames         int           `json:"Frames" yaml:"Frames,omitempty"`
-	FileWidth          int           `json:"Width" yaml:"Width,omitempty"`
-	FileHeight         int           `json:"Height" yaml:"Height,omitempty"`
-	FileOrientation    int           `json:"Orientation" yaml:"Orientation,omitempty"`
-	FileOrientationSrc string        `gorm:"type:VARBINARY(8);default:'';" json:"OrientationSrc" yaml:"OrientationSrc,omitempty"`
-	FileProjection     string        `gorm:"type:VARBINARY(64);" json:"Projection,omitempty" yaml:"Projection,omitempty"`
-	FileAspectRatio    float32       `gorm:"type:FLOAT;" json:"AspectRatio" yaml:"AspectRatio,omitempty"`
+	FileFrames         int           `gorm:"column:file_frames;" json:"Frames" yaml:"Frames,omitempty"`
+	FileWidth          int           `gorm:"column:file_width;" json:"Width" yaml:"Width,omitempty"`
+	FileHeight         int           `gorm:"column:file_height;" json:"Height" yaml:"Height,omitempty"`
+	FileOrientation    int           `gorm:"column:file_orientation;" json:"Orientation" yaml:"Orientation,omitempty"`
+	FileOrientationSrc string        `gorm:"column:file_orientation_src;type:VARBINARY(8);default:'';" json:"OrientationSrc" yaml:"OrientationSrc,omitempty"`
+	FileProjection     string        `gorm:"column:file_projection;type:VARBINARY(64);" json:"Projection,omitempty" yaml:"Projection,omitempty"`
+	FileAspectRatio    float32       `gorm:"column:file_aspect_ratio;type:FLOAT;" json:"AspectRatio" yaml:"AspectRatio,omitempty"`
 	FileHDR            bool          `gorm:"column:file_hdr;"  json:"HDR" yaml:"HDR,omitempty"`
 	FileWatermark      bool          `gorm:"column:file_watermark;"  json:"Watermark" yaml:"Watermark,omitempty"`
 	FileColorProfile   string        `gorm:"type:VARBINARY(64);" json:"ColorProfile,omitempty" yaml:"ColorProfile,omitempty"`
-	FileMainColor      string        `gorm:"type:VARBINARY(16);index;" json:"MainColor" yaml:"MainColor,omitempty"`
+	FileMainColor      string        `gorm:"type:VARBINARY(16);" json:"MainColor" yaml:"MainColor,omitempty"`
 	FileColors         string        `gorm:"type:VARBINARY(18);" json:"Colors" yaml:"Colors,omitempty"`
 	FileLuminance      string        `gorm:"type:VARBINARY(18);" json:"Luminance" yaml:"Luminance,omitempty"`
 	FileDiff           int           `json:"Diff" yaml:"Diff,omitempty"`
 	FileChroma         int16         `json:"Chroma" yaml:"Chroma,omitempty"`
 	FileSoftware       string        `gorm:"type:VARCHAR(64)" json:"Software" yaml:"Software,omitempty"`
-	FileError          string        `gorm:"type:VARBINARY(512)" json:"Error" yaml:"Error,omitempty"`
+	FileError          string        `gorm:"type:VARBINARY(512);index;" json:"Error" yaml:"Error,omitempty"`
 	ModTime            int64         `json:"ModTime" yaml:"-"`
 	CreatedAt          time.Time     `json:"CreatedAt" yaml:"-"`
 	CreatedIn          int64         `json:"CreatedIn" yaml:"-"`
@@ -154,18 +155,6 @@ func (m File) RegenerateIndex() {
 	}
 
 	log.Debugf("search: updated %s [%s]", scope, time.Since(start))
-}
-
-type FileInfos struct {
-	FileWidth       int
-	FileHeight      int
-	FileOrientation int
-	FileAspectRatio float32
-	FileMainColor   string
-	FileColors      string
-	FileLuminance   string
-	FileDiff        int
-	FileChroma      int16
 }
 
 // FirstFileByHash gets a file in db from its hash
@@ -250,24 +239,59 @@ func (m *File) OriginalBase(seq int) string {
 
 // ShareBase returns a meaningful file name for sharing.
 func (m *File) ShareBase(seq int) string {
+	// Return fallback share name if the file hash is empty.
+	if len(m.FileHash) < 8 {
+		return fmt.Sprintf("%s.%s", rnd.UUID(), m.FileType)
+	}
+
 	photo := m.RelatedPhoto()
 
+	// Return fallback share name if the related photo could not be found.
 	if photo == nil {
 		return fmt.Sprintf("%s.%s", m.FileHash, m.FileType)
-	} else if len(m.FileHash) < 8 {
-		return fmt.Sprintf("%s.%s", rnd.UUID(), m.FileType)
-	} else if photo.TakenAtLocal.IsZero() || photo.PhotoTitle == "" {
-		return fmt.Sprintf("%s.%s", m.FileHash, m.FileType)
 	}
 
-	name := txt.Title(slug.MakeLang(photo.PhotoTitle, "en"))
-	taken := photo.TakenAtLocal.Format("20060102-150405")
+	var (
+		takenAt   time.Time
+		fileTitle string
+	)
 
+	// Get time when the photo was taken.
+	if !photo.TakenAtLocal.IsZero() {
+		takenAt = photo.TakenAtLocal
+	} else if !photo.TakenAt.IsZero() {
+		takenAt = photo.TakenAt
+	} else if !m.PhotoTakenAt.IsZero() {
+		takenAt = m.PhotoTakenAt
+	} else {
+		takenAt = time.Unix(m.ModTime, 0)
+	}
+
+	// Get title to use in the share file name.
+	if photo.PhotoTitle != "" {
+		fileTitle = photo.PhotoTitle
+	} else if m.OriginalName != "" && fs.NonCanonical(m.OriginalName) {
+		fileTitle = m.OriginalName
+	} else if m.FileName != "" && fs.NonCanonical(m.FileName) {
+		fileTitle = m.FileName
+	} else if photo.OriginalName != "" && fs.NonCanonical(photo.OriginalName) {
+		fileTitle = photo.OriginalName
+	} else if photo.PhotoName != "" && fs.NonCanonical(photo.PhotoName) {
+		fileTitle = photo.PhotoName
+	} else {
+		fileTitle = m.FileHash
+	}
+
+	// Compose a file share name based on time and title.
+	fileTime := takenAt.Format("20060102-150405")
+	fileTitle = txt.Title(slug.MakeLang(fileTitle, "en"))
+
+	// Append file sequence number if requested.
 	if seq > 0 {
-		return fmt.Sprintf("%s-%s (%d).%s", taken, name, seq, m.FileType)
+		return fmt.Sprintf("%s-%s (%d).%s", fileTime, fileTitle, seq, m.FileType)
 	}
 
-	return fmt.Sprintf("%s-%s.%s", taken, name, m.FileType)
+	return fmt.Sprintf("%s-%s.%s", fileTime, fileTitle, m.FileType)
 }
 
 // Changed returns true if new and old file size or modified time are different.
@@ -374,7 +398,7 @@ func (m *File) Delete(permanently bool) error {
 
 // Purge removes a file from the index by marking it as missing.
 func (m *File) Purge() error {
-	deletedAt := TimeStamp()
+	deletedAt := Now()
 	m.FileMissing = true
 	m.FilePrimary = false
 	m.DeletedAt = &deletedAt
@@ -458,15 +482,34 @@ func (m *File) Save() error {
 	return m.ResolvePrimary()
 }
 
-// UpdateVideoInfos updates related video infos based on this file.
+// UpdateVideoInfos updated related video files so they are properly grouped with the primary image in search results.
+// see https://github.com/photoprism/photoprism/pull/3588#issuecomment-1683429455
 func (m *File) UpdateVideoInfos() error {
-	values := FileInfos{}
+	if m.PhotoID <= 0 {
+		return fmt.Errorf("file has invalid photo id")
+	}
 
-	if err := deepcopier.Copy(&values).From(m); err != nil {
+	// Set the video dimensions from the primary image if it could not be determined from the video metadata.
+	// see https://github.com/photoprism/photoprism/blob/develop/internal/photoprism/index_mediafile.go
+	dimensions := FileDimensions{}
+
+	if err := deepcopier.Copy(&dimensions).From(m); err != nil {
+		return err
+	} else if err = Db().Model(File{}).Where("photo_id = ? AND file_video = 1 AND file_width <= 0", m.PhotoID).Updates(dimensions).Error; err != nil {
 		return err
 	}
 
-	return Db().Model(File{}).Where("photo_id = ? AND file_video = 1", m.PhotoID).Updates(values).Error
+	// Set the video appearance from the primary file if it could not be detected e.g. from a JPEG sidecar file.
+	// see https://github.com/photoprism/photoprism/blob/develop/internal/photoprism/index_mediafile.go
+	appearance := FileAppearance{}
+
+	if err := deepcopier.Copy(&appearance).From(m); err != nil {
+		return err
+	} else if err = Db().Model(File{}).Where("photo_id = ? AND file_video = 1", m.PhotoID).Updates(appearance).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Update updates a column in the database.
@@ -676,7 +719,7 @@ func (m *File) SetDuration(d time.Duration) {
 
 // Bitrate returns the average bitrate in MBit/s if the file has a duration.
 func (m *File) Bitrate() float64 {
-	// Make sure size and duration have a positive value.
+	// Return 0 if file size or video duration are unknown.
 	if m.FileSize <= 0 || m.FileDuration <= 0 {
 		return 0
 	}
@@ -837,4 +880,17 @@ func (m *File) SetOrientation(val int, src string) *File {
 	}
 
 	return m
+}
+
+// ContentType returns the HTTP content type of the file including the codec as a parameter, if known.
+func (m *File) ContentType() (contentType string) {
+	if m.FileVideo {
+		contentType = video.ContentType(m.FileMime, m.FileType, m.FileCodec)
+	} else {
+		contentType = clean.ContentType(m.FileMime)
+	}
+
+	log.Debugf("file: %s has content type %s", clean.Log(m.FileName), clean.LogQuote(contentType))
+
+	return contentType
 }

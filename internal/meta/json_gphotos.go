@@ -6,6 +6,7 @@ import (
 	"runtime/debug"
 	"time"
 
+	"github.com/photoprism/photoprism/pkg/txt"
 	"gopkg.in/photoprism/go-tz.v2/tz"
 )
 
@@ -19,12 +20,12 @@ type GPhoto struct {
 	UpdatedAt   GTime  `json:"modificationTime"`
 }
 
-func (m GPhoto) SanitizedTitle() string {
+func (m GPhoto) GetTitle() string {
 	return SanitizeTitle(m.Title)
 }
 
-func (m GPhoto) SanitizedDescription() string {
-	return SanitizeDescription(m.Description)
+func (m GPhoto) GetCaption() string {
+	return SanitizeCaption(m.Description)
 }
 
 type GMeta struct {
@@ -102,12 +103,12 @@ func (data *Data) GPhoto(jsonData []byte) (err error) {
 		return err
 	}
 
-	if s := p.SanitizedTitle(); s != "" && data.Title == "" {
+	if s := p.GetTitle(); s != "" && data.Title == "" {
 		data.Title = s
 	}
 
-	if s := p.SanitizedDescription(); s != "" && data.Description == "" {
-		data.Description = s
+	if s := p.GetCaption(); s != "" && data.Caption == "" {
+		data.Caption = s
 	}
 
 	if p.Views > 0 && data.Views == 0 {
@@ -126,8 +127,8 @@ func (data *Data) GPhoto(jsonData []byte) (err error) {
 
 	if p.Geo.Exists() {
 		if data.Lat == 0 && data.Lng == 0 {
-			data.Lat = float32(p.Geo.Lat)
-			data.Lng = float32(p.Geo.Lng)
+			data.Lat = p.Geo.Lat
+			data.Lng = p.Geo.Lng
 		}
 
 		if data.Altitude == 0 {
@@ -147,8 +148,8 @@ func (data *Data) GPhoto(jsonData []byte) (err error) {
 		}
 
 		if !data.TakenAtLocal.IsZero() {
-			if loc, err := time.LoadLocation(data.TimeZone); err != nil {
-				log.Warnf("metadata: unknown time zone %s (gphotos)", data.TimeZone)
+			if loc := txt.TimeZone(data.TimeZone); loc == nil {
+				log.Warnf("metadata: invalid time zone %s (gphotos)", data.TimeZone)
 			} else if tl, err := time.ParseInLocation("2006:01:02 15:04:05", data.TakenAtLocal.Format("2006:01:02 15:04:05"), loc); err == nil {
 				data.TakenAt = tl.UTC().Truncate(time.Second)
 			} else {

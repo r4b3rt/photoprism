@@ -5,24 +5,29 @@ import (
 
 	"github.com/manifoldco/promptui"
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 
 	"github.com/photoprism/photoprism/internal/config"
 	"github.com/photoprism/photoprism/internal/entity"
 )
 
+const UsersResetDescription = "This command recreates the session and user management database tables so that they are compatible with the current version. Should you experience login problems, for example after an upgrade from an earlier version or a development preview, we recommend that you first try the \"photoprism auth reset --yes\" command to see if it solves the issue. Note that any client access tokens and app passwords that users may have created are also deleted and must be recreated."
+
 // UsersResetCommand configures the command name, flags, and action.
-var UsersResetCommand = cli.Command{
-	Name:  "reset",
-	Usage: "Resets the user database to a clean state",
+var UsersResetCommand = &cli.Command{
+	Name:        "reset",
+	Usage:       "Removes all registered user accounts",
+	Description: UsersResetDescription,
 	Flags: []cli.Flag{
-		cli.BoolFlag{
-			Name:  "trace, t",
-			Usage: "show trace logs for debugging",
+		&cli.BoolFlag{
+			Name:    "trace",
+			Aliases: []string{"t"},
+			Usage:   "show trace logs for debugging",
 		},
-		cli.BoolFlag{
-			Name:  "yes, y",
-			Usage: "assume \"yes\" and run non-interactively",
+		&cli.BoolFlag{
+			Name:    "yes",
+			Aliases: []string{"y"},
+			Usage:   "assume \"yes\" and run non-interactively",
 		},
 	},
 	Action: usersResetAction,
@@ -53,7 +58,7 @@ func usersResetAction(ctx *cli.Context) error {
 		db := conf.Db()
 
 		// Drop existing user management tables.
-		if err := db.DropTableIfExists(entity.User{}, entity.UserDetails{}, entity.UserSettings{}, entity.UserShare{}).Error; err != nil {
+		if err := db.DropTableIfExists(entity.User{}, entity.UserDetails{}, entity.UserSettings{}, entity.UserShare{}, entity.Passcode{}, entity.Session{}).Error; err != nil {
 			return err
 		}
 
@@ -74,6 +79,16 @@ func usersResetAction(ctx *cli.Context) error {
 
 		// Re-create auth_users_shares.
 		if err := db.CreateTable(entity.UserShare{}).Error; err != nil {
+			return err
+		}
+
+		// Re-create passcodes.
+		if err := db.CreateTable(entity.Passcode{}).Error; err != nil {
+			return err
+		}
+
+		// Re-create auth_sessions.
+		if err := db.CreateTable(entity.Session{}).Error; err != nil {
 			return err
 		}
 
