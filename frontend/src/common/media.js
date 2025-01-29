@@ -48,7 +48,7 @@ export const FormatGIF = "gif";
 
 // HTTP Content types (MIME).
 export const ContentTypeMP4 = "video/mp4";
-export const ContentTypeAVC = 'video/mp4; codecs="avc1.640028"';
+export const ContentTypeAVC = 'video/mp4; codecs="avc1.640028"'; // AVC High Profile Level 4
 export const ContentTypeHEVC = 'video/mp4; codecs="hvc1.2.4.L120.B0"';
 export const ContentTypeHEV1 = 'video/mp4; codecs="hev1.2.4.L120.B0"';
 export const ContentTypeVVC = 'video/mp4; codecs="vvc1"';
