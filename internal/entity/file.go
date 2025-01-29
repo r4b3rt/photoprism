@@ -6,13 +6,8 @@ import (
 	"math"
 	"path/filepath"
 	"sort"
-	"strings"
 	"sync"
 	"time"
-
-	"github.com/photoprism/photoprism/pkg/media/video"
-
-	"github.com/photoprism/photoprism/pkg/header"
 
 	"github.com/dustin/go-humanize/english"
 	"github.com/gosimple/slug"
@@ -26,6 +21,7 @@ import (
 	"github.com/photoprism/photoprism/pkg/media"
 	"github.com/photoprism/photoprism/pkg/media/colors"
 	"github.com/photoprism/photoprism/pkg/media/projection"
+	"github.com/photoprism/photoprism/pkg/media/video"
 	"github.com/photoprism/photoprism/pkg/rnd"
 	"github.com/photoprism/photoprism/pkg/txt"
 )
@@ -888,50 +884,11 @@ func (m *File) SetOrientation(val int, src string) *File {
 
 // ContentType returns the HTTP content type of the file including the codec as a parameter, if known.
 func (m *File) ContentType() (contentType string) {
-	contentType = m.FileMime
-
 	if m.FileVideo {
-		if contentType == "" {
-			var codec string
-
-			if m.FileCodec != "" {
-				codec = m.FileCodec
-			} else {
-				codec = m.FileType
-			}
-
-			switch codec {
-			case video.CodecAVC, "mov", "mp4", "avc", "v_avc", "v_avc1":
-				contentType = header.ContentTypeAVC // Advanced Video Coding (AVC), also known as H.264
-			case video.CodecHEVC, "hvc", "hevc", "v_hvc", "v_hvc1":
-				contentType = header.ContentTypeHEVC // High Efficiency Video Coding (HEVC), also known as H.265
-			case video.CodecHEV1, "hev":
-				contentType = header.ContentTypeHEV1 // High Efficiency Video Coding (HEVC) Bitstream
-			case video.CodecVVC, "vvc":
-				contentType = header.ContentTypeVVC // Versatile Video Coding (VVC), also known as H.266
-			case video.CodecEVC, "evc":
-				contentType = header.ContentTypeEVC // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
-			case video.CodecVP8, "vp08":
-				contentType = header.ContentTypeVP8
-			case video.CodecVP9, "vp9":
-				contentType = header.ContentTypeVP9
-			case video.CodecAV1, "av1":
-				contentType = header.ContentTypeAV1
-			case video.CodecOGV, "ogg":
-				contentType = header.ContentTypeOGV
-			case "webm":
-				contentType = header.ContentTypeWebM
-			}
-		}
-
-		if contentType != "" && !strings.Contains(contentType, ";") {
-			if codec := clean.Codec(m.FileCodec); codec != "" {
-				contentType = fmt.Sprintf("%s; codecs=\"%s\"", contentType, codec)
-			}
-		}
+		contentType = video.ContentType(m.FileMime, m.FileType, m.FileCodec)
+	} else {
+		contentType = clean.ContentType(m.FileMime)
 	}
-
-	contentType = clean.ContentType(contentType)
 
 	log.Debugf("file: %s has content type %s", clean.Log(m.FileName), clean.LogQuote(contentType))
 

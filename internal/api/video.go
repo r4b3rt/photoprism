@@ -1,7 +1,6 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
 	"path/filepath"
 	"strings"
@@ -113,7 +112,7 @@ func GetVideo(router *gin.RouterGroup) {
 			} else if c.Request.Header.Get("Range") == "" && info.VideoCodec == format.Codec {
 				defer reader.Close()
 				AddVideoCacheHeader(c, conf.CdnVideo())
-				c.DataFromReader(http.StatusOK, info.VideoSize(), clean.ContentType(info.VideoContentType()), reader, nil)
+				c.DataFromReader(http.StatusOK, info.VideoSize(), info.VideoContentType(), reader, nil)
 				return
 			} else if cacheName, cacheErr := fs.CacheFileFromReader(filepath.Join(conf.MediaFileCachePath(f.FileHash), f.FileHash+info.VideoFileExt()), reader); cacheErr != nil {
 				log.Errorf("video: failed to cache %s embedded in %s (%s)", strings.ToUpper(videoFileType), clean.Log(f.FileName), cacheErr)
@@ -164,7 +163,7 @@ func GetVideo(router *gin.RouterGroup) {
 		} else {
 			if videoCodec != "" && videoCodec != videoFileType {
 				log.Debugf("video: %s is %s encoded and requires no transcoding, average bitrate %.1f MBit/s", clean.Log(f.FileName), strings.ToUpper(videoCodec), videoBitrate)
-				AddContentTypeHeader(c, clean.ContentType(fmt.Sprintf("%s; codecs=\"%s\"", f.FileMime, clean.Codec(videoCodec))))
+				AddContentTypeHeader(c, video.ContentType(mediaFile.MimeType(), videoFileType, videoCodec))
 			} else {
 				log.Debugf("video: %s is streamed directly, average bitrate %.1f MBit/s", clean.Log(f.FileName), videoBitrate)
 				AddContentTypeHeader(c, f.ContentType())

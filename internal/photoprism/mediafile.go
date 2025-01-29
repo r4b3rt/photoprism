@@ -550,15 +550,12 @@ func (m *MediaFile) ContentType() string {
 
 	m.contentType = m.MimeType()
 
-	// Append codecs if media file is a video.
+	// Generate normalized HTTP content type.
 	if m.IsVideo() {
-		if !strings.Contains(m.contentType, ";") && m.MetaData().Codec != "" {
-			m.contentType = fmt.Sprintf("%s; codecs=\"%s\"", m.contentType, clean.Codec(m.MetaData().Codec))
-		}
+		m.contentType = video.ContentType(m.contentType, m.FileType().String(), m.MetaData().Codec)
+	} else {
+		m.contentType = clean.ContentType(m.contentType)
 	}
-
-	// Normalize media content type.
-	m.contentType = clean.ContentType(m.contentType)
 
 	log.Debugf("media: %s has content type %s", clean.Log(m.RootRelName()), clean.LogQuote(m.contentType))
 

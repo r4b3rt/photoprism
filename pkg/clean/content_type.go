@@ -15,7 +15,7 @@ func ContentType(s string) string {
 	s = Type(s)
 
 	// Replace "video/quicktime" with "video/mp4" as the container formats are largely compatible.
-	s = strings.Replace(s, "video/quicktime", "video/mp4", 1)
+	s = strings.Replace(s, header.ContentTypeQT, header.ContentTypeMP4, 1)
 
 	switch s {
 	case "":

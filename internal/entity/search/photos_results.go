@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/photoprism/photoprism/pkg/clean"
-
 	"github.com/gosimple/slug"
 	"github.com/jinzhu/gorm"
 	"github.com/ulule/deepcopier"
 
 	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/event"
+	"github.com/photoprism/photoprism/pkg/clean"
+	"github.com/photoprism/photoprism/pkg/media/video"
 	"github.com/photoprism/photoprism/pkg/txt"
 )
 
@@ -200,7 +200,7 @@ func (m *Photo) MediaInfo() (mediaHash, mediaCodec, mediaMime string) {
 	if m.PhotoType == entity.MediaVideo || m.PhotoType == entity.MediaLive {
 		for _, f := range m.Files {
 			if f.FileVideo && f.FileHash != "" {
-				return f.FileHash, f.FileCodec, clean.ContentType(f.FileMime)
+				return f.FileHash, f.FileCodec, video.ContentType(f.FileMime, f.FileType, f.FileCodec)
 			}
 		}
 	} else if m.PhotoType == entity.MediaVector {
