@@ -4,7 +4,6 @@
       <v-form
         ref="form"
         v-model="valid"
-        validate-on="invalid-input"
         class="p-form-account ma-0 pa-0"
         accept-charset="UTF-8"
         @submit.prevent="onChange"
@@ -32,8 +31,7 @@
                       autocapitalize="none"
                       :label="$gettext('Title')"
                       class="input-name-title"
-                      :rules="[(v) => validLength(v, 0, 32) || $gettext('Invalid')]"
-                      hide-details
+                      :rules="[(v) => validLength(v, 0, 32) || $gettext('Too long')]"
                       @change="onChangeName"
                     ></v-text-field>
                   </v-col>
@@ -48,8 +46,7 @@
                       autocapitalize="none"
                       :label="$gettext('Given Name')"
                       class="input-given-name"
-                      :rules="[(v) => validLength(v, 0, 64) || $gettext('Invalid')]"
-                      hide-details
+                      :rules="[(v) => validLength(v, 0, 64) || $gettext('Too long')]"
                       @change="onChangeName"
                     ></v-text-field>
                   </v-col>
@@ -64,8 +61,7 @@
                       autocapitalize="none"
                       :label="$gettext('Family Name')"
                       class="input-family-name"
-                      :rules="[(v) => validLength(v, 0, 64) || $gettext('Invalid')]"
-                      hide-details
+                      :rules="[(v) => validLength(v, 0, 64) || $gettext('Too long')]"
                       @change="onChangeName"
                     ></v-text-field>
                   </v-col>
@@ -79,15 +75,16 @@
                       autocapitalize="none"
                       :label="$gettext('Display Name')"
                       class="input-display-name"
-                      :rules="[(v) => validLength(v, 1, 200) || $gettext('Required')]"
-                      hide-details
+                      :rules="[
+                        (v) => v?.length > 0 || $gettext('This field is required'),
+                        (v) => validLength(v, 0, 200) || $gettext('Too long'),
+                      ]"
                       @change="onChange"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" md="7">
                     <v-text-field
                       v-model="user.Email"
-                      validate-on="invalid-input"
                       type="email"
                       maxlength="255"
                       :disabled="busy"
@@ -96,8 +93,7 @@
                       autocapitalize="none"
                       :label="$gettext('Email')"
                       class="input-email"
-                      :rules="[(v) => validEmail(v) || $gettext('Invalid')]"
-                      hide-details
+                      :rules="[(v) => validEmail(v) || $gettext('Invalid address')]"
                       @change="onChange"
                     ></v-text-field>
                   </v-col>
@@ -127,9 +123,8 @@
                   autocomplete="off"
                   :disabled="busy"
                   maxlength="2000"
-                  :rules="[(v) => validLength(v, 0, 2000) || $gettext('Invalid')]"
+                  :rules="[(v) => validLength(v, 0, 2000) || $gettext('Too long')]"
                   :label="$gettext('Bio')"
-                  hide-details
                   @change="onChange"
                 ></v-textarea>
               </v-col>
@@ -144,9 +139,8 @@
                   autocomplete="off"
                   :disabled="busy"
                   maxlength="500"
-                  :rules="[(v) => validLength(v, 0, 500) || $gettext('Invalid')]"
+                  :rules="[(v) => validLength(v, 0, 500) || $gettext('Too long')]"
                   :label="$gettext('About')"
-                  hide-details
                   @change="onChange"
                 ></v-textarea>
               </v-col>
@@ -293,8 +287,7 @@
                   autocapitalize="none"
                   :label="$gettext('Location')"
                   class="input-location"
-                  :rules="[(v) => validLength(v, 0, 500) || $gettext('Invalid')]"
-                  hide-details
+                  :rules="[(v) => validLength(v, 0, 500) || $gettext('Too long')]"
                   @change="onChange"
                 ></v-text-field>
               </v-col>
@@ -309,8 +302,7 @@
                   item-title="Name"
                   :items="countries"
                   class="input-country"
-                  :rules="[(v) => validLength(v, 0, 2) || $gettext('Invalid')]"
-                  hide-details
+                  :rules="[(v) => validLength(v, 0, 2) || $gettext('Invalid country')]"
                   @update:modelValue="onChange"
                 >
                 </v-autocomplete>
@@ -325,10 +317,9 @@
                   autocomplete="off"
                   autocorrect="off"
                   autocapitalize="none"
-                  :label="$gettext('URL')"
+                  :label="$gettext('Website')"
                   class="input-site-url"
-                  :rules="[(v) => validUrl(v) || $gettext('Invalid')]"
-                  hide-details
+                  :rules="[(v) => validUrl(v) || $gettext('Invalid URL')]"
                   @change="onChange"
                 ></v-text-field>
               </v-col>
@@ -413,6 +404,9 @@ export default {
       this.$router.push({ name: "settings" });
     }
   },
+  mounted() {
+    this.$refs.form.validate();
+  },
   methods: {
     getProvider() {
       return this.$session.provider ? this.$session.provider : this.user.AuthProvider;
@@ -480,18 +474,35 @@ export default {
       return this.onChange();
     },
     onChange() {
-      if (this.busy || !this.valid) {
+      if (this.busy || !this?.$refs?.form) {
         return;
       }
+
       this.busy = true;
-      this.user
-        .update()
-        .then((u) => {
-          this.user = new User(u);
-          this.$session.setUser(u);
-          this.$notify.success(this.$gettext("Settings saved"));
+
+      this.$refs.form
+        .validate()
+        .then((form) => {
+          if (form.valid) {
+            this.user
+              .update()
+              .then((u) => {
+                this.user = new User(u);
+                this.$session.setUser(u);
+                this.$notify.success(this.$gettext("Settings saved"));
+              })
+              .finally(() => {
+                this.busy = false;
+              });
+          } else {
+            this.$notify.error(this.$gettext("Changes could not be saved"));
+            this.busy = false;
+          }
         })
-        .finally(() => (this.busy = false));
+        .catch(() => {
+          this.$notify.error(this.$gettext("Changes could not be saved"));
+          this.busy = false;
+        });
     },
     onUploadAvatar() {
       if (this.busy) {
