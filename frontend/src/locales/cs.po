@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-29 04:08+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>\n"
+"PO-Revision-Date: 2025-01-29 06:10+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
 "Language-Team: Czech <https://translate.photoprism.app/projects/photoprism/frontend/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -68,15 +68,23 @@ msgstr "%{n} nalezeno lidí"
 msgid "%{n} pictures found"
 msgstr "%{n} nalezených obrázků"
 
-#: src/options/options.js:429
+#: src/common/form.js:180 src/common/form.js:185
+msgid "%{s} is too long"
+msgstr "%{s} je příliš dlouhé"
+
+#: src/common/form.js:179 src/common/form.js:184
+msgid "%{s} is too short"
+msgstr "%{s} je příliš krátké"
+
+#: src/options/options.js:433
 msgid "1 hour"
 msgstr "1 hodina"
 
-#: src/options/options.js:431
+#: src/options/options.js:435
 msgid "12 hours"
 msgstr "12 hodin"
 
-#: src/component/user/edit/dialog.vue:466 src/page/settings/account.vue:326
+#: src/component/user/edit/dialog.vue:466 src/page/settings/account.vue:323
 #: src/component/settings/passcode.vue:72
 msgid "2-Factor Authentication"
 msgstr "Dvoufaktorové ověřování"
@@ -85,7 +93,7 @@ msgstr "Dvoufaktorové ověřování"
 msgid "2FA"
 msgstr "2FA"
 
-#: src/options/options.js:430
+#: src/options/options.js:434
 msgid "4 hours"
 msgstr "4 hodiny"
 
@@ -98,8 +106,9 @@ msgid "A new version of %{s} is available:"
 msgstr "K dispozici je nová verze %{s}:"
 
 #: src/component/user/edit/dialog.vue:243 src/page/about/about.vue:39
-#: src/page/settings/account.vue:251 src/app/routes.js:60
-#: src/component/navigation.vue:1423 src/page/people/recognized.vue:322
+#: src/page/settings/account.vue:247 src/page/settings/account.vue:248
+#: src/app/routes.js:60 src/component/navigation.vue:1423
+#: src/page/people/recognized.vue:322
 msgid "About"
 msgstr "O nás"
 
@@ -215,15 +224,15 @@ msgstr "Admin"
 msgid "Advanced"
 msgstr "Pokročilé"
 
-#: src/options/options.js:439
+#: src/options/options.js:443
 msgid "After 1 day"
 msgstr "Po 1 dni"
 
-#: src/options/options.js:440
+#: src/options/options.js:444
 msgid "After 3 days"
 msgstr "Po 3 dnech"
 
-#: src/options/options.js:441
+#: src/options/options.js:445
 msgid "After 7 days"
 msgstr "Po 7 dnech"
 
@@ -231,11 +240,11 @@ msgstr "Po 7 dnech"
 msgid "After entering your password for confirmation, you can set up two-factor authentication with a compatible authenticator app or device:"
 msgstr "Po zadání hesla pro potvrzení můžete nastavit dvoufaktorové ověřování pomocí kompatibilní ověřovací aplikace nebo zařízení:"
 
-#: src/options/options.js:443
+#: src/options/options.js:447
 msgid "After one month"
 msgstr "Po jednom měsíci"
 
-#: src/options/options.js:445
+#: src/options/options.js:449
 msgid "After one year"
 msgstr "Po jednom roce"
 
@@ -243,11 +252,11 @@ msgstr "Po jednom roce"
 msgid "After selecting pictures from search results, you can add them to an album using the context menu."
 msgstr "Po výběru obrázků z výsledků vyhledávání je můžete přidat do alba pomocí kontextové nabídky."
 
-#: src/options/options.js:444
+#: src/options/options.js:448
 msgid "After two months"
 msgstr "Po dvou měsících"
 
-#: src/options/options.js:442
+#: src/options/options.js:446
 msgid "After two weeks"
 msgstr "Po dvou týdnech"
 
@@ -338,7 +347,7 @@ msgstr "Alternativně lze nahrát soubory přímo do WebDAV serverů jako je Nex
 msgid "Altitude"
 msgstr "Nadmořská výška"
 
-#: src/component/photo/edit/details.vue:263
+#: src/component/photo/edit/details.vue:266
 msgid "Altitude (m)"
 msgstr "Nadmořská výška (m)"
 
@@ -349,7 +358,7 @@ msgstr "AM"
 #: src/component/navigation.vue:423 src/component/photo/edit/files.vue:326
 #: src/component/photo/view/cards.vue:312
 #: src/component/photo/view/cards.vue:470 src/component/photo/view/list.vue:172
-#: src/component/photo/view/mosaic.vue:183 src/options/options.js:364
+#: src/component/photo/view/mosaic.vue:183 src/options/options.js:368
 msgid "Animated"
 msgstr "Animované"
 
@@ -369,17 +378,17 @@ msgstr "API klíč"
 msgid "Application"
 msgstr "Aplikace"
 
-#: src/component/photo/edit/details.vue:619
+#: src/component/photo/edit/details.vue:622
 msgid "Apply"
 msgstr "Použít"
 
 #: src/component/photo/clipboard.vue:64
-#: src/component/photo/edit/details.vue:618
+#: src/component/photo/edit/details.vue:621
 #: src/component/photo/view/cards.vue:402
 msgid "Approve"
 msgstr "Potvrdit"
 
-#: src/page/settings/account.vue:376 src/component/settings/apps.vue:88
+#: src/page/settings/account.vue:373 src/component/settings/apps.vue:88
 msgid "Apps and Devices"
 msgstr "Aplikace a zařízení"
 
@@ -426,7 +435,7 @@ msgstr "Jste si jisti, že chcete tento soubor trvale odstranit?"
 msgid "Are you sure?"
 msgstr "Jste si jistí?"
 
-#: src/component/photo/edit/details.vue:515
+#: src/component/photo/edit/details.vue:518
 msgid "Artist"
 msgstr "Umělec"
 
@@ -472,27 +481,28 @@ msgstr "Staňte se členem ještě dnes, podpořte naše poslání a využívejt
 msgid "Being 100% self-funded and independent, we can promise you that we will never sell your data and that we will always be transparent about our software and services."
 msgstr "Vzhledem k tomu, že jsme stoprocentně financováni z vlastních zdrojů a nezávislí, můžeme vám slíbit, že vaše údaje nikdy neprodáme a že budeme vždy transparentní, pokud jde o náš software a služby."
 
-#: src/component/user/edit/dialog.vue:270 src/page/settings/account.vue:230
+#: src/component/user/edit/dialog.vue:270 src/page/settings/account.vue:226
+#: src/page/settings/account.vue:227
 msgid "Bio"
 msgstr "Biografie"
 
-#: src/page/settings/account.vue:433
+#: src/page/settings/account.vue:430
 msgid "Birth Date"
 msgstr "Datum narození"
 
-#: src/options/options.js:464
+#: src/options/options.js:468
 msgid "Black"
 msgstr "Černá"
 
-#: src/options/options.js:494
+#: src/options/options.js:498
 msgid "Blackman: Lanczos Modification, Less Ringing Artifacts"
 msgstr "Blackman: Lanczos převzorkování, Méně prstencových artefaktů"
 
-#: src/options/options.js:460
+#: src/options/options.js:464
 msgid "Blue"
 msgstr "Modrá"
 
-#: src/options/options.js:461
+#: src/options/options.js:465
 msgid "Brown"
 msgstr "Hnědá"
 
@@ -513,7 +523,7 @@ msgstr "Procházet soubory"
 msgid "Browse indexed files and folders in Library."
 msgstr "Prohlížet indexované soubory a složky v Knihovně."
 
-#: src/page/about/feedback.vue:8 src/options/options.js:471
+#: src/page/about/feedback.vue:8 src/options/options.js:475
 msgid "Bug Report"
 msgstr "Nahlásit chybu"
 
@@ -529,7 +539,7 @@ msgstr "Používáním softwaru a služeb, které poskytujeme, souhlasíte s na�
 msgid "Calendar"
 msgstr "Kalendář"
 
-#: src/component/photo/edit/details.vue:331 src/component/photo/toolbar.vue:313
+#: src/component/photo/edit/details.vue:334 src/component/photo/toolbar.vue:313
 #: src/component/photo/view/cards.vue:487 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "Fotoaparát"
@@ -599,11 +609,11 @@ msgstr "Kolotočový snímek {0} z {1}"
 msgid "Category"
 msgstr "Kategorie"
 
-#: src/component/user/edit/dialog.vue:193 src/page/settings/account.vue:203
+#: src/component/user/edit/dialog.vue:193 src/page/settings/account.vue:200
 msgid "Change Avatar"
 msgstr "Změnit fotku"
 
-#: src/page/settings/account.vue:299 src/component/settings/password.vue:46
+#: src/page/settings/account.vue:296 src/component/settings/password.vue:46
 msgid "Change Password"
 msgstr "Změnit heslo"
 
@@ -619,7 +629,7 @@ msgstr "Změna názvů fotografií, umístění a dalších metadat."
 msgid "Change private flag"
 msgstr "Změnit soukromou vlaječku"
 
-#: src/page/settings/account.vue:155 src/page/settings/account.vue:160
+#: src/page/settings/account.vue:122 src/page/settings/account.vue:127
 msgid "Changes could not be saved"
 msgstr "Změny nemohly být uloženy"
 
@@ -666,7 +676,7 @@ msgstr "Klient"
 msgid "Client Credentials"
 msgstr "Pověření klienta"
 
-#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:605
+#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:608
 #: src/component/photo/toolbar.vue:242
 #: src/component/photo/upload/dialog.vue:219
 #: src/component/settings/apps.vue:221 src/component/settings/apps.vue:434
@@ -717,7 +727,7 @@ msgstr "Potvrdit"
 msgid "Connect"
 msgstr "Připojit"
 
-#: src/page/settings/account.vue:403 src/component/settings/webdav.vue:42
+#: src/page/settings/account.vue:400 src/component/settings/webdav.vue:42
 #: src/page/settings/services.vue:167
 msgid "Connect via WebDAV"
 msgstr "Připojit přes WebDAV"
@@ -726,7 +736,7 @@ msgstr "Připojit přes WebDAV"
 msgid "Connected"
 msgstr "Připojeno"
 
-#: src/page/settings/account.vue:644 src/page/settings/account.vue:536
+#: src/page/settings/account.vue:641 src/page/settings/account.vue:533
 msgid "Contact Details"
 msgstr "Kontaktní údaje"
 
@@ -769,7 +779,7 @@ msgstr "Zkopírováno do schránky"
 msgid "Copy"
 msgstr "Kopie"
 
-#: src/component/photo/edit/details.vue:494
+#: src/component/photo/edit/details.vue:497
 msgid "Copyright"
 msgstr "Autorská práva"
 
@@ -777,8 +787,8 @@ msgstr "Autorská práva"
 msgid "Couldn't find anything."
 msgstr "Nebylo nic nalezeno."
 
-#: src/page/settings/account.vue:689 src/component/photo/edit/details.vue:235
-#: src/component/photo/toolbar.vue:285 src/page/settings/account.vue:581
+#: src/page/settings/account.vue:686 src/component/photo/edit/details.vue:238
+#: src/component/photo/toolbar.vue:285 src/page/settings/account.vue:578
 msgid "Country"
 msgstr "Země"
 
@@ -810,7 +820,7 @@ msgstr "Vytvořeno"
 msgid "Creating thumbnails for"
 msgstr "Vytváření miniatur pro"
 
-#: src/options/options.js:496
+#: src/options/options.js:500
 msgid "Cubic: Moderate Quality, Good Performance"
 msgstr "Cubic: Střední kvalita, Dobrý výkon"
 
@@ -818,15 +828,15 @@ msgstr "Cubic: Střední kvalita, Dobrý výkon"
 msgid "Current Password"
 msgstr "Aktuální heslo"
 
-#: src/page/about/feedback.vue:5 src/options/options.js:468
+#: src/page/about/feedback.vue:5 src/options/options.js:472
 msgid "Customer Support"
 msgstr "Zákaznická podpora"
 
-#: src/options/options.js:459
+#: src/options/options.js:463
 msgid "Cyan"
 msgstr "Tyrkysová"
 
-#: src/options/options.js:432
+#: src/options/options.js:436
 msgid "Daily"
 msgstr "Denně"
 
@@ -834,7 +844,7 @@ msgstr "Denně"
 msgid "Database Backups"
 msgstr "Zálohování databáze"
 
-#: src/page/settings/account.vue:456 src/component/photo/edit/details.vue:112
+#: src/page/settings/account.vue:453 src/component/photo/edit/details.vue:112
 msgid "Day"
 msgstr "Den"
 
@@ -849,9 +859,9 @@ msgstr "Protokoly ladění"
 #: src/options/admin.js:31 src/page/admin/sessions.vue:62
 #: src/page/admin/users.vue:99 src/component/photo/edit/info.vue:61
 #: src/component/photo/edit/info.vue:109 src/model/session.js:64
-#: src/model/user.js:238 src/options/auth.js:20 src/options/auth.js:21
-#: src/options/auth.js:39 src/options/auth.js:40 src/options/options.js:319
-#: src/options/options.js:383 src/options/themes.js:701 src/page/places.vue:197
+#: src/model/user.js:244 src/options/auth.js:20 src/options/auth.js:21
+#: src/options/auth.js:39 src/options/auth.js:40 src/options/options.js:323
+#: src/options/options.js:387 src/options/themes.js:701 src/page/places.vue:197
 msgid "Default"
 msgstr "Výchozí"
 
@@ -964,6 +974,7 @@ msgstr "Odmítnout"
 
 #: src/component/user/add/dialog.vue:115 src/component/user/edit/dialog.vue:165
 #: src/page/admin/users.vue:41 src/page/settings/account.vue:148
+#: src/page/settings/account.vue:150
 msgid "Display Name"
 msgstr "Zobrazované jméno"
 
@@ -979,7 +990,7 @@ msgstr "Nepoužívejte ImageMagick ke konverzi obrázků."
 msgid "Don't use RawTherapee to convert RAW images."
 msgstr "Nepoužívat RawTherapee ke konverzi souborů RAW."
 
-#: src/options/options.js:472
+#: src/options/options.js:476
 msgid "Donations"
 msgstr "Sponzorské dary"
 
@@ -1078,7 +1089,7 @@ msgid "Edited"
 msgstr "Upraveno"
 
 #: src/component/user/add/dialog.vue:134 src/component/user/edit/dialog.vue:217
-#: src/page/settings/account.vue:173 src/page/settings/account.vue:597
+#: src/page/settings/account.vue:170 src/page/settings/account.vue:594
 msgid "Email"
 msgstr "Email"
 
@@ -1139,7 +1150,7 @@ msgstr "Odhad lokalit"
 msgid "Estimate the approximate location of pictures without GPS coordinates."
 msgstr "Odhad přibližné polohy obrázků bez souřadnic GPS."
 
-#: src/options/options.js:433
+#: src/options/options.js:437
 msgid "Every two days"
 msgstr "Každé dva dny"
 
@@ -1169,7 +1180,7 @@ msgstr "Experimentální funkce"
 msgid "Expires"
 msgstr "Vyprší"
 
-#: src/component/photo/edit/details.vue:379
+#: src/component/photo/edit/details.vue:382
 msgid "Exposure"
 msgstr "Expozice"
 
@@ -1177,7 +1188,7 @@ msgstr "Expozice"
 msgid "Extract still images and generate thumbnails while indexing."
 msgstr "Extrakce statických snímků a generování miniatur při indexování."
 
-#: src/component/photo/edit/details.vue:426
+#: src/component/photo/edit/details.vue:429
 msgid "F Number"
 msgstr "Clonové číslo"
 
@@ -1202,10 +1213,11 @@ msgid "Failed updating link"
 msgstr "Aktualizace odkazu selhalo"
 
 #: src/component/user/edit/dialog.vue:144 src/page/settings/account.vue:127
+#: src/page/settings/account.vue:129
 msgid "Family Name"
 msgstr "Rodné jméno"
 
-#: src/options/options.js:303
+#: src/options/options.js:307
 msgid "Fast"
 msgstr "Rychlé"
 
@@ -1221,7 +1233,7 @@ msgstr "Oblíbené"
 msgid "Favorites"
 msgstr "Oblíbené"
 
-#: src/page/about/feedback.vue:7 src/options/options.js:470
+#: src/page/about/feedback.vue:7 src/options/options.js:474
 msgid "Feature Request"
 msgstr "Žádost o funkci"
 
@@ -1229,7 +1241,7 @@ msgstr "Žádost o funkci"
 msgid "Feedback"
 msgstr "Zpětná vazba"
 
-#: src/options/options.js:502
+#: src/options/options.js:506
 msgid "Female"
 msgstr "Žena"
 
@@ -1272,7 +1284,7 @@ msgstr "Soubory s pořadovými názvy jako 'IMG_1234 (2)' a 'IMG_1234 (3)' nále
 msgid "First page"
 msgstr "První strana"
 
-#: src/component/photo/edit/details.vue:445
+#: src/component/photo/edit/details.vue:448
 msgid "Focal Length"
 msgstr "Ohnisková vzdálenost"
 
@@ -1336,6 +1348,7 @@ msgid "Generated"
 msgstr "Generováno"
 
 #: src/component/user/edit/dialog.vue:120 src/page/settings/account.vue:105
+#: src/page/settings/account.vue:107
 msgid "Given Name"
 msgstr "Dané jméno"
 
@@ -1347,15 +1360,15 @@ msgstr "Globální možnosti"
 msgid "Go to page {0}"
 msgstr "Přejít na stránku {0}"
 
-#: src/options/options.js:454
+#: src/options/options.js:458
 msgid "Gold"
 msgstr "Zlatá"
 
-#: src/options/options.js:457
+#: src/options/options.js:461
 msgid "Green"
 msgstr "Zelená"
 
-#: src/options/options.js:463
+#: src/options/options.js:467
 msgid "Grey"
 msgstr "Šedá"
 
@@ -1391,7 +1404,7 @@ msgstr "Skrýt"
 msgid "Hide photos that have been moved to archive."
 msgstr "Skrýt fotografie, které byly přesunuty do archivu."
 
-#: src/options/options.js:387
+#: src/options/options.js:391
 msgid "High"
 msgstr "Vysoká"
 
@@ -1408,7 +1421,7 @@ msgid "If you lose access to your authenticator app or device, you can use your 
 msgstr "Pokud ztratíte přístup ke své ověřovací aplikaci nebo zařízení, můžete pomocí kódu pro obnovení znovu získat přístup ke svému účtu."
 
 #: src/component/photo/edit/info.vue:77 src/component/photo/edit/labels.vue:50
-#: src/model/file.js:217 src/options/options.js:356
+#: src/model/file.js:217 src/options/options.js:360
 msgid "Image"
 msgstr "Snímek"
 
@@ -1496,20 +1509,23 @@ msgstr "Interval"
 #: src/component/user/edit/dialog.vue:220
 #: src/component/user/edit/dialog.vue:242
 #: src/component/user/edit/dialog.vue:269
-#: src/component/user/edit/dialog.vue:351 src/page/settings/account.vue:462
-#: src/page/settings/account.vue:488 src/page/settings/account.vue:511
+#: src/component/user/edit/dialog.vue:351 src/common/form.js:208
+#: src/common/form.js:211 src/common/form.js:219 src/common/form.js:222
+#: src/common/form.js:238 src/common/form.js:239 src/common/form.js:243
+#: src/common/form.js:244
 msgid "Invalid"
 msgstr "Neplatné"
 
-#: src/page/settings/account.vue:175 src/page/settings/account.vue:599
+#: src/common/form.js:153 src/common/form.js:156
 msgid "Invalid address"
 msgstr "Neplatná adresa"
 
-#: src/page/settings/account.vue:696 src/page/settings/account.vue:588
+#: src/common/form.js:194 src/common/form.js:195 src/common/form.js:199
+#: src/common/form.js:200
 msgid "Invalid country"
 msgstr "Neplatná země"
 
-#: src/component/photo/edit/details.vue:147
+#: src/component/photo/edit/details.vue:149
 msgid "Invalid date"
 msgstr "Neplatné datum"
 
@@ -1522,8 +1538,7 @@ msgstr "Neplatné parametry"
 msgid "Invalid photo selected"
 msgstr "Vybrána neplatná fotografie"
 
-#: src/page/settings/account.vue:621 src/page/settings/account.vue:715
-#: src/page/settings/account.vue:607
+#: src/common/form.js:164 src/common/form.js:167
 msgid "Invalid URL"
 msgstr "Neplatná adresa URL"
 
@@ -1532,7 +1547,7 @@ msgstr "Neplatná adresa URL"
 msgid "It is a one-time use code that will disable 2FA for your account when you use it."
 msgstr "Jedná se o jednorázový kód, který deaktivuje 2FA pro váš účet, když jej použijete."
 
-#: src/model/rest.js:165
+#: src/model/rest.js:171
 msgid "Item"
 msgstr "Položka"
 
@@ -1552,7 +1567,7 @@ msgstr "JPEG limit velikosti: %{n}px"
 msgid "JPEGs and thumbnails are automatically rendered as needed."
 msgstr "JPEG a miniatury se vykreslují automaticky dle potřeby."
 
-#: src/component/photo/edit/details.vue:559
+#: src/component/photo/edit/details.vue:562
 msgid "Keywords"
 msgstr "Klíčová slova"
 
@@ -1571,7 +1586,7 @@ msgstr "Štítky"
 msgid "Labels deleted"
 msgstr "Štítky vymazány"
 
-#: src/options/options.js:495
+#: src/options/options.js:499
 msgid "Lanczos: Detail Preservation, Minimal Artifacts"
 msgstr "Lanczos: Zachování detailů, Minimální artefakty"
 
@@ -1599,7 +1614,7 @@ msgstr "Poslední synchronizace"
 msgid "Last Used"
 msgstr "Naposledy použitý"
 
-#: src/component/photo/edit/details.vue:287
+#: src/component/photo/edit/details.vue:290
 #: src/component/photo/edit/info.vue:372
 msgid "Latitude"
 msgstr "Zeměpisná šířka"
@@ -1618,7 +1633,7 @@ msgstr "Zjistěte více"
 msgid "Legal Information"
 msgstr "Právní informace"
 
-#: src/component/photo/edit/details.vue:398
+#: src/component/photo/edit/details.vue:401
 #: src/component/photo/view/cards.vue:498
 msgid "Lens"
 msgstr "Objektiv"
@@ -1630,7 +1645,7 @@ msgid "Library"
 msgstr "Knihovna"
 
 #: src/page/connect.vue:40 src/app/routes.js:66
-#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:537
+#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:540
 #: src/page/about/license.vue:25
 msgid "License"
 msgstr "Licence"
@@ -1639,7 +1654,7 @@ msgstr "Licence"
 msgid "Like"
 msgstr "Líbí se mi"
 
-#: src/options/options.js:456
+#: src/options/options.js:460
 msgid "Lime"
 msgstr "Limetková"
 
@@ -1647,7 +1662,7 @@ msgstr "Limetková"
 msgid "Limit reached, showing first %{n} files"
 msgstr "Dosaženo limitu, zobrazeno prvních %{n} souborů"
 
-#: src/options/options.js:497
+#: src/options/options.js:501
 msgid "Linear: Very Smooth, Best Performance"
 msgstr "Linear: Velmi vyhlazené, Nejlepší výkon"
 
@@ -1661,7 +1676,7 @@ msgstr "Seznam"
 
 #: src/app/routes.js:228 src/component/photo/view/cards.vue:296
 #: src/component/photo/view/cards.vue:461 src/component/photo/view/list.vue:163
-#: src/component/photo/view/mosaic.vue:167 src/options/options.js:368
+#: src/component/photo/view/mosaic.vue:167 src/options/options.js:372
 msgid "Live"
 msgstr "Živé"
 
@@ -1685,14 +1700,16 @@ msgstr "Načítání..."
 msgid "Local"
 msgstr "Místní"
 
-#: src/component/photo/edit/details.vue:187 src/options/options.js:37
+#: src/component/photo/edit/details.vue:190 src/options/options.js:37
 msgid "Local Time"
 msgstr "Místní čas"
 
-#: src/page/settings/account.vue:669 src/component/album/edit/dialog.vue:90
-#: src/component/photo/edit/info.vue:79 src/component/photo/edit/labels.vue:52
+#: src/page/settings/account.vue:666 src/page/settings/account.vue:668
+#: src/component/album/edit/dialog.vue:90 src/component/photo/edit/info.vue:79
+#: src/component/photo/edit/labels.vue:52
 #: src/component/photo/view/cards.vue:521 src/component/photo/view/list.vue:116
-#: src/page/albums.vue:90 src/page/settings/account.vue:561
+#: src/page/albums.vue:90 src/page/settings/account.vue:558
+#: src/page/settings/account.vue:560
 msgid "Location"
 msgstr "Lokalita"
 
@@ -1713,20 +1730,20 @@ msgstr "Odhlásit se"
 msgid "Logs"
 msgstr "Logy"
 
-#: src/component/photo/edit/details.vue:311
+#: src/component/photo/edit/details.vue:314
 #: src/component/photo/edit/info.vue:378
 msgid "Longitude"
 msgstr "Zeměpisná délka"
 
-#: src/options/options.js:391
+#: src/options/options.js:395
 msgid "Low"
 msgstr "Nízká"
 
-#: src/options/options.js:346
+#: src/options/options.js:350
 msgid "Low Resolution"
 msgstr "Nízké rozlišení"
 
-#: src/options/options.js:450
+#: src/options/options.js:454
 msgid "Magenta"
 msgstr "Purpurová"
 
@@ -1734,7 +1751,7 @@ msgstr "Purpurová"
 msgid "Main Color"
 msgstr "Převažující barva"
 
-#: src/options/options.js:501
+#: src/options/options.js:505
 msgid "Male"
 msgstr "Muž"
 
@@ -1760,7 +1777,7 @@ msgstr "Mapy"
 msgid "Marker"
 msgstr "Značka"
 
-#: src/options/options.js:307
+#: src/options/options.js:311
 msgid "Medium"
 msgstr "Střední"
 
@@ -1805,7 +1822,7 @@ msgstr "Okamžiky"
 msgid "Monochrome"
 msgstr "Monochromatické"
 
-#: src/page/settings/account.vue:482 src/component/photo/edit/details.vue:138
+#: src/page/settings/account.vue:479 src/component/photo/edit/details.vue:139
 #: src/component/photo/toolbar.vue:419
 msgid "Month"
 msgstr "Měsíc"
@@ -1849,8 +1866,8 @@ msgstr "Název"
 msgid "Name too long"
 msgstr "Název je příliš dlouhý"
 
-#: src/page/admin/users.vue:127 src/options/options.js:428
-#: src/options/options.js:438 src/page/settings/services.vue:74
+#: src/page/admin/users.vue:127 src/options/options.js:432
+#: src/options/options.js:442 src/page/settings/services.vue:74
 msgid "Never"
 msgstr "Nikdy"
 
@@ -1952,8 +1969,8 @@ msgstr "Žádná varování nebo chyba obsahující toto klíčové slovo. Mějt
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
 msgstr "Nefotografické obrázky a snímky nízké kvality vyžadují kontrolu, než se objeví ve výsledcích vyhledávání."
 
-#: src/options/admin.js:47 src/options/auth.js:32 src/options/options.js:299
-#: src/options/options.js:395
+#: src/options/admin.js:47 src/options/auth.js:32 src/options/options.js:303
+#: src/options/options.js:399
 msgid "None"
 msgstr "Žádné"
 
@@ -1973,7 +1990,7 @@ msgstr "Poznámka:"
 msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
 msgstr "Poznámka: Pouze WebDAV servery, jako Nextcloud nebo PhotoPrism, mohou být nakonfigurovány jako vzdálená služba pro zálohu a nahrávání souborů."
 
-#: src/component/photo/edit/details.vue:581
+#: src/component/photo/edit/details.vue:584
 msgid "Notes"
 msgstr "Poznámky"
 
@@ -2008,7 +2025,7 @@ msgstr "V systému Windows zadejte do dialogového okna připojení následujíc
 msgid "On-demand generation of thumbnails may cause high CPU and memory usage. It is not recommended for resource-constrained servers and NAS devices."
 msgstr "Generování miniatur na vyžádání může způsobit vysoké využití procesoru a paměti. Nedoporučuje se pro servery a zařízení NAS s omezenými zdroji."
 
-#: src/options/options.js:434
+#: src/options/options.js:438
 msgid "Once a week"
 msgstr "Jednou týdně"
 
@@ -2057,11 +2074,11 @@ msgstr "volitelné"
 msgid "or"
 msgstr "nebo"
 
-#: src/options/options.js:453
+#: src/options/options.js:457
 msgid "Orange"
 msgstr "Oranžová"
 
-#: src/page/settings/account.vue:575
+#: src/page/settings/account.vue:572 src/page/settings/account.vue:574
 msgid "Organization"
 msgstr "Organizace"
 
@@ -2078,12 +2095,12 @@ msgid "Original Name"
 msgstr "Název originálu"
 
 #: src/component/navigation.vue:1206 src/model/file.js:195
-#: src/options/options.js:482 src/page/library/browse.vue:58
+#: src/options/options.js:486 src/page/library/browse.vue:58
 #: src/page/settings/general.vue:442 src/page/settings/general.vue:648
 msgid "Originals"
 msgstr "Originály"
 
-#: src/options/options.js:473 src/options/options.js:503
+#: src/options/options.js:477 src/options/options.js:507
 msgid "Other"
 msgstr "Jiné"
 
@@ -2091,7 +2108,7 @@ msgstr "Jiné"
 msgid "Our mission is to provide the most user- and privacy-friendly solution to keep your pictures organized and accessible."
 msgstr "Naším posláním je poskytovat uživatelsky nejpřívětivější řešení pro uspořádání a zpřístupnění vašich fotografií."
 
-#: src/options/options.js:333 src/page/places.vue:213
+#: src/options/options.js:337 src/page/places.vue:213
 msgid "Outdoor"
 msgstr "Zeměpisně"
 
@@ -2170,7 +2187,7 @@ msgstr "Fotografie"
 msgid "Picture Title"
 msgstr "Název obrázku"
 
-#: src/options/options.js:451
+#: src/options/options.js:455
 msgid "Pink"
 msgstr "Růžová"
 
@@ -2280,7 +2297,7 @@ msgstr "Primární"
 msgid "Private"
 msgstr "Soukromé"
 
-#: src/page/about/feedback.vue:6 src/options/options.js:469
+#: src/page/about/feedback.vue:6 src/options/options.js:473
 msgid "Product Feedback"
 msgstr "Zpětná vazba k produktu"
 
@@ -2288,7 +2305,7 @@ msgstr "Zpětná vazba k produktu"
 msgid "Projection"
 msgstr "Projekce"
 
-#: src/options/options.js:449
+#: src/options/options.js:453
 msgid "Purple"
 msgstr "Fialová"
 
@@ -2312,7 +2329,7 @@ msgstr "Náhodně"
 msgid "Rating {0} of {1}"
 msgstr "Hodnocení {0} z {1}"
 
-#: src/options/options.js:360
+#: src/options/options.js:364
 msgid "Raw"
 msgstr "Raw"
 
@@ -2360,7 +2377,7 @@ msgstr "Rozpoznané"
 msgid "Recovery Code"
 msgstr "Kód obnovy"
 
-#: src/options/options.js:452
+#: src/options/options.js:456
 msgid "Red"
 msgstr "Červená"
 
@@ -2458,7 +2475,7 @@ msgstr "Role"
 msgid "Rows per page:"
 msgstr "Řádky na stránku:"
 
-#: src/options/options.js:328 src/page/places.vue:209
+#: src/options/options.js:332 src/page/places.vue:209
 msgid "Satellite"
 msgstr "Satelitní"
 
@@ -2506,7 +2523,7 @@ msgstr "Období"
 msgid "Secret"
 msgstr "Tajemství"
 
-#: src/page/settings/account.vue:274
+#: src/page/settings/account.vue:271
 msgid "Security and Access"
 msgstr "Zabezpečení a přístup"
 
@@ -2590,7 +2607,7 @@ msgstr "Relace"
 msgid "Settings"
 msgstr "Nastavení"
 
-#: src/page/settings/account.vue:149 src/page/settings/account.vue:178
+#: src/page/settings/account.vue:116 src/page/settings/account.vue:145
 #: src/component/settings/passcode.vue:134
 msgid "Settings saved"
 msgstr "Nastavení uloženo"
@@ -2661,7 +2678,7 @@ msgstr "Podobné"
 msgid "Size"
 msgstr "Velikost"
 
-#: src/options/options.js:311
+#: src/options/options.js:315
 msgid "Slow"
 msgstr "Pomalé"
 
@@ -2736,11 +2753,11 @@ msgstr "Status"
 msgid "Storage"
 msgstr "Úložiště"
 
-#: src/options/options.js:323 src/page/places.vue:205
+#: src/options/options.js:327 src/page/places.vue:205
 msgid "Streets"
 msgstr "Ulice"
 
-#: src/component/photo/edit/details.vue:472
+#: src/component/photo/edit/details.vue:475
 #: src/component/photo/edit/labels.vue:48
 msgid "Subject"
 msgstr "Předmět"
@@ -2787,7 +2804,7 @@ msgstr "Synchronizovat raw a video soubory"
 msgid "Taken"
 msgstr "Pořízeno"
 
-#: src/options/options.js:458
+#: src/options/options.js:462
 msgid "Teal"
 msgstr "Šedozelená"
 
@@ -2795,7 +2812,11 @@ msgstr "Šedozelená"
 msgid "TensorFlow is required for image classification, facial recognition, and detecting unsafe content."
 msgstr "TensorFlow je nutný pro klasifikaci obrázků, rozpoznávání obličejů a detekci nebezpečného obsahu."
 
-#: src/component/photo/edit/details.vue:33 src/page/people/new.vue:70
+#: src/common/form.js:173
+msgid "Text"
+msgstr "Text"
+
+#: src/component/photo/edit/details.vue:35 src/page/people/new.vue:70
 msgid "Text too long"
 msgstr "Text je příliš dlouhý"
 
@@ -2819,7 +2840,9 @@ msgstr "Jejich formát nemusí být podporován, nebyly dosud převedeny do JPEG
 msgid "Theme"
 msgstr "Téma"
 
-#: src/page/settings/account.vue:151
+#: src/common/form.js:152 src/common/form.js:163 src/common/form.js:178
+#: src/common/form.js:193 src/common/form.js:207 src/common/form.js:218
+#: src/common/form.js:237
 msgid "This field is required"
 msgstr "Toto pole je povinné"
 
@@ -2827,11 +2850,11 @@ msgstr "Toto pole je povinné"
 msgid "This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local."
 msgstr "Toto nastaví složku originálů jako síťový disk a umožní vám otevírat, upravovat a mazat soubory prostřednictvím vašeho počítače nebo telefonu jako by byly lokálně."
 
-#: src/component/photo/edit/details.vue:187
+#: src/component/photo/edit/details.vue:190
 msgid "Time UTC"
 msgstr "Čas UTC"
 
-#: src/component/photo/edit/details.vue:212
+#: src/component/photo/edit/details.vue:215
 msgid "Time Zone"
 msgstr "Časová zóna"
 
@@ -2849,13 +2872,13 @@ msgctxt "Photo"
 msgid "Title"
 msgstr "Titulek"
 
-#: src/page/settings/account.vue:83 src/component/photo/edit/info.vue:73
-#: src/component/photo/edit/info.vue:154 src/component/photo/edit/labels.vue:44
-#: src/component/photo/view/list.vue:113
+#: src/page/settings/account.vue:83 src/page/settings/account.vue:85
+#: src/component/photo/edit/info.vue:73 src/component/photo/edit/info.vue:154
+#: src/component/photo/edit/labels.vue:44 src/component/photo/view/list.vue:113
 msgid "Title"
 msgstr "Titulek"
 
-#: src/page/settings/account.vue:557
+#: src/page/settings/account.vue:554 src/page/settings/account.vue:556
 msgid "Title / Position"
 msgstr "Název / pozice"
 
@@ -2898,14 +2921,6 @@ msgstr "Přepnout zobrazení"
 msgid "Token"
 msgstr "Token"
 
-#: src/page/settings/account.vue:85 src/page/settings/account.vue:107
-#: src/page/settings/account.vue:129 src/page/settings/account.vue:152
-#: src/page/settings/account.vue:229 src/page/settings/account.vue:250
-#: src/page/settings/account.vue:559 src/page/settings/account.vue:577
-#: src/page/settings/account.vue:671 src/page/settings/account.vue:563
-msgid "Too long"
-msgstr "Příliš dlouho"
-
 #: src/component/photo/upload/dialog.vue:196
 msgid "Too many files selected"
 msgstr "Příliš mnoho vybraných souborů"
@@ -2914,7 +2929,7 @@ msgstr "Příliš mnoho vybraných souborů"
 msgid "Too many requests"
 msgstr "Příliš mnoho požadavků"
 
-#: src/options/options.js:338 src/page/places.vue:217
+#: src/options/options.js:342 src/page/places.vue:217
 msgid "Topographic"
 msgstr "Topograficky"
 
@@ -2950,18 +2965,18 @@ msgstr "Vrátit"
 msgid "Unique ID"
 msgstr "Jedinečné ID"
 
-#: src/component/photo/edit/details.vue:23 src/component/photo/edit/info.vue:28
+#: src/component/photo/edit/details.vue:24 src/component/photo/edit/info.vue:28
 #: src/model/album.js:179 src/model/photo.js:344 src/model/photo.js:781
 #: src/model/photo.js:802 src/model/photo.js:825 src/model/photo.js:843
 #: src/model/photo.js:980 src/model/photo.js:1036 src/model/photo.js:1050
-#: src/model/user.js:155 src/options/options.js:50 src/options/options.js:64
-#: src/options/options.js:81 src/options/options.js:95
-#: src/options/options.js:107 src/page/library/errors.vue:187
+#: src/model/user.js:155 src/options/options.js:50 src/options/options.js:68
+#: src/options/options.js:85 src/options/options.js:99
+#: src/options/options.js:111 src/page/library/errors.vue:187
 #: src/page/library/errors.vue:204
 msgid "Unknown"
 msgstr "Neznámé"
 
-#: src/page/settings/account.vue:48 src/page/settings/account.vue:56
+#: src/page/settings/account.vue:50 src/page/settings/account.vue:58
 #: src/component/navigation.vue:95
 msgid "Unregistered"
 msgstr "Neregistrovaný"
@@ -3058,7 +3073,7 @@ msgstr "Nahrávání %{n} z %{t}…"
 msgid "Uploading photos…"
 msgstr "Nahrávání fotografií…"
 
-#: src/page/settings/account.vue:171
+#: src/page/settings/account.vue:138
 msgid "Uploading…"
 msgstr "Nahrávání…"
 
@@ -3079,7 +3094,7 @@ msgid "Use your recovery code or contact an administrator for help."
 msgstr "Použijte kód pro obnovení nebo se obraťte na správce."
 
 #: src/options/admin.js:10 src/page/admin/sessions.vue:27
-#: src/page/admin/sessions.vue:167 src/model/user.js:337 src/options/auth.js:7
+#: src/page/admin/sessions.vue:167 src/model/user.js:343 src/options/auth.js:7
 msgid "User"
 msgstr "Uživatel"
 
@@ -3104,7 +3119,7 @@ msgstr "Uživatelé"
 #: src/component/photo/view/cards.vue:319
 #: src/component/photo/view/cards.vue:479 src/component/photo/view/list.vue:179
 #: src/component/photo/view/mosaic.vue:190 src/model/photo.js:888
-#: src/model/photo.js:896 src/options/options.js:376
+#: src/model/photo.js:896 src/options/options.js:380
 msgid "Vector"
 msgstr "Vektor"
 
@@ -3119,7 +3134,7 @@ msgstr "Ověřovací kód"
 #: src/component/photo/view/cards.vue:305
 #: src/component/photo/view/cards.vue:452 src/component/photo/view/list.vue:186
 #: src/component/photo/view/mosaic.vue:176 src/model/file.js:220
-#: src/model/photo.js:912 src/model/photo.js:936 src/options/options.js:372
+#: src/model/photo.js:912 src/model/photo.js:936 src/options/options.js:376
 msgid "Video"
 msgstr "Video"
 
@@ -3168,7 +3183,7 @@ msgstr "Webové přihlášení"
 
 #: src/component/user/add/dialog.vue:225 src/component/user/edit/dialog.vue:446
 #: src/page/admin/users.vue:51 src/options/auth.js:55 src/options/auth.js:68
-#: src/options/options.js:513
+#: src/options/options.js:517
 msgid "WebDAV"
 msgstr "WebDAV"
 
@@ -3188,25 +3203,25 @@ msgstr "Nahrát přes WebDAV"
 msgid "WebGL support is disabled in your browser"
 msgstr "Podpora WebGL je ve vašem prohlížeči zakázána"
 
-#: src/page/settings/account.vue:619 src/page/settings/account.vue:713
-#: src/page/settings/account.vue:605
+#: src/page/settings/account.vue:616 src/page/settings/account.vue:710
+#: src/page/settings/account.vue:602
 msgid "Website"
 msgstr "Webová stránka"
 
-#: src/options/options.js:462
+#: src/options/options.js:466
 msgid "White"
 msgstr "Bílá"
 
-#: src/page/settings/account.vue:536
+#: src/page/settings/account.vue:533
 msgid "Work Details"
 msgstr "Podrobnosti o práci"
 
-#: src/page/settings/account.vue:508 src/component/photo/edit/details.vue:164
+#: src/page/settings/account.vue:505 src/component/photo/edit/details.vue:166
 #: src/component/photo/toolbar.vue:393 src/page/albums.vue:194
 msgid "Year"
 msgstr "Rok"
 
-#: src/options/options.js:455
+#: src/options/options.js:459
 msgid "Yellow"
 msgstr "Žlutá"
 
@@ -3268,6 +3283,9 @@ msgstr "Vaše knihovna je průběžně analyzována a automaticky vytváří alb
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "Přiblížit/Oddálit"
+
+#~ msgid "Too long"
+#~ msgstr "Příliš dlouho"
 
 #~ msgid "close"
 #~ msgstr "zavřít"

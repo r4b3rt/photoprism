@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
-"PO-Revision-Date: 2025-01-29 04:08+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>\n"
+"PO-Revision-Date: 2025-01-29 06:10+0000\n"
+"Last-Translator: DeepL <noreply-mt-deepl@weblate.org>\n"
 "Language: et\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,15 +65,23 @@ msgstr "%{n} inimest leitud"
 msgid "%{n} pictures found"
 msgstr "%{n} pilti leitud"
 
-#: src/options/options.js:429
+#: src/common/form.js:180 src/common/form.js:185
+msgid "%{s} is too long"
+msgstr "%{s} on liiga pikk"
+
+#: src/common/form.js:179 src/common/form.js:184
+msgid "%{s} is too short"
+msgstr "%{s} on liiga lühike"
+
+#: src/options/options.js:433
 msgid "1 hour"
 msgstr "1 tund"
 
-#: src/options/options.js:431
+#: src/options/options.js:435
 msgid "12 hours"
 msgstr "12 tundi"
 
-#: src/component/user/edit/dialog.vue:466 src/page/settings/account.vue:326
+#: src/component/user/edit/dialog.vue:466 src/page/settings/account.vue:323
 #: src/component/settings/passcode.vue:72
 msgid "2-Factor Authentication"
 msgstr "2-faktoriline autentimine"
@@ -82,7 +90,7 @@ msgstr "2-faktoriline autentimine"
 msgid "2FA"
 msgstr "2FA"
 
-#: src/options/options.js:430
+#: src/options/options.js:434
 msgid "4 hours"
 msgstr "4 tundi"
 
@@ -95,8 +103,9 @@ msgid "A new version of %{s} is available:"
 msgstr "Rakenduse %{s} uus versioon on saadaval:"
 
 #: src/component/user/edit/dialog.vue:243 src/page/about/about.vue:39
-#: src/page/settings/account.vue:251 src/app/routes.js:60
-#: src/component/navigation.vue:1423 src/page/people/recognized.vue:322
+#: src/page/settings/account.vue:247 src/page/settings/account.vue:248
+#: src/app/routes.js:60 src/component/navigation.vue:1423
+#: src/page/people/recognized.vue:322
 msgid "About"
 msgstr "Teave"
 
@@ -212,15 +221,15 @@ msgstr "Admin"
 msgid "Advanced"
 msgstr "Täpsemad"
 
-#: src/options/options.js:439
+#: src/options/options.js:443
 msgid "After 1 day"
 msgstr "1 päeva pärast"
 
-#: src/options/options.js:440
+#: src/options/options.js:444
 msgid "After 3 days"
 msgstr "3 päeva pärast"
 
-#: src/options/options.js:441
+#: src/options/options.js:445
 msgid "After 7 days"
 msgstr "7 päeva pärast"
 
@@ -228,11 +237,11 @@ msgstr "7 päeva pärast"
 msgid "After entering your password for confirmation, you can set up two-factor authentication with a compatible authenticator app or device:"
 msgstr "Pärast parooli kinnitamiseks sisestamist saate seadistada kahefaktorilise autentimise ühilduva autentimisrakenduse või -seadmega."
 
-#: src/options/options.js:443
+#: src/options/options.js:447
 msgid "After one month"
 msgstr "Ühe kuu pärast"
 
-#: src/options/options.js:445
+#: src/options/options.js:449
 msgid "After one year"
 msgstr "Ühe aasta pärast"
 
@@ -240,11 +249,11 @@ msgstr "Ühe aasta pärast"
 msgid "After selecting pictures from search results, you can add them to an album using the context menu."
 msgstr "Pärast piltide valimist otsingutulemustest saad need kontekstimenüü abil albumisse lisada."
 
-#: src/options/options.js:444
+#: src/options/options.js:448
 msgid "After two months"
 msgstr "Kahe kuu pärast"
 
-#: src/options/options.js:442
+#: src/options/options.js:446
 msgid "After two weeks"
 msgstr "Kahe nädala pärast"
 
@@ -335,7 +344,7 @@ msgstr "Alternatiivina saad faile üles laadida otse WebDAV serveritesse nagu Ne
 msgid "Altitude"
 msgstr "Kõrgus"
 
-#: src/component/photo/edit/details.vue:263
+#: src/component/photo/edit/details.vue:266
 msgid "Altitude (m)"
 msgstr "Kõrgus (m)"
 
@@ -346,7 +355,7 @@ msgstr "AM"
 #: src/component/navigation.vue:423 src/component/photo/edit/files.vue:326
 #: src/component/photo/view/cards.vue:312
 #: src/component/photo/view/cards.vue:470 src/component/photo/view/list.vue:172
-#: src/component/photo/view/mosaic.vue:183 src/options/options.js:364
+#: src/component/photo/view/mosaic.vue:183 src/options/options.js:368
 msgid "Animated"
 msgstr "Animeeritud"
 
@@ -366,17 +375,17 @@ msgstr "API võti"
 msgid "Application"
 msgstr "Taotlus"
 
-#: src/component/photo/edit/details.vue:619
+#: src/component/photo/edit/details.vue:622
 msgid "Apply"
 msgstr "Rakenda"
 
 #: src/component/photo/clipboard.vue:64
-#: src/component/photo/edit/details.vue:618
+#: src/component/photo/edit/details.vue:621
 #: src/component/photo/view/cards.vue:402
 msgid "Approve"
 msgstr "Kinnita"
 
-#: src/page/settings/account.vue:376 src/component/settings/apps.vue:88
+#: src/page/settings/account.vue:373 src/component/settings/apps.vue:88
 msgid "Apps and Devices"
 msgstr "Rakendused ja seadmed"
 
@@ -423,7 +432,7 @@ msgstr "Kas oled kindel, et soovid selle faili lõplikult kustutada?"
 msgid "Are you sure?"
 msgstr "Kas sa oled kindel?"
 
-#: src/component/photo/edit/details.vue:515
+#: src/component/photo/edit/details.vue:518
 msgid "Artist"
 msgstr "Kunstnik"
 
@@ -469,27 +478,28 @@ msgstr "Astu liikmeks juba täna, toeta meie missiooni ja naudi meie liikmete so
 msgid "Being 100% self-funded and independent, we can promise you that we will never sell your data and that we will always be transparent about our software and services."
 msgstr "Kuna me oleme 100% isefinantseeritud ja sõltumatud, võime lubada, et me ei müü kunagi su andmeid ja et oleme oma tarkvara ja teenuste osas alati läbipaistvad."
 
-#: src/component/user/edit/dialog.vue:270 src/page/settings/account.vue:230
+#: src/component/user/edit/dialog.vue:270 src/page/settings/account.vue:226
+#: src/page/settings/account.vue:227
 msgid "Bio"
 msgstr "Elulugu"
 
-#: src/page/settings/account.vue:433
+#: src/page/settings/account.vue:430
 msgid "Birth Date"
 msgstr "Sünnikuupäev"
 
-#: src/options/options.js:464
+#: src/options/options.js:468
 msgid "Black"
 msgstr "Must"
 
-#: src/options/options.js:494
+#: src/options/options.js:498
 msgid "Blackman: Lanczos Modification, Less Ringing Artifacts"
 msgstr "Blackman: Lanczos modifikatsioon, vähem artefakte"
 
-#: src/options/options.js:460
+#: src/options/options.js:464
 msgid "Blue"
 msgstr "Sinine"
 
-#: src/options/options.js:461
+#: src/options/options.js:465
 msgid "Brown"
 msgstr "Pruun"
 
@@ -510,7 +520,7 @@ msgstr "Failide sirvimine"
 msgid "Browse indexed files and folders in Library."
 msgstr "Sirvi fototeegis olevaid indekseeritud faile ja kaustu."
 
-#: src/page/about/feedback.vue:8 src/options/options.js:471
+#: src/page/about/feedback.vue:8 src/options/options.js:475
 msgid "Bug Report"
 msgstr "Vearaport"
 
@@ -526,7 +536,7 @@ msgstr "Meie poolt pakutavat tarkvara ja teenuseid kasutades nõustud kasutustin
 msgid "Calendar"
 msgstr "Kalender"
 
-#: src/component/photo/edit/details.vue:331 src/component/photo/toolbar.vue:313
+#: src/component/photo/edit/details.vue:334 src/component/photo/toolbar.vue:313
 #: src/component/photo/view/cards.vue:487 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "Kaamera"
@@ -596,11 +606,11 @@ msgstr "Karussell slaid {0} of {1}"
 msgid "Category"
 msgstr "Kategooria"
 
-#: src/component/user/edit/dialog.vue:193 src/page/settings/account.vue:203
+#: src/component/user/edit/dialog.vue:193 src/page/settings/account.vue:200
 msgid "Change Avatar"
 msgstr "Muuda profiilipilti"
 
-#: src/page/settings/account.vue:299 src/component/settings/password.vue:46
+#: src/page/settings/account.vue:296 src/component/settings/password.vue:46
 msgid "Change Password"
 msgstr "Muuda parool"
 
@@ -616,7 +626,7 @@ msgstr "Muuda fotode pealkirju, asukohti ja muid metaandmeid."
 msgid "Change private flag"
 msgstr "Muuda isiklikkust"
 
-#: src/page/settings/account.vue:155 src/page/settings/account.vue:160
+#: src/page/settings/account.vue:122 src/page/settings/account.vue:127
 msgid "Changes could not be saved"
 msgstr "Muudatuste salvestamine ebaõnnestus"
 
@@ -663,7 +673,7 @@ msgstr "Klient"
 msgid "Client Credentials"
 msgstr "Kliendi volitused"
 
-#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:605
+#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:608
 #: src/component/photo/toolbar.vue:242
 #: src/component/photo/upload/dialog.vue:219
 #: src/component/settings/apps.vue:221 src/component/settings/apps.vue:434
@@ -714,7 +724,7 @@ msgstr "Kinnita"
 msgid "Connect"
 msgstr "Ühenda"
 
-#: src/page/settings/account.vue:403 src/component/settings/webdav.vue:42
+#: src/page/settings/account.vue:400 src/component/settings/webdav.vue:42
 #: src/page/settings/services.vue:167
 msgid "Connect via WebDAV"
 msgstr "Ühenda WebDAV-i kaudu"
@@ -723,7 +733,7 @@ msgstr "Ühenda WebDAV-i kaudu"
 msgid "Connected"
 msgstr "Ühendatud"
 
-#: src/page/settings/account.vue:644 src/page/settings/account.vue:536
+#: src/page/settings/account.vue:641 src/page/settings/account.vue:533
 msgid "Contact Details"
 msgstr "Kontaktandmed"
 
@@ -766,7 +776,7 @@ msgstr "Kopeeritud lõikelauale"
 msgid "Copy"
 msgstr "Kopeeri"
 
-#: src/component/photo/edit/details.vue:494
+#: src/component/photo/edit/details.vue:497
 msgid "Copyright"
 msgstr "Autoriõigus"
 
@@ -774,8 +784,8 @@ msgstr "Autoriõigus"
 msgid "Couldn't find anything."
 msgstr "Midagi ei leitud."
 
-#: src/page/settings/account.vue:689 src/component/photo/edit/details.vue:235
-#: src/component/photo/toolbar.vue:285 src/page/settings/account.vue:581
+#: src/page/settings/account.vue:686 src/component/photo/edit/details.vue:238
+#: src/component/photo/toolbar.vue:285 src/page/settings/account.vue:578
 msgid "Country"
 msgstr "Riik"
 
@@ -807,7 +817,7 @@ msgstr "Lisatud"
 msgid "Creating thumbnails for"
 msgstr "Pisipiltide loomine:"
 
-#: src/options/options.js:496
+#: src/options/options.js:500
 msgid "Cubic: Moderate Quality, Good Performance"
 msgstr "Cubic: mõõdukas kvaliteet, hea jõudlus"
 
@@ -815,15 +825,15 @@ msgstr "Cubic: mõõdukas kvaliteet, hea jõudlus"
 msgid "Current Password"
 msgstr "Praegune parool"
 
-#: src/page/about/feedback.vue:5 src/options/options.js:468
+#: src/page/about/feedback.vue:5 src/options/options.js:472
 msgid "Customer Support"
 msgstr "Klienditugi"
 
-#: src/options/options.js:459
+#: src/options/options.js:463
 msgid "Cyan"
 msgstr "Tsüaan"
 
-#: src/options/options.js:432
+#: src/options/options.js:436
 msgid "Daily"
 msgstr "Üks kord päevas"
 
@@ -831,7 +841,7 @@ msgstr "Üks kord päevas"
 msgid "Database Backups"
 msgstr "Andmebaasi varukoopiad"
 
-#: src/page/settings/account.vue:456 src/component/photo/edit/details.vue:112
+#: src/page/settings/account.vue:453 src/component/photo/edit/details.vue:112
 msgid "Day"
 msgstr "Päev"
 
@@ -846,9 +856,9 @@ msgstr "Tõrkeotsingu logid"
 #: src/options/admin.js:31 src/page/admin/sessions.vue:62
 #: src/page/admin/users.vue:99 src/component/photo/edit/info.vue:61
 #: src/component/photo/edit/info.vue:109 src/model/session.js:64
-#: src/model/user.js:238 src/options/auth.js:20 src/options/auth.js:21
-#: src/options/auth.js:39 src/options/auth.js:40 src/options/options.js:319
-#: src/options/options.js:383 src/options/themes.js:701 src/page/places.vue:197
+#: src/model/user.js:244 src/options/auth.js:20 src/options/auth.js:21
+#: src/options/auth.js:39 src/options/auth.js:40 src/options/options.js:323
+#: src/options/options.js:387 src/options/themes.js:701 src/page/places.vue:197
 msgid "Default"
 msgstr "Vaikimisi"
 
@@ -961,6 +971,7 @@ msgstr "Lase lahti"
 
 #: src/component/user/add/dialog.vue:115 src/component/user/edit/dialog.vue:165
 #: src/page/admin/users.vue:41 src/page/settings/account.vue:148
+#: src/page/settings/account.vue:150
 msgid "Display Name"
 msgstr "Esitusnimi"
 
@@ -976,7 +987,7 @@ msgstr "Ärge kasutage ImageMagicki piltide teisendamiseks."
 msgid "Don't use RawTherapee to convert RAW images."
 msgstr "Ärge kasutage RawTherapee't RAW-piltide teisendamiseks."
 
-#: src/options/options.js:472
+#: src/options/options.js:476
 msgid "Donations"
 msgstr "Annetused"
 
@@ -1075,7 +1086,7 @@ msgid "Edited"
 msgstr "Muudetud"
 
 #: src/component/user/add/dialog.vue:134 src/component/user/edit/dialog.vue:217
-#: src/page/settings/account.vue:173 src/page/settings/account.vue:597
+#: src/page/settings/account.vue:170 src/page/settings/account.vue:594
 msgid "Email"
 msgstr "E-post"
 
@@ -1136,7 +1147,7 @@ msgstr "Hinnangulised asukohad"
 msgid "Estimate the approximate location of pictures without GPS coordinates."
 msgstr "Hinnake piltide ligikaudset asukohta ilma GPS-koordinaatideta."
 
-#: src/options/options.js:433
+#: src/options/options.js:437
 msgid "Every two days"
 msgstr "Iga kahe päeva tagant"
 
@@ -1166,7 +1177,7 @@ msgstr "Eksperimentaalsed funktsioonid"
 msgid "Expires"
 msgstr "Aegub"
 
-#: src/component/photo/edit/details.vue:379
+#: src/component/photo/edit/details.vue:382
 msgid "Exposure"
 msgstr "Säriaeg"
 
@@ -1174,7 +1185,7 @@ msgstr "Säriaeg"
 msgid "Extract still images and generate thumbnails while indexing."
 msgstr "Väljavõte fotodest ja pisipiltide genereerimine indekseerimise ajal."
 
-#: src/component/photo/edit/details.vue:426
+#: src/component/photo/edit/details.vue:429
 msgid "F Number"
 msgstr "F-number"
 
@@ -1199,10 +1210,11 @@ msgid "Failed updating link"
 msgstr "Lingi uuendamine ebaõnnestus"
 
 #: src/component/user/edit/dialog.vue:144 src/page/settings/account.vue:127
+#: src/page/settings/account.vue:129
 msgid "Family Name"
 msgstr "Perekonnanimi"
 
-#: src/options/options.js:303
+#: src/options/options.js:307
 msgid "Fast"
 msgstr "Kiire"
 
@@ -1218,7 +1230,7 @@ msgstr "Lemmik"
 msgid "Favorites"
 msgstr "Lemmikud"
 
-#: src/page/about/feedback.vue:7 src/options/options.js:470
+#: src/page/about/feedback.vue:7 src/options/options.js:474
 msgid "Feature Request"
 msgstr "Funktsiooni taotlus"
 
@@ -1226,7 +1238,7 @@ msgstr "Funktsiooni taotlus"
 msgid "Feedback"
 msgstr "Tagasiside"
 
-#: src/options/options.js:502
+#: src/options/options.js:506
 msgid "Female"
 msgstr "Naine"
 
@@ -1269,7 +1281,7 @@ msgstr "Järjestikuste nimedega failid nagu 'IMG_1234 (2)' ja 'IMG_1234 (3)' kuu
 msgid "First page"
 msgstr "Esimene lehekülg"
 
-#: src/component/photo/edit/details.vue:445
+#: src/component/photo/edit/details.vue:448
 msgid "Focal Length"
 msgstr "Fookuskaugus"
 
@@ -1333,6 +1345,7 @@ msgid "Generated"
 msgstr "Genereeritud"
 
 #: src/component/user/edit/dialog.vue:120 src/page/settings/account.vue:105
+#: src/page/settings/account.vue:107
 msgid "Given Name"
 msgstr "Eesnimi"
 
@@ -1344,15 +1357,15 @@ msgstr "Globaalsed valikud"
 msgid "Go to page {0}"
 msgstr "Mine lehele {0}"
 
-#: src/options/options.js:454
+#: src/options/options.js:458
 msgid "Gold"
 msgstr "Kuld"
 
-#: src/options/options.js:457
+#: src/options/options.js:461
 msgid "Green"
 msgstr "Roheline"
 
-#: src/options/options.js:463
+#: src/options/options.js:467
 msgid "Grey"
 msgstr "Hall"
 
@@ -1388,7 +1401,7 @@ msgstr "Peida"
 msgid "Hide photos that have been moved to archive."
 msgstr "Peida fotod, mis on viidud arhiivi."
 
-#: src/options/options.js:387
+#: src/options/options.js:391
 msgid "High"
 msgstr "Kõrge"
 
@@ -1405,7 +1418,7 @@ msgid "If you lose access to your authenticator app or device, you can use your 
 msgstr "Kui kaotate juurdepääsu autentimisrakendusele või -seadmele, saate oma kontole juurdepääsu taastamiseks kasutada taastekoodi."
 
 #: src/component/photo/edit/info.vue:77 src/component/photo/edit/labels.vue:50
-#: src/model/file.js:217 src/options/options.js:356
+#: src/model/file.js:217 src/options/options.js:360
 msgid "Image"
 msgstr "Pilt"
 
@@ -1493,20 +1506,23 @@ msgstr "Intervall"
 #: src/component/user/edit/dialog.vue:220
 #: src/component/user/edit/dialog.vue:242
 #: src/component/user/edit/dialog.vue:269
-#: src/component/user/edit/dialog.vue:351 src/page/settings/account.vue:462
-#: src/page/settings/account.vue:488 src/page/settings/account.vue:511
+#: src/component/user/edit/dialog.vue:351 src/common/form.js:208
+#: src/common/form.js:211 src/common/form.js:219 src/common/form.js:222
+#: src/common/form.js:238 src/common/form.js:239 src/common/form.js:243
+#: src/common/form.js:244
 msgid "Invalid"
 msgstr "Vigane"
 
-#: src/page/settings/account.vue:175 src/page/settings/account.vue:599
+#: src/common/form.js:153 src/common/form.js:156
 msgid "Invalid address"
 msgstr "Vale aadress"
 
-#: src/page/settings/account.vue:696 src/page/settings/account.vue:588
+#: src/common/form.js:194 src/common/form.js:195 src/common/form.js:199
+#: src/common/form.js:200
 msgid "Invalid country"
 msgstr "Vale riik"
 
-#: src/component/photo/edit/details.vue:147
+#: src/component/photo/edit/details.vue:149
 msgid "Invalid date"
 msgstr "Vigane kuupäev"
 
@@ -1519,8 +1535,7 @@ msgstr "Vigased parameetrid"
 msgid "Invalid photo selected"
 msgstr "Vigane foto valitud"
 
-#: src/page/settings/account.vue:621 src/page/settings/account.vue:715
-#: src/page/settings/account.vue:607
+#: src/common/form.js:164 src/common/form.js:167
 msgid "Invalid URL"
 msgstr "Vale URL aadress"
 
@@ -1529,7 +1544,7 @@ msgstr "Vale URL aadress"
 msgid "It is a one-time use code that will disable 2FA for your account when you use it."
 msgstr "See on ühekordne kood, mis keelab teie kontol 2FA, kui seda kasutate."
 
-#: src/model/rest.js:165
+#: src/model/rest.js:171
 msgid "Item"
 msgstr "Element"
 
@@ -1549,7 +1564,7 @@ msgstr "JPEG suuruse limiit: %{n}px"
 msgid "JPEGs and thumbnails are automatically rendered as needed."
 msgstr "JPEG- ja pisipildid renderdatakse automaatselt vastavalt vajadusele."
 
-#: src/component/photo/edit/details.vue:559
+#: src/component/photo/edit/details.vue:562
 msgid "Keywords"
 msgstr "Märksõnad"
 
@@ -1568,7 +1583,7 @@ msgstr "Sildid"
 msgid "Labels deleted"
 msgstr "Sildid kustutatud"
 
-#: src/options/options.js:495
+#: src/options/options.js:499
 msgid "Lanczos: Detail Preservation, Minimal Artifacts"
 msgstr "Lanczos: detailide säilitamine, minimaalsed artefaktid"
 
@@ -1596,7 +1611,7 @@ msgstr "Viimane sünkroonimine"
 msgid "Last Used"
 msgstr "Viimati kasutatud"
 
-#: src/component/photo/edit/details.vue:287
+#: src/component/photo/edit/details.vue:290
 #: src/component/photo/edit/info.vue:372
 msgid "Latitude"
 msgstr "Laiuskraad"
@@ -1615,7 +1630,7 @@ msgstr "Lisateave"
 msgid "Legal Information"
 msgstr "Õigusalane teave"
 
-#: src/component/photo/edit/details.vue:398
+#: src/component/photo/edit/details.vue:401
 #: src/component/photo/view/cards.vue:498
 msgid "Lens"
 msgstr "Objektiiv"
@@ -1627,7 +1642,7 @@ msgid "Library"
 msgstr "Fototeek"
 
 #: src/page/connect.vue:40 src/app/routes.js:66
-#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:537
+#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:540
 #: src/page/about/license.vue:25
 msgid "License"
 msgstr "Litsents"
@@ -1636,7 +1651,7 @@ msgstr "Litsents"
 msgid "Like"
 msgstr "Meeldib"
 
-#: src/options/options.js:456
+#: src/options/options.js:460
 msgid "Lime"
 msgstr "Laimiroheline"
 
@@ -1644,7 +1659,7 @@ msgstr "Laimiroheline"
 msgid "Limit reached, showing first %{n} files"
 msgstr "Limiit saavutatud, näidatakse esimest %{n} faili"
 
-#: src/options/options.js:497
+#: src/options/options.js:501
 msgid "Linear: Very Smooth, Best Performance"
 msgstr "Lineaarne: väga sujuv, parim jõudlus"
 
@@ -1658,7 +1673,7 @@ msgstr "Loend"
 
 #: src/app/routes.js:228 src/component/photo/view/cards.vue:296
 #: src/component/photo/view/cards.vue:461 src/component/photo/view/list.vue:163
-#: src/component/photo/view/mosaic.vue:167 src/options/options.js:368
+#: src/component/photo/view/mosaic.vue:167 src/options/options.js:372
 msgid "Live"
 msgstr "Live"
 
@@ -1682,14 +1697,16 @@ msgstr "Laadimine..."
 msgid "Local"
 msgstr "Kohalik"
 
-#: src/component/photo/edit/details.vue:187 src/options/options.js:37
+#: src/component/photo/edit/details.vue:190 src/options/options.js:37
 msgid "Local Time"
 msgstr "Kohalik aeg"
 
-#: src/page/settings/account.vue:669 src/component/album/edit/dialog.vue:90
-#: src/component/photo/edit/info.vue:79 src/component/photo/edit/labels.vue:52
+#: src/page/settings/account.vue:666 src/page/settings/account.vue:668
+#: src/component/album/edit/dialog.vue:90 src/component/photo/edit/info.vue:79
+#: src/component/photo/edit/labels.vue:52
 #: src/component/photo/view/cards.vue:521 src/component/photo/view/list.vue:116
-#: src/page/albums.vue:90 src/page/settings/account.vue:561
+#: src/page/albums.vue:90 src/page/settings/account.vue:558
+#: src/page/settings/account.vue:560
 msgid "Location"
 msgstr "Asukoht"
 
@@ -1710,20 +1727,20 @@ msgstr "Logi välja"
 msgid "Logs"
 msgstr "Logid"
 
-#: src/component/photo/edit/details.vue:311
+#: src/component/photo/edit/details.vue:314
 #: src/component/photo/edit/info.vue:378
 msgid "Longitude"
 msgstr "Pikkuskraad"
 
-#: src/options/options.js:391
+#: src/options/options.js:395
 msgid "Low"
 msgstr "Madal"
 
-#: src/options/options.js:346
+#: src/options/options.js:350
 msgid "Low Resolution"
 msgstr "Madal resolutsioon"
 
-#: src/options/options.js:450
+#: src/options/options.js:454
 msgid "Magenta"
 msgstr "Magenta"
 
@@ -1731,7 +1748,7 @@ msgstr "Magenta"
 msgid "Main Color"
 msgstr "Põhivärv"
 
-#: src/options/options.js:501
+#: src/options/options.js:505
 msgid "Male"
 msgstr "Mees"
 
@@ -1757,7 +1774,7 @@ msgstr "Kaardid"
 msgid "Marker"
 msgstr "Märk"
 
-#: src/options/options.js:307
+#: src/options/options.js:311
 msgid "Medium"
 msgstr "Keskmine"
 
@@ -1802,7 +1819,7 @@ msgstr "Hetked"
 msgid "Monochrome"
 msgstr "Mustvalge"
 
-#: src/page/settings/account.vue:482 src/component/photo/edit/details.vue:138
+#: src/page/settings/account.vue:479 src/component/photo/edit/details.vue:139
 #: src/component/photo/toolbar.vue:419
 msgid "Month"
 msgstr "Kuu"
@@ -1846,8 +1863,8 @@ msgstr "Nimi"
 msgid "Name too long"
 msgstr "Nimi on liiga pikk"
 
-#: src/page/admin/users.vue:127 src/options/options.js:428
-#: src/options/options.js:438 src/page/settings/services.vue:74
+#: src/page/admin/users.vue:127 src/options/options.js:432
+#: src/options/options.js:442 src/page/settings/services.vue:74
 msgid "Never"
 msgstr "Mitte kunagi"
 
@@ -1949,8 +1966,8 @@ msgstr "Seda märksõna sisaldavaid hoiatusi või vigu ei ole. Pane tähele, et 
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
 msgstr "Mittefotograafilised ja madala kvaliteediga pildid tuleb üle vaadata, enne kui nad otsingutulemustes ilmuvad."
 
-#: src/options/admin.js:47 src/options/auth.js:32 src/options/options.js:299
-#: src/options/options.js:395
+#: src/options/admin.js:47 src/options/auth.js:32 src/options/options.js:303
+#: src/options/options.js:399
 msgid "None"
 msgstr "Puudub"
 
@@ -1970,7 +1987,7 @@ msgstr "Märkus:"
 msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
 msgstr "Märkus: Ainult WebDAV servereid, nagu Nextcloud või PhotoPrism, saab seadistada kaugteenusena varundamiseks ja failide üleslaadimiseks."
 
-#: src/component/photo/edit/details.vue:581
+#: src/component/photo/edit/details.vue:584
 msgid "Notes"
 msgstr "Märkused"
 
@@ -2005,7 +2022,7 @@ msgstr "Windowsis sisestage ühendusdialoogi järgmine ressurss:"
 msgid "On-demand generation of thumbnails may cause high CPU and memory usage. It is not recommended for resource-constrained servers and NAS devices."
 msgstr "Väikepiltide nõudmisel genereerimine võib põhjustada suurt protsessori- ja mälukasutust. Seda ei soovitata piiratud ressurssidega serverite ja NAS-seadmete puhul."
 
-#: src/options/options.js:434
+#: src/options/options.js:438
 msgid "Once a week"
 msgstr "Üks kord nädalas"
 
@@ -2054,11 +2071,11 @@ msgstr "vabatahtlik"
 msgid "or"
 msgstr "või"
 
-#: src/options/options.js:453
+#: src/options/options.js:457
 msgid "Orange"
 msgstr "Oranžikas"
 
-#: src/page/settings/account.vue:575
+#: src/page/settings/account.vue:572 src/page/settings/account.vue:574
 msgid "Organization"
 msgstr "Organisatsioon"
 
@@ -2075,12 +2092,12 @@ msgid "Original Name"
 msgstr "Esialgne nimi"
 
 #: src/component/navigation.vue:1206 src/model/file.js:195
-#: src/options/options.js:482 src/page/library/browse.vue:58
+#: src/options/options.js:486 src/page/library/browse.vue:58
 #: src/page/settings/general.vue:442 src/page/settings/general.vue:648
 msgid "Originals"
 msgstr "Originaalid"
 
-#: src/options/options.js:473 src/options/options.js:503
+#: src/options/options.js:477 src/options/options.js:507
 msgid "Other"
 msgstr "Muu"
 
@@ -2088,7 +2105,7 @@ msgstr "Muu"
 msgid "Our mission is to provide the most user- and privacy-friendly solution to keep your pictures organized and accessible."
 msgstr "Meie eesmärk on pakkuda kõige kasutajasõbralikumat ja privaatsussõbralikumat lahendust, et hoida teie pilte korrastatuna ja kättesaadavana."
 
-#: src/options/options.js:333 src/page/places.vue:213
+#: src/options/options.js:337 src/page/places.vue:213
 msgid "Outdoor"
 msgstr "Loodus"
 
@@ -2167,7 +2184,7 @@ msgstr "Fotod"
 msgid "Picture Title"
 msgstr "Pildi pealkiri"
 
-#: src/options/options.js:451
+#: src/options/options.js:455
 msgid "Pink"
 msgstr "Roosa"
 
@@ -2277,7 +2294,7 @@ msgstr "Primaarne"
 msgid "Private"
 msgstr "Isiklik"
 
-#: src/page/about/feedback.vue:6 src/options/options.js:469
+#: src/page/about/feedback.vue:6 src/options/options.js:473
 msgid "Product Feedback"
 msgstr "Tagasiside"
 
@@ -2285,7 +2302,7 @@ msgstr "Tagasiside"
 msgid "Projection"
 msgstr "Projektsioon"
 
-#: src/options/options.js:449
+#: src/options/options.js:453
 msgid "Purple"
 msgstr "Lilla"
 
@@ -2309,7 +2326,7 @@ msgstr "Juhuslik"
 msgid "Rating {0} of {1}"
 msgstr "Hinnang {0} {1}"
 
-#: src/options/options.js:360
+#: src/options/options.js:364
 msgid "Raw"
 msgstr "RAW"
 
@@ -2357,7 +2374,7 @@ msgstr "Tuvastatud"
 msgid "Recovery Code"
 msgstr "Taastamiskood"
 
-#: src/options/options.js:452
+#: src/options/options.js:456
 msgid "Red"
 msgstr "Punane"
 
@@ -2455,7 +2472,7 @@ msgstr "Role"
 msgid "Rows per page:"
 msgstr "Rida lehekülje kohta:"
 
-#: src/options/options.js:328 src/page/places.vue:209
+#: src/options/options.js:332 src/page/places.vue:209
 msgid "Satellite"
 msgstr "Satelliit"
 
@@ -2503,7 +2520,7 @@ msgstr "Aastaaeg"
 msgid "Secret"
 msgstr "Salajane"
 
-#: src/page/settings/account.vue:274
+#: src/page/settings/account.vue:271
 msgid "Security and Access"
 msgstr "Turvalisus ja ligipääs"
 
@@ -2587,7 +2604,7 @@ msgstr "Sessioonid"
 msgid "Settings"
 msgstr "Seaded"
 
-#: src/page/settings/account.vue:149 src/page/settings/account.vue:178
+#: src/page/settings/account.vue:116 src/page/settings/account.vue:145
 #: src/component/settings/passcode.vue:134
 msgid "Settings saved"
 msgstr "Seaded salvestatud"
@@ -2658,7 +2675,7 @@ msgstr "Sarnased"
 msgid "Size"
 msgstr "Suurus"
 
-#: src/options/options.js:311
+#: src/options/options.js:315
 msgid "Slow"
 msgstr "Aeglane"
 
@@ -2733,11 +2750,11 @@ msgstr "Staatus"
 msgid "Storage"
 msgstr "Asukoht"
 
-#: src/options/options.js:323 src/page/places.vue:205
+#: src/options/options.js:327 src/page/places.vue:205
 msgid "Streets"
 msgstr "Tänavad"
 
-#: src/component/photo/edit/details.vue:472
+#: src/component/photo/edit/details.vue:475
 #: src/component/photo/edit/labels.vue:48
 msgid "Subject"
 msgstr "Subjekt"
@@ -2784,7 +2801,7 @@ msgstr "Sünkrooni RAW ja videofaile"
 msgid "Taken"
 msgstr "Pildistatud"
 
-#: src/options/options.js:458
+#: src/options/options.js:462
 msgid "Teal"
 msgstr "Sinakasroheline"
 
@@ -2792,7 +2809,11 @@ msgstr "Sinakasroheline"
 msgid "TensorFlow is required for image classification, facial recognition, and detecting unsafe content."
 msgstr "TensorFlow on vajalik piltide klassifitseerimiseks, näotuvastuseks ja ohtliku sisu tuvastamiseks."
 
-#: src/component/photo/edit/details.vue:33 src/page/people/new.vue:70
+#: src/common/form.js:173
+msgid "Text"
+msgstr "Tekst"
+
+#: src/component/photo/edit/details.vue:35 src/page/people/new.vue:70
 msgid "Text too long"
 msgstr "Tekst on liiga pikk"
 
@@ -2816,7 +2837,9 @@ msgstr "Nende formaat ei pruugi olla toetatud, neid ei ole veel JPEG-vormingusse
 msgid "Theme"
 msgstr "Välimus"
 
-#: src/page/settings/account.vue:151
+#: src/common/form.js:152 src/common/form.js:163 src/common/form.js:178
+#: src/common/form.js:193 src/common/form.js:207 src/common/form.js:218
+#: src/common/form.js:237
 msgid "This field is required"
 msgstr "See väli on kohustuslik"
 
@@ -2824,11 +2847,11 @@ msgstr "See väli on kohustuslik"
 msgid "This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local."
 msgstr "See ühendab originaalide kausta võrgukettana ja võimaldab avada, muuta ja kustutada faile arvutist või nutitelefonist, nagu oleksid need kohalikud."
 
-#: src/component/photo/edit/details.vue:187
+#: src/component/photo/edit/details.vue:190
 msgid "Time UTC"
 msgstr "UTC aeg"
 
-#: src/component/photo/edit/details.vue:212
+#: src/component/photo/edit/details.vue:215
 msgid "Time Zone"
 msgstr "Ajavöönd"
 
@@ -2846,13 +2869,13 @@ msgctxt "Photo"
 msgid "Title"
 msgstr "Pealkiri"
 
-#: src/page/settings/account.vue:83 src/component/photo/edit/info.vue:73
-#: src/component/photo/edit/info.vue:154 src/component/photo/edit/labels.vue:44
-#: src/component/photo/view/list.vue:113
+#: src/page/settings/account.vue:83 src/page/settings/account.vue:85
+#: src/component/photo/edit/info.vue:73 src/component/photo/edit/info.vue:154
+#: src/component/photo/edit/labels.vue:44 src/component/photo/view/list.vue:113
 msgid "Title"
 msgstr "Pealkiri"
 
-#: src/page/settings/account.vue:557
+#: src/page/settings/account.vue:554 src/page/settings/account.vue:556
 msgid "Title / Position"
 msgstr "Tiitel / ametikoht"
 
@@ -2895,14 +2918,6 @@ msgstr "Muuda vaadet"
 msgid "Token"
 msgstr "Token"
 
-#: src/page/settings/account.vue:85 src/page/settings/account.vue:107
-#: src/page/settings/account.vue:129 src/page/settings/account.vue:152
-#: src/page/settings/account.vue:229 src/page/settings/account.vue:250
-#: src/page/settings/account.vue:559 src/page/settings/account.vue:577
-#: src/page/settings/account.vue:671 src/page/settings/account.vue:563
-msgid "Too long"
-msgstr "Liiga pikk"
-
 #: src/component/photo/upload/dialog.vue:196
 msgid "Too many files selected"
 msgstr "Liiga palju valitud faile"
@@ -2911,7 +2926,7 @@ msgstr "Liiga palju valitud faile"
 msgid "Too many requests"
 msgstr "Liiga palju taotlusi"
 
-#: src/options/options.js:338 src/page/places.vue:217
+#: src/options/options.js:342 src/page/places.vue:217
 msgid "Topographic"
 msgstr "Topograafiline"
 
@@ -2947,18 +2962,18 @@ msgstr "Võta tagasi"
 msgid "Unique ID"
 msgstr "Unikaalne ID"
 
-#: src/component/photo/edit/details.vue:23 src/component/photo/edit/info.vue:28
+#: src/component/photo/edit/details.vue:24 src/component/photo/edit/info.vue:28
 #: src/model/album.js:179 src/model/photo.js:344 src/model/photo.js:781
 #: src/model/photo.js:802 src/model/photo.js:825 src/model/photo.js:843
 #: src/model/photo.js:980 src/model/photo.js:1036 src/model/photo.js:1050
-#: src/model/user.js:155 src/options/options.js:50 src/options/options.js:64
-#: src/options/options.js:81 src/options/options.js:95
-#: src/options/options.js:107 src/page/library/errors.vue:187
+#: src/model/user.js:155 src/options/options.js:50 src/options/options.js:68
+#: src/options/options.js:85 src/options/options.js:99
+#: src/options/options.js:111 src/page/library/errors.vue:187
 #: src/page/library/errors.vue:204
 msgid "Unknown"
 msgstr "Teadmata"
 
-#: src/page/settings/account.vue:48 src/page/settings/account.vue:56
+#: src/page/settings/account.vue:50 src/page/settings/account.vue:58
 #: src/component/navigation.vue:95
 msgid "Unregistered"
 msgstr "Mitteregistreeritud"
@@ -3055,7 +3070,7 @@ msgstr "Üleslaadimine %{n}/%{t}…"
 msgid "Uploading photos…"
 msgstr "Fotode üleslaadimine…"
 
-#: src/page/settings/account.vue:171
+#: src/page/settings/account.vue:138
 msgid "Uploading…"
 msgstr "Üleslaadimine…"
 
@@ -3076,7 +3091,7 @@ msgid "Use your recovery code or contact an administrator for help."
 msgstr "Kasutage oma taastamiskoodi või võtke abi saamiseks ühendust administraatoriga."
 
 #: src/options/admin.js:10 src/page/admin/sessions.vue:27
-#: src/page/admin/sessions.vue:167 src/model/user.js:337 src/options/auth.js:7
+#: src/page/admin/sessions.vue:167 src/model/user.js:343 src/options/auth.js:7
 msgid "User"
 msgstr "Kasutaja"
 
@@ -3101,7 +3116,7 @@ msgstr "Kasutajad"
 #: src/component/photo/view/cards.vue:319
 #: src/component/photo/view/cards.vue:479 src/component/photo/view/list.vue:179
 #: src/component/photo/view/mosaic.vue:190 src/model/photo.js:888
-#: src/model/photo.js:896 src/options/options.js:376
+#: src/model/photo.js:896 src/options/options.js:380
 msgid "Vector"
 msgstr "Vektor"
 
@@ -3116,7 +3131,7 @@ msgstr "Kinnituskood"
 #: src/component/photo/view/cards.vue:305
 #: src/component/photo/view/cards.vue:452 src/component/photo/view/list.vue:186
 #: src/component/photo/view/mosaic.vue:176 src/model/file.js:220
-#: src/model/photo.js:912 src/model/photo.js:936 src/options/options.js:372
+#: src/model/photo.js:912 src/model/photo.js:936 src/options/options.js:376
 msgid "Video"
 msgstr "Video"
 
@@ -3165,7 +3180,7 @@ msgstr "Veebisisene sisselogimine"
 
 #: src/component/user/add/dialog.vue:225 src/component/user/edit/dialog.vue:446
 #: src/page/admin/users.vue:51 src/options/auth.js:55 src/options/auth.js:68
-#: src/options/options.js:513
+#: src/options/options.js:517
 msgid "WebDAV"
 msgstr "WebDAV"
 
@@ -3187,25 +3202,25 @@ msgstr "WebDAV üleslaadimine"
 msgid "WebGL support is disabled in your browser"
 msgstr "WebGL tugi on teie brauseris välja lülitatud"
 
-#: src/page/settings/account.vue:619 src/page/settings/account.vue:713
-#: src/page/settings/account.vue:605
+#: src/page/settings/account.vue:616 src/page/settings/account.vue:710
+#: src/page/settings/account.vue:602
 msgid "Website"
 msgstr "Veebileht"
 
-#: src/options/options.js:462
+#: src/options/options.js:466
 msgid "White"
 msgstr "Valge"
 
-#: src/page/settings/account.vue:536
+#: src/page/settings/account.vue:533
 msgid "Work Details"
 msgstr "Töö üksikasjad"
 
-#: src/page/settings/account.vue:508 src/component/photo/edit/details.vue:164
+#: src/page/settings/account.vue:505 src/component/photo/edit/details.vue:166
 #: src/component/photo/toolbar.vue:393 src/page/albums.vue:194
 msgid "Year"
 msgstr "Aasta"
 
-#: src/options/options.js:455
+#: src/options/options.js:459
 msgid "Yellow"
 msgstr "Kollane"
 
@@ -3267,6 +3282,9 @@ msgstr "Sinu fototeeki analüüsitakse pidevalt, et luua automaatselt albumied e
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "Suumi sisse/välja"
+
+#~ msgid "Too long"
+#~ msgstr "Liiga pikk"
 
 #~ msgid "close"
 #~ msgstr "sulge"
