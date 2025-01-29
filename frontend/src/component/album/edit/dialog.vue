@@ -82,7 +82,6 @@
               ></v-select>
             </v-col>
             <v-col sm="3">
-              <!-- TODO: check property flat TEST -->
               <v-checkbox
                 v-model="model.Favorite"
                 :disabled="disabled"

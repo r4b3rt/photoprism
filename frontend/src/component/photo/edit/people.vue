@@ -65,7 +65,6 @@
                 class="input-name pa-0 ma-0"
                 @click:clear="onClearSubject(m)"
               ></v-text-field>
-              <!-- TODO: check property allow-overflow TEST -->
               <v-combobox
                 v-else
                 v-model:search="m.Name"

@@ -34,8 +34,6 @@
               ></v-text-field>
             </v-col>
             <v-col sm="4">
-              <!-- TODO: check property flat TEST -->
-              <!--                TODO: fix Favorite saving-->
               <v-checkbox
                 v-model="model.Favorite"
                 :disabled="disabled"

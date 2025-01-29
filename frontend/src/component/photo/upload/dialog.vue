@@ -42,7 +42,6 @@
             </div>
             <div class="form-body">
               <div class="form-controls">
-                <!-- TODO: check property allow-overflow TEST -->
                 <v-combobox
                   v-model="selectedAlbums"
                   :disabled="busy || loading || total > 0"
