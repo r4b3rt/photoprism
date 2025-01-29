@@ -556,7 +556,7 @@ msgid "Can't select more items"
 msgstr "无法选择更多项目"
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/edit/dialog.vue:487
+#: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
 #: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
@@ -665,10 +665,6 @@ msgstr "客户"
 #: src/options/auth.js:24
 msgid "Client Credentials"
 msgstr "客户证书"
-
-#: src/component/user/add/dialog.vue:22
-msgid "close"
-msgstr "关闭"
 
 #: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:605
 #: src/component/photo/toolbar.vue:242
@@ -3274,6 +3270,9 @@ msgstr "你的库被不断分析，以自动创建特殊时刻、旅行和地点
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "缩放"
+
+#~ msgid "close"
+#~ msgstr "关闭"
 
 #~ msgid "Stacks group files with a similar frame of reference, but differences of quality, format, size or color."
 #~ msgstr "堆叠具有相似参照系但质量、格式、大小或颜色不同的分组文件。"

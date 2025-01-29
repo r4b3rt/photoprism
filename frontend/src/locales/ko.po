@@ -556,7 +556,7 @@ msgid "Can't select more items"
 msgstr "더 많은 아이템을 선택할 수 없습니다"
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/edit/dialog.vue:487
+#: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
 #: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
@@ -665,10 +665,6 @@ msgstr "클라이언트"
 #: src/options/auth.js:24
 msgid "Client Credentials"
 msgstr "클라이언트 자격 증명"
-
-#: src/component/user/add/dialog.vue:22
-msgid "close"
-msgstr "닫기"
 
 #: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:605
 #: src/component/photo/toolbar.vue:242
@@ -3272,6 +3268,9 @@ msgstr "라이브러리는 지속적으로 분석되어 특별한 순간, 여행
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "확대/축소"
+
+#~ msgid "close"
+#~ msgstr "닫기"
 
 #~ msgid "Stacks group files with a similar frame of reference, but differences of quality, format, size or color."
 #~ msgstr "참조 프레임은 유사하지만 품질, 형식, 크기 또는 색상이 다른 그룹 파일을 스택합니다."
