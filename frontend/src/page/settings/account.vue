@@ -29,9 +29,9 @@
                       autocomplete="off"
                       autocorrect="off"
                       autocapitalize="none"
-                      :label="$gettext('Title')"
+                      :label="$pgettext('Account', 'Title')"
                       class="input-name-title"
-                      :rules="rules.text(false, 1, 32, $gettext('Title'))"
+                      :rules="rules.text(false, 0, 32, $pgettext('Account', 'Title'))"
                       @change="onChangeName"
                     ></v-text-field>
                   </v-col>
