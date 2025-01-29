@@ -886,7 +886,7 @@ func (m *File) SetOrientation(val int, src string) *File {
 	return m
 }
 
-// ContentType returns the file content type including codec if known.
+// ContentType returns the HTTP content type of the file including the codec as a parameter, if known.
 func (m *File) ContentType() (contentType string) {
 	contentType = m.FileMime
 
@@ -901,21 +901,23 @@ func (m *File) ContentType() (contentType string) {
 			}
 
 			switch codec {
-			case "mov", "mp4", "avc", video.CodecAVC:
+			case video.CodecAVC, "mov", "mp4", "avc", "v_avc", "v_avc1":
 				contentType = header.ContentTypeAVC // Advanced Video Coding (AVC), also known as H.264
-			case "hev", "hev1", "hevc", video.CodecHEVC:
+			case video.CodecHEVC, "hvc", "hevc", "v_hvc", "v_hvc1":
 				contentType = header.ContentTypeHEVC // High Efficiency Video Coding (HEVC), also known as H.265
-			case "vvc", video.CodecVVC:
+			case video.CodecHEV1, "hev":
+				contentType = header.ContentTypeHEV1 // High Efficiency Video Coding (HEVC) Bitstream
+			case video.CodecVVC, "vvc":
 				contentType = header.ContentTypeVVC // Versatile Video Coding (VVC), also known as H.266
-			case "evc", video.CodecEVC:
+			case video.CodecEVC, "evc":
 				contentType = header.ContentTypeEVC // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
-			case "vp8", video.CodecVP8:
+			case video.CodecVP8, "vp8":
 				contentType = header.ContentTypeVP8
-			case "vp9", video.CodecVP9:
+			case video.CodecVP9, "vp9":
 				contentType = header.ContentTypeVP9
-			case "av1", video.CodecAV1:
+			case video.CodecAV1, "av1":
 				contentType = header.ContentTypeAV1
-			case "ogg", video.CodecOGV:
+			case video.CodecOGV, "ogg":
 				contentType = header.ContentTypeOGV
 			case "webm":
 				contentType = header.ContentTypeWebM

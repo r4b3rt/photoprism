@@ -5,35 +5,43 @@ let chai = require("chai/chai");
 let assert = chai.assert;
 
 describe("common/can", () => {
-  it("canUseVideo", () => {
+  it("useVideo", () => {
     assert.equal(can.useVideo, true);
   });
 
-  it("canUseAvc", () => {
-    assert.equal(can.useAvc, true);
+  it("useAVC", () => {
+    assert.equal(can.useAVC, true);
   });
 
-  it("canUseOGV", () => {
+  it("useHEVC", () => {
+    assert.equal(can.useHEVC, false);
+  });
+
+  it("useHEV1", () => {
+    assert.equal(can.useHEV1, false);
+  });
+
+  it("useVVC", () => {
+    assert.equal(can.useVVC, false);
+  });
+
+  it("useOGV", () => {
     assert.equal(can.useOGV, true);
   });
 
-  it("canUseVP8", () => {
-    assert.equal(can.useVp8, false);
+  it("useVP8", () => {
+    assert.equal(can.useVP8, false);
   });
 
-  it("canUseVP9", () => {
-    assert.equal(can.useVp9, true);
+  it("useVP9", () => {
+    assert.equal(can.useVP9, true);
   });
 
-  it("canUseAv1", () => {
-    assert.equal(can.useAv1, true);
+  it("useAV1", () => {
+    assert.equal(can.useAV1, true);
   });
 
-  it("canUseWebM", () => {
+  it("useWebM", () => {
     assert.equal(can.useWebM, true);
-  });
-
-  it("canUseHevc", () => {
-    assert.equal(can.useHevc, false);
   });
 });

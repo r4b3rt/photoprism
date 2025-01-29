@@ -2,12 +2,18 @@ package video
 
 type Codec = string
 
-// Video codecs supported by web browsers:
-// https://cconcolato.github.io/media-mime-support/
+// Standard video Codec types.
+//
+// Browser support can be tested by visiting one of the following sites:
+// - https://ott.dolby.com/codec_test/index.html
+// - https://dmnsgn.github.io/media-codecs/
+// - https://cconcolato.github.io/media-mime-support/
+// - https://thorium.rocks/misc/h265-tester.html
 const (
 	CodecUnknown Codec = ""
 	CodecAVC     Codec = "avc1" // Advanced Video Coding (AVC), also known as H.264
 	CodecHEVC    Codec = "hvc1" // High Efficiency Video Coding (HEVC), also known as H.265
+	CodecHEV1    Codec = "hev1" // HEVC bitstream with the parameter sets stored in the samples, not supported on macOS
 	CodecVVC     Codec = "vvc1" // Versatile Video Coding (VVC), also known as H.266
 	CodecEVC     Codec = "evc1" // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
 	CodecAV1     Codec = "av01" // AOMedia Video 1 (AV1)
@@ -17,13 +23,14 @@ const (
 	CodecWebM    Codec = "webm" // Google WebM
 )
 
-// Codecs maps identifiers to codecs.
+// Codecs maps supported string identifiers to standard Codec types.
 var Codecs = StandardCodecs{
 	"":                CodecUnknown,
 	"a_opus":          CodecUnknown,
 	"a_vorbis":        CodecUnknown,
 	"avc":             CodecAVC,
 	"avc1":            CodecAVC,
+	"avc3":            CodecAVC,
 	"v_avc":           CodecAVC,
 	"v_avc1":          CodecAVC,
 	"iso/avc":         CodecAVC,
@@ -35,15 +42,19 @@ var Codecs = StandardCodecs{
 	"hvc1":            CodecHEVC,
 	"v_hvc":           CodecHEVC,
 	"v_hvc1":          CodecHEVC,
-	"hev":             CodecHEVC,
-	"hev1":            CodecHEVC,
+	"hvcC":            CodecHEVC,
+	"hvcc":            CodecHEVC,
+	"hev":             CodecHEV1,
+	"hev1":            CodecHEV1,
 	"evc":             CodecEVC,
 	"evc1":            CodecEVC,
 	"evcC":            CodecEVC,
+	"evcc":            CodecEVC,
 	"v_evc":           CodecEVC,
 	"v_evc1":          CodecEVC,
 	"vvc":             CodecVVC,
 	"vvcC":            CodecVVC,
+	"vvcc":            CodecVVC,
 	"vvc1":            CodecVVC,
 	"v_vvc":           CodecVVC,
 	"v_vvc1":          CodecVVC,
@@ -63,5 +74,5 @@ var Codecs = StandardCodecs{
 	"webm":            CodecWebM,
 }
 
-// StandardCodecs maps names to known codecs.
+// StandardCodecs maps strings to codec types.
 type StandardCodecs map[string]Codec

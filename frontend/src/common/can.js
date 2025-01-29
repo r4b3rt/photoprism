@@ -26,13 +26,16 @@ Additional information can be found in our Developer Guide:
 import * as media from "common/media";
 
 export const useVideo = !!document.createElement("video").canPlayType;
-export const useAvc = useVideo // AVC
+export const useAVC = useVideo // AVC
   ? !!document.createElement("video").canPlayType(media.ContentTypeAVC)
   : false;
-export const useHevc = useVideo // HEVC, Basic Support
+export const useHEVC = useVideo // HEVC, Basic Support
   ? !!document.createElement("video").canPlayType(media.ContentTypeHEVC)
   : false;
-export const useVvc = useVideo // VVC, Basic Support
+export const useHEV1 = useVideo // HEV1, Basic Support
+  ? !!document.createElement("video").canPlayType(media.ContentTypeHEV1)
+  : false;
+export const useVVC = useVideo // VVC, Basic Support
   ? !!document.createElement("video").canPlayType(media.ContentTypeVVC)
   : false;
 export const useOGV = useVideo // Ogg Theora
@@ -41,12 +44,12 @@ export const useOGV = useVideo // Ogg Theora
 export const useWebM = useVideo // Google WebM
   ? !!document.createElement("video").canPlayType(media.ContentTypeWebM)
   : false;
-export const useVp8 = useVideo // Google WebM, VP8
+export const useVP8 = useVideo // Google WebM, VP8
   ? !!document.createElement("video").canPlayType(media.ContentTypeVP8)
   : false;
-export const useVp9 = useVideo // Google WebM, VP9
+export const useVP9 = useVideo // Google WebM, VP9
   ? !!document.createElement("video").canPlayType(media.ContentTypeVP9)
   : false;
-export const useAv1 = useVideo // AV1, Main Profile
+export const useAV1 = useVideo // AV1, Main Profile
   ? !!document.createElement("video").canPlayType(media.ContentTypeAV1)
   : false;

@@ -278,10 +278,12 @@ export default class Util {
         return "AVIF Image Sequence";
       case "hev":
       case "hvc":
-      case media.CodecHEV1:
       case media.CodecHEVC:
       case media.FormatHEVC:
         return "High Efficiency Video Coding (HEVC) / H.265";
+      case media.CodecHEV1:
+      case media.FormatHEV1:
+        return "High Efficiency Video Coding (HEVC) Bitstream";
       case media.FormatEVC:
       case media.CodecEVC:
         return "Essential Video Coding (MPEG-5 Part 1)";
@@ -359,10 +361,12 @@ export default class Util {
       case media.CodecAV1:
         return "AV1";
       case media.CodecAVC:
+      case media.CodecAVC3:
       case media.FormatAVC:
         return "AVC";
       case "hvc":
       case media.CodecHEV1:
+      case media.FormatHEV1:
       case media.CodecHEVC:
       case media.FormatHEVC:
         return "HEVC";
@@ -402,13 +406,16 @@ export default class Util {
         return "Apple QuickTime (MOV)";
       case "avc":
       case "avc1":
+      case "avc3":
         return "Advanced Video Coding (AVC) / H.264";
       case "hvc":
       case "hev":
-      case media.CodecHEV1:
       case media.CodecHEVC:
       case media.FormatHEVC:
         return "High Efficiency Video Coding (HEVC) / H.265";
+      case media.CodecHEV1:
+      case media.FormatHEV1:
+        return "High Efficiency Video Coding (HEVC) Bitstream";
       case media.FormatVVC:
       case media.CodecVVC:
         return "Versatile Video Coding (VVC) / H.266";
@@ -562,33 +569,29 @@ export default class Util {
   static videoFormat(codec, mime) {
     if ((!codec && !mime) || mime?.startsWith('video/mp4; codecs="avc')) {
       return media.FormatAVC;
-    } else if (
-      can.useHevc &&
-      (codec === media.CodecHEVC ||
-        codec === media.CodecHEV1 ||
-        mime?.startsWith('video/mp4; codecs="hev') ||
-        mime?.startsWith('video/mp4; codecs="hvc'))
-    ) {
+    } else if (can.useHEVC && (codec === media.CodecHEVC || mime?.startsWith('video/mp4; codecs="hvc'))) {
       return media.FormatHEVC;
+    } else if (can.useHEV1 && (codec === media.CodecHEV1 || mime?.startsWith('video/mp4; codecs="hev'))) {
+      return media.FormatHEV1; // HEVC Bitstream
     } else if (
-      can.useVvc &&
+      can.useVVC &&
       (codec === media.CodecVVC || codec === media.FormatVVC || mime?.startsWith('video/mp4; codecs="vvc'))
     ) {
       return media.FormatVVC;
     } else if (can.useOGV && (codec === media.CodecOGV || codec === media.FormatOGG || mime === media.ContentTypeOGV)) {
       return media.CodecOGV;
     } else if (
-      can.useVp8 &&
+      can.useVP8 &&
       (codec === media.CodecVP8 || codec === media.FormatVP8 || mime?.startsWith('video/mp4; codecs="vp08'))
     ) {
       return media.CodecVP8;
     } else if (
-      can.useVp9 &&
+      can.useVP9 &&
       (codec === media.CodecVP9 || codec === media.FormatVP9 || mime?.startsWith('video/mp4; codecs="vp09'))
     ) {
       return media.CodecVP9;
     } else if (
-      can.useAv1 &&
+      can.useAV1 &&
       (codec === media.CodecAV1 ||
         codec === media.CodecAV1C ||
         codec === media.FormatAV1 ||
@@ -636,10 +639,12 @@ export default class Util {
         return media.ContentTypeAV1;
       case media.FormatWebM:
         return media.ContentTypeWebM;
-      case media.CodecHEV1:
       case media.CodecHEVC:
       case media.FormatHEVC:
         return media.ContentTypeHEVC;
+      case media.CodecHEV1:
+      case media.FormatHEV1:
+        return media.ContentTypeHEV1;
       case media.FormatVVC:
         return media.ContentTypeVVC;
       default:

@@ -362,7 +362,7 @@ func (data *Data) Exiftool(jsonData []byte, originalName string) (err error) {
 	if strings.Contains(data.Codec, CodecJpeg) { // JPEG Image?
 		data.Codec = CodecJpeg
 	} else if c, ok := video.Codecs[data.Codec]; ok { // Video codec?
-		data.Codec = string(c)
+		data.Codec = c
 	} else if strings.HasPrefix(data.Codec, "a_") { // Audio codec?
 		data.Codec = ""
 	}

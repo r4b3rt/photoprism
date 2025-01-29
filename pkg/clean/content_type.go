@@ -35,23 +35,25 @@ func ContentType(s string) string {
 		return header.ContentTypeSVG
 	case "image/jpe", "image/jpg":
 		return header.ContentTypeJPEG
-	case "video/mp4; codecs=\"avc\"":
-		return header.ContentTypeAVC
+	case "video/mp4; codecs=\"avc\"",
+		"video/mp4; codecs=\"avc1\"":
+		return header.ContentTypeAVC // Advanced Video Coding (AVC), also known as H.264
 	case "video/mp4; codecs=\"hvc\"",
 		"video/mp4; codecs=\"hvc1\"",
-		"video/mp4; codecs=\"hev\"",
-		"video/mp4; codecs=\"hev1\"",
 		"video/mp4; codecs=\"hevc\"":
-		return header.ContentTypeHEVC
+		return header.ContentTypeHEVC // HEVC MP4 Main10 Profile
+	case "video/mp4; codecs=\"hev\"",
+		"video/mp4; codecs=\"hev1\"":
+		return header.ContentTypeHEV1 // HEVC bitstream with the parameter sets stored in the samples, not supported on macOS
 	case "video/webm; codecs=\"vp8\"",
 		"video/webm; codecs=\"vp08\"":
-		return header.ContentTypeVP8
+		return header.ContentTypeVP8 // Google WebM container with VP8 video
 	case "video/webm; codecs=\"vp9\"",
 		"video/webm; codecs=\"vp09\"":
-		return header.ContentTypeVP9
+		return header.ContentTypeVP9 // Google WebM container with VP9 video
 	case "video/webm; codecs=\"av1\"",
 		"video/webm; codecs=\"av01\"":
-		return header.ContentTypeAV1
+		return header.ContentTypeAV1 // Google WebM container with AV1 video
 	}
 
 	return s

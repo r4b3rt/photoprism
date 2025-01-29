@@ -7,14 +7,15 @@ var Types = Standards{
 	"mpeg4":  MP4,
 	"avc":    AVC,
 	"avc1":   AVC,
+	"avc3":   AVC, // H.264 with the parameter sets stored in the samples instead of the sample descriptions.
 	"hevc":   HEVC,
 	"hevC":   HEVC,
 	"hvc":    HEVC,
 	"hvc1":   HEVC,
 	"v_hvc":  HEVC,
 	"v_hvc1": HEVC,
-	"hev":    HEVC,
-	"hev1":   HEVC,
+	"hev":    HEV1, // H.265 with the parameter sets stored in the samples instead of the sample descriptions.
+	"hev1":   HEV1,
 	"evc":    EVC,
 	"evc1":   EVC,
 	"evcC":   EVC,

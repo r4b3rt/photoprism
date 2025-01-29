@@ -9,10 +9,16 @@ export const Live = "live";
 export const Vector = "vector";
 export const Video = "video";
 
-// File codecs.
+// Video codec names.
+//
+// Browser support can be tested by visiting one of the following sites:
+// - https://ott.dolby.com/codec_test/index.html
+// - https://dmnsgn.github.io/media-codecs/
+// - https://cconcolato.github.io/media-mime-support/
+// - https://thorium.rocks/misc/h265-tester.html
 export const CodecAVC = "avc1";
-export const CodecHEV1 = "hev1";
 export const CodecHEVC = "hvc1";
+export const CodecHEV1 = "hev1";
 export const CodecVVC = "vvc1";
 export const CodecEVC = "evc1";
 export const CodecOGV = "ogv";
@@ -20,11 +26,13 @@ export const CodecVP8 = "vp08";
 export const CodecVP9 = "vp09";
 export const CodecAV1 = "av01";
 export const CodecAV1C = "av1c";
+export const CodecAVC3 = "avc3";
 
-// File formats.
+// Media file formats.
 export const FormatMP4 = "mp4";
 export const FormatAVC = "avc";
 export const FormatHEVC = "hevc";
+export const FormatHEV1 = "hev1";
 export const FormatVVC = "vvc";
 export const FormatEVC = "evc";
 export const FormatOGG = "ogg";
@@ -38,9 +46,10 @@ export const FormatPNG = "png";
 export const FormatSVG = "svg";
 export const FormatGIF = "gif";
 
-// Content types (MIME).
+// HTTP Content types (MIME).
 export const ContentTypeAVC = 'video/mp4; codecs="avc1"';
-export const ContentTypeHEVC = 'video/mp4; codecs="hev1.2.4.L120.B0"';
+export const ContentTypeHEVC = 'video/mp4; codecs="hvc1.2.4.L120.B0"';
+export const ContentTypeHEV1 = 'video/mp4; codecs="hev1.2.4.L120.B0"';
 export const ContentTypeVVC = 'video/mp4; codecs="vvc1"';
 export const ContentTypeOGV = "video/ogg";
 export const ContentTypeWebM = "video/webm";
