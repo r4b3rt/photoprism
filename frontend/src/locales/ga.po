@@ -172,8 +172,8 @@ msgid "Add"
 msgstr "Cuir"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "Cuir %{name} leis?"
+msgid "Add %{s}?"
+msgstr "Cuir %{s} leis?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1070,8 +1070,8 @@ msgstr "Cuir in eagar"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "Cuir %{name} in eagar"
+msgid "Edit %{s}"
+msgstr "Cuir %{s} in eagar"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1444,8 +1444,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Déanfar comhaid iompórtáilte a shórtáil de réir dáta agus tabharfar ainm uathúil orthu."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "%{name} á iompórtáil…"
+msgid "Importing %{s}…"
+msgstr "%{s} á iompórtáil…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2619,8 +2619,8 @@ msgid "Share"
 msgstr "Comhroinn"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "Roinn %{name}"
+msgid "Share %{s}"
+msgstr "Roinn %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

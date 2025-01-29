@@ -175,8 +175,8 @@ msgid "Add"
 msgstr "추가"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "이름 추가 %{name}?"
+msgid "Add %{s}?"
+msgstr "이름 추가 %{s}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1073,8 +1073,8 @@ msgstr "편집"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "%{name} 편집하기"
+msgid "Edit %{s}"
+msgstr "%{s} 편집하기"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1447,8 +1447,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "가져온 파일은 날짜별로 정렬되고 유일한 이름이 지정됩니다."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "%{name} 가져오기 중…"
+msgid "Importing %{s}…"
+msgstr "%{s} 가져오기 중…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2622,8 +2622,8 @@ msgid "Share"
 msgstr "공유"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "%{name} 공유하기"
+msgid "Share %{s}"
+msgstr "%{s} 공유하기"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

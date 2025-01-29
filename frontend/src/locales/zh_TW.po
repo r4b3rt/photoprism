@@ -175,7 +175,7 @@ msgid "Add"
 msgstr "新增"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
+msgid "Add %{s}?"
 msgstr "添加%{名稱}？"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
@@ -1073,8 +1073,8 @@ msgstr "編輯"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "編輯 %{name}"
+msgid "Edit %{s}"
+msgstr "編輯 %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1447,8 +1447,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "匯入的檔案會依照日期排序，並且給予一個獨特的名字。"
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "匯入 %{name} 中…"
+msgid "Importing %{s}…"
+msgstr "匯入 %{s} 中…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2622,8 +2622,8 @@ msgid "Share"
 msgstr "分享"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "分享 %{name}"
+msgid "Share %{s}"
+msgstr "分享 %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

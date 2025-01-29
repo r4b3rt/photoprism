@@ -172,8 +172,8 @@ msgid "Add"
 msgstr "Dodaj"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "Dodaj %{name}?"
+msgid "Add %{s}?"
+msgstr "Dodaj %{s}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1070,8 +1070,8 @@ msgstr "Uredi"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "Urejanje %{name}"
+msgid "Edit %{s}"
+msgstr "Urejanje %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1444,8 +1444,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Uvožene datoteke bodo razvrščene po datumu in bodo imele edinstveno ime."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "Uvažanje %{name}…"
+msgid "Importing %{s}…"
+msgstr "Uvažanje %{s}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2619,8 +2619,8 @@ msgid "Share"
 msgstr "Delite"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "Skupna raba %{name}"
+msgid "Share %{s}"
+msgstr "Skupna raba %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

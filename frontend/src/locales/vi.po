@@ -172,8 +172,8 @@ msgid "Add"
 msgstr "Thêm vào"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "Thêm %{name}?"
+msgid "Add %{s}?"
+msgstr "Thêm %{s}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1070,7 +1070,7 @@ msgstr "Biên tập"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
+msgid "Edit %{s}"
 msgstr "Chỉnh sửa tên}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
@@ -1444,8 +1444,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Các tệp đã nhập sẽ được sắp xếp theo ngày và được đặt một tên duy nhất."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "Đang nhập %{name}…"
+msgid "Importing %{s}…"
+msgstr "Đang nhập %{s}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2619,8 +2619,8 @@ msgid "Share"
 msgstr "Chia sẻ"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "Chia sẻ %{name}"
+msgid "Share %{s}"
+msgstr "Chia sẻ %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

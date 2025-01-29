@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: ci@photoprism.app\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-29 06:10+0000\n"
+"PO-Revision-Date: 2025-01-29 06:17+0000\n"
 "Last-Translator: Google Cloud Translation Basic <noreply-mt-google-translate@weblate.org>\n"
 "Language-Team: Hebrew <https://translate.photoprism.app/projects/photoprism/frontend/he/>\n"
 "Language: he\n"
@@ -175,8 +175,8 @@ msgid "Add"
 msgstr "הוספה"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "האם להוסיף את %{name}?"
+msgid "Add %{s}?"
+msgstr "להוסיף %{s}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1073,8 +1073,8 @@ msgstr "ערוך"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "ערוך %{name}"
+msgid "Edit %{s}"
+msgstr "ערוך %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1447,8 +1447,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "קבצים מיובאים ימוינו לפי תאריך ויקבלו שם ייחודי."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "מייבא %{name}…"
+msgid "Importing %{s}…"
+msgstr "מייבא את %{s}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2622,8 +2622,8 @@ msgid "Share"
 msgstr "שתף"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "שתף %{name}"
+msgid "Share %{s}"
+msgstr "שתף %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."
@@ -3283,6 +3283,18 @@ msgstr "הספרייה שלך מנותחת באופן רציף ליצירת אל
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "זום פנימה\\החוצה"
+
+#~ msgid "Add %{name}?"
+#~ msgstr "האם להוסיף את %{name}?"
+
+#~ msgid "Edit %{name}"
+#~ msgstr "ערוך %{name}"
+
+#~ msgid "Importing %{name}…"
+#~ msgstr "מייבא %{name}…"
+
+#~ msgid "Share %{name}"
+#~ msgstr "שתף %{name}"
 
 #~ msgid "Too long"
 #~ msgstr "ארוך מדי"

@@ -175,8 +175,8 @@ msgid "Add"
 msgstr "Lägg till"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "Lägg till %{name}?"
+msgid "Add %{s}?"
+msgstr "Lägg till %{s}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1073,8 +1073,8 @@ msgstr "Redigera"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "Redigera %{name}"
+msgid "Edit %{s}"
+msgstr "Redigera %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1447,8 +1447,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Importerade filer sorteras efter datum och får ett unikt namn."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "Importerar %{name}…"
+msgid "Importing %{s}…"
+msgstr "Importerar %{s}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2622,8 +2622,8 @@ msgid "Share"
 msgstr "Dela"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "Dela %{name}"
+msgid "Share %{s}"
+msgstr "Dela %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

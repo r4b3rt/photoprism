@@ -172,8 +172,8 @@ msgid "Add"
 msgstr "Voeg by"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "Voeg %{name} by?"
+msgid "Add %{s}?"
+msgstr "Voeg %{s} by?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1070,8 +1070,8 @@ msgstr "Wysig"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "Wysig %{name}"
+msgid "Edit %{s}"
+msgstr "Wysig %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1444,8 +1444,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Ingevoerde lêers sal volgens datum gesorteer word en 'n unieke naam kry."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "Voer tans %{name} in …"
+msgid "Importing %{s}…"
+msgstr "Voer tans %{s} in …"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2619,8 +2619,8 @@ msgid "Share"
 msgstr "Deel"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "Deel %{name}"
+msgid "Share %{s}"
+msgstr "Deel %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."
