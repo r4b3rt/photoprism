@@ -34,7 +34,8 @@ const (
 	ContentTypePNG       = "image/png"
 	ContentTypeJPEG      = "image/jpeg"
 	ContentTypeSVG       = "image/svg+xml"
-	ContentTypeAVC       = "video/mp4; codecs=\"avc1.640028\""      // Advanced Video Coding (AVC), also known as H.264
+	ContentTypeAVC32     = "video/mp4; codecs=\"avc1.640020\""      // MPEG-4 AVC, High Profile Level 3.2
+	ContentTypeAVC       = "video/mp4; codecs=\"avc1.640028\""      // MPEG-4 AVC, High Profile Level 4.0
 	ContentTypeHEVC      = "video/mp4; codecs=\"hvc1.2.4.L120.B0\"" // HEVC MP4 Main10 Profile, Main Tier, Level 4.0
 	ContentTypeHEV1      = "video/mp4; codecs=\"hev1.2.4.L120.B0\"" // HEVC Bitstream, not supported on macOS
 	ContentTypeVVC       = "video/mp4; codecs=\"vvc1\""             // Versatile Video Coding (VVC), also known as H.266

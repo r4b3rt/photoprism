@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"net/http"
 	"path/filepath"
 	"strings"
@@ -37,12 +38,13 @@ func GetVideo(router *gin.RouterGroup) {
 
 		// Check if a valid security token was provided.
 		if InvalidPreviewToken(c) {
-			AbortVideoWithStatus(c, http.StatusForbidden)
+			c.Data(http.StatusForbidden, "image/svg+xml", videoIconSvg)
 			return
 		}
 
 		// Check if a valid file hash was provided.
 		if !rnd.IsSHA(fileHash) {
+			log.Debugf("video: invalid file hash %s", clean.Log(fileHash))
 			AbortVideo(c)
 			return
 		}
@@ -53,7 +55,7 @@ func GetVideo(router *gin.RouterGroup) {
 
 		if !ok {
 			log.Errorf("video: invalid format %s", clean.Log(formatName))
-			AbortVideo(c)
+			c.Data(http.StatusBadRequest, "image/svg+xml", videoIconSvg)
 			return
 		}
 
@@ -162,7 +164,7 @@ func GetVideo(router *gin.RouterGroup) {
 		} else {
 			if videoCodec != "" && videoCodec != videoFileType {
 				log.Debugf("video: %s is %s encoded and requires no transcoding, average bitrate %.1f MBit/s", clean.Log(f.FileName), strings.ToUpper(videoCodec), videoBitrate)
-				AddContentTypeHeader(c, f.ContentType())
+				AddContentTypeHeader(c, clean.ContentType(fmt.Sprintf("%s; codecs=\"%s\"", f.FileMime, clean.Codec(videoCodec))))
 			} else {
 				log.Debugf("video: %s is streamed directly, average bitrate %.1f MBit/s", clean.Log(f.FileName), videoBitrate)
 				AddContentTypeHeader(c, f.ContentType())

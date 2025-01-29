@@ -44,7 +44,7 @@ func TestGetVideo(t *testing.T) {
 		app, router, conf := NewApiTest()
 		GetVideo(router)
 		r := PerformRequest(app, "GET", "/api/v1/videos/acad9168fa6acc5c5c2965ddf6ec465ca42fd831/"+conf.PreviewToken()+"/xxx")
-		assert.Equal(t, http.StatusOK, r.Code)
+		assert.Equal(t, http.StatusBadRequest, r.Code)
 	})
 
 	t.Run("NotFound", func(t *testing.T) {

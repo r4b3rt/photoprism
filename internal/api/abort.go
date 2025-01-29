@@ -118,12 +118,12 @@ func AbortInvalidCredentials(c *gin.Context) {
 
 func AbortVideo(c *gin.Context) {
 	if c != nil {
-		c.Data(http.StatusOK, header.ContentTypeAVC, brokenVideo)
+		AbortVideoWithStatus(c, http.StatusOK)
 	}
 }
 
 func AbortVideoWithStatus(c *gin.Context, code int) {
 	if c != nil {
-		c.Data(code, header.ContentTypeAVC, brokenVideo)
+		c.Data(code, header.ContentTypeAVC32, brokenVideo)
 	}
 }
