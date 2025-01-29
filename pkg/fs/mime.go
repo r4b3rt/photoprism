@@ -53,6 +53,9 @@ func MimeType(filename string) (mimeType string) {
 	// Apple QuickTime Container
 	case VideoMOV:
 		return MimeTypeMOV
+	// MPEG-4 AVC Video
+	case VideoAVC:
+		return MimeTypeMP4
 	// Adobe Digital Negative
 	case ImageDNG:
 		return MimeTypeDNG
@@ -86,7 +89,7 @@ func MimeType(filename string) (mimeType string) {
 	if mimeType == MimeTypeUnknown {
 		switch fileType {
 		// MP4 Multimedia Container
-		case VideoMP4:
+		case VideoMP4, VideoHEVC, VideoHEV1:
 			return MimeTypeMP4
 		// AV1 Image File
 		case ImageAVIF:
