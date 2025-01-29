@@ -119,13 +119,12 @@
               }}</strong>
             </p>
 
-            <!-- TODO: check property return-masked-value TEST -->
             <v-text-field
               v-model="form.token"
               single-line
               hide-details
+              v-mask="tokenMask"
               return-masked-value
-              :mask="tokenMask"
               autocomplete="off"
               :placeholder="$gettext('Activation Code')"
             ></v-text-field>

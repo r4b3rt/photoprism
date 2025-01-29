@@ -107,7 +107,6 @@
               </v-autocomplete>
             </v-col>
             <v-col cols="6" lg="2">
-              <!-- TODO: check property return-masked-value TEST -->
               <v-text-field
                 v-model="time"
                 :append-inner-icon="model.TakenSrc === 'manual' ? 'mdi-check' : ''"
@@ -118,7 +117,7 @@
                 autocapitalize="none"
                 hide-details
                 return-masked-value
-                mask="##:##:##"
+                v-mask="'##:##:##'"
                 density="comfortable"
                 class="input-local-time"
               ></v-text-field>
