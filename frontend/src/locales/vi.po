@@ -81,12 +81,12 @@ msgstr "1 giờ"
 msgid "12 hours"
 msgstr "12 giờ"
 
-#: src/component/user/edit/dialog.vue:466 src/page/settings/account.vue:323
+#: src/component/user/edit/dialog.vue:447 src/page/settings/account.vue:323
 #: src/component/settings/passcode.vue:72
 msgid "2-Factor Authentication"
 msgstr "Xác thực 2 yếu tố"
 
-#: src/component/user/edit/dialog.vue:465 src/options/auth.js:46
+#: src/component/user/edit/dialog.vue:446 src/options/auth.js:46
 msgid "2FA"
 msgstr "2FA"
 
@@ -102,7 +102,8 @@ msgstr "Một cú nhấp chuột sẽ sao chép nó vào clipboard của bạn."
 msgid "A new version of %{s} is available:"
 msgstr "Phiên bản mới của %{s} đã có sẵn:"
 
-#: src/component/user/edit/dialog.vue:243 src/page/about/about.vue:39
+#: src/component/user/edit/dialog.vue:229
+#: src/component/user/edit/dialog.vue:230 src/page/about/about.vue:39
 #: src/page/settings/account.vue:247 src/page/settings/account.vue:248
 #: src/app/routes.js:60 src/component/navigation.vue:1423
 #: src/page/people/recognized.vue:322
@@ -120,7 +121,7 @@ msgstr "Truy cập thẻ"
 msgid "Account"
 msgstr "Tài khoản"
 
-#: src/component/user/add/dialog.vue:89 src/component/service/add.vue:34
+#: src/component/user/add/dialog.vue:83 src/component/service/add.vue:34
 msgid "Account created"
 msgstr "Tài khoản đã được tạo"
 
@@ -166,7 +167,7 @@ msgstr "Kích hoạt để sắp xếp theo thứ tự giảm dần."
 msgid "Activation Code"
 msgstr "Mã kích hoạt"
 
-#: src/component/user/add/dialog.vue:23 src/page/admin/users.vue:151
+#: src/component/user/add/dialog.vue:25 src/page/admin/users.vue:151
 #: src/component/settings/apps.vue:445
 msgid "Add"
 msgstr "Thêm vào"
@@ -175,7 +176,7 @@ msgstr "Thêm vào"
 msgid "Add %{s}?"
 msgstr "Thêm %{s}?"
 
-#: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
+#: src/component/user/add/dialog.vue:49 src/component/service/add.vue:38
 msgid "Add Account"
 msgstr "Thêm tài khoản"
 
@@ -440,7 +441,7 @@ msgstr "Nghệ sĩ"
 msgid "Aspect Ratio"
 msgstr "Tỷ lệ khung hình"
 
-#: src/component/user/add/dialog.vue:171 src/component/user/edit/dialog.vue:320
+#: src/component/user/add/dialog.vue:168 src/component/user/edit/dialog.vue:305
 #: src/page/admin/sessions.vue:28 src/page/admin/sessions.vue:206
 #: src/page/admin/users.vue:44
 msgid "Authentication"
@@ -466,9 +467,10 @@ msgstr "Hỗ trợ"
 msgid "Badge"
 msgstr "Huy hiệu"
 
-#: src/component/user/edit/dialog.vue:372
-msgid "Base Folder"
-msgstr "Thư mục cơ sở"
+#: src/component/user/edit/dialog.vue:356
+#: src/component/user/edit/dialog.vue:357
+msgid "Base Path"
+msgstr ""
 
 #: src/page/about/about.vue:83 src/page/connect.vue:213
 msgid "Become a member today, support our mission and enjoy our member benefits!"
@@ -478,7 +480,8 @@ msgstr "Hãy trở thành thành viên ngay hôm nay, ủng hộ sứ mệnh c�
 msgid "Being 100% self-funded and independent, we can promise you that we will never sell your data and that we will always be transparent about our software and services."
 msgstr "Với hoạt động tự tài trợ và độc lập 100%, chúng tôi có thể hứa với bạn rằng chúng tôi sẽ không bao giờ bán dữ liệu của bạn và chúng tôi sẽ luôn minh bạch về phần mềm và dịch vụ của mình."
 
-#: src/component/user/edit/dialog.vue:270 src/page/settings/account.vue:226
+#: src/component/user/edit/dialog.vue:254
+#: src/component/user/edit/dialog.vue:255 src/page/settings/account.vue:226
 #: src/page/settings/account.vue:227
 msgid "Bio"
 msgstr "Tiểu sử"
@@ -563,7 +566,7 @@ msgid "Can't select more items"
 msgstr "Không thể chọn thêm mục"
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
+#: src/component/user/add/dialog.vue:24 src/component/user/edit/dialog.vue:468
 #: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
@@ -606,7 +609,7 @@ msgstr "Trượt băng chuyền {0} của {1}"
 msgid "Category"
 msgstr "Loại"
 
-#: src/component/user/edit/dialog.vue:193 src/page/settings/account.vue:200
+#: src/component/user/edit/dialog.vue:188 src/page/settings/account.vue:200
 msgid "Change Avatar"
 msgstr "Thay đổi hình đại diện"
 
@@ -626,11 +629,13 @@ msgstr "Thay đổi tiêu đề ảnh, vị trí và siêu dữ liệu khác."
 msgid "Change private flag"
 msgstr "Thay đổi cờ riêng tư"
 
+#: src/component/user/add/dialog.vue:90 src/component/user/add/dialog.vue:95
+#: src/component/user/edit/dialog.vue:80 src/component/user/edit/dialog.vue:85
 #: src/page/settings/account.vue:122 src/page/settings/account.vue:127
 msgid "Changes could not be saved"
 msgstr "Không thể lưu các thay đổi"
 
-#: src/component/user/edit/dialog.vue:69 src/component/user/edit/dialog.vue:166
+#: src/component/user/edit/dialog.vue:73 src/component/user/edit/dialog.vue:149
 #: src/component/album/edit/dialog.vue:64
 #: src/component/label/edit/dialog.vue:37
 #: src/component/photo/edit/files.vue:145 src/component/service/edit.vue:79
@@ -969,9 +974,10 @@ msgstr "Phát hiện"
 msgid "Dismiss"
 msgstr "Miễn nhiệm"
 
-#: src/component/user/add/dialog.vue:115 src/component/user/edit/dialog.vue:165
-#: src/page/admin/users.vue:41 src/page/settings/account.vue:148
-#: src/page/settings/account.vue:150
+#: src/component/user/add/dialog.vue:112 src/component/user/add/dialog.vue:113
+#: src/component/user/edit/dialog.vue:160
+#: src/component/user/edit/dialog.vue:161 src/page/admin/users.vue:41
+#: src/page/settings/account.vue:148 src/page/settings/account.vue:150
 msgid "Display Name"
 msgstr "Tên hiển thị"
 
@@ -1073,7 +1079,7 @@ msgstr "Biên tập"
 msgid "Edit %{s}"
 msgstr "Chỉnh sửa tên}"
 
-#: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
+#: src/component/user/edit/dialog.vue:59 src/component/service/edit.vue:68
 msgid "Edit Account"
 msgstr "Chỉnh sửa tài khoản"
 
@@ -1085,7 +1091,7 @@ msgstr "Chỉnh sửa hình ảnh"
 msgid "Edited"
 msgstr "Đã chỉnh sửa"
 
-#: src/component/user/add/dialog.vue:134 src/component/user/edit/dialog.vue:217
+#: src/component/user/add/dialog.vue:129 src/component/user/edit/dialog.vue:209
 #: src/page/settings/account.vue:170 src/page/settings/account.vue:594
 msgid "Email"
 msgstr "E-mail"
@@ -1209,7 +1215,8 @@ msgstr "Không thể kết nối tài khoản."
 msgid "Failed updating link"
 msgstr "Liên kết cập nhật không thành công"
 
-#: src/component/user/edit/dialog.vue:144 src/page/settings/account.vue:127
+#: src/component/user/edit/dialog.vue:141
+#: src/component/user/edit/dialog.vue:142 src/page/settings/account.vue:127
 #: src/page/settings/account.vue:129
 msgid "Family Name"
 msgstr "Tên gia đình"
@@ -1344,7 +1351,8 @@ msgstr "Tạo bản xem trước"
 msgid "Generated"
 msgstr "Đã tạo ra"
 
-#: src/component/user/edit/dialog.vue:120 src/page/settings/account.vue:105
+#: src/component/user/edit/dialog.vue:118
+#: src/component/user/edit/dialog.vue:119 src/page/settings/account.vue:105
 #: src/page/settings/account.vue:107
 msgid "Given Name"
 msgstr "Tên"
@@ -1499,17 +1507,9 @@ msgstr "ID phiên bản"
 msgid "Interval"
 msgstr "Khoảng thời gian"
 
-#: src/component/user/add/dialog.vue:117 src/component/user/add/dialog.vue:136
-#: src/component/user/add/dialog.vue:198 src/component/user/edit/dialog.vue:100
-#: src/component/user/edit/dialog.vue:123
-#: src/component/user/edit/dialog.vue:147
-#: src/component/user/edit/dialog.vue:220
-#: src/component/user/edit/dialog.vue:242
-#: src/component/user/edit/dialog.vue:269
-#: src/component/user/edit/dialog.vue:351 src/common/form.js:208
-#: src/common/form.js:211 src/common/form.js:219 src/common/form.js:222
-#: src/common/form.js:238 src/common/form.js:239 src/common/form.js:243
-#: src/common/form.js:244
+#: src/common/form.js:208 src/common/form.js:211 src/common/form.js:219
+#: src/common/form.js:222 src/common/form.js:238 src/common/form.js:239
+#: src/common/form.js:243 src/common/form.js:244
 msgid "Invalid"
 msgstr "Không hợp lệ"
 
@@ -2125,9 +2125,9 @@ msgstr "Toàn cảnh"
 msgid "Panoramas"
 msgstr "Ảnh toàn cảnh"
 
-#: src/component/user/add/dialog.vue:92 src/component/service/add.vue:92
-#: src/component/service/edit.vue:339 src/component/settings/apps.vue:118
-#: src/component/settings/passcode.vue:104
+#: src/component/user/add/dialog.vue:93 src/component/user/add/dialog.vue:94
+#: src/component/service/add.vue:92 src/component/service/edit.vue:339
+#: src/component/settings/apps.vue:118 src/component/settings/passcode.vue:104
 #: src/component/settings/passcode.vue:415 src/component/share/dialog.vue:24
 #: src/options/auth.js:91 src/page/auth/login.vue:173
 msgid "Password"
@@ -2431,10 +2431,8 @@ msgstr "Yêu cầu không thành công - phản hồi không hợp lệ"
 msgid "Require non-photographic and low-quality images to be reviewed before they appear in search results."
 msgstr "Yêu cầu xem xét những hình ảnh không phải là ảnh chụp và chất lượng thấp trước khi chúng xuất hiện trong kết quả tìm kiếm."
 
-#: src/component/user/add/dialog.vue:71 src/component/user/add/dialog.vue:96
-#: src/component/user/edit/dialog.vue:167 src/page/about/feedback.vue:96
-#: src/page/about/feedback.vue:111 src/page/about/feedback.vue:147
-#: src/page/about/feedback.vue:146
+#: src/page/about/feedback.vue:96 src/page/about/feedback.vue:111
+#: src/page/about/feedback.vue:147 src/page/about/feedback.vue:146
 msgid "Required"
 msgstr "Yêu cầu"
 
@@ -2463,7 +2461,7 @@ msgstr "Gõ lại mật khẩu"
 msgid "Review"
 msgstr "Ôn tập"
 
-#: src/component/user/add/dialog.vue:152 src/component/user/edit/dialog.vue:294
+#: src/component/user/add/dialog.vue:149 src/component/user/edit/dialog.vue:280
 #: src/page/admin/sessions.vue:187 src/page/admin/users.vue:42
 msgid "Role"
 msgstr "Vai trò"
@@ -2476,7 +2474,7 @@ msgstr "Số hàng trên mỗi trang:"
 msgid "Satellite"
 msgstr "Vệ tinh"
 
-#: src/component/user/edit/dialog.vue:499
+#: src/component/user/edit/dialog.vue:480
 #: src/component/album/edit/dialog.vue:208
 #: src/component/label/edit/dialog.vue:116
 #: src/component/people/edit/dialog.vue:129 src/component/service/edit.vue:453
@@ -2776,7 +2774,7 @@ msgstr "Đã xóa thành công"
 msgid "Successfully verified"
 msgstr "Đã xác minh thành công"
 
-#: src/component/user/edit/dialog.vue:412 src/page/admin/users.vue:86
+#: src/component/user/edit/dialog.vue:393 src/page/admin/users.vue:86
 msgid "Super Admin"
 msgstr "Quản trị viên cấp cao"
 
@@ -2859,7 +2857,8 @@ msgstr "Múi giờ"
 msgid "Timeout"
 msgstr "Hết giờ"
 
-#: src/component/user/edit/dialog.vue:97
+#: src/component/user/edit/dialog.vue:96 src/component/user/edit/dialog.vue:97
+#: src/page/settings/account.vue:83 src/page/settings/account.vue:85
 msgctxt "Account"
 msgid "Title"
 msgstr "Tiêu đề"
@@ -2869,7 +2868,6 @@ msgctxt "Photo"
 msgid "Title"
 msgstr "Tiêu đề"
 
-#: src/page/settings/account.vue:83 src/page/settings/account.vue:85
 #: src/component/photo/edit/info.vue:73 src/component/photo/edit/info.vue:154
 #: src/component/photo/edit/labels.vue:44 src/component/photo/view/list.vue:113
 msgid "Title"
@@ -3002,7 +3000,7 @@ msgstr "Đang cập nhật chỉ mục"
 msgid "Updating moments"
 msgstr "Cập nhật khoảnh khắc"
 
-#: src/component/user/edit/dialog.vue:161
+#: src/component/user/edit/dialog.vue:144
 msgid "Updating picture…"
 msgstr "Đang cập nhật hình ảnh…"
 
@@ -3048,13 +3046,14 @@ msgstr "Tải lên hoàn tất. Lập chỉ mục…"
 msgid "Upload failed"
 msgstr "Tải lên không thành công"
 
-#: src/component/user/edit/dialog.vue:394
-msgid "Upload Folder"
-msgstr "Tải thư mục lên"
-
 #: src/component/service/edit.vue:244
 msgid "Upload local files"
 msgstr "Tải lên các tập tin cục bộ"
+
+#: src/component/user/edit/dialog.vue:375
+#: src/component/user/edit/dialog.vue:376
+msgid "Upload Path"
+msgstr ""
 
 #: src/page/settings/general.vue:299
 msgid "Upload to WebDAV and share links with friends."
@@ -3103,9 +3102,10 @@ msgstr "Hướng dẫn sử dụng"
 msgid "User Interface"
 msgstr "Giao diện người dùng"
 
-#: src/component/user/add/dialog.vue:65 src/page/admin/sessions.vue:145
-#: src/page/admin/users.vue:40 src/component/service/add.vue:73
-#: src/component/service/edit.vue:324 src/component/share/dialog.vue:23
+#: src/component/user/add/dialog.vue:68 src/component/user/add/dialog.vue:69
+#: src/page/admin/sessions.vue:145 src/page/admin/users.vue:40
+#: src/component/service/add.vue:73 src/component/service/edit.vue:324
+#: src/component/share/dialog.vue:23
 msgid "Username"
 msgstr "tên tài khoản"
 
@@ -3173,12 +3173,12 @@ msgstr "Chúng tôi cảm kích những phản hồi của bạn!"
 msgid "We do our best to respond within five business days or less."
 msgstr "Chúng tôi cố gắng hết sức để phản hồi trong vòng năm ngày làm việc hoặc ít hơn."
 
-#: src/component/user/add/dialog.vue:212 src/component/user/edit/dialog.vue:429
+#: src/component/user/add/dialog.vue:212 src/component/user/edit/dialog.vue:410
 #: src/page/admin/users.vue:49
 msgid "Web Login"
 msgstr "Đăng nhập web"
 
-#: src/component/user/add/dialog.vue:225 src/component/user/edit/dialog.vue:446
+#: src/component/user/add/dialog.vue:225 src/component/user/edit/dialog.vue:427
 #: src/page/admin/users.vue:51 src/options/auth.js:55 src/options/auth.js:68
 #: src/options/options.js:517
 msgid "WebDAV"
@@ -3282,6 +3282,12 @@ msgstr "Thư viện của bạn được phân tích liên tục để tự đ�
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "Phóng to / thu nhỏ"
+
+#~ msgid "Base Folder"
+#~ msgstr "Thư mục cơ sở"
+
+#~ msgid "Upload Folder"
+#~ msgstr "Tải thư mục lên"
 
 #~ msgid "Too long"
 #~ msgstr "Quá dài"

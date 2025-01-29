@@ -80,14 +80,14 @@ msgstr ""
 msgid "12 hours"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:466
+#: src/component/user/edit/dialog.vue:447
 #: src/page/settings/account.vue:323
 #: src/component/settings/passcode.vue:72
 #: src/page/settings/account.vue:323
 msgid "2-Factor Authentication"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:465
+#: src/component/user/edit/dialog.vue:446
 #: src/options/auth.js:46
 msgid "2FA"
 msgstr ""
@@ -104,7 +104,8 @@ msgstr ""
 msgid "A new version of %{s} is available:"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:243
+#: src/component/user/edit/dialog.vue:229
+#: src/component/user/edit/dialog.vue:230
 #: src/page/about/about.vue:39
 #: src/page/settings/account.vue:247
 #: src/page/settings/account.vue:248
@@ -131,7 +132,7 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:89
+#: src/component/user/add/dialog.vue:83
 #: src/component/service/add.vue:34
 msgid "Account created"
 msgstr ""
@@ -181,7 +182,7 @@ msgstr ""
 msgid "Activation Code"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:23
+#: src/component/user/add/dialog.vue:25
 #: src/page/admin/users.vue:151
 #: src/component/settings/apps.vue:445
 msgid "Add"
@@ -192,7 +193,7 @@ msgstr ""
 msgid "Add %{s}?"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:50
+#: src/component/user/add/dialog.vue:49
 #: src/component/service/add.vue:38
 msgid "Add Account"
 msgstr ""
@@ -480,8 +481,8 @@ msgstr ""
 msgid "Aspect Ratio"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:171
-#: src/component/user/edit/dialog.vue:320
+#: src/component/user/add/dialog.vue:168
+#: src/component/user/edit/dialog.vue:305
 #: src/page/admin/sessions.vue:28
 #: src/page/admin/sessions.vue:206
 #: src/page/admin/users.vue:44
@@ -508,8 +509,9 @@ msgstr ""
 msgid "Badge"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:372
-msgid "Base Folder"
+#: src/component/user/edit/dialog.vue:356
+#: src/component/user/edit/dialog.vue:357
+msgid "Base Path"
 msgstr ""
 
 #: src/page/about/about.vue:83
@@ -522,7 +524,8 @@ msgstr ""
 msgid "Being 100% self-funded and independent, we can promise you that we will never sell your data and that we will always be transparent about our software and services."
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:270
+#: src/component/user/edit/dialog.vue:254
+#: src/component/user/edit/dialog.vue:255
 #: src/page/settings/account.vue:226
 #: src/page/settings/account.vue:227
 #: src/page/settings/account.vue:226
@@ -624,8 +627,8 @@ msgid "Can't select more items"
 msgstr ""
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/add/dialog.vue:22
-#: src/component/user/edit/dialog.vue:487
+#: src/component/user/add/dialog.vue:24
+#: src/component/user/edit/dialog.vue:468
 #: src/component/user/remove/dialog.vue:43
 #: src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
@@ -682,7 +685,7 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:193
+#: src/component/user/edit/dialog.vue:188
 #: src/page/settings/account.vue:200
 #: src/page/settings/account.vue:200
 msgid "Change Avatar"
@@ -706,6 +709,10 @@ msgstr ""
 msgid "Change private flag"
 msgstr ""
 
+#: src/component/user/add/dialog.vue:90
+#: src/component/user/add/dialog.vue:95
+#: src/component/user/edit/dialog.vue:80
+#: src/component/user/edit/dialog.vue:85
 #: src/page/settings/account.vue:122
 #: src/page/settings/account.vue:127
 #: src/page/settings/account.vue:122
@@ -713,8 +720,8 @@ msgstr ""
 msgid "Changes could not be saved"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:69
-#: src/component/user/edit/dialog.vue:166
+#: src/component/user/edit/dialog.vue:73
+#: src/component/user/edit/dialog.vue:149
 #: src/component/album/edit/dialog.vue:64
 #: src/component/label/edit/dialog.vue:37
 #: src/component/photo/edit/files.vue:145
@@ -1099,8 +1106,10 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:115
-#: src/component/user/edit/dialog.vue:165
+#: src/component/user/add/dialog.vue:112
+#: src/component/user/add/dialog.vue:113
+#: src/component/user/edit/dialog.vue:160
+#: src/component/user/edit/dialog.vue:161
 #: src/page/admin/users.vue:41
 #: src/page/settings/account.vue:148
 #: src/page/settings/account.vue:150
@@ -1222,7 +1231,7 @@ msgstr ""
 msgid "Edit %{s}"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:60
+#: src/component/user/edit/dialog.vue:59
 #: src/component/service/edit.vue:68
 msgid "Edit Account"
 msgstr ""
@@ -1235,8 +1244,8 @@ msgstr ""
 msgid "Edited"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:134
-#: src/component/user/edit/dialog.vue:217
+#: src/component/user/add/dialog.vue:129
+#: src/component/user/edit/dialog.vue:209
 #: src/page/settings/account.vue:170
 #: src/page/settings/account.vue:594
 #: src/page/settings/account.vue:170
@@ -1373,7 +1382,8 @@ msgstr ""
 msgid "Failed updating link"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:144
+#: src/component/user/edit/dialog.vue:141
+#: src/component/user/edit/dialog.vue:142
 #: src/page/settings/account.vue:127
 #: src/page/settings/account.vue:129
 #: src/page/settings/account.vue:127
@@ -1527,7 +1537,8 @@ msgstr ""
 msgid "Generated"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:120
+#: src/component/user/edit/dialog.vue:118
+#: src/component/user/edit/dialog.vue:119
 #: src/page/settings/account.vue:105
 #: src/page/settings/account.vue:107
 #: src/page/settings/account.vue:105
@@ -1697,16 +1708,6 @@ msgstr ""
 msgid "Interval"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:117
-#: src/component/user/add/dialog.vue:136
-#: src/component/user/add/dialog.vue:198
-#: src/component/user/edit/dialog.vue:100
-#: src/component/user/edit/dialog.vue:123
-#: src/component/user/edit/dialog.vue:147
-#: src/component/user/edit/dialog.vue:220
-#: src/component/user/edit/dialog.vue:242
-#: src/component/user/edit/dialog.vue:269
-#: src/component/user/edit/dialog.vue:351
 #: src/common/form.js:208
 #: src/common/form.js:211
 #: src/common/form.js:219
@@ -2425,7 +2426,8 @@ msgstr ""
 msgid "Panoramas"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:92
+#: src/component/user/add/dialog.vue:93
+#: src/component/user/add/dialog.vue:94
 #: src/component/service/add.vue:92
 #: src/component/service/edit.vue:339
 #: src/component/settings/apps.vue:118
@@ -2768,9 +2770,6 @@ msgstr ""
 msgid "Require non-photographic and low-quality images to be reviewed before they appear in search results."
 msgstr ""
 
-#: src/component/user/add/dialog.vue:71
-#: src/component/user/add/dialog.vue:96
-#: src/component/user/edit/dialog.vue:167
 #: src/page/about/feedback.vue:96
 #: src/page/about/feedback.vue:111
 #: src/page/about/feedback.vue:147
@@ -2807,8 +2806,8 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:152
-#: src/component/user/edit/dialog.vue:294
+#: src/component/user/add/dialog.vue:149
+#: src/component/user/edit/dialog.vue:280
 #: src/page/admin/sessions.vue:187
 #: src/page/admin/users.vue:42
 msgid "Role"
@@ -2823,7 +2822,7 @@ msgstr ""
 msgid "Satellite"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:499
+#: src/component/user/edit/dialog.vue:480
 #: src/component/album/edit/dialog.vue:208
 #: src/component/label/edit/dialog.vue:116
 #: src/component/people/edit/dialog.vue:129
@@ -3157,7 +3156,7 @@ msgstr ""
 msgid "Successfully verified"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:412
+#: src/component/user/edit/dialog.vue:393
 #: src/page/admin/users.vue:86
 msgid "Super Admin"
 msgstr ""
@@ -3251,7 +3250,12 @@ msgstr ""
 msgid "Timeout"
 msgstr ""
 
+#: src/component/user/edit/dialog.vue:96
 #: src/component/user/edit/dialog.vue:97
+#: src/page/settings/account.vue:83
+#: src/page/settings/account.vue:85
+#: src/page/settings/account.vue:83
+#: src/page/settings/account.vue:85
 msgctxt "Account"
 msgid "Title"
 msgstr ""
@@ -3261,14 +3265,10 @@ msgctxt "Photo"
 msgid "Title"
 msgstr ""
 
-#: src/page/settings/account.vue:83
-#: src/page/settings/account.vue:85
 #: src/component/photo/edit/info.vue:73
 #: src/component/photo/edit/info.vue:154
 #: src/component/photo/edit/labels.vue:44
 #: src/component/photo/view/list.vue:113
-#: src/page/settings/account.vue:83
-#: src/page/settings/account.vue:85
 msgid "Title"
 msgstr ""
 
@@ -3427,7 +3427,7 @@ msgstr ""
 msgid "Updating moments"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:161
+#: src/component/user/edit/dialog.vue:144
 msgid "Updating picture…"
 msgstr ""
 
@@ -3481,12 +3481,13 @@ msgstr ""
 msgid "Upload failed"
 msgstr ""
 
-#: src/component/user/edit/dialog.vue:394
-msgid "Upload Folder"
-msgstr ""
-
 #: src/component/service/edit.vue:244
 msgid "Upload local files"
+msgstr ""
+
+#: src/component/user/edit/dialog.vue:375
+#: src/component/user/edit/dialog.vue:376
+msgid "Upload Path"
 msgstr ""
 
 #: src/page/settings/general.vue:299
@@ -3540,7 +3541,8 @@ msgstr ""
 msgid "User Interface"
 msgstr ""
 
-#: src/component/user/add/dialog.vue:65
+#: src/component/user/add/dialog.vue:68
+#: src/component/user/add/dialog.vue:69
 #: src/page/admin/sessions.vue:145
 #: src/page/admin/users.vue:40
 #: src/component/service/add.vue:73
@@ -3630,13 +3632,13 @@ msgid "We do our best to respond within five business days or less."
 msgstr ""
 
 #: src/component/user/add/dialog.vue:212
-#: src/component/user/edit/dialog.vue:429
+#: src/component/user/edit/dialog.vue:410
 #: src/page/admin/users.vue:49
 msgid "Web Login"
 msgstr ""
 
 #: src/component/user/add/dialog.vue:225
-#: src/component/user/edit/dialog.vue:446
+#: src/component/user/edit/dialog.vue:427
 #: src/page/admin/users.vue:51
 #: src/options/auth.js:55
 #: src/options/auth.js:68
