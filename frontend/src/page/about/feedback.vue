@@ -134,7 +134,6 @@ export default {
   },
   methods: {
     send() {
-      // TODO: fix form
       if (this.$refs.form.validate()) {
         Api.post("feedback", this.form).then(() => {
           this.$notify.success(this.$gettext("Message sent"));
