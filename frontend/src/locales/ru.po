@@ -84,12 +84,12 @@ msgstr "1 час"
 msgid "12 hours"
 msgstr "12 часов"
 
-#: src/component/user/edit/dialog.vue:447 src/page/settings/account.vue:323
+#: src/component/user/edit/dialog.vue:450 src/page/settings/account.vue:323
 #: src/component/settings/passcode.vue:72
 msgid "2-Factor Authentication"
 msgstr "Двухфакторная аутентификация"
 
-#: src/component/user/edit/dialog.vue:446 src/options/auth.js:46
+#: src/component/user/edit/dialog.vue:449 src/options/auth.js:46
 msgid "2FA"
 msgstr "2ФА"
 
@@ -105,8 +105,8 @@ msgstr "Клик скопирует это в буфер обмена."
 msgid "A new version of %{s} is available:"
 msgstr "Доступна новая версия %{s}:"
 
-#: src/component/user/edit/dialog.vue:229
-#: src/component/user/edit/dialog.vue:230 src/page/about/about.vue:39
+#: src/component/user/edit/dialog.vue:231
+#: src/component/user/edit/dialog.vue:232 src/page/about/about.vue:39
 #: src/page/settings/account.vue:247 src/page/settings/account.vue:248
 #: src/app/routes.js:60 src/component/navigation.vue:1423
 #: src/page/people/recognized.vue:322
@@ -149,8 +149,8 @@ msgstr "Действие"
 msgid "Actions"
 msgstr "Действия"
 
-#: src/page/connect.vue:291 src/component/settings/passcode.vue:343
-#: src/page/connect.vue:298
+#: src/page/connect.vue:293 src/component/settings/passcode.vue:343
+#: src/page/connect.vue:300
 msgid "Activate"
 msgstr "Активировать"
 
@@ -316,7 +316,7 @@ msgstr "Все цвета"
 msgid "All Countries"
 msgstr "Все страны"
 
-#: src/page/about/feedback.vue:42 src/page/about/feedback.vue:36
+#: src/page/about/feedback.vue:42 src/page/about/feedback.vue:35
 msgid "All fields are required"
 msgstr "Все поля обязательны к заполнению"
 
@@ -348,7 +348,7 @@ msgstr "Кроме того, вы можете загружать файлы н�
 msgid "Altitude"
 msgstr "Высота"
 
-#: src/component/photo/edit/details.vue:266
+#: src/component/photo/edit/details.vue:268
 msgid "Altitude (m)"
 msgstr "Высота (м)"
 
@@ -379,12 +379,12 @@ msgstr "Ключ API"
 msgid "Application"
 msgstr "Приложение"
 
-#: src/component/photo/edit/details.vue:622
+#: src/component/photo/edit/details.vue:624
 msgid "Apply"
 msgstr "Применить"
 
 #: src/component/photo/clipboard.vue:64
-#: src/component/photo/edit/details.vue:621
+#: src/component/photo/edit/details.vue:623
 #: src/component/photo/view/cards.vue:402
 msgid "Approve"
 msgstr "Подтвердить"
@@ -436,7 +436,7 @@ msgstr "Вы уверены, что хотите удалить этот фай�
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
-#: src/component/photo/edit/details.vue:518
+#: src/component/photo/edit/details.vue:520
 msgid "Artist"
 msgstr "Автор"
 
@@ -444,7 +444,7 @@ msgstr "Автор"
 msgid "Aspect Ratio"
 msgstr "Соотношение сторон"
 
-#: src/component/user/add/dialog.vue:168 src/component/user/edit/dialog.vue:305
+#: src/component/user/add/dialog.vue:171 src/component/user/edit/dialog.vue:307
 #: src/page/admin/sessions.vue:28 src/page/admin/sessions.vue:206
 #: src/page/admin/users.vue:44
 msgid "Authentication"
@@ -470,12 +470,12 @@ msgstr "Резервная копия"
 msgid "Badge"
 msgstr "Значок"
 
-#: src/component/user/edit/dialog.vue:356
-#: src/component/user/edit/dialog.vue:357
+#: src/component/user/edit/dialog.vue:359
+#: src/component/user/edit/dialog.vue:360
 msgid "Base Path"
 msgstr "Базовый путь"
 
-#: src/page/about/about.vue:83 src/page/connect.vue:213
+#: src/page/about/about.vue:83 src/page/connect.vue:214
 msgid "Become a member today, support our mission and enjoy our member benefits!"
 msgstr "Станьте членом клуба сегодня, поддержите нашу миссию и воспользуйтесь нашими преимуществами!"
 
@@ -483,8 +483,8 @@ msgstr "Станьте членом клуба сегодня, поддержи�
 msgid "Being 100% self-funded and independent, we can promise you that we will never sell your data and that we will always be transparent about our software and services."
 msgstr "Будучи на 100% самофинансируемыми и независимыми, мы можем пообещать вам, что никогда не будем продавать ваши данные и что мы всегда будем прозрачны в отношении нашего программного обеспечения и услуг."
 
-#: src/component/user/edit/dialog.vue:254
-#: src/component/user/edit/dialog.vue:255 src/page/settings/account.vue:226
+#: src/component/user/edit/dialog.vue:256
+#: src/component/user/edit/dialog.vue:257 src/page/settings/account.vue:226
 #: src/page/settings/account.vue:227
 msgid "Bio"
 msgstr "Биография"
@@ -530,11 +530,11 @@ msgstr "Просматривайте проиндексированные фай
 msgid "Bug Report"
 msgstr "Отчет об ошибке"
 
-#: src/page/connect.vue:45 src/common/notify.js:101 src/page/connect.vue:49
+#: src/page/connect.vue:46 src/common/notify.js:101 src/page/connect.vue:50
 msgid "Busy, please wait…"
 msgstr "Занят, пожалуйста, подождите…"
 
-#: src/page/connect.vue:312
+#: src/page/connect.vue:314
 msgid "By using the software and services we provide, you agree to our terms of service, privacy policy, and code of conduct."
 msgstr "Используя программное обеспечение и услуги, которые мы предоставляем, вы соглашаетесь с нашими условиями обслуживания, политикой конфиденциальности и кодексом поведения."
 
@@ -542,7 +542,7 @@ msgstr "Используя программное обеспечение и ус
 msgid "Calendar"
 msgstr "Календарь"
 
-#: src/component/photo/edit/details.vue:334 src/component/photo/toolbar.vue:313
+#: src/component/photo/edit/details.vue:336 src/component/photo/toolbar.vue:313
 #: src/component/photo/view/cards.vue:487 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "Камера"
@@ -569,8 +569,8 @@ msgid "Can't select more items"
 msgstr "Нельзя выбрать больше элементов"
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/add/dialog.vue:24 src/component/user/edit/dialog.vue:468
-#: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
+#: src/component/user/add/dialog.vue:24 src/component/user/edit/dialog.vue:471
+#: src/component/user/remove/dialog.vue:43 src/page/connect.vue:115
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
 #: src/component/file/delete/dialog.vue:47
@@ -584,16 +584,16 @@ msgstr "Нельзя выбрать больше элементов"
 #: src/component/settings/passcode.vue:245
 #: src/component/settings/passcode.vue:330
 #: src/component/settings/password.vue:152 src/component/share/dialog.vue:25
-#: src/locales.js:26 src/page/auth/login.vue:204 src/page/connect.vue:116
+#: src/locales.js:26 src/page/auth/login.vue:204 src/page/connect.vue:117
 #: src/page/library/import.vue:103 src/page/library/index.vue:115
 msgid "Cancel"
 msgstr "Отменить"
 
-#: src/common/util.js:667
+#: src/common/util.js:669
 msgid "Cannot copy to clipboard"
 msgstr "Невозможно скопировать в буфер обмена"
 
-#: src/component/photo/edit/details.vue:85 src/component/photo/edit/info.vue:75
+#: src/component/photo/edit/details.vue:86 src/component/photo/edit/info.vue:75
 #: src/component/photo/edit/labels.vue:46
 #: src/component/photo/view/cards.vue:432
 msgid "Caption"
@@ -612,7 +612,7 @@ msgstr "Карусельный слайд {0} из {1}"
 msgid "Category"
 msgstr "Категория"
 
-#: src/component/user/edit/dialog.vue:188 src/page/settings/account.vue:200
+#: src/component/user/edit/dialog.vue:189 src/page/settings/account.vue:200
 msgid "Change Avatar"
 msgstr "Изменить аватар"
 
@@ -681,7 +681,7 @@ msgstr "Клиент"
 msgid "Client Credentials"
 msgstr "Учетные данные клиента"
 
-#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:608
+#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:610
 #: src/component/photo/toolbar.vue:242
 #: src/component/photo/upload/dialog.vue:219
 #: src/component/settings/apps.vue:221 src/component/settings/apps.vue:434
@@ -710,7 +710,7 @@ msgstr "Цветовой профиль"
 msgid "Colors"
 msgstr "Цвета"
 
-#: src/page/connect.vue:257 src/page/connect.vue:264
+#: src/page/connect.vue:259 src/page/connect.vue:266
 msgid "Compare Editions"
 msgstr "Сравнить издания"
 
@@ -745,8 +745,8 @@ msgstr "Подключено"
 msgid "Contact Details"
 msgstr "Контактная информация"
 
-#: src/page/about/feedback.vue:34 src/page/connect.vue:127
-#: src/page/connect.vue:129
+#: src/page/about/feedback.vue:34 src/page/connect.vue:128
+#: src/page/connect.vue:130
 msgid "Contact Us"
 msgstr "Свяжитесь с нами"
 
@@ -776,7 +776,7 @@ msgstr "Вкладчик"
 msgid "Converting"
 msgstr "Конвертация"
 
-#: src/common/util.js:664
+#: src/common/util.js:666
 msgid "Copied to clipboard"
 msgstr "Скопировано в буфер обмена"
 
@@ -784,7 +784,7 @@ msgstr "Скопировано в буфер обмена"
 msgid "Copy"
 msgstr "Копировать"
 
-#: src/component/photo/edit/details.vue:497
+#: src/component/photo/edit/details.vue:499
 msgid "Copyright"
 msgstr "Копирайт"
 
@@ -792,7 +792,7 @@ msgstr "Копирайт"
 msgid "Couldn't find anything."
 msgstr "Ничего не найдено."
 
-#: src/page/settings/account.vue:686 src/component/photo/edit/details.vue:238
+#: src/page/settings/account.vue:686 src/component/photo/edit/details.vue:240
 #: src/component/photo/toolbar.vue:285 src/page/settings/account.vue:578
 msgid "Country"
 msgstr "Страна"
@@ -849,7 +849,7 @@ msgstr "Ежедневно"
 msgid "Database Backups"
 msgstr "Резервные копии баз данных"
 
-#: src/page/settings/account.vue:453 src/component/photo/edit/details.vue:112
+#: src/page/settings/account.vue:453 src/component/photo/edit/details.vue:113
 msgid "Day"
 msgstr "День"
 
@@ -977,9 +977,9 @@ msgstr "Исследование"
 msgid "Dismiss"
 msgstr "Откажись от"
 
-#: src/component/user/add/dialog.vue:112 src/component/user/add/dialog.vue:113
-#: src/component/user/edit/dialog.vue:160
-#: src/component/user/edit/dialog.vue:161 src/page/admin/users.vue:41
+#: src/component/user/add/dialog.vue:114 src/component/user/add/dialog.vue:115
+#: src/component/user/edit/dialog.vue:161
+#: src/component/user/edit/dialog.vue:162 src/page/admin/users.vue:41
 #: src/page/settings/account.vue:148 src/page/settings/account.vue:150
 msgid "Display Name"
 msgstr "Отображаемое имя"
@@ -1094,7 +1094,7 @@ msgstr "Редактировать фотографию"
 msgid "Edited"
 msgstr "Отредактировано"
 
-#: src/component/user/add/dialog.vue:129 src/component/user/edit/dialog.vue:209
+#: src/component/user/add/dialog.vue:132 src/component/user/edit/dialog.vue:211
 #: src/page/settings/account.vue:170 src/page/settings/account.vue:594
 msgid "Email"
 msgstr "Электронная почта"
@@ -1135,7 +1135,7 @@ msgstr "введите код подтверждения"
 msgid "Enter your password to confirm the action and continue:"
 msgstr "Введите пароль, чтобы подтвердить действие и продолжить:"
 
-#: src/page/connect.vue:49 src/component/viewer.vue:109 src/page/connect.vue:53
+#: src/page/connect.vue:50 src/component/viewer.vue:109 src/page/connect.vue:54
 #: src/page/library/errors.vue:195
 msgid "Error"
 msgstr "Ошибка"
@@ -1186,7 +1186,7 @@ msgstr "Экспериментальные возможности"
 msgid "Expires"
 msgstr "Ожидаемое время"
 
-#: src/component/photo/edit/details.vue:382
+#: src/component/photo/edit/details.vue:384
 msgid "Exposure"
 msgstr "Экспозиция"
 
@@ -1194,7 +1194,7 @@ msgstr "Экспозиция"
 msgid "Extract still images and generate thumbnails while indexing."
 msgstr "Извлекай неподвижные изображения и создавай миниатюры во время индексации."
 
-#: src/component/photo/edit/details.vue:429
+#: src/component/photo/edit/details.vue:431
 msgid "F Number"
 msgstr "Диафрагменное число"
 
@@ -1210,7 +1210,7 @@ msgstr "Лица"
 msgid "Failed removing link"
 msgstr "Не удалось удалить ссылку"
 
-#: src/page/connect.vue:101 src/page/connect.vue:103
+#: src/page/connect.vue:102 src/page/connect.vue:104
 msgid "Failed to connect account."
 msgstr "Не удалось подключить аккаунт."
 
@@ -1291,7 +1291,7 @@ msgstr "Файлы с последовательными именами типа
 msgid "First page"
 msgstr "Первая страница"
 
-#: src/component/photo/edit/details.vue:448
+#: src/component/photo/edit/details.vue:450
 msgid "Focal Length"
 msgstr "Фокусное расстояние"
 
@@ -1567,7 +1567,7 @@ msgstr "Ограничение по размеру в формате JPEG: %{n}p
 msgid "JPEGs and thumbnails are automatically rendered as needed."
 msgstr "JPEG и эскизы автоматически отображаются по мере необходимости."
 
-#: src/component/photo/edit/details.vue:562
+#: src/component/photo/edit/details.vue:564
 msgid "Keywords"
 msgstr "Ключевые слова"
 
@@ -1614,7 +1614,7 @@ msgstr "Последняя синхронизация"
 msgid "Last Used"
 msgstr "Последний используемый"
 
-#: src/component/photo/edit/details.vue:290
+#: src/component/photo/edit/details.vue:292
 #: src/component/photo/edit/info.vue:372
 msgid "Latitude"
 msgstr "Широта"
@@ -1623,9 +1623,9 @@ msgstr "Широта"
 msgid "LDAP/AD"
 msgstr "LDAP/AD"
 
-#: src/page/connect.vue:61 src/component/confirm/sponsor.vue:84
+#: src/page/connect.vue:62 src/component/confirm/sponsor.vue:84
 #: src/page/about/about.vue:50 src/page/about/about.vue:120
-#: src/page/connect.vue:63 src/page/help.vue:32
+#: src/page/connect.vue:64 src/page/help.vue:32
 msgid "Learn more"
 msgstr "Узнать больше"
 
@@ -1633,7 +1633,7 @@ msgstr "Узнать больше"
 msgid "Legal Information"
 msgstr "Юридическая информация"
 
-#: src/component/photo/edit/details.vue:401
+#: src/component/photo/edit/details.vue:403
 #: src/component/photo/view/cards.vue:498
 msgid "Lens"
 msgstr "Объектив"
@@ -1644,8 +1644,8 @@ msgstr "Объектив"
 msgid "Library"
 msgstr "Библиотека"
 
-#: src/page/connect.vue:40 src/app/routes.js:66
-#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:540
+#: src/page/connect.vue:41 src/app/routes.js:66
+#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:542
 #: src/page/about/license.vue:25
 msgid "License"
 msgstr "Лицензия"
@@ -1700,7 +1700,7 @@ msgstr "Loading..."
 msgid "Local"
 msgstr "Местный"
 
-#: src/component/photo/edit/details.vue:190 src/options/options.js:37
+#: src/component/photo/edit/details.vue:191 src/options/options.js:37
 msgid "Local Time"
 msgstr "Местное время"
 
@@ -1730,7 +1730,7 @@ msgstr "Выйти"
 msgid "Logs"
 msgstr "Журнал"
 
-#: src/component/photo/edit/details.vue:314
+#: src/component/photo/edit/details.vue:316
 #: src/component/photo/edit/info.vue:378
 msgid "Longitude"
 msgstr "Долгота"
@@ -1755,9 +1755,9 @@ msgstr "Основной цвет"
 msgid "Male"
 msgstr "Мужской"
 
-#: src/page/connect.vue:159 src/page/connect.vue:243
-#: src/page/about/about.vue:159 src/page/connect.vue:161
-#: src/page/connect.vue:250
+#: src/page/connect.vue:160 src/page/connect.vue:245
+#: src/page/about/about.vue:159 src/page/connect.vue:162
+#: src/page/connect.vue:252
 msgid "Manage Account"
 msgstr "Управление счетом"
 
@@ -1781,7 +1781,7 @@ msgstr "Маркер"
 msgid "Medium"
 msgstr "Средний"
 
-#: src/page/connect.vue:44
+#: src/page/connect.vue:45
 msgid "Membership"
 msgstr "Членство"
 
@@ -1789,7 +1789,7 @@ msgstr "Членство"
 msgid "Merge %{a} with %{b}?"
 msgstr "Объединить %{a} с %{b}?"
 
-#: src/page/about/feedback.vue:38 src/page/about/feedback.vue:32
+#: src/page/about/feedback.vue:38 src/page/about/feedback.vue:31
 msgid "Message sent"
 msgstr "Сообщение отправлено"
 
@@ -1822,7 +1822,7 @@ msgstr "Моменты"
 msgid "Monochrome"
 msgstr "Монохромные"
 
-#: src/page/settings/account.vue:479 src/component/photo/edit/details.vue:139
+#: src/page/settings/account.vue:479 src/component/photo/edit/details.vue:140
 #: src/component/photo/toolbar.vue:419
 msgid "Month"
 msgstr "Месяц"
@@ -1990,7 +1990,7 @@ msgstr "Примечание:"
 msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
 msgstr "Примечание: Только серверы WebDAV, такие как Nextcloud или PhotoPrism, могут быть настроены как удаленная служба для резервного копирования и загрузки файлов."
 
-#: src/component/photo/edit/details.vue:584
+#: src/component/photo/edit/details.vue:586
 msgid "Notes"
 msgstr "Заметки"
 
@@ -2128,7 +2128,7 @@ msgstr "Панорама"
 msgid "Panoramas"
 msgstr "Панорамы"
 
-#: src/component/user/add/dialog.vue:93 src/component/user/add/dialog.vue:94
+#: src/component/user/add/dialog.vue:95 src/component/user/add/dialog.vue:96
 #: src/component/service/add.vue:92 src/component/service/edit.vue:339
 #: src/component/settings/apps.vue:118 src/component/settings/passcode.vue:104
 #: src/component/settings/passcode.vue:415 src/component/share/dialog.vue:24
@@ -2166,7 +2166,7 @@ msgstr "Человек"
 msgid "Personal"
 msgstr "Личный"
 
-#: src/model/photo.js:1249
+#: src/model/photo.js:1247
 msgid "Photo"
 msgstr "Фотография"
 
@@ -2230,7 +2230,7 @@ msgstr "Пожалуйста, введите символ OTP {0}"
 msgid "Please note that changing your password will log you out on other devices and browsers."
 msgstr "Обратите внимание, что изменение пароля приведет к выходу из системы на других устройствах и в браузерах."
 
-#: src/page/connect.vue:143 src/page/connect.vue:145
+#: src/page/connect.vue:144 src/page/connect.vue:146
 msgid "Please restart your instance for the changes to take effect."
 msgstr "Чтобы изменения вступили в силу, перезапустите ваш экземпляр."
 
@@ -2385,7 +2385,7 @@ msgstr "Красный"
 msgid "Regions"
 msgstr "Регионы"
 
-#: src/page/connect.vue:272 src/page/connect.vue:279
+#: src/page/connect.vue:274 src/page/connect.vue:281
 msgid "Register"
 msgstr "Зарегистрироваться"
 
@@ -2443,7 +2443,7 @@ msgstr "Обязательно"
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: src/page/connect.vue:174 src/page/connect.vue:176
+#: src/page/connect.vue:175 src/page/connect.vue:177
 #: src/page/settings/advanced.vue:782
 msgid "Restart"
 msgstr "Перезапустить"
@@ -2464,7 +2464,7 @@ msgstr "Повторите пароль"
 msgid "Review"
 msgstr "Не одобрены"
 
-#: src/component/user/add/dialog.vue:149 src/component/user/edit/dialog.vue:280
+#: src/component/user/add/dialog.vue:152 src/component/user/edit/dialog.vue:282
 #: src/page/admin/sessions.vue:187 src/page/admin/users.vue:42
 msgid "Role"
 msgstr "Роль"
@@ -2477,7 +2477,7 @@ msgstr "Строки на страницу:"
 msgid "Satellite"
 msgstr "Спутник"
 
-#: src/component/user/edit/dialog.vue:480
+#: src/component/user/edit/dialog.vue:483
 #: src/component/album/edit/dialog.vue:208
 #: src/component/label/edit/dialog.vue:116
 #: src/component/people/edit/dialog.vue:129 src/component/service/edit.vue:453
@@ -2755,7 +2755,7 @@ msgstr "Хранилище"
 msgid "Streets"
 msgstr "Улицы"
 
-#: src/component/photo/edit/details.vue:475
+#: src/component/photo/edit/details.vue:477
 #: src/component/photo/edit/labels.vue:48
 msgid "Subject"
 msgstr "Тема"
@@ -2764,7 +2764,7 @@ msgstr "Тема"
 msgid "Successfully activated"
 msgstr "Успешно активировано"
 
-#: src/page/connect.vue:47 src/page/connect.vue:51
+#: src/page/connect.vue:48 src/page/connect.vue:52
 msgid "Successfully Connected"
 msgstr "Успешно подключено"
 
@@ -2777,7 +2777,7 @@ msgstr "Успешно удалено"
 msgid "Successfully verified"
 msgstr "Успешно проверено"
 
-#: src/component/user/edit/dialog.vue:393 src/page/admin/users.vue:86
+#: src/component/user/edit/dialog.vue:396 src/page/admin/users.vue:86
 msgid "Super Admin"
 msgstr "Супер-администратор"
 
@@ -2848,11 +2848,11 @@ msgstr "Это поле обязательно для заполнения"
 msgid "This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local."
 msgstr "При этом папка с оригиналами подключается как сетевой диск и позволяет вам открывать, редактировать и удалять файлы с вашего компьютера или смартфона, как если бы они находились на вашем устройстве."
 
-#: src/component/photo/edit/details.vue:190
+#: src/component/photo/edit/details.vue:191
 msgid "Time UTC"
 msgstr "Время UTC"
 
-#: src/component/photo/edit/details.vue:215
+#: src/component/photo/edit/details.vue:217
 msgid "Time Zone"
 msgstr "Часовой пояс"
 
@@ -2866,7 +2866,7 @@ msgctxt "Account"
 msgid "Title"
 msgstr "Титул"
 
-#: src/component/photo/edit/details.vue:71
+#: src/component/photo/edit/details.vue:72
 msgctxt "Photo"
 msgid "Title"
 msgstr "Название"
@@ -2900,7 +2900,7 @@ msgstr "Чтобы создать новый пароль для конкрет�
 msgid "To switch to a new authenticator app or device, first deactivate two-factor authentication and then reactivate it:"
 msgstr "Чтобы переключиться на новое приложение или устройство для проверки подлинности, сначала отключите двухфакторную аутентификацию, а затем повторно активируйте ее:"
 
-#: src/page/connect.vue:216 src/page/connect.vue:223
+#: src/page/connect.vue:217 src/page/connect.vue:224
 msgid "To upgrade, you can either enter an activation code or click \"Register\" to sign up on our website:"
 msgstr "Для обновления вы можете ввести код активации или нажать кнопку \"Регистрация\", чтобы зарегистрироваться на нашем сайте:"
 
@@ -2964,9 +2964,9 @@ msgid "Unique ID"
 msgstr "Уникальный ID"
 
 #: src/component/photo/edit/details.vue:24 src/component/photo/edit/info.vue:28
-#: src/model/album.js:179 src/model/photo.js:344 src/model/photo.js:781
-#: src/model/photo.js:802 src/model/photo.js:825 src/model/photo.js:843
-#: src/model/photo.js:980 src/model/photo.js:1036 src/model/photo.js:1050
+#: src/model/album.js:179 src/model/photo.js:344 src/model/photo.js:779
+#: src/model/photo.js:800 src/model/photo.js:823 src/model/photo.js:841
+#: src/model/photo.js:978 src/model/photo.js:1034 src/model/photo.js:1048
 #: src/model/user.js:155 src/options/options.js:50 src/options/options.js:68
 #: src/options/options.js:85 src/options/options.js:99
 #: src/options/options.js:111 src/page/library/errors.vue:187
@@ -3015,15 +3015,15 @@ msgstr "Обновление предварительных просмотров
 msgid "Updating stacks"
 msgstr "Обновление серий"
 
-#: src/page/connect.vue:52 src/component/navigation.vue:1402
+#: src/page/connect.vue:53 src/component/navigation.vue:1402
 #: src/component/navigation.vue:1516 src/component/navigation.vue:1880
-#: src/page/connect.vue:54
+#: src/page/connect.vue:55
 msgid "Upgrade"
 msgstr "Обновление"
 
-#: src/page/about/about.vue:79 src/page/connect.vue:197
+#: src/page/about/about.vue:79 src/page/connect.vue:198
 #: src/component/confirm/sponsor.vue:96 src/page/about/about.vue:101
-#: src/page/connect.vue:199
+#: src/page/connect.vue:200
 msgid "Upgrade Now"
 msgstr "Обновить сейчас"
 
@@ -3053,8 +3053,8 @@ msgstr "Загрузка не удалась"
 msgid "Upload local files"
 msgstr "Загрузка локальных файлов"
 
-#: src/component/user/edit/dialog.vue:375
-#: src/component/user/edit/dialog.vue:376
+#: src/component/user/edit/dialog.vue:378
+#: src/component/user/edit/dialog.vue:379
 msgid "Upload Path"
 msgstr "Путь загрузки"
 
@@ -3118,8 +3118,8 @@ msgstr "Пользователи"
 
 #: src/component/photo/view/cards.vue:319
 #: src/component/photo/view/cards.vue:479 src/component/photo/view/list.vue:179
-#: src/component/photo/view/mosaic.vue:190 src/model/photo.js:888
-#: src/model/photo.js:896 src/options/options.js:380
+#: src/component/photo/view/mosaic.vue:190 src/model/photo.js:886
+#: src/model/photo.js:894 src/options/options.js:380
 msgid "Vector"
 msgstr "Вектор"
 
@@ -3134,7 +3134,7 @@ msgstr "Проверочный код"
 #: src/component/photo/view/cards.vue:305
 #: src/component/photo/view/cards.vue:452 src/component/photo/view/list.vue:186
 #: src/component/photo/view/mosaic.vue:176 src/model/file.js:220
-#: src/model/photo.js:912 src/model/photo.js:936 src/options/options.js:376
+#: src/model/photo.js:910 src/model/photo.js:934 src/options/options.js:376
 msgid "Video"
 msgstr "Видео"
 
@@ -3176,12 +3176,12 @@ msgstr "Мы признательны за ваш отзыв!"
 msgid "We do our best to respond within five business days or less."
 msgstr "Мы делаем все возможное, чтобы ответить в течение пяти рабочих дней или меньше."
 
-#: src/component/user/add/dialog.vue:212 src/component/user/edit/dialog.vue:410
+#: src/component/user/add/dialog.vue:216 src/component/user/edit/dialog.vue:413
 #: src/page/admin/users.vue:49
 msgid "Web Login"
 msgstr "Веб-логин"
 
-#: src/component/user/add/dialog.vue:225 src/component/user/edit/dialog.vue:427
+#: src/component/user/add/dialog.vue:229 src/component/user/edit/dialog.vue:430
 #: src/page/admin/users.vue:51 src/options/auth.js:55 src/options/auth.js:68
 #: src/options/options.js:517
 msgid "WebDAV"
@@ -3216,7 +3216,7 @@ msgstr "Белый"
 msgid "Work Details"
 msgstr "Детали работы"
 
-#: src/page/settings/account.vue:505 src/component/photo/edit/details.vue:166
+#: src/page/settings/account.vue:505 src/component/photo/edit/details.vue:167
 #: src/component/photo/toolbar.vue:393 src/page/albums.vue:194
 msgid "Year"
 msgstr "Год"
@@ -3238,7 +3238,7 @@ msgid "Yes"
 msgstr "Да"
 
 #: src/component/confirm/sponsor.vue:57 src/page/about/about.vue:146
-#: src/page/connect.vue:310
+#: src/page/connect.vue:312
 msgid "You are welcome to contact us at membership@photoprism.app for questions regarding your membership."
 msgstr "Вы можете связаться с нами по адресу membership@photoprism.app, чтобы задать вопросы, касающиеся вашего членства."
 
@@ -3263,7 +3263,7 @@ msgstr "Вы можете выбрать только один элемент"
 msgid "You may rescan your library to find additional faces."
 msgstr "Вы можете повторно просканировать свою библиотеку, чтобы найти дополнительные лица."
 
-#: src/page/connect.vue:141 src/page/connect.vue:143
+#: src/page/connect.vue:142 src/page/connect.vue:144
 msgid "Your account has been successfully connected."
 msgstr "Ваша учетная запись успешно подключена."
 
@@ -3272,7 +3272,7 @@ msgid "Your browser does not support WebGL"
 msgstr "Твой браузер не поддерживает WebGL"
 
 #: src/component/confirm/sponsor.vue:41 src/page/about/about.vue:85
-#: src/page/about/about.vue:144 src/page/connect.vue:213
+#: src/page/about/about.vue:144 src/page/connect.vue:214
 msgid "Your continued support helps us provide regular updates and remain independent, so we can fulfill our mission and protect your privacy."
 msgstr "Ваша постоянная поддержка помогает нам предоставлять регулярные обновления и оставаться независимыми, чтобы мы могли выполнять нашу миссию и защищать вашу частную жизнь."
 
