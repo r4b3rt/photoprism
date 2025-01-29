@@ -423,7 +423,9 @@ export default class Util {
       case media.FormatEVC:
       case media.CodecEVC:
         return "Essential Video Coding (MPEG-5 Part 1)";
+      case "av1":
       case "av1c":
+      case "av1C":
       case "av01":
         return "AOMedia Video 1 (AV1)";
       case "gif":
@@ -581,15 +583,9 @@ export default class Util {
       return media.FormatVVC;
     } else if (can.useOGV && (codec === media.CodecOGV || codec === media.FormatOGG || mime === media.ContentTypeOGV)) {
       return media.FormatOGG;
-    } else if (
-      can.useVP8 &&
-      (codec === media.CodecVP8 || codec === media.FormatVP8 || mime?.startsWith('video/mp4; codecs="vp08'))
-    ) {
+    } else if (can.useVP8 && (codec === "vp8" || codec === "vp08" || mime?.startsWith('video/mp4; codecs="vp8'))) {
       return media.FormatVP8;
-    } else if (
-      can.useVP9 &&
-      (codec === media.CodecVP9 || codec === media.FormatVP9 || mime?.startsWith('video/mp4; codecs="vp09'))
-    ) {
+    } else if (can.useVP9 && (codec === "vp9" || codec === "vp09" || mime?.startsWith('video/mp4; codecs="vp09'))) {
       return media.FormatVP9;
     } else if (
       can.useAV1 &&

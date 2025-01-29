@@ -911,7 +911,7 @@ func (m *File) ContentType() (contentType string) {
 				contentType = header.ContentTypeVVC // Versatile Video Coding (VVC), also known as H.266
 			case video.CodecEVC, "evc":
 				contentType = header.ContentTypeEVC // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
-			case video.CodecVP8, "vp8":
+			case video.CodecVP8, "vp08":
 				contentType = header.ContentTypeVP8
 			case video.CodecVP9, "vp9":
 				contentType = header.ContentTypeVP9

@@ -17,7 +17,7 @@ const (
 	CodecVVC     Codec = "vvc1" // Versatile Video Coding (VVC), also known as H.266
 	CodecEVC     Codec = "evc1" // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
 	CodecAV1     Codec = "av01" // AOMedia Video 1 (AV1)
-	CodecVP8     Codec = "vp08" // Google VP8
+	CodecVP8     Codec = "vp8"  // Google VP8
 	CodecVP9     Codec = "vp09" // Google VP9
 	CodecOGV     Codec = "ogv"  // Ogg Vorbis Video
 	CodecWebM    Codec = "webm" // Google WebM
@@ -58,6 +58,12 @@ var Codecs = StandardCodecs{
 	"vvc1":            CodecVVC,
 	"v_vvc":           CodecVVC,
 	"v_vvc1":          CodecVVC,
+	"av1f":            CodecAV1,
+	"av1m":            CodecAV1,
+	"av1M":            CodecAV1,
+	"av1s":            CodecAV1,
+	"av1c":            CodecAV1,
+	"av1C":            CodecAV1,
 	"av1":             CodecAV1,
 	"av01":            CodecAV1,
 	"v_av1":           CodecAV1,
