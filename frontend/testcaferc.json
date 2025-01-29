@@ -1,8 +1,8 @@
 {
   "skipJsErrors": true,
   "quarantineMode": false,
-  "selectorTimeout": 8000,
-  "assertionTimeout": 10000,
+  "selectorTimeout": 6000,
+  "assertionTimeout": 7000,
   "hostname": "localhost",
   "disableNativeAutomation": "true",
   "screenshots": {

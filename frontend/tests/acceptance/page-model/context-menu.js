@@ -48,9 +48,6 @@ export default class Page {
         await t.click(Selector("div").withText(albumName).parent('div[role="option"]'))
       }
       await t.click(Selector("button.action-confirm"));
-      //TODO MUST work with enter as well!
-
-      //await t.pressKey("enter");
     }
   }
 
