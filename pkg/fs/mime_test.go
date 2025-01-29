@@ -158,7 +158,7 @@ func TestIsType(t *testing.T) {
 		assert.True(t, IsType("video/mp4", "video/mp4"))
 		assert.True(t, IsType("video/mp4", MimeTypeMP4))
 		assert.True(t, IsType("video/mp4", "video/MP4"))
-		assert.True(t, IsType("video/mp4", "video/MP4; codecs=\"avc1\""))
+		assert.True(t, IsType("video/mp4", "video/MP4; codecs=\"avc1.640028\""))
 	})
 	t.Run("False", func(t *testing.T) {
 		assert.False(t, IsType("", MimeTypeMP4))

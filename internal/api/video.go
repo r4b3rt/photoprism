@@ -13,6 +13,7 @@ import (
 	"github.com/photoprism/photoprism/internal/photoprism/get"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
+	"github.com/photoprism/photoprism/pkg/header"
 	"github.com/photoprism/photoprism/pkg/media/video"
 	"github.com/photoprism/photoprism/pkg/rnd"
 )
@@ -110,7 +111,7 @@ func GetVideo(router *gin.RouterGroup) {
 			} else if c.Request.Header.Get("Range") == "" && info.VideoCodec == format.Codec {
 				defer reader.Close()
 				AddVideoCacheHeader(c, conf.CdnVideo())
-				c.DataFromReader(http.StatusOK, info.VideoSize(), info.VideoContentType(), reader, nil)
+				c.DataFromReader(http.StatusOK, info.VideoSize(), clean.ContentType(info.VideoContentType()), reader, nil)
 				return
 			} else if cacheName, cacheErr := fs.CacheFileFromReader(filepath.Join(conf.MediaFileCachePath(f.FileHash), f.FileHash+info.VideoFileExt()), reader); cacheErr != nil {
 				log.Errorf("video: failed to cache %s embedded in %s (%s)", strings.ToUpper(videoFileType), clean.Log(f.FileName), cacheErr)
@@ -151,7 +152,7 @@ func GetVideo(router *gin.RouterGroup) {
 
 			if avcFile, avcErr := conv.ToAvc(mediaFile, get.Config().FFmpegEncoder(), false, false); avcFile != nil && avcErr == nil {
 				videoFileName = avcFile.FileName()
-				AddContentTypeHeader(c, video.ContentTypeAVC)
+				AddContentTypeHeader(c, header.ContentTypeAVC)
 			} else {
 				// Log error and default to 404.mp4
 				log.Errorf("video: failed to transcode %s", clean.Log(f.FileName))

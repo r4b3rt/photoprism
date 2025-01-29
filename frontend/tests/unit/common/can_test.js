@@ -30,7 +30,7 @@ describe("common/can", () => {
   });
 
   it("useVP8", () => {
-    assert.equal(can.useVP8, false);
+    assert.equal(can.useVP8, true);
   });
 
   it("useVP9", () => {

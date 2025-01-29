@@ -587,9 +587,7 @@ export class Photo extends RestModel {
         file = files.find((f) => f.MediaType === media.Image && f.Root === "/");
         break;
       case media.Live:
-        file = files.find(
-          (f) => (f.MediaType === media.Video || f.MediaType === media.Live) && f.Root === "/"
-        );
+        file = files.find((f) => (f.MediaType === media.Video || f.MediaType === media.Live) && f.Root === "/");
         break;
       case media.Raw:
       case media.Video:

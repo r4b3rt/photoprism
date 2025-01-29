@@ -9,12 +9,14 @@ import (
 
 	"github.com/photoprism/photoprism/internal/config"
 	"github.com/photoprism/photoprism/pkg/clean"
-	"github.com/photoprism/photoprism/pkg/media/video"
+	"github.com/photoprism/photoprism/pkg/header"
 )
 
 func TestGetVideo(t *testing.T) {
 	t.Run("ContentTypeAVC", func(t *testing.T) {
-		assert.Equal(t, video.ContentTypeAVC, fmt.Sprintf("%s; codecs=\"%s\"", "video/mp4", clean.Codec("avc1")))
+		assert.Equal(t, header.ContentTypeAVC, clean.ContentType("video/mp4; codecs=\"avc1\""))
+		mimeType := fmt.Sprintf("video/mp4; codecs=\"%s\"", clean.Codec("avc1"))
+		assert.Equal(t, header.ContentTypeAVC, clean.ContentType(mimeType))
 	})
 
 	t.Run("NoHash", func(t *testing.T) {

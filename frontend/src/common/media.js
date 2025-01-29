@@ -17,6 +17,7 @@ export const Video = "video";
 // - https://cconcolato.github.io/media-mime-support/
 // - https://thorium.rocks/misc/h265-tester.html
 export const CodecAVC = "avc1";
+export const CodecAVC3 = "avc3";
 export const CodecHEVC = "hvc1";
 export const CodecHEV1 = "hev1";
 export const CodecVVC = "vvc1";
@@ -26,7 +27,6 @@ export const CodecVP8 = "vp08";
 export const CodecVP9 = "vp09";
 export const CodecAV1 = "av01";
 export const CodecAV1C = "av1c";
-export const CodecAVC3 = "avc3";
 
 // Media file formats.
 export const FormatMP4 = "mp4";
@@ -47,12 +47,13 @@ export const FormatSVG = "svg";
 export const FormatGIF = "gif";
 
 // HTTP Content types (MIME).
-export const ContentTypeAVC = 'video/mp4; codecs="avc1"';
+export const ContentTypeMP4 = "video/mp4";
+export const ContentTypeAVC = 'video/mp4; codecs="avc1.640028"';
 export const ContentTypeHEVC = 'video/mp4; codecs="hvc1.2.4.L120.B0"';
 export const ContentTypeHEV1 = 'video/mp4; codecs="hev1.2.4.L120.B0"';
 export const ContentTypeVVC = 'video/mp4; codecs="vvc1"';
 export const ContentTypeOGV = "video/ogg";
 export const ContentTypeWebM = "video/webm";
-export const ContentTypeVP8 = 'video/webm; codecs="vp08.02.41.10"';
-export const ContentTypeVP9 = 'video/webm; codecs="vp09.00.50.08"';
+export const ContentTypeVP8 = 'video/webm; codecs="vp8"';
+export const ContentTypeVP9 = 'video/webm; codecs="vp09.00.10.08"';
 export const ContentTypeAV1 = 'video/webm; codecs="av01.2.10M.10"';

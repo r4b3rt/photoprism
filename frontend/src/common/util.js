@@ -23,14 +23,14 @@ Additional information can be found in our Developer Guide:
 
 */
 
-import * as media from "common/media";
-import * as can from "common/can";
 import { config } from "app/session";
 import { DATE_FULL } from "model/photo";
 import sanitizeHtml from "sanitize-html";
 import { DateTime } from "luxon";
 import { $gettext } from "common/gettext";
 import Notify from "common/notify";
+import * as media from "common/media";
+import * as can from "common/can";
 
 const Nanosecond = 1;
 const Microsecond = 1000 * Nanosecond;
@@ -405,9 +405,10 @@ export default class Util {
       case "qt  ":
         return "Apple QuickTime (MOV)";
       case "avc":
-      case "avc1":
-      case "avc3":
+      case media.CodecAVC:
         return "Advanced Video Coding (AVC) / H.264";
+      case media.CodecAVC3:
+        return "Advanced Video Coding (AVC) Bitstream";
       case "hvc":
       case "hev":
       case media.CodecHEVC:
@@ -579,17 +580,17 @@ export default class Util {
     ) {
       return media.FormatVVC;
     } else if (can.useOGV && (codec === media.CodecOGV || codec === media.FormatOGG || mime === media.ContentTypeOGV)) {
-      return media.CodecOGV;
+      return media.FormatOGG;
     } else if (
       can.useVP8 &&
       (codec === media.CodecVP8 || codec === media.FormatVP8 || mime?.startsWith('video/mp4; codecs="vp08'))
     ) {
-      return media.CodecVP8;
+      return media.FormatVP8;
     } else if (
       can.useVP9 &&
       (codec === media.CodecVP9 || codec === media.FormatVP9 || mime?.startsWith('video/mp4; codecs="vp09'))
     ) {
-      return media.CodecVP9;
+      return media.FormatVP9;
     } else if (
       can.useAV1 &&
       (codec === media.CodecAV1 ||

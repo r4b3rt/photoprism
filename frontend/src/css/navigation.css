@@ -267,6 +267,7 @@ nav .v-list__item__title.title {
     padding-top: 12px;
     overflow-x: hidden;
     overflow-y: auto;
+    scrollbar-width: none;
     flex-grow: 1;
 }
 

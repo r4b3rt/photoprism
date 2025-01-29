@@ -11,8 +11,8 @@ import (
 	"github.com/photoprism/photoprism/internal/photoprism/get"
 	"github.com/photoprism/photoprism/pkg/authn"
 	"github.com/photoprism/photoprism/pkg/clean"
+	"github.com/photoprism/photoprism/pkg/header"
 	"github.com/photoprism/photoprism/pkg/i18n"
-	"github.com/photoprism/photoprism/pkg/media/video"
 )
 
 //go:embed embed/video.mp4
@@ -118,12 +118,12 @@ func AbortInvalidCredentials(c *gin.Context) {
 
 func AbortVideo(c *gin.Context) {
 	if c != nil {
-		c.Data(http.StatusOK, video.ContentTypeAVC, brokenVideo)
+		c.Data(http.StatusOK, header.ContentTypeAVC, brokenVideo)
 	}
 }
 
 func AbortVideoWithStatus(c *gin.Context, code int) {
 	if c != nil {
-		c.Data(code, video.ContentTypeAVC, brokenVideo)
+		c.Data(code, header.ContentTypeAVC, brokenVideo)
 	}
 }
