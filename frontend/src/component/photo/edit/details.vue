@@ -117,7 +117,6 @@
                 autocapitalize="none"
                 hide-details
                 return-masked-value
-                v-mask="'##:##:##'"
                 density="comfortable"
                 class="input-local-time"
               ></v-text-field>
