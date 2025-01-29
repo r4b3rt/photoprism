@@ -172,8 +172,8 @@ msgid "Add"
 msgstr "Дадаць"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "Дадаць %{name}?"
+msgid "Add %{s}?"
+msgstr "Дадаць %{s}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1070,8 +1070,8 @@ msgstr "Рэдагаваць"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "Рэдагаваць %{name}"
+msgid "Edit %{s}"
+msgstr "Рэдагаваць %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1444,8 +1444,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Імпартаваныя файлы будуць адсартаваны па даце і атрымаюць унікальную назву."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "Імпарт %{name}…"
+msgid "Importing %{s}…"
+msgstr "Імпарт %{s}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2619,8 +2619,8 @@ msgid "Share"
 msgstr "падзяліцца"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "Падзяліцца %{name}"
+msgid "Share %{s}"
+msgstr "Падзяліцца %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

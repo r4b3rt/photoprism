@@ -175,8 +175,8 @@ msgid "Add"
 msgstr "Přidat"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "Přidat %{name}?"
+msgid "Add %{s}?"
+msgstr "Přidat %{s}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1073,8 +1073,8 @@ msgstr "Upravit"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "Upravit %{name}"
+msgid "Edit %{s}"
+msgstr "Upravit %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1447,8 +1447,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Importované soubory budou seřazeny podle data a přiděleného jedinečného názvu."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "Importování %{name}…"
+msgid "Importing %{s}…"
+msgstr "Importování %{s}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2622,8 +2622,8 @@ msgid "Share"
 msgstr "Sdílet"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "Sdílet %{name}"
+msgid "Share %{s}"
+msgstr "Sdílet %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

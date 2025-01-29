@@ -172,8 +172,8 @@ msgid "Add"
 msgstr "Gehitu"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "%{name} gehitu?"
+msgid "Add %{s}?"
+msgstr "%{s} gehitu?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1070,8 +1070,8 @@ msgstr "Editatu"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "Editatu %{name}"
+msgid "Edit %{s}"
+msgstr "Editatu %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1444,8 +1444,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Inportatutako fitxategiak dataren arabera ordenatuko dira eta izen esklusibo bat emango zaie."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "%{name} inportatzen…"
+msgid "Importing %{s}…"
+msgstr "%{s} inportatzen…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2619,8 +2619,8 @@ msgid "Share"
 msgstr "Partekatu"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "Partekatu %{name}"
+msgid "Share %{s}"
+msgstr "Partekatu %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

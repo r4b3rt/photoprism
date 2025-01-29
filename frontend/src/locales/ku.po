@@ -175,8 +175,8 @@ msgid "Add"
 msgstr "Lêzêdekirin"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "%{name} lê zêde bike?"
+msgid "Add %{s}?"
+msgstr "%{s} lê zêde bike?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1073,8 +1073,8 @@ msgstr "دەستکاری"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "دەستکاری %{name}"
+msgid "Edit %{s}"
+msgstr "دەستکاری %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1447,8 +1447,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "پەڕگە هاوردەکان بەپێی بەروار پۆلێن دەکرێت و ناوی بێهاوتای پێ دەدرێت."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "هاوردنی %{name}…"
+msgid "Importing %{s}…"
+msgstr "هاوردنی %{s}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2622,8 +2622,8 @@ msgid "Share"
 msgstr "هاوبەشکردن"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "هاوبەشیپێکردنی %{name}"
+msgid "Share %{s}"
+msgstr "هاوبەشیپێکردنی %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

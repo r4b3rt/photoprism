@@ -175,8 +175,8 @@ msgid "Add"
 msgstr "يضيف"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "إضافة %{name}؟"
+msgid "Add %{s}?"
+msgstr "إضافة %{s}؟"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1073,8 +1073,8 @@ msgstr "يحرر"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "تحرير %{name}"
+msgid "Edit %{s}"
+msgstr "تحرير %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1447,8 +1447,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "سيتم فرز الملفات المستوردة حسب التاريخ وإعطاء اسم فريد."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "استيراد %{name}…"
+msgid "Importing %{s}…"
+msgstr "استيراد %{s}…"
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2622,8 +2622,8 @@ msgid "Share"
 msgstr "يشارك"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "مشاركة %{name}"
+msgid "Share %{s}"
+msgstr "مشاركة %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."

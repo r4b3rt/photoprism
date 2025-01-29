@@ -175,8 +175,8 @@ msgid "Add"
 msgstr "Afegeix"
 
 #: src/component/photo/edit/people.vue:163 src/page/people/new.vue:259
-msgid "Add %{name}?"
-msgstr "Afegiu %{name}?"
+msgid "Add %{s}?"
+msgstr "Afegiu %{s}?"
 
 #: src/component/user/add/dialog.vue:50 src/component/service/add.vue:38
 msgid "Add Account"
@@ -1073,8 +1073,8 @@ msgstr "Edita"
 #: src/component/album/edit/dialog.vue:52
 #: src/component/label/edit/dialog.vue:49
 #: src/component/people/edit/dialog.vue:49
-msgid "Edit %{name}"
-msgstr "Edita %{name}"
+msgid "Edit %{s}"
+msgstr "Edita %{s}"
 
 #: src/component/user/edit/dialog.vue:60 src/component/service/edit.vue:68
 msgid "Edit Account"
@@ -1447,8 +1447,8 @@ msgid "Imported files will be sorted by date and given a unique name."
 msgstr "Els fitxers importats s'ordenaran per data i se'ls donarà un nom únic."
 
 #: src/page/library/import.vue:37
-msgid "Importing %{name}…"
-msgstr "S'està important %{name}..."
+msgid "Importing %{s}…"
+msgstr "S'està important %{s}..."
 
 #: src/page/library/import.vue:39
 msgid "Importing files to originals…"
@@ -2622,8 +2622,8 @@ msgid "Share"
 msgstr "Compartir"
 
 #: src/component/share/dialog.vue:41
-msgid "Share %{name}"
-msgstr "Comparteix %{name}"
+msgid "Share %{s}"
+msgstr "Comparteix %{s}"
 
 #: src/page/settings/general.vue:395
 msgid "Share your pictures with other apps and services."
