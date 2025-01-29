@@ -52,12 +52,16 @@ export const Days = () => {
   return result;
 };
 
-export const Years = () => {
+export const Years = (start) => {
+  if (!start) {
+    start = 1000;
+  }
+
   let result = [];
 
   const currentYear = new Date().getUTCFullYear();
 
-  for (let i = currentYear; i >= 1000; i--) {
+  for (let i = currentYear; i >= start; i--) {
     result.push({ value: i, text: i.toString().padStart(4, "0") });
   }
 

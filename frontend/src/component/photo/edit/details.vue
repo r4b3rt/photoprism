@@ -59,6 +59,7 @@
                 hide-details
                 hide-no-data
                 :items="options.Days()"
+                :rules="rules.day(false)"
                 item-title="text"
                 item-value="value"
                 density="comfortable"
@@ -77,6 +78,7 @@
                 hide-details
                 hide-no-data
                 :items="options.MonthsShort()"
+                :rules="rules.month(false)"
                 item-title="text"
                 item-value="value"
                 density="comfortable"
@@ -94,7 +96,8 @@
                 autocomplete="off"
                 hide-details
                 hide-no-data
-                :items="options.Years()"
+                :items="options.Years(1000)"
+                :rules="rules.year(false, 1000)"
                 item-title="text"
                 item-value="value"
                 density="comfortable"
@@ -413,6 +416,7 @@ import countries from "options/countries.json";
 import Thumb from "model/thumb";
 import Photo from "model/photo";
 import * as options from "options/options";
+import { rules } from "common/form";
 
 export default {
   name: "PTabPhotoDetails",
@@ -434,8 +438,9 @@ export default {
         colors: [{ label: this.$gettext("Unknown"), name: "" }],
       },
       readonly: this.$config.get("readonly"),
-      options: options,
-      countries: countries,
+      options,
+      rules,
+      countries,
       featReview: this.$config.feature("review"),
       showDatePicker: false,
       showTimePicker: false,

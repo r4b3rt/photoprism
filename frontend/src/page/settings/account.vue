@@ -31,7 +31,7 @@
                       autocapitalize="none"
                       :label="$gettext('Title')"
                       class="input-name-title"
-                      :rules="[(v) => validLength(v, 0, 32) || $gettext('Too long')]"
+                      :rules="rules.text(false, 1, 32, $gettext('Title'))"
                       @change="onChangeName"
                     ></v-text-field>
                   </v-col>
@@ -46,7 +46,7 @@
                       autocapitalize="none"
                       :label="$gettext('Given Name')"
                       class="input-given-name"
-                      :rules="[(v) => validLength(v, 0, 64) || $gettext('Too long')]"
+                      :rules="rules.text(false, 1, 64, $gettext('Given Name'))"
                       @change="onChangeName"
                     ></v-text-field>
                   </v-col>
@@ -61,7 +61,7 @@
                       autocapitalize="none"
                       :label="$gettext('Family Name')"
                       class="input-family-name"
-                      :rules="[(v) => validLength(v, 0, 64) || $gettext('Too long')]"
+                      :rules="rules.text(false, 1, 64, $gettext('Family Name'))"
                       @change="onChangeName"
                     ></v-text-field>
                   </v-col>
@@ -75,10 +75,7 @@
                       autocapitalize="none"
                       :label="$gettext('Display Name')"
                       class="input-display-name"
-                      :rules="[
-                        (v) => v?.length > 0 || $gettext('This field is required'),
-                        (v) => validLength(v, 0, 200) || $gettext('Too long'),
-                      ]"
+                      :rules="rules.text(true, 1, 200, $gettext('Display Name'))"
                       @change="onChange"
                     ></v-text-field>
                   </v-col>
@@ -93,7 +90,7 @@
                       autocapitalize="none"
                       :label="$gettext('Email')"
                       class="input-email"
-                      :rules="[(v) => validEmail(v) || $gettext('Invalid address')]"
+                      :rules="rules.email()"
                       @change="onChange"
                     ></v-text-field>
                   </v-col>
@@ -123,7 +120,7 @@
                   autocomplete="off"
                   :disabled="busy"
                   maxlength="2000"
-                  :rules="[(v) => validLength(v, 0, 2000) || $gettext('Too long')]"
+                  :rules="rules.text(false, 1, 2000, $gettext('Bio'))"
                   :label="$gettext('Bio')"
                   @change="onChange"
                 ></v-textarea>
@@ -139,7 +136,7 @@
                   autocomplete="off"
                   :disabled="busy"
                   maxlength="500"
-                  :rules="[(v) => validLength(v, 0, 500) || $gettext('Too long')]"
+                  :rules="rules.text(false, 10, 500, $gettext('About'))"
                   :label="$gettext('About')"
                   @change="onChange"
                 ></v-textarea>
@@ -226,7 +223,7 @@
                   item-title="text"
                   item-value="value"
                   :items="options.Days()"
-                  :rules="[(v) => v === -1 || (v >= 1 && v <= 31) || $gettext('Invalid')]"
+                  :rules="rules.day(false)"
                   density="comfortable"
                   class="input-birth-day"
                   hide-details
@@ -244,7 +241,7 @@
                   item-title="text"
                   item-value="value"
                   :items="options.MonthsShort()"
-                  :rules="[(v) => v === -1 || (v >= 1 && v <= 12) || $gettext('Invalid')]"
+                  :rules="rules.month(false)"
                   density="comfortable"
                   class="input-birth-month"
                   hide-details
@@ -258,8 +255,8 @@
                   :disabled="busy"
                   :label="$gettext('Year')"
                   autocomplete="off"
-                  :items="options.Years()"
-                  :rules="[(v) => v === -1 || (v >= 1000 && v <= 9999) || $gettext('Invalid')]"
+                  :items="options.Years(1900)"
+                  :rules="rules.year(false, 1900)"
                   density="comfortable"
                   class="input-birth-year"
                   hide-details
@@ -287,7 +284,7 @@
                   autocapitalize="none"
                   :label="$gettext('Location')"
                   class="input-location"
-                  :rules="[(v) => validLength(v, 0, 500) || $gettext('Too long')]"
+                  :rules="rules.text(false, 1, 500, $gettext('Location'))"
                   @change="onChange"
                 ></v-text-field>
               </v-col>
@@ -302,7 +299,7 @@
                   item-title="Name"
                   :items="countries"
                   class="input-country"
-                  :rules="[(v) => validLength(v, 0, 2) || $gettext('Invalid country')]"
+                  :rules="rules.country()"
                   @update:modelValue="onChange"
                 >
                 </v-autocomplete>
@@ -319,7 +316,7 @@
                   autocapitalize="none"
                   :label="$gettext('Website')"
                   class="input-site-url"
-                  :rules="[(v) => validUrl(v) || $gettext('Invalid URL')]"
+                  :rules="rules.url()"
                   @change="onChange"
                 ></v-text-field>
               </v-col>
@@ -349,6 +346,7 @@ import countries from "options/countries.json";
 import Notify from "common/notify";
 import User from "model/user";
 import * as options from "options/options";
+import { rules } from "common/form";
 
 export default {
   name: "PSettingsAccount",
@@ -366,6 +364,7 @@ export default {
     return {
       busy: isDemo || isPublic,
       options,
+      rules,
       isDemo,
       isPublic,
       valid: true,
@@ -428,46 +427,11 @@ export default {
           this.$notify.unblockUI();
         });
     },
-    validEmail(v) {
-      if (typeof v !== "string" || v === "") {
-        return true;
-      } else if (!this.validLength(v, 0, 250)) {
-        return false;
-      }
-
-      return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,32})+$/.test(v);
-    },
-    validLength(v, min, max) {
-      if (typeof v !== "string" && min <= 0) {
-        return true;
-      } else if (max > 0 && v.length > max) {
-        return false;
-      }
-
-      return v.length >= min;
-    },
-    validUrl(v) {
-      if (typeof v !== "string" || v === "") {
-        return true;
-      } else if (!this.validLength(v, 0, 500)) {
-        return false;
-      }
-
-      try {
-        new URL(v);
-      } catch (e) {
-        return false;
-      }
-      return true;
-    },
     onChangeAvatar() {
       if (this.busy) {
         return;
       }
       this.$refs.upload.click();
-    },
-    onLogout() {
-      this.$session.logout();
     },
     onChangeName() {
       this.user.Details.NameSrc = "manual";

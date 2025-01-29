@@ -9,12 +9,12 @@ export let gettext = {
   $npgettext: (context, msgid) => msgid,
 };
 
-export function T(msgid) {
-  return gettext.$gettext(msgid);
+export function T(msgid, params) {
+  return gettext.$gettext(msgid, params);
 }
 
-export function $gettext(msgid) {
-  return gettext.$gettext(msgid);
+export function $gettext(msgid, params) {
+  return gettext.$gettext(msgid, params);
 }
 
 export function $ngettext(msgid, plural, n) {

@@ -24,7 +24,7 @@ Additional information can be found in our Developer Guide:
 */
 
 import Api from "common/api";
-import Form from "common/form";
+import { Form } from "common/form";
 import Model from "model.js";
 import Link from "link.js";
 import { $gettext } from "common/gettext";
@@ -67,7 +67,9 @@ export class Rest extends Model {
       return this.update();
     }
 
-    return Api.post(this.constructor.getCollectionResource(), this.getValues()).then((resp) => Promise.resolve(this.setValues(resp.data)));
+    return Api.post(this.constructor.getCollectionResource(), this.getValues()).then((resp) =>
+      Promise.resolve(this.setValues(resp.data))
+    );
   }
 
   update() {
@@ -124,11 +126,15 @@ export class Rest extends Model {
       values["Password"] = link.Password;
     }
 
-    return Api.put(this.getEntityResource() + "/links/" + link.getId(), values).then((resp) => Promise.resolve(link.setValues(resp.data)));
+    return Api.put(this.getEntityResource() + "/links/" + link.getId(), values).then((resp) =>
+      Promise.resolve(link.setValues(resp.data))
+    );
   }
 
   removeLink(link) {
-    return Api.delete(this.getEntityResource() + "/links/" + link.getId()).then((resp) => Promise.resolve(link.setValues(resp.data)));
+    return Api.delete(this.getEntityResource() + "/links/" + link.getId()).then((resp) =>
+      Promise.resolve(link.setValues(resp.data))
+    );
   }
 
   links() {

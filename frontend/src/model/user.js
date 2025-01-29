@@ -24,13 +24,13 @@ Additional information can be found in our Developer Guide:
 */
 
 import RestModel from "model/rest";
-import Form from "common/form";
+import { Form } from "common/form";
 import Util from "common/util";
 import Api from "common/api";
 import { T, $gettext } from "common/gettext";
 import { config } from "app/session";
 import memoizeOne from "memoize-one";
-import * as auth from "../options/auth";
+import * as auth from "options/auth";
 
 export class User extends RestModel {
   getDefaults() {
@@ -174,7 +174,9 @@ export class User extends RestModel {
   }
 
   getRegisterForm() {
-    return Api.options(this.getEntityResource() + "/register").then((response) => Promise.resolve(new Form(response.data)));
+    return Api.options(this.getEntityResource() + "/register").then((response) =>
+      Promise.resolve(new Form(response.data))
+    );
   }
 
   getAvatarURL(size, $config) {
@@ -206,11 +208,15 @@ export class User extends RestModel {
 
     formData.append("files", file);
 
-    return Api.post(this.getEntityResource() + `/avatar`, formData, formConf).then((response) => Promise.resolve(this.setValues(response.data)));
+    return Api.post(this.getEntityResource() + `/avatar`, formData, formConf).then((response) =>
+      Promise.resolve(this.setValues(response.data))
+    );
   }
 
   getProfileForm() {
-    return Api.options(this.getEntityResource() + "/profile").then((response) => Promise.resolve(new Form(response.data)));
+    return Api.options(this.getEntityResource() + "/profile").then((response) =>
+      Promise.resolve(new Form(response.data))
+    );
   }
 
   isRemote() {
