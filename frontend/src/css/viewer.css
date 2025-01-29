@@ -189,6 +189,11 @@
     align-items: center !important;
 }
 
+.is-rtl .pswp__button--close {
+    margin-right: 0;
+    margin-left: 6px;
+}
+
 .pswp__top-bar .pswp__button .pswp__icn {
     display: block;
     position: static;

@@ -23,7 +23,7 @@
 <script>
 import PhotoSwipe from "photoswipe";
 import Lightbox from "photoswipe/lightbox";
-import PhotoSwipeDynamicCaption from "photoswipe-dynamic-caption-plugin";
+import Captions from "common/captions";
 import Util from "common/util";
 import Api from "common/api";
 import Thumb from "model/thumb";
@@ -394,7 +394,7 @@ export default {
 
       // Use dynamic caption plugin,
       // see https://github.com/dimsemenov/photoswipe-dynamic-caption-plugin.
-      this.captionPlugin = new PhotoSwipeDynamicCaption(this.lightbox, {
+      this.captionPlugin = new Captions(this.lightbox, {
         type: "auto",
         captionContent: (slide) => {
           if (!slide || !this.models || slide?.index < 0) {
