@@ -117,7 +117,7 @@ export default {
         secondaryZoomLevel: "fill",
         maxZoomLevel: 6,
         bgOpacity: 1,
-        preload: [1, 2],
+        preload: [1, 1],
         showHideAnimationType: "none",
         tapAction: (point, ev) => this.toggleControls(ev),
         imageClickAction: "zoom",
