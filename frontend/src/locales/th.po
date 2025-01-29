@@ -556,7 +556,7 @@ msgid "Can't select more items"
 msgstr "ไม่สามารถเลือกรายการเพิ่มเติมได้"
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/edit/dialog.vue:487
+#: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
 #: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
@@ -665,10 +665,6 @@ msgstr "ลูกค้า"
 #: src/options/auth.js:24
 msgid "Client Credentials"
 msgstr "ข้อมูลรับรองลูกค้า"
-
-#: src/component/user/add/dialog.vue:22
-msgid "close"
-msgstr "ปิด"
 
 #: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:605
 #: src/component/photo/toolbar.vue:242
@@ -3272,6 +3268,9 @@ msgstr "คลังของคุณได้รับการวิเคร
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "ซูมเข้า/ออก"
+
+#~ msgid "close"
+#~ msgstr "ปิด"
 
 #~ msgid "Stacks group files with a similar frame of reference, but differences of quality, format, size or color."
 #~ msgstr "สแต็คไฟล์กลุ่มที่มีกรอบอ้างอิงคล้ายกัน แต่มีความแตกต่างด้านคุณภาพ รูปแบบ ขนาด หรือสี"

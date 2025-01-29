@@ -556,7 +556,7 @@ msgid "Can't select more items"
 msgstr "Nije moguće odabrati više stavki"
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/edit/dialog.vue:487
+#: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
 #: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
@@ -665,10 +665,6 @@ msgstr "Klijent"
 #: src/options/auth.js:24
 msgid "Client Credentials"
 msgstr "vjerodajnice klijenta"
-
-#: src/component/user/add/dialog.vue:22
-msgid "close"
-msgstr "zatvoriti"
 
 #: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:605
 #: src/component/photo/toolbar.vue:242
@@ -3272,6 +3268,9 @@ msgstr "Vaša se knjižnica kontinuirano analizira kako bi se automatski izradil
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "Povećavanje/smanjivanje"
+
+#~ msgid "close"
+#~ msgstr "zatvoriti"
 
 #~ msgid "Stacks group files with a similar frame of reference, but differences of quality, format, size or color."
 #~ msgstr "Grupira datoteke sa sličnim referentnim okvirom, ali razlikama u kvaliteti, formatu, veličini ili boji."

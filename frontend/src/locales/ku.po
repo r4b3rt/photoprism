@@ -556,7 +556,7 @@ msgid "Can't select more items"
 msgstr "ناتوانێت ئایتمی زیاتر دیاری بکات"
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/edit/dialog.vue:487
+#: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
 #: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
@@ -665,10 +665,6 @@ msgstr "Kirrîxwaz"
 #: src/options/auth.js:24
 msgid "Client Credentials"
 msgstr "Bawernameyên Client"
-
-#: src/component/user/add/dialog.vue:22
-msgid "close"
-msgstr "nêzîkî"
 
 #: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:605
 #: src/component/photo/toolbar.vue:242
@@ -3272,6 +3268,9 @@ msgstr "Pirtûkxaneya we bi domdarî tê analîz kirin ku bixweber albumên dem�
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "گەورەکردن/بچووکردن"
+
+#~ msgid "close"
+#~ msgstr "nêzîkî"
 
 #~ msgid "Stacks group files with a similar frame of reference, but differences of quality, format, size or color."
 #~ msgstr "کەڵەکەکراوەکان کۆمەڵێ فۆتۆ لە سەر بنەمای هەمان ناوەڕۆک پێکەوە دەبەستێ بەڵام فۆتۆکان جیاوازن لە جۆرێتی، فۆرمات، قەبارە یان ڕەنگ."

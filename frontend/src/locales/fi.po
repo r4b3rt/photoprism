@@ -553,7 +553,7 @@ msgid "Can't select more items"
 msgstr "Ei voi valita enempää kohteita"
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/edit/dialog.vue:487
+#: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
 #: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
@@ -662,10 +662,6 @@ msgstr "Asiakas"
 #: src/options/auth.js:24
 msgid "Client Credentials"
 msgstr "Asiakkaan valtakirjat"
-
-#: src/component/user/add/dialog.vue:22
-msgid "close"
-msgstr "sulje"
 
 #: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:605
 #: src/component/photo/toolbar.vue:242
@@ -3269,6 +3265,9 @@ msgstr "Kirjastoasi analysoidaan jatkuvasti ja luodaan automaattisesti albumeita
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "Lähennä/loitonna"
+
+#~ msgid "close"
+#~ msgstr "sulje"
 
 #~ msgid "Stacks group files with a similar frame of reference, but differences of quality, format, size or color."
 #~ msgstr "Pinoaa tiedostoja, joilla on samanlainen viitekehys, mutta laadussa, muodossa, koossa tai värissä on eroja."

@@ -553,7 +553,7 @@ msgid "Can't select more items"
 msgstr "Ezin dira elementu gehiago hautatu"
 
 #: src/component/session/remove/dialog.vue:43
-#: src/component/user/edit/dialog.vue:487
+#: src/component/user/add/dialog.vue:22 src/component/user/edit/dialog.vue:487
 #: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
@@ -662,10 +662,6 @@ msgstr "Bezeroa"
 #: src/options/auth.js:24
 msgid "Client Credentials"
 msgstr "Bezeroaren kredentzialak"
-
-#: src/component/user/add/dialog.vue:22
-msgid "close"
-msgstr "itxi"
 
 #: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:605
 #: src/component/photo/toolbar.vue:242
@@ -3269,6 +3265,9 @@ msgstr "Zure liburutegia etengabe aztertzen da momentu, bidai eta leku berezien 
 #: src/component/viewer.vue:106
 msgid "Zoom in/out"
 msgstr "Handitu/txikiagotu"
+
+#~ msgid "close"
+#~ msgstr "itxi"
 
 #~ msgid "Stacks group files with a similar frame of reference, but differences of quality, format, size or color."
 #~ msgstr "Fitxategiak multzokatzen ditu erreferentzia-marko antzeko batekin, baina kalitate, formatu, tamaina edo kolore ezberdintasunak dituztenak."
