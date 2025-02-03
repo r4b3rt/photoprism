@@ -1256,7 +1256,7 @@ msgstr "Vrouw"
 msgid "File"
 msgstr "Bestand"
 
-#: src/app/routes.js:303 src/component/photo/edit/files.vue:237
+#: src/app/routes.js:303
 msgid "File Browser"
 msgstr "Bestands Browser"
 
@@ -2065,6 +2065,10 @@ msgstr "Alleen lokaal beheerde accounts kunnen worden ingesteld voor verificatie
 #: src/locales.js:21
 msgid "Open"
 msgstr "Open"
+
+#: src/component/photo/edit/files.vue:237
+msgid "Open Folder"
+msgstr ""
 
 #: src/component/service/add.vue:74 src/component/service/add.vue:93
 msgid "optional"

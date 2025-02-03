@@ -1253,7 +1253,7 @@ msgstr "Emakumezkoa"
 msgid "File"
 msgstr "Fitxategia"
 
-#: src/app/routes.js:303 src/component/photo/edit/files.vue:237
+#: src/app/routes.js:303
 msgid "File Browser"
 msgstr "Fitxategien arakatzailea"
 
@@ -2062,6 +2062,10 @@ msgstr "Lokalean kudeatutako kontuak soilik konfigura daitezke 2FA-rekin autenti
 #: src/locales.js:21
 msgid "Open"
 msgstr "Ireki"
+
+#: src/component/photo/edit/files.vue:237
+msgid "Open Folder"
+msgstr ""
 
 #: src/component/service/add.vue:74 src/component/service/add.vue:93
 msgid "optional"

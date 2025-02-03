@@ -1256,7 +1256,7 @@ msgstr "נקבה"
 msgid "File"
 msgstr "קובץ"
 
-#: src/app/routes.js:303 src/component/photo/edit/files.vue:237
+#: src/app/routes.js:303
 msgid "File Browser"
 msgstr "סייר קבצים"
 
@@ -2065,6 +2065,10 @@ msgstr "ניתן להגדיר רק חשבונות בניהול מקומי לאי
 #: src/locales.js:21
 msgid "Open"
 msgstr "לִפְתוֹחַ"
+
+#: src/component/photo/edit/files.vue:237
+msgid "Open Folder"
+msgstr ""
 
 #: src/component/service/add.vue:74 src/component/service/add.vue:93
 msgid "optional"

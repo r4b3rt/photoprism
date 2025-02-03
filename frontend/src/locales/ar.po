@@ -1256,7 +1256,7 @@ msgstr "أنثى"
 msgid "File"
 msgstr "ملف"
 
-#: src/app/routes.js:303 src/component/photo/edit/files.vue:237
+#: src/app/routes.js:303
 msgid "File Browser"
 msgstr "متصفح الملفات"
 
@@ -2065,6 +2065,10 @@ msgstr "يمكن إعداد الحسابات المُدارة محليًا فق�
 #: src/locales.js:21
 msgid "Open"
 msgstr "يفتح"
+
+#: src/component/photo/edit/files.vue:237
+msgid "Open Folder"
+msgstr ""
 
 #: src/component/service/add.vue:74 src/component/service/add.vue:93
 msgid "optional"

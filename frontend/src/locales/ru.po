@@ -1256,7 +1256,7 @@ msgstr "Женский"
 msgid "File"
 msgstr "Файлы"
 
-#: src/app/routes.js:303 src/component/photo/edit/files.vue:237
+#: src/app/routes.js:303
 msgid "File Browser"
 msgstr "Файловый менеджер"
 
@@ -2065,6 +2065,10 @@ msgstr "Для аутентификации с помощью 2ФА можно �
 #: src/locales.js:21
 msgid "Open"
 msgstr "Открыть"
+
+#: src/component/photo/edit/files.vue:237
+msgid "Open Folder"
+msgstr ""
 
 #: src/component/service/add.vue:74 src/component/service/add.vue:93
 msgid "optional"

@@ -1256,7 +1256,7 @@ msgstr "زن"
 msgid "File"
 msgstr "فایل"
 
-#: src/app/routes.js:303 src/component/photo/edit/files.vue:237
+#: src/app/routes.js:303
 msgid "File Browser"
 msgstr "مرورگر فایل"
 
@@ -2065,6 +2065,10 @@ msgstr "فقط حساب های مدیریت شده محلی را می توان �
 #: src/locales.js:21
 msgid "Open"
 msgstr "باز کن"
+
+#: src/component/photo/edit/files.vue:237
+msgid "Open Folder"
+msgstr ""
 
 #: src/component/service/add.vue:74 src/component/service/add.vue:93
 msgid "optional"

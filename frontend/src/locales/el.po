@@ -1253,7 +1253,7 @@ msgstr "Γυναίκα"
 msgid "File"
 msgstr "Αρχείο"
 
-#: src/app/routes.js:303 src/component/photo/edit/files.vue:237
+#: src/app/routes.js:303
 msgid "File Browser"
 msgstr "Πρόγραμμα περιήγησης αρχείων"
 
@@ -2062,6 +2062,10 @@ msgstr "Μόνο οι τοπικά διαχειριζόμενοι λογαρια
 #: src/locales.js:21
 msgid "Open"
 msgstr "Ανοίξτε το"
+
+#: src/component/photo/edit/files.vue:237
+msgid "Open Folder"
+msgstr ""
 
 #: src/component/service/add.vue:74 src/component/service/add.vue:93
 msgid "optional"

@@ -1253,7 +1253,7 @@ msgstr "Ženske"
 msgid "File"
 msgstr "Datoteka"
 
-#: src/app/routes.js:303 src/component/photo/edit/files.vue:237
+#: src/app/routes.js:303
 msgid "File Browser"
 msgstr "Brskalnik za datoteke"
 
@@ -2062,6 +2062,10 @@ msgstr "Samo lokalno upravljane račune je mogoče nastaviti za preverjanje pris
 #: src/locales.js:21
 msgid "Open"
 msgstr "Odpri"
+
+#: src/component/photo/edit/files.vue:237
+msgid "Open Folder"
+msgstr ""
 
 #: src/component/service/add.vue:74 src/component/service/add.vue:93
 msgid "optional"

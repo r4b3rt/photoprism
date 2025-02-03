@@ -1256,7 +1256,7 @@ msgstr "女"
 msgid "File"
 msgstr "文件"
 
-#: src/app/routes.js:303 src/component/photo/edit/files.vue:237
+#: src/app/routes.js:303
 msgid "File Browser"
 msgstr "文件浏览器"
 
@@ -2065,6 +2065,10 @@ msgstr "仅可设置本地管理的帐户进行 2FA 身份验证。"
 #: src/locales.js:21
 msgid "Open"
 msgstr "开放"
+
+#: src/component/photo/edit/files.vue:237
+msgid "Open Folder"
+msgstr ""
 
 #: src/component/service/add.vue:74 src/component/service/add.vue:93
 msgid "optional"
