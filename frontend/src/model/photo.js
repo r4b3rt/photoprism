@@ -648,7 +648,19 @@ export class Photo extends RestModel {
       result.push(new File(f));
     });
 
+    // Get main file UID so it can be sorted first.
+    const mainUID = this.originalFile()?.UID;
+
     result.sort((a, b) => {
+      if (mainUID) {
+        // Ensure that the main file is sorted first.
+        if (mainUID === a.UID) {
+          return -1;
+        } else if (mainUID === b.UID) {
+          return 1;
+        }
+      }
+
       if (a.Primary > b.Primary) {
         return -1;
       } else if (a.Primary < b.Primary) {

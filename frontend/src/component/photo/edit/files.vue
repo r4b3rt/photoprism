@@ -32,8 +32,8 @@
                               <v-img
                                 :src="file.thumbnailUrl('tile_224')"
                                 aspect-ratio="1"
-                                max-width="112"
-                                max-height="112"
+                                max-width="150"
+                                max-height="150"
                                 rounded="4"
                                 class="card elevation-0 clickable my-1"
                                 @click.exact="openFile(file)"
