@@ -106,7 +106,7 @@
                                   :href="folderUrl(file)"
                                   target="_blank"
                                 >
-                                  {{ $gettext(`File Browser`) }}
+                                  {{ $gettext(`Open Folder`) }}
                                 </v-btn>
                               </div>
                             </td>
