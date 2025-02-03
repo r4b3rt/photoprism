@@ -335,7 +335,7 @@ var Flags = CliFlags{
 		Flag: &cli.BoolFlag{
 			Name:    "experimental",
 			Aliases: []string{"e"},
-			Usage:   "enable new features currently under development",
+			Usage:   "enable new features that may be incomplete or unstable",
 			EnvVars: EnvVars("EXPERIMENTAL"),
 		}}, {
 		Flag: &cli.BoolFlag{

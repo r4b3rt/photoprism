@@ -149,8 +149,8 @@ msgstr "Tindakan"
 msgid "Actions"
 msgstr "Tindakan"
 
-#: src/page/connect.vue:293 src/component/settings/passcode.vue:343
-#: src/page/connect.vue:300
+#: src/page/connect.vue:290 src/component/settings/passcode.vue:343
+#: src/page/connect.vue:297
 msgid "Activate"
 msgstr "Aktifkan"
 
@@ -166,7 +166,7 @@ msgstr "Aktifkan untuk mengurutkan menaik."
 msgid "Activate to sort descending."
 msgstr "Aktifkan untuk mengurutkan menurun."
 
-#: src/page/connect.vue:228 src/page/connect.vue:235
+#: src/page/connect.vue:227 src/page/connect.vue:234
 msgid "Activation Code"
 msgstr "Kode Aktivasi"
 
@@ -348,7 +348,7 @@ msgstr "Sebagai kemungkinan lain, Anda dapat mengunggah berkas langsung ke WebDA
 msgid "Altitude"
 msgstr "Ketinggian"
 
-#: src/component/photo/edit/details.vue:268
+#: src/component/photo/edit/details.vue:265
 msgid "Altitude (m)"
 msgstr "Ketinggian (m)"
 
@@ -379,12 +379,12 @@ msgstr "Kunci API"
 msgid "Application"
 msgstr "Aplikasi"
 
-#: src/component/photo/edit/details.vue:624
+#: src/component/photo/edit/details.vue:621
 msgid "Apply"
 msgstr "Terapkan"
 
 #: src/component/photo/clipboard.vue:64
-#: src/component/photo/edit/details.vue:623
+#: src/component/photo/edit/details.vue:620
 #: src/component/photo/view/cards.vue:402
 msgid "Approve"
 msgstr "Setujui"
@@ -436,7 +436,7 @@ msgstr "Apakah Anda yakin untuk menghapus berkas ini secara permanen?"
 msgid "Are you sure?"
 msgstr "Apakah Anda yakin?"
 
-#: src/component/photo/edit/details.vue:520
+#: src/component/photo/edit/details.vue:517
 msgid "Artist"
 msgstr "Artis"
 
@@ -475,7 +475,7 @@ msgstr "Lencana"
 msgid "Base Path"
 msgstr "Jalur Dasar"
 
-#: src/page/about/about.vue:83 src/page/connect.vue:214
+#: src/page/about/about.vue:83 src/page/connect.vue:213
 msgid "Become a member today, support our mission and enjoy our member benefits!"
 msgstr "Jadilah anggota hari ini, dukung misi kami dan nikmati manfaat anggota kami!"
 
@@ -530,11 +530,11 @@ msgstr "Jelajahi file dan folder yang diindeks di Perpustakaan."
 msgid "Bug Report"
 msgstr "Laporan Bug"
 
-#: src/page/connect.vue:46 src/common/notify.js:101 src/page/connect.vue:50
+#: src/page/connect.vue:45 src/common/notify.js:101 src/page/connect.vue:49
 msgid "Busy, please wait…"
 msgstr "Sibuk, harap tunggu…"
 
-#: src/page/connect.vue:314
+#: src/page/connect.vue:311
 msgid "By using the software and services we provide, you agree to our terms of service, privacy policy, and code of conduct."
 msgstr "Dengan menggunakan perangkat lunak dan layanan yang kami sediakan, Anda menyetujui ketentuan layanan, kebijakan privasi, dan kode etik kami."
 
@@ -542,7 +542,7 @@ msgstr "Dengan menggunakan perangkat lunak dan layanan yang kami sediakan, Anda 
 msgid "Calendar"
 msgstr "Kalender"
 
-#: src/component/photo/edit/details.vue:336 src/component/photo/toolbar.vue:313
+#: src/component/photo/edit/details.vue:333 src/component/photo/toolbar.vue:313
 #: src/component/photo/view/cards.vue:487 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "Kamera"
@@ -570,7 +570,7 @@ msgstr "Tidak dapat memilih item lainnya"
 
 #: src/component/session/remove/dialog.vue:43
 #: src/component/user/add/dialog.vue:24 src/component/user/edit/dialog.vue:471
-#: src/component/user/remove/dialog.vue:43 src/page/connect.vue:115
+#: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
 #: src/component/file/delete/dialog.vue:47
@@ -584,7 +584,7 @@ msgstr "Tidak dapat memilih item lainnya"
 #: src/component/settings/passcode.vue:245
 #: src/component/settings/passcode.vue:330
 #: src/component/settings/password.vue:152 src/component/share/dialog.vue:25
-#: src/locales.js:26 src/page/auth/login.vue:204 src/page/connect.vue:117
+#: src/locales.js:26 src/page/auth/login.vue:204 src/page/connect.vue:116
 #: src/page/library/import.vue:103 src/page/library/index.vue:115
 msgid "Cancel"
 msgstr "Batal"
@@ -593,7 +593,7 @@ msgstr "Batal"
 msgid "Cannot copy to clipboard"
 msgstr "Tidak dapat menyalin ke papan klip"
 
-#: src/component/photo/edit/details.vue:86 src/component/photo/edit/info.vue:75
+#: src/component/photo/edit/details.vue:85 src/component/photo/edit/info.vue:75
 #: src/component/photo/edit/labels.vue:46
 #: src/component/photo/view/cards.vue:432
 msgid "Caption"
@@ -681,7 +681,7 @@ msgstr "Klien"
 msgid "Client Credentials"
 msgstr "Kredensial Klien"
 
-#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:610
+#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:607
 #: src/component/photo/toolbar.vue:242
 #: src/component/photo/upload/dialog.vue:219
 #: src/component/settings/apps.vue:221 src/component/settings/apps.vue:434
@@ -689,7 +689,7 @@ msgstr "Kredensial Klien"
 #: src/component/settings/passcode.vue:452
 #: src/component/settings/passcode.vue:493
 #: src/component/settings/webdav.vue:130 src/component/share/dialog.vue:228
-#: src/component/update.vue:53 src/component/viewer.vue:105 src/locales.js:22
+#: src/component/update.vue:53 src/component/viewer.vue:106 src/locales.js:22
 #: src/page/library/errors.vue:263
 msgid "Close"
 msgstr "Tutup"
@@ -710,7 +710,7 @@ msgstr "Profil Warna"
 msgid "Colors"
 msgstr "Warna"
 
-#: src/page/connect.vue:259 src/page/connect.vue:266
+#: src/page/connect.vue:256 src/page/connect.vue:263
 msgid "Compare Editions"
 msgstr "Bandingkan Edisi"
 
@@ -745,8 +745,8 @@ msgstr "Hubungkan"
 msgid "Contact Details"
 msgstr "Hubungi Kami"
 
-#: src/page/about/feedback.vue:34 src/page/connect.vue:128
-#: src/page/connect.vue:130
+#: src/page/about/feedback.vue:34 src/page/connect.vue:127
+#: src/page/connect.vue:129
 msgid "Contact Us"
 msgstr "Hubungi Kami"
 
@@ -784,7 +784,7 @@ msgstr "Disalin ke papan klip"
 msgid "Copy"
 msgstr "Menyalin"
 
-#: src/component/photo/edit/details.vue:499
+#: src/component/photo/edit/details.vue:496
 msgid "Copyright"
 msgstr "Hak Cipta"
 
@@ -792,7 +792,7 @@ msgstr "Hak Cipta"
 msgid "Couldn't find anything."
 msgstr "Tidak dapat menemukan apa pun."
 
-#: src/page/settings/account.vue:686 src/component/photo/edit/details.vue:240
+#: src/page/settings/account.vue:686 src/component/photo/edit/details.vue:237
 #: src/component/photo/toolbar.vue:285 src/page/settings/account.vue:578
 msgid "Country"
 msgstr "Negara"
@@ -849,7 +849,7 @@ msgstr "Harian"
 msgid "Database Backups"
 msgstr "Pencadangan Basis Data"
 
-#: src/page/settings/account.vue:453 src/component/photo/edit/details.vue:113
+#: src/page/settings/account.vue:453 src/component/photo/edit/details.vue:112
 msgid "Day"
 msgstr "Hari"
 
@@ -1012,7 +1012,7 @@ msgstr "Selesai."
 #: src/component/album/clipboard.vue:72 src/component/album/toolbar.vue:120
 #: src/component/file/clipboard.vue:48 src/component/people/clipboard.vue:47
 #: src/component/photo/clipboard.vue:116 src/component/photo/edit/files.vue:166
-#: src/component/viewer.vue:602 src/page/settings/general.vue:250
+#: src/component/viewer.vue:603 src/page/settings/general.vue:250
 #: src/page/settings/general.vue:622
 msgid "Download"
 msgstr "Unduh"
@@ -1034,7 +1034,7 @@ msgstr "Unduh file tunggal dan arsip zip."
 #: src/component/people/clipboard.vue:59 src/component/photo/clipboard.vue:212
 #: src/component/photo/edit/files.vue:110
 #: src/component/photo/view/cards.vue:163 src/component/photo/view/list.vue:133
-#: src/component/viewer.vue:1034 src/page/library/browse.vue:113
+#: src/component/viewer.vue:1035 src/page/library/browse.vue:113
 msgid "Downloading…"
 msgstr "Mengunduh…"
 
@@ -1071,7 +1071,7 @@ msgid "E-Mail"
 msgstr "Email"
 
 #: src/component/album/clipboard.vue:61 src/component/album/toolbar.vue:82
-#: src/component/photo/clipboard.vue:90 src/component/viewer.vue:581
+#: src/component/photo/clipboard.vue:90 src/component/viewer.vue:582
 #: src/page/settings/general.vue:322
 msgid "Edit"
 msgstr "Sunting"
@@ -1104,8 +1104,8 @@ msgid "Enable debug mode to display additional logs and help with troubleshootin
 msgstr "Aktifkan mode debug untuk menampilkan log tambahan dan membantu pemecahan masalah."
 
 #: src/page/settings/advanced.vue:129
-msgid "Enable new features currently under development."
-msgstr "Aktifkan fitur baru yang sedang dikembangkan."
+msgid "Enable new features that may be incomplete or unstable."
+msgstr ""
 
 #: src/page/settings/advanced.vue:679
 msgid "Enables RAW converter presets. May reduce performance."
@@ -1135,7 +1135,7 @@ msgstr "Masukkan kode verifikasi"
 msgid "Enter your password to confirm the action and continue:"
 msgstr "Masukkan kata sandi Anda untuk mengonfirmasi tindakan dan melanjutkan:"
 
-#: src/page/connect.vue:50 src/component/viewer.vue:109 src/page/connect.vue:54
+#: src/page/connect.vue:49 src/component/viewer.vue:110 src/page/connect.vue:53
 #: src/page/library/errors.vue:195
 msgid "Error"
 msgstr "Kesalahan"
@@ -1186,7 +1186,7 @@ msgstr "Fitur Eksperimental"
 msgid "Expires"
 msgstr "Kedaluwarsa"
 
-#: src/component/photo/edit/details.vue:384
+#: src/component/photo/edit/details.vue:381
 msgid "Exposure"
 msgstr "Eksposur"
 
@@ -1194,7 +1194,7 @@ msgstr "Eksposur"
 msgid "Extract still images and generate thumbnails while indexing."
 msgstr "Mengekstrak gambar diam dan menghasilkan gambar mini sewaktu mengindeks."
 
-#: src/component/photo/edit/details.vue:431
+#: src/component/photo/edit/details.vue:428
 msgid "F Number"
 msgstr "Nilai F"
 
@@ -1210,7 +1210,7 @@ msgstr "Wajah"
 msgid "Failed removing link"
 msgstr "Gagal menghapus tautan"
 
-#: src/page/connect.vue:102 src/page/connect.vue:104
+#: src/page/connect.vue:101 src/page/connect.vue:103
 msgid "Failed to connect account."
 msgstr "Gagal menghubungkan akun."
 
@@ -1291,7 +1291,7 @@ msgstr "File dengan nama berurutan seperti 'IMG_1234 (2)' dan 'IMG_1234 (3)' mil
 msgid "First page"
 msgstr "Halaman pertama"
 
-#: src/component/photo/edit/details.vue:450
+#: src/component/photo/edit/details.vue:447
 msgid "Focal Length"
 msgstr "Panjang Fokus"
 
@@ -1330,7 +1330,7 @@ msgstr "Bingkai"
 msgid "Full Access"
 msgstr "Akses penuh"
 
-#: src/component/viewer.vue:523
+#: src/component/viewer.vue:524
 msgid "Fullscreen"
 msgstr "Layar Penuh"
 
@@ -1567,7 +1567,7 @@ msgstr "Batas Ukuran JPEG: %{n}px"
 msgid "JPEGs and thumbnails are automatically rendered as needed."
 msgstr "JPEG dan thumbnail secara otomatis dirender sesuai dengan kebutuhan."
 
-#: src/component/photo/edit/details.vue:564
+#: src/component/photo/edit/details.vue:561
 msgid "Keywords"
 msgstr "Kata kunci"
 
@@ -1614,7 +1614,7 @@ msgstr "Sinkronisasi Terakhir"
 msgid "Last Used"
 msgstr "Terakhir digunakan"
 
-#: src/component/photo/edit/details.vue:292
+#: src/component/photo/edit/details.vue:289
 #: src/component/photo/edit/info.vue:372
 msgid "Latitude"
 msgstr "Lintang"
@@ -1623,9 +1623,9 @@ msgstr "Lintang"
 msgid "LDAP/AD"
 msgstr "LDAP/AD"
 
-#: src/page/connect.vue:62 src/component/confirm/sponsor.vue:84
+#: src/page/connect.vue:61 src/component/confirm/sponsor.vue:84
 #: src/page/about/about.vue:50 src/page/about/about.vue:120
-#: src/page/connect.vue:64 src/page/help.vue:32
+#: src/page/connect.vue:63 src/page/help.vue:32
 msgid "Learn more"
 msgstr "Pelajari lebih lanjut"
 
@@ -1633,7 +1633,7 @@ msgstr "Pelajari lebih lanjut"
 msgid "Legal Information"
 msgstr "Informasi Hukum"
 
-#: src/component/photo/edit/details.vue:403
+#: src/component/photo/edit/details.vue:400
 #: src/component/photo/view/cards.vue:498
 msgid "Lens"
 msgstr "Lensa"
@@ -1644,13 +1644,13 @@ msgstr "Lensa"
 msgid "Library"
 msgstr "Perpustakaan"
 
-#: src/page/connect.vue:41 src/app/routes.js:66
-#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:542
+#: src/page/connect.vue:40 src/app/routes.js:66
+#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:539
 #: src/page/about/license.vue:25
 msgid "License"
 msgstr "Lisensi"
 
-#: src/component/viewer.vue:543
+#: src/component/viewer.vue:544
 msgid "Like"
 msgstr "Suka"
 
@@ -1700,7 +1700,7 @@ msgstr "Memuat..."
 msgid "Local"
 msgstr "Lokal"
 
-#: src/component/photo/edit/details.vue:191 src/options/options.js:37
+#: src/component/photo/edit/details.vue:190 src/options/options.js:37
 msgid "Local Time"
 msgstr "Waktu Setempat"
 
@@ -1730,7 +1730,7 @@ msgstr "Keluar"
 msgid "Logs"
 msgstr "Log"
 
-#: src/component/photo/edit/details.vue:316
+#: src/component/photo/edit/details.vue:313
 #: src/component/photo/edit/info.vue:378
 msgid "Longitude"
 msgstr "Bujur"
@@ -1755,9 +1755,9 @@ msgstr "Warna Utama"
 msgid "Male"
 msgstr "Laki-laki"
 
-#: src/page/connect.vue:160 src/page/connect.vue:245
-#: src/page/about/about.vue:159 src/page/connect.vue:162
-#: src/page/connect.vue:252
+#: src/page/connect.vue:159 src/page/connect.vue:242
+#: src/page/about/about.vue:159 src/page/connect.vue:161
+#: src/page/connect.vue:249
 msgid "Manage Account"
 msgstr "Kelola Akun"
 
@@ -1781,7 +1781,7 @@ msgstr "PenAnda"
 msgid "Medium"
 msgstr "Sedang"
 
-#: src/page/connect.vue:45
+#: src/page/connect.vue:44
 msgid "Membership"
 msgstr "Keanggotaan"
 
@@ -1822,7 +1822,7 @@ msgstr "Momen"
 msgid "Monochrome"
 msgstr "Monokrom"
 
-#: src/page/settings/account.vue:479 src/component/photo/edit/details.vue:140
+#: src/page/settings/account.vue:479 src/component/photo/edit/details.vue:139
 #: src/component/photo/toolbar.vue:419
 msgid "Month"
 msgstr "Setelah 1 bulanBulan"
@@ -1885,7 +1885,7 @@ msgstr "Kata sandi baru"
 msgid "Newest First"
 msgstr "Terbaru terlebih dahulu"
 
-#: src/component/viewer.vue:108 src/locales.js:112
+#: src/component/viewer.vue:109 src/locales.js:112
 msgid "Next"
 msgstr "Berikutnya"
 
@@ -1932,7 +1932,7 @@ msgid "No people found"
 msgstr "Tidak ada orang yang ditemukan"
 
 #: src/component/photo/view/cards.vue:115 src/component/photo/view/list.vue:82
-#: src/component/photo/view/mosaic.vue:71 src/component/viewer.vue:166
+#: src/component/photo/view/mosaic.vue:71 src/component/viewer.vue:167
 #: src/page/album/photos.vue:438 src/page/library/browse.vue:125
 #: src/page/photos.vue:579 src/page/places.vue:447 src/page/places.vue:533
 msgid "No pictures found"
@@ -1990,7 +1990,7 @@ msgstr "Catatan:"
 msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
 msgstr "Catatan: Hanya server WebDAV, seperti Nextcloud atau PhotoPrism, yang dapat dikonfigurasi sebagai layanan jarak jauh untuk pencadangan dan pengunggahan file."
 
-#: src/component/photo/edit/details.vue:586
+#: src/component/photo/edit/details.vue:583
 msgid "Notes"
 msgstr "Catatan"
 
@@ -2230,7 +2230,7 @@ msgstr "Masukkan karakter OTP {0}"
 msgid "Please note that changing your password will log you out on other devices and browsers."
 msgstr "Harap diperhatikan bahwa mengubah kata sandi Anda akan membuat Anda log out pada perangkat dan browser lain."
 
-#: src/page/connect.vue:144 src/page/connect.vue:146
+#: src/page/connect.vue:143 src/page/connect.vue:145
 msgid "Please restart your instance for the changes to take effect."
 msgstr "Mulai ulang instance Anda agar perubahan diterapkan."
 
@@ -2274,7 +2274,7 @@ msgstr "Pratinjau"
 msgid "Preview Images"
 msgstr "Pratinjau Gambar"
 
-#: src/component/viewer.vue:107 src/locales.js:113
+#: src/component/viewer.vue:108 src/locales.js:113
 msgid "Previous"
 msgstr "Sebelumnya"
 
@@ -2385,7 +2385,7 @@ msgstr "Merah"
 msgid "Regions"
 msgstr "Wilayah"
 
-#: src/page/connect.vue:274 src/page/connect.vue:281
+#: src/page/connect.vue:271 src/page/connect.vue:278
 msgid "Register"
 msgstr "Daftar"
 
@@ -2443,7 +2443,7 @@ msgstr "Diperlukan"
 msgid "Resolution"
 msgstr "Resolusi"
 
-#: src/page/connect.vue:175 src/page/connect.vue:177
+#: src/page/connect.vue:174 src/page/connect.vue:176
 #: src/page/settings/advanced.vue:782
 msgid "Restart"
 msgstr "Mulai ulang"
@@ -2525,7 +2525,7 @@ msgstr "Rahasia"
 msgid "Security and Access"
 msgstr "Keamanan dan Akses"
 
-#: src/component/viewer.vue:562
+#: src/component/viewer.vue:563
 msgid "Select"
 msgstr "Pilih"
 
@@ -2651,7 +2651,7 @@ msgstr "Tampilkan lebih banyak"
 msgid "Show server logs in Library."
 msgstr "Tampilkan log server di Perpustakaan."
 
-#: src/component/viewer.vue:483
+#: src/component/viewer.vue:484
 msgid "Show/Hide Sidebar"
 msgstr "Tampilkan/Sembunyikan Bilah Samping"
 
@@ -2735,7 +2735,7 @@ msgstr "Tumpukan"
 msgid "Start"
 msgstr "Mulai"
 
-#: src/component/viewer.vue:504
+#: src/component/viewer.vue:505
 msgid "Start/Stop Slideshow"
 msgstr "Mulai/Hentikan Slideshow"
 
@@ -2755,7 +2755,7 @@ msgstr "Penyimpanan"
 msgid "Streets"
 msgstr "Jalan"
 
-#: src/component/photo/edit/details.vue:477
+#: src/component/photo/edit/details.vue:474
 #: src/component/photo/edit/labels.vue:48
 msgid "Subject"
 msgstr "Subjek"
@@ -2764,7 +2764,7 @@ msgstr "Subjek"
 msgid "Successfully activated"
 msgstr "Berhasil diaktifkan"
 
-#: src/page/connect.vue:48 src/page/connect.vue:52
+#: src/page/connect.vue:47 src/page/connect.vue:51
 msgid "Successfully Connected"
 msgstr "Berhasil Terhubung"
 
@@ -2848,11 +2848,11 @@ msgstr "Bidang ini wajib diisi"
 msgid "This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local."
 msgstr "Ini memasang folder asli sebagai drive tersambung dan memungkinkan Anda untuk membuka, mengubah, dan menghapus file dari komputer atau ponsel cerdas Anda."
 
-#: src/component/photo/edit/details.vue:191
+#: src/component/photo/edit/details.vue:190
 msgid "Time UTC"
 msgstr "Waktu UTC"
 
-#: src/component/photo/edit/details.vue:217
+#: src/component/photo/edit/details.vue:214
 msgid "Time Zone"
 msgstr "Zona Waktu"
 
@@ -2866,7 +2866,7 @@ msgctxt "Account"
 msgid "Title"
 msgstr "Judul"
 
-#: src/component/photo/edit/details.vue:72
+#: src/component/photo/edit/details.vue:71
 msgctxt "Photo"
 msgid "Title"
 msgstr "Judul"
@@ -2900,7 +2900,7 @@ msgstr "Untuk membuat kata sandi khusus aplikasi yang baru, masukkan nama dan ca
 msgid "To switch to a new authenticator app or device, first deactivate two-factor authentication and then reactivate it:"
 msgstr "Untuk beralih ke aplikasi atau perangkat pengautentikasi baru, nonaktifkan autentikasi dua faktor terlebih dahulu, lalu aktifkan kembali:"
 
-#: src/page/connect.vue:217 src/page/connect.vue:224
+#: src/page/connect.vue:216 src/page/connect.vue:223
 msgid "To upgrade, you can either enter an activation code or click \"Register\" to sign up on our website:"
 msgstr "Untuk meningkatkan, Anda dapat memasukkan kode aktivasi atau klik \"Daftar\" untuk mendaftar di situs web kami:"
 
@@ -3015,15 +3015,15 @@ msgstr "Memperbarui pratinjau"
 msgid "Updating stacks"
 msgstr "Memperbarui tumpukan"
 
-#: src/page/connect.vue:53 src/component/navigation.vue:1402
+#: src/page/connect.vue:52 src/component/navigation.vue:1402
 #: src/component/navigation.vue:1516 src/component/navigation.vue:1880
-#: src/page/connect.vue:55
+#: src/page/connect.vue:54
 msgid "Upgrade"
 msgstr "Tingkatkan"
 
-#: src/page/about/about.vue:79 src/page/connect.vue:198
+#: src/page/about/about.vue:79 src/page/connect.vue:197
 #: src/component/confirm/sponsor.vue:96 src/page/about/about.vue:101
-#: src/page/connect.vue:200
+#: src/page/connect.vue:199
 msgid "Upgrade Now"
 msgstr "Tingkatkan Sekarang"
 
@@ -3216,7 +3216,7 @@ msgstr "Putih"
 msgid "Work Details"
 msgstr "Detail"
 
-#: src/page/settings/account.vue:505 src/component/photo/edit/details.vue:167
+#: src/page/settings/account.vue:505 src/component/photo/edit/details.vue:166
 #: src/component/photo/toolbar.vue:393 src/page/albums.vue:194
 msgid "Year"
 msgstr "Tahun"
@@ -3238,7 +3238,7 @@ msgid "Yes"
 msgstr "Ya"
 
 #: src/component/confirm/sponsor.vue:57 src/page/about/about.vue:146
-#: src/page/connect.vue:312
+#: src/page/connect.vue:309
 msgid "You are welcome to contact us at membership@photoprism.app for questions regarding your membership."
 msgstr "Anda dapat menghubungi kami di membership@photoprism.app untuk pertanyaan mengenai keanggotaan Anda."
 
@@ -3263,7 +3263,7 @@ msgstr "Anda hanya dapat memilih satu item"
 msgid "You may rescan your library to find additional faces."
 msgstr "Anda dapat memindai ulang perpustakaan Anda untuk menemukan wajah tambahan."
 
-#: src/page/connect.vue:142 src/page/connect.vue:144
+#: src/page/connect.vue:141 src/page/connect.vue:143
 msgid "Your account has been successfully connected."
 msgstr "Akun Anda telah berhasil terhubung."
 
@@ -3272,7 +3272,7 @@ msgid "Your browser does not support WebGL"
 msgstr "Browser Anda tidak mendukung WebGL"
 
 #: src/component/confirm/sponsor.vue:41 src/page/about/about.vue:85
-#: src/page/about/about.vue:144 src/page/connect.vue:214
+#: src/page/about/about.vue:144 src/page/connect.vue:213
 msgid "Your continued support helps us provide regular updates and remain independent, so we can fulfill our mission and protect your privacy."
 msgstr "Dukungan Anda yang berkelanjutan membantu kami menyediakan layanan seperti peta satelit dan mengembangkan fitur-fitur terbaru."
 
@@ -3280,9 +3280,12 @@ msgstr "Dukungan Anda yang berkelanjutan membantu kami menyediakan layanan seper
 msgid "Your library is continuously analyzed to automatically create albums of special moments, trips, and places."
 msgstr "Perpustakaan Anda akan terus dianalisis secara otomatis dalam membuat album momen spesial, perjalanan, dan tempat."
 
-#: src/component/viewer.vue:106
+#: src/component/viewer.vue:107
 msgid "Zoom in/out"
 msgstr "Memperbesar/memperkecil"
+
+#~ msgid "Enable new features currently under development."
+#~ msgstr "Aktifkan fitur baru yang sedang dikembangkan."
 
 #~ msgid "Base Folder"
 #~ msgstr "Folder Dasar"

@@ -152,8 +152,8 @@ msgstr "Action"
 msgid "Actions"
 msgstr "Actions"
 
-#: src/page/connect.vue:293 src/component/settings/passcode.vue:343
-#: src/page/connect.vue:300
+#: src/page/connect.vue:290 src/component/settings/passcode.vue:343
+#: src/page/connect.vue:297
 msgid "Activate"
 msgstr "Activer"
 
@@ -169,7 +169,7 @@ msgstr "Activer pour trier par ordre croissant."
 msgid "Activate to sort descending."
 msgstr "Activer pour trier par ordre décroissant."
 
-#: src/page/connect.vue:228 src/page/connect.vue:235
+#: src/page/connect.vue:227 src/page/connect.vue:234
 msgid "Activation Code"
 msgstr "Code d'activation"
 
@@ -353,7 +353,7 @@ msgstr "Vous pouvez également envoyer les fichiers directement vers un serveur 
 msgid "Altitude"
 msgstr "Altitude"
 
-#: src/component/photo/edit/details.vue:268
+#: src/component/photo/edit/details.vue:265
 msgid "Altitude (m)"
 msgstr "Altitude (m)"
 
@@ -384,12 +384,12 @@ msgstr "Clé d'API"
 msgid "Application"
 msgstr "Application"
 
-#: src/component/photo/edit/details.vue:624
+#: src/component/photo/edit/details.vue:621
 msgid "Apply"
 msgstr "Appliquer"
 
 #: src/component/photo/clipboard.vue:64
-#: src/component/photo/edit/details.vue:623
+#: src/component/photo/edit/details.vue:620
 #: src/component/photo/view/cards.vue:402
 msgid "Approve"
 msgstr "Approuver"
@@ -441,7 +441,7 @@ msgstr "Êtes-vous sûr de vouloir supprimer définitivement ce fichier ?"
 msgid "Are you sure?"
 msgstr "Êtes-vous sûr ?"
 
-#: src/component/photo/edit/details.vue:520
+#: src/component/photo/edit/details.vue:517
 msgid "Artist"
 msgstr "Artiste"
 
@@ -481,7 +481,7 @@ msgstr "Badge"
 msgid "Base Path"
 msgstr "Chemin de base"
 
-#: src/page/about/about.vue:83 src/page/connect.vue:214
+#: src/page/about/about.vue:83 src/page/connect.vue:213
 msgid "Become a member today, support our mission and enjoy our member benefits!"
 msgstr "Devenez membre aujourd'hui, soutenez notre mission et profitez de nos avantages !"
 
@@ -536,11 +536,11 @@ msgstr "Parcourir les dossiers et fichiers indexés dans la bibliothèque."
 msgid "Bug Report"
 msgstr "Signaler une erreur"
 
-#: src/page/connect.vue:46 src/common/notify.js:101 src/page/connect.vue:50
+#: src/page/connect.vue:45 src/common/notify.js:101 src/page/connect.vue:49
 msgid "Busy, please wait…"
 msgstr "Veuillez patienter…"
 
-#: src/page/connect.vue:314
+#: src/page/connect.vue:311
 msgid "By using the software and services we provide, you agree to our terms of service, privacy policy, and code of conduct."
 msgstr "En utilisant le logiciel et les services que nous fournissons, vous acceptez nos conditions d'utilisation, notre politique de confidentialité et notre code de conduite."
 
@@ -548,7 +548,7 @@ msgstr "En utilisant le logiciel et les services que nous fournissons, vous acce
 msgid "Calendar"
 msgstr "Calendrier"
 
-#: src/component/photo/edit/details.vue:336 src/component/photo/toolbar.vue:313
+#: src/component/photo/edit/details.vue:333 src/component/photo/toolbar.vue:313
 #: src/component/photo/view/cards.vue:487 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "Appareil photo"
@@ -576,7 +576,7 @@ msgstr "Impossible de sélectionner plus d’éléments"
 
 #: src/component/session/remove/dialog.vue:43
 #: src/component/user/add/dialog.vue:24 src/component/user/edit/dialog.vue:471
-#: src/component/user/remove/dialog.vue:43 src/page/connect.vue:115
+#: src/component/user/remove/dialog.vue:43 src/page/connect.vue:114
 #: src/component/album/delete/dialog.vue:43
 #: src/component/album/edit/dialog.vue:196 src/component/confirm/action.vue:43
 #: src/component/file/delete/dialog.vue:47
@@ -590,7 +590,7 @@ msgstr "Impossible de sélectionner plus d’éléments"
 #: src/component/settings/passcode.vue:245
 #: src/component/settings/passcode.vue:330
 #: src/component/settings/password.vue:152 src/component/share/dialog.vue:25
-#: src/locales.js:26 src/page/auth/login.vue:204 src/page/connect.vue:117
+#: src/locales.js:26 src/page/auth/login.vue:204 src/page/connect.vue:116
 #: src/page/library/import.vue:103 src/page/library/index.vue:115
 msgid "Cancel"
 msgstr "Annuler"
@@ -599,7 +599,7 @@ msgstr "Annuler"
 msgid "Cannot copy to clipboard"
 msgstr "Impossible de copier dans le presse-papiers"
 
-#: src/component/photo/edit/details.vue:86 src/component/photo/edit/info.vue:75
+#: src/component/photo/edit/details.vue:85 src/component/photo/edit/info.vue:75
 #: src/component/photo/edit/labels.vue:46
 #: src/component/photo/view/cards.vue:432
 msgid "Caption"
@@ -687,7 +687,7 @@ msgstr "Client"
 msgid "Client Credentials"
 msgstr "Identifiants du client"
 
-#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:610
+#: src/page/admin/sessions.vue:454 src/component/photo/edit/details.vue:607
 #: src/component/photo/toolbar.vue:242
 #: src/component/photo/upload/dialog.vue:219
 #: src/component/settings/apps.vue:221 src/component/settings/apps.vue:434
@@ -695,7 +695,7 @@ msgstr "Identifiants du client"
 #: src/component/settings/passcode.vue:452
 #: src/component/settings/passcode.vue:493
 #: src/component/settings/webdav.vue:130 src/component/share/dialog.vue:228
-#: src/component/update.vue:53 src/component/viewer.vue:105 src/locales.js:22
+#: src/component/update.vue:53 src/component/viewer.vue:106 src/locales.js:22
 #: src/page/library/errors.vue:263
 msgid "Close"
 msgstr "Fermer"
@@ -716,7 +716,7 @@ msgstr "Profil de couleur"
 msgid "Colors"
 msgstr "Couleurs"
 
-#: src/page/connect.vue:259 src/page/connect.vue:266
+#: src/page/connect.vue:256 src/page/connect.vue:263
 msgid "Compare Editions"
 msgstr "Comparer les éditions"
 
@@ -751,8 +751,8 @@ msgstr "Connecté"
 msgid "Contact Details"
 msgstr "Coordonnées"
 
-#: src/page/about/feedback.vue:34 src/page/connect.vue:128
-#: src/page/connect.vue:130
+#: src/page/about/feedback.vue:34 src/page/connect.vue:127
+#: src/page/connect.vue:129
 msgid "Contact Us"
 msgstr "Nous contacter"
 
@@ -790,7 +790,7 @@ msgstr "Copié vers le presse-papier"
 msgid "Copy"
 msgstr "Copier"
 
-#: src/component/photo/edit/details.vue:499
+#: src/component/photo/edit/details.vue:496
 msgid "Copyright"
 msgstr "Copyright"
 
@@ -798,7 +798,7 @@ msgstr "Copyright"
 msgid "Couldn't find anything."
 msgstr "Aucun élément trouvé."
 
-#: src/page/settings/account.vue:686 src/component/photo/edit/details.vue:240
+#: src/page/settings/account.vue:686 src/component/photo/edit/details.vue:237
 #: src/component/photo/toolbar.vue:285 src/page/settings/account.vue:578
 msgid "Country"
 msgstr "Pays"
@@ -857,7 +857,7 @@ msgstr "Quotidien"
 msgid "Database Backups"
 msgstr "Sauvegarde de la base de données"
 
-#: src/page/settings/account.vue:453 src/component/photo/edit/details.vue:113
+#: src/page/settings/account.vue:453 src/component/photo/edit/details.vue:112
 msgid "Day"
 msgstr "Jour"
 
@@ -1020,7 +1020,7 @@ msgstr "Terminé."
 #: src/component/album/clipboard.vue:72 src/component/album/toolbar.vue:120
 #: src/component/file/clipboard.vue:48 src/component/people/clipboard.vue:47
 #: src/component/photo/clipboard.vue:116 src/component/photo/edit/files.vue:166
-#: src/component/viewer.vue:602 src/page/settings/general.vue:250
+#: src/component/viewer.vue:603 src/page/settings/general.vue:250
 #: src/page/settings/general.vue:622
 msgid "Download"
 msgstr "Télécharger"
@@ -1042,7 +1042,7 @@ msgstr "Téléchargement de fichiers et d'archives zip."
 #: src/component/people/clipboard.vue:59 src/component/photo/clipboard.vue:212
 #: src/component/photo/edit/files.vue:110
 #: src/component/photo/view/cards.vue:163 src/component/photo/view/list.vue:133
-#: src/component/viewer.vue:1034 src/page/library/browse.vue:113
+#: src/component/viewer.vue:1035 src/page/library/browse.vue:113
 msgid "Downloading…"
 msgstr "Téléchargement en cours…"
 
@@ -1079,7 +1079,7 @@ msgid "E-Mail"
 msgstr "Courriel"
 
 #: src/component/album/clipboard.vue:61 src/component/album/toolbar.vue:82
-#: src/component/photo/clipboard.vue:90 src/component/viewer.vue:581
+#: src/component/photo/clipboard.vue:90 src/component/viewer.vue:582
 #: src/page/settings/general.vue:322
 msgid "Edit"
 msgstr "Modifier"
@@ -1112,8 +1112,8 @@ msgid "Enable debug mode to display additional logs and help with troubleshootin
 msgstr "Activer le mode débogage pour afficher des journaux supplémentaires et aider au dépannage."
 
 #: src/page/settings/advanced.vue:129
-msgid "Enable new features currently under development."
-msgstr "Activer les nouvelles fonctionnalités en cours de développement."
+msgid "Enable new features that may be incomplete or unstable."
+msgstr ""
 
 #: src/page/settings/advanced.vue:679
 msgid "Enables RAW converter presets. May reduce performance."
@@ -1143,7 +1143,7 @@ msgstr "Entrer le code de vérification"
 msgid "Enter your password to confirm the action and continue:"
 msgstr "Saisissez votre mot de passe pour confirmer l'action et continuer :"
 
-#: src/page/connect.vue:50 src/component/viewer.vue:109 src/page/connect.vue:54
+#: src/page/connect.vue:49 src/component/viewer.vue:110 src/page/connect.vue:53
 #: src/page/library/errors.vue:195
 msgid "Error"
 msgstr "Erreur"
@@ -1196,7 +1196,7 @@ msgstr "Fonctions Expérimentales"
 msgid "Expires"
 msgstr "Expire"
 
-#: src/component/photo/edit/details.vue:384
+#: src/component/photo/edit/details.vue:381
 msgid "Exposure"
 msgstr "Exposition"
 
@@ -1205,7 +1205,7 @@ msgstr "Exposition"
 msgid "Extract still images and generate thumbnails while indexing."
 msgstr "Extrait les images fixes et génère des vignettes lors de l'indexation."
 
-#: src/component/photo/edit/details.vue:431
+#: src/component/photo/edit/details.vue:428
 msgid "F Number"
 msgstr "Ouverture"
 
@@ -1221,7 +1221,7 @@ msgstr "Visages"
 msgid "Failed removing link"
 msgstr "Échec de la suppression du lien"
 
-#: src/page/connect.vue:102 src/page/connect.vue:104
+#: src/page/connect.vue:101 src/page/connect.vue:103
 msgid "Failed to connect account."
 msgstr "Échec de la connexion au compte."
 
@@ -1303,7 +1303,7 @@ msgstr "Des fichiers ayant des noms séquentiels tels que 'IMG_1234 (2)' et 'IMG
 msgid "First page"
 msgstr "Première page"
 
-#: src/component/photo/edit/details.vue:450
+#: src/component/photo/edit/details.vue:447
 msgid "Focal Length"
 msgstr "Longueur focale"
 
@@ -1342,7 +1342,7 @@ msgstr "Cadres"
 msgid "Full Access"
 msgstr "Accès intégral"
 
-#: src/component/viewer.vue:523
+#: src/component/viewer.vue:524
 msgid "Fullscreen"
 msgstr "Plein écran"
 
@@ -1583,7 +1583,7 @@ msgstr "Limite de taille des JPEGs : %{n}px"
 msgid "JPEGs and thumbnails are automatically rendered as needed."
 msgstr "Les JPEGs et miniatures sont automatiquement affichés selon les besoins."
 
-#: src/component/photo/edit/details.vue:564
+#: src/component/photo/edit/details.vue:561
 msgid "Keywords"
 msgstr "Mots-clés"
 
@@ -1630,7 +1630,7 @@ msgstr "Dernière synchro"
 msgid "Last Used"
 msgstr "Dernière utilisation"
 
-#: src/component/photo/edit/details.vue:292
+#: src/component/photo/edit/details.vue:289
 #: src/component/photo/edit/info.vue:372
 msgid "Latitude"
 msgstr "Latitude"
@@ -1639,9 +1639,9 @@ msgstr "Latitude"
 msgid "LDAP/AD"
 msgstr "LDAP/AD"
 
-#: src/page/connect.vue:62 src/component/confirm/sponsor.vue:84
+#: src/page/connect.vue:61 src/component/confirm/sponsor.vue:84
 #: src/page/about/about.vue:50 src/page/about/about.vue:120
-#: src/page/connect.vue:64 src/page/help.vue:32
+#: src/page/connect.vue:63 src/page/help.vue:32
 msgid "Learn more"
 msgstr "En savoir plus"
 
@@ -1649,7 +1649,7 @@ msgstr "En savoir plus"
 msgid "Legal Information"
 msgstr "Informations légales"
 
-#: src/component/photo/edit/details.vue:403
+#: src/component/photo/edit/details.vue:400
 #: src/component/photo/view/cards.vue:498
 msgid "Lens"
 msgstr "Objectif"
@@ -1660,13 +1660,13 @@ msgstr "Objectif"
 msgid "Library"
 msgstr "Bibliothèque"
 
-#: src/page/connect.vue:41 src/app/routes.js:66
-#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:542
+#: src/page/connect.vue:40 src/app/routes.js:66
+#: src/component/navigation.vue:1380 src/component/photo/edit/details.vue:539
 #: src/page/about/license.vue:25
 msgid "License"
 msgstr "Licence"
 
-#: src/component/viewer.vue:543
+#: src/component/viewer.vue:544
 msgid "Like"
 msgstr "Préféré"
 
@@ -1717,7 +1717,7 @@ msgstr "Chargement…"
 msgid "Local"
 msgstr "Locale"
 
-#: src/component/photo/edit/details.vue:191 src/options/options.js:37
+#: src/component/photo/edit/details.vue:190 src/options/options.js:37
 msgid "Local Time"
 msgstr "Heure locale"
 
@@ -1747,7 +1747,7 @@ msgstr "Déconnexion"
 msgid "Logs"
 msgstr "Journaux"
 
-#: src/component/photo/edit/details.vue:316
+#: src/component/photo/edit/details.vue:313
 #: src/component/photo/edit/info.vue:378
 msgid "Longitude"
 msgstr "Longitude"
@@ -1772,9 +1772,9 @@ msgstr "Couleur principale"
 msgid "Male"
 msgstr "Homme"
 
-#: src/page/connect.vue:160 src/page/connect.vue:245
-#: src/page/about/about.vue:159 src/page/connect.vue:162
-#: src/page/connect.vue:252
+#: src/page/connect.vue:159 src/page/connect.vue:242
+#: src/page/about/about.vue:159 src/page/connect.vue:161
+#: src/page/connect.vue:249
 msgid "Manage Account"
 msgstr "Gérer le compte"
 
@@ -1798,7 +1798,7 @@ msgstr "Marqueur"
 msgid "Medium"
 msgstr "Moyen"
 
-#: src/page/connect.vue:45
+#: src/page/connect.vue:44
 msgid "Membership"
 msgstr "Adhésion"
 
@@ -1839,7 +1839,7 @@ msgstr "Moments"
 msgid "Monochrome"
 msgstr "Monochrome"
 
-#: src/page/settings/account.vue:479 src/component/photo/edit/details.vue:140
+#: src/page/settings/account.vue:479 src/component/photo/edit/details.vue:139
 #: src/component/photo/toolbar.vue:419
 msgid "Month"
 msgstr "Mois"
@@ -1902,7 +1902,7 @@ msgstr "Nouveau mot de passe"
 msgid "Newest First"
 msgstr "La plus récente d'abord"
 
-#: src/component/viewer.vue:108 src/locales.js:112
+#: src/component/viewer.vue:109 src/locales.js:112
 msgid "Next"
 msgstr "Suivant"
 
@@ -1951,7 +1951,7 @@ msgid "No people found"
 msgstr "Aucune personne trouvée"
 
 #: src/component/photo/view/cards.vue:115 src/component/photo/view/list.vue:82
-#: src/component/photo/view/mosaic.vue:71 src/component/viewer.vue:166
+#: src/component/photo/view/mosaic.vue:71 src/component/viewer.vue:167
 #: src/page/album/photos.vue:438 src/page/library/browse.vue:125
 #: src/page/photos.vue:579 src/page/places.vue:447 src/page/places.vue:533
 msgid "No pictures found"
@@ -2009,7 +2009,7 @@ msgstr "Remarque :"
 msgid "Note: Only WebDAV servers, like Nextcloud or PhotoPrism, can be configured as remote service for backup and file upload."
 msgstr "Note : Seuls les serveurs WebDAV, comme Nextcloud ou PhotoPrism, peuvent être configurés comme service à distance pour la sauvegarde et le chargement de fichiers."
 
-#: src/component/photo/edit/details.vue:586
+#: src/component/photo/edit/details.vue:583
 msgid "Notes"
 msgstr "Remarques"
 
@@ -2249,7 +2249,7 @@ msgstr "Saisir le caractère OTP {0}"
 msgid "Please note that changing your password will log you out on other devices and browsers."
 msgstr "Veuillez noter que la modification de votre mot de passe vous déconnectera sur d'autres appareils et navigateurs."
 
-#: src/page/connect.vue:144 src/page/connect.vue:146
+#: src/page/connect.vue:143 src/page/connect.vue:145
 msgid "Please restart your instance for the changes to take effect."
 msgstr "Veuillez redémarrer votre instance pour que les changements prennent effet."
 
@@ -2293,7 +2293,7 @@ msgstr "Prévisualisation"
 msgid "Preview Images"
 msgstr "Images de prévisualisation"
 
-#: src/component/viewer.vue:107 src/locales.js:113
+#: src/component/viewer.vue:108 src/locales.js:113
 msgid "Previous"
 msgstr "Précédent"
 
@@ -2405,7 +2405,7 @@ msgstr "Rouge"
 msgid "Regions"
 msgstr "Les régions"
 
-#: src/page/connect.vue:274 src/page/connect.vue:281
+#: src/page/connect.vue:271 src/page/connect.vue:278
 msgid "Register"
 msgstr "S'inscrire"
 
@@ -2463,7 +2463,7 @@ msgstr "Obligatoire"
 msgid "Resolution"
 msgstr "Résolution"
 
-#: src/page/connect.vue:175 src/page/connect.vue:177
+#: src/page/connect.vue:174 src/page/connect.vue:176
 #: src/page/settings/advanced.vue:782
 msgid "Restart"
 msgstr "Redémarrer"
@@ -2545,7 +2545,7 @@ msgstr "Secret"
 msgid "Security and Access"
 msgstr "Sécurité et accès"
 
-#: src/component/viewer.vue:562
+#: src/component/viewer.vue:563
 msgid "Select"
 msgstr "Sélectionner"
 
@@ -2671,7 +2671,7 @@ msgstr "Montre plus"
 msgid "Show server logs in Library."
 msgstr "Afficher les journaux serveurs dans Bibliothèque."
 
-#: src/component/viewer.vue:483
+#: src/component/viewer.vue:484
 #, fuzzy
 msgid "Show/Hide Sidebar"
 msgstr "Afficher/masquer la barre latérale"
@@ -2756,7 +2756,7 @@ msgstr "Groupes"
 msgid "Start"
 msgstr "Démarrer"
 
-#: src/component/viewer.vue:504
+#: src/component/viewer.vue:505
 msgid "Start/Stop Slideshow"
 msgstr "Démarrer / arrêter le diaporama"
 
@@ -2776,7 +2776,7 @@ msgstr "Stockage"
 msgid "Streets"
 msgstr "Rues"
 
-#: src/component/photo/edit/details.vue:477
+#: src/component/photo/edit/details.vue:474
 #: src/component/photo/edit/labels.vue:48
 msgid "Subject"
 msgstr "Sujet"
@@ -2785,7 +2785,7 @@ msgstr "Sujet"
 msgid "Successfully activated"
 msgstr "Activation réussie"
 
-#: src/page/connect.vue:48 src/page/connect.vue:52
+#: src/page/connect.vue:47 src/page/connect.vue:51
 msgid "Successfully Connected"
 msgstr "Bien connecté"
 
@@ -2869,11 +2869,11 @@ msgstr "Ce champ est obligatoire"
 msgid "This mounts the originals folder as a network drive and allows you to open, edit, and delete files from your computer or smartphone as if they were local."
 msgstr "Cela monte le dossier des originaux en tant que lecteur réseau et vous permet d'ouvrir, modifier et supprimer des fichiers de votre ordinateur ou smartphone comme s'ils étaient locaux."
 
-#: src/component/photo/edit/details.vue:191
+#: src/component/photo/edit/details.vue:190
 msgid "Time UTC"
 msgstr "Heure UTC"
 
-#: src/component/photo/edit/details.vue:217
+#: src/component/photo/edit/details.vue:214
 msgid "Time Zone"
 msgstr "Fuseau horaire"
 
@@ -2887,7 +2887,7 @@ msgctxt "Account"
 msgid "Title"
 msgstr "Titre"
 
-#: src/component/photo/edit/details.vue:72
+#: src/component/photo/edit/details.vue:71
 msgctxt "Photo"
 msgid "Title"
 msgstr "Titre"
@@ -2921,7 +2921,7 @@ msgstr "Pour générer un nouveau mot de passe spécifique à l'application, veu
 msgid "To switch to a new authenticator app or device, first deactivate two-factor authentication and then reactivate it:"
 msgstr "Pour changer d'application ou de dispositif d'authentification, commencez par désactiver l'authentification à deux facteurs, puis réactivez-la :"
 
-#: src/page/connect.vue:217 src/page/connect.vue:224
+#: src/page/connect.vue:216 src/page/connect.vue:223
 msgid "To upgrade, you can either enter an activation code or click \"Register\" to sign up on our website:"
 msgstr "Pour effectuer une mise à niveau, vous pouvez soit saisir un code d'activation, soit cliquer sur «S'inscrire» pour vous inscrire sur notre site web :"
 
@@ -3036,15 +3036,15 @@ msgstr "Mise à jour des aperçus"
 msgid "Updating stacks"
 msgstr "Mise à jour des groupes"
 
-#: src/page/connect.vue:53 src/component/navigation.vue:1402
+#: src/page/connect.vue:52 src/component/navigation.vue:1402
 #: src/component/navigation.vue:1516 src/component/navigation.vue:1880
-#: src/page/connect.vue:55
+#: src/page/connect.vue:54
 msgid "Upgrade"
 msgstr "Mise à niveau"
 
-#: src/page/about/about.vue:79 src/page/connect.vue:198
+#: src/page/about/about.vue:79 src/page/connect.vue:197
 #: src/component/confirm/sponsor.vue:96 src/page/about/about.vue:101
-#: src/page/connect.vue:200
+#: src/page/connect.vue:199
 msgid "Upgrade Now"
 msgstr "Mettre à niveau maintenant"
 
@@ -3238,7 +3238,7 @@ msgstr "Blanc"
 msgid "Work Details"
 msgstr "Détails sur le poste"
 
-#: src/page/settings/account.vue:505 src/component/photo/edit/details.vue:167
+#: src/page/settings/account.vue:505 src/component/photo/edit/details.vue:166
 #: src/component/photo/toolbar.vue:393 src/page/albums.vue:194
 msgid "Year"
 msgstr "Année"
@@ -3260,7 +3260,7 @@ msgid "Yes"
 msgstr "Oui"
 
 #: src/component/confirm/sponsor.vue:57 src/page/about/about.vue:146
-#: src/page/connect.vue:312
+#: src/page/connect.vue:309
 msgid "You are welcome to contact us at membership@photoprism.app for questions regarding your membership."
 msgstr "Vous pouvez nous contacter à l'adresse membership@photoprism.app pour toute question concernant votre adhésion."
 
@@ -3285,7 +3285,7 @@ msgstr "Vous ne pouvez sélectionner qu'un seul élément"
 msgid "You may rescan your library to find additional faces."
 msgstr "Vous pouvez réanalyser votre bibliothèque pour trouver plus de visages."
 
-#: src/page/connect.vue:142 src/page/connect.vue:144
+#: src/page/connect.vue:141 src/page/connect.vue:143
 msgid "Your account has been successfully connected."
 msgstr "Votre compte a été connecté avec succès."
 
@@ -3294,7 +3294,7 @@ msgid "Your browser does not support WebGL"
 msgstr "Votre navigateur ne prend pas en charge WebGL"
 
 #: src/component/confirm/sponsor.vue:41 src/page/about/about.vue:85
-#: src/page/about/about.vue:144 src/page/connect.vue:214
+#: src/page/about/about.vue:144 src/page/connect.vue:213
 msgid "Your continued support helps us provide regular updates and remain independent, so we can fulfill our mission and protect your privacy."
 msgstr "Votre soutien continu nous aide à fournir des mises à jour régulières et à rester indépendants, afin que nous puissions remplir notre mission et protéger votre vie privée."
 
@@ -3302,9 +3302,12 @@ msgstr "Votre soutien continu nous aide à fournir des mises à jour régulière
 msgid "Your library is continuously analyzed to automatically create albums of special moments, trips, and places."
 msgstr "Votre bibliothèque est analysée en permanence pour créer automatiquement des albums regroupant des moments, des voyages et des lieux spéciaux."
 
-#: src/component/viewer.vue:106
+#: src/component/viewer.vue:107
 msgid "Zoom in/out"
 msgstr "Agrandir/Dézoomer"
+
+#~ msgid "Enable new features currently under development."
+#~ msgstr "Activer les nouvelles fonctionnalités en cours de développement."
 
 #, fuzzy
 #~ msgid "Base Folder"
