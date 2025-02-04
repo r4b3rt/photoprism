@@ -6,23 +6,23 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/photoprism/photoprism/pkg/fs"
-	"github.com/photoprism/photoprism/pkg/net/header"
+	"github.com/photoprism/photoprism/pkg/media/http/header"
 )
 
 func TestContentType(t *testing.T) {
 	t.Run("QuickTime", func(t *testing.T) {
-		assert.Equal(t, fs.MimeTypeMP4, ContentType(fs.MimeTypeMOV, "", ""))
+		assert.Equal(t, fs.MimeTypeMp4, ContentType(fs.MimeTypeMov, "", ""))
 	})
 	t.Run("QuickTime_HVC", func(t *testing.T) {
-		assert.Equal(t, header.ContentTypeHEVC, ContentType(fs.MimeTypeMOV, "mov", CodecHEVC))
+		assert.Equal(t, header.ContentTypeMp4Hevc, ContentType(fs.MimeTypeMov, "mov", CodecHevc))
 	})
-	t.Run("MP4", func(t *testing.T) {
-		assert.Equal(t, fs.MimeTypeMP4, ContentType(fs.MimeTypeMP4, "", ""))
+	t.Run("Mp4", func(t *testing.T) {
+		assert.Equal(t, fs.MimeTypeMp4, ContentType(fs.MimeTypeMp4, "", ""))
 	})
-	t.Run("MP4_AVC", func(t *testing.T) {
-		assert.Equal(t, header.ContentTypeAVC, ContentType(fs.MimeTypeMP4, "", CodecAVC))
+	t.Run("Mp4_AVC", func(t *testing.T) {
+		assert.Equal(t, header.ContentTypeMp4Avc, ContentType(fs.MimeTypeMp4, "", CodecAvc))
 	})
-	t.Run("MP4_HVC", func(t *testing.T) {
-		assert.Equal(t, header.ContentTypeHEVC, ContentType(fs.MimeTypeMP4, "", CodecHEVC))
+	t.Run("Mp4_HVC", func(t *testing.T) {
+		assert.Equal(t, header.ContentTypeMp4Hevc, ContentType(fs.MimeTypeMp4, "", CodecHevc))
 	})
 }

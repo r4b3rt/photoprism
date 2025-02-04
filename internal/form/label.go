@@ -1,10 +1,11 @@
 package form
 
 import (
+	"github.com/ulule/deepcopier"
+
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/i18n"
 	"github.com/photoprism/photoprism/pkg/txt"
-	"github.com/ulule/deepcopier"
 )
 
 // Label represents a label edit form.

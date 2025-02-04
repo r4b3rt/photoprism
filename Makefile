@@ -780,7 +780,7 @@ fmt-js:
 fmt-go:
 	go fmt ./pkg/... ./internal/... ./cmd/...
 	gofmt -w -s pkg internal cmd
-	goimports -w pkg internal cmd
+	goimports -w -local "github.com/photoprism" pkg internal cmd
 tidy:
 	go mod tidy
 users:

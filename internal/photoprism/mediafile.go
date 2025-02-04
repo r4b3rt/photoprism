@@ -708,14 +708,14 @@ func (m *MediaFile) IsPreviewImage() bool {
 		return false
 	}
 
-	return m.IsJpeg() || m.IsPNG()
+	return m.IsJpeg() || m.IsPng()
 }
 
 // IsJpeg checks if the file is a JPEG image with a supported file type extension.
 func (m *MediaFile) IsJpeg() bool {
 	if m == nil {
 		return false
-	} else if fs.FileType(m.fileName) != fs.ImageJPEG {
+	} else if fs.FileType(m.fileName) != fs.ImageJpeg {
 		// Thumbnails and other JPEGs with an unsupported file extension are no longer indexed as
 		// JPEG to improve performance (skips mime type detection) and to avoid follow-up issues
 		// with external tools that rely on a correct file extension.
@@ -723,49 +723,49 @@ func (m *MediaFile) IsJpeg() bool {
 	}
 
 	// Check the mime type after other tests have passed to improve performance.
-	return m.HasMimeType(fs.MimeTypeJPEG)
+	return m.HasMimeType(fs.MimeTypeJpeg)
 }
 
 // IsJpegXL checks if the file is a JPEG XL image with a supported file type extension.
 func (m *MediaFile) IsJpegXL() bool {
-	if fs.FileType(m.fileName) != fs.ImageJPEGXL {
+	if fs.FileType(m.fileName) != fs.ImageJpegXL {
 		return false
 	}
 
 	// Check the mime type after other tests have passed to improve performance.
-	return m.HasMimeType(fs.MimeTypeJPEGXL)
+	return m.HasMimeType(fs.MimeTypeJpegXL)
 }
 
 // IsPNG checks if the file is a PNG image with a supported file type extension.
-func (m *MediaFile) IsPNG() bool {
-	if fs.FileType(m.fileName) != fs.ImagePNG {
+func (m *MediaFile) IsPng() bool {
+	if fs.FileType(m.fileName) != fs.ImagePng {
 		// Files with an incorrect file extension are no longer
 		// recognized as PNG to improve indexing performance.
 		return false
 	}
 
 	// Check the mime type after other tests have passed to improve performance.
-	return m.HasMimeType(fs.MimeTypePNG) || m.HasMimeType(fs.MimeTypeAPNG)
+	return m.HasMimeType(fs.MimeTypePng) || m.HasMimeType(fs.MimeTypeAPng)
 }
 
 // IsGIF checks if the file is a GIF image with a supported file type extension.
-func (m *MediaFile) IsGIF() bool {
-	if fs.FileType(m.fileName) != fs.ImageGIF {
+func (m *MediaFile) IsGif() bool {
+	if fs.FileType(m.fileName) != fs.ImageGif {
 		return false
 	}
 
 	// Check the mime type after other tests have passed to improve performance.
-	return m.HasMimeType(fs.MimeTypeGIF)
+	return m.HasMimeType(fs.MimeTypeGif)
 }
 
 // IsTIFF checks if the file is a TIFF image with a supported file type extension.
-func (m *MediaFile) IsTIFF() bool {
-	if fs.FileType(m.fileName) != fs.ImageTIFF {
+func (m *MediaFile) IsTiff() bool {
+	if fs.FileType(m.fileName) != fs.ImageTiff {
 		return false
 	}
 
 	// Check the mime type after other tests have passed to improve performance.
-	return m.HasMimeType(fs.MimeTypeTIFF)
+	return m.HasMimeType(fs.MimeTypeTiff)
 }
 
 // IsDNG checks if the file is a Adobe Digital Negative (DNG) image with a supported file type extension.
@@ -778,56 +778,56 @@ func (m *MediaFile) IsDNG() bool {
 }
 
 // IsHEIF checks if the file is a High Efficiency Image File Format (HEIF) container with a supported file type extension.
-func (m *MediaFile) IsHEIF() bool {
-	return m.IsHEIC() || m.IsHEICS() || m.IsAVIF() || m.IsAVIFS()
+func (m *MediaFile) IsHeif() bool {
+	return m.IsHeic() || m.IsHeicS() || m.IsAVIF() || m.IsAVIFS()
 }
 
 // IsHEIC checks if the file is a High Efficiency Image Container (HEIC) image with a supported file type extension.
-func (m *MediaFile) IsHEIC() bool {
-	if t := fs.FileType(m.fileName); t != fs.ImageHEIF && t != fs.ImageHEIC {
+func (m *MediaFile) IsHeic() bool {
+	if t := fs.FileType(m.fileName); t != fs.ImageHeif && t != fs.ImageHeic {
 		return false
 	}
 
 	// Check the mime type after other tests have passed to improve performance.
-	return m.HasMimeType(fs.MimeTypeHEIC) || m.HasMimeType(fs.MimeTypeHEICS)
+	return m.HasMimeType(fs.MimeTypeHeic) || m.HasMimeType(fs.MimeTypeHeicS)
 }
 
 // IsHEICS checks if the file is a HEIC image sequence with a supported file type extension.
-func (m *MediaFile) IsHEICS() bool {
-	return m.HasFileType(fs.ImageHEICS)
+func (m *MediaFile) IsHeicS() bool {
+	return m.HasFileType(fs.ImageHeicS)
 }
 
 // IsAVIF checks if the file is an AV1 Image File Format image with a supported file type extension.
 func (m *MediaFile) IsAVIF() bool {
-	if t := fs.FileType(m.fileName); t != fs.ImageAVIF {
+	if t := fs.FileType(m.fileName); t != fs.ImageAvif {
 		return false
 	}
 
-	return m.HasMimeType(fs.MimeTypeAVIF)
+	return m.HasMimeType(fs.MimeTypeAvif)
 }
 
 // IsAVIFS checks if the file is an AVIF image sequence with a supported file type extension.
 func (m *MediaFile) IsAVIFS() bool {
-	return m.HasFileType(fs.ImageAVIFS)
+	return m.HasFileType(fs.ImageAvifS)
 }
 
 // IsBMP checks if the file is a bitmap image with a supported file type extension.
-func (m *MediaFile) IsBMP() bool {
-	if fs.FileType(m.fileName) != fs.ImageBMP {
+func (m *MediaFile) IsBmp() bool {
+	if fs.FileType(m.fileName) != fs.ImageBmp {
 		return false
 	}
 
 	// Check the mime type after other tests have passed to improve performance.
-	return m.HasMimeType(fs.MimeTypeBMP)
+	return m.HasMimeType(fs.MimeTypeBmp)
 }
 
 // IsWebP checks if the file is a WebP image file with a supported file type extension.
-func (m *MediaFile) IsWebP() bool {
-	if fs.FileType(m.fileName) != fs.ImageWebP {
+func (m *MediaFile) IsWebp() bool {
+	if fs.FileType(m.fileName) != fs.ImageWebp {
 		return false
 	}
 
-	return m.HasMimeType(fs.MimeTypeWebP)
+	return m.HasMimeType(fs.MimeTypeWebp)
 }
 
 // Duration returns the duration is the media content is playable.
@@ -842,26 +842,26 @@ func (m *MediaFile) IsAnimatedImage() bool {
 
 // IsJSON checks if the file is a JSON sidecar file with a supported file type extension.
 func (m *MediaFile) IsJSON() bool {
-	return m.HasFileType(fs.SidecarJSON)
+	return m.HasFileType(fs.SidecarJson)
 }
 
 // FileType returns the file type (jpg, gif, tiff,...).
 func (m *MediaFile) FileType() fs.Type {
 	switch {
 	case m.IsJpeg():
-		return fs.ImageJPEG
-	case m.IsPNG():
-		return fs.ImagePNG
-	case m.IsGIF():
-		return fs.ImageGIF
-	case m.IsBMP():
-		return fs.ImageBMP
+		return fs.ImageJpeg
+	case m.IsPng():
+		return fs.ImagePng
+	case m.IsGif():
+		return fs.ImageGif
+	case m.IsBmp():
+		return fs.ImageBmp
 	case m.IsDNG():
 		return fs.ImageDNG
 	case m.IsAVIF():
-		return fs.ImageAVIF
-	case m.IsHEIC():
-		return fs.ImageHEIC
+		return fs.ImageAvif
+	case m.IsHeic():
+		return fs.ImageHeic
 	default:
 		return fs.FileType(m.fileName)
 	}
@@ -891,16 +891,16 @@ func (m *MediaFile) CheckType() error {
 	// Perform mime type checks for selected file types.
 	var valid bool
 	switch fileType {
-	case fs.ImageJPEG:
-		valid = mimeType == fs.MimeTypeJPEG
-	case fs.ImagePNG:
-		valid = mimeType == fs.MimeTypePNG || mimeType == fs.MimeTypeAPNG
-	case fs.ImageGIF:
-		valid = mimeType == fs.MimeTypeGIF
-	case fs.ImageTIFF:
-		valid = mimeType == fs.MimeTypeTIFF
-	case fs.ImageHEIC, fs.ImageHEIF:
-		valid = mimeType == fs.MimeTypeHEIC || mimeType == fs.MimeTypeHEICS
+	case fs.ImageJpeg:
+		valid = mimeType == fs.MimeTypeJpeg
+	case fs.ImagePng:
+		valid = mimeType == fs.MimeTypePng || mimeType == fs.MimeTypeAPng
+	case fs.ImageGif:
+		valid = mimeType == fs.MimeTypeGif
+	case fs.ImageTiff:
+		valid = mimeType == fs.MimeTypeTiff
+	case fs.ImageHeic, fs.ImageHeif:
+		valid = mimeType == fs.MimeTypeHeic || mimeType == fs.MimeTypeHeicS
 	default:
 		// Skip mime type check. Note: Checks for additional formats and/or generic
 		// checks based on the media content type can be added over time as needed.
@@ -932,7 +932,7 @@ func (m *MediaFile) HasMediaType(mediaType media.Type) bool {
 
 // HasFileType checks if the file has the given file type.
 func (m *MediaFile) HasFileType(fileType fs.Type) bool {
-	if fileType == fs.ImageJPEG {
+	if fileType == fs.ImageJpeg {
 		return m.IsJpeg()
 	}
 
@@ -1003,15 +1003,15 @@ func (m *MediaFile) InSidecar() bool {
 func (m *MediaFile) NeedsTranscoding() bool {
 	if m.NotAnimated() {
 		return false
-	} else if m.HasFileType(fs.VideoAVC) || m.HasFileType(fs.VideoMP4) && m.MetaData().CodecAvc() {
+	} else if m.HasFileType(fs.VideoAvc) || m.HasFileType(fs.VideoMp4) && m.MetaData().CodecAvc() {
 		return false
 	}
 
 	if m.IsAnimatedImage() {
-		return fs.VideoMP4.FindFirst(m.FileName(), []string{Config().SidecarPath(), fs.PPHiddenPathname}, Config().OriginalsPath(), false) == ""
+		return fs.VideoMp4.FindFirst(m.FileName(), []string{Config().SidecarPath(), fs.PPHiddenPathname}, Config().OriginalsPath(), false) == ""
 	}
 
-	return fs.VideoAVC.FindFirst(m.FileName(), []string{Config().SidecarPath(), fs.PPHiddenPathname}, Config().OriginalsPath(), false) == ""
+	return fs.VideoAvc.FindFirst(m.FileName(), []string{Config().SidecarPath(), fs.PPHiddenPathname}, Config().OriginalsPath(), false) == ""
 }
 
 // SkipTranscoding checks if the media file is not animated or has already been transcoded to a playable format.
@@ -1022,7 +1022,7 @@ func (m *MediaFile) SkipTranscoding() bool {
 // IsImageOther returns true if this is a PNG, GIF, BMP, TIFF, or WebP file.
 func (m *MediaFile) IsImageOther() bool {
 	switch {
-	case m.IsPNG(), m.IsGIF(), m.IsTIFF(), m.IsBMP(), m.IsWebP():
+	case m.IsPng(), m.IsGif(), m.IsTiff(), m.IsBmp(), m.IsWebp():
 		return true
 	default:
 		return false
@@ -1036,12 +1036,12 @@ func (m *MediaFile) IsImageNative() bool {
 
 // IsLive checks if the file is a live photo.
 func (m *MediaFile) IsLive() bool {
-	if m.IsHEIC() {
-		return fs.VideoMOV.FindFirst(m.FileName(), []string{}, Config().OriginalsPath(), false) != ""
+	if m.IsHeic() {
+		return fs.VideoMov.FindFirst(m.FileName(), []string{}, Config().OriginalsPath(), false) != ""
 	}
 
 	if m.IsVideo() {
-		return fs.ImageHEIC.FindFirst(m.FileName(), []string{}, Config().OriginalsPath(), false) != ""
+		return fs.ImageHeic.FindFirst(m.FileName(), []string{}, Config().OriginalsPath(), false) != ""
 	}
 
 	return m.MetaData().MediaType == media.Live && m.VideoInfo().Compatible
@@ -1049,7 +1049,7 @@ func (m *MediaFile) IsLive() bool {
 
 // ExifSupported returns true if parsing exif metadata is supported for the media file type.
 func (m *MediaFile) ExifSupported() bool {
-	return m.IsJpeg() || m.IsRaw() || m.IsHEIF() || m.IsPNG() || m.IsTIFF()
+	return m.IsJpeg() || m.IsRaw() || m.IsHeif() || m.IsPng() || m.IsTiff()
 }
 
 // IsMedia returns true if this is a media file (photo or video, not sidecar or other).
@@ -1069,14 +1069,14 @@ func (m *MediaFile) PreviewImage() (*MediaFile, error) {
 		return nil, fmt.Errorf("%s is empty", m.RootRelName())
 	}
 
-	jpegName := fs.ImageJPEG.FindFirst(m.FileName(),
+	jpegName := fs.ImageJpeg.FindFirst(m.FileName(),
 		[]string{Config().SidecarPath(), fs.PPHiddenPathname}, Config().OriginalsPath(), false)
 
 	if jpegName != "" {
 		return NewMediaFile(jpegName)
 	}
 
-	pngName := fs.ImagePNG.FindFirst(m.FileName(),
+	pngName := fs.ImagePng.FindFirst(m.FileName(),
 		[]string{Config().SidecarPath(), fs.PPHiddenPathname}, Config().OriginalsPath(), false)
 
 	if pngName != "" {
@@ -1097,17 +1097,17 @@ func (m *MediaFile) HasPreviewImage() bool {
 		return true
 	}
 
-	jpegName := fs.ImageJPEG.FindFirst(m.FileName(),
+	jpegName := fs.ImageJpeg.FindFirst(m.FileName(),
 		[]string{Config().SidecarPath(), fs.PPHiddenPathname}, Config().OriginalsPath(), false)
 
-	if m.hasPreviewImage = fs.MimeType(jpegName) == fs.MimeTypeJPEG; m.hasPreviewImage {
+	if m.hasPreviewImage = fs.MimeType(jpegName) == fs.MimeTypeJpeg; m.hasPreviewImage {
 		return true
 	}
 
-	pngName := fs.ImagePNG.FindFirst(m.FileName(),
+	pngName := fs.ImagePng.FindFirst(m.FileName(),
 		[]string{Config().SidecarPath(), fs.PPHiddenPathname}, Config().OriginalsPath(), false)
 
-	if m.hasPreviewImage = fs.MimeType(pngName) == fs.MimeTypePNG; m.hasPreviewImage {
+	if m.hasPreviewImage = fs.MimeType(pngName) == fs.MimeTypePng; m.hasPreviewImage {
 		return true
 	}
 

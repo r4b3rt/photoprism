@@ -36,10 +36,10 @@ func (w *Convert) ToImage(f *MediaFile, force bool) (result *MediaFile, err erro
 		return f, nil
 	}
 
-	imageName := fs.ImagePNG.FindFirst(f.FileName(), []string{w.conf.SidecarPath(), fs.PPHiddenPathname}, w.conf.OriginalsPath(), false)
+	imageName := fs.ImagePng.FindFirst(f.FileName(), []string{w.conf.SidecarPath(), fs.PPHiddenPathname}, w.conf.OriginalsPath(), false)
 
 	if imageName == "" {
-		imageName = fs.ImageJPEG.FindFirst(f.FileName(), []string{w.conf.SidecarPath(), fs.PPHiddenPathname}, w.conf.OriginalsPath(), false)
+		imageName = fs.ImageJpeg.FindFirst(f.FileName(), []string{w.conf.SidecarPath(), fs.PPHiddenPathname}, w.conf.OriginalsPath(), false)
 	}
 
 	mediaFile, err := NewMediaFile(imageName)
@@ -59,9 +59,9 @@ func (w *Convert) ToImage(f *MediaFile, force bool) (result *MediaFile, err erro
 		if !w.conf.VectorEnabled() {
 			return nil, fmt.Errorf("convert: vector graphics support disabled (%s)", clean.Log(f.RootRelName()))
 		}
-		imageName, _ = fs.FileName(f.FileName(), w.conf.SidecarPath(), w.conf.OriginalsPath(), fs.ExtPNG)
+		imageName, _ = fs.FileName(f.FileName(), w.conf.SidecarPath(), w.conf.OriginalsPath(), fs.ExtPng)
 	} else {
-		imageName, _ = fs.FileName(f.FileName(), w.conf.SidecarPath(), w.conf.OriginalsPath(), fs.ExtJPEG)
+		imageName, _ = fs.FileName(f.FileName(), w.conf.SidecarPath(), w.conf.OriginalsPath(), fs.ExtJpeg)
 	}
 
 	if !w.conf.SidecarWritable() {
@@ -88,9 +88,9 @@ func (w *Convert) ToImage(f *MediaFile, force bool) (result *MediaFile, err erro
 
 		// Create PNG or JPEG image from source file.
 		switch fs.LowerExt(imageName) {
-		case fs.ExtPNG:
+		case fs.ExtPng:
 			_, err = thumb.Png(f.FileName(), imageName, f.Orientation())
-		case fs.ExtJPEG:
+		case fs.ExtJpeg:
 			_, err = thumb.Jpeg(f.FileName(), imageName, f.Orientation())
 		default:
 			return nil, fmt.Errorf("convert: unspported target format %s (%s)", fs.LowerExt(imageName), clean.Log(f.RootRelName()))
@@ -100,7 +100,7 @@ func (w *Convert) ToImage(f *MediaFile, force bool) (result *MediaFile, err erro
 		if err == nil {
 			log.Infof("convert: %s created in %s (%s)", clean.Log(filepath.Base(imageName)), time.Since(start), f.FileType())
 			return NewMediaFile(imageName)
-		} else if !f.IsTIFF() && !f.IsWebP() {
+		} else if !f.IsTiff() && !f.IsWebp() {
 			// See https://github.com/photoprism/photoprism/issues/1612
 			// for TIFF file format compatibility.
 			return nil, err
@@ -113,12 +113,12 @@ func (w *Convert) ToImage(f *MediaFile, force bool) (result *MediaFile, err erro
 	var expectedMime string
 
 	switch fs.LowerExt(imageName) {
-	case fs.ExtPNG:
+	case fs.ExtPng:
 		cmds, useMutex, err = w.PngConvertCmds(f, imageName)
-		expectedMime = fs.MimeTypePNG
-	case fs.ExtJPEG:
+		expectedMime = fs.MimeTypePng
+	case fs.ExtJpeg:
 		cmds, useMutex, err = w.JpegConvertCmds(f, imageName, xmpName)
-		expectedMime = fs.MimeTypeJPEG
+		expectedMime = fs.MimeTypeJpeg
 	default:
 		return nil, fmt.Errorf("convert: unspported target format %s (%s)", fs.LowerExt(imageName), clean.Log(f.RootRelName()))
 	}

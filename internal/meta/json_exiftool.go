@@ -21,7 +21,7 @@ import (
 	"github.com/photoprism/photoprism/pkg/txt"
 )
 
-const MimeVideoMP4 = "video/mp4"
+const MimeVideoMp4 = "video/mp4"
 const MimeQuicktime = "video/quicktime"
 
 // Exiftool parses JSON sidecar data as created by Exiftool.
@@ -232,7 +232,7 @@ func (data *Data) Exiftool(jsonData []byte, originalName string) (err error) {
 	// Has time zone offset?
 	if _, offset := data.TakenAtLocal.Zone(); offset != 0 && !data.TakenAtLocal.IsZero() {
 		hasTimeOffset = true
-	} else if mt, ok := data.json["MIMEType"]; ok && data.TakenAtLocal.IsZero() && (mt == MimeVideoMP4 || mt == MimeQuicktime) {
+	} else if mt, ok := data.json["MIMEType"]; ok && data.TakenAtLocal.IsZero() && (mt == MimeVideoMp4 || mt == MimeQuicktime) {
 		// Assume default time zone for MP4 & Quicktime videos is UTC.
 		// see https://exiftool.org/TagNames/QuickTime.html
 		log.Debugf("metadata: default time zone for %s is UTC (%s)", logName, clean.Log(mt))
@@ -396,7 +396,7 @@ func (data *Data) Exiftool(jsonData []byte, originalName string) (err error) {
 	}
 
 	// Flag Samsung/Google Motion Photos as live media.
-	if data.HasVideoEmbedded && (data.MimeType == fs.MimeTypeJPEG || data.MimeType == fs.MimeTypeHEIC) {
+	if data.HasVideoEmbedded && (data.MimeType == fs.MimeTypeJpeg || data.MimeType == fs.MimeTypeHeic) {
 		data.MediaType = media.Live
 	}
 

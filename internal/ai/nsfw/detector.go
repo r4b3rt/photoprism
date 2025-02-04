@@ -7,10 +7,11 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/photoprism/photoprism/pkg/clean"
-	"github.com/photoprism/photoprism/pkg/fs"
 	tf "github.com/tensorflow/tensorflow/tensorflow/go"
 	"github.com/tensorflow/tensorflow/tensorflow/go/op"
+
+	"github.com/photoprism/photoprism/pkg/clean"
+	"github.com/photoprism/photoprism/pkg/fs"
 )
 
 // Detector uses TensorFlow to label drawing, hentai, neutral, porn and sexy images.
@@ -29,7 +30,7 @@ func New(modelPath string) *Detector {
 
 // File returns matching labels for a jpeg media file.
 func (t *Detector) File(filename string) (result Labels, err error) {
-	if fs.MimeType(filename) != fs.MimeTypeJPEG {
+	if fs.MimeType(filename) != fs.MimeTypeJpeg {
 		return result, fmt.Errorf("nsfw: %s is not a jpeg file", clean.Log(filepath.Base(filename)))
 	}
 

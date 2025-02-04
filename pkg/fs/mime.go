@@ -10,28 +10,28 @@ import (
 const (
 	MimeTypeUnknown = ""
 	MimeTypeBinary  = "application/octet-stream"
-	MimeTypeJPEG    = "image/jpeg"
-	MimeTypeJPEGXL  = "image/jxl"
-	MimeTypePNG     = "image/png"
-	MimeTypeAPNG    = "image/vnd.mozilla.apng"
-	MimeTypeGIF     = "image/gif"
-	MimeTypeBMP     = "image/bmp"
-	MimeTypeTIFF    = "image/tiff"
+	MimeTypeJpeg    = "image/jpeg"
+	MimeTypeJpegXL  = "image/jxl"
+	MimeTypePng     = "image/png"
+	MimeTypeAPng    = "image/vnd.mozilla.apng"
+	MimeTypeGif     = "image/gif"
+	MimeTypeBmp     = "image/bmp"
+	MimeTypeTiff    = "image/tiff"
 	MimeTypeDNG     = "image/dng"
-	MimeTypeAVIF    = "image/avif"
-	MimeTypeAVIFS   = "image/avif-sequence"
-	MimeTypeHEIC    = "image/heic"
-	MimeTypeHEICS   = "image/heic-sequence"
-	MimeTypeWebP    = "image/webp"
-	MimeTypeMP4     = "video/mp4"
-	MimeTypeMOV     = "video/quicktime"
+	MimeTypeAvif    = "image/avif"
+	MimeTypeAvifS   = "image/avif-sequence"
+	MimeTypeHeic    = "image/heic"
+	MimeTypeHeicS   = "image/heic-sequence"
+	MimeTypeWebp    = "image/webp"
+	MimeTypeMp4     = "video/mp4"
+	MimeTypeMov     = "video/quicktime"
 	MimeTypeSVG     = "image/svg+xml"
 	MimeTypeAI      = "application/vnd.adobe.illustrator"
 	MimeTypePS      = "application/postscript"
 	MimeTypeEPS     = "image/eps"
 	MimeTypeText    = "text/plain"
-	MimeTypeXML     = "text/xml"
-	MimeTypeJSON    = "application/json"
+	MimeTypeXml     = "text/xml"
+	MimeTypeJson    = "application/json"
 )
 
 // MimeType returns the mimetype of a file, or an empty string if it could not be determined.
@@ -51,11 +51,11 @@ func MimeType(filename string) (mimeType string) {
 	// formats, which otherwise cannot be reliably distinguished:
 	switch fileType {
 	// Apple QuickTime Container
-	case VideoMOV:
-		return MimeTypeMOV
+	case VideoMov:
+		return MimeTypeMov
 	// MPEG-4 AVC Video
-	case VideoAVC:
-		return MimeTypeMP4
+	case VideoAvc:
+		return MimeTypeMp4
 	// Adobe Digital Negative
 	case ImageDNG:
 		return MimeTypeDNG
@@ -88,21 +88,21 @@ func MimeType(filename string) (mimeType string) {
 	// If it could be detected, try to determine mime type from extension:
 	if mimeType == MimeTypeUnknown {
 		switch fileType {
-		// MP4 Multimedia Container
-		case VideoMP4, VideoHEVC, VideoHEV1:
-			return MimeTypeMP4
+		// Mp4 Multimedia Container
+		case VideoMp4, VideoHevc, VideoHev1:
+			return MimeTypeMp4
 		// AV1 Image File
-		case ImageAVIF:
-			return MimeTypeAVIF
+		case ImageAvif:
+			return MimeTypeAvif
 		// AV1 Image File Sequence
-		case ImageAVIFS:
-			return MimeTypeAVIFS
+		case ImageAvifS:
+			return MimeTypeAvifS
 		// High Efficiency Image Container
-		case ImageHEIC, ImageHEIF:
-			return MimeTypeHEIC
+		case ImageHeic, ImageHeif:
+			return MimeTypeHeic
 		// High Efficiency Image Container Sequence
-		case ImageHEICS:
-			return MimeTypeHEICS
+		case ImageHeicS:
+			return MimeTypeHeicS
 		}
 	}
 

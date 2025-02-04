@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/disintegration/imaging"
+
 	"github.com/photoprism/photoprism/pkg/fs"
 
 	"github.com/stretchr/testify/assert"
@@ -31,7 +32,7 @@ func TestCollage(t *testing.T) {
 
 		assert.NoError(t, err)
 		mimeType := fs.MimeType(saveName)
-		assert.Equal(t, fs.MimeTypeJPEG, mimeType)
+		assert.Equal(t, fs.MimeTypeJpeg, mimeType)
 
 		_ = os.Remove(saveName)
 	})
@@ -55,7 +56,7 @@ func TestCollage(t *testing.T) {
 
 		assert.NoError(t, err)
 		mimeType := fs.MimeType(saveName)
-		assert.Equal(t, fs.MimeTypeJPEG, mimeType)
+		assert.Equal(t, fs.MimeTypeJpeg, mimeType)
 
 		_ = os.Remove(saveName)
 	})
@@ -72,7 +73,7 @@ func TestCollage(t *testing.T) {
 
 		assert.NoError(t, err)
 		mimeType := fs.MimeType(saveName)
-		assert.Equal(t, fs.MimeTypeJPEG, mimeType)
+		assert.Equal(t, fs.MimeTypeJpeg, mimeType)
 
 		_ = os.Remove(saveName)
 	})
@@ -99,7 +100,7 @@ func TestCollage(t *testing.T) {
 		assert.NoError(t, err)
 
 		mimeType := fs.MimeType(saveName)
-		assert.Equal(t, fs.MimeTypeJPEG, mimeType)
+		assert.Equal(t, fs.MimeTypeJpeg, mimeType)
 
 		_ = os.Remove(saveName)
 

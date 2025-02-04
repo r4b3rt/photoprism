@@ -85,7 +85,7 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 
 	var video *mp4.ProbeInfo
 
-	// Detect MP4 video metadata.
+	// Detect Mp4 video metadata.
 	if video, err = mp4.Probe(videoFile); err != nil {
 		return info, err
 	}
@@ -93,8 +93,8 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 	// Check compatibility.
 	if CompatibleBrands.ContainsAny(video.CompatibleBrands) {
 		info.Compatible = true
-		info.VideoType = MP4
-		info.VideoMimeType = fs.MimeTypeMP4
+		info.VideoType = Mp4
+		info.VideoMimeType = fs.MimeTypeMp4
 		info.FPS = 30.0 // TODO: Detect actual frames per second!
 
 		if info.VideoOffset > 0 {
@@ -102,17 +102,17 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 			info.ThumbOffset = 0
 		} else {
 			info.MediaType = media.Video
-			info.FileType = fs.VideoMP4
+			info.FileType = fs.VideoMp4
 		}
 	}
 
 	// Check major brand.
 	switch video.MajorBrand {
 	case ChunkQT.Get():
-		info.VideoType = MOV
-		info.VideoMimeType = fs.MimeTypeMOV
+		info.VideoType = Mov
+		info.VideoMimeType = fs.MimeTypeMov
 		if info.MediaType == media.Video {
-			info.FileType = fs.VideoMOV
+			info.FileType = fs.VideoMov
 		}
 	}
 
@@ -128,12 +128,12 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 
 		switch track.Codec {
 		case mp4.CodecAVC1:
-			info.VideoCodec = CodecAVC
+			info.VideoCodec = CodecAvc
 		}
 
 		if avc := track.AVC; avc != nil {
 			if info.VideoMimeType == "" {
-				info.VideoMimeType = fs.MimeTypeMP4
+				info.VideoMimeType = fs.MimeTypeMp4
 			}
 			if w := int(avc.Width); w > info.VideoWidth {
 				info.VideoWidth = w
@@ -148,9 +148,9 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 	// see https://stackoverflow.com/questions/63468587/what-hevc-codec-tag-to-use-with-fmp4-hvc1-or-hev1.
 	if info.VideoCodec == "" {
 		if fileOffset, fileErr := ChunkHVC1.DataOffset(file, -1); fileOffset > 0 && fileErr == nil {
-			info.VideoCodec = CodecHEVC
-		} else if fileOffset, fileErr = ChunkHEV1.DataOffset(file, 5*fs.MB); fileOffset > 0 && fileErr == nil {
-			info.VideoCodec = CodecHEV1
+			info.VideoCodec = CodecHevc
+		} else if fileOffset, fileErr = ChunkHEV1.DataOffset(file, 5*fs.MegaByte); fileOffset > 0 && fileErr == nil {
+			info.VideoCodec = CodecHev1
 		}
 	}
 

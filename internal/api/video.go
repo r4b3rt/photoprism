@@ -13,8 +13,8 @@ import (
 	"github.com/photoprism/photoprism/internal/photoprism/get"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
+	"github.com/photoprism/photoprism/pkg/media/http/header"
 	"github.com/photoprism/photoprism/pkg/media/video"
-	"github.com/photoprism/photoprism/pkg/net/header"
 	"github.com/photoprism/photoprism/pkg/rnd"
 )
 
@@ -153,7 +153,7 @@ func GetVideo(router *gin.RouterGroup) {
 
 			if avcFile, avcErr := conv.ToAvc(mediaFile, get.Config().FFmpegEncoder(), false, false); avcFile != nil && avcErr == nil {
 				videoFileName = avcFile.FileName()
-				AddContentTypeHeader(c, header.ContentTypeAVC)
+				AddContentTypeHeader(c, header.ContentTypeMp4Avc)
 			} else {
 				// Log error and default to 404.mp4
 				log.Errorf("video: failed to transcode %s", clean.Log(f.FileName))

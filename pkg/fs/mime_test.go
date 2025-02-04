@@ -7,7 +7,7 @@ import (
 )
 
 func TestMimeType(t *testing.T) {
-	t.Run("MP4", func(t *testing.T) {
+	t.Run("Mp4", func(t *testing.T) {
 		filename := Abs("./testdata/test.mp4")
 		mimeType := MimeType(filename)
 		assert.Equal(t, "video/mp4", mimeType)
@@ -79,7 +79,7 @@ func TestMimeType(t *testing.T) {
 }
 
 func TestBaseType(t *testing.T) {
-	t.Run("MP4", func(t *testing.T) {
+	t.Run("Mp4", func(t *testing.T) {
 		filename := Abs("./testdata/test.mp4")
 		mimeType := BaseType(MimeType(filename))
 		assert.Equal(t, "video/mp4", mimeType)
@@ -156,14 +156,14 @@ func TestIsType(t *testing.T) {
 		assert.True(t, IsType("video/jpg", "video/jpg"))
 		assert.True(t, IsType("video/jpeg", "video/jpeg"))
 		assert.True(t, IsType("video/mp4", "video/mp4"))
-		assert.True(t, IsType("video/mp4", MimeTypeMP4))
-		assert.True(t, IsType("video/mp4", "video/MP4"))
-		assert.True(t, IsType("video/mp4", "video/MP4; codecs=\"avc1.640028\""))
+		assert.True(t, IsType("video/mp4", MimeTypeMp4))
+		assert.True(t, IsType("video/mp4", "video/Mp4"))
+		assert.True(t, IsType("video/mp4", "video/Mp4; codecs=\"avc1.640028\""))
 	})
 	t.Run("False", func(t *testing.T) {
-		assert.False(t, IsType("", MimeTypeMP4))
+		assert.False(t, IsType("", MimeTypeMp4))
 		assert.False(t, IsType("video/jpeg", "video/jpg"))
 		assert.False(t, IsType("video/mp4", MimeTypeUnknown))
-		assert.False(t, IsType(MimeTypeMP4, MimeTypeJPEG))
+		assert.False(t, IsType(MimeTypeMp4, MimeTypeJpeg))
 	})
 }

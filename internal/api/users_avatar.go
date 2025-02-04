@@ -99,9 +99,9 @@ func UploadUserAvatar(router *gin.RouterGroup) {
 			return
 		} else {
 			switch {
-			case mimeType.Is(fs.MimeTypePNG):
+			case mimeType.Is(fs.MimeTypePng):
 				fileName = "avatar.png"
-			case mimeType.Is(fs.MimeTypeJPEG):
+			case mimeType.Is(fs.MimeTypeJpeg):
 				fileName = "avatar.jpg"
 			default:
 				event.AuditWarn([]string{ClientIP(c), "session %s", "upload avatar", " %s not supported"}, s.RefID, mimeType)

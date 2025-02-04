@@ -12,7 +12,7 @@ import (
 	"github.com/photoprism/photoprism/pkg/authn"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/i18n"
-	"github.com/photoprism/photoprism/pkg/net/header"
+	"github.com/photoprism/photoprism/pkg/media/http/header"
 )
 
 //go:embed embed/video.mp4
@@ -128,6 +128,6 @@ func AbortVideo(c *gin.Context) {
 
 func AbortVideoWithStatus(c *gin.Context, code int) {
 	if c != nil {
-		c.Data(code, header.ContentTypeAVC32, brokenVideo)
+		c.Data(code, header.ContentTypeMp4Avc720, brokenVideo)
 	}
 }
