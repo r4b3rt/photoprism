@@ -637,18 +637,34 @@ stop-mysql:
 	$(DOCKER_COMPOSE) -f compose.mysql.yaml stop mysql
 logs-mysql:
 	$(DOCKER_COMPOSE) -f compose.mysql.yaml logs -f mysql
-latest:
+test-latest:
 	$(DOCKER_COMPOSE) -f compose.latest.yaml pull photoprism-latest
 	$(DOCKER_COMPOSE) -f compose.latest.yaml stop photoprism-latest
 	$(DOCKER_COMPOSE) -f compose.latest.yaml up -d --wait photoprism-latest
 start-latest:
 	$(DOCKER_COMPOSE) -f compose.latest.yaml up photoprism-latest
 stop-latest:
-	$(DOCKER_COMPOSE) -f compose.latest.yaml stop photoprism-latest
+	$(DOCKER_COMPOSE) -f compose.latest.yaml stop -t 30 photoprism-latest
+down-latest:
+	$(DOCKER_COMPOSE) -f compose.latest.yaml down -t 30 photoprism-latest
 terminal-latest:
 	$(DOCKER_COMPOSE) -f compose.latest.yaml exec photoprism-latest bash
 logs-latest:
 	$(DOCKER_COMPOSE) -f compose.latest.yaml logs -f photoprism-latest
+test-preview:
+	$(DOCKER_COMPOSE) -f compose.preview.yaml pull photoprism-preview
+	$(DOCKER_COMPOSE) -f compose.preview.yaml stop photoprism-preview
+	$(DOCKER_COMPOSE) -f compose.preview.yaml up -d --wait photoprism-preview
+start-preview:
+	$(DOCKER_COMPOSE) -f compose.preview.yaml up photoprism-preview
+stop-preview:
+	$(DOCKER_COMPOSE) -f compose.preview.yaml stop -t 30 photoprism-preview
+down-preview:
+	$(DOCKER_COMPOSE) -f compose.preview.yaml down -t 30 photoprism-preview
+terminal-preview:
+	$(DOCKER_COMPOSE) -f compose.preview.yaml exec photoprism-preview bash
+logs-preview:
+	$(DOCKER_COMPOSE) -f compose.preview.yaml logs -f photoprism-preview
 docker-local: docker-local-oracular
 docker-local-all: docker-local-oracular docker-local-noble docker-local-mantic docker-local-lunar docker-local-jammy docker-local-bookworm docker-local-bullseye docker-local-buster
 docker-local-bookworm:
