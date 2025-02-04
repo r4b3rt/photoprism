@@ -88,7 +88,7 @@ echo "backup path...: ${PHOTOPRISM_BACKUP_PATH:-default}"
 echo "import path...: ${PHOTOPRISM_IMPORT_PATH:-default}"
 echo "originals path: ${PHOTOPRISM_ORIGINALS_PATH:-default}"
 
-# error code of the last executed command
+# exit status code of the last command executed
 ret=0
 
 # change to another user and group on request

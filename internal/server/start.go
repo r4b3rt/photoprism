@@ -17,6 +17,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/photoprism/photoprism/internal/config"
+	"github.com/photoprism/photoprism/internal/server/process"
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/net/header"
@@ -32,6 +33,9 @@ func Start(ctx context.Context, conf *config.Config) {
 	}()
 
 	start := time.Now()
+
+	// Log the server process ID for troubleshooting purposes.
+	log.Infof("server: started as pid %d", process.ID)
 
 	// Set web server mode.
 	if conf.HttpMode() != "" {
