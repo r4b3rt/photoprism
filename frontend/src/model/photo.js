@@ -349,7 +349,7 @@ export class Photo extends RestModel {
   });
 
   baseName(truncate) {
-    let result = this.fileBase(this.FileName ? this.FileName : this.mainFile().Name);
+    let result = this.fileBase(this.FileName ? this.FileName : this.primaryFile().Name);
 
     if (truncate) {
       result = Util.truncate(result, truncate, "…");
@@ -382,7 +382,7 @@ export class Photo extends RestModel {
   }
 
   refreshFileAttr() {
-    const file = this.mainFile();
+    const file = this.primaryFile();
 
     if (!file || !file.Hash) {
       return;
@@ -438,7 +438,7 @@ export class Photo extends RestModel {
       return { error: "no video selected" };
     }
 
-    let main = this.mainFile();
+    let main = this.primaryFile();
     let file = this.videoFile();
 
     if (!file) {
@@ -535,11 +535,11 @@ export class Photo extends RestModel {
     return Util.videoUrl(file ? file.Hash : this.Hash, file?.Codec, file?.Mime);
   }
 
-  mainFile() {
-    return this.getMainFileFromFiles(this.Files);
+  primaryFile() {
+    return this.generatePrimaryFile(this.Files);
   }
 
-  getMainFileFromFiles = memoizeOne((files) => {
+  generatePrimaryFile = memoizeOne((files) => {
     if (!files) {
       return this;
     }
@@ -566,15 +566,15 @@ export class Photo extends RestModel {
   originalFile() {
     // Default to main file if there is only one.
     if (this.Files?.length < 2) {
-      return this.mainFile();
+      return this.primaryFile();
     }
 
     // If there are multiple files, find the first one with
     // a format other than JPEG, e.g. RAW or Live.
-    return this.getOriginalFileFromFiles(this.Files);
+    return this.generateOriginalFile(this.Files);
   }
 
-  getOriginalFileFromFiles = memoizeOne((files) => {
+  generateOriginalFile = memoizeOne((files) => {
     if (!files) {
       return this;
     }
@@ -587,10 +587,14 @@ export class Photo extends RestModel {
         file = files.find((f) => f.MediaType === media.Image && f.Root === "/");
         break;
       case media.Live:
-        file = files.find((f) => (f.MediaType === media.Video || f.MediaType === media.Live) && f.Root === "/");
+        file = files.find(
+          (f) => (f.MediaType === media.Video || f.MediaType === media.Live || f.Video) && f.Root === "/"
+        );
+        break;
+      case media.Video:
+        file = files.find((f) => (f.MediaType === media.Video || f.Video) && f.Root === "/");
         break;
       case media.Raw:
-      case media.Video:
       case media.Vector:
         file = files.find((f) => f.MediaType === this.Type && f.Root === "/");
         break;
@@ -610,7 +614,7 @@ export class Photo extends RestModel {
     }
 
     // Find and return the primary JPEG or PNG otherwise.
-    return this.getMainFileFromFiles(files);
+    return this.generatePrimaryFile(files);
   });
 
   jpegFiles() {
@@ -621,14 +625,14 @@ export class Photo extends RestModel {
     return this.Files.filter((f) => f.FileType === media.FormatJPEG || f.FileType === media.FormatPNG);
   }
 
-  mainFileHash() {
-    return this.generateMainFileHash(this.mainFile(), this.Hash);
+  primaryFileHash() {
+    return this.generatePrimaryFileHash(this.primaryFile(), this.Hash);
   }
 
-  generateMainFileHash = memoizeOne((mainFile, hash) => {
+  generatePrimaryFileHash = memoizeOne((primary, hash) => {
     if (this.Files) {
-      if (mainFile && mainFile.Hash) {
-        return mainFile.Hash;
+      if (primary && primary.Hash) {
+        return primary.Hash;
       }
     } else if (hash) {
       return hash;
@@ -675,7 +679,7 @@ export class Photo extends RestModel {
 
   thumbnailUrl(size) {
     return this.generateThumbnailUrl(
-      this.mainFileHash(),
+      this.primaryFileHash(),
       this.videoFile(),
       config.staticUri,
       config.contentUri,
@@ -699,7 +703,7 @@ export class Photo extends RestModel {
   });
 
   getDownloadUrl() {
-    return `${config.apiUri}/dl/${this.mainFileHash()}?t=${config.downloadToken}`;
+    return `${config.apiUri}/dl/${this.primaryFileHash()}?t=${config.downloadToken}`;
   }
 
   downloadAll() {
@@ -713,7 +717,7 @@ export class Photo extends RestModel {
     const token = config.downloadToken;
 
     if (!this.Files) {
-      const hash = this.mainFileHash();
+      const hash = this.primaryFileHash();
 
       if (hash) {
         download(`/${config.apiUri}/dl/${hash}?t=${token}`, this.baseName(false));
@@ -861,9 +865,9 @@ export class Photo extends RestModel {
     if (file.Width && file.Height) {
       info.push(file.Width + " × " + file.Height);
     } else if (!file.Primary) {
-      let main = this.mainFile();
-      if (main && main.Width && main.Height) {
-        info.push(main.Width + " × " + main.Height);
+      let primary = this.primaryFile();
+      if (primary && primary.Width && primary.Height) {
+        info.push(primary.Width + " × " + primary.Height);
       }
     }
 
@@ -889,7 +893,7 @@ export class Photo extends RestModel {
   }
 
   getVectorInfo = () => {
-    let file = this.vectorFile() || this.mainFile();
+    let file = this.vectorFile() || this.primaryFile();
     return this.generateVectorInfo(file);
   };
 
@@ -913,7 +917,7 @@ export class Photo extends RestModel {
 
   // Example: 1:03:46, HEVC, 1440 × 1920, 4.2 MB
   getVideoInfo = () => {
-    let file = this.videoFile() || this.mainFile();
+    let file = this.videoFile() || this.primaryFile();
     return this.generateVideoInfo(this.Camera, this.CameraID, this.CameraMake, this.CameraModel, file);
   };
 
@@ -951,7 +955,7 @@ export class Photo extends RestModel {
 
   // Example: 1:03:46
   getDurationInfo = () => {
-    let file = this.videoFile() || this.mainFile();
+    let file = this.videoFile() || this.primaryFile();
     return this.generateDurationInfo(file);
   };
 
@@ -1087,7 +1091,7 @@ export class Photo extends RestModel {
     return Api.put(this.getEntityResource(), { Private: this.Private });
   }
 
-  primaryFile(fileUID) {
+  setPrimaryFile(fileUID) {
     return Api.post(`${this.getEntityResource()}/files/${fileUID}/primary`).then((r) =>
       Promise.resolve(this.setValues(r.data))
     );

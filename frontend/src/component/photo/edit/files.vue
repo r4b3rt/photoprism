@@ -69,7 +69,7 @@
                                   color="highlight"
                                   class="btn-action action-primary"
                                   :disabled="busy"
-                                  @click.stop.prevent="primaryFile(file)"
+                                  @click.stop.prevent="setPrimaryFile(file)"
                                 >
                                   {{ $gettext(`Primary`) }}
                                 </v-btn>
@@ -501,8 +501,8 @@ export default {
     unstackFile(file) {
       this.model.unstackFile(file.UID);
     },
-    primaryFile(file) {
-      this.model.primaryFile(file.UID);
+    setPrimaryFile(file) {
+      this.model.setPrimaryFile(file.UID);
     },
     changeOrientation(file) {
       if (!file) {
