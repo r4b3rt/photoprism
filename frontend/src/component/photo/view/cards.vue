@@ -84,7 +84,7 @@
                 <i class="mdi mdi-camera-iris" />
                 {{ m.getLensInfo() }}
               </button>
-              <button v-if="featDownload" class="meta-filename text-truncate">
+              <button class="meta-filename text-truncate">
                 <i class="mdi mdi-film" />
                 {{ m.getOriginalName() }}
               </button>
