@@ -7,6 +7,7 @@
 # - https://github.com/skarnet/s6
 # - https://skarnet.org/software/s6/
 # - https://ahmet.im/blog/minimal-init-process-for-containers/
+# - https://labex.io/tutorials/docker-how-to-gracefully-shut-down-a-long-running-docker-container-417742
 
 # Show usage information if first argument is --help.
 if [[ ${1} == "--help" ]]; then
