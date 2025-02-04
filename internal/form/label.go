@@ -1,6 +1,11 @@
 package form
 
-import "github.com/ulule/deepcopier"
+import (
+	"github.com/photoprism/photoprism/pkg/clean"
+	"github.com/photoprism/photoprism/pkg/i18n"
+	"github.com/photoprism/photoprism/pkg/txt"
+	"github.com/ulule/deepcopier"
+)
 
 // Label represents a label edit form.
 type Label struct {
@@ -19,4 +24,21 @@ func NewLabel(m interface{}) (*Label, error) {
 	frm := &Label{}
 	err := deepcopier.Copy(m).To(frm)
 	return frm, err
+}
+
+// Validate returns an error if any form values are invalid.
+func (frm *Label) Validate() error {
+	labelName := txt.Clip(clean.NameCapitalized(frm.LabelName), txt.ClipName)
+
+	if labelName == "" {
+		return i18n.Error(i18n.ErrInvalidName)
+	}
+
+	labelSlug := txt.Slug(labelName)
+
+	if labelSlug == "" {
+		return i18n.Error(i18n.ErrInvalidName)
+	}
+
+	return nil
 }

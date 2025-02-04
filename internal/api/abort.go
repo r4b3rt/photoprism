@@ -110,6 +110,10 @@ func AbortBusy(c *gin.Context) {
 	Abort(c, http.StatusTooManyRequests, i18n.ErrBusy)
 }
 
+func AbortInvalidName(c *gin.Context) {
+	Abort(c, http.StatusBadRequest, i18n.ErrInvalidName)
+}
+
 func AbortInvalidCredentials(c *gin.Context) {
 	if c != nil {
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": authn.ErrInvalidCredentials.Error(), "code": i18n.ErrInvalidCredentials, "message": i18n.Msg(i18n.ErrInvalidCredentials)})
