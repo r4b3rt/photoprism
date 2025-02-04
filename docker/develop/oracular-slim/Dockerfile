@@ -74,11 +74,12 @@ RUN echo 'APT::Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries && \
     /scripts/install-s6.sh && \
     /scripts/cleanup.sh
 
-# Default working directory.
+# Set default working directory.
 WORKDIR /photoprism
 
-# Expose HTTP and HTTPS ports.
+# Expose default HTTP and HTTPS ports.
 EXPOSE 2342 2442 2443
 
-# Keep container running.
+# Set default entrypoint and command.
+ENTRYPOINT ["/init"]
 CMD ["tail", "-f", "/dev/null"]
