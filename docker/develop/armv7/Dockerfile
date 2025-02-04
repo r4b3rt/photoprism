@@ -36,7 +36,9 @@ ENV PHOTOPRISM_ARCH=$TARGETARCH \
     GOBIN="/usr/local/bin" \
     GO111MODULE="on" \
     CGO_CFLAGS="-g -O2 -Wno-return-local-addr" \
-    PROG="photoprism"
+    PROG="photoprism" \
+    S6_KEEP_ENV=1 \
+    S6_LOGGING=0
 
 # Copy scripts and package sources config.
 COPY --chown=root:root --chmod=755 /scripts/dist/ /scripts/
@@ -82,6 +84,7 @@ RUN echo 'APT::Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries && \
         /photoprism/storage/backups \
         /photoprism/storage/config \
         /photoprism/storage/cache && \
+    /scripts/install-s6.sh && \
     /scripts/cleanup.sh
 
 # Download machine learning models and test data.
@@ -106,6 +109,6 @@ EXPOSE 2342 2343 2442 2443 9515 40000
 # Declare container entrypoint script.
 ENTRYPOINT ["/scripts/entrypoint.sh"]
 
-# Keep container running.
-CMD ["tail", "-f", "/dev/null"]
-
+# Set default entrypoint and command.
+ENTRYPOINT ["/init"]
+CMD ["/scripts/cmd.sh", "tail", "-f", "/dev/null"]
