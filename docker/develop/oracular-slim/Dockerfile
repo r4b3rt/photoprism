@@ -82,4 +82,4 @@ EXPOSE 2342 2442 2443
 
 # Set default entrypoint and command.
 ENTRYPOINT ["/init"]
-CMD ["tail", "-f", "/dev/null"]
+CMD ["/scripts/cmd.sh", "tail", "-f", "/dev/null"]

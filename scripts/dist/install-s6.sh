@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
-# This downloads and installs the s6-overlay binaries and noarch files from GitHub.
+# This downloads and installs the s6-overlay binaries and noarch files from GitHub:
+# - https://github.com/just-containers/s6-overlay
 #
+# s6 is a suite of utilities for UNIX that provides process supervision, e.g. for use with Docker:
+# - https://github.com/skarnet/s6
+# - https://skarnet.org/software/s6/
+# - https://ahmet.im/blog/minimal-init-process-for-containers/
+
 # Show usage information if first argument is --help.
 if [[ ${1} == "--help" ]]; then
   echo "Usage: ${0##*/} [version] [dir]" 1>&2
