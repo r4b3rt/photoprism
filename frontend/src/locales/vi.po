@@ -210,7 +210,7 @@ msgstr "Thêm hình ảnh từ kết quả tìm kiếm bằng cách chọn chún
 msgid "Add to album"
 msgstr "Thêm vào album"
 
-#: src/component/photo/edit/files.vue:475
+#: src/component/photo/edit/files.vue:474
 msgid "Added"
 msgstr "Thêm"
 
@@ -353,9 +353,9 @@ msgstr "Độ cao (m)"
 msgid "AM"
 msgstr "LÀ"
 
-#: src/component/navigation.vue:423 src/component/photo/edit/files.vue:326
-#: src/component/photo/view/cards.vue:312
-#: src/component/photo/view/cards.vue:470 src/component/photo/view/list.vue:172
+#: src/component/navigation.vue:423 src/component/photo/edit/files.vue:325
+#: src/component/photo/view/cards.vue:307
+#: src/component/photo/view/cards.vue:465 src/component/photo/view/list.vue:172
 #: src/component/photo/view/mosaic.vue:183 src/options/options.js:368
 msgid "Animated"
 msgstr "hoạt hình"
@@ -382,7 +382,7 @@ msgstr "Áp dụng"
 
 #: src/component/photo/clipboard.vue:64
 #: src/component/photo/edit/details.vue:620
-#: src/component/photo/view/cards.vue:402
+#: src/component/photo/view/cards.vue:397
 msgid "Approve"
 msgstr "Chấp thuận"
 
@@ -391,7 +391,7 @@ msgid "Apps and Devices"
 msgstr "Ứng dụng và thiết bị"
 
 #: src/app/routes.js:256 src/component/navigation.vue:552
-#: src/component/photo/clipboard.vue:142 src/component/photo/view/cards.vue:384
+#: src/component/photo/clipboard.vue:142 src/component/photo/view/cards.vue:379
 #: src/page/settings/general.vue:346
 msgid "Archive"
 msgstr "Lưu trữ"
@@ -437,7 +437,7 @@ msgstr "Bạn có chắc không?"
 msgid "Artist"
 msgstr "Nghệ sĩ"
 
-#: src/component/photo/edit/files.vue:380
+#: src/component/photo/edit/files.vue:379
 msgid "Aspect Ratio"
 msgstr "Tỷ lệ khung hình"
 
@@ -540,7 +540,7 @@ msgid "Calendar"
 msgstr "Lịch"
 
 #: src/component/photo/edit/details.vue:333 src/component/photo/toolbar.vue:313
-#: src/component/photo/view/cards.vue:487 src/component/photo/view/list.vue:115
+#: src/component/photo/view/cards.vue:482 src/component/photo/view/list.vue:115
 msgid "Camera"
 msgstr "Máy ảnh"
 
@@ -592,7 +592,7 @@ msgstr "Không thể sao chép vào clipboard"
 
 #: src/component/photo/edit/details.vue:85 src/component/photo/edit/info.vue:75
 #: src/component/photo/edit/labels.vue:46
-#: src/component/photo/view/cards.vue:432
+#: src/component/photo/view/cards.vue:427
 msgid "Caption"
 msgstr "Đầu đề"
 
@@ -638,7 +638,7 @@ msgstr "Không thể lưu các thay đổi"
 #: src/component/user/edit/dialog.vue:73 src/component/user/edit/dialog.vue:149
 #: src/component/album/edit/dialog.vue:64
 #: src/component/label/edit/dialog.vue:37
-#: src/component/photo/edit/files.vue:145 src/component/service/edit.vue:79
+#: src/component/photo/edit/files.vue:157 src/component/service/edit.vue:79
 #: src/component/share/dialog.vue:83 src/component/share/dialog.vue:102
 #: src/page/albums.vue:583 src/page/people/recognized.vue:118
 #: src/page/settings/advanced.vue:58 src/page/settings/general.vue:106
@@ -654,7 +654,7 @@ msgstr "Những thay đổi đối với cài đặt nâng cao yêu cầu khởi
 msgid "Checked"
 msgstr "Đã kiểm tra"
 
-#: src/component/photo/edit/files.vue:457
+#: src/component/photo/edit/files.vue:456
 msgid "Chroma"
 msgstr "sắc độ"
 
@@ -691,7 +691,7 @@ msgstr "Thông tin xác thực của khách hàng"
 msgid "Close"
 msgstr "Đóng"
 
-#: src/component/photo/edit/files.vue:332
+#: src/component/photo/edit/files.vue:331
 msgid "Codec"
 msgstr "Bộ giải mã"
 
@@ -699,7 +699,7 @@ msgstr "Bộ giải mã"
 msgid "Color"
 msgstr "Màu sắc"
 
-#: src/component/photo/edit/files.vue:445
+#: src/component/photo/edit/files.vue:444
 msgid "Color Profile"
 msgstr "Hồ sơ màu"
 
@@ -1029,7 +1029,7 @@ msgstr "Tải xuống các tập tin đơn lẻ và lưu trữ zip."
 #: src/component/album/clipboard.vue:102 src/component/album/toolbar.vue:106
 #: src/component/file/clipboard.vue:61 src/component/label/clipboard.vue:86
 #: src/component/people/clipboard.vue:59 src/component/photo/clipboard.vue:212
-#: src/component/photo/edit/files.vue:110
+#: src/component/photo/edit/files.vue:122
 #: src/component/photo/view/cards.vue:163 src/component/photo/view/list.vue:133
 #: src/component/viewer.vue:1035 src/page/library/browse.vue:113
 msgid "Downloading…"
@@ -1051,7 +1051,7 @@ msgstr "Do chúng tôi nhận được số lượng lớn email nên nhóm củ
 msgid "Duplicates will be skipped and only appear once."
 msgstr "Các bản sao sẽ bị bỏ qua và chỉ xuất hiện một lần."
 
-#: src/component/photo/edit/files.vue:338
+#: src/component/photo/edit/files.vue:337
 msgid "Duration"
 msgstr "Khoảng thời gian"
 
@@ -1271,7 +1271,7 @@ msgstr "Tên tệp"
 msgid "File Size"
 msgstr "Kích thước tập tin"
 
-#: src/component/photo/edit/files.vue:276
+#: src/component/photo/edit/files.vue:275
 msgid "Filename"
 msgstr "Tên tệp"
 
@@ -1315,11 +1315,11 @@ msgstr "Thư mục"
 msgid "Forgot password?"
 msgstr "Quên mật khẩu?"
 
-#: src/component/photo/edit/files.vue:350
+#: src/component/photo/edit/files.vue:349
 msgid "FPS"
 msgstr "FPS"
 
-#: src/component/photo/edit/files.vue:344
+#: src/component/photo/edit/files.vue:343
 msgid "Frames"
 msgstr "Khung"
 
@@ -1381,7 +1381,7 @@ msgstr "Xám"
 msgid "Guest"
 msgstr "Khách mời"
 
-#: src/component/photo/edit/files.vue:266
+#: src/component/photo/edit/files.vue:265
 msgid "Hash"
 msgstr "Băm"
 
@@ -1413,7 +1413,7 @@ msgstr "Ẩn ảnh đã được chuyển vào kho lưu trữ."
 msgid "High"
 msgstr "Cao"
 
-#: src/component/photo/edit/files.vue:362
+#: src/component/photo/edit/files.vue:361
 msgid "High Dynamic Range (HDR)"
 msgstr "Dải động cao (HDR)"
 
@@ -1459,12 +1459,12 @@ msgstr "Đang nhập %{s}…"
 msgid "Importing files to originals…"
 msgstr "Đang nhập tệp vào bản gốc…"
 
-#: src/component/photo/edit/files.vue:476
-#: src/component/photo/edit/files.vue:481
+#: src/component/photo/edit/files.vue:475
+#: src/component/photo/edit/files.vue:480
 msgid "in"
 msgstr "TRONG"
 
-#: src/component/photo/view/cards.vue:120 src/component/photo/view/list.vue:87
+#: src/component/photo/view/cards.vue:117 src/component/photo/view/list.vue:87
 #: src/component/photo/view/mosaic.vue:76 src/page/labels.vue:176
 #: src/page/library/browse.vue:126
 msgid "In case pictures you expect are missing, please rescan your library and wait until indexing has been completed."
@@ -1499,7 +1499,7 @@ msgstr "Lập chỉ mục không thành công"
 msgid "Indexing media and sidecar files…"
 msgstr "Lập chỉ mục các tập tin media và sidecar…"
 
-#: src/component/photo/edit/files.vue:256
+#: src/component/photo/edit/files.vue:255
 msgid "Instance ID"
 msgstr "ID phiên bản"
 
@@ -1631,7 +1631,7 @@ msgid "Legal Information"
 msgstr "Thông tin hợp pháp"
 
 #: src/component/photo/edit/details.vue:400
-#: src/component/photo/view/cards.vue:498
+#: src/component/photo/view/cards.vue:493
 msgid "Lens"
 msgstr "Ống kính"
 
@@ -1671,8 +1671,8 @@ msgstr "liên kết"
 msgid "List"
 msgstr "Danh sách"
 
-#: src/app/routes.js:228 src/component/photo/view/cards.vue:296
-#: src/component/photo/view/cards.vue:461 src/component/photo/view/list.vue:163
+#: src/app/routes.js:228 src/component/photo/view/cards.vue:291
+#: src/component/photo/view/cards.vue:456 src/component/photo/view/list.vue:163
 #: src/component/photo/view/mosaic.vue:167 src/options/options.js:372
 msgid "Live"
 msgstr "Sống"
@@ -1704,7 +1704,7 @@ msgstr "Giờ địa phương"
 #: src/page/settings/account.vue:666 src/page/settings/account.vue:668
 #: src/component/album/edit/dialog.vue:90 src/component/photo/edit/info.vue:79
 #: src/component/photo/edit/labels.vue:52
-#: src/component/photo/view/cards.vue:521 src/component/photo/view/list.vue:116
+#: src/component/photo/view/cards.vue:513 src/component/photo/view/list.vue:116
 #: src/page/albums.vue:90 src/page/settings/account.vue:558
 #: src/page/settings/account.vue:560
 msgid "Location"
@@ -1744,7 +1744,7 @@ msgstr "Độ phân giải thấp"
 msgid "Magenta"
 msgstr "Màu đỏ tươi"
 
-#: src/component/photo/edit/files.vue:451
+#: src/component/photo/edit/files.vue:450
 msgid "Main Color"
 msgstr "Màu chính"
 
@@ -1802,7 +1802,7 @@ msgstr "Số liệu"
 msgid "Minimize"
 msgstr "Giảm thiểu"
 
-#: src/component/photo/edit/files.vue:470 src/component/photo/edit/info.vue:366
+#: src/component/photo/edit/files.vue:469 src/component/photo/edit/info.vue:366
 msgid "Missing"
 msgstr "Mất tích"
 
@@ -1928,14 +1928,14 @@ msgstr "Không còn nữa"
 msgid "No people found"
 msgstr "Không tìm thấy người nào"
 
-#: src/component/photo/view/cards.vue:115 src/component/photo/view/list.vue:82
+#: src/component/photo/view/cards.vue:112 src/component/photo/view/list.vue:82
 #: src/component/photo/view/mosaic.vue:71 src/component/viewer.vue:167
 #: src/page/album/photos.vue:438 src/page/library/browse.vue:125
 #: src/page/photos.vue:579 src/page/places.vue:447 src/page/places.vue:533
 msgid "No pictures found"
 msgstr "Không tìm thấy hình ảnh nào"
 
-#: src/component/photo/view/cards.vue:114 src/component/photo/view/list.vue:81
+#: src/component/photo/view/cards.vue:111 src/component/photo/view/list.vue:81
 #: src/component/photo/view/mosaic.vue:70
 msgid "No recently edited pictures"
 msgstr "Không có hình ảnh được chỉnh sửa gần đây"
@@ -1961,7 +1961,7 @@ msgid "No warnings or error containing this keyword. Note that search is case-se
 msgstr "Không có cảnh báo hoặc lỗi có chứa từ khóa này. Lưu ý rằng tìm kiếm có phân biệt chữ hoa chữ thường."
 
 #: src/component/photo/upload/dialog.vue:199
-#: src/component/photo/view/cards.vue:125 src/component/photo/view/list.vue:58
+#: src/component/photo/view/cards.vue:122 src/component/photo/view/list.vue:58
 #: src/component/photo/view/list.vue:92 src/component/photo/view/mosaic.vue:81
 msgid "Non-photographic and low-quality images require a review before they appear in search results."
 msgstr "Hình ảnh không phải ảnh và chất lượng thấp cần được xem xét trước khi chúng xuất hiện trong kết quả tìm kiếm."
@@ -2063,7 +2063,7 @@ msgstr "Chỉ những tài khoản được quản lý cục bộ mới có th�
 msgid "Open"
 msgstr "Mở"
 
-#: src/component/photo/edit/files.vue:237
+#: src/component/photo/edit/files.vue:236
 msgid "Open Folder"
 msgstr "Mở thư mục"
 
@@ -2083,7 +2083,7 @@ msgstr "Quả cam"
 msgid "Organization"
 msgstr "Tổ chức"
 
-#: src/component/photo/edit/files.vue:386
+#: src/component/photo/edit/files.vue:385
 msgid "Orientation"
 msgstr "Định hướng"
 
@@ -2091,7 +2091,7 @@ msgstr "Định hướng"
 msgid "Original file names will be stored and indexed."
 msgstr "Tên tập tin gốc sẽ được lưu trữ và lập chỉ mục."
 
-#: src/component/photo/edit/files.vue:293 src/component/photo/edit/info.vue:134
+#: src/component/photo/edit/files.vue:292 src/component/photo/edit/info.vue:134
 msgid "Original Name"
 msgstr "Tên khai sinh"
 
@@ -2167,7 +2167,7 @@ msgstr "Người"
 msgid "Personal"
 msgstr "Riêng tư"
 
-#: src/model/photo.js:1247
+#: src/model/photo.js:1263
 msgid "Photo"
 msgstr "hình chụp"
 
@@ -2247,7 +2247,7 @@ msgstr "Thủ tướng"
 msgid "PNG Size Limit: %{n}px"
 msgstr "Giới hạn kích thước PNG: %{n}px"
 
-#: src/component/photo/edit/files.vue:368
+#: src/component/photo/edit/files.vue:367
 msgid "Portrait"
 msgstr "Chân dung"
 
@@ -2288,7 +2288,7 @@ msgid "Previous visual"
 msgstr "Hình ảnh trước đó"
 
 #: src/component/photo/edit/files.vue:37 src/component/photo/edit/files.vue:187
-#: src/component/photo/edit/files.vue:356
+#: src/component/photo/edit/files.vue:355
 msgid "Primary"
 msgstr "Sơ đẳng"
 
@@ -2302,7 +2302,7 @@ msgstr "Riêng tư"
 msgid "Product Feedback"
 msgstr "Phản hồi sản phẩm"
 
-#: src/component/photo/edit/files.vue:374
+#: src/component/photo/edit/files.vue:373
 msgid "Projection"
 msgstr "Chiếu"
 
@@ -2334,7 +2334,7 @@ msgstr "Xếp hạng {0} của {1}"
 msgid "Raw"
 msgstr "thô"
 
-#: src/component/photo/view/cards.vue:289
+#: src/component/photo/view/cards.vue:284
 #: src/component/photo/view/mosaic.vue:160 src/page/settings/general.vue:671
 msgid "RAW"
 msgstr "NGUYÊN"
@@ -2672,7 +2672,7 @@ msgstr "Đăng nhập"
 msgid "Similar"
 msgstr "Tương tự"
 
-#: src/component/photo/edit/files.vue:53 src/component/photo/edit/files.vue:303
+#: src/component/photo/edit/files.vue:53 src/component/photo/edit/files.vue:302
 #: src/component/service/edit.vue:127
 msgid "Size"
 msgstr "Kích cỡ"
@@ -2681,7 +2681,7 @@ msgstr "Kích cỡ"
 msgid "Slow"
 msgstr "Chậm"
 
-#: src/component/photo/edit/files.vue:308
+#: src/component/photo/edit/files.vue:307
 msgid "Software"
 msgstr "Phần mềm"
 
@@ -2711,7 +2711,7 @@ msgstr "Sắp xếp theo thứ tự giảm dần."
 msgid "Source"
 msgstr "Nguồn"
 
-#: src/component/photo/view/cards.vue:326
+#: src/component/photo/view/cards.vue:321
 #: src/component/photo/view/mosaic.vue:197
 msgid "Stack"
 msgstr "Cây rơm"
@@ -2748,7 +2748,7 @@ msgstr "Giới hạn kích thước tĩnh: %{n}px"
 msgid "Status"
 msgstr "Trạng thái"
 
-#: src/component/photo/edit/files.vue:287
+#: src/component/photo/edit/files.vue:286
 msgid "Storage"
 msgstr "Kho"
 
@@ -2798,8 +2798,8 @@ msgstr "Đồng bộ hóa"
 msgid "Sync raw and video files"
 msgstr "Đồng bộ hóa các tập tin thô và video"
 
-#: src/component/photo/edit/info.vue:182 src/component/photo/view/cards.vue:177
-#: src/component/photo/view/cards.vue:444 src/component/photo/view/list.vue:114
+#: src/component/photo/edit/info.vue:182 src/component/photo/view/cards.vue:174
+#: src/component/photo/view/cards.vue:439 src/component/photo/view/list.vue:114
 msgid "Taken"
 msgstr "Lấy"
 
@@ -2936,7 +2936,7 @@ msgstr "Địa hình"
 msgid "Troubleshooting Checklists"
 msgstr "Danh sách kiểm tra khắc phục sự cố"
 
-#: src/component/photo/view/cards.vue:117 src/component/photo/view/list.vue:53
+#: src/component/photo/view/cards.vue:114 src/component/photo/view/list.vue:53
 #: src/component/photo/view/list.vue:84 src/component/photo/view/mosaic.vue:73
 #: src/page/albums.vue:316 src/page/labels.vue:176
 #: src/page/people/recognized.vue:176
@@ -2947,7 +2947,7 @@ msgstr "Hãy thử lại bằng các bộ lọc hoặc từ khóa khác."
 msgid "Two-factor authentication has been enabled for your account."
 msgstr "Xác thực hai yếu tố đã được kích hoạt cho tài khoản của bạn."
 
-#: src/component/photo/edit/files.vue:60 src/component/photo/edit/files.vue:314
+#: src/component/photo/edit/files.vue:60 src/component/photo/edit/files.vue:313
 #: src/component/photo/edit/info.vue:86 src/component/service/edit.vue:375
 msgid "Type"
 msgstr "Kiểu"
@@ -2965,9 +2965,9 @@ msgid "Unique ID"
 msgstr "ID duy nhất"
 
 #: src/component/photo/edit/details.vue:24 src/component/photo/edit/info.vue:28
-#: src/model/album.js:179 src/model/photo.js:344 src/model/photo.js:779
-#: src/model/photo.js:800 src/model/photo.js:823 src/model/photo.js:841
-#: src/model/photo.js:978 src/model/photo.js:1034 src/model/photo.js:1048
+#: src/model/album.js:179 src/model/photo.js:344 src/model/photo.js:795
+#: src/model/photo.js:816 src/model/photo.js:839 src/model/photo.js:857
+#: src/model/photo.js:994 src/model/photo.js:1050 src/model/photo.js:1064
 #: src/model/user.js:155 src/options/options.js:50 src/options/options.js:68
 #: src/options/options.js:85 src/options/options.js:99
 #: src/options/options.js:111 src/page/library/errors.vue:187
@@ -2988,7 +2988,7 @@ msgstr "Chưa sắp xếp"
 msgid "Unstack"
 msgstr "Giải nén"
 
-#: src/component/photo/edit/files.vue:480 src/component/photo/edit/info.vue:415
+#: src/component/photo/edit/files.vue:479 src/component/photo/edit/info.vue:415
 msgid "Updated"
 msgstr "Đã cập nhật"
 
@@ -3117,10 +3117,10 @@ msgstr "tên tài khoản"
 msgid "Users"
 msgstr "Người dùng"
 
-#: src/component/photo/view/cards.vue:319
-#: src/component/photo/view/cards.vue:479 src/component/photo/view/list.vue:179
-#: src/component/photo/view/mosaic.vue:190 src/model/photo.js:886
-#: src/model/photo.js:894 src/options/options.js:380
+#: src/component/photo/view/cards.vue:314
+#: src/component/photo/view/cards.vue:474 src/component/photo/view/list.vue:179
+#: src/component/photo/view/mosaic.vue:190 src/model/photo.js:902
+#: src/model/photo.js:910 src/options/options.js:380
 msgid "Vector"
 msgstr "Vectơ"
 
@@ -3132,10 +3132,10 @@ msgstr "Vectơ"
 msgid "Verification Code"
 msgstr "Mã xác nhận"
 
-#: src/component/photo/view/cards.vue:305
-#: src/component/photo/view/cards.vue:452 src/component/photo/view/list.vue:186
+#: src/component/photo/view/cards.vue:300
+#: src/component/photo/view/cards.vue:447 src/component/photo/view/list.vue:186
 #: src/component/photo/view/mosaic.vue:176 src/model/file.js:220
-#: src/model/photo.js:910 src/model/photo.js:934 src/options/options.js:376
+#: src/model/photo.js:926 src/model/photo.js:950 src/options/options.js:376
 msgid "Video"
 msgstr "Băng hình"
 
@@ -3148,7 +3148,7 @@ msgstr "Thời lượng video"
 msgid "Videos"
 msgstr "Video"
 
-#: src/component/photo/toolbar.vue:341 src/component/photo/view/cards.vue:335
+#: src/component/photo/toolbar.vue:341 src/component/photo/view/cards.vue:330
 #: src/component/photo/view/mosaic.vue:206
 msgid "View"
 msgstr "Xem"
@@ -3230,11 +3230,11 @@ msgstr "Màu vàng"
 
 #: src/component/confirm/action.vue:54 src/component/people/merge/dialog.vue:58
 #: src/component/photo/archive/dialog.vue:58
-#: src/component/photo/edit/files.vue:327
-#: src/component/photo/edit/files.vue:357
-#: src/component/photo/edit/files.vue:363
-#: src/component/photo/edit/files.vue:369
-#: src/component/photo/edit/files.vue:471 src/component/photo/edit/info.vue:280
+#: src/component/photo/edit/files.vue:326
+#: src/component/photo/edit/files.vue:356
+#: src/component/photo/edit/files.vue:362
+#: src/component/photo/edit/files.vue:368
+#: src/component/photo/edit/files.vue:470 src/component/photo/edit/info.vue:280
 #: src/component/photo/edit/info.vue:296 src/component/photo/edit/info.vue:312
 #: src/component/photo/edit/info.vue:328 src/component/photo/edit/info.vue:343
 msgid "Yes"
