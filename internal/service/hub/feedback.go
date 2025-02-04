@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/photoprism/photoprism/internal/form"
-	"github.com/photoprism/photoprism/pkg/header"
+	"github.com/photoprism/photoprism/pkg/net/header"
 	"github.com/photoprism/photoprism/pkg/txt"
 )
 

@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/photoprism/photoprism/pkg/clean"
-	"github.com/photoprism/photoprism/pkg/header"
+	"github.com/photoprism/photoprism/pkg/net/header"
 )
 
 // ContentType returns a normalized video content type strings based on the video file type and codec.

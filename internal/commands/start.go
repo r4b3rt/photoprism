@@ -145,10 +145,8 @@ func startAction(ctx *cli.Context) error {
 	auto.Start(conf)
 
 	// Wait for signal to initiate server shutdown.
-	quit := make(chan os.Signal)
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM, syscall.SIGUSR1)
-
-	sig := <-quit
+	signal.Notify(server.Signal, syscall.SIGINT, syscall.SIGTERM, syscall.SIGUSR1)
+	sig := <-server.Signal
 
 	// Stop all background activity.
 	auto.Shutdown()

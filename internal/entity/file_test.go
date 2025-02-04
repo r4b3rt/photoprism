@@ -4,8 +4,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/photoprism/photoprism/pkg/header"
-
 	"github.com/stretchr/testify/assert"
 
 	"github.com/photoprism/photoprism/internal/ai/face"
@@ -14,6 +12,7 @@ import (
 	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/media/colors"
 	"github.com/photoprism/photoprism/pkg/media/projection"
+	"github.com/photoprism/photoprism/pkg/net/header"
 	"github.com/photoprism/photoprism/pkg/rnd"
 )
 
