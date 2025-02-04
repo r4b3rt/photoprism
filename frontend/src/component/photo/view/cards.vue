@@ -282,7 +282,6 @@
                 {{ m.getLensInfo() }}
               </button>
               <button
-                v-if="featDownload"
                 :title="m.getOriginalName()"
                 class="meta-filename text-truncate"
                 @click.exact="editPhoto(index, 'files')"
