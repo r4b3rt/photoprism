@@ -103,8 +103,7 @@
                                   variant="flat"
                                   color="highlight"
                                   class="btn-action action-open-folder"
-                                  :href="folderUrl(file)"
-                                  target="_blank"
+                                  @click.stop.prevent="openFolder(file)"
                                 >
                                   {{ $gettext(`Open Folder`) }}
                                 </v-btn>
@@ -466,17 +465,29 @@ export default {
     openFile(file) {
       this.$root.$refs.viewer.showThumbs([Thumb.fromFile(this.model, file)], 0);
     },
-    folderUrl(m) {
-      if (!m) {
+    openFolder(file) {
+      if (!file) {
         return "#";
       }
 
-      const name = m.Name;
+      const name = file.Name;
 
       // "#" chars in path names must be explicitly escaped,
       // see https://github.com/photoprism/photoprism/issues/3695
       const path = name.substring(0, name.lastIndexOf("/")).replaceAll(":", "%3A").replaceAll("#", "%23");
-      return this.$router.resolve({ path: "/index/files/" + path }).href;
+      const route = { path: "/index/files/" + path };
+
+      if (this.$isMobile) {
+        this.$emit("close");
+        this.$router.push(route);
+      } else {
+        // Open in a new tab on desktop browsers.
+        const routeUrl = this.$router.resolve(route).href;
+
+        if (routeUrl) {
+          window.open(routeUrl, "_blank");
+        }
+      }
     },
     downloadFile(file) {
       Notify.success(this.$gettext("Downloading…"));
