@@ -106,9 +106,6 @@ WORKDIR "/go/src/github.com/photoprism/photoprism"
 # - 40000 (Go Debugger)
 EXPOSE 2342 2343 2442 2443 9515 40000
 
-# Declare container entrypoint script.
-ENTRYPOINT ["/scripts/entrypoint.sh"]
-
 # Set default entrypoint and command.
 ENTRYPOINT ["/init"]
 CMD ["/scripts/cmd.sh", "tail", "-f", "/dev/null"]
