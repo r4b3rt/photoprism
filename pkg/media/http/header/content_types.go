@@ -26,7 +26,7 @@ const (
 	ContentTypeMp4Avc3High    = ContentTypeMp4 + "; codecs=\"avc3.640028\""      // MPEG-4 AVC Bitstream, High Profile, may not be supported on macOS
 	ContentTypeMp4Hvc         = ContentTypeMp4 + "; codecs=\"hvc1\""             // MPEG-4 HEVC (H.265)
 	ContentTypeMp4HvcMain     = ContentTypeMp4 + "; codecs=\"hvc1.1.6.L93.B0\""  // MPEG-4 HEVC (H.265), Main Profile
-	ContentTypeMp4HvcMain10   = ContentTypeMp4 + "; codecs=\"hev1.2.4.L153.B0\"" // MPEG-4 HEVC (H.265), Main 10 Profile
+	ContentTypeMp4HvcMain10   = ContentTypeMp4 + "; codecs=\"hvc1.2.4.L153.B0\"" // MPEG-4 HEVC (H.265), Main 10 Profile
 	ContentTypeMp4Hev         = ContentTypeMp4 + "; codecs=\"hev1\""             // MPEG-4 HEVC Bitstream
 	ContentTypeMp4HevMain     = ContentTypeMp4 + "; codecs=\"hev1.1.6.L93.B0\""  // MPEG-4 HEVC Bitstream, Main Profile, not supported on macOS
 	ContentTypeMp4HevMain10   = ContentTypeMp4 + "; codecs=\"hev1.2.4.L153.B0\"" // MPEG-4 HEVC Bitstream, Main 10 Profile, not supported on macOS

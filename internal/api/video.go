@@ -131,7 +131,7 @@ func GetVideo(router *gin.RouterGroup) {
 		}
 
 		// Verify video format support and compatibility.
-		supported := video.Compatible(videoContentType, format.ContentType) || format.Codec == video.CodecUnknown && videoFileType == format.FileType.String()
+		supported := video.Compatible(videoContentType, format.ContentType)
 
 		// Check video bitrate against the configured limit.
 		transcode := !supported || conf.FFmpegEnabled() && conf.FFmpegBitrateExceeded(videoBitrate)

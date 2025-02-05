@@ -66,7 +66,9 @@ func ContentType(mediaType, fileType, videoCodec string) string {
 // Compatible tests if the video content types are expected to be compatible,
 func Compatible(contentType1, contentType2 string) bool {
 	// Content is likely compatible if the content type strings match exactly (case-insensitive).
-	if strings.EqualFold(contentType1, contentType2) {
+	if contentType1 == "" || contentType2 == "" {
+		return false
+	} else if strings.EqualFold(contentType1, contentType2) {
 		return true
 	}
 
@@ -92,7 +94,7 @@ func Compatible(contentType1, contentType2 string) bool {
 
 	// Compare the media codecs.
 	codec1 := params1["codecs"]
-	codec2 := params1["codecs"]
+	codec2 := params2["codecs"]
 
 	// Content is likely compatible if the full codec details match (case-insensitive).
 	if strings.EqualFold(codec1, codec2) {
