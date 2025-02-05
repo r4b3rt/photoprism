@@ -136,7 +136,7 @@
                   autocomplete="off"
                   :disabled="busy"
                   maxlength="500"
-                  :rules="rules.text(false, 10, 500, $gettext('About'))"
+                  :rules="rules.text(false, 1, 500, $gettext('About'))"
                   :label="$gettext('About')"
                   @change="onChange"
                 ></v-textarea>

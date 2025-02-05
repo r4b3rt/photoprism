@@ -123,7 +123,6 @@
               v-model="form.token"
               single-line
               hide-details
-              return-masked-value
               autocomplete="off"
               :placeholder="$gettext('Activation Code')"
             ></v-text-field>
