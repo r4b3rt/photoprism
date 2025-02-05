@@ -37,7 +37,7 @@ func ContentType(s string) string {
 		return header.ContentTypeJpeg
 	case "video/mp4; codecs=\"avc\"",
 		"video/mp4; codecs=\"avc1\"":
-		return header.ContentTypeMp4Avc // Advanced Video Coding (AVC), also known as H.264
+		return header.ContentTypeMp4AvcHigh // Advanced Video Coding (AVC), also known as H.264
 	case "video/mp4; codecs=\"hvc\"",
 		"video/mp4; codecs=\"hvc1\"",
 		"video/mp4; codecs=\"hevc\"":

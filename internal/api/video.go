@@ -153,7 +153,7 @@ func GetVideo(router *gin.RouterGroup) {
 
 			if avcFile, avcErr := conv.ToAvc(mediaFile, get.Config().FFmpegEncoder(), false, false); avcFile != nil && avcErr == nil {
 				videoFileName = avcFile.FileName()
-				AddContentTypeHeader(c, header.ContentTypeMp4Avc)
+				AddContentTypeHeader(c, header.ContentTypeMp4AvcHigh)
 			} else {
 				// Log error and default to 404.mp4
 				log.Errorf("video: failed to transcode %s", clean.Log(f.FileName))

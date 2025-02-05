@@ -128,6 +128,6 @@ func AbortVideo(c *gin.Context) {
 
 func AbortVideoWithStatus(c *gin.Context, code int) {
 	if c != nil {
-		c.Data(code, header.ContentTypeMp4Avc720, brokenVideo)
+		c.Data(code, header.ContentTypeMp4AvcMain, brokenVideo)
 	}
 }

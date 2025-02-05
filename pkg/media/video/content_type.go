@@ -27,10 +27,12 @@ func ContentType(mediaType, fileType, videoCodec string) string {
 		switch c {
 		case "mov", "mp4":
 			mediaType = header.ContentTypeMp4
-		case CodecAvc, "avc":
-			mediaType = header.ContentTypeMp4Avc // Advanced Video Coding (AVC), also known as H.264
-		case CodecHevc, "hvc", "hevc":
-			mediaType = header.ContentTypeMp4Hevc // High Efficiency Video Coding (HEVC), also known as H.265
+		case CodecAvc3:
+			mediaType = header.ContentTypeMp4Avc3High // AVC (H.264) Bitstream, High Profile
+		case string(fs.VideoAvc), CodecAvc:
+			mediaType = header.ContentTypeMp4AvcHigh // Advanced Video Coding (H.264), High Profile
+		case string(fs.VideoHevc), CodecHevc, "hvc":
+			mediaType = header.ContentTypeMp4Hevc // High Efficiency Video Coding (H.265)
 		case CodecHev1, "hev":
 			mediaType = header.ContentTypeMp4Hev1 // High Efficiency Video Coding (HEVC) Bitstream
 		case CodecVvc, "vvc":
@@ -44,7 +46,7 @@ func ContentType(mediaType, fileType, videoCodec string) string {
 		case CodecAv1, "av1":
 			mediaType = header.ContentTypeWebmAv1
 		case CodecTheora, "ogg":
-			mediaType = header.ContentTypeTheora
+			mediaType = header.ContentTypeOggTheora
 		case string(fs.VideoWebm):
 			mediaType = header.ContentTypeWebm
 		}

@@ -7,24 +7,36 @@ package header
 	- https://ott.dolby.com/codec_test/index.html
 	- https://dmnsgn.github.io/media-codecs/
 	- https://cconcolato.github.io/media-mime-support/
+    - https://cconcolato.github.io/media-mime-support/mediacapabilities.html
 	- https://thorium.rocks/misc/h265-tester.html
+    - https://developers.google.com/cast/docs/media
+    - https://privacycheck.sec.lrz.de/active/fp_cpt/fp_can_play_type.html
+	- https://chromium.googlesource.com/chromium/src.git/+/62.0.3178.1/content/browser/media/media_canplaytype_browsertest.cc
 */
 
 // Standard ContentType identifiers for audio and video files.
 const (
-	ContentTypeMov       = "video/quicktime"
-	ContentTypeMp4       = "video/mp4"
-	ContentTypeMp4Avc720 = ContentTypeMp4 + "; codecs=\"avc1.640020\""      // MPEG-4 AVC, High Profile Level 3.2
-	ContentTypeMp4Avc    = ContentTypeMp4 + "; codecs=\"avc1.640028\""      // MPEG-4 AVC, High Profile Level 4.0
-	ContentTypeMp4Hevc   = ContentTypeMp4 + "; codecs=\"hvc1.2.4.L120.B0\"" // HEVC Mp4 Main10 Profile, Main Tier, Level 4.0
-	ContentTypeMp4Hev1   = ContentTypeMp4 + "; codecs=\"hev1.2.4.L120.B0\"" // HEVC Bitstream, not supported on macOS
-	ContentTypeMp4Vvc    = ContentTypeMp4 + "; codecs=\"vvc1\""             // Versatile Video Coding (VVC), also known as H.266
-	ContentTypeMp4Evc    = ContentTypeMp4 + "; codecs=\"evc1\""             // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
-	ContentTypeTheora    = "video/ogg"
-	ContentTypeWebm      = "video/webm"
-	ContentTypeWebmVp8   = "video/webm; codecs=\"vp8\""
-	ContentTypeWebmVp9   = "video/webm; codecs=\"vp09.00.10.08\""
-	ContentTypeWebmAv1   = "video/webm; codecs=\"av01.2.10M.10\""
+	ContentTypeMp4            = "video/mp4"
+	ContentTypeMp4AvcBaseline = ContentTypeMp4 + "; codecs=\"avc1.420028\""      // MPEG-4 AVC (H.264), Baseline Level 4.0
+	ContentTypeMp4AvcMain     = ContentTypeMp4 + "; codecs=\"avc1.4d0028\""      // MPEG-4 AVC (H.264), Main Level 4.0
+	ContentTypeMp4AvcHigh     = ContentTypeMp4 + "; codecs=\"avc1.640028\""      // MPEG-4 AVC (H.264), High Level 4.0
+	ContentTypeMp4Avc3High    = ContentTypeMp4 + "; codecs=\"avc3.640028\""      // MPEG-4 AVC Bitstream, High Profile, may not be supported on macOS
+	ContentTypeMp4Hevc        = ContentTypeMp4 + "; codecs=\"hvc1.1.6.L93.B0\""  // MPEG-4 HEVC (H.265), Main Profile
+	ContentTypeMp4HevcHDR     = ContentTypeMp4 + "; codecs=\"hev1.2.4.L153.B0\"" // MPEG-4 HEVC (H.265), Main 10 Profile
+	ContentTypeMp4Hev1        = ContentTypeMp4 + "; codecs=\"hev1.1.6.L93.B0\""  // MPEG-4 HEVC Bitstream, Main Profile, not supported on macOS
+	ContentTypeMp4Hev1HDR     = ContentTypeMp4 + "; codecs=\"hev1.2.4.L153.B0\"" // MPEG-4 HEVC Bitstream, Main 10 Profile, not supported on macOS
+	ContentTypeMp4Vvc         = ContentTypeMp4 + "; codecs=\"vvc1\""             // Versatile Video Coding (VVC), also known as H.266
+	ContentTypeMp4Evc         = ContentTypeMp4 + "; codecs=\"evc1\""             // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
+	ContentTypeMov            = "video/quicktime"
+	ContentTypeMovAvcMain     = ContentTypeMov + "; codecs=\"avc1.4d0028\"" // Apple QuickTime AVC, Main Level 4.0
+	ContentTypeMovAvcHigh     = ContentTypeMov + "; codecs=\"avc1.640028\"" // Apple QuickTime AVC, High Level 4.0
+	ContentTypeOgg            = "video/ogg"
+	ContentTypeOggVorbis      = ContentTypeOgg + "; codecs=\"vorbis\""
+	ContentTypeOggTheora      = ContentTypeOgg + "; codecs=\"theora, vorbis\""
+	ContentTypeWebm           = "video/webm"
+	ContentTypeWebmVp8        = ContentTypeWebm + "; codecs=\"vp8\""
+	ContentTypeWebmVp9        = ContentTypeWebm + "; codecs=\"vp09.00.10.08\""
+	ContentTypeWebmAv1        = ContentTypeWebm + "; codecs=\"av01.2.10M.10\""
 )
 
 // Standard ContentType identifiers for images and vector graphics.

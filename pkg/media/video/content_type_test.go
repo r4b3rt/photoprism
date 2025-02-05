@@ -20,7 +20,7 @@ func TestContentType(t *testing.T) {
 		assert.Equal(t, fs.MimeTypeMp4, ContentType(fs.MimeTypeMp4, "", ""))
 	})
 	t.Run("Mp4_AVC", func(t *testing.T) {
-		assert.Equal(t, header.ContentTypeMp4Avc, ContentType(fs.MimeTypeMp4, "", CodecAvc))
+		assert.Equal(t, header.ContentTypeMp4AvcHigh, ContentType(fs.MimeTypeMp4, "", CodecAvc))
 	})
 	t.Run("Mp4_HVC", func(t *testing.T) {
 		assert.Equal(t, header.ContentTypeMp4Hevc, ContentType(fs.MimeTypeMp4, "", CodecHevc))

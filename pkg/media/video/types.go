@@ -15,7 +15,7 @@ var Unknown = Type{
 var Mp4 = Type{
 	Codec:       CodecAvc,
 	FileType:    fs.VideoMp4,
-	ContentType: header.ContentTypeMp4Avc,
+	ContentType: header.ContentTypeMp4AvcHigh,
 	WidthLimit:  8192,
 	HeightLimit: 4320,
 	Public:      true,
@@ -30,7 +30,8 @@ var Mov = Type{
 	Public:      true,
 }
 
-// Avc specifies the MPEG-4 Advanced Video Coding (H.264) format.
+// Avc specifies the MPEG-4 Advanced Video Coding (H.264) format,
+// see https://en.wikipedia.org/wiki/Advanced_Video_Coding.
 var Avc = Type{
 	Codec:       CodecAvc,
 	FileType:    fs.VideoAvc,
