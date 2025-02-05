@@ -10,10 +10,9 @@ import (
 )
 
 const (
-	GenderMale    = "male"
-	GenderFemale  = "female"
-	GenderOther   = "other"
-	GenderUnknown = ""
+	GenderMale   = "male"
+	GenderFemale = "female"
+	GenderOther  = "other"
 )
 
 // UserDetails represents user profile information.
@@ -24,9 +23,9 @@ type UserDetails struct {
 	PlaceID      string    `gorm:"type:VARBINARY(42);index;default:'zz'" json:"-" yaml:"-"`
 	PlaceSrc     string    `gorm:"type:VARBINARY(8);" json:"-" yaml:"PlaceSrc,omitempty"`
 	CellID       string    `gorm:"type:VARBINARY(42);index;default:'zz'" json:"-" yaml:"CellID,omitempty"`
-	BirthYear    int       `json:"BirthYear" yaml:"BirthYear,omitempty"`
-	BirthMonth   int       `json:"BirthMonth" yaml:"BirthMonth,omitempty"`
-	BirthDay     int       `json:"BirthDay" yaml:"BirthDay,omitempty"`
+	BirthYear    int       `gorm:"default:-1;" json:"BirthYear" yaml:"BirthYear,omitempty"`
+	BirthMonth   int       `gorm:"default:-1;" json:"BirthMonth" yaml:"BirthMonth,omitempty"`
+	BirthDay     int       `gorm:"default:-1;" json:"BirthDay" yaml:"BirthDay,omitempty"`
 	NameTitle    string    `gorm:"size:32;" json:"NameTitle" yaml:"NameTitle,omitempty"`
 	GivenName    string    `gorm:"size:64;" json:"GivenName" yaml:"GivenName,omitempty"`
 	MiddleName   string    `gorm:"size:64;" json:"MiddleName" yaml:"MiddleName,omitempty"`
@@ -38,7 +37,7 @@ type UserDetails struct {
 	UserAbout    string    `gorm:"size:512;" json:"About" yaml:"About,omitempty"`
 	UserBio      string    `gorm:"size:2048;" json:"Bio" yaml:"Bio,omitempty"`
 	UserLocation string    `gorm:"size:512;" json:"Location" yaml:"Location,omitempty"`
-	UserCountry  string    `gorm:"type:VARBINARY(2);" json:"Country" yaml:"Country,omitempty"`
+	UserCountry  string    `gorm:"type:VARBINARY(2);default:'zz'" json:"Country" yaml:"Country,omitempty"`
 	UserPhone    string    `gorm:"size:32;" json:"Phone" yaml:"Phone,omitempty"`
 	SiteURL      string    `gorm:"type:VARBINARY(512);column:site_url" json:"SiteURL" yaml:"SiteURL,omitempty"`
 	ProfileURL   string    `gorm:"type:VARBINARY(512);column:profile_url" json:"ProfileURL" yaml:"ProfileURL,omitempty"`
@@ -70,13 +69,13 @@ func CreateUserDetails(user *User) error {
 		return fmt.Errorf("user is nil")
 	}
 
-	if user.UID() == "" {
+	if user.GetUID() == "" {
 		return fmt.Errorf("empty user uid")
 	}
 
-	user.UserDetails = NewUserDetails(user.UID())
+	user.UserDetails = NewUserDetails(user.GetUID())
 
-	if err := Db().Where("user_uid = ?", user.UID()).First(user.UserDetails).Error; err == nil {
+	if err := Db().Where("user_uid = ?", user.GetUID()).First(user.UserDetails).Error; err == nil {
 		return nil
 	}
 

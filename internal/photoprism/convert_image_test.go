@@ -3,11 +3,13 @@ package photoprism
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 
 	"github.com/photoprism/photoprism/internal/config"
 	"github.com/photoprism/photoprism/pkg/fs"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestConvert_ToImage(t *testing.T) {
@@ -33,16 +35,16 @@ func TestConvert_ToImage(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		jpegFile, err := convert.ToImage(mf, false)
+		img, err := convert.ToImage(mf, false)
 
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		assert.Equal(t, jpegFile.FileName(), outputName)
-		assert.Truef(t, fs.FileExists(jpegFile.FileName()), "output file does not exist: %s", jpegFile.FileName())
+		assert.Equal(t, img.FileName(), outputName)
+		assert.Truef(t, fs.FileExists(img.FileName()), "output file does not exist: %s", img.FileName())
 
-		t.Logf("video metadata: %+v", jpegFile.MetaData())
+		t.Logf("video metadata: %+v", img.MetaData())
 
 		_ = os.Remove(outputName)
 	})
@@ -125,9 +127,73 @@ func TestConvert_ToImage(t *testing.T) {
 
 		_ = imageFile.Remove()
 	})
+	t.Run("SvgWithVectorsDisabled", func(t *testing.T) {
+		svgFile := fs.Abs("./testdata/agpl.svg")
+
+		cnf.Options().DisableVectors = true
+
+		mediaFile, err := NewMediaFile(svgFile)
+
+		t.Logf("svg: %s", mediaFile.FileName())
+
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		imageFile, err := convert.ToImage(mediaFile, false)
+
+		if err == nil {
+			t.Fatal("error expected")
+		}
+
+		assert.Nil(t, imageFile)
+
+		cnf.Options().DisableVectors = false
+
+	})
+	t.Run("Webp", func(t *testing.T) {
+		webpFile := fs.Abs("./testdata/windows95.webp")
+
+		mediaFile, err := NewMediaFile(webpFile)
+
+		t.Logf("webp: %s", mediaFile.FileName())
+
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		imageFile, err := convert.ToImage(mediaFile, false)
+
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		t.Logf("jpeg: %s", imageFile.FileName())
+
+		_ = imageFile.Remove()
+	})
+	t.Run("DoNotConvertThumb", func(t *testing.T) {
+		thumbFile := fs.Abs("./testdata/animated-earth.thm")
+
+		mediaFile, err := NewMediaFile(thumbFile)
+
+		t.Logf("svg: %s", mediaFile.FileName())
+
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		imageFile, err := convert.ToImage(mediaFile, false)
+
+		if err == nil {
+			t.Fatal("error expected")
+		}
+
+		assert.Nil(t, imageFile)
+	})
 }
 
-func TestConvert_PngConvertCommands(t *testing.T) {
+func TestConvert_PngConvertCmds(t *testing.T) {
 	cnf := config.TestConfig()
 	convert := NewConvert(cnf)
 
@@ -143,13 +209,16 @@ func TestConvert_PngConvertCommands(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		cmds, useMutex, err := convert.PngConvertCommands(mediaFile, pngFile)
+		cmds, useMutex, err := convert.PngConvertCmds(mediaFile, pngFile)
 
 		if err != nil {
 			t.Fatal(err)
 		}
 
 		assert.False(t, useMutex)
+
+		assert.NotEmpty(t, cmds)
+		assert.True(t, strings.Contains(cmds[0].String(), "rsvg"))
 
 		t.Logf("commands: %#v", cmds)
 	})

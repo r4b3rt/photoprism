@@ -10,20 +10,28 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 
-	"github.com/photoprism/photoprism/internal/acl"
+	"github.com/photoprism/photoprism/internal/auth/acl"
 	"github.com/photoprism/photoprism/internal/entity"
+	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/internal/event"
 	"github.com/photoprism/photoprism/internal/form"
-	"github.com/photoprism/photoprism/internal/get"
-	"github.com/photoprism/photoprism/internal/i18n"
 	"github.com/photoprism/photoprism/internal/photoprism"
-	"github.com/photoprism/photoprism/internal/query"
+	"github.com/photoprism/photoprism/internal/photoprism/get"
 	"github.com/photoprism/photoprism/pkg/clean"
+	"github.com/photoprism/photoprism/pkg/i18n"
 )
 
 // BatchPhotosArchive moves multiple photos to the archive.
 //
-// POST /api/v1/batch/photos/archive
+//	@Summary	moves multiple photos to the archive
+//	@Id			BatchPhotosArchive
+//	@Tags		Photos
+//	@Accept		json
+//	@Produce	json
+//	@Success	200						{object}	i18n.Response
+//	@Failure	400,401,403,404,429,500	{object}	i18n.Response
+//	@Param		photos					body		form.Selection	true	"Photo Selection"
+//	@Router		/api/v1/batch/photos/archive [post]
 func BatchPhotosArchive(router *gin.RouterGroup) {
 	router.POST("/batch/photos/archive", func(c *gin.Context) {
 		s := Auth(c, acl.ResourcePhotos, acl.ActionDelete)
@@ -32,23 +40,24 @@ func BatchPhotosArchive(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		// Assign and validate request form values.
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
+		if len(frm.Photos) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
-		log.Infof("photos: archiving %s", clean.Log(f.String()))
+		log.Infof("photos: archiving %s", clean.Log(frm.String()))
 
-		if get.Config().BackupYaml() {
+		if get.Config().SidecarYaml() {
 			// Fetch selection from index.
-			photos, err := query.SelectedPhotos(f)
+			photos, err := query.SelectedPhotos(frm)
 
 			if err != nil {
 				AbortEntityNotFound(c)
@@ -56,18 +65,18 @@ func BatchPhotosArchive(router *gin.RouterGroup) {
 			}
 
 			for _, p := range photos {
-				if err := p.Archive(); err != nil {
-					log.Errorf("archive: %s", err)
+				if archiveErr := p.Archive(); archiveErr != nil {
+					log.Errorf("archive: %s", archiveErr)
 				} else {
-					SavePhotoAsYaml(p)
+					SaveSidecarYaml(&p)
 				}
 			}
-		} else if err := entity.Db().Where("photo_uid IN (?)", f.Photos).Delete(&entity.Photo{}).Error; err != nil {
-			log.Errorf("archive: %s", err)
+		} else if err := entity.Db().Where("photo_uid IN (?)", frm.Photos).Delete(&entity.Photo{}).Error; err != nil {
+			log.Errorf("archive: failed to archive %d pictures (%s)", len(frm.Photos), err)
 			AbortSaveFailed(c)
 			return
-		} else if err := entity.Db().Model(&entity.PhotoAlbum{}).Where("photo_uid IN (?)", f.Photos).UpdateColumn("hidden", true).Error; err != nil {
-			log.Errorf("archive: %s", err)
+		} else if err = entity.Db().Model(&entity.PhotoAlbum{}).Where("photo_uid IN (?)", frm.Photos).UpdateColumn("hidden", true).Error; err != nil {
+			log.Errorf("archive: failed to flag %d pictures as hidden (%s)", len(frm.Photos), err)
 		}
 
 		// Update precalculated photo and file counts.
@@ -78,7 +87,7 @@ func BatchPhotosArchive(router *gin.RouterGroup) {
 
 		UpdateClientConfig()
 
-		event.EntitiesArchived("photos", f.Photos)
+		event.EntitiesArchived("photos", frm.Photos)
 
 		c.JSON(http.StatusOK, i18n.NewResponse(http.StatusOK, i18n.MsgSelectionArchived))
 	})
@@ -86,7 +95,15 @@ func BatchPhotosArchive(router *gin.RouterGroup) {
 
 // BatchPhotosRestore restores multiple photos from the archive.
 //
-// POST /api/v1/batch/photos/restore
+//	@Summary	restores multiple photos from the archive
+//	@Id			BatchPhotosRestore
+//	@Tags		Photos
+//	@Accept		json
+//	@Produce	json
+//	@Success	200						{object}	i18n.Response
+//	@Failure	400,401,403,404,429,500	{object}	i18n.Response
+//	@Param		photos					body		form.Selection	true	"Photo Selection"
+//	@Router		/api/v1/batch/photos/restore [post]
 func BatchPhotosRestore(router *gin.RouterGroup) {
 	router.POST("/batch/photos/restore", func(c *gin.Context) {
 		s := Auth(c, acl.ResourcePhotos, acl.ActionDelete)
@@ -95,23 +112,23 @@ func BatchPhotosRestore(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
+		if len(frm.Photos) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
-		log.Infof("photos: restoring %s", clean.Log(f.String()))
+		log.Infof("photos: restoring %s", clean.Log(frm.String()))
 
-		if get.Config().BackupYaml() {
+		if get.Config().SidecarYaml() {
 			// Fetch selection from index.
-			photos, err := query.SelectedPhotos(f)
+			photos, err := query.SelectedPhotos(frm)
 
 			if err != nil {
 				AbortEntityNotFound(c)
@@ -119,13 +136,13 @@ func BatchPhotosRestore(router *gin.RouterGroup) {
 			}
 
 			for _, p := range photos {
-				if err := p.Restore(); err != nil {
+				if err = p.Restore(); err != nil {
 					log.Errorf("restore: %s", err)
 				} else {
-					SavePhotoAsYaml(p)
+					SaveSidecarYaml(&p)
 				}
 			}
-		} else if err := entity.Db().Unscoped().Model(&entity.Photo{}).Where("photo_uid IN (?)", f.Photos).
+		} else if err := entity.Db().Unscoped().Model(&entity.Photo{}).Where("photo_uid IN (?)", frm.Photos).
 			UpdateColumn("deleted_at", gorm.Expr("NULL")).Error; err != nil {
 			log.Errorf("restore: %s", err)
 			AbortSaveFailed(c)
@@ -140,7 +157,7 @@ func BatchPhotosRestore(router *gin.RouterGroup) {
 
 		UpdateClientConfig()
 
-		event.EntitiesRestored("photos", f.Photos)
+		event.EntitiesRestored("photos", frm.Photos)
 
 		c.JSON(http.StatusOK, i18n.NewResponse(http.StatusOK, i18n.MsgSelectionRestored))
 	})
@@ -148,7 +165,15 @@ func BatchPhotosRestore(router *gin.RouterGroup) {
 
 // BatchPhotosApprove approves multiple photos that are currently under review.
 //
-// POST /api/v1/batch/photos/approve
+//	@Summary	approves multiple photos that are currently under review
+//	@Id			BatchPhotosApprove
+//	@Tags		Photos
+//	@Accept		json
+//	@Produce	json
+//	@Success	200					{object}	i18n.Response
+//	@Failure	400,401,403,404,429	{object}	i18n.Response
+//	@Param		photos				body		form.Selection	true	"Photo Selection"
+//	@Router		/api/v1/batch/photos/approve [post]
 func BatchPhotosApprove(router *gin.RouterGroup) {
 	router.POST("batch/photos/approve", func(c *gin.Context) {
 		s := Auth(c, acl.ResourcePhotos, acl.ActionUpdate)
@@ -157,22 +182,22 @@ func BatchPhotosApprove(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
+		if len(frm.Photos) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
-		log.Infof("photos: approving %s", clean.Log(f.String()))
+		log.Infof("photos: approving %s", clean.Log(frm.String()))
 
 		// Fetch selection from index.
-		photos, err := query.SelectedPhotos(f)
+		photos, err := query.SelectedPhotos(frm)
 
 		if err != nil {
 			AbortEntityNotFound(c)
@@ -186,7 +211,7 @@ func BatchPhotosApprove(router *gin.RouterGroup) {
 				log.Errorf("approve: %s", err)
 			} else {
 				approved = append(approved, p)
-				SavePhotoAsYaml(p)
+				SaveSidecarYaml(&p)
 			}
 		}
 
@@ -200,7 +225,15 @@ func BatchPhotosApprove(router *gin.RouterGroup) {
 
 // BatchAlbumsDelete permanently removes multiple albums.
 //
-// POST /api/v1/batch/albums/delete
+//	@Summary	permanently removes multiple albums
+//	@Id			BatchAlbumsDelete
+//	@Tags		Albums
+//	@Accept		json
+//	@Produce	json
+//	@Success	200					{object}	i18n.Response
+//	@Failure	400,401,403,404,429	{object}	i18n.Response
+//	@Param		albums				body		form.Selection	true	"Album Selection"
+//	@Router		/api/v1/batch/albums/delete [post]
 func BatchAlbumsDelete(router *gin.RouterGroup) {
 	router.POST("/batch/albums/delete", func(c *gin.Context) {
 		s := Auth(c, acl.ResourceAlbums, acl.ActionDelete)
@@ -209,39 +242,72 @@ func BatchAlbumsDelete(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Albums) == 0 {
+		// Get album UIDs.
+		albumUIDs := frm.Albums
+
+		if len(albumUIDs) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoAlbumsSelected)
 			return
 		}
 
-		log.Infof("albums: deleting %s", clean.Log(f.String()))
+		log.Infof("albums: deleting %s", clean.Log(frm.String()))
 
-		// Soft delete albums, can be restored.
-		entity.Db().Where("album_uid IN (?)", f.Albums).Delete(&entity.Album{})
+		// Fetch albums.
+		albums, queryErr := query.AlbumsByUID(albumUIDs, false)
 
-		/*
-			KEEP ENTRIES AS ALBUMS MAY NOW BE RESTORED BY NAME
-			entity.Db().Where("album_uid IN (?)", f.Albums).Delete(&entity.PhotoAlbum{})
-		*/
+		if queryErr != nil {
+			log.Errorf("albums: %s (find)", queryErr)
+		}
 
-		UpdateClientConfig()
+		// Abort if no albums with a matching UID were found.
+		if len(albums) == 0 {
+			AbortEntityNotFound(c)
+			return
+		}
 
-		event.EntitiesDeleted("albums", f.Albums)
+		deleted := 0
+		conf := get.Config()
+
+		// Flag matching albums as deleted.
+		for _, a := range albums {
+			if deleteErr := a.Delete(); deleteErr != nil {
+				log.Errorf("albums: %s (delete)", deleteErr)
+			} else {
+				if conf.BackupAlbums() {
+					SaveAlbumYaml(a)
+				}
+
+				deleted++
+			}
+		}
+
+		// Update client config if at least one album was successfully deleted.
+		if deleted > 0 {
+			UpdateClientConfig()
+		}
 
 		c.JSON(http.StatusOK, i18n.NewResponse(http.StatusOK, i18n.MsgAlbumsDeleted))
 	})
 }
 
-// BatchPhotosPrivate flags multiple photos as private.
+// BatchPhotosPrivate toggles private state of multiple photos.
 //
-// POST /api/v1/batch/photos/private
+//	@Summary	toggles private state of multiple photos
+//	@Id			BatchPhotosPrivate
+//	@Tags		Photos
+//	@Accept		json
+//	@Produce	json
+//	@Success	200						{object}	i18n.Response
+//	@Failure	400,401,403,404,429,500	{object}	i18n.Response
+//	@Param		photos					body		form.Selection	true	"Photo Selection"
+//	@Router		/api/v1/batch/photos/private [post]
 func BatchPhotosPrivate(router *gin.RouterGroup) {
 	router.POST("/batch/photos/private", func(c *gin.Context) {
 		s := Auth(c, acl.ResourcePhotos, acl.AccessPrivate)
@@ -250,21 +316,21 @@ func BatchPhotosPrivate(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
+		if len(frm.Photos) == 0 {
 			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
-		log.Infof("photos: updating private flag for %s", clean.Log(f.String()))
+		log.Infof("photos: updating private flag for %s", clean.Log(frm.String()))
 
-		if err := entity.Db().Model(entity.Photo{}).Where("photo_uid IN (?)", f.Photos).UpdateColumn("photo_private",
+		if err := entity.Db().Model(entity.Photo{}).Where("photo_uid IN (?)", frm.Photos).UpdateColumn("photo_private",
 			gorm.Expr("CASE WHEN photo_private > 0 THEN 0 ELSE 1 END")).Error; err != nil {
 			log.Errorf("private: %s", err)
 			AbortSaveFailed(c)
@@ -275,9 +341,9 @@ func BatchPhotosPrivate(router *gin.RouterGroup) {
 		logWarn("index", entity.UpdateCounts())
 
 		// Fetch selection from index.
-		if photos, err := query.SelectedPhotos(f); err == nil {
+		if photos, err := query.SelectedPhotos(frm); err == nil {
 			for _, p := range photos {
-				SavePhotoAsYaml(p)
+				SaveSidecarYaml(&p)
 			}
 
 			event.EntitiesUpdated("photos", photos)
@@ -293,7 +359,15 @@ func BatchPhotosPrivate(router *gin.RouterGroup) {
 
 // BatchLabelsDelete deletes multiple labels.
 //
-// POST /api/v1/batch/labels/delete
+//	@Summary	deletes multiple labels
+//	@Id			BatchLabelsDelete
+//	@Tags		Labels
+//	@Accept		json
+//	@Produce	json
+//	@Success	200					{object}	i18n.Response
+//	@Failure	400,401,403,429,500	{object}	i18n.Response
+//	@Param		labels				body		form.Selection	true	"Label Selection"
+//	@Router		/api/v1/batch/labels/delete [post]
 func BatchLabelsDelete(router *gin.RouterGroup) {
 	router.POST("/batch/labels/delete", func(c *gin.Context) {
 		s := Auth(c, acl.ResourceLabels, acl.ActionDelete)
@@ -302,35 +376,35 @@ func BatchLabelsDelete(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Labels) == 0 {
+		if len(frm.Labels) == 0 {
 			log.Error("no labels selected")
 			Abort(c, http.StatusBadRequest, i18n.ErrNoLabelsSelected)
 			return
 		}
 
-		log.Infof("labels: deleting %s", clean.Log(f.String()))
+		log.Infof("labels: deleting %s", clean.Log(frm.String()))
 
 		var labels entity.Labels
 
-		if err := entity.Db().Where("label_uid IN (?)", f.Labels).Find(&labels).Error; err != nil {
+		if err := entity.Db().Where("label_uid IN (?)", frm.Labels).Find(&labels).Error; err != nil {
 			Error(c, http.StatusInternalServerError, err, i18n.ErrDeleteFailed)
 			return
 		}
 
 		for _, label := range labels {
-			logError("labels", label.Delete())
+			logErr("labels", label.Delete())
 		}
 
 		UpdateClientConfig()
 
-		event.EntitiesDeleted("labels", f.Labels)
+		event.EntitiesDeleted("labels", frm.Labels)
 
 		c.JSON(http.StatusOK, i18n.NewResponse(http.StatusOK, i18n.MsgLabelsDeleted))
 	})
@@ -338,7 +412,15 @@ func BatchLabelsDelete(router *gin.RouterGroup) {
 
 // BatchPhotosDelete permanently removes multiple photos from the archive.
 //
-// POST /api/v1/batch/photos/delete
+//	@Summary	permanently removes multiple or all photos from the archive
+//	@Id			BatchPhotosDelete
+//	@Tags		Photos
+//	@Accept		json
+//	@Produce	json
+//	@Success	200				{object}	i18n.Response
+//	@Failure	400,401,403,429	{object}	i18n.Response
+//	@Param		photos			body		form.Selection	true	"All or Photo Selection"
+//	@Router		/api/v1/batch/photos/delete [post]
 func BatchPhotosDelete(router *gin.RouterGroup) {
 	router.POST("/batch/photos/delete", func(c *gin.Context) {
 		s := Auth(c, acl.ResourcePhotos, acl.ActionDelete)
@@ -354,26 +436,43 @@ func BatchPhotosDelete(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Selection
+		var frm form.Selection
 
-		if err := c.BindJSON(&f); err != nil {
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
 
-		if len(f.Photos) == 0 {
-			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
+		deleteStart := time.Now()
+
+		var photos entity.Photos
+		var err error
+
+		// Abort if user wants to delete all but does not have sufficient privileges.
+		if frm.All && !acl.Rules.AllowAll(acl.ResourcePhotos, s.UserRole(), acl.Permissions{acl.AccessAll, acl.ActionManage}) {
+			AbortForbidden(c)
 			return
 		}
 
-		log.Infof("photos: deleting %s", clean.Log(f.String()))
+		// Get selection or all archived photos if f.All is true.
+		if len(frm.Photos) == 0 && !frm.All {
+			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
+			return
+		} else if frm.All {
+			photos, err = query.ArchivedPhotos(1000000, 0)
+		} else {
+			photos, err = query.SelectedPhotos(frm)
+		}
 
-		// Fetch selection from index and record time.
-		deleteStart := time.Now()
-		photos, err := query.SelectedPhotos(f)
-
+		// Abort if the query failed or no photos were found.
 		if err != nil {
-			AbortEntityNotFound(c)
+			log.Errorf("archive: %s", err)
+			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
+			return
+		} else if len(photos) > 0 {
+			log.Infof("archive: deleting %s", english.Plural(len(photos), "photo", "photos"))
+		} else {
+			Abort(c, http.StatusBadRequest, i18n.ErrNoItemsSelected)
 			return
 		}
 
@@ -387,19 +486,19 @@ func BatchPhotosDelete(router *gin.RouterGroup) {
 			event.AuditWarn([]string{ClientIP(c), s.UserName, "delete", path.Join(p.PhotoPath, p.PhotoName+"*")})
 
 			// Remove all related files from storage.
-			n, err := photoprism.DeletePhoto(p, true, true)
+			n, deleteErr := photoprism.DeletePhoto(&p, true, true)
 
 			numFiles += n
 
-			if err != nil {
-				log.Errorf("delete: %s", err)
+			if deleteErr != nil {
+				log.Errorf("delete: %s", deleteErr)
 			} else {
 				deleted = append(deleted, p)
 			}
 		}
 
-		if numFiles > 0 {
-			log.Infof("delete: removed %s [%s]", english.Plural(numFiles, "file", "files"), time.Since(deleteStart))
+		if numFiles > 0 || len(deleted) > 0 {
+			log.Infof("archive: deleted %s and %s [%s]", english.Plural(numFiles, "file", "files"), english.Plural(len(deleted), "photo", "photos"), time.Since(deleteStart))
 		}
 
 		// Any photos deleted?

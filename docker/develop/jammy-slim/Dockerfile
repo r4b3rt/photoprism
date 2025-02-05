@@ -1,7 +1,7 @@
 #### Base Image: Ubuntu 22.04 LTS (Jammy Jellyfish)
 FROM ubuntu:jammy
 
-# Copyright © 2018 - 2023 PhotoPrism UG. All rights reserved.
+# Copyright © 2018 - 2025 PhotoPrism UG. All rights reserved.
 #
 # Questions? Email us at hello@photoprism.app or visit our website to learn
 # more about our team, products and services: https://www.photoprism.app/
@@ -24,13 +24,16 @@ ARG BUILD_TAG
 ENV PHOTOPRISM_ARCH=$TARGETARCH \
     DOCKER_TAG=$BUILD_TAG \
     DOCKER_ENV="prod" \
-    PS1="\u@$DOCKER_TAG:\w\$ " \
+    PS1="\u@$BUILD_TAG:\w\$ " \
     PATH="/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/scripts:/opt/photoprism/bin" \
     LD_LIBRARY_PATH="/usr/local/lib:/usr/lib" \
     TMPDIR="/tmp" \
     DEBIAN_FRONTEND="noninteractive" \
     TF_CPP_MIN_LOG_LEVEL="2" \
-    PROG="photoprism"
+    MALLOC_ARENA_MAX="4" \
+    PROG="photoprism" \
+    S6_KEEP_ENV=1 \
+    S6_LOGGING=0
 
 # Copy scripts and package sources config.
 COPY --chown=root:root --chmod=755 /scripts/dist/ /scripts/
@@ -42,12 +45,13 @@ RUN echo 'APT::Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries && \
     echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/80forceyes && \
     echo 'APT::Get::Fix-Missing "true";' > /etc/apt/apt.conf.d/80fixmissing && \
     echo 'force-confold' > /etc/dpkg/dpkg.cfg.d/force-confold && \
-    apt-get update && apt-get -qq upgrade && \
+    apt-get update && apt-get -qq dist-upgrade && \
     apt-get -qq install \
         libc6 ca-certificates bash sudo nano avahi-utils jq lsof lshw \
         exiftool sqlite3 tzdata gpg make zip unzip wget curl rsync \
         imagemagick libvips-dev rawtherapee ffmpeg libavcodec-extra x264 x265 libde265-dev \
-        libaom3 libvpx7 libwebm1 libjpeg8 libmatroska7 libdvdread8 libebml5 libgav1-bin libatomic1 \
+        libaom-dev libvpx-dev libwebm-dev libjpeg-dev libmatroska-dev libdvdread-dev libebml5 libgav1-bin libatomic1 \
+        iputils-ping dnsutils \
     && \
     /scripts/install-mariadb.sh mariadb-client && \
     /scripts/install-darktable.sh && \
@@ -66,13 +70,15 @@ RUN echo 'APT::Acquire::Retries "3";' > /etc/apt/apt.conf.d/80retries && \
         /photoprism/storage/backups \
         /photoprism/storage/config \
         /photoprism/storage/cache && \
+    /scripts/install-s6.sh && \
     /scripts/cleanup.sh
 
-# Default working directory.
+# Set default working directory.
 WORKDIR /photoprism
 
 # Expose HTTP and HTTPS ports.
 EXPOSE 2342 2442 2443
 
-# Keep container running.
-CMD ["tail", "-f", "/dev/null"]
+# Set default entrypoint and command.
+ENTRYPOINT ["/init"]
+CMD ["/scripts/cmd.sh", "tail", "-f", "/dev/null"]

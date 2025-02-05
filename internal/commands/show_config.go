@@ -5,15 +5,15 @@ import (
 	"strings"
 
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 
 	"github.com/photoprism/photoprism/internal/config"
-	"github.com/photoprism/photoprism/internal/get"
-	"github.com/photoprism/photoprism/pkg/report"
+	"github.com/photoprism/photoprism/internal/photoprism/get"
+	"github.com/photoprism/photoprism/pkg/txt/report"
 )
 
 // ShowConfigCommand configures the command name, flags, and action.
-var ShowConfigCommand = cli.Command{
+var ShowConfigCommand = &cli.Command{
 	Name:   "config",
 	Usage:  "Displays global config options and their current values",
 	Flags:  report.CliFlags,
@@ -24,6 +24,9 @@ var ShowConfigCommand = cli.Command{
 var ConfigReports = []Report{
 	{Title: "Global Config Options", NoWrap: true, Report: func(conf *config.Config) ([][]string, []string) {
 		return conf.Report()
+	}},
+	{Title: "OpenID Connect (OIDC)", NoWrap: true, Report: func(conf *config.Config) ([][]string, []string) {
+		return conf.OIDCReport()
 	}},
 }
 

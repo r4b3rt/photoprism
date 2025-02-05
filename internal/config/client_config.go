@@ -4,12 +4,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/photoprism/photoprism/internal/acl"
-	"github.com/photoprism/photoprism/internal/customize"
+	"github.com/photoprism/photoprism/internal/auth/acl"
+	"github.com/photoprism/photoprism/internal/config/customize"
 	"github.com/photoprism/photoprism/internal/entity"
-	"github.com/photoprism/photoprism/internal/query"
-	"github.com/photoprism/photoprism/pkg/colors"
+	"github.com/photoprism/photoprism/internal/entity/query"
 	"github.com/photoprism/photoprism/pkg/env"
+	"github.com/photoprism/photoprism/pkg/media/colors"
 	"github.com/photoprism/photoprism/pkg/txt"
 )
 
@@ -32,6 +32,7 @@ type ClientConfig struct {
 	Flags            string              `json:"flags"`
 	BaseUri          string              `json:"baseUri"`
 	StaticUri        string              `json:"staticUri"`
+	ClientAssets     *ClientAssets       `json:"-"`
 	CssUri           string              `json:"cssUri"`
 	JsUri            string              `json:"jsUri"`
 	ManifestUri      string              `json:"manifestUri"`
@@ -67,6 +68,7 @@ type ClientConfig struct {
 	RegisterUri      string              `json:"registerUri"`
 	PasswordLength   int                 `json:"passwordLength"`
 	PasswordResetUri string              `json:"passwordResetUri"`
+	Develop          bool                `json:"develop"`
 	Experimental     bool                `json:"experimental"`
 	AlbumCategories  []string            `json:"albumCategories"`
 	Albums           entity.Albums       `json:"albums"`
@@ -91,11 +93,11 @@ type ClientConfig struct {
 	Server           env.Resources       `json:"server"`
 	Settings         *customize.Settings `json:"settings,omitempty"`
 	ACL              acl.Grants          `json:"acl,omitempty"`
-	Ext              Values              `json:"ext"`
+	Ext              Map                 `json:"ext"`
 }
 
 // ApplyACL updates the client config values based on the ACL and Role provided.
-func (c ClientConfig) ApplyACL(a acl.ACL, r acl.Role) ClientConfig {
+func (c *ClientConfig) ApplyACL(a acl.ACL, r acl.Role) *ClientConfig {
 	if c.Settings != nil {
 		c.Settings = c.Settings.ApplyACL(a, r)
 	}
@@ -110,6 +112,7 @@ type Years []int
 
 // ClientDisable represents disabled client features a user cannot turn back on.
 type ClientDisable struct {
+	Restart        bool `json:"restart"`
 	WebDAV         bool `json:"webdav"`
 	Settings       bool `json:"settings"`
 	Places         bool `json:"places"`
@@ -117,9 +120,10 @@ type ClientDisable struct {
 	TensorFlow     bool `json:"tensorflow"`
 	Faces          bool `json:"faces"`
 	Classification bool `json:"classification"`
-	Sips           bool `json:"sips"`
 	FFmpeg         bool `json:"ffmpeg"`
 	ExifTool       bool `json:"exiftool"`
+	Vips           bool `json:"vips"`
+	Sips           bool `json:"sips"`
 	Darktable      bool `json:"darktable"`
 	RawTherapee    bool `json:"rawtherapee"`
 	ImageMagick    bool `json:"imagemagick"`
@@ -139,6 +143,7 @@ type ClientCounts struct {
 	Lenses         int `json:"lenses"`
 	Countries      int `json:"countries"`
 	Hidden         int `json:"hidden"`
+	Archived       int `json:"archived"`
 	Favorites      int `json:"favorites"`
 	Review         int `json:"review"`
 	Stories        int `json:"stories"`
@@ -198,6 +203,10 @@ func (c *Config) Flags() (flags []string) {
 		flags = append(flags, "sponsor")
 	}
 
+	if c.Develop() {
+		flags = append(flags, "develop")
+	}
+
 	if c.Experimental() {
 		flags = append(flags, "experimental")
 	}
@@ -218,17 +227,18 @@ func (c *Config) Flags() (flags []string) {
 }
 
 // ClientPublic returns config values for use by the JavaScript UI and other clients.
-func (c *Config) ClientPublic() ClientConfig {
+func (c *Config) ClientPublic() *ClientConfig {
 	if c.Public() {
-		return c.ClientUser(true).ApplyACL(acl.Resources, acl.RoleAdmin)
+		return c.ClientUser(true).ApplyACL(acl.Rules, acl.RoleAdmin)
 	}
 
 	a := c.ClientAssets()
 
-	cfg := ClientConfig{
+	cfg := &ClientConfig{
 		Settings: c.PublicSettings(),
-		ACL:      acl.Resources.Grants(acl.RoleUnknown),
+		ACL:      acl.Rules.Grants(acl.RoleNone),
 		Disable: ClientDisable{
+			Restart:        true,
 			WebDAV:         true,
 			Settings:       c.DisableSettings(),
 			Places:         c.DisablePlaces(),
@@ -254,6 +264,7 @@ func (c *Config) ClientPublic() ClientConfig {
 		Edition:          c.Edition(),
 		BaseUri:          c.BaseUri(""),
 		StaticUri:        c.StaticUri(),
+		ClientAssets:     a,
 		CssUri:           a.AppCssUri(),
 		JsUri:            a.AppJsUri(),
 		ApiUri:           c.ApiUri(),
@@ -288,6 +299,7 @@ func (c *Config) ClientPublic() ClientConfig {
 		LoginUri:         c.LoginUri(),
 		RegisterUri:      c.RegisterUri(),
 		PasswordResetUri: c.PasswordResetUri(),
+		Develop:          c.Develop(),
 		Experimental:     c.Experimental(),
 		Albums:           entity.Albums{},
 		Cameras:          entity.Cameras{},
@@ -311,13 +323,14 @@ func (c *Config) ClientPublic() ClientConfig {
 }
 
 // ClientShare returns reduced client config values for share link visitors.
-func (c *Config) ClientShare() ClientConfig {
+func (c *Config) ClientShare() *ClientConfig {
 	a := c.ClientAssets()
 
-	cfg := ClientConfig{
+	cfg := &ClientConfig{
 		Settings: c.ShareSettings(),
-		ACL:      acl.Resources.Grants(acl.RoleVisitor),
+		ACL:      acl.Rules.Grants(acl.RoleVisitor),
 		Disable: ClientDisable{
+			Restart:        true,
 			WebDAV:         c.DisableWebDAV(),
 			Settings:       c.DisableSettings(),
 			Places:         c.DisablePlaces(),
@@ -343,6 +356,7 @@ func (c *Config) ClientShare() ClientConfig {
 		Edition:          c.Edition(),
 		BaseUri:          c.BaseUri(""),
 		StaticUri:        c.StaticUri(),
+		ClientAssets:     a,
 		CssUri:           a.AppCssUri(),
 		JsUri:            a.ShareJsUri(),
 		ApiUri:           c.ApiUri(),
@@ -378,6 +392,7 @@ func (c *Config) ClientShare() ClientConfig {
 		LoginUri:         c.LoginUri(),
 		RegisterUri:      c.RegisterUri(),
 		PasswordResetUri: c.PasswordResetUri(),
+		Develop:          c.Develop(),
 		Experimental:     c.Experimental(),
 		Albums:           entity.Albums{},
 		Cameras:          entity.Cameras{},
@@ -401,7 +416,7 @@ func (c *Config) ClientShare() ClientConfig {
 }
 
 // ClientUser returns complete client config values for users with full access.
-func (c *Config) ClientUser(withSettings bool) ClientConfig {
+func (c *Config) ClientUser(withSettings bool) *ClientConfig {
 	a := c.ClientAssets()
 
 	var s *customize.Settings
@@ -410,19 +425,21 @@ func (c *Config) ClientUser(withSettings bool) ClientConfig {
 		s = c.Settings()
 	}
 
-	cfg := ClientConfig{
+	cfg := &ClientConfig{
 		Settings: s,
 		Disable: ClientDisable{
-			WebDAV:         c.DisableWebDAV(),
 			Settings:       c.DisableSettings(),
-			Places:         c.DisablePlaces(),
 			Backups:        c.DisableBackups(),
+			Restart:        c.DisableRestart(),
+			WebDAV:         c.DisableWebDAV(),
+			Places:         c.DisablePlaces(),
 			TensorFlow:     c.DisableTensorFlow(),
 			Faces:          c.DisableFaces(),
 			Classification: c.DisableClassification(),
-			Sips:           c.DisableSips(),
 			FFmpeg:         c.DisableFFmpeg(),
 			ExifTool:       c.DisableExifTool(),
+			Vips:           c.DisableVips(),
+			Sips:           c.DisableSips(),
 			Darktable:      c.DisableDarktable(),
 			RawTherapee:    c.DisableRawTherapee(),
 			ImageMagick:    c.DisableImageMagick(),
@@ -438,6 +455,7 @@ func (c *Config) ClientUser(withSettings bool) ClientConfig {
 		Edition:          c.Edition(),
 		BaseUri:          c.BaseUri(""),
 		StaticUri:        c.StaticUri(),
+		ClientAssets:     a,
 		CssUri:           a.AppCssUri(),
 		JsUri:            a.AppJsUri(),
 		ApiUri:           c.ApiUri(),
@@ -474,6 +492,7 @@ func (c *Config) ClientUser(withSettings bool) ClientConfig {
 		RegisterUri:      c.RegisterUri(),
 		PasswordLength:   c.PasswordLength(),
 		PasswordResetUri: c.PasswordResetUri(),
+		Develop:          c.Develop(),
 		Experimental:     c.Experimental(),
 		Albums:           entity.Albums{},
 		Cameras:          entity.Cameras{},
@@ -493,6 +512,9 @@ func (c *Config) ClientUser(withSettings bool) ClientConfig {
 		Server:           env.Info(),
 		Ext:              ClientExt(c, ClientUser),
 	}
+
+	// Query start time.
+	start := time.Now()
 
 	hidePrivate := c.Settings().Features.Private
 
@@ -521,8 +543,9 @@ func (c *Config) ClientUser(withSettings bool) ClientConfig {
 			Table("photos").
 			Select("SUM(photo_type = 'video' AND photo_quality > -1 AND photo_private = 0) AS videos, " +
 				"SUM(photo_type = 'live' AND photo_quality > -1 AND photo_private = 0) AS live, " +
-				"SUM(photo_quality = -1) AS hidden, SUM(photo_type IN ('image','animated','vector','raw') AND photo_private = 0 AND photo_quality > -1) AS photos, " +
-				"SUM(photo_type IN ('image','live','animated','vector','raw') AND photo_quality < 3 AND photo_quality > -1 AND photo_private = 0) AS review, " +
+				"SUM(photo_quality = -1) AS hidden, " +
+				"SUM(photo_type NOT IN ('live', 'video') AND photo_quality > -1 AND photo_private = 0) AS photos, " +
+				"SUM(photo_quality BETWEEN 0 AND 2) AS review, " +
 				"SUM(photo_favorite = 1 AND photo_private = 0 AND photo_quality > -1) AS favorites, " +
 				"SUM(photo_private = 1 AND photo_quality > -1) AS private").
 			Where("photos.id NOT IN (SELECT photo_id FROM files WHERE file_primary = 1 AND (file_missing = 1 OR file_error <> ''))").
@@ -533,12 +556,22 @@ func (c *Config) ClientUser(withSettings bool) ClientConfig {
 			Table("photos").
 			Select("SUM(photo_type = 'video' AND photo_quality > -1) AS videos, " +
 				"SUM(photo_type = 'live' AND photo_quality > -1) AS live, " +
-				"SUM(photo_quality = -1) AS hidden, SUM(photo_type IN ('image','raw','animated') AND photo_quality > -1) AS photos, " +
-				"SUM(photo_type IN ('image','raw','live','animated') AND photo_quality < 3 AND photo_quality > -1) AS review, " +
+				"SUM(photo_quality = -1) AS hidden, " +
+				"SUM(photo_type NOT IN ('live', 'video') AND photo_quality > -1) AS photos, " +
+				"SUM(photo_quality BETWEEN 0 AND 2) AS review, " +
 				"SUM(photo_favorite = 1 AND photo_quality > -1) AS favorites, " +
 				"0 AS private").
 			Where("photos.id NOT IN (SELECT photo_id FROM files WHERE file_primary = 1 AND (file_missing = 1 OR file_error <> ''))").
 			Where("deleted_at IS NULL").
+			Take(&cfg.Count)
+	}
+
+	// Get number of archived pictures.
+	if c.Settings().Features.Archive {
+		c.Db().
+			Table("photos").
+			Select("SUM(photo_quality > -1) AS archived").
+			Where("deleted_at IS NOT NULL").
 			Take(&cfg.Count)
 	}
 
@@ -561,15 +594,29 @@ func (c *Config) ClientUser(withSettings bool) ClientConfig {
 	if hidePrivate {
 		c.Db().
 			Table("albums").
-			Select("SUM(album_type = ?) AS albums, SUM(album_type = ?) AS moments, SUM(album_type = ?) AS months, SUM(album_type = ?) AS states, SUM(album_type = ?) AS folders, "+
-				"SUM(album_type = ? AND album_private = 1) AS private_albums, SUM(album_type = ? AND album_private = 1) AS private_moments, SUM(album_type = ? AND album_private = 1) AS private_months, SUM(album_type = ? AND album_private = 1) AS private_states, SUM(album_type = ? AND album_private = 1) AS private_folders",
-				entity.AlbumManual, entity.AlbumMoment, entity.AlbumMonth, entity.AlbumState, entity.AlbumFolder, entity.AlbumManual, entity.AlbumMoment, entity.AlbumMonth, entity.AlbumState, entity.AlbumFolder).
+			Select("SUM(album_type = ?) AS albums, "+
+				"SUM(album_type = ?) AS moments, "+
+				"SUM(album_type = ?) AS months, "+
+				"SUM(album_type = ?) AS states, "+
+				"SUM(album_type = ?) AS folders, "+
+				"SUM(album_type = ? AND album_private = 1) AS private_albums, "+
+				"SUM(album_type = ? AND album_private = 1) AS private_moments, "+
+				"SUM(album_type = ? AND album_private = 1) AS private_months, "+
+				"SUM(album_type = ? AND album_private = 1) AS private_states, "+
+				"SUM(album_type = ? AND album_private = 1) AS private_folders",
+				entity.AlbumManual, entity.AlbumMoment, entity.AlbumMonth, entity.AlbumState, entity.AlbumFolder,
+				entity.AlbumManual, entity.AlbumMoment, entity.AlbumMonth, entity.AlbumState, entity.AlbumFolder).
 			Where("deleted_at IS NULL AND (albums.album_type <> 'folder' OR albums.album_path IN (SELECT photos.photo_path FROM photos WHERE photos.photo_private = 0 AND photos.deleted_at IS NULL))").
 			Take(&cfg.Count)
 	} else {
 		c.Db().
 			Table("albums").
-			Select("SUM(album_type = ?) AS albums, SUM(album_type = ?) AS moments, SUM(album_type = ?) AS months, SUM(album_type = ?) AS states, SUM(album_type = ?) AS folders", entity.AlbumManual, entity.AlbumMoment, entity.AlbumMonth, entity.AlbumState, entity.AlbumFolder).
+			Select("SUM(album_type = ?) AS albums, "+
+				"SUM(album_type = ?) AS moments, "+
+				"SUM(album_type = ?) AS months, "+
+				"SUM(album_type = ?) AS states, "+
+				"SUM(album_type = ?) AS folders",
+				entity.AlbumManual, entity.AlbumMoment, entity.AlbumMonth, entity.AlbumState, entity.AlbumFolder).
 			Where("deleted_at IS NULL AND (albums.album_type <> 'folder' OR albums.album_path IN (SELECT photos.photo_path FROM photos WHERE photos.deleted_at IS NULL))").
 			Take(&cfg.Count)
 	}
@@ -628,7 +675,7 @@ func (c *Config) ClientUser(withSettings bool) ClientConfig {
 		Where("l.deleted_at IS NULL").
 		Group("l.custom_slug, l.label_uid, l.label_name").
 		Order("l.custom_slug").
-		Limit(1000).Offset(0).
+		Limit(10000).Offset(0).
 		Scan(&cfg.Categories)
 
 	c.Db().
@@ -637,23 +684,29 @@ func (c *Config) ClientUser(withSettings bool) ClientConfig {
 		Where("deleted_at IS NULL AND album_category <> ''").
 		Group("album_category").
 		Order("album_category").
-		Limit(1000).Offset(0).
+		Limit(10000).Offset(0).
 		Pluck("album_category", &cfg.AlbumCategories)
+
+	// Trace log for performance measurement.
+	log.Tracef("config: updated counts [%s]", time.Since(start))
 
 	return cfg
 }
 
 // ClientRole provides the client config values for the specified user role.
-func (c *Config) ClientRole(role acl.Role) ClientConfig {
-	return c.ClientUser(true).ApplyACL(acl.Resources, role)
+func (c *Config) ClientRole(role acl.Role) *ClientConfig {
+	return c.ClientUser(true).ApplyACL(acl.Rules, role)
 }
 
 // ClientSession provides the client config values for the specified session.
-func (c *Config) ClientSession(sess *entity.Session) (cfg ClientConfig) {
-	if sess.User().IsVisitor() {
+func (c *Config) ClientSession(sess *entity.Session) (cfg *ClientConfig) {
+	if sess.NoUser() && sess.IsClient() {
+		cfg = c.ClientUser(false).ApplyACL(acl.Rules, sess.ClientRole())
+		cfg.Settings = c.SessionSettings(sess)
+	} else if sess.User().IsVisitor() {
 		cfg = c.ClientShare()
 	} else if sess.User().IsRegistered() {
-		cfg = c.ClientUser(false).ApplyACL(acl.Resources, sess.User().AclRole())
+		cfg = c.ClientUser(false).ApplyACL(acl.Rules, sess.UserRole())
 		cfg.Settings = c.SessionSettings(sess)
 	} else {
 		cfg = c.ClientPublic()

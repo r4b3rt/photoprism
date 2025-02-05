@@ -3,12 +3,13 @@ package entity
 import (
 	"testing"
 
-	"github.com/photoprism/photoprism/internal/form"
 	"github.com/stretchr/testify/assert"
+
+	"github.com/photoprism/photoprism/internal/form"
 )
 
 func TestCreateService(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		account := Service{AccName: "Foo", AccOwner: "bar", AccURL: "test.com", AccType: "webdav", AccKey: "123", AccUser: "testuser", AccPass: "testpass",
 			AccError: "", AccShare: true, AccSync: true, RetryLimit: 4, SharePath: "/home", ShareSize: "500", ShareExpires: 3500, SyncPath: "/sync",
 			SyncInterval: 5, SyncUpload: true, SyncDownload: false, SyncFilenames: true, SyncRaw: false}
@@ -50,7 +51,7 @@ func TestCreateService(t *testing.T) {
 }
 
 func TestService_SaveForm(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		account := Service{AccName: "Foo", AccOwner: "bar", AccURL: "test.com", AccType: "test", AccKey: "123", AccUser: "testuser", AccPass: "testpass",
 			AccError: "", AccShare: true, AccSync: true, RetryLimit: 4, SharePath: "/home", ShareSize: "500", ShareExpires: 3500, SyncPath: "/sync",
 			SyncInterval: 5, SyncUpload: true, SyncDownload: true, SyncFilenames: true, SyncRaw: false}
@@ -94,7 +95,7 @@ func TestService_SaveForm(t *testing.T) {
 }
 
 func TestService_Delete(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		account := Service{AccName: "DeleteAccount", AccOwner: "Delete", AccURL: "test.com", AccType: "test", AccKey: "123", AccUser: "testuser", AccPass: "testpass",
 			AccError: "", AccShare: true, AccSync: true, RetryLimit: 4, SharePath: "/home", ShareSize: "500", ShareExpires: 3500, SyncPath: "/sync",
 			SyncInterval: 5, SyncUpload: true, SyncDownload: false, SyncFilenames: true, SyncRaw: false}
@@ -121,7 +122,7 @@ func TestService_Delete(t *testing.T) {
 }
 
 func TestService_Directories(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		account := Service{AccName: "DirectoriesAccount", AccOwner: "Owner", AccURL: "http://dummy-webdav/", AccType: "webdav", AccKey: "123", AccUser: "admin", AccPass: "photoprism",
 			AccError: "", AccShare: true, AccSync: true, RetryLimit: 4, SharePath: "/home", ShareSize: "500", ShareExpires: 3500, SyncPath: "/sync",
 			SyncInterval: 5, SyncUpload: true, SyncDownload: false, SyncFilenames: true, SyncRaw: false}
@@ -173,7 +174,7 @@ func TestService_Directories(t *testing.T) {
 }
 
 func TestService_Updates(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		account := Service{AccName: "DeleteAccount", AccOwner: "Delete", AccURL: "test.com", AccType: "test", AccKey: "123", AccUser: "testuser", AccPass: "testpass",
 			AccError: "", AccShare: true, AccSync: true, RetryLimit: 4, SharePath: "/home", ShareSize: "500", ShareExpires: 3500, SyncPath: "/sync",
 			SyncInterval: 5, SyncUpload: true, SyncDownload: false, SyncFilenames: true, SyncRaw: false}
@@ -203,7 +204,7 @@ func TestService_Updates(t *testing.T) {
 }
 
 func TestService_Update(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		account := Service{AccName: "DeleteAccount", AccOwner: "Delete", AccURL: "test.com", AccType: "test", AccKey: "123", AccUser: "testuser", AccPass: "testpass",
 			AccError: "", AccShare: true, AccSync: true, RetryLimit: 4, SharePath: "/home", ShareSize: "500", ShareExpires: 3500, SyncPath: "/sync",
 			SyncInterval: 5, SyncUpload: true, SyncDownload: false, SyncFilenames: true, SyncRaw: false}
@@ -231,7 +232,7 @@ func TestService_Update(t *testing.T) {
 
 // TODO fails on mariadb
 func TestService_Save(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		account := Service{AccName: "DeleteAccount", AccOwner: "Delete", AccURL: "test.com", AccType: "test", AccKey: "123", AccUser: "testuser", AccPass: "testpass",
 			AccError: "", AccShare: true, AccSync: true, RetryLimit: 4, SharePath: "/home", ShareSize: "500", ShareExpires: 3500, SyncPath: "/sync",
 			SyncInterval: 5, SyncUpload: true, SyncDownload: false, SyncFilenames: true, SyncRaw: false}
@@ -259,7 +260,7 @@ func TestService_Save(t *testing.T) {
 }
 
 func TestService_Create(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		account := Service{}
 
 		err := account.Create()

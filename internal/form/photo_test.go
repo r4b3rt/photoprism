@@ -8,7 +8,7 @@ import (
 )
 
 func TestNewPhoto(t *testing.T) {
-	t.Run("success", func(t *testing.T) {
+	t.Run("Success", func(t *testing.T) {
 		photo := Photo{
 			TakenAt:          time.Date(2008, 1, 1, 2, 0, 0, 0, time.UTC),
 			TakenAtLocal:     time.Date(2008, 1, 1, 2, 0, 0, 0, time.UTC),
@@ -51,8 +51,8 @@ func TestNewPhoto(t *testing.T) {
 		assert.Equal(t, false, r.PhotoPrivate)
 		assert.Equal(t, "image", r.PhotoType)
 		assert.Equal(t, int8(1), r.PhotoStack)
-		assert.Equal(t, float32(9.9999), r.PhotoLat)
-		assert.Equal(t, float32(8.8888), r.PhotoLng)
+		assert.Equal(t, 9.9999, r.PhotoLat)
+		assert.Equal(t, 8.8888, r.PhotoLng)
 		assert.Equal(t, 2, r.PhotoAltitude)
 		assert.Equal(t, 5, r.PhotoIso)
 		assert.Equal(t, 10, r.PhotoFocalLength)

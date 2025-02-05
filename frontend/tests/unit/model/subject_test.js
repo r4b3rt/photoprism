@@ -1,5 +1,5 @@
 import "../fixtures";
-import Subject from "model/subject";
+import { Subject, BatchSize } from "model/subject";
 
 let chai = require("chai/chai");
 let assert = chai.assert;
@@ -42,6 +42,7 @@ describe("model/subject", () => {
       Favorite: false,
       Excluded: true,
       Private: true,
+      Hidden: true,
     };
     const subject = new Subject(values);
     const result = subject.classes(true);
@@ -51,6 +52,7 @@ describe("model/subject", () => {
     assert.notInclude(result, "is-favorite");
     assert.include(result, "is-private");
     assert.include(result, "is-excluded");
+    assert.include(result, "is-hidden");
     const values2 = {
       UID: "s123ghytrfggd",
       Type: "person",
@@ -235,7 +237,10 @@ describe("model/subject", () => {
   });
 
   it("should return batch size", () => {
-    assert.equal(Subject.batchSize(), 60);
+    assert.equal(Subject.batchSize(), BatchSize);
+    Subject.setBatchSize(30);
+    assert.equal(Subject.batchSize(), 30);
+    Subject.setBatchSize(BatchSize);
   });
 
   it("should get collection resource", () => {
@@ -245,6 +250,6 @@ describe("model/subject", () => {
 
   it("should get model name", () => {
     const result = Subject.getModelName();
-    assert.equal(result, "Subject");
+    assert.equal(result, "Person");
   });
 });

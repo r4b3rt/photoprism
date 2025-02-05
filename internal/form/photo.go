@@ -36,6 +36,8 @@ type Photo struct {
 	PhotoDay         int       `json:"Day"`
 	PhotoTitle       string    `json:"Title"`
 	TitleSrc         string    `json:"TitleSrc"`
+	PhotoCaption     string    `json:"Caption"`
+	CaptionSrc       string    `json:"CaptionSrc"`
 	PhotoDescription string    `json:"Description"`
 	DescriptionSrc   string    `json:"DescriptionSrc"`
 	Details          Details   `json:"Details"`
@@ -45,8 +47,8 @@ type Photo struct {
 	PhotoScan        bool      `json:"Scan"`
 	PhotoPanorama    bool      `json:"Panorama"`
 	PhotoAltitude    int       `json:"Altitude"`
-	PhotoLat         float32   `json:"Lat"`
-	PhotoLng         float32   `json:"Lng"`
+	PhotoLat         float64   `json:"Lat"`
+	PhotoLng         float64   `json:"Lng"`
 	PhotoIso         int       `json:"Iso"`
 	PhotoFocalLength int       `json:"FocalLength"`
 	PhotoFNumber     float32   `json:"FNumber"`

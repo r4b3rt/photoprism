@@ -3,12 +3,13 @@ package photoprism
 import (
 	"testing"
 
-	"github.com/photoprism/photoprism/internal/classify"
+	"github.com/stretchr/testify/assert"
+
+	"github.com/photoprism/photoprism/internal/ai/classify"
+	"github.com/photoprism/photoprism/internal/ai/face"
+	"github.com/photoprism/photoprism/internal/ai/nsfw"
 	"github.com/photoprism/photoprism/internal/config"
 	"github.com/photoprism/photoprism/internal/entity"
-	"github.com/photoprism/photoprism/internal/face"
-	"github.com/photoprism/photoprism/internal/nsfw"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestImportWorker_OriginalFileNames(t *testing.T) {

@@ -8,13 +8,13 @@ import (
 )
 
 // FileType returns the type associated with the specified filename,
-// and UnknownType if it could not be matched.
+// and TypeUnknown if it could not be matched.
 func FileType(fileName string) Type {
 	if t, found := Extensions[LowerExt(fileName)]; found {
 		return t
 	}
 
-	return UnknownType
+	return TypeUnknown
 }
 
 // IsAnimatedImage checks if the type associated with the specified filename may be animated.
@@ -37,6 +37,11 @@ type Type string
 // String returns the file format as string.
 func (t Type) String() string {
 	return string(t)
+}
+
+// ToUpper returns the file format as uppercase string.
+func (t Type) ToUpper() string {
+	return strings.ToUpper(t.String())
 }
 
 // Equal checks if the type matches.

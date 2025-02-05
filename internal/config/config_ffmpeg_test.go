@@ -4,21 +4,23 @@ import (
 	"testing"
 
 	"github.com/photoprism/photoprism/internal/ffmpeg"
+	"github.com/photoprism/photoprism/internal/ffmpeg/encode"
+	"github.com/photoprism/photoprism/internal/thumb"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestConfig_FFmpegEncoder(t *testing.T) {
 	c := NewConfig(CliTestContext())
-	assert.Equal(t, ffmpeg.SoftwareEncoder, c.FFmpegEncoder())
+	assert.Equal(t, encode.SoftwareAvc, c.FFmpegEncoder())
 	c.options.FFmpegEncoder = "nvidia"
-	assert.Equal(t, ffmpeg.NvidiaEncoder, c.FFmpegEncoder())
+	assert.Equal(t, encode.NvidiaAvc, c.FFmpegEncoder())
 	c.options.FFmpegEncoder = "intel"
-	assert.Equal(t, ffmpeg.IntelEncoder, c.FFmpegEncoder())
+	assert.Equal(t, encode.IntelAvc, c.FFmpegEncoder())
 	c.options.FFmpegEncoder = "xxx"
-	assert.Equal(t, ffmpeg.SoftwareEncoder, c.FFmpegEncoder())
+	assert.Equal(t, encode.SoftwareAvc, c.FFmpegEncoder())
 	c.options.FFmpegEncoder = ""
-	assert.Equal(t, ffmpeg.SoftwareEncoder, c.FFmpegEncoder())
+	assert.Equal(t, encode.SoftwareAvc, c.FFmpegEncoder())
 }
 
 func TestConfig_FFmpegEnabled(t *testing.T) {
@@ -41,6 +43,32 @@ func TestConfig_FFmpegBitrate(t *testing.T) {
 
 	c.options.FFmpegBitrate = 800
 	assert.Equal(t, 800, c.FFmpegBitrate())
+}
+
+func TestConfig_FFmpegSize(t *testing.T) {
+	c := NewConfig(CliTestContext())
+	assert.Equal(t, 4096, c.FFmpegSize())
+
+	c.options.FFmpegSize = 0
+	assert.Equal(t, 4096, c.FFmpegSize())
+
+	c.options.FFmpegSize = -1
+	assert.Equal(t, 7680, c.FFmpegSize())
+
+	c.options.FFmpegSize = 10
+	assert.Equal(t, 720, c.FFmpegSize())
+
+	c.options.FFmpegSize = 720
+	assert.Equal(t, 720, c.FFmpegSize())
+
+	c.options.FFmpegSize = 1920
+	assert.Equal(t, 1920, c.FFmpegSize())
+
+	c.options.FFmpegSize = 4000
+	assert.Equal(t, 3840, c.FFmpegSize())
+
+	c.options.FFmpegSize = 8640
+	assert.Equal(t, thumb.Sizes[thumb.Fit7680].Width, c.FFmpegSize())
 }
 
 func TestConfig_FFmpegBitrateExceeded(t *testing.T) {
@@ -77,11 +105,11 @@ func TestConfig_FFmpegMapAudio(t *testing.T) {
 func TestConfig_FFmpegOptions(t *testing.T) {
 	c := NewConfig(CliTestContext())
 	bitrate := "25M"
-	opt, err := c.FFmpegOptions(ffmpeg.SoftwareEncoder, bitrate)
+	opt, err := c.FFmpegOptions(encode.SoftwareAvc, bitrate)
 	assert.NoError(t, err)
 	assert.Equal(t, c.FFmpegBin(), opt.Bin)
-	assert.Equal(t, ffmpeg.SoftwareEncoder, opt.Encoder)
-	assert.Equal(t, bitrate, opt.Bitrate)
+	assert.Equal(t, encode.SoftwareAvc, opt.Encoder)
+	assert.Equal(t, bitrate, opt.DestBitrate)
 	assert.Equal(t, ffmpeg.MapVideoDefault, opt.MapVideo)
 	assert.Equal(t, ffmpeg.MapAudioDefault, opt.MapAudio)
 	assert.Equal(t, c.FFmpegMapVideo(), opt.MapVideo)

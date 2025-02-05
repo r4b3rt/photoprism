@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018 - 2023 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -24,10 +24,10 @@ Additional information can be found in our Developer Guide:
 */
 
 import Api from "common/api";
-import Form from "common/form";
+import { Form } from "common/form";
 import Model from "model.js";
 import Link from "link.js";
-import { $gettext } from "common/vm";
+import { $gettext } from "common/gettext";
 
 export class Rest extends Model {
   getId() {
@@ -51,9 +51,7 @@ export class Rest extends Model {
   }
 
   find(id, params) {
-    return Api.get(this.getEntityResource(id), params).then((resp) =>
-      Promise.resolve(new this.constructor(resp.data))
-    );
+    return Api.get(this.getEntityResource(id), params).then((resp) => Promise.resolve(new this.constructor(resp.data)));
   }
 
   load() {
@@ -61,9 +59,7 @@ export class Rest extends Model {
       return;
     }
 
-    return Api.get(this.getEntityResource(this.getId())).then((resp) =>
-      Promise.resolve(this.setValues(resp.data))
-    );
+    return Api.get(this.getEntityResource(this.getId())).then((resp) => Promise.resolve(this.setValues(resp.data)));
   }
 
   save() {
@@ -86,9 +82,7 @@ export class Rest extends Model {
     }
 
     // Send PUT request.
-    return Api.put(this.getEntityResource(), values).then((resp) =>
-      Promise.resolve(this.setValues(resp.data))
-    );
+    return Api.put(this.getEntityResource(), values).then((resp) => Promise.resolve(this.setValues(resp.data)));
   }
 
   remove() {
@@ -96,9 +90,7 @@ export class Rest extends Model {
   }
 
   getEditForm() {
-    return Api.options(this.getEntityResource()).then((resp) =>
-      Promise.resolve(new Form(resp.data))
-    );
+    return Api.options(this.getEntityResource()).then((resp) => Promise.resolve(new Form(resp.data)));
   }
 
   getEntityResource(id) {
@@ -172,9 +164,7 @@ export class Rest extends Model {
   }
 
   static getCreateForm() {
-    return Api.options(this.getCreateResource()).then((resp) =>
-      Promise.resolve(new Form(resp.data))
-    );
+    return Api.options(this.getCreateResource()).then((resp) => Promise.resolve(new Form(resp.data)));
   }
 
   static getModelName() {
@@ -182,9 +172,7 @@ export class Rest extends Model {
   }
 
   static getSearchForm() {
-    return Api.options(this.getCollectionResource()).then((resp) =>
-      Promise.resolve(new Form(resp.data))
-    );
+    return Api.options(this.getCollectionResource()).then((resp) => Promise.resolve(new Form(resp.data)));
   }
 
   static limit() {

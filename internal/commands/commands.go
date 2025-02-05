@@ -1,7 +1,7 @@
 /*
 Package commands provides the CLI commands of PhotoPrism.
 
-Copyright (c) 2018 - 2023 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
 
 	This program is free software: you can redistribute it and/or modify
 	it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -30,7 +30,7 @@ import (
 	"syscall"
 
 	"github.com/sevlyar/go-daemon"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 
 	"github.com/photoprism/photoprism/internal/config"
 	"github.com/photoprism/photoprism/internal/event"
@@ -40,15 +40,16 @@ import (
 var log = event.Log
 
 // PhotoPrism contains the photoprism CLI (sub-)commands.
-var PhotoPrism = []cli.Command{
+var PhotoPrism = []*cli.Command{
 	StartCommand,
 	StopCommand,
 	StatusCommand,
 	IndexCommand,
+	FindCommand,
 	ImportCommand,
 	CopyCommand,
-	FacesCommand,
-	PlacesCommand,
+	FacesCommands,
+	PlacesCommands,
 	PurgeCommand,
 	CleanUpCommand,
 	OptimizeCommand,
@@ -56,16 +57,34 @@ var PhotoPrism = []cli.Command{
 	ConvertCommand,
 	ThumbsCommand,
 	MigrateCommand,
-	MigrationsCommand,
+	MigrationsCommands,
 	BackupCommand,
 	RestoreCommand,
 	ResetCommand,
 	PasswdCommand,
-	UsersCommand,
-	ShowCommand,
+	UsersCommands,
+	ClientsCommands,
+	AuthCommands,
+	ShowCommands,
 	VersionCommand,
+	EditionCommand,
 	ShowConfigCommand,
 	ConnectCommand,
+}
+
+// CountFlag represents a CLI flag to limit the number of report rows.
+var CountFlag = &cli.UintFlag{
+	Name:    "count",
+	Aliases: []string{"n"},
+	Usage:   "`LIMIT` number of results",
+	Value:   100,
+}
+
+// LogErr logs an error if the argument is not nil.
+func LogErr(err error) {
+	if err != nil {
+		log.Error(err)
+	}
 }
 
 // childAlreadyRunning tests if a .pid file at filePath is a running process.
@@ -103,7 +122,6 @@ func CallWithDependencies(ctx *cli.Context, action func(conf *config.Config) err
 		return err
 	}
 
-	conf.RegisterDb()
 	defer conf.Shutdown()
 
 	// Run command.

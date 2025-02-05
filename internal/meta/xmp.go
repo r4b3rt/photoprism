@@ -46,7 +46,7 @@ func (data *Data) XMP(fileName string) (err error) {
 	}
 
 	if doc.Description() != "" {
-		data.Description = doc.Description()
+		data.Caption = doc.Description()
 	}
 
 	if doc.Copyright() != "" {
@@ -75,6 +75,8 @@ func (data *Data) XMP(fileName string) (err error) {
 	if len(doc.Keywords()) != 0 {
 		data.AddKeywords(doc.Keywords())
 	}
+
+	data.Favorite = doc.Favorite()
 
 	return nil
 }

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2018 - 2023 PhotoPrism UG. All rights reserved.
+Copyright (c) 2018 - 2025 PhotoPrism UG. All rights reserved.
 
     This program is free software: you can redistribute it and/or modify
     it under Version 3 of the GNU Affero General Public License (the "AGPL"):
@@ -25,7 +25,7 @@ Additional information can be found in our Developer Guide:
 
 import Axios from "axios";
 import Notify from "common/notify";
-import { $gettext } from "vm.js";
+import { $gettext } from "common/gettext";
 import Event from "pubsub-js";
 
 const testConfig = {
@@ -47,7 +47,7 @@ const Api = Axios.create({
   baseURL: c.apiUri,
   headers: {
     common: {
-      "X-Session-ID": window.localStorage.getItem("session_id"),
+      "X-Auth-Token": window.localStorage.getItem("authToken"),
       "X-Client-Uri": c.jsUri,
       "X-Client-Version": c.version,
     },
@@ -100,17 +100,29 @@ Api.interceptors.response.use(
 
     // Default error message.
     let errorMessage = $gettext("Request failed - are you offline?");
-    let code = error.code;
+    let code = error.response && error.response.status ? error.response.status : 0;
 
     // Extract error details from response.
-    if (error.response && error.response.data) {
+    if (error.response && typeof error.response.data === "object") {
       let data = error.response.data;
-      code = data.code;
-      errorMessage = data.message ? data.message : data.error;
+
+      if (data.code) {
+        code = data.code;
+      }
+
+      if (data.message) {
+        errorMessage = data.message;
+      } else if (data.error) {
+        errorMessage = data.error;
+      }
     }
 
     // Show error notification.
-    if (errorMessage) {
+    if (code === 32) {
+      Notify.info($gettext("Enter verification code"));
+    } else if (code === 429) {
+      Notify.error($gettext("Too many requests"));
+    } else if (errorMessage) {
       if (code === 401) {
         Notify.logout(errorMessage);
       } else {

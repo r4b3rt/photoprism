@@ -1,25 +1,27 @@
 package commands
 
 import (
+	"context"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"time"
 
 	"github.com/tidwall/gjson"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 
 	"github.com/photoprism/photoprism/internal/config"
 )
 
 // StatusCommand configures the command name, flags, and action.
-var StatusCommand = cli.Command{
+var StatusCommand = &cli.Command{
 	Name:   "status",
 	Usage:  "Checks if the Web server is running",
 	Action: statusAction,
 }
 
-// statusAction checks if the web server is running.
+// statusAction checks if the Web server is running.
 func statusAction(ctx *cli.Context) error {
 	conf := config.NewConfig(ctx)
 
@@ -31,6 +33,15 @@ func statusAction(ctx *cli.Context) error {
 	// running after Get, Head, Post, or Do return and will
 	// interrupt reading of the Response.Body.
 	client := &http.Client{Timeout: 10 * time.Second}
+
+	// Connect to unix socket?
+	if unixSocket := conf.HttpSocket(); unixSocket != nil {
+		client.Transport = &http.Transport{
+			DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
+				return net.Dial(unixSocket.Scheme, unixSocket.Path)
+			},
+		}
+	}
 
 	url := fmt.Sprintf("http://%s:%d/api/v1/status", conf.HttpHost(), conf.HttpPort())
 

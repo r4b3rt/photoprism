@@ -5,12 +5,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/photoprism/photoprism/internal/acl"
+	"github.com/photoprism/photoprism/internal/auth/acl"
 	"github.com/photoprism/photoprism/internal/form"
-	"github.com/photoprism/photoprism/internal/get"
-	"github.com/photoprism/photoprism/internal/i18n"
 	"github.com/photoprism/photoprism/internal/mutex"
+	"github.com/photoprism/photoprism/internal/photoprism/get"
 	"github.com/photoprism/photoprism/pkg/clean"
+	"github.com/photoprism/photoprism/pkg/i18n"
 )
 
 // Connect confirms external service accounts using a token.
@@ -26,16 +26,17 @@ func Connect(router *gin.RouterGroup) {
 			return
 		}
 
-		var f form.Connect
+		var frm form.Connect
 
-		if err := c.BindJSON(&f); err != nil {
+		// Assign and validate request form values.
+		if err := c.BindJSON(&frm); err != nil {
 			log.Warnf("connect: invalid form values (%s)", clean.Log(name))
 			Abort(c, http.StatusBadRequest, i18n.ErrAccountConnect)
 			return
 		}
 
-		if f.Invalid() {
-			log.Warnf("connect: invalid token %s", clean.Log(f.Token))
+		if frm.Invalid() {
+			log.Warnf("connect: invalid token %s", clean.Log(frm.Token))
 			Abort(c, http.StatusBadRequest, i18n.ErrAccountConnect)
 			return
 		}
@@ -61,7 +62,7 @@ func Connect(router *gin.RouterGroup) {
 		switch name {
 		case "hub":
 			old := conf.Hub().Session
-			err = conf.ResyncHub(f.Token)
+			err = conf.RenewApiKeysWithToken(frm.Token)
 			restart = old != conf.Hub().Session
 		default:
 			log.Errorf("connect: invalid service %s", clean.Log(name))

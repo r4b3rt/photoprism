@@ -1,5 +1,5 @@
 import "../fixtures";
-import Album from "model/album";
+import { Album, BatchSize } from "model/album";
 
 let chai = require("chai/chai");
 let assert = chai.assert;
@@ -51,6 +51,104 @@ describe("model/album", () => {
     const album = new Album(values);
     const result = album.getTitle();
     assert.equal(result, "Christmas 2019");
+  });
+
+  it("should get album country", () => {
+    const values = { ID: 5, Title: "Christmas 2019", Slug: "christmas-2019", Country: "at" };
+    const album = new Album(values);
+    const result = album.getCountry();
+    assert.equal(result, "Austria");
+
+    const values2 = { ID: 5, Title: "Christmas 2019", Slug: "christmas-2019", Country: "zz" };
+    const album2 = new Album(values2);
+    const result2 = album2.getCountry();
+    assert.equal(result2, "");
+
+    const values3 = { ID: 5, Title: "Christmas 2019", Slug: "christmas-2019", Country: "xx" };
+    const album3 = new Album(values3);
+    const result3 = album3.getCountry();
+    assert.equal(result3, "");
+  });
+
+  it("should check if album has location", () => {
+    const values = {
+      ID: 5,
+      Title: "Christmas 2019",
+      Slug: "christmas-2019",
+      Country: "zz",
+      State: "",
+      Location: "",
+    };
+    const album = new Album(values);
+    const result = album.hasLocation();
+    assert.equal(result, false);
+
+    const values2 = { ID: 5, Title: "Christmas 2019", Slug: "christmas-2019", Country: "at" };
+    const album2 = new Album(values2);
+    const result2 = album2.hasLocation();
+    assert.equal(result2, true);
+  });
+
+  it("should get album location", () => {
+    const values = {
+      ID: 5,
+      Title: "Christmas 2019",
+      Slug: "christmas-2019",
+      Country: "at",
+      State: "Salzburg",
+      Location: "",
+    };
+    const album = new Album(values);
+    const result = album.getLocation();
+    assert.equal(result, "Salzburg, Austria");
+
+    const values2 = {
+      ID: 5,
+      Title: "Christmas 2019",
+      Slug: "christmas-2019",
+      Country: "zz",
+      State: "",
+      Location: "",
+    };
+    const album2 = new Album(values2);
+    const result2 = album2.getLocation();
+    assert.equal(result2, "");
+
+    const values3 = {
+      ID: 5,
+      Title: "Christmas 2019",
+      Slug: "christmas-2019",
+      Country: "zz",
+      State: "",
+      Location: "Austria",
+    };
+    const album3 = new Album(values3);
+    const result3 = album3.getLocation();
+    assert.equal(result3, "Austria");
+
+    const values5 = {
+      ID: 5,
+      Title: "Salzburg",
+      Slug: "salzburg",
+      Country: "at",
+      State: "Salzburg",
+      Location: "",
+    };
+    const album5 = new Album(values5);
+    const result5 = album5.getLocation();
+    assert.equal(result5, "Austria");
+
+    const values6 = {
+      ID: 5,
+      Title: "Austria",
+      Slug: "austria",
+      Country: "at",
+      State: "Salzburg",
+      Location: "",
+    };
+    const album6 = new Album(values6);
+    const result6 = album6.getLocation();
+    assert.equal(result6, "Salzburg");
   });
 
   it("should get thumbnail url", () => {
@@ -213,7 +311,10 @@ describe("model/album", () => {
   });
 
   it("should return batch size", () => {
-    assert.equal(Album.batchSize(), 24);
+    assert.equal(Album.batchSize(), BatchSize);
+    Album.setBatchSize(30);
+    assert.equal(Album.batchSize(), 30);
+    Album.setBatchSize(BatchSize);
   });
 
   it("should like album", () => {

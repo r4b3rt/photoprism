@@ -8,20 +8,28 @@ import (
 	"github.com/dustin/go-humanize/english"
 	"github.com/gin-gonic/gin"
 
-	"github.com/photoprism/photoprism/internal/acl"
+	"github.com/photoprism/photoprism/internal/auth/acl"
 	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/event"
 	"github.com/photoprism/photoprism/internal/form"
-	"github.com/photoprism/photoprism/internal/get"
-	"github.com/photoprism/photoprism/internal/i18n"
 	"github.com/photoprism/photoprism/internal/photoprism"
+	"github.com/photoprism/photoprism/internal/photoprism/get"
 	"github.com/photoprism/photoprism/pkg/clean"
+	"github.com/photoprism/photoprism/pkg/i18n"
 	"github.com/photoprism/photoprism/pkg/txt"
 )
 
 // StartIndexing indexes media files in the "originals" folder.
 //
-// POST /api/v1/index
+//	@Summary	start indexing
+//	@Id			StartIndexing
+//	@Tags		Library
+//	@Accept		json
+//	@Produce	json
+//	@Success	200					{object}	i18n.Response
+//	@Failure	400,401,403,429,500	{object}	i18n.Response
+//	@Param		options				body		form.IndexOptions	true	"index options"
+//	@Router		/api/v1/index [post]
 func StartIndexing(router *gin.RouterGroup) {
 	router.POST("/index", func(c *gin.Context) {
 		s := Auth(c, acl.ResourcePhotos, acl.ActionUpdate)
@@ -40,9 +48,10 @@ func StartIndexing(router *gin.RouterGroup) {
 
 		start := time.Now()
 
-		var f form.IndexOptions
+		var frm form.IndexOptions
 
-		if err := c.BindJSON(&f); err != nil {
+		// Assign and validate request form values.
+		if err := c.BindJSON(&frm); err != nil {
 			AbortBadRequest(c)
 			return
 		}
@@ -52,7 +61,7 @@ func StartIndexing(router *gin.RouterGroup) {
 		convert := settings.Index.Convert && conf.SidecarWritable()
 		skipArchived := settings.Index.SkipArchived
 
-		indOpt := photoprism.NewIndexOptions(filepath.Clean(f.Path), f.Rescan, convert, true, false, skipArchived)
+		indOpt := photoprism.NewIndexOptions(filepath.Clean(frm.Path), frm.Rescan, convert, true, false, skipArchived)
 		indOpt.SetUser(s.User())
 
 		if len(indOpt.Path) > 1 {
@@ -65,7 +74,7 @@ func StartIndexing(router *gin.RouterGroup) {
 		lastRun, lastFound := ind.LastRun()
 		indexStart := time.Now()
 
-		// Start indexing.
+		// Update file index.
 		found, indexed := ind.Start(indOpt)
 
 		// Only run purge and moments if necessary.
@@ -90,22 +99,48 @@ func StartIndexing(router *gin.RouterGroup) {
 				"step":   "purge",
 			})
 
-			// Configure purge options.
-			prgOpt := photoprism.PurgeOptions{
-				Path:   filepath.Clean(f.Path),
+			// Get purge worker instance.
+			w := get.Purge()
+
+			// Purge worker options.
+			opt := photoprism.PurgeOptions{
+				Path:   filepath.Clean(frm.Path),
 				Ignore: found,
 				Force:  forceUpdate,
 			}
 
-			// Start purging.
-			prg := get.Purge()
-
-			if files, photos, updated, err := prg.Start(prgOpt); err != nil {
+			// Start purge to remove missing files from search results.
+			if files, photos, updated, err := w.Start(opt); err != nil {
 				c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": txt.UpperFirst(err.Error())})
 				return
 			} else if updated > 0 {
 				event.InfoMsg(i18n.MsgRemovedFilesAndPhotos, len(files), len(photos))
 				forceUpdate = true
+			}
+		}
+
+		// Delete orphaned index entries, sidecar files and thumbnails?
+		if frm.Cleanup && s.User().IsAdmin() {
+			event.Publish("index.updating", event.Data{
+				"uid":    indOpt.UID,
+				"action": indOpt.Action,
+				"step":   "cleanup",
+			})
+
+			// Get cleanup worker instance.
+			w := get.CleanUp()
+
+			// Cleanup worker options.
+			opt := photoprism.CleanUpOptions{
+				Dry: false,
+			}
+
+			// Start index and cache cleanup.
+			cleanupStart := time.Now()
+			if thumbnails, _, sidecars, err := w.Start(opt); err != nil {
+				log.Errorf("cleanup: %s", err)
+			} else if total := thumbnails + sidecars; total > 0 {
+				log.Infof("cleanup: deleted %s in total [%s]", english.Plural(total, "file", "files"), time.Since(cleanupStart))
 			}
 		}
 

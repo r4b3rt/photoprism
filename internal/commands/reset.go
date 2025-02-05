@@ -8,32 +8,34 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/photoprism/photoprism/internal/migrate"
-
 	"github.com/manifoldco/promptui"
 	"github.com/sirupsen/logrus"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 
 	"github.com/photoprism/photoprism/internal/config"
 	"github.com/photoprism/photoprism/internal/entity"
+	"github.com/photoprism/photoprism/internal/entity/migrate"
 )
 
 // ResetCommand configures the command name, flags, and action.
-var ResetCommand = cli.Command{
+var ResetCommand = &cli.Command{
 	Name:  "reset",
 	Usage: "Resets the index, clears the cache, and removes sidecar files",
 	Flags: []cli.Flag{
-		cli.BoolFlag{
-			Name:  "index, i",
-			Usage: "reset index database only",
+		&cli.BoolFlag{
+			Name:    "index",
+			Aliases: []string{"i"},
+			Usage:   "reset index database only",
 		},
-		cli.BoolFlag{
-			Name:  "trace, t",
-			Usage: "show trace logs for debugging",
+		&cli.BoolFlag{
+			Name:    "trace",
+			Aliases: []string{"t"},
+			Usage:   "show trace logs for debugging",
 		},
-		cli.BoolFlag{
-			Name:  "yes, y",
-			Usage: "assume \"yes\" and run non-interactively",
+		&cli.BoolFlag{
+			Name:    "yes",
+			Aliases: []string{"y"},
+			Usage:   "assume \"yes\" and run non-interactively",
 		},
 	},
 	Action: resetAction,
@@ -50,7 +52,6 @@ func resetAction(ctx *cli.Context) error {
 		return err
 	}
 
-	conf.RegisterDb()
 	defer conf.Shutdown()
 
 	if !ctx.Bool("yes") {
@@ -137,7 +138,7 @@ func resetAction(ctx *cli.Context) error {
 	if _, err := removeAlbumYamlPrompt.Run(); err == nil {
 		start := time.Now()
 
-		matches, err := filepath.Glob(regexp.QuoteMeta(conf.AlbumsPath()) + "/**/*.yml")
+		matches, err := filepath.Glob(regexp.QuoteMeta(conf.BackupAlbumsPath()) + "/**/*.yml")
 
 		if err != nil {
 			return err
