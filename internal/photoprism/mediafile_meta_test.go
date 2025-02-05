@@ -142,7 +142,7 @@ func TestMediaFile_CreateExifToolJson(t *testing.T) {
 		assert.Equal(t, "2020-05-11 14:18:35 +0000 UTC", data.TakenAt.String())
 		assert.Equal(t, "2020-05-11 14:18:35 +0000 UTC", data.TakenAtLocal.String())
 		assert.Equal(t, time.Duration(2410000000), data.Duration)
-		assert.Equal(t, meta.CodecAvc1, data.Codec)
+		assert.Equal(t, video.CodecAvc, data.Codec)
 		assert.Equal(t, 270, data.Width)
 		assert.Equal(t, 480, data.Height)
 		assert.Equal(t, false, data.Flash)
@@ -319,7 +319,7 @@ func TestMediaFile_Exif_Jpeg(t *testing.T) {
 	})
 }
 
-func TestMediaFile_Exif_DNG(t *testing.T) {
+func TestMediaFile_Exif_Dng(t *testing.T) {
 	c := config.TestConfig()
 
 	img, err := NewMediaFile(c.ExamplesPath() + "/canon_eos_6d.dng")

@@ -37,7 +37,7 @@ func (w *Convert) PngConvertCmds(f *MediaFile, pngName string) (result ConvertCm
 	}
 
 	// Use heif-convert for HEIC/HEIF and AVIF image files.
-	if (f.IsHeic() || f.IsAVIF()) && w.conf.HeifConvertEnabled() {
+	if (f.IsHeic() || f.IsAvif()) && w.conf.HeifConvertEnabled() {
 		result = append(result, NewConvertCmd(
 			exec.Command(w.conf.HeifConvertBin(), f.FileName(), pngName)).
 			WithOrientation(w.conf.HeifConvertOrientation()),

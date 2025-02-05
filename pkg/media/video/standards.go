@@ -8,14 +8,14 @@ var Types = Standards{
 	"avc":    Avc,
 	"avc1":   Avc,
 	"avc3":   Avc, // H.264 with the parameter sets stored in the samples instead of the sample descriptions.
-	"hevc":   Hevc,
-	"hevC":   Hevc,
-	"hvc":    Hevc,
-	"hvc1":   Hevc,
-	"v_hvc":  Hevc,
-	"v_hvc1": Hevc,
-	"hev":    Hev1, // H.265 with the parameter sets stored in the samples instead of the sample descriptions.
-	"hev1":   Hev1,
+	"hevc":   Hvc,
+	"hevC":   Hvc,
+	"hvc":    Hvc,
+	"hvc1":   Hvc,
+	"v_hvc":  Hvc,
+	"v_hvc1": Hvc,
+	"hev":    Hev, // H.265 with the parameter sets stored in the samples instead of the sample descriptions.
+	"hev1":   Hev,
 	"evc":    Evc,
 	"evc1":   Evc,
 	"evcC":   Evc,

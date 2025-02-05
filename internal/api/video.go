@@ -97,6 +97,7 @@ func GetVideo(router *gin.RouterGroup) {
 		videoCodec := f.FileCodec
 		videoFileType := f.FileType
 		videoFileName := photoprism.FileName(f.FileRoot, f.FileName)
+		videoContentType := f.FileMime
 
 		// If the file has a hybrid photo/video format, try to find and send the embedded video data.
 		if f.MediaType == entity.MediaLive {
@@ -124,12 +125,13 @@ func GetVideo(router *gin.RouterGroup) {
 				videoCodec = info.VideoCodec
 				videoFileType = info.VideoFileType().String()
 				videoFileName = cacheName
+				videoContentType = info.VideoContentType()
 				log.Debugf("video: streaming %s encoded %s in %s from cache", strings.ToUpper(videoCodec), strings.ToUpper(videoFileType), clean.Log(f.FileName))
 			}
 		}
 
-		// Check video format support.
-		supported := videoCodec != "" && videoCodec == format.Codec || format.Codec == video.CodecUnknown && videoFileType == format.FileType.String()
+		// Verify video format support and compatibility.
+		supported := video.Compatible(videoContentType, format.ContentType) || format.Codec == video.CodecUnknown && videoFileType == format.FileType.String()
 
 		// Check video bitrate against the configured limit.
 		transcode := !supported || conf.FFmpegEnabled() && conf.FFmpegBitrateExceeded(videoBitrate)
@@ -153,7 +155,7 @@ func GetVideo(router *gin.RouterGroup) {
 
 			if avcFile, avcErr := conv.ToAvc(mediaFile, get.Config().FFmpegEncoder(), false, false); avcFile != nil && avcErr == nil {
 				videoFileName = avcFile.FileName()
-				AddContentTypeHeader(c, header.ContentTypeMp4AvcHigh)
+				AddContentTypeHeader(c, header.ContentTypeMp4AvcMain)
 			} else {
 				// Log error and default to 404.mp4
 				log.Errorf("video: failed to transcode %s", clean.Log(f.FileName))

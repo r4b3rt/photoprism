@@ -27,7 +27,7 @@ var Extensions = FileExtensions{
 	".pn":       ImagePng,
 	".gif":      ImageGif,
 	".bmp":      ImageBmp,
-	ExtDng:      ImageDNG, // .dng
+	ExtDng:      ImageDng, // .dng
 	".avif":     ImageAvif,
 	".avis":     ImageAvifS,
 	".avifs":    ImageAvifS,
@@ -80,11 +80,11 @@ var Extensions = FileExtensions{
 	".srw":      ImageRaw,
 	".sr2":      ImageRaw,
 	".x3f":      ImageRaw,
-	ExtAvc:      VideoAvc,  // .avc
-	ExtHevc:     VideoHevc, // .hevc
-	ExtHev1:     VideoHev1, // .hev1
-	ExtVvc:      VideoVvc,  // .vvc
-	ExtEvc:      VideoEvc,  // .evc
+	ExtAvc:      VideoAvc, // .avc
+	ExtHevc:     VideoHvc, // .hevc
+	ExtHev1:     VideoHev, // .hev1
+	ExtVvc:      VideoVvc, // .vvc
+	ExtEvc:      VideoEvc, // .evc
 	".mov":      VideoMov,
 	".qt":       VideoMov,
 	".avi":      VideoAVI,

@@ -5,7 +5,7 @@ type TypeMap map[Type]string
 // TypeInfo contains human-readable descriptions for supported file formats
 var TypeInfo = TypeMap{
 	ImageRaw:        "Unprocessed Sensor Data",
-	ImageDNG:        "Adobe Digital Negative",
+	ImageDng:        "Adobe Digital Negative",
 	ImageJpeg:       "Joint Photographic Experts Group (JPEG)",
 	ImageJpegXL:     "JPEG XL",
 	ImageThumb:      "Thumbnail Image",
@@ -24,8 +24,8 @@ var TypeInfo = TypeMap{
 	VideoWebm:       "Google WebM",
 	VideoMp2:        "MPEG 2 (H.262)",
 	VideoAvc:        "Advanced Video Coding (H.264, MPEG-4 Part 10)",
-	VideoHevc:       "High Efficiency Video Coding (H.265)",
-	VideoHev1:       "High Efficiency Video Coding (HEVC) Bitstream",
+	VideoHvc:        "High Efficiency Video Coding (H.265)",
+	VideoHev:        "High Efficiency Video Coding (HEVC) Bitstream",
 	VideoVvc:        "Versatile Video Coding (H.266)",
 	VideoEvc:        "Essential Video Coding (MPEG-5 Part 1)",
 	VideoAv1:        "AOMedia Video 1",

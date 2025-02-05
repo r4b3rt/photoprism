@@ -694,7 +694,7 @@ func TestMediaFile_MimeType(t *testing.T) {
 		}
 
 		assert.Equal(t, "image/dng", mediaFile.MimeType())
-		assert.True(t, mediaFile.IsDNG())
+		assert.True(t, mediaFile.IsDng())
 		assert.True(t, mediaFile.IsRaw())
 	})
 	t.Run("iphone_7.xmp", func(t *testing.T) {
@@ -704,7 +704,7 @@ func TestMediaFile_MimeType(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.Equal(t, fs.MimeTypeText, mediaFile.BaseType())
+		assert.True(t, fs.SameType(header.ContentTypeText, mediaFile.BaseType()))
 		assert.Equal(t, "text/plain", mediaFile.BaseType())
 		assert.Equal(t, "text/plain; charset=utf-8", mediaFile.MimeType())
 		assert.Equal(t, true, mediaFile.HasMimeType("text/plain"))
@@ -714,22 +714,22 @@ func TestMediaFile_MimeType(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		assert.Equal(t, header.ContentTypeJson, mediaFile.MimeType())
+		assert.True(t, fs.SameType(header.ContentTypeJson, mediaFile.MimeType()))
 	})
 	t.Run("fox.profile0.8bpc.yuv420.avif", func(t *testing.T) {
 		mediaFile, err := NewMediaFile(c.ExamplesPath() + "/fox.profile0.8bpc.yuv420.avif")
 		if err != nil {
 			t.Fatal(err)
 		}
-		assert.Equal(t, fs.MimeTypeAvif, mediaFile.MimeType())
-		assert.True(t, mediaFile.IsAVIF())
+		assert.True(t, fs.SameType(header.ContentTypeAvif, mediaFile.MimeType()))
+		assert.True(t, mediaFile.IsAvif())
 	})
 	t.Run("iphone_7.heic", func(t *testing.T) {
 		mediaFile, err := NewMediaFile(c.ExamplesPath() + "/iphone_7.heic")
 		if err != nil {
 			t.Fatal(err)
 		}
-		assert.Equal(t, fs.MimeTypeHeic, mediaFile.MimeType())
+		assert.True(t, fs.SameType(header.ContentTypeHeic, mediaFile.MimeType()))
 		assert.True(t, mediaFile.IsHeic())
 	})
 	t.Run("IMG_4120.AAE", func(t *testing.T) {
@@ -738,7 +738,7 @@ func TestMediaFile_MimeType(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.Equal(t, fs.MimeTypeXml, mediaFile.BaseType())
+		assert.True(t, fs.SameType(header.ContentTypeXml, mediaFile.BaseType()))
 		assert.Equal(t, "text/xml", mediaFile.BaseType())
 		assert.Equal(t, "text/xml; charset=utf-8", mediaFile.MimeType())
 		assert.Equal(t, true, mediaFile.HasMimeType("text/xml"))
@@ -1096,7 +1096,7 @@ func TestMediaFile_IsTiff(t *testing.T) {
 			t.Fatal(err)
 		}
 		assert.Equal(t, fs.SidecarJson, mediaFile.FileType())
-		assert.Equal(t, fs.MimeTypeJson, mediaFile.MimeType())
+		assert.Equal(t, header.ContentTypeJson, mediaFile.MimeType())
 		assert.Equal(t, false, mediaFile.IsTiff())
 	})
 	t.Run("purple.tiff", func(t *testing.T) {
@@ -1195,7 +1195,7 @@ func TestMediaFile_IsImageOther(t *testing.T) {
 		}
 
 		assert.Equal(t, fs.ImageWebp, mediaFile.FileType())
-		assert.Equal(t, fs.MimeTypeWebp, mediaFile.MimeType())
+		assert.Equal(t, header.ContentTypeWebp, mediaFile.MimeType())
 		assert.Equal(t, false, mediaFile.IsJpeg())
 		assert.Equal(t, false, mediaFile.IsGif())
 		assert.Equal(t, false, mediaFile.IsBmp())
@@ -1428,7 +1428,7 @@ func TestMediaFile_IsAnimated(t *testing.T) {
 			t.Fatal(err)
 		} else {
 			assert.Equal(t, true, f.IsImage())
-			assert.Equal(t, true, f.IsAVIFS())
+			assert.Equal(t, true, f.IsAvifS())
 			assert.Equal(t, true, f.IsAnimated())
 			assert.Equal(t, false, f.NotAnimated())
 			assert.Equal(t, true, f.IsAnimatedImage())
@@ -1436,7 +1436,7 @@ func TestMediaFile_IsAnimated(t *testing.T) {
 			assert.Equal(t, false, f.IsVideo())
 			assert.Equal(t, false, f.IsGif())
 			assert.Equal(t, false, f.IsWebp())
-			assert.Equal(t, false, f.IsAVIF())
+			assert.Equal(t, false, f.IsAvif())
 			assert.Equal(t, false, f.IsHeic())
 			assert.Equal(t, false, f.IsHeicS())
 			assert.Equal(t, false, f.IsSidecar())
@@ -1454,8 +1454,8 @@ func TestMediaFile_IsAnimated(t *testing.T) {
 			assert.Equal(t, false, f.ExifSupported())
 			assert.Equal(t, false, f.IsVideo())
 			assert.Equal(t, false, f.IsGif())
-			assert.Equal(t, false, f.IsAVIF())
-			assert.Equal(t, false, f.IsAVIFS())
+			assert.Equal(t, false, f.IsAvif())
+			assert.Equal(t, false, f.IsAvifS())
 			assert.Equal(t, false, f.IsHeic())
 			assert.Equal(t, false, f.IsHeicS())
 			assert.Equal(t, false, f.IsSidecar())

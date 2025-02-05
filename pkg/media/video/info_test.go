@@ -26,19 +26,19 @@ func TestInfo(t *testing.T) {
 	})
 	t.Run("VideoContentType", func(t *testing.T) {
 		info := NewInfo()
-		info.VideoMimeType = fs.MimeTypeMp4
+		info.VideoMimeType = header.ContentTypeMp4
 		info.VideoCodec = CodecAvc
-		assert.Equal(t, header.ContentTypeMp4AvcHigh, info.VideoContentType())
+		assert.Equal(t, header.ContentTypeMp4AvcMain, info.VideoContentType())
 	})
 	t.Run("VideoFileExt", func(t *testing.T) {
 		info := NewInfo()
-		info.VideoMimeType = fs.MimeTypeMp4
+		info.VideoMimeType = header.ContentTypeMp4
 		info.VideoCodec = CodecAvc
 		assert.Equal(t, fs.ExtMp4, info.VideoFileExt())
 	})
 	t.Run("VideoFileType", func(t *testing.T) {
 		info := NewInfo()
-		info.VideoMimeType = fs.MimeTypeMp4
+		info.VideoMimeType = header.ContentTypeMp4
 		info.VideoCodec = CodecAvc
 		assert.Equal(t, fs.VideoMp4, info.VideoFileType())
 	})

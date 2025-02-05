@@ -15,7 +15,7 @@ var Unknown = Type{
 var Mp4 = Type{
 	Codec:       CodecAvc,
 	FileType:    fs.VideoMp4,
-	ContentType: header.ContentTypeMp4AvcHigh,
+	ContentType: header.ContentTypeMp4,
 	WidthLimit:  8192,
 	HeightLimit: 4320,
 	Public:      true,
@@ -25,6 +25,7 @@ var Mp4 = Type{
 var Mov = Type{
 	Codec:       CodecAvc,
 	FileType:    fs.VideoMov,
+	ContentType: header.ContentTypeMovAvc,
 	WidthLimit:  8192,
 	HeightLimit: 4320,
 	Public:      true,
@@ -35,25 +36,28 @@ var Mov = Type{
 var Avc = Type{
 	Codec:       CodecAvc,
 	FileType:    fs.VideoAvc,
+	ContentType: header.ContentTypeMp4Avc,
 	WidthLimit:  8192,
 	HeightLimit: 4320,
 	Public:      true,
 }
 
-// Hevc specifies the generally compatible High Efficiency Video Coding (H.265) format.
-var Hevc = Type{
-	Codec:       CodecHevc,
-	FileType:    fs.VideoHevc,
+// Hvc specifies the generally compatible High Efficiency Video Coding (H.265) format.
+var Hvc = Type{
+	Codec:       CodecHvc,
+	FileType:    fs.VideoHvc,
+	ContentType: header.ContentTypeMp4Hvc,
 	WidthLimit:  0,
 	HeightLimit: 0,
 	Public:      false,
 }
 
-// Hev1 specifies the HEVC bitstream format with the parameter sets stored in the samples (not supported on macOS):
+// Hev specifies the HEVC bitstream format with the parameter sets stored in the samples (not supported on macOS):
 // https://ott.dolby.com/codec_test/index.html
-var Hev1 = Type{
-	Codec:       CodecHev1,
-	FileType:    fs.VideoHev1,
+var Hev = Type{
+	Codec:       CodecHev,
+	FileType:    fs.VideoHev,
+	ContentType: header.ContentTypeMp4Hev,
 	WidthLimit:  0,
 	HeightLimit: 0,
 	Public:      false,
@@ -63,6 +67,7 @@ var Hev1 = Type{
 var Vvc = Type{
 	Codec:       CodecVvc,
 	FileType:    fs.VideoVvc,
+	ContentType: header.ContentTypeMp4Vvc,
 	WidthLimit:  0,
 	HeightLimit: 0,
 	Public:      false,
@@ -72,6 +77,7 @@ var Vvc = Type{
 var Evc = Type{
 	Codec:       CodecEvc,
 	FileType:    fs.VideoEvc,
+	ContentType: header.ContentTypeMp4Evc,
 	WidthLimit:  0,
 	HeightLimit: 0,
 	Public:      false,
@@ -81,6 +87,7 @@ var Evc = Type{
 var Vp8 = Type{
 	Codec:       CodecVp8,
 	FileType:    fs.VideoWebm,
+	ContentType: header.ContentTypeWebmVp8,
 	WidthLimit:  0,
 	HeightLimit: 0,
 	Public:      false,
@@ -90,6 +97,7 @@ var Vp8 = Type{
 var Vp9 = Type{
 	Codec:       CodecVp9,
 	FileType:    fs.VideoWebm,
+	ContentType: header.ContentTypeWebmVp9,
 	WidthLimit:  0,
 	HeightLimit: 0,
 	Public:      false,
@@ -99,6 +107,7 @@ var Vp9 = Type{
 var Av1 = Type{
 	Codec:       CodecAv1,
 	FileType:    fs.VideoWebm,
+	ContentType: header.ContentTypeWebmAv1,
 	WidthLimit:  0,
 	HeightLimit: 0,
 	Public:      false,
@@ -108,6 +117,7 @@ var Av1 = Type{
 var Theora = Type{
 	Codec:       CodecTheora,
 	FileType:    fs.VideoTheora,
+	ContentType: header.ContentTypeOggTheora,
 	WidthLimit:  0,
 	HeightLimit: 0,
 	Public:      false,
@@ -117,6 +127,7 @@ var Theora = Type{
 var Webm = Type{
 	Codec:       CodecUnknown,
 	FileType:    fs.VideoWebm,
+	ContentType: header.ContentTypeWebm,
 	WidthLimit:  0,
 	HeightLimit: 0,
 	Public:      false,

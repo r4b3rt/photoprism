@@ -5,33 +5,12 @@ import (
 	"strings"
 
 	"github.com/gabriel-vasile/mimetype"
+
+	"github.com/photoprism/photoprism/pkg/media/http/header"
 )
 
 const (
 	MimeTypeUnknown = ""
-	MimeTypeBinary  = "application/octet-stream"
-	MimeTypeJpeg    = "image/jpeg"
-	MimeTypeJpegXL  = "image/jxl"
-	MimeTypePng     = "image/png"
-	MimeTypeAPng    = "image/vnd.mozilla.apng"
-	MimeTypeGif     = "image/gif"
-	MimeTypeBmp     = "image/bmp"
-	MimeTypeTiff    = "image/tiff"
-	MimeTypeDNG     = "image/dng"
-	MimeTypeAvif    = "image/avif"
-	MimeTypeAvifS   = "image/avif-sequence"
-	MimeTypeHeic    = "image/heic"
-	MimeTypeHeicS   = "image/heic-sequence"
-	MimeTypeWebp    = "image/webp"
-	MimeTypeMp4     = "video/mp4"
-	MimeTypeMov     = "video/quicktime"
-	MimeTypeSVG     = "image/svg+xml"
-	MimeTypeAI      = "application/vnd.adobe.illustrator"
-	MimeTypePS      = "application/postscript"
-	MimeTypeEPS     = "image/eps"
-	MimeTypeText    = "text/plain"
-	MimeTypeXml     = "text/xml"
-	MimeTypeJson    = "application/json"
 )
 
 // MimeType returns the mimetype of a file, or an empty string if it could not be determined.
@@ -52,25 +31,34 @@ func MimeType(filename string) (mimeType string) {
 	switch fileType {
 	// Apple QuickTime Container
 	case VideoMov:
-		return MimeTypeMov
+		return header.ContentTypeMov
 	// MPEG-4 AVC Video
 	case VideoAvc:
-		return MimeTypeMp4
+		return header.ContentTypeMp4Avc
+	// MPEG-4 HEVC Video
+	case VideoHvc:
+		return header.ContentTypeMp4Hvc
+	// MPEG-4 HEVC Bitstream
+	case VideoHev:
+		return header.ContentTypeMp4Hev
 	// Adobe Digital Negative
-	case ImageDNG:
-		return MimeTypeDNG
-	// Adobe PostScript
-	case VectorPS:
-		return MimeTypePS
-	// Adobe Embedded PostScript
-	case VectorEPS:
-		return MimeTypeEPS
+	case ImageDng:
+		return header.ContentTypeDng
 	// Adobe Illustrator
 	case VectorAI:
-		return MimeTypeAI
+		return header.ContentTypeAI
+	// Adobe PostScript
+	case VectorPS:
+		return header.ContentTypePS
+	// Adobe Embedded PostScript
+	case VectorEPS:
+		return header.ContentTypeEPS
+	// Adobe PDF
+	case VectorPDF:
+		return header.ContentTypePDF
 	// Scalable Vector Graphics
 	case VectorSVG:
-		return MimeTypeSVG
+		return header.ContentTypeSVG
 	}
 
 	// Detect mime type based on the file content.
@@ -81,28 +69,28 @@ func MimeType(filename string) (mimeType string) {
 	}
 
 	// Treat "application/octet-stream" as unknown.
-	if mimeType == MimeTypeBinary {
+	if mimeType == header.ContentTypeBinary {
 		mimeType = MimeTypeUnknown
 	}
 
 	// If it could be detected, try to determine mime type from extension:
 	if mimeType == MimeTypeUnknown {
 		switch fileType {
-		// Mp4 Multimedia Container
-		case VideoMp4, VideoHevc, VideoHev1:
-			return MimeTypeMp4
+		// MPEG-4 Multimedia Container
+		case VideoMp4:
+			return header.ContentTypeMp4
 		// AV1 Image File
 		case ImageAvif:
-			return MimeTypeAvif
+			return header.ContentTypeAvif
 		// AV1 Image File Sequence
 		case ImageAvifS:
-			return MimeTypeAvifS
+			return header.ContentTypeAvifS
 		// High Efficiency Image Container
 		case ImageHeic, ImageHeif:
-			return MimeTypeHeic
+			return header.ContentTypeHeic
 		// High Efficiency Image Container Sequence
 		case ImageHeicS:
-			return MimeTypeHeicS
+			return header.ContentTypeHeicS
 		}
 	}
 
@@ -120,8 +108,8 @@ func BaseType(mimeType string) string {
 	return strings.ToLower(mimeType)
 }
 
-// IsType tests if the specified mime types are matching, except for any optional parameters.
-func IsType(mime1, mime2 string) bool {
+// SameType tests if the specified mime types are matching, except for any optional parameters.
+func SameType(mime1, mime2 string) bool {
 	if mime1 == mime2 {
 		return true
 	}

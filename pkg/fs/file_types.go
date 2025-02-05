@@ -16,7 +16,7 @@ const TypeUnknown Type = ""
 // Supported media.Raw file types:
 const (
 	ImageRaw Type = "raw" // RAW Image
-	ImageDNG Type = "dng" // Adobe Digital Negative
+	ImageDng Type = "dng" // Adobe Digital Negative
 )
 
 // Supported media.Image file types:
@@ -41,9 +41,9 @@ const (
 // Supported media.Video file types:
 const (
 	VideoWebm   Type = "webm" // Google WebM Video
-	VideoHevc   Type = "hevc" // H.265, High Efficiency Video Coding (HEVC)
-	VideoHev1   Type = "hev1" // HEVC Bitstream, not supported on macOS
 	VideoAvc    Type = "avc"  // H.264, Advanced Video Coding (AVC, MPEG-4 Part 10)
+	VideoHvc    Type = "hvc"  // H.265, High Efficiency Video Coding (HEVC)
+	VideoHev    Type = "hev"  // HEVC Bitstream, not supported on macOS
 	VideoVvc    Type = "vvc"  // H.266, Versatile Video Coding (VVC)
 	VideoEvc    Type = "evc"  // Essential Video Coding (MPEG-5 Part 1)
 	VideoAv1    Type = "av1"  // Alliance for Open Media Video
@@ -69,10 +69,11 @@ const (
 
 // Supported media.Vector file types:
 const (
-	VectorSVG Type = "svg" // Scalable Vector Graphics
 	VectorAI  Type = "ai"  // Adobe Illustrator
 	VectorPS  Type = "ps"  // Adobe PostScript
 	VectorEPS Type = "eps" // Encapsulated PostScript
+	VectorPDF Type = "pdf" // Encapsulated PostScript
+	VectorSVG Type = "svg" // Scalable Vector Graphics
 )
 
 // Supported media.Sidecar file types:

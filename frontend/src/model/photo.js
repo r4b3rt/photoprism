@@ -423,7 +423,7 @@ export class Photo extends RestModel {
     let jpegs = 0;
 
     this.Files.forEach((f) => {
-      if (f && f.FileType === media.FormatJPEG) {
+      if (f && f.FileType === media.FormatJpeg) {
         jpegs++;
       }
     });
@@ -494,10 +494,10 @@ export class Photo extends RestModel {
       return false;
     }
 
-    let file = files.find((f) => f.Codec === media.CodecAVC);
+    let file = files.find((f) => f.Codec === media.CodecAvc);
 
     if (!file) {
-      file = files.find((f) => f.FileType === media.FormatMP4);
+      file = files.find((f) => f.FileType === media.FormatMp4);
     }
 
     if (!file) {
@@ -516,7 +516,7 @@ export class Photo extends RestModel {
       return false;
     }
 
-    return this.Files.find((f) => f.FileType === media.FormatGIF || !!f.Frames || !!f.Duration);
+    return this.Files.find((f) => f.FileType === media.FormatGif || !!f.Frames || !!f.Duration);
   }
 
   videoContentType() {
@@ -525,7 +525,7 @@ export class Photo extends RestModel {
     if (file) {
       return Util.videoContentType(file?.Codec, file?.Mime);
     } else {
-      return media.ContentTypeAVC;
+      return media.ContentTypeMp4AvcMain;
     }
   }
 
@@ -553,7 +553,7 @@ export class Photo extends RestModel {
     }
 
     // Find and return the first JPEG or PNG image otherwise.
-    file = files.find((f) => f.FileType === media.FormatJPEG || f.FileType === media.FormatPNG);
+    file = files.find((f) => f.FileType === media.FormatJpeg || f.FileType === media.FormatPng);
 
     // Found?
     if (file) {
@@ -606,7 +606,7 @@ export class Photo extends RestModel {
     }
 
     // Find first original media file with a format other than JPEG.
-    file = files.find((f) => !f.Sidecar && f.FileType !== media.FormatJPEG && f.Root === "/");
+    file = files.find((f) => !f.Sidecar && f.FileType !== media.FormatJpeg && f.Root === "/");
 
     // Found?
     if (file) {
@@ -622,7 +622,7 @@ export class Photo extends RestModel {
       return [this];
     }
 
-    return this.Files.filter((f) => f.FileType === media.FormatJPEG || f.FileType === media.FormatPNG);
+    return this.Files.filter((f) => f.FileType === media.FormatJpeg || f.FileType === media.FormatPng);
   }
 
   primaryFileHash() {

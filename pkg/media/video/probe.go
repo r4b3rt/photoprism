@@ -11,6 +11,7 @@ import (
 
 	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/media"
+	"github.com/photoprism/photoprism/pkg/media/http/header"
 )
 
 // ProbeFile returns information for the given filename.
@@ -94,7 +95,7 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 	if CompatibleBrands.ContainsAny(video.CompatibleBrands) {
 		info.Compatible = true
 		info.VideoType = Mp4
-		info.VideoMimeType = fs.MimeTypeMp4
+		info.VideoMimeType = header.ContentTypeMp4
 		info.FPS = 30.0 // TODO: Detect actual frames per second!
 
 		if info.VideoOffset > 0 {
@@ -110,7 +111,7 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 	switch video.MajorBrand {
 	case ChunkQT.Get():
 		info.VideoType = Mov
-		info.VideoMimeType = fs.MimeTypeMov
+		info.VideoMimeType = header.ContentTypeMov
 		if info.MediaType == media.Video {
 			info.FileType = fs.VideoMov
 		}
@@ -133,7 +134,7 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 
 		if avc := track.AVC; avc != nil {
 			if info.VideoMimeType == "" {
-				info.VideoMimeType = fs.MimeTypeMp4
+				info.VideoMimeType = header.ContentTypeMp4
 			}
 			if w := int(avc.Width); w > info.VideoWidth {
 				info.VideoWidth = w
@@ -148,9 +149,9 @@ func Probe(file io.ReadSeeker) (info Info, err error) {
 	// see https://stackoverflow.com/questions/63468587/what-hevc-codec-tag-to-use-with-fmp4-hvc1-or-hev1.
 	if info.VideoCodec == "" {
 		if fileOffset, fileErr := ChunkHVC1.DataOffset(file, -1); fileOffset > 0 && fileErr == nil {
-			info.VideoCodec = CodecHevc
+			info.VideoCodec = CodecHvc
 		} else if fileOffset, fileErr = ChunkHEV1.DataOffset(file, 5*fs.MegaByte); fileOffset > 0 && fileErr == nil {
-			info.VideoCodec = CodecHev1
+			info.VideoCodec = CodecHev
 		}
 	}
 

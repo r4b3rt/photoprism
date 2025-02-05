@@ -345,9 +345,9 @@ export default {
 
       // Create and append video source elements, depending on file format support.
       if (
-        format !== media.FormatAVC &&
+        format !== media.FormatAvc &&
         model?.Mime &&
-        model.Mime !== media.ContentTypeAVC &&
+        model.Mime !== media.ContentTypeMp4AvcMain &&
         video.canPlayType(model.Mime)
       ) {
         const nativeSource = document.createElement("source");
@@ -357,8 +357,8 @@ export default {
       }
 
       const avcSource = document.createElement("source");
-      avcSource.type = media.ContentTypeAVC;
-      avcSource.src = Util.videoFormatUrl(model.Hash, media.FormatAVC);
+      avcSource.type = media.ContentTypeMp4AvcMain;
+      avcSource.src = Util.videoFormatUrl(model.Hash, media.FormatAvc);
       video.appendChild(avcSource);
 
       // Return HTMLMediaElement.

@@ -4,6 +4,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"github.com/photoprism/photoprism/pkg/media/http/header"
 )
 
 func TestMimeType(t *testing.T) {
@@ -152,18 +154,18 @@ func TestBaseType(t *testing.T) {
 
 func TestIsType(t *testing.T) {
 	t.Run("True", func(t *testing.T) {
-		assert.True(t, IsType("", MimeTypeUnknown))
-		assert.True(t, IsType("video/jpg", "video/jpg"))
-		assert.True(t, IsType("video/jpeg", "video/jpeg"))
-		assert.True(t, IsType("video/mp4", "video/mp4"))
-		assert.True(t, IsType("video/mp4", MimeTypeMp4))
-		assert.True(t, IsType("video/mp4", "video/Mp4"))
-		assert.True(t, IsType("video/mp4", "video/Mp4; codecs=\"avc1.640028\""))
+		assert.True(t, SameType("", MimeTypeUnknown))
+		assert.True(t, SameType("video/jpg", "video/jpg"))
+		assert.True(t, SameType("video/jpeg", "video/jpeg"))
+		assert.True(t, SameType("video/mp4", "video/mp4"))
+		assert.True(t, SameType("video/mp4", header.ContentTypeMp4))
+		assert.True(t, SameType("video/mp4", "video/Mp4"))
+		assert.True(t, SameType("video/mp4", "video/Mp4; codecs=\"avc1.640028\""))
 	})
 	t.Run("False", func(t *testing.T) {
-		assert.False(t, IsType("", MimeTypeMp4))
-		assert.False(t, IsType("video/jpeg", "video/jpg"))
-		assert.False(t, IsType("video/mp4", MimeTypeUnknown))
-		assert.False(t, IsType(MimeTypeMp4, MimeTypeJpeg))
+		assert.False(t, SameType("", header.ContentTypeMp4))
+		assert.False(t, SameType("video/jpeg", "video/jpg"))
+		assert.False(t, SameType("video/mp4", MimeTypeUnknown))
+		assert.False(t, SameType(header.ContentTypeMp4, header.ContentTypeJpeg))
 	})
 }

@@ -1,12 +1,16 @@
 package fs
 
+import (
+	"github.com/photoprism/photoprism/pkg/media/http/header"
+)
+
 // TypeAnimated maps animated file types to their mime type.
 var TypeAnimated = TypeMap{
-	ImageGif:   MimeTypeGif,
-	ImagePng:   MimeTypeAPng,
-	ImageWebp:  MimeTypeWebp,
-	ImageAvif:  MimeTypeAvifS,
-	ImageAvifS: MimeTypeAvifS,
-	ImageHeic:  MimeTypeHeicS,
-	ImageHeicS: MimeTypeHeicS,
+	ImageGif:   header.ContentTypeGif,
+	ImagePng:   header.ContentTypeAPng,
+	ImageWebp:  header.ContentTypeWebp,
+	ImageAvif:  header.ContentTypeAvifS,
+	ImageAvifS: header.ContentTypeAvifS,
+	ImageHeic:  header.ContentTypeHeicS,
+	ImageHeicS: header.ContentTypeHeicS,
 }

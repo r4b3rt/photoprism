@@ -79,7 +79,7 @@ func (info Info) VideoContentType() string {
 // VideoFileExt returns the appropriate video file extension based on the mime type and defaults to fs.ExtMp4 otherwise.
 func (info Info) VideoFileExt() string {
 	switch info.VideoMimeType {
-	case fs.MimeTypeMov:
+	case header.ContentTypeMov:
 		return fs.ExtMov
 	default:
 		return fs.ExtMp4
@@ -89,7 +89,7 @@ func (info Info) VideoFileExt() string {
 // VideoFileType returns the video type based on the mime type and defaults to fs.VideoMp4 otherwise.
 func (info Info) VideoFileType() fs.Type {
 	switch info.VideoMimeType {
-	case fs.MimeTypeMov:
+	case header.ContentTypeMov:
 		return fs.VideoMov
 	default:
 		return fs.VideoMp4

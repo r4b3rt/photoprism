@@ -37,7 +37,7 @@ func (w *Convert) JpegConvertCmds(f *MediaFile, jpegName string, xmpName string)
 	}
 
 	// Use heif-convert for HEIC/HEIF and AVIF image files.
-	if (f.IsHeic() || f.IsAVIF()) && w.conf.HeifConvertEnabled() {
+	if (f.IsHeic() || f.IsAvif()) && w.conf.HeifConvertEnabled() {
 		result = append(result, NewConvertCmd(
 			exec.Command(w.conf.HeifConvertBin(), "-q", w.conf.JpegQuality().String(), f.FileName(), jpegName)).
 			WithOrientation(w.conf.HeifConvertOrientation()),
@@ -94,7 +94,7 @@ func (w *Convert) JpegConvertCmds(f *MediaFile, jpegName string, xmpName string)
 	}
 
 	// Extract preview image from DNG files.
-	if f.IsDNG() && w.conf.ExifToolEnabled() {
+	if f.IsDng() && w.conf.ExifToolEnabled() {
 		// Example: exiftool -b -PreviewImage -w IMG_4691.DNG.jpg IMG_4691.DNG
 		result = append(result, NewConvertCmd(
 			exec.Command(w.conf.ExifToolBin(), "-q", "-q", "-b", "-PreviewImage", f.FileName())),

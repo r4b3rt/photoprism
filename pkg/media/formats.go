@@ -5,7 +5,7 @@ import "github.com/photoprism/photoprism/pkg/fs"
 // Formats maps file formats to general media types.
 var Formats = map[fs.Type]Type{
 	fs.ImageRaw:        Raw,
-	fs.ImageDNG:        Raw,
+	fs.ImageDng:        Raw,
 	fs.ImageJpeg:       Image,
 	fs.ImageJpegXL:     Image,
 	fs.ImageThumb:      Image,
@@ -35,8 +35,8 @@ var Formats = map[fs.Type]Type{
 	fs.VectorEPS:       Vector,
 	fs.VideoWebm:       Video,
 	fs.VideoAvc:        Video,
-	fs.VideoHevc:       Video,
-	fs.VideoHev1:       Video,
+	fs.VideoHvc:        Video,
+	fs.VideoHev:        Video,
 	fs.VideoVvc:        Video,
 	fs.VideoEvc:        Video,
 	fs.VideoAVI:        Video,

@@ -16,6 +16,7 @@ import (
 	"github.com/photoprism/photoprism/pkg/clean"
 	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/media"
+	"github.com/photoprism/photoprism/pkg/media/http/header"
 )
 
 // ToImage converts a media file to a directly supported image file format.
@@ -115,10 +116,10 @@ func (w *Convert) ToImage(f *MediaFile, force bool) (result *MediaFile, err erro
 	switch fs.LowerExt(imageName) {
 	case fs.ExtPng:
 		cmds, useMutex, err = w.PngConvertCmds(f, imageName)
-		expectedMime = fs.MimeTypePng
+		expectedMime = header.ContentTypePng
 	case fs.ExtJpeg:
 		cmds, useMutex, err = w.JpegConvertCmds(f, imageName, xmpName)
-		expectedMime = fs.MimeTypeJpeg
+		expectedMime = header.ContentTypeJpeg
 	default:
 		return nil, fmt.Errorf("convert: unspported target format %s (%s)", fs.LowerExt(imageName), clean.Log(f.RootRelName()))
 	}

@@ -22,7 +22,7 @@ func TestJSON(t *testing.T) {
 		// t.Logf("DATA: %#v", data)
 
 		assert.Equal(t, "20230602_100151_361985AB.mov", data.FileName)
-		assert.Equal(t, CodecHvc1, data.Codec)
+		assert.Equal(t, video.CodecHvc, data.Codec)
 		assert.Equal(t, int64(1420), data.Duration.Milliseconds())
 		assert.Equal(t, "1.42s", data.Duration.String())
 		assert.Equal(t, "2023-06-02 12:01:51 +0000 UTC", data.TakenAtLocal.String())
@@ -52,7 +52,7 @@ func TestJSON(t *testing.T) {
 		// t.Logf("DATA: %#v", data)
 
 		assert.Equal(t, "20170323-083538-Berlin-Zoologischer-Garten-2017-2u4.mov", data.FileName)
-		assert.Equal(t, CodecAvc1, data.Codec)
+		assert.Equal(t, video.CodecAvc, data.Codec)
 		assert.Equal(t, int64(3540), data.Duration.Milliseconds())
 		assert.Equal(t, "3.54s", data.Duration.String())
 		assert.Equal(t, "2018-09-08 19:20:14 +0000 UTC", data.TakenAtLocal.String())
@@ -96,7 +96,7 @@ func TestJSON(t *testing.T) {
 		}
 
 		assert.Equal(t, "stream.webm", data.FileName)
-		assert.Equal(t, CodecAv1, data.Codec)
+		assert.Equal(t, video.CodecAv1, data.Codec)
 		assert.Equal(t, "2m24.12s", data.Duration.String())
 		assert.Equal(t, 1280, data.Width)
 		assert.Equal(t, 720, data.Height)
@@ -161,7 +161,7 @@ func TestJSON(t *testing.T) {
 
 		// t.Logf("DATA: %+v", data)
 
-		assert.Equal(t, CodecAvc1, data.Codec)
+		assert.Equal(t, video.CodecAvc, data.Codec)
 		assert.Equal(t, "2.41s", data.Duration.String())
 		assert.Equal(t, "2020-05-11 14:18:35 +0000 UTC", data.TakenAtLocal.String())
 		assert.Equal(t, "2020-05-11 14:18:35 +0000 UTC", data.TakenAt.String())
@@ -189,7 +189,7 @@ func TestJSON(t *testing.T) {
 
 		// t.Logf("DATA: %+v", data)
 
-		assert.Equal(t, CodecAvc1, data.Codec)
+		assert.Equal(t, video.CodecAvc, data.Codec)
 		assert.Equal(t, "2.42s", data.Duration.String())
 		assert.Equal(t, "2020-05-11 16:16:48 +0000 UTC", data.TakenAtLocal.String())
 		assert.Equal(t, "2020-05-11 14:16:48 +0000 UTC", data.TakenAt.String())
@@ -216,7 +216,7 @@ func TestJSON(t *testing.T) {
 
 		// t.Logf("DATA: %+v", data)
 
-		assert.Equal(t, CodecAvc1, data.Codec)
+		assert.Equal(t, video.CodecAvc, data.Codec)
 		assert.Equal(t, "4.3s", data.Duration.String())
 		assert.Equal(t, "2020-05-14 13:34:41 +0000 UTC", data.TakenAtLocal.String())
 		assert.Equal(t, "2020-05-14 11:34:41 +0000 UTC", data.TakenAt.String())
@@ -241,7 +241,7 @@ func TestJSON(t *testing.T) {
 
 		// t.Logf("DATA: %+v", data)
 
-		assert.Equal(t, CodecAvc1, data.Codec)
+		assert.Equal(t, video.CodecAvc, data.Codec)
 		assert.Equal(t, "4m25s", data.Duration.String())
 		assert.Equal(t, "2019-11-23 13:51:49 +0000 UTC", data.TakenAtLocal.String())
 		assert.Equal(t, 848, data.Width)
@@ -681,7 +681,7 @@ func TestJSON(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.Equal(t, CodecAvc1, data.Codec)
+		assert.Equal(t, video.CodecAvc, data.Codec)
 		assert.Equal(t, "6.83s", data.Duration.String())
 		assert.Equal(t, "2015-06-10 14:06:09 +0000 UTC", data.TakenAtLocal.String())
 		assert.Equal(t, "2015-06-10 11:06:09 +0000 UTC", data.TakenAt.String())
@@ -730,7 +730,7 @@ func TestJSON(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.Equal(t, video.CodecHevc, data.Codec)
+		assert.Equal(t, video.CodecHvc, data.Codec)
 		assert.Equal(t, "6.83s", data.Duration.String())
 		assert.Equal(t, "2020-12-22 02:45:43 +0000 UTC", data.TakenAtLocal.String())
 		assert.Equal(t, "2020-12-22 01:45:43 +0000 UTC", data.TakenAt.String())
@@ -754,7 +754,7 @@ func TestJSON(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.Equal(t, video.CodecHevc, data.Codec)
+		assert.Equal(t, video.CodecHvc, data.Codec)
 		assert.Equal(t, "2.15s", data.Duration.String())
 		assert.Equal(t, "2019-12-12 20:47:21 +0000 UTC", data.TakenAtLocal.String())
 		assert.Equal(t, "2019-12-13 01:47:21 +0000 UTC", data.TakenAt.String())

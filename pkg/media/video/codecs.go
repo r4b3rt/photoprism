@@ -13,8 +13,8 @@ const (
 	CodecUnknown Codec = ""
 	CodecAvc     Codec = "avc1" // Advanced Video Coding (AVC), also known as H.264
 	CodecAvc3    Codec = "avc3" // AVC bitstream with the parameter sets stored in the samples, not supported on macOS
-	CodecHevc    Codec = "hvc1" // High Efficiency Video Coding (HEVC), also known as H.265
-	CodecHev1    Codec = "hev1" // HEVC bitstream with the parameter sets stored in the samples, not supported on macOS
+	CodecHvc     Codec = "hvc1" // High Efficiency Video Coding (HEVC), also known as H.265
+	CodecHev     Codec = "hev1" // HEVC bitstream with the parameter sets stored in the samples, not supported on macOS
 	CodecVvc     Codec = "vvc1" // Versatile Video Coding (VVC), also known as H.266
 	CodecEvc     Codec = "evc1" // MPEG-5 Essential Video Coding (EVC), also known as ISO/IEC 23094-1
 	CodecAv1     Codec = "av01" // AOMedia Video 1 (AV1)
@@ -37,16 +37,16 @@ var Codecs = StandardCodecs{
 	"iso/avc":         CodecAvc,
 	"v_mpeg4/avc":     CodecAvc,
 	"v_mpeg4/iso/avc": CodecAvc,
-	"hevc":            CodecHevc,
-	"hevC":            CodecHevc,
-	"hvc":             CodecHevc,
-	CodecHevc:         CodecHevc,
-	"v_hvc":           CodecHevc,
-	"v_hvc1":          CodecHevc,
-	"hvcC":            CodecHevc,
-	"hvcc":            CodecHevc,
-	"hev":             CodecHev1,
-	CodecHev1:         CodecHev1,
+	"hevc":            CodecHvc,
+	"hevC":            CodecHvc,
+	"hvc":             CodecHvc,
+	CodecHvc:          CodecHvc,
+	"v_hvc":           CodecHvc,
+	"v_hvc1":          CodecHvc,
+	"hvcC":            CodecHvc,
+	"hvcc":            CodecHvc,
+	"hev":             CodecHev,
+	CodecHev:          CodecHev,
 	"evc":             CodecEvc,
 	CodecEvc:          CodecEvc,
 	"evcC":            CodecEvc,

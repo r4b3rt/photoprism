@@ -13,8 +13,8 @@ import (
 	"gopkg.in/photoprism/go-tz.v2/tz"
 
 	"github.com/photoprism/photoprism/pkg/clean"
-	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/photoprism/photoprism/pkg/media"
+	"github.com/photoprism/photoprism/pkg/media/http/header"
 	"github.com/photoprism/photoprism/pkg/media/projection"
 	"github.com/photoprism/photoprism/pkg/media/video"
 	"github.com/photoprism/photoprism/pkg/rnd"
@@ -396,7 +396,7 @@ func (data *Data) Exiftool(jsonData []byte, originalName string) (err error) {
 	}
 
 	// Flag Samsung/Google Motion Photos as live media.
-	if data.HasVideoEmbedded && (data.MimeType == fs.MimeTypeJpeg || data.MimeType == fs.MimeTypeHeic) {
+	if data.HasVideoEmbedded && (data.MimeType == header.ContentTypeJpeg || data.MimeType == header.ContentTypeHeic) {
 		data.MediaType = media.Live
 	}
 

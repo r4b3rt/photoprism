@@ -7,6 +7,7 @@ import (
 	"github.com/disintegration/imaging"
 
 	"github.com/photoprism/photoprism/pkg/fs"
+	"github.com/photoprism/photoprism/pkg/media/http/header"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -26,7 +27,7 @@ func TestPolaroid(t *testing.T) {
 
 		assert.NoError(t, err)
 		mimeType := fs.MimeType(saveName)
-		assert.Equal(t, fs.MimeTypePng, mimeType)
+		assert.Equal(t, header.ContentTypePng, mimeType)
 
 		_ = os.Remove(saveName)
 	})
